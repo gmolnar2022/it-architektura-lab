@@ -304,6 +304,7 @@ PowerShell → Script → AI</p>
 }
 .check-status.passed { background: #e9f7ef; }
 .check-status.needs_revision { background: #fff4e5; }
+.check-status.invalid { background: #fdecec; }
 .check-status.stale { background: #eef2ff; }
 .submission-summary {
   border: 2px solid #6c757d;
@@ -981,7 +982,7 @@ function collectAnswers() {
   obj._meta = {
     week: "week01",
     saved_at: nowIso(),
-    format_version: 7,
+    format_version: 8,
     tracking: {
       time_tracking_enabled: !!SETUP.timeTracking,
       event_tracking_enabled: !!SETUP.eventTracking
@@ -1216,17 +1217,25 @@ function runSyntaxRules(q) {
       if (!noWhitespace(v.Q02_USERNAME) || !/^[A-Za-z0-9._\-]{1,20}$/.test(v.Q02_USERNAME || "")) return result("needs_revision", "A felhasználónév nem tartalmazhat szóközt, és csak megengedett karaktereket használhat.");
       break;
     }
-    case "Q05":
-      if (!isPublicIPv4(v.Q05_PUBLICIP)) return result("needs_revision", "A megadott nyilvános IP-cím nem érvényes, globálisan használható IPv4-cím.");
-      if (!isPrivateIPv4(v.Q05_PRIVATEIP)) return result("needs_revision", "A megadott cím nem RFC1918 szerinti magánhálózati IPv4-cím (10/8, 172.16/12 vagy 192.168/16).");
-      if (!noWhitespace(v.Q05_VNET) || !/^[A-Za-z0-9._\-]{2,64}$/.test(v.Q05_VNET || "")) return result("needs_revision", "A virtuális hálózat neve nem tartalmazhat szóközt, és csak megengedett karaktereket használhat.");
+    case "Q05": {
+      const publicIp = parseIPv4(v.Q05_PUBLICIP);
+      if (!publicIp) return result("invalid", "A nyilvános IP-cím formátuma hibás. Négy, 0 és 255 közötti számból álló IPv4-címet adj meg.");
+      if (!isPublicIPv4(v.Q05_PUBLICIP)) return result("needs_revision", "A megadott cím érvényes IPv4-cím, de nem használható nyilvános IP-címként. Ellenőrizd az Azure Portalon a VM nyilvános IP-címét.");
+      const privateIp = parseIPv4(v.Q05_PRIVATEIP);
+      if (!privateIp) return result("invalid", "A magánhálózati IP-cím formátuma hibás. Négy, 0 és 255 közötti számból álló IPv4-címet adj meg.");
+      if (!isPrivateIPv4(v.Q05_PRIVATEIP)) return result("needs_revision", "A megadott cím érvényes IPv4-cím, de nem RFC1918 szerinti magánhálózati cím. A privát címnek a 10/8, 172.16/12 vagy 192.168/16 tartományba kell esnie.");
+      if (!noWhitespace(v.Q05_VNET) || !/^[A-Za-z0-9._\-]{2,64}$/.test(v.Q05_VNET || "")) return result("invalid", "A virtuális hálózat neve nem tartalmazhat szóközt, és csak megengedett karaktereket használhat.");
       break;
-    case "Q06":
-      if (String(v.Q06_TCP || "").trim() !== "True") return result("needs_revision", "A PowerShell kimenetéből a TcpTestSucceeded sorban kapott értéket add meg. Sikeres kapcsolatvizsgálatnál ennek True-nak kell lennie.");
-      if (!/\bTest-NetConnection\b/i.test(v.Q06_COMMAND || "")) return result("needs_revision", "A megadott parancsban nem találom a Test-NetConnection cmdletet.");
-      if (!/-Port\s+3389\b/i.test(v.Q06_COMMAND || "")) return result("needs_revision", "A parancsnak a 3389-es RDP-portot kell ellenőriznie.");
-      if (v.Q05_PUBLICIP && !String(v.Q06_COMMAND || "").includes(v.Q05_PUBLICIP)) return result("needs_revision", "A parancsban az 5. feladatban megadott nyilvános IP-cím szerepeljen.");
+    }
+    case "Q06": {
+      if (!/\bTest-NetConnection\b/i.test(v.Q06_COMMAND || "")) return result("invalid", "A megadott parancsban nem találom a Test-NetConnection cmdletet.");
+      if (!/-Port\s+3389\b/i.test(v.Q06_COMMAND || "")) return result("invalid", "A parancsnak a 3389-es RDP-portot kell ellenőriznie.");
+      if (v.Q05_PUBLICIP && !String(v.Q06_COMMAND || "").includes(v.Q05_PUBLICIP)) return result("invalid", "A parancsban az 5. feladatban megadott nyilvános IP-cím szerepeljen.");
+      const tcp = String(v.Q06_TCP || "").trim().toLowerCase();
+      if (tcp !== "true" && tcp !== "false") return result("invalid", "A PowerShell kimenetében található TcpTestSucceeded értékét add meg: True vagy False.");
+      if (tcp === "false") return result("needs_revision", "A TcpTestSucceeded = False érvényes PowerShell-eredmény, de azt jelzi, hogy a 3389-es RDP-port jelenleg nem érhető el. Ellenőrizd, hogy a VM fut-e, van-e nyilvános IP-címe, és engedélyezve van-e az RDP (3389) bejövő forgalom, majd futtasd újra a tesztet.");
       break;
+    }
     case "Q07":
       if (!has("Q07_COMMAND", /\bSet-AzContext\b/i)) return result("needs_revision", "A parancsban nem találom a Set-AzContext cmdletet.");
       if (!/Azure\s+for\s+Students/i.test(v.Q07_COMMAND || "")) return result("needs_revision", "A parancsban az Azure for Students előfizetés nevét add meg.");
@@ -1252,22 +1261,35 @@ function runSyntaxRules(q) {
       break;
     case "Q14": {
       const command = String(v.Q14_COMMAND || "");
-      if (!/\bGet-AzResource\b/i.test(command)) return result("needs_revision", "A kiegészített parancs elején a megfelelő Azure PowerShell cmdletet használd.");
-      if (!/-ResourceGroupName\b/i.test(command)) return result("needs_revision", "A parancsban szerepeljen a -ResourceGroupName paraméter.");
+      if (!/\bGet-AzResource\b/i.test(command)) return result("invalid", "A kiegészített parancs elején a Get-AzResource cmdletnek kell szerepelnie.");
+      if (!/-ResourceGroupName\b/i.test(command)) return result("invalid", "A parancsban szerepeljen a -ResourceGroupName paraméter.");
       const expectedRg = String(document.querySelector('[data-answer="Q02_RESOURCEGROUP"]')?.value || "").trim();
-      if (expectedRg && !command.includes(expectedRg)) return result("needs_revision", "A parancsban a 2. feladatban megadott saját erőforráscsoportod neve szerepeljen.");
-      if (!/Microsoft\.DevTestLab\/schedules/i.test(command)) return result("needs_revision", "A parancsban maradjon meg a megadott Microsoft.DevTestLab/schedules erőforrástípus.");
-      if (!/-ExpandProperties\b/i.test(command)) return result("needs_revision", "A parancsban szerepeljen az -ExpandProperties kapcsoló.");
-      if (!/Select-Object\s+-ExpandProperty\s+Properties/i.test(command.replace(/[`\r\n]+/g, " "))) return result("needs_revision", "A kimenetből a Properties tulajdonságot bontsd ki a megadott Select-Object résszel.");
-      if (!/(time\s*=\s*2200|\b2200\b|22:00)/i.test(v.Q14_DAILYRECURRENCE || "")) return result("needs_revision", "A dailyRecurrence értékének a 22:00-s napi leállítást kell jeleznie (az Azure ezt gyakran 2200 formában adja vissza).");
-      if (!/status\s*=\s*Disabled/i.test(v.Q14_NOTIFICATIONSETTINGS || "")) return result("needs_revision", "A notificationSettings mezőben az e-mailes értesítés állapota legyen Disabled.");
+      if (expectedRg && !command.includes(expectedRg)) return result("invalid", "A parancsban a 2. feladatban megadott saját erőforráscsoportod neve szerepeljen.");
+      if (!/Microsoft\.DevTestLab\/schedules/i.test(command)) return result("invalid", "A parancsban maradjon meg a megadott Microsoft.DevTestLab/schedules erőforrástípus.");
+      if (!/-ExpandProperties\b/i.test(command)) return result("invalid", "A parancsban szerepeljen az -ExpandProperties kapcsoló.");
+      if (!/Select-Object\s+-ExpandProperty\s+Properties/i.test(command.replace(/[`\r\n]+/g, " "))) return result("invalid", "A kimenetből a Properties tulajdonságot bontsd ki a megadott Select-Object résszel.");
+
+      const daily = String(v.Q14_DAILYRECURRENCE || "").trim();
+      const timeMatch = daily.match(/time\s*=\s*(\d{4})/i) || daily.match(/\b(\d{2}):(\d{2})\b/);
+      if (!timeMatch) return result("invalid", "A dailyRecurrence mezőből nem tudom kiolvasni a leállítás időpontját. Másold be a PowerShell-kimenetben megjelenő teljes mezőértéket.");
+      const shutdownTime = timeMatch.length === 3 ? `${timeMatch[1]}${timeMatch[2]}` : timeMatch[1];
+      if (shutdownTime !== "2200") return result("needs_revision", `A lekérdezés eredménye alapján az automatikus leállítás ${shutdownTime.slice(0,2)}:${shutdownTime.slice(2)} időpontra van beállítva. Állítsd át 22:00-ra, majd futtasd újra a lekérdezést.`);
+
+      const notifications = String(v.Q14_NOTIFICATIONSETTINGS || "").trim();
+      const notificationMatch = notifications.match(/status\s*=\s*(Enabled|Disabled)/i);
+      if (!notificationMatch) return result("invalid", "A notificationSettings mezőből nem tudom kiolvasni az értesítés állapotát. Másold be a PowerShell-kimenetben megjelenő teljes mezőértéket.");
+      if (notificationMatch[1].toLowerCase() === "enabled") return result("needs_revision", "A lekérdezés alapján az e-mailes értesítés engedélyezve van. Kapcsold ki az értesítést az Auto-shutdown beállításnál, majd ellenőrizd újra.");
       break;
     }
-    case "Q15":
-      if (!has("Q15_STOPCOMMAND", /\bStop-AzVM\b/i)) return result("needs_revision", "A leállítási parancsban nem találom a Stop-AzVM cmdletet.");
-      if (!has("Q15_STATUSCOMMAND", /\bGet-AzVM\b/i) || !has("Q15_STATUSCOMMAND", /-Status\b/i)) return result("needs_revision", "Az állapot ellenőrzéséhez használj Get-AzVM parancsot -Status paraméterrel.");
-      if (!/(deallocated|felszabadítva)/i.test(v.Q15_STATE || "")) return result("needs_revision", "Ellenőrizd, hogy a VM végső állapota leállított/felszabadított (deallocated) legyen.");
-      break;
+    case "Q15": {
+      if (!has("Q15_STOPCOMMAND", /\bStop-AzVM\b/i)) return result("invalid", "A leállítási parancsban nem találom a Stop-AzVM cmdletet.");
+      if (!has("Q15_STATUSCOMMAND", /\bGet-AzVM\b/i) || !has("Q15_STATUSCOMMAND", /-Status\b/i)) return result("invalid", "Az állapot ellenőrzéséhez Get-AzVM parancsot használj -Status paraméterrel.");
+      const state = String(v.Q15_STATE || "").trim();
+      if (/(deallocated|felszabadítva)/i.test(state)) break;
+      if (/(stopped|leállítva)/i.test(state)) return result("needs_revision", "A VM már leállt, de a megadott állapot alapján még nincs felszabadítva (deallocated). Várj röviden, majd kérdezd le újra az állapotát.");
+      if (/(running|starting|stopping|deallocating|fut|indul|leállítás|felszabadítás)/i.test(state)) return result("needs_revision", "A megadott állapot érvényes VM-állapotnak tűnik, de a gép még nincs Leállítva (felszabadítva) / Stopped (deallocated) állapotban. Várj, majd kérdezd le újra.");
+      return result("invalid", "A VM állapotát nem tudom értelmezni. Másold be a Get-AzVM -Status kimenetében megjelenő állapotot.");
+    }
   }
   return result("passed", "A megadott válaszok formailag megfelelnek a jelenlegi ellenőrzési szabályoknak.");
 }
@@ -1310,6 +1332,7 @@ function statusText(check) {
   if (!check) return "";
   if (check.status === "passed") return "✓ Megfelelő";
   if (check.status === "needs_revision") return "⚠ Javítandó";
+  if (check.status === "invalid") return "✗ Hibás / hiányos";
   if (check.status === "stale") return "↻ A válasz az utolsó ellenőrzés óta módosult";
   return "";
 }
@@ -1365,7 +1388,7 @@ function taskCompletion(q) {
 
 function summaryCheckCounts(type) {
   const qs = Object.keys(TASKS).filter(q => TASKS[q].type === type && checkEnabledFor(q));
-  const counts = { total: qs.length, passed: 0, needs_revision: 0, stale: 0, unchecked: 0 };
+  const counts = { total: qs.length, passed: 0, needs_revision: 0, invalid: 0, stale: 0, unchecked: 0 };
   qs.forEach(q => {
     const s = checks[q]?.status;
     if (s && Object.prototype.hasOwnProperty.call(counts, s)) counts[s] += 1;
@@ -1375,7 +1398,7 @@ function summaryCheckCounts(type) {
 }
 
 function summaryLine(label, c) {
-  return `<div class="check-summary-line"><strong>${label}:</strong> ✓ ${c.passed} megfelelő · ⚠ ${c.needs_revision} javítandó · ↻ ${c.stale} módosítva · ○ ${c.unchecked} nincs ellenőrizve</div>`;
+  return `<div class="check-summary-line"><strong>${label}:</strong> ✓ ${c.passed} megfelelő · ⚠ ${c.needs_revision} javítandó · ✗ ${c.invalid} hibás/hiányos · ↻ ${c.stale} módosítva · ○ ${c.unchecked} nincs ellenőrizve</div>`;
 }
 
 function openSubmissionSummary() {

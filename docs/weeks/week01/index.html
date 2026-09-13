@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.9.37">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta charset="utf-8"/>
+<meta content="quarto-1.9.37" name="generator"/>
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport"/>
 <title>1. hét – Első virtuális gépünk az Azure-ban – IT Architektúra – Gyakorlati munkafüzet</title>
 <style>
 /* Default styles provided by pandoc.
@@ -59,25 +56,23 @@ div.sourceCode
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
-
-
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
+<meta content="../../" name="quarto:offset"/>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet"/>
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" id="quarto-text-highlighting-styles" rel="stylesheet"/>
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-2c169b83e1fc2996b25bcc8774810429.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet"/>
+<link append-hash="true" data-mode="light" href="../../site_libs/bootstrap/bootstrap-2c169b83e1fc2996b25bcc8774810429.min.css" id="quarto-bootstrap" rel="stylesheet"/>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,93 +101,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-
-
 </head>
-
 <body class="nav-fixed quarto-light">
-
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">IT Architektúra – Gyakorlati munkafüzet</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
-<span class="menu-text">Kezdőlap</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link active" href="../../weeks/week01/index.html" aria-current="page"> 
-<span class="menu-text">1. hét</span></a>
-  </li>  
-</ul>
-          </div> <!-- /navcollapse -->
-            <div class="quarto-navbar-tools">
+<header class="headroom fixed-top" id="quarto-header">
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+<div class="navbar-container container-fluid">
+<div class="navbar-brand-container mx-auto">
+<a class="navbar-brand" href="../../index.html">
+<span class="navbar-title">IT Architektúra – Gyakorlati munkafüzet</span>
+</a>
 </div>
-      </div> <!-- /container-fluid -->
-    </nav>
+<div class="" id="quarto-search" title="Search"></div>
+<button aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }" role="menu" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+<ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+<a class="nav-link" href="../../index.html">
+<span class="menu-text">Kezdőlap</span></a>
+</li>
+<li class="nav-item">
+<a aria-current="page" class="nav-link active" href="../../weeks/week01/index.html">
+<span class="menu-text">1. hét</span></a>
+</li>
+</ul>
+</div> <!-- /navcollapse -->
+<div class="quarto-navbar-tools">
+</div>
+</div> <!-- /container-fluid -->
+</nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div class="quarto-container page-columns page-rows-contents page-layout-article page-navbar" id="quarto-content">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#feladat-belépés-az-azure-ba" id="toc-feladat-belépés-az-azure-ba" class="nav-link active" data-scroll-target="#feladat-belépés-az-azure-ba">1. feladat – Belépés az Azure-ba</a></li>
-  <li><a href="#feladat-virtuális-gép-alapadatok" id="toc-feladat-virtuális-gép-alapadatok" class="nav-link" data-scroll-target="#feladat-virtuális-gép-alapadatok">2. feladat – Virtuális gép: Alapadatok</a></li>
-  <li><a href="#feladat-virtuális-gép-lemezek" id="toc-feladat-virtuális-gép-lemezek" class="nav-link" data-scroll-target="#feladat-virtuális-gép-lemezek">3. feladat – Virtuális gép: Lemezek</a></li>
-  <li><a href="#feladat-virtuális-gép-hálózatkezelés" id="toc-feladat-virtuális-gép-hálózatkezelés" class="nav-link" data-scroll-target="#feladat-virtuális-gép-hálózatkezelés">4. feladat – Virtuális gép: Hálózatkezelés</a></li>
-  <li><a href="#feladat-áttekintés-létrehozás-és-a-telepítés-ellenőrzése" id="toc-feladat-áttekintés-létrehozás-és-a-telepítés-ellenőrzése" class="nav-link" data-scroll-target="#feladat-áttekintés-létrehozás-és-a-telepítés-ellenőrzése">5. feladat – Áttekintés, létrehozás és a telepítés ellenőrzése</a></li>
-  <li><a href="#feladat-csatlakozás-a-virtuális-géphez-rdp-vel" id="toc-feladat-csatlakozás-a-virtuális-géphez-rdp-vel" class="nav-link" data-scroll-target="#feladat-csatlakozás-a-virtuális-géphez-rdp-vel">6. feladat – Csatlakozás a virtuális géphez RDP-vel</a></li>
-  <li><a href="#feladat-azure-cloud-shell" id="toc-feladat-azure-cloud-shell" class="nav-link" data-scroll-target="#feladat-azure-cloud-shell">7. feladat – Azure Cloud Shell</a></li>
-  <li><a href="#feladat-azure-előfizetések-listázása" id="toc-feladat-azure-előfizetések-listázása" class="nav-link" data-scroll-target="#feladat-azure-előfizetések-listázása">8. feladat – Azure-előfizetések listázása</a></li>
-  <li><a href="#feladat-resource-groupok-lekérdezése" id="toc-feladat-resource-groupok-lekérdezése" class="nav-link" data-scroll-target="#feladat-resource-groupok-lekérdezése">9. feladat – Resource Groupok lekérdezése</a></li>
-  <li><a href="#feladat-virtuális-gépek-lekérdezése" id="toc-feladat-virtuális-gépek-lekérdezése" class="nav-link" data-scroll-target="#feladat-virtuális-gépek-lekérdezése">10. feladat – Virtuális gépek lekérdezése</a></li>
-  <li><a href="#feladat-a-virtuális-gép-állapota-és-vezérlése" id="toc-feladat-a-virtuális-gép-állapota-és-vezérlése" class="nav-link" data-scroll-target="#feladat-a-virtuális-gép-állapota-és-vezérlése">11. feladat – A virtuális gép állapota és vezérlése</a></li>
-  <li><a href="#feladat-powershell-script-kiegészítése" id="toc-feladat-powershell-script-kiegészítése" class="nav-link" data-scroll-target="#feladat-powershell-script-kiegészítése">12. feladat – PowerShell script kiegészítése</a></li>
-  <li><a href="#feladat-ismeretlenebb-powershell-kód-megértése-ai-segítségével" id="toc-feladat-ismeretlenebb-powershell-kód-megértése-ai-segítségével" class="nav-link" data-scroll-target="#feladat-ismeretlenebb-powershell-kód-megértése-ai-segítségével">13. feladat – Ismeretlenebb PowerShell-kód megértése AI segítségével</a></li>
-  <li><a href="#feladat-automatikus-leállítás-beállítása-és-ellenőrzése" id="toc-feladat-automatikus-leállítás-beállítása-és-ellenőrzése" class="nav-link" data-scroll-target="#feladat-automatikus-leállítás-beállítása-és-ellenőrzése">14. feladat – Automatikus leállítás beállítása és ellenőrzése</a></li>
-  <li><a href="#feladat-a-virtuális-gép-leállítása-és-ellenőrzése" id="toc-feladat-a-virtuális-gép-leállítása-és-ellenőrzése" class="nav-link" data-scroll-target="#feladat-a-virtuális-gép-leállítása-és-ellenőrzése">15. feladat – A virtuális gép leállítása és ellenőrzése</a></li>
-  <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
-  </ul>
+<div class="sidebar margin-sidebar" id="quarto-margin-sidebar">
+<nav class="toc-active" id="TOC" role="doc-toc">
+<h2 id="toc-title">On this page</h2>
+<ul>
+<li><a class="nav-link active" data-scroll-target="#feladat-belépés-az-azure-ba" href="#feladat-belépés-az-azure-ba" id="toc-feladat-belépés-az-azure-ba">1. feladat – Belépés az Azure-ba</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-virtuális-gép-alapadatok" href="#feladat-virtuális-gép-alapadatok" id="toc-feladat-virtuális-gép-alapadatok">2. feladat – Virtuális gép: Alapadatok</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-virtuális-gép-lemezek" href="#feladat-virtuális-gép-lemezek" id="toc-feladat-virtuális-gép-lemezek">3. feladat – Virtuális gép: Lemezek</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-virtuális-gép-hálózatkezelés" href="#feladat-virtuális-gép-hálózatkezelés" id="toc-feladat-virtuális-gép-hálózatkezelés">4. feladat – Virtuális gép: Hálózatkezelés</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-áttekintés-létrehozás-és-a-telepítés-ellenőrzése" href="#feladat-áttekintés-létrehozás-és-a-telepítés-ellenőrzése" id="toc-feladat-áttekintés-létrehozás-és-a-telepítés-ellenőrzése">5. feladat – Áttekintés, létrehozás és a telepítés ellenőrzése</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-csatlakozás-a-virtuális-géphez-rdp-vel" href="#feladat-csatlakozás-a-virtuális-géphez-rdp-vel" id="toc-feladat-csatlakozás-a-virtuális-géphez-rdp-vel">6. feladat – Csatlakozás a virtuális géphez RDP-vel</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-azure-cloud-shell" href="#feladat-azure-cloud-shell" id="toc-feladat-azure-cloud-shell">7. feladat – Azure Cloud Shell</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-azure-előfizetések-listázása" href="#feladat-azure-előfizetések-listázása" id="toc-feladat-azure-előfizetések-listázása">8. feladat – Azure-előfizetések listázása</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-resource-groupok-lekérdezése" href="#feladat-resource-groupok-lekérdezése" id="toc-feladat-resource-groupok-lekérdezése">9. feladat – Resource Groupok lekérdezése</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-virtuális-gépek-lekérdezése" href="#feladat-virtuális-gépek-lekérdezése" id="toc-feladat-virtuális-gépek-lekérdezése">10. feladat – Virtuális gépek lekérdezése</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-a-virtuális-gép-állapota-és-vezérlése" href="#feladat-a-virtuális-gép-állapota-és-vezérlése" id="toc-feladat-a-virtuális-gép-állapota-és-vezérlése">11. feladat – A virtuális gép állapota és vezérlése</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-powershell-script-kiegészítése" href="#feladat-powershell-script-kiegészítése" id="toc-feladat-powershell-script-kiegészítése">12. feladat – PowerShell script kiegészítése</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-ismeretlenebb-powershell-kód-megértése-ai-segítségével" href="#feladat-ismeretlenebb-powershell-kód-megértése-ai-segítségével" id="toc-feladat-ismeretlenebb-powershell-kód-megértése-ai-segítségével">13. feladat – Ismeretlenebb PowerShell-kód megértése AI segítségével</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-automatikus-leállítás-beállítása" href="#feladat-automatikus-leállítás-beállítása" id="toc-feladat-automatikus-leállítás-beállítása">14. feladat – Automatikus leállítás beállítása és ellenőrzése</a></li>
+<li><a class="nav-link" data-scroll-target="#feladat-a-virtuális-gép-leállítása-és-ellenőrzése" href="#feladat-a-virtuális-gép-leállítása-és-ellenőrzése" id="toc-feladat-a-virtuális-gép-leállítása-és-ellenőrzése">15. feladat – A virtuális gép leállítása és ellenőrzése</a></li>
+<li><a class="nav-link" data-scroll-target="#mentés-és-beadás" href="#mentés-és-beadás" id="toc-mentés-és-beadás">Mentés és beadás</a></li>
+</ul>
 </nav>
-    </div>
+</div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
+<header class="quarto-title-block default" id="title-block-header">
 <div class="quarto-title">
 <h1 class="title">1. hét – Első virtuális gépünk az Azure-ban</h1>
 <p class="subtitle lead">Azure Portal → Windows 11 VM → RDP → Cloud Shell → PowerShell → Script → AI</p>
 </div>
-
-
-
 <div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
+</div>
 </header>
-
-
 <style>
 .answer-box {
   border: 1px solid #d0d7de;
@@ -257,6 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 .check-status.passed { background: #e9f7ef; }
 .check-status.needs_revision { background: #fff4e5; }
+.check-status.invalid { background: #fdecec; }
 .check-status.stale { background: #eef2ff; }
 .submission-summary {
   border: 2px solid #6c757d;
@@ -301,25 +279,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="answer-box">
-<label for="student_id">Neptun-kód</label> <input id="student_id" data-answer="STUDENT_ID" placeholder="pl. ABC123" maxlength="6" pattern="[A-Za-z0-9]{6}" autocomplete="off">
-<div id="student-id-status" class="check-status">
+<label for="student_id">Neptun-kód</label> <input autocomplete="off" data-answer="STUDENT_ID" id="student_id" maxlength="6" pattern="[A-Za-z0-9]{6}" placeholder="pl. ABC123"/>
+<div class="check-status" id="student-id-status">
 A Neptun-kód 6 betűből és/vagy számjegyből áll.
 </div>
 </div>
-<section id="feladat-belépés-az-azure-ba" class="level2">
+<section class="level2" id="feladat-belépés-az-azure-ba">
 <h2 class="anchored" data-anchor-id="feladat-belépés-az-azure-ba">1. feladat – Belépés az Azure-ba</h2>
 <p>Nyisd meg az Azure Portalt, és jelentkezz be az egyetemi fiókoddal. Ha szükséges, aktiváld az <a href="https://azure.microsoft.com/free/students/" target="_blank"><strong>Azure for Students</strong></a> előfizetést.</p>
 <div class="answer-box">
-<p><label for="q01_subscription">Az Azure-előfizetés azonosítója (Subscription ID)</label> <input id="q01_subscription" data-answer="Q01_SUBSCRIPTION_ID" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" maxlength="36" autocomplete="off"></p>
+<p><label for="q01_subscription">Az Azure-előfizetés azonosítója (Subscription ID)</label> <input autocomplete="off" data-answer="Q01_SUBSCRIPTION_ID" id="q01_subscription" maxlength="36" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"/></p>
 </div>
 </section>
-<section id="feladat-virtuális-gép-alapadatok" class="level2">
+<section class="level2" id="feladat-virtuális-gép-alapadatok">
 <h2 class="anchored" data-anchor-id="feladat-virtuális-gép-alapadatok">2. feladat – Virtuális gép: Alapadatok</h2>
 <p>Nyisd meg a <strong>Virtuális gépek (Virtual machines)</strong> szolgáltatást, majd kezdd el egy új <strong>Azure-beli virtuális gép (Azure virtual machine)</strong> létrehozását. Az <strong>Alapadatok (Basics)</strong> lapon végezd el az alábbi beállításokat.</p>
 <div class="answer-box">
-<p><label for="q02_rg">Erőforráscsoport (Resource group) – hozz létre egy új erőforráscsoportot</label> <input id="q02_rg" data-answer="Q02_RESOURCEGROUP" autocomplete="off"></p>
-<p><label for="q02_vmname">Virtuális gép neve (Virtual machine name) – adj meg egy tetszőleges nevet</label> <input id="q02_vmname" data-answer="Q02_VMNAME" autocomplete="off"></p>
-<p><label for="q02_region">Régió (Region) – válassz egy támogatott régiót</label> <input id="q02_region" data-answer="Q02_REGION" autocomplete="off"></p>
+<p><label for="q02_rg">Erőforráscsoport (Resource group) – hozz létre egy új erőforráscsoportot</label> <input data-answer="Q02_RESOURCEGROUP" id="q02_rg"/></p>
+<p><label for="q02_vmname">Virtuális gép neve (Virtual machine name) – adj meg egy tetszőleges nevet</label> <input data-answer="Q02_VMNAME" id="q02_vmname"/></p>
+<p><label for="q02_region">Régió (Region) – válassz egy támogatott régiót</label> <input data-answer="Q02_REGION" id="q02_region"/></p>
 <details class="hint-box">
 <summary>
 ⓘ Hol találom a támogatott régiókat?
@@ -353,7 +331,7 @@ Az Azure for Students előfizetés korlátozhatja a használható régiókat. Ha
 <p>Előfordulhat, hogy a B sorozatú virtuális gép az adott régióban vagy előfizetéssel nem telepíthető. Ha a rendszer elutasítja a választott B sorozatú méretet, válassz egy elérhető <strong>D sorozatú</strong> gépet, például <strong>Standard_D2s_v3</strong> méretet.</p>
 </div>
 </div>
-<p><label for="q02_username">Felhasználónév (Username) – add meg a virtuális gép rendszergazdai felhasználónevét</label> <input id="q02_username" data-answer="Q02_USERNAME" autocomplete="off"></p>
+<p><label for="q02_username">Felhasználónév (Username) – add meg a virtuális gép rendszergazdai felhasználónevét</label> <input autocomplete="off" data-answer="Q02_USERNAME" id="q02_username"/></p>
 <div class="security-note">
 <strong>Jelszó (Password):</strong> adj meg egy megfelelő jelszót, majd erősítsd meg az Azure Portalon. <strong>A jelszót a munkafüzetbe ne írd be!</strong>
 </div>
@@ -363,26 +341,26 @@ Az oldal alján fogadd el a Windows használatához szükséges <strong>licencfe
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/week01/vm-basics.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img class="img-fluid figure-img" src="../../images/week01/vm-basics.png" style="width:90.0%"/></p>
 <figcaption>Az Azure virtuális gép Alapadatok (Basics) beállításai</figcaption>
 </figure>
 </div>
 </section>
-<section id="feladat-virtuális-gép-lemezek" class="level2">
+<section class="level2" id="feladat-virtuális-gép-lemezek">
 <h2 class="anchored" data-anchor-id="feladat-virtuális-gép-lemezek">3. feladat – Virtuális gép: Lemezek</h2>
 <p>Nyisd meg a <strong>Lemezek (Disks)</strong> fület. Az <strong>operációsrendszer-lemez típusánál (OS disk type)</strong> válaszd a <strong>Standard HDD</strong> lehetőséget. Ez a gyakorlat céljára megfelelő és költségtakarékos választás.</p>
 <p><strong>A többi beállítást hagyd változtatás nélkül.</strong></p>
 <div class="answer-box">
-<p><label for="q03_done">A beállítást elvégeztem</label> <select id="q03_done" data-answer="Q03_DONE"><option value=""></option><option>Igen</option></select></p>
+<p><label for="q03_done">A beállítást elvégeztem</label> <select data-answer="Q03_DONE" id="q03_done"><option value=""></option><option>Igen</option></select></p>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/week01/vm-disks.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img class="img-fluid figure-img" src="../../images/week01/vm-disks.png" style="width:90.0%"/></p>
 <figcaption>A Standard HDD kiválasztása a Lemezek (Disks) lapon</figcaption>
 </figure>
 </div>
 </section>
-<section id="feladat-virtuális-gép-hálózatkezelés" class="level2">
+<section class="level2" id="feladat-virtuális-gép-hálózatkezelés">
 <h2 class="anchored" data-anchor-id="feladat-virtuális-gép-hálózatkezelés">4. feladat – Virtuális gép: Hálózatkezelés</h2>
 <p>Nyisd meg a <strong>Hálózatkezelés (Networking)</strong> fület. A gyakorlat során használhatod az Azure által automatikusan létrehozott hálózati beállításokat.</p>
 <p>Mielőtt továbblépsz, győződj meg arról, hogy:</p>
@@ -407,43 +385,43 @@ Az oldal alján fogadd el a Windows használatához szükséges <strong>licencfe
 </div>
 <p><strong>A többi beállítást hagyd változtatás nélkül.</strong> A <strong>Felügyelet (Management)</strong>, <strong>Monitorozás (Monitoring)</strong> és <strong>Speciális (Advanced)</strong> füleken nem szükséges módosítanod semmit. Lépj tovább az <strong>Áttekintés + létrehozás (Review + create)</strong> fülre.</p>
 <div class="answer-box">
-<p><label for="q04_done">A hálózati beállításokat ellenőriztem</label> <select id="q04_done" data-answer="Q04_DONE"><option value=""></option><option>Igen</option></select></p>
+<p><label for="q04_done">A hálózati beállításokat ellenőriztem</label> <select data-answer="Q04_DONE" id="q04_done"><option value=""></option><option>Igen</option></select></p>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/week01/vm-networking.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img class="img-fluid figure-img" src="../../images/week01/vm-networking.png" style="width:90.0%"/></p>
 <figcaption>A virtuális gép Hálózatkezelés (Networking) beállításai</figcaption>
 </figure>
 </div>
 </section>
-<section id="feladat-áttekintés-létrehozás-és-a-telepítés-ellenőrzése" class="level2">
+<section class="level2" id="feladat-áttekintés-létrehozás-és-a-telepítés-ellenőrzése">
 <h2 class="anchored" data-anchor-id="feladat-áttekintés-létrehozás-és-a-telepítés-ellenőrzése">5. feladat – Áttekintés, létrehozás és a telepítés ellenőrzése</h2>
 <p>Nyisd meg az <strong>Áttekintés + létrehozás (Review + create)</strong> oldalt. Várd meg a sikeres ellenőrzést, majd válaszd a <strong>Létrehozás (Create)</strong> gombot. Várd meg, amíg az Azure jelzi, hogy a virtuális gép telepítése sikeresen befejeződött, majd nyisd meg a létrehozott virtuális gép <strong>Áttekintés (Overview)</strong> oldalát.</p>
 <p>Keresd meg és add meg az alábbi adatokat.</p>
 <div class="answer-box">
-<p><label for="q05_publicip">Nyilvános IP-cím (Public IP address)</label> <input id="q05_publicip" data-answer="Q05_PUBLICIP" autocomplete="off"></p>
-<p><label for="q05_privateip">Magánhálózati IP-cím (Private IP address)</label> <input id="q05_privateip" data-answer="Q05_PRIVATEIP" autocomplete="off"></p>
-<p><label for="q05_vnet">Virtuális hálózat (Virtual network)</label> <input id="q05_vnet" data-answer="Q05_VNET" autocomplete="off"></p>
+<p><label for="q05_publicip">Nyilvános IP-cím (Public IP address)</label> <input data-answer="Q05_PUBLICIP" id="q05_publicip"/></p>
+<p><label for="q05_privateip">Magánhálózati IP-cím (Private IP address)</label> <input data-answer="Q05_PRIVATEIP" id="q05_privateip"/></p>
+<p><label for="q05_vnet">Virtuális hálózat (Virtual network)</label> <input data-answer="Q05_VNET" id="q05_vnet"/></p>
 </div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/week01/vm-overview.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img class="img-fluid figure-img" src="../../images/week01/vm-overview.png" style="width:90.0%"/></p>
 <figcaption>A létrehozott virtuális gép Áttekintés (Overview) oldala</figcaption>
 </figure>
 </div>
 </section>
-<section id="feladat-csatlakozás-a-virtuális-géphez-rdp-vel" class="level2">
+<section class="level2" id="feladat-csatlakozás-a-virtuális-géphez-rdp-vel">
 <h2 class="anchored" data-anchor-id="feladat-csatlakozás-a-virtuális-géphez-rdp-vel">6. feladat – Csatlakozás a virtuális géphez RDP-vel</h2>
 <p>Mielőtt csatlakozol, a <strong>tantermi gépen</strong> nyiss meg egy PowerShell ablakot, és ellenőrizd, hogy elérhető-e a virtuális gép RDP-portja. A <code>&lt;nyilvános-IP-cím&gt;</code> helyére az előző feladatban feljegyzett címet írd:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Test-NetConnection <span class="op">&lt;</span>nyilvános-IP-cím<span class="op">&gt;</span> <span class="op">-</span>Port <span class="dv">3389</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a>Test-NetConnection <span class="op">&lt;</span>nyilvános-IP-cím<span class="op">&gt;</span> <span class="op">-</span>Port <span class="dv">3389</span></span></code></pre></div><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></div>
 <p>A parancs részletes működésével később foglalkozunk. Most keresd meg a <code>TcpTestSucceeded</code> sort.</p>
 <div class="answer-box">
-<p><label for="q06_tcp">A <code>TcpTestSucceeded</code> sorban kapott érték</label> <input id="q06_tcp" data-answer="Q06_TCP" autocomplete="off"></p>
+<p><label for="q06_tcp">A `TcpTestSucceeded` sorban kapott érték</label> <input autocomplete="off" data-answer="Q06_TCP" id="q06_tcp"/></p>
 </div>
 <p>Ezután az Azure Portalon válaszd a <strong>Csatlakozás (Connect) → RDP</strong> lehetőséget, majd az <strong>RDP-fájl letöltése (Download RDP File)</strong> lehetőséget. Nyisd meg a letöltött <code>.rdp</code> fájlt.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/week01/vm-rdp.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img class="img-fluid figure-img" src="../../images/week01/vm-rdp.png" style="width:90.0%"/></p>
 <figcaption>Az RDP-fájl letöltése a Csatlakozás (Connect) oldalon</figcaption>
 </figure>
 </div>
@@ -475,15 +453,15 @@ Az oldal alján fogadd el a Windows használatához szükséges <strong>licencfe
 </div>
 <p>A kapcsolat ellenőrzéséhez add meg azt a <strong>PowerShell-parancsot</strong>, amelyet a tantermi gépen futtattál. A parancsban a virtuális gép tényleges nyilvános IP-címe szerepeljen.</p>
 <div class="answer-box">
-<p><label for="q06_command">A kapcsolat teszteléséhez használt PowerShell-parancs</label> <input id="q06_command" data-answer="Q06_COMMAND" autocomplete="off"></p>
+<p><label for="q06_command">A kapcsolat teszteléséhez használt PowerShell-parancs</label> <input data-answer="Q06_COMMAND" id="q06_command"/></p>
 </div>
 </section>
-<section id="feladat-azure-cloud-shell" class="level2">
+<section class="level2" id="feladat-azure-cloud-shell">
 <h2 class="anchored" data-anchor-id="feladat-azure-cloud-shell">7. feladat – Azure Cloud Shell</h2>
 <p>Indítsd el az <strong>Azure Cloud Shellt</strong>, és válaszd a <strong>PowerShell</strong> környezetet.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/week01/azure-cloud-shell.png" class="img-fluid figure-img" style="width:90.0%"></p>
+<p><img class="img-fluid figure-img" src="../../images/week01/azure-cloud-shell.png" style="width:90.0%"/></p>
 <figcaption>Az Azure Cloud Shell megnyitása</figcaption>
 </figure>
 </div>
@@ -503,10 +481,10 @@ Az oldal alján fogadd el a Windows használatához szükséges <strong>licencfe
 </div>
 <div class="answer-box">
 <label for="q07_command">A használt PowerShell-parancs</label>
-<textarea id="q07_command" class="code-answer" data-answer="Q07_COMMAND"></textarea>
+<textarea class="code-answer" data-answer="Q07_COMMAND" id="q07_command"></textarea>
 </div>
 </section>
-<section id="feladat-azure-előfizetések-listázása" class="level2">
+<section class="level2" id="feladat-azure-előfizetések-listázása">
 <h2 class="anchored" data-anchor-id="feladat-azure-előfizetések-listázása">8. feladat – Azure-előfizetések listázása</h2>
 <p>Listázd az elérhető Azure-előfizetéseidet, majd jelenítsd meg csak a <code>Name</code> és <code>State</code> tulajdonságokat.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Tipp">
@@ -524,32 +502,32 @@ Az oldal alján fogadd el a Windows használatához szükséges <strong>licencfe
 </div>
 <div class="answer-box">
 <label for="q08_command">Az előfizetések listázására használt parancs</label>
-<textarea id="q08_command" class="code-answer" data-answer="Q08_COMMAND"></textarea>
+<textarea class="code-answer" data-answer="Q08_COMMAND" id="q08_command"></textarea>
 <label for="q08_filter">Csak a Name és State tulajdonságok megjelenítése</label>
-<textarea id="q08_filter" class="code-answer" data-answer="Q08_FILTER"></textarea>
+<textarea class="code-answer" data-answer="Q08_FILTER" id="q08_filter"></textarea>
 <label for="q08_output">A parancs eredménye</label>
-<textarea id="q08_output" class="code-answer" data-answer="Q08_OUTPUT"></textarea>
+<textarea class="code-answer" data-answer="Q08_OUTPUT" id="q08_output"></textarea>
 </div>
 </section>
-<section id="feladat-resource-groupok-lekérdezése" class="level2">
+<section class="level2" id="feladat-resource-groupok-lekérdezése">
 <h2 class="anchored" data-anchor-id="feladat-resource-groupok-lekérdezése">9. feladat – Resource Groupok lekérdezése</h2>
 <p>Listázd az előfizetésed Resource Groupjait Azure PowerShellből.</p>
 <div class="answer-box">
 <label for="q09_command">A használt parancs</label>
-<textarea id="q09_command" class="code-answer" data-answer="Q09_COMMAND"></textarea>
-<p><label for="q09_rg">A saját VM-ed Resource Groupjának neve</label> <input id="q09_rg" data-answer="Q09_RESOURCEGROUP"></p>
+<textarea class="code-answer" data-answer="Q09_COMMAND" id="q09_command"></textarea>
+<p><label for="q09_rg">A saját VM-ed Resource Groupjának neve</label> <input data-answer="Q09_RESOURCEGROUP" id="q09_rg"/></p>
 </div>
 </section>
-<section id="feladat-virtuális-gépek-lekérdezése" class="level2">
+<section class="level2" id="feladat-virtuális-gépek-lekérdezése">
 <h2 class="anchored" data-anchor-id="feladat-virtuális-gépek-lekérdezése">10. feladat – Virtuális gépek lekérdezése</h2>
 <p>Listázd az előfizetésed virtuális gépeit Azure PowerShellből.</p>
 <div class="answer-box">
 <label for="q10_command">A használt parancs</label>
-<textarea id="q10_command" class="code-answer" data-answer="Q10_COMMAND"></textarea>
-<p><label for="q10_vmname">A saját virtuális géped neve</label> <input id="q10_vmname" data-answer="Q10_VMNAME"></p>
+<textarea class="code-answer" data-answer="Q10_COMMAND" id="q10_command"></textarea>
+<p><label for="q10_vmname">A saját virtuális géped neve</label> <input data-answer="Q10_VMNAME" id="q10_vmname"/></p>
 </div>
 </section>
-<section id="feladat-a-virtuális-gép-állapota-és-vezérlése" class="level2">
+<section class="level2" id="feladat-a-virtuális-gép-állapota-és-vezérlése">
 <h2 class="anchored" data-anchor-id="feladat-a-virtuális-gép-állapota-és-vezérlése">11. feladat – A virtuális gép állapota és vezérlése</h2>
 <p>Kérdezd le a VM állapotát. Ismerkedj meg a <code>Start-AzVM</code>, <code>Stop-AzVM</code> és <code>Restart-AzVM</code> parancsokkal.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Fontos">
@@ -567,11 +545,11 @@ Az oldal alján fogadd el a Windows használatához szükséges <strong>licencfe
 </div>
 <div class="answer-box">
 <label for="q11_command">Az állapot lekérdezésére használt parancs</label>
-<textarea id="q11_command" class="code-answer" data-answer="Q11_COMMAND"></textarea>
-<p><label for="q11_state">A VM aktuális állapota</label> <input id="q11_state" data-answer="Q11_STATE"></p>
+<textarea class="code-answer" data-answer="Q11_COMMAND" id="q11_command"></textarea>
+<p><label for="q11_state">A VM aktuális állapota</label> <input data-answer="Q11_STATE" id="q11_state"/></p>
 </div>
 </section>
-<section id="feladat-powershell-script-kiegészítése" class="level2">
+<section class="level2" id="feladat-powershell-script-kiegészítése">
 <h2 class="anchored" data-anchor-id="feladat-powershell-script-kiegészítése">12. feladat – PowerShell script kiegészítése</h2>
 <p>Ebben a feladatban egy részben elkészített PowerShell scriptet fogsz használni. A script lekérdezi a virtuális gép aktuális állapotát és az operációsrendszer-lemez méretét. <strong>A kódvázat másold be</strong>, és csak a két hiányzó sort egészítsd ki.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Script létrehozása a Cloud Shellben">
@@ -585,86 +563,101 @@ Az oldal alján fogadd el a Windows használatához szükséges <strong>licencfe
 </div>
 <div class="callout-body-container callout-body">
 <p>A Cloud Shellben indítsd el a beépített szerkesztőt:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>code <span class="op">.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a aria-hidden="true" href="#cb2-1" tabindex="-1"></a>code <span class="op">.</span></span></code></pre></div><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></div>
 <p>Hozz létre egy <code>vm-info.ps1</code> nevű fájlt, másold bele az alábbi kódvázat, egészítsd ki a két hiányzó sort, majd mentsd el. A scriptet ezután így futtathatod:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">./</span>vm-info<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a aria-hidden="true" href="#cb3-1" tabindex="-1"></a><span class="op">./</span>vm-info<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></div>
 <p>A PowerShell-scriptek létrehozásával és futtatásával az előadáson is foglalkoztunk.</p>
 </div>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">$resourceGroup</span> <span class="op">=</span> <span class="st">"SAJÁT ERŐFORRÁSCSOPORT"</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">$vmName</span> <span class="op">=</span> <span class="st">"SAJÁT VM NÉV"</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A virtuális gép állapotának lekérdezése</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="va">$vmStatus</span> <span class="op">=</span> __________________________________________</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="va">$powerState</span> <span class="op">=</span> <span class="op">(</span><span class="va">$vmStatus</span><span class="op">.</span><span class="fu">Statuses</span> <span class="op">|</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Where-Object</span> <span class="op">{</span> <span class="va">$_</span><span class="op">.</span><span class="fu">Code</span> <span class="op">-like</span> <span class="st">"PowerState/*"</span> <span class="op">}).</span><span class="fu">DisplayStatus</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">Write-Host</span> <span class="st">"A virtuális gép állapota: </span><span class="va">$powerState</span><span class="st">"</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># A virtuális gép és az OS-lemez adatainak lekérdezése</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="va">$vm</span> <span class="op">=</span> Get-AzVM <span class="op">-</span>ResourceGroupName <span class="va">$resourceGroup</span> <span class="op">-</span>Name <span class="va">$vmName</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="va">$diskName</span> <span class="op">=</span> <span class="va">$vm</span><span class="op">.</span><span class="fu">StorageProfile</span><span class="op">.</span><span class="fu">OsDisk</span><span class="op">.</span><span class="fu">Name</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="va">$disk</span> <span class="op">=</span> Get-AzDisk <span class="op">-</span>ResourceGroupName <span class="va">$resourceGroup</span> <span class="op">-</span>DiskName <span class="va">$diskName</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Az OS-lemez méretének kiírása</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>_____________________________________________________</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a aria-hidden="true" href="#cb4-1" tabindex="-1"></a><span class="va">$resourceGroup</span> <span class="op">=</span> <span class="st">"SAJÁT ERŐFORRÁSCSOPORT"</span></span>
+<span id="cb4-2"><a aria-hidden="true" href="#cb4-2" tabindex="-1"></a><span class="va">$vmName</span> <span class="op">=</span> <span class="st">"SAJÁT VM NÉV"</span></span>
+<span id="cb4-3"><a aria-hidden="true" href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a aria-hidden="true" href="#cb4-4" tabindex="-1"></a><span class="co"># A virtuális gép állapotának lekérdezése</span></span>
+<span id="cb4-5"><a aria-hidden="true" href="#cb4-5" tabindex="-1"></a><span class="va">$vmStatus</span> <span class="op">=</span> __________________________________________</span>
+<span id="cb4-6"><a aria-hidden="true" href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a aria-hidden="true" href="#cb4-7" tabindex="-1"></a><span class="va">$powerState</span> <span class="op">=</span> <span class="op">(</span><span class="va">$vmStatus</span><span class="op">.</span><span class="fu">Statuses</span> <span class="op">|</span></span>
+<span id="cb4-8"><a aria-hidden="true" href="#cb4-8" tabindex="-1"></a>    <span class="fu">Where-Object</span> <span class="op">{</span> <span class="va">$_</span><span class="op">.</span><span class="fu">Code</span> <span class="op">-like</span> <span class="st">"PowerState/*"</span> <span class="op">}).</span><span class="fu">DisplayStatus</span></span>
+<span id="cb4-9"><a aria-hidden="true" href="#cb4-9" tabindex="-1"></a></span>
+<span id="cb4-10"><a aria-hidden="true" href="#cb4-10" tabindex="-1"></a><span class="fu">Write-Host</span> <span class="st">"A virtuális gép állapota: </span><span class="va">$powerState</span><span class="st">"</span></span>
+<span id="cb4-11"><a aria-hidden="true" href="#cb4-11" tabindex="-1"></a></span>
+<span id="cb4-12"><a aria-hidden="true" href="#cb4-12" tabindex="-1"></a><span class="co"># A virtuális gép és az OS-lemez adatainak lekérdezése</span></span>
+<span id="cb4-13"><a aria-hidden="true" href="#cb4-13" tabindex="-1"></a><span class="va">$vm</span> <span class="op">=</span> Get-AzVM <span class="op">-</span>ResourceGroupName <span class="va">$resourceGroup</span> <span class="op">-</span>Name <span class="va">$vmName</span></span>
+<span id="cb4-14"><a aria-hidden="true" href="#cb4-14" tabindex="-1"></a><span class="va">$diskName</span> <span class="op">=</span> <span class="va">$vm</span><span class="op">.</span><span class="fu">StorageProfile</span><span class="op">.</span><span class="fu">OsDisk</span><span class="op">.</span><span class="fu">Name</span></span>
+<span id="cb4-15"><a aria-hidden="true" href="#cb4-15" tabindex="-1"></a><span class="va">$disk</span> <span class="op">=</span> Get-AzDisk <span class="op">-</span>ResourceGroupName <span class="va">$resourceGroup</span> <span class="op">-</span>DiskName <span class="va">$diskName</span></span>
+<span id="cb4-16"><a aria-hidden="true" href="#cb4-16" tabindex="-1"></a></span>
+<span id="cb4-17"><a aria-hidden="true" href="#cb4-17" tabindex="-1"></a><span class="co"># Az OS-lemez méretének kiírása</span></span>
+<span id="cb4-18"><a aria-hidden="true" href="#cb4-18" tabindex="-1"></a>_____________________________________________________</span></code></pre></div><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></div>
 <div class="answer-box">
 <label for="q12_line1">1. hiányzó PowerShell-sor</label>
-<textarea id="q12_line1" class="code-answer" data-answer="Q12_LINE1" placeholder="Írd ide a VM állapotát lekérdező parancsot..."></textarea>
+<textarea class="code-answer" data-answer="Q12_LINE1" id="q12_line1" placeholder="Írd ide a VM állapotát lekérdező parancsot..."></textarea>
 <label for="q12_line2">2. hiányzó PowerShell-sor</label>
-<textarea id="q12_line2" class="code-answer" data-answer="Q12_LINE2" placeholder="Írd ide az OS-lemez méretét kiíró Write-Host utasítást..."></textarea>
+<textarea class="code-answer" data-answer="Q12_LINE2" id="q12_line2" placeholder="Írd ide az OS-lemez méretét kiíró Write-Host utasítást..."></textarea>
 </div>
 </section>
-<section id="feladat-ismeretlenebb-powershell-kód-megértése-ai-segítségével" class="level2">
+<section class="level2" id="feladat-ismeretlenebb-powershell-kód-megértése-ai-segítségével">
 <h2 class="anchored" data-anchor-id="feladat-ismeretlenebb-powershell-kód-megértése-ai-segítségével">13. feladat – Ismeretlenebb PowerShell-kód megértése AI segítségével</h2>
 <p>Az alábbi scriptben olyan PowerShell-elemek is szerepelnek, amelyekkel az előadáson még nem foglalkoztunk. Másold a kódot a Cloud Shellbe, futtasd le, majd használj generatív AI-eszközt a működésének megértéséhez.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Get-AzVM <span class="op">-</span>Status <span class="op">|</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Select-Object</span> Name<span class="op">,</span> ResourceGroupName<span class="op">,</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        @<span class="op">{</span>Name<span class="op">=</span><span class="st">"PowerState"</span><span class="op">;</span> Expression<span class="op">={</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            <span class="op">(</span><span class="va">$_</span><span class="op">.</span><span class="fu">Statuses</span> <span class="op">|</span> <span class="fu">Where-Object</span> <span class="op">{</span><span class="va">$_</span><span class="op">.</span><span class="fu">Code</span> <span class="op">-like</span> <span class="st">"PowerState/*"</span><span class="op">}).</span><span class="fu">DisplayStatus</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="op">}}</span> <span class="op">|</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Format-Table</span> <span class="op">-</span>AutoSize</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a aria-hidden="true" href="#cb5-1" tabindex="-1"></a>Get-AzVM <span class="op">-</span>Status <span class="op">|</span></span>
+<span id="cb5-2"><a aria-hidden="true" href="#cb5-2" tabindex="-1"></a>    <span class="fu">Select-Object</span> Name<span class="op">,</span> ResourceGroupName<span class="op">,</span></span>
+<span id="cb5-3"><a aria-hidden="true" href="#cb5-3" tabindex="-1"></a>        @<span class="op">{</span>Name<span class="op">=</span><span class="st">"PowerState"</span><span class="op">;</span> Expression<span class="op">={</span></span>
+<span id="cb5-4"><a aria-hidden="true" href="#cb5-4" tabindex="-1"></a>            <span class="op">(</span><span class="va">$_</span><span class="op">.</span><span class="fu">Statuses</span> <span class="op">|</span> <span class="fu">Where-Object</span> <span class="op">{</span><span class="va">$_</span><span class="op">.</span><span class="fu">Code</span> <span class="op">-like</span> <span class="st">"PowerState/*"</span><span class="op">}).</span><span class="fu">DisplayStatus</span></span>
+<span id="cb5-5"><a aria-hidden="true" href="#cb5-5" tabindex="-1"></a>        <span class="op">}}</span> <span class="op">|</span></span>
+<span id="cb5-6"><a aria-hidden="true" href="#cb5-6" tabindex="-1"></a>    <span class="fu">Format-Table</span> <span class="op">-</span>AutoSize</span></code></pre></div><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></div>
 <p>Kérd meg az AI-t, hogy a script működését <strong>PowerShellt még csak alapszinten ismerő hallgató számára</strong> magyarázza el. Ezután a saját szavaiddal foglald össze, mit csinál a script, és mi a <code>Select-Object</code> szerepe.</p>
 <div class="answer-box">
 <label for="q13_prompt">Az AI-nak adott prompt</label>
-<textarea id="q13_prompt" data-answer="Q13_PROMPT" placeholder="Másold ide a használt promptot..."></textarea>
+<textarea data-answer="Q13_PROMPT" id="q13_prompt" placeholder="Másold ide a használt promptot..."></textarea>
 <label for="q13_summary">Saját összefoglalásod (2–4 mondat)</label>
-<textarea id="q13_summary" data-answer="Q13_SUMMARY" placeholder="Fogalmazd meg saját szavaiddal, mit csinál a script..."></textarea>
+<textarea data-answer="Q13_SUMMARY" id="q13_summary" placeholder="Fogalmazd meg saját szavaiddal, mit csinál a script..."></textarea>
 </div>
 </section>
-<section id="feladat-automatikus-leállítás-beállítása-és-ellenőrzése" class="level2">
-<h2 class="anchored" data-anchor-id="feladat-automatikus-leállítás-beállítása-és-ellenőrzése">14. feladat – Automatikus leállítás beállítása és ellenőrzése</h2>
-<p>Nyisd meg a létrehozott virtuális gépet az Azure Portalon, és keresd meg az <strong>Automatikus leállítás (Auto-shutdown)</strong> beállítást.</p>
+<section class="level2" id="feladat-automatikus-leállítás-beállítása"><h2 class="anchored" data-anchor-id="feladat-automatikus-leállítás-beállítása" id="feladat-automatikus-leállítás-beállítása-és-ellenőrzése">14.
+feladat – Automatikus leállítás beállítása és ellenőrzése</h2>
+<p>Nyisd meg a létrehozott virtuális gépet az Azure Portalon, és keresd
+meg az <strong>Automatikus leállítás (Auto-shutdown)</strong>
+beállítást.</p>
 <ul>
 <li>Engedélyezd az automatikus leállítást.</li>
-<li>Állítsd a leállítás időpontját minden nap <strong>22:00</strong>-ra.</li>
+<li>Állítsd a leállítás időpontját minden nap
+<strong>22:00</strong>-ra.</li>
 <li>Az e-mailes értesítést <strong>ne engedélyezd</strong>.</li>
 <li>Mentsd a beállítást.</li>
 </ul>
-<p>Ezután ellenőrizd PowerShellből, hogy az Azure létrehozta-e a megfelelő ütemezést. Egészítsd ki a következő parancsot a megfelelő <strong>PowerShell-utasítás nevével</strong>, és cseréld le a <code>SAJÁT ERŐFORRÁSCSOPORT</code> szöveget a saját erőforráscsoportod nevére.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>________________ `</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">-</span>ResourceGroupName <span class="st">"SAJÁT ERŐFORRÁSCSOPORT"</span> `</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">-</span>ResourceType <span class="st">"Microsoft.DevTestLab/schedules"</span> `</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">-</span>ExpandProperties <span class="op">|</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Select-Object</span> <span class="op">-</span>ExpandProperty Properties</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Futtasd a kiegészített parancsot az <strong>Azure Cloud Shell</strong> PowerShell környezetében. A kimenetben keresd meg a <code>dailyRecurrence</code> és a <code>notificationSettings</code> mezőt.</p>
+<p>Ezután ellenőrizd PowerShellből, hogy az Azure létrehozta-e a
+megfelelő ütemezést. Egészítsd ki a következő parancsot a megfelelő
+<strong>PowerShell-utasítás nevével</strong>, és cseréld le a
+<code>SAJÁT ERŐFORRÁSCSOPORT</code> szöveget a saját erőforráscsoportod
+nevére.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a>________________ `</span>
+<span id="cb1-2"><a aria-hidden="true" href="#cb1-2" tabindex="-1"></a>    <span class="op">-</span>ResourceGroupName <span class="st">"SAJÁT ERŐFORRÁSCSOPORT"</span> `</span>
+<span id="cb1-3"><a aria-hidden="true" href="#cb1-3" tabindex="-1"></a>    <span class="op">-</span>ResourceType <span class="st">"Microsoft.DevTestLab/schedules"</span> `</span>
+<span id="cb1-4"><a aria-hidden="true" href="#cb1-4" tabindex="-1"></a>    <span class="op">-</span>ExpandProperties <span class="op">|</span></span>
+<span id="cb1-5"><a aria-hidden="true" href="#cb1-5" tabindex="-1"></a>    <span class="fu">Select-Object</span> <span class="op">-</span>ExpandProperty Properties</span></code></pre></div>
+<p>Futtasd a kiegészített parancsot az <strong>Azure Cloud
+Shell</strong> PowerShell környezetében. A kimenetben keresd meg a
+<code>dailyRecurrence</code> és a <code>notificationSettings</code>
+mezőt.</p>
 <div class="answer-box">
-<label for="q14_command">A kiegészített és lefuttatott PowerShell-parancs</label>
-<textarea id="q14_command" class="code-answer" data-answer="Q14_COMMAND"></textarea>
-<p><label for="q14_daily">A <code>dailyRecurrence</code> mező teljes értéke</label> <input id="q14_daily" data-answer="Q14_DAILYRECURRENCE" autocomplete="off"></p>
-<p><label for="q14_notifications">A <code>notificationSettings</code> mező teljes értéke</label> <input id="q14_notifications" data-answer="Q14_NOTIFICATIONSETTINGS" autocomplete="off"></p>
+<label for="q14_command">A kiegészített és lefuttatott
+PowerShell-parancs</label>
+<textarea class="code-answer" data-answer="Q14_COMMAND" id="q14_command"></textarea>
+<p><label for="q14_daily">A <code>dailyRecurrence</code> mező teljes
+értéke</label>
+<input autocomplete="off" data-answer="Q14_DAILYRECURRENCE" id="q14_daily"/></p>
+<p><label for="q14_notifications">A <code>notificationSettings</code>
+mező teljes értéke</label>
+<input autocomplete="off" data-answer="Q14_NOTIFICATIONSETTINGS" id="q14_notifications"/></p>
 </div>
 </section>
-<section id="feladat-a-virtuális-gép-leállítása-és-ellenőrzése" class="level2">
+<section class="level2" id="feladat-a-virtuális-gép-leállítása-és-ellenőrzése">
 <h2 class="anchored" data-anchor-id="feladat-a-virtuális-gép-leállítása-és-ellenőrzése">15. feladat – A virtuális gép leállítása és ellenőrzése</h2>
 <p>A gyakorlat végén állítsd le a virtuális gépet <strong>PowerShell-paranccsal</strong>, majd egy másik PowerShell-paranccsal ellenőrizd a gép állapotát. A leállítással elkerülheted, hogy a virtuális gép feleslegesen használja az Azure-kreditedet.</p>
 <div class="answer-box">
 <label for="q15_stopcommand">A leállításhoz használt PowerShell-parancs</label>
-<textarea id="q15_stopcommand" class="code-answer" data-answer="Q15_STOPCOMMAND"></textarea>
+<textarea class="code-answer" data-answer="Q15_STOPCOMMAND" id="q15_stopcommand"></textarea>
 <label for="q15_statuscommand">Az állapot ellenőrzéséhez használt PowerShell-parancs</label>
-<textarea id="q15_statuscommand" class="code-answer" data-answer="Q15_STATUSCOMMAND"></textarea>
-<p><label for="q15_state">A VM végső állapota</label> <input id="q15_state" data-answer="Q15_STATE" autocomplete="off"></p>
+<textarea class="code-answer" data-answer="Q15_STATUSCOMMAND" id="q15_statuscommand"></textarea>
+<p><label for="q15_state">A VM végső állapota</label> <input data-answer="Q15_STATE" id="q15_state"/></p>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Opcionális feladat – Microsoft Azure mobilalkalmazás">
 <div class="callout-header d-flex align-content-center">
@@ -704,46 +697,44 @@ Az oldal alján fogadd el a Windows használatához szükséges <strong>licencfe
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A munkafüzet kísérleti jelleggel <strong>becsült aktív időt</strong> és feladatonkénti szerkesztési eseményeket is rögzít.<br>
+<p>A munkafüzet kísérleti jelleggel <strong>becsült aktív időt</strong> és feladatonkénti szerkesztési eseményeket is rögzít.<br/>
 Ez nem pontos munkaidőmérés: ha például az Azure Portal vagy a Cloud Shell másik böngészőlapon van, az ott töltött idő nem feltétlenül számít aktív időnek.</p>
 </div>
 </div>
-<div id="tracking-panel" class="answer-box">
+<div class="answer-box" id="tracking-panel">
 <strong>Aktivitás ezen a gépen</strong>
 <p style="margin:.5rem 0 0 0">
-Időmérés: <span id="tracking-time-status">–</span><br> Eseménykövetés: <span id="tracking-event-status">–</span><br> Becsült aktív idő: <span id="activity-active-time">0:00</span><br> Szerkesztési események: <span id="activity-edit-count">0</span><br> Első megnyitás: <span id="activity-started">–</span><br> Utolsó aktivitás: <span id="activity-last">–</span>
+Időmérés: <span id="tracking-time-status">–</span><br/> Eseménykövetés: <span id="tracking-event-status">–</span><br/> Becsült aktív idő: <span id="activity-active-time">0:00</span><br/> Szerkesztési események: <span id="activity-edit-count">0</span><br/> Első megnyitás: <span id="activity-started">–</span><br/> Utolsó aktivitás: <span id="activity-last">–</span>
 </p>
 </div>
 </section>
-<section id="mentés-és-beadás" class="level2">
+<section class="level2" id="mentés-és-beadás">
 <h2 class="anchored" data-anchor-id="mentés-és-beadás">Mentés és beadás</h2>
 <div class="actions">
-<button type="button" onclick="openSubmissionSummary()">
+<button onclick="openSubmissionSummary()" type="button">
 📤 Beadás
 </button>
-<button type="button" onclick="clearAnswers()">
+<button onclick="clearAnswers()" type="button">
 Helyi adatok törlése
 </button>
 <p><span id="save-status"></span></p>
 </div>
-<div id="submission-summary" class="submission-summary" hidden="">
-<h3 style="margin-top:0" class="anchored">
+<div class="submission-summary" hidden="" id="submission-summary">
+<h3 class="anchored" style="margin-top:0">
 Beadás előtti összesítés
 </h3>
 <div id="submission-summary-body">
-
 </div>
 <div class="actions">
-<button type="button" onclick="closeSubmissionSummary()">
+<button onclick="closeSubmissionSummary()" type="button">
 Vissza a javításhoz
 </button>
-<button id="confirm-submit-button" type="button" onclick="confirmSubmission()">
+<button id="confirm-submit-button" onclick="confirmSubmission()" type="button">
 Beadás megerősítése
 </button>
 </div>
 </div>
 <div id="submission-result">
-
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Automatikus mentés">
 <div class="callout-header d-flex align-content-center">
@@ -760,6 +751,7 @@ Beadás megerősítése
 </div>
 <script src="../../config/setup.js"></script>
 <script>
+
 const SETUP = Object.assign({
   timeTracking: false,
   eventTracking: false,
@@ -932,7 +924,7 @@ function collectAnswers() {
   obj._meta = {
     week: "week01",
     saved_at: nowIso(),
-    format_version: 7,
+    format_version: 8,
     tracking: {
       time_tracking_enabled: !!SETUP.timeTracking,
       event_tracking_enabled: !!SETUP.eventTracking
@@ -1167,17 +1159,25 @@ function runSyntaxRules(q) {
       if (!noWhitespace(v.Q02_USERNAME) || !/^[A-Za-z0-9._\-]{1,20}$/.test(v.Q02_USERNAME || "")) return result("needs_revision", "A felhasználónév nem tartalmazhat szóközt, és csak megengedett karaktereket használhat.");
       break;
     }
-    case "Q05":
-      if (!isPublicIPv4(v.Q05_PUBLICIP)) return result("needs_revision", "A megadott nyilvános IP-cím nem érvényes, globálisan használható IPv4-cím.");
-      if (!isPrivateIPv4(v.Q05_PRIVATEIP)) return result("needs_revision", "A megadott cím nem RFC1918 szerinti magánhálózati IPv4-cím (10/8, 172.16/12 vagy 192.168/16).");
-      if (!noWhitespace(v.Q05_VNET) || !/^[A-Za-z0-9._\-]{2,64}$/.test(v.Q05_VNET || "")) return result("needs_revision", "A virtuális hálózat neve nem tartalmazhat szóközt, és csak megengedett karaktereket használhat.");
+    case "Q05": {
+      const publicIp = parseIPv4(v.Q05_PUBLICIP);
+      if (!publicIp) return result("invalid", "A nyilvános IP-cím formátuma hibás. Négy, 0 és 255 közötti számból álló IPv4-címet adj meg.");
+      if (!isPublicIPv4(v.Q05_PUBLICIP)) return result("needs_revision", "A megadott cím érvényes IPv4-cím, de nem használható nyilvános IP-címként. Ellenőrizd az Azure Portalon a VM nyilvános IP-címét.");
+      const privateIp = parseIPv4(v.Q05_PRIVATEIP);
+      if (!privateIp) return result("invalid", "A magánhálózati IP-cím formátuma hibás. Négy, 0 és 255 közötti számból álló IPv4-címet adj meg.");
+      if (!isPrivateIPv4(v.Q05_PRIVATEIP)) return result("needs_revision", "A megadott cím érvényes IPv4-cím, de nem RFC1918 szerinti magánhálózati cím. A privát címnek a 10/8, 172.16/12 vagy 192.168/16 tartományba kell esnie.");
+      if (!noWhitespace(v.Q05_VNET) || !/^[A-Za-z0-9._\-]{2,64}$/.test(v.Q05_VNET || "")) return result("invalid", "A virtuális hálózat neve nem tartalmazhat szóközt, és csak megengedett karaktereket használhat.");
       break;
-    case "Q06":
-      if (String(v.Q06_TCP || "").trim() !== "True") return result("needs_revision", "A PowerShell kimenetéből a TcpTestSucceeded sorban kapott értéket add meg. Sikeres kapcsolatvizsgálatnál ennek True-nak kell lennie.");
-      if (!/\bTest-NetConnection\b/i.test(v.Q06_COMMAND || "")) return result("needs_revision", "A megadott parancsban nem találom a Test-NetConnection cmdletet.");
-      if (!/-Port\s+3389\b/i.test(v.Q06_COMMAND || "")) return result("needs_revision", "A parancsnak a 3389-es RDP-portot kell ellenőriznie.");
-      if (v.Q05_PUBLICIP && !String(v.Q06_COMMAND || "").includes(v.Q05_PUBLICIP)) return result("needs_revision", "A parancsban az 5. feladatban megadott nyilvános IP-cím szerepeljen.");
+    }
+    case "Q06": {
+      if (!/\bTest-NetConnection\b/i.test(v.Q06_COMMAND || "")) return result("invalid", "A megadott parancsban nem találom a Test-NetConnection cmdletet.");
+      if (!/-Port\s+3389\b/i.test(v.Q06_COMMAND || "")) return result("invalid", "A parancsnak a 3389-es RDP-portot kell ellenőriznie.");
+      if (v.Q05_PUBLICIP && !String(v.Q06_COMMAND || "").includes(v.Q05_PUBLICIP)) return result("invalid", "A parancsban az 5. feladatban megadott nyilvános IP-cím szerepeljen.");
+      const tcp = String(v.Q06_TCP || "").trim().toLowerCase();
+      if (tcp !== "true" && tcp !== "false") return result("invalid", "A PowerShell kimenetében található TcpTestSucceeded értékét add meg: True vagy False.");
+      if (tcp === "false") return result("needs_revision", "A TcpTestSucceeded = False érvényes PowerShell-eredmény, de azt jelzi, hogy a 3389-es RDP-port jelenleg nem érhető el. Ellenőrizd, hogy a VM fut-e, van-e nyilvános IP-címe, és engedélyezve van-e az RDP (3389) bejövő forgalom, majd futtasd újra a tesztet.");
       break;
+    }
     case "Q07":
       if (!has("Q07_COMMAND", /\bSet-AzContext\b/i)) return result("needs_revision", "A parancsban nem találom a Set-AzContext cmdletet.");
       if (!/Azure\s+for\s+Students/i.test(v.Q07_COMMAND || "")) return result("needs_revision", "A parancsban az Azure for Students előfizetés nevét add meg.");
@@ -1203,22 +1203,35 @@ function runSyntaxRules(q) {
       break;
     case "Q14": {
       const command = String(v.Q14_COMMAND || "");
-      if (!/\bGet-AzResource\b/i.test(command)) return result("needs_revision", "A kiegészített parancs elején a megfelelő Azure PowerShell cmdletet használd.");
-      if (!/-ResourceGroupName\b/i.test(command)) return result("needs_revision", "A parancsban szerepeljen a -ResourceGroupName paraméter.");
+      if (!/\bGet-AzResource\b/i.test(command)) return result("invalid", "A kiegészített parancs elején a Get-AzResource cmdletnek kell szerepelnie.");
+      if (!/-ResourceGroupName\b/i.test(command)) return result("invalid", "A parancsban szerepeljen a -ResourceGroupName paraméter.");
       const expectedRg = String(document.querySelector('[data-answer="Q02_RESOURCEGROUP"]')?.value || "").trim();
-      if (expectedRg && !command.includes(expectedRg)) return result("needs_revision", "A parancsban a 2. feladatban megadott saját erőforráscsoportod neve szerepeljen.");
-      if (!/Microsoft\.DevTestLab\/schedules/i.test(command)) return result("needs_revision", "A parancsban maradjon meg a megadott Microsoft.DevTestLab/schedules erőforrástípus.");
-      if (!/-ExpandProperties\b/i.test(command)) return result("needs_revision", "A parancsban szerepeljen az -ExpandProperties kapcsoló.");
-      if (!/Select-Object\s+-ExpandProperty\s+Properties/i.test(command.replace(/[`\r\n]+/g, " "))) return result("needs_revision", "A kimenetből a Properties tulajdonságot bontsd ki a megadott Select-Object résszel.");
-      if (!/(time\s*=\s*2200|\b2200\b|22:00)/i.test(v.Q14_DAILYRECURRENCE || "")) return result("needs_revision", "A dailyRecurrence értékének a 22:00-s napi leállítást kell jeleznie (az Azure ezt gyakran 2200 formában adja vissza).");
-      if (!/status\s*=\s*Disabled/i.test(v.Q14_NOTIFICATIONSETTINGS || "")) return result("needs_revision", "A notificationSettings mezőben az e-mailes értesítés állapota legyen Disabled.");
+      if (expectedRg && !command.includes(expectedRg)) return result("invalid", "A parancsban a 2. feladatban megadott saját erőforráscsoportod neve szerepeljen.");
+      if (!/Microsoft\.DevTestLab\/schedules/i.test(command)) return result("invalid", "A parancsban maradjon meg a megadott Microsoft.DevTestLab/schedules erőforrástípus.");
+      if (!/-ExpandProperties\b/i.test(command)) return result("invalid", "A parancsban szerepeljen az -ExpandProperties kapcsoló.");
+      if (!/Select-Object\s+-ExpandProperty\s+Properties/i.test(command.replace(/[`\r\n]+/g, " "))) return result("invalid", "A kimenetből a Properties tulajdonságot bontsd ki a megadott Select-Object résszel.");
+
+      const daily = String(v.Q14_DAILYRECURRENCE || "").trim();
+      const timeMatch = daily.match(/time\s*=\s*(\d{4})/i) || daily.match(/\b(\d{2}):(\d{2})\b/);
+      if (!timeMatch) return result("invalid", "A dailyRecurrence mezőből nem tudom kiolvasni a leállítás időpontját. Másold be a PowerShell-kimenetben megjelenő teljes mezőértéket.");
+      const shutdownTime = timeMatch.length === 3 ? `${timeMatch[1]}${timeMatch[2]}` : timeMatch[1];
+      if (shutdownTime !== "2200") return result("needs_revision", `A lekérdezés eredménye alapján az automatikus leállítás ${shutdownTime.slice(0,2)}:${shutdownTime.slice(2)} időpontra van beállítva. Állítsd át 22:00-ra, majd futtasd újra a lekérdezést.`);
+
+      const notifications = String(v.Q14_NOTIFICATIONSETTINGS || "").trim();
+      const notificationMatch = notifications.match(/status\s*=\s*(Enabled|Disabled)/i);
+      if (!notificationMatch) return result("invalid", "A notificationSettings mezőből nem tudom kiolvasni az értesítés állapotát. Másold be a PowerShell-kimenetben megjelenő teljes mezőértéket.");
+      if (notificationMatch[1].toLowerCase() === "enabled") return result("needs_revision", "A lekérdezés alapján az e-mailes értesítés engedélyezve van. Kapcsold ki az értesítést az Auto-shutdown beállításnál, majd ellenőrizd újra.");
       break;
     }
-    case "Q15":
-      if (!has("Q15_STOPCOMMAND", /\bStop-AzVM\b/i)) return result("needs_revision", "A leállítási parancsban nem találom a Stop-AzVM cmdletet.");
-      if (!has("Q15_STATUSCOMMAND", /\bGet-AzVM\b/i) || !has("Q15_STATUSCOMMAND", /-Status\b/i)) return result("needs_revision", "Az állapot ellenőrzéséhez használj Get-AzVM parancsot -Status paraméterrel.");
-      if (!/(deallocated|felszabadítva)/i.test(v.Q15_STATE || "")) return result("needs_revision", "Ellenőrizd, hogy a VM végső állapota leállított/felszabadított (deallocated) legyen.");
-      break;
+    case "Q15": {
+      if (!has("Q15_STOPCOMMAND", /\bStop-AzVM\b/i)) return result("invalid", "A leállítási parancsban nem találom a Stop-AzVM cmdletet.");
+      if (!has("Q15_STATUSCOMMAND", /\bGet-AzVM\b/i) || !has("Q15_STATUSCOMMAND", /-Status\b/i)) return result("invalid", "Az állapot ellenőrzéséhez Get-AzVM parancsot használj -Status paraméterrel.");
+      const state = String(v.Q15_STATE || "").trim();
+      if (/(deallocated|felszabadítva)/i.test(state)) break;
+      if (/(stopped|leállítva)/i.test(state)) return result("needs_revision", "A VM már leállt, de a megadott állapot alapján még nincs felszabadítva (deallocated). Várj röviden, majd kérdezd le újra az állapotát.");
+      if (/(running|starting|stopping|deallocating|fut|indul|leállítás|felszabadítás)/i.test(state)) return result("needs_revision", "A megadott állapot érvényes VM-állapotnak tűnik, de a gép még nincs Leállítva (felszabadítva) / Stopped (deallocated) állapotban. Várj, majd kérdezd le újra.");
+      return result("invalid", "A VM állapotát nem tudom értelmezni. Másold be a Get-AzVM -Status kimenetében megjelenő állapotot.");
+    }
   }
   return result("passed", "A megadott válaszok formailag megfelelnek a jelenlegi ellenőrzési szabályoknak.");
 }
@@ -1261,6 +1274,7 @@ function statusText(check) {
   if (!check) return "";
   if (check.status === "passed") return "✓ Megfelelő";
   if (check.status === "needs_revision") return "⚠ Javítandó";
+  if (check.status === "invalid") return "✗ Hibás / hiányos";
   if (check.status === "stale") return "↻ A válasz az utolsó ellenőrzés óta módosult";
   return "";
 }
@@ -1316,7 +1330,7 @@ function taskCompletion(q) {
 
 function summaryCheckCounts(type) {
   const qs = Object.keys(TASKS).filter(q => TASKS[q].type === type && checkEnabledFor(q));
-  const counts = { total: qs.length, passed: 0, needs_revision: 0, stale: 0, unchecked: 0 };
+  const counts = { total: qs.length, passed: 0, needs_revision: 0, invalid: 0, stale: 0, unchecked: 0 };
   qs.forEach(q => {
     const s = checks[q]?.status;
     if (s && Object.prototype.hasOwnProperty.call(counts, s)) counts[s] += 1;
@@ -1326,7 +1340,7 @@ function summaryCheckCounts(type) {
 }
 
 function summaryLine(label, c) {
-  return `<div class="check-summary-line"><strong>${label}:</strong> ✓ ${c.passed} megfelelő · ⚠ ${c.needs_revision} javítandó · ↻ ${c.stale} módosítva · ○ ${c.unchecked} nincs ellenőrizve</div>`;
+  return `<div class="check-summary-line"><strong>${label}:</strong> ✓ ${c.passed} megfelelő · ⚠ ${c.needs_revision} javítandó · ✗ ${c.invalid} hibás/hiányos · ↻ ${c.stale} módosítva · ○ ${c.unchecked} nincs ellenőrizve</div>`;
 }
 
 function openSubmissionSummary() {
@@ -1490,11 +1504,9 @@ document.addEventListener("DOMContentLoaded", () => {
   Object.keys(TASKS).forEach(renderCheckStatus);
   setInterval(activityTick, TICK_MS);
 });
+
 </script>
-
-
 </section>
-
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1897,9 +1909,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   </script>
 </div> <!-- /content -->
-
-
-
-
 <script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

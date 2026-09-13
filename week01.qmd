@@ -463,6 +463,7 @@ Ez nem pontos munkaidőmérés: ha például az Azure Portal vagy a Cloud Shell 
 
 <div class="actions">
 <button type="button" onclick="openSubmissionSummary()">📤 Beadás</button>
+<button type="button" onclick="exportSubmissionJson()">💾 JSON export</button>
 <button type="button" onclick="clearAnswers()">Helyi adatok törlése</button>
 <span id="save-status"></span>
 </div>
@@ -664,7 +665,7 @@ function collectAnswers() {
   obj._meta = {
     week: "week01",
     saved_at: nowIso(),
-    format_version: 9,
+    format_version: 10,
     tracking: {
       time_tracking_enabled: !!SETUP.timeTracking,
       event_tracking_enabled: !!SETUP.eventTracking
@@ -1166,22 +1167,94 @@ function closeSubmissionSummary() {
   saveLocal(false);
 }
 
-function confirmSubmission() {
-  registerInteraction();
+function buildSubmissionPayload() {
+  const collected = collectAnswers();
   const sid = normalizeStudentId(document.querySelector('[data-answer="STUDENT_ID"]')?.value || "");
-  if (!validStudentId(sid)) {
+  const answers = {};
+  Object.entries(collected).forEach(([key, value]) => {
+    if (!key.startsWith("_") && key !== "STUDENT_ID") answers[key] = value;
+  });
+  return {
+    schema_version: 1,
+    course: "ITARCH",
+    week: 1,
+    student_id: sid,
+    submitted_at: nowIso(),
+    answers,
+    checks: JSON.parse(JSON.stringify(checks)),
+    activity_summary: JSON.parse(JSON.stringify(activity))
+  };
+}
+
+function downloadJsonPayload(payload) {
+  const safeTs = String(payload.submitted_at || nowIso()).replace(/[:.]/g, "-");
+  const filename = `ITARCH_week01_${payload.student_id || "UNKNOWN"}_${safeTs}.json`;
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function exportSubmissionJson() {
+  registerInteraction();
+  const payload = buildSubmissionPayload();
+  if (!validStudentId(payload.student_id)) {
+    refreshStudentIdStatus();
+    const status = document.getElementById("submission-result");
+    if (status) status.innerHTML = `<strong>⚠ JSON export előtt adj meg érvényes Neptun-kódot.</strong>`;
+    return;
+  }
+  recordEvent("submission_json_exported");
+  saveLocal(false);
+  downloadJsonPayload(payload);
+}
+
+async function confirmSubmission() {
+  registerInteraction();
+  const payload = buildSubmissionPayload();
+  if (!validStudentId(payload.student_id)) {
     refreshStudentIdStatus();
     const status = document.getElementById("submission-result");
     if (status) status.innerHTML = `<strong>⚠ A beadás nem lehetséges.</strong><br>Adj meg érvényes, pontosan 6 karakteres Neptun-kódot.`;
     return;
   }
-  activity.submitted_at = nowIso();
-  recordEvent("submission_confirmed_prototype");
-  saveLocal(false);
+
+  const confirmBtn = document.getElementById("confirm-submit-button");
   const status = document.getElementById("submission-result");
-  if (status) status.innerHTML = `<strong>✓ Tesztbeadás rögzítve ezen a gépen.</strong><br>Ez a prototípus még nem küld adatot Azure Functionnek vagy GitHubra.`;
-  const panel = document.getElementById("submission-summary");
-  if (panel) panel.hidden = true;
+  if (confirmBtn) confirmBtn.disabled = true;
+  if (status) status.innerHTML = `<strong>Beadás folyamatban…</strong>`;
+
+  try {
+    const response = await fetch("https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    let resultData = null;
+    try { resultData = await response.json(); } catch (_) {}
+    if (!response.ok || !resultData || resultData.success !== true) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    activity.submitted_at = payload.submitted_at;
+    activity.last_submission_id = resultData.submission_id || null;
+    recordEvent("submission_succeeded", { submission_id: resultData.submission_id || null });
+    saveLocal(false);
+    if (status) status.innerHTML = `<strong>✓ Beadás sikeres.</strong><br>Azonosító: <code>${escapeHtml(resultData.submission_id || "–")}</code><br><small>A helyi mentés továbbra is megmarad ezen a böngészőn.</small>`;
+    const panel = document.getElementById("submission-summary");
+    if (panel) panel.hidden = true;
+  } catch (error) {
+    recordEvent("submission_failed", { message: String(error?.message || error) });
+    saveLocal(false);
+    if (status) status.innerHTML = `<strong>⚠ A szerveres beadás nem sikerült.</strong><br>A munkád nem veszett el: a helyi mentés megmaradt. Próbáld újra, vagy készíts JSON exportot, és őrizd meg a fájlt.<div class="actions" style="margin-top:.7rem"><button type="button" onclick="confirmSubmission()">↻ Beadás újrapróbálása</button><button type="button" onclick="exportSubmissionJson()">💾 JSON export letöltése</button></div>`;
+  } finally {
+    if (confirmBtn) confirmBtn.disabled = false;
+  }
 }
 
 function clearAnswers() {

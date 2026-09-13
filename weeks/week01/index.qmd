@@ -994,38 +994,96 @@ function runSyntaxRules(q) {
   return result("passed", "A megadott válaszok formailag megfelelnek a jelenlegi ellenőrzési szabályoknak.");
 }
 
-// PROTOTÍPUS: ez még nem valódi AI-hívás. A végleges verzióban ezt az Azure Function /api/check végpontja váltja fel.
-function runAiPrototype(q) {
-  const v = valuesFor(q);
-  if (!allFilled(q)) return result("needs_revision", "Még van kitöltetlen válaszmező. Először egészítsd ki a megoldást, majd kérj új ellenőrzést.");
+const AI_CHECK_ENDPOINT = "https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/check";
 
-  if (q === "Q13") {
-    const prompt = String(v.Q13_PROMPT || "").trim();
-    const summary = String(v.Q13_SUMMARY || "").trim();
-    if (prompt.length < 20) return result("needs_revision", "A prompt nagyon rövid. Kérd az AI-tól a script érthető, kezdő PowerShell-használónak szóló magyarázatát.");
-    if (summary.length < 80) return result("needs_revision", "Az összefoglalás még túl rövid. 2–4 mondatban foglald össze a script működését.");
-    if (!/Select-Object/i.test(summary)) return result("needs_revision", "Az összefoglalásban térj ki arra is, mi a Select-Object szerepe.");
-    if (!/(állapot|status|PowerState|virtuális gép|VM)/i.test(summary)) return result("needs_revision", "Az összefoglalásból még nem derül ki egyértelműen, hogy a script a virtuális gépek állapotát is feldolgozza.");
-    return result("passed", "A válasz tartalmazza a feladat fő elemeit. A béta verzióban ez még szabályalapú ellenőrzés; a következő fejlesztési lépés a valódi AI-rubrika.");
+async function runAiCheck(q) {
+  const v = valuesFor(q);
+
+  if (!allFilled(q)) {
+    return result("needs_revision", "Még van kitöltetlen válaszmező. Először egészítsd ki a megoldást, majd kérj új ellenőrzést.");
   }
 
-  return result("needs_revision", "Ehhez a feladathoz még nincs prototípus AI-szabály.");
+  if (q !== "Q13") {
+    return result("needs_revision", "Ehhez a feladathoz még nincs AI-ellenőrzés beállítva.");
+  }
+
+  const response = await fetch(AI_CHECK_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      task_id: "Q13",
+      task: "A hallgató a saját szavaival 2–4 mondatban foglalja össze, mit csinál a megadott Get-AzVM -Status PowerShell script, és térjen ki a Select-Object szerepére is.",
+      answer: String(v.Q13_SUMMARY || "").trim(),
+      prompt: String(v.Q13_PROMPT || "").trim()
+    })
+  });
+
+  let data = null;
+  try {
+    data = await response.json();
+  } catch (_) {}
+
+  if (!response.ok || !data || data.success !== true) {
+    const detail = data?.details || data?.error || `HTTP ${response.status}`;
+    throw new Error(detail);
+  }
+
+  const status = data.status === "pass" ? "passed" :
+                 data.status === "needs_revision" ? "needs_revision" : "invalid";
+
+  return result(status, String(data.feedback || "Az AI-ellenőrzés befejeződött."));
 }
 
-function performCheck(q) {
+async function performCheck(q) {
   if (!checkEnabledFor(q)) return;
   registerInteraction();
+
   const task = TASKS[q];
-  const r = task.type === "syntax" ? runSyntaxRules(q) : runAiPrototype(q);
-  checks[q] = {
-    type: task.type,
-    status: r.status,
-    feedback: r.feedback,
-    checked_at: nowIso()
-  };
-  recordEvent("check_performed", { question: q, check_type: task.type, result: r.status });
-  saveLocal(false);
-  renderCheckStatus(q);
+  const statusBox = document.getElementById(`check-status-${q}`);
+  const button = statusBox?.parentElement?.querySelector(".check-button");
+
+  if (task.type === "ai") {
+    if (button) button.disabled = true;
+    if (statusBox) {
+      statusBox.className = "check-status";
+      statusBox.textContent = "AI-ellenőrzés folyamatban…";
+    }
+  }
+
+  try {
+    const r = task.type === "syntax" ? runSyntaxRules(q) : await runAiCheck(q);
+
+    checks[q] = {
+      type: task.type,
+      status: r.status,
+      feedback: r.feedback,
+      checked_at: nowIso()
+    };
+
+    recordEvent("check_performed", {
+      question: q,
+      check_type: task.type,
+      result: r.status
+    });
+  } catch (error) {
+    checks[q] = {
+      type: task.type,
+      status: "needs_revision",
+      feedback: "Az AI-ellenőrzés jelenleg nem érhető el. A válaszod ettől még mentésre és beadásra kerülhet.",
+      checked_at: nowIso(),
+      error: String(error?.message || error)
+    };
+
+    recordEvent("check_failed", {
+      question: q,
+      check_type: task.type,
+      error: String(error?.message || error)
+    });
+  } finally {
+    if (button) button.disabled = false;
+    saveLocal(false);
+    renderCheckStatus(q);
+  }
 }
 
 function statusText(check) {

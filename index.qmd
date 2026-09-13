@@ -14,9 +14,6 @@ Az egyes heti oldalak **interaktív munkafüzetként** működnek:
 - minden feladatnál – a beállításoktól függően – szintaktikai vagy AI-ellenőrzést kérhetsz;
 - a **Beadás** gomb előbb összesítést mutat a kitöltöttségről, időről és hátralévő feladatokról.
 
-::: {.callout-note title="Prototípus"}
-A jelenlegi tesztverzió még a böngésző helyi tárhelyére ment. A végleges változatban a mentés és beadás az Azure Functionön keresztül történhet, így a hallgatónak nem kell JSON-fájlt kezelnie.
-:::
 
 ## Heti gyakorlatok
 
@@ -26,4 +23,4 @@ A jelenlegi tesztverzió még a böngésző helyi tárhelyére ment. A végleges
 
 Az első heti oldalon már közvetlenül kitölthető interaktív válaszmezők találhatók.
 
-A további hetek később kerülnek hozzáadásra.
+A további hetek folyamatosan kerülnek hozzáadásra

@@ -453,26 +453,11 @@ Az alkalmazásban keresd meg a **Virtual Machines** erőforrásokat, majd válas
 :::
 
 
-::: {.callout-warning title="Prototípus – AI-ellenőrzés és beadás"}
-Ebben a kipróbálható verzióban az **AI-ellenőrzés még nem hív valódi AI-szolgáltatást**: helyi, szabályalapú visszajelzéssel szimuláljuk a későbbi Azure Function működését. A **Beadás** gomb szintén csak a beadási folyamatot demonstrálja, még nem küld adatot szerverre vagy GitHubra.
-:::
-
 ::: {.callout-note title="Aktivitási adatok"}
 A munkafüzet kísérleti jelleggel **becsült aktív időt** és feladatonkénti szerkesztési eseményeket is rögzít.  
 Ez nem pontos munkaidőmérés: ha például az Azure Portal vagy a Cloud Shell másik böngészőlapon van, az ott töltött idő nem feltétlenül számít aktív időnek.
 :::
 
-<div id="tracking-panel" class="answer-box">
-<strong>Aktivitás ezen a gépen</strong>
-<p style="margin:.5rem 0 0 0">
-Időmérés: <span id="tracking-time-status">–</span><br>
-Eseménykövetés: <span id="tracking-event-status">–</span><br>
-Becsült aktív idő: <span id="activity-active-time">0:00</span><br>
-Szerkesztési események: <span id="activity-edit-count">0</span><br>
-Első megnyitás: <span id="activity-started">–</span><br>
-Utolsó aktivitás: <span id="activity-last">–</span>
-</p>
-</div>
 
 ## Mentés és beadás
 
@@ -493,9 +478,17 @@ Utolsó aktivitás: <span id="activity-last">–</span>
 
 <div id="submission-result"></div>
 
-::: {.callout-note title="Automatikus mentés"}
-A prototípus továbbra is a böngésző helyi tárhelyére menti a válaszokat, hogy a felület kipróbálható legyen. A végleges szerveres változatban az elsődleges mentés az Azure Functionön keresztül történhet, és a hallgatónak nem kell JSON-fájlt kezelnie.
-:::
+<div id="tracking-panel" class="answer-box">
+<strong>Aktivitás ezen a gépen</strong>
+<p style="margin:.5rem 0 0 0">
+Időmérés: <span id="tracking-time-status">–</span><br>
+Eseménykövetés: <span id="tracking-event-status">–</span><br>
+Becsült aktív idő: <span id="activity-active-time">0:00</span><br>
+Szerkesztési események: <span id="activity-edit-count">0</span><br>
+Első megnyitás: <span id="activity-started">–</span><br>
+Utolsó aktivitás: <span id="activity-last">–</span>
+</p>
+</div>
 
 <script src="../../config/setup.js"></script>
 <script>

@@ -12,8 +12,8 @@ A hallgató közvetlenül a böngészőben tölti ki a heti oldalt. A prototípu
 
 Minden feladat pontosan egy ellenőrzési típust kap:
 
-- **Szintaktikai ellenőrzés** – Q01–Q12, Q14 és Q15
-- **AI-ellenőrzés** – Q13
+- **Szintaktikai ellenőrzés** – Q01–Q12 és Q15
+- **AI-ellenőrzés** – Q13–Q14
 
 Az AI-ellenőrzés ebben a prototípusban még helyi szabályokkal szimulált. A végleges verzióban az Azure Function `/api/check` végpontja fogja kiszolgálni.
 

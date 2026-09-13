@@ -228,13 +228,9 @@ A kapcsolat ellenőrzéséhez add meg azt a **PowerShell-parancsot**, amelyet a 
 <div class="answer-box">
 <label for="q06_command">A kapcsolat teszteléséhez használt PowerShell-parancs</label>
 <input id="q06_command" data-answer="Q06_COMMAND" autocomplete="off">
-</div>
-
-A parancs részletes működésével később foglalkozunk. Most keresd meg a `TcpTestSucceeded` sort, és add meg az ott kapott értéket.
-
-<div class="answer-box">
 <label for="q06_tcp">A `TcpTestSucceeded` sorban kapott érték</label>
 <input id="q06_tcp" data-answer="Q06_TCP" autocomplete="off">
+
 </div>
 
 Ezután az Azure Portalon válaszd a **Csatlakozás (Connect) → RDP** lehetőséget, majd az **RDP-fájl letöltése (Download RDP File)** lehetőséget. Nyisd meg a letöltött `.rdp` fájlt.

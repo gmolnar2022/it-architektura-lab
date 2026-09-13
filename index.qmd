@@ -1,0 +1,29 @@
+---
+title: "IT Architektúra – Gyakorlati munkafüzet"
+---
+
+## Gyakorlati anyagok
+
+A kurzus gyakorlati anyagai hetenként külön oldalon jelennek meg.
+
+Az egyes heti oldalak **interaktív munkafüzetként** működnek:
+
+- a feladatleírásokat közvetlenül a böngészőben olvashatod;
+- a válaszokat ugyanazon az oldalon rögzítheted;
+- a böngésző automatikusan menti a kitöltött mezőket;
+- minden feladatnál – a beállításoktól függően – szintaktikai vagy AI-ellenőrzést kérhetsz;
+- a **Beadás** gomb előbb összesítést mutat a kitöltöttségről, időről és hátralévő feladatokról.
+
+::: {.callout-note title="Prototípus"}
+A jelenlegi tesztverzió még a böngésző helyi tárhelyére ment. A végleges változatban a mentés és beadás az Azure Functionön keresztül történhet, így a hallgatónak nem kell JSON-fájlt kezelnie.
+:::
+
+## Heti gyakorlatok
+
+### [1. hét – Első virtuális gépünk az Azure-ban](weeks/week01/index.qmd)
+
+**Azure Portal → Windows 11 VM → RDP → Cloud Shell → PowerShell → Script → AI**
+
+Az első heti oldalon már közvetlenül kitölthető interaktív válaszmezők találhatók.
+
+A további hetek később kerülnek hozzáadásra.

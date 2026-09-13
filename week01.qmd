@@ -1,0 +1,1147 @@
+---
+title: "1. hét – Első virtuális gépünk az Azure-ban"
+subtitle: "Azure Portal → Windows 11 VM → RDP → Cloud Shell → PowerShell → Script → AI"
+---
+
+<style>
+.answer-box {
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0 1.5rem 0;
+  background: #f8f9fa;
+}
+.answer-box label {
+  font-weight: 600;
+  display: block;
+  margin-top: .7rem;
+}
+.answer-box input, .answer-box textarea, .answer-box select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: .55rem;
+  margin-top: .25rem;
+  border: 1px solid #adb5bd;
+  border-radius: 5px;
+  font-family: inherit;
+}
+.answer-box select { width: 100%; padding: .55rem; margin-top: .25rem; border: 1px solid #adb5bd; border-radius: 5px; }
+.answer-box textarea.code-answer {
+  min-height: 110px;
+  font-family: Consolas, "Courier New", monospace;
+}
+.actions {
+  display: flex;
+  gap: .7rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+.actions button, .file-label {
+  padding: .65rem 1rem;
+  border: 1px solid #6c757d;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+}
+#save-status { margin-left: .5rem; font-weight: 600; }
+
+.task-check-controls {
+  margin-top: 1rem;
+  padding-top: .9rem;
+  border-top: 1px solid #dee2e6;
+}
+.check-button {
+  padding: .55rem .9rem;
+  border: 1px solid #6c757d;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+.check-status {
+  margin-top: .65rem;
+  padding: .55rem .7rem;
+  border-radius: 6px;
+  background: #eef1f4;
+  font-size: .95rem;
+}
+.check-status.passed { background: #e9f7ef; }
+.check-status.needs_revision { background: #fff4e5; }
+.check-status.stale { background: #eef2ff; }
+.submission-summary {
+  border: 2px solid #6c757d;
+  border-radius: 10px;
+  padding: 1.1rem;
+  margin: 1.2rem 0;
+  background: #fff;
+}
+.submission-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: .8rem;
+  margin: .8rem 0 1.2rem 0;
+}
+.submission-grid > div {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: .8rem;
+  background: #f8f9fa;
+}
+.submission-grid span, .submission-grid small { display: block; }
+.submission-grid strong { display: block; font-size: 1.35rem; margin: .2rem 0; }
+.submission-warning { padding: .7rem; background: #fff4e5; border-radius: 6px; margin: .8rem 0; }
+.submission-question { margin-top: 1rem; padding: .9rem; background: #f8f9fa; border-radius: 8px; }
+.check-summary-line { margin: .4rem 0; }
+#submission-result { margin-top: .8rem; }
+
+</style>
+
+
+Az első heti gyakorlat során egy **Windows 11 virtuális gépet** hozunk létre az Azure-ban, majd távoli asztallal kapcsolódunk hozzá, és megismerkedünk az **Azure Cloud Shell** és az **Azure PowerShell** alapjaival.
+
+::: {.callout-important title="Hogyan használd?"}
+A feladatokat közvetlenül ezen az oldalon követheted, és a válaszokat is itt rögzítheted. A böngésző ezen a gépen automatikusan megőrzi a kitöltött mezőket.
+
+A gyakorlat végén add meg a Neptun-kódodat, majd válaszd a **Beadás** gombot. Először egy összesítést kapsz a kitöltöttségről, a becsült aktív időről, a hátralévő feladatokról és – ha engedélyezve vannak – az ellenőrzések eredményeiről.
+:::
+
+<div class="answer-box">
+<label for="student_id">Neptun-kód</label>
+<input id="student_id" data-answer="STUDENT_ID" placeholder="pl. ABC123" maxlength="6" pattern="[A-Za-z0-9]{6}" autocomplete="off">
+<div id="student-id-status" class="check-status">A Neptun-kód 6 betűből és/vagy számjegyből áll.</div>
+</div>
+
+## 1. feladat – Belépés az Azure-ba
+
+Nyisd meg az Azure Portalt, és jelentkezz be az egyetemi fiókoddal. Ha szükséges, aktiváld az [**Azure for Students**](https://azure.microsoft.com/free/students/){target="_blank"} előfizetést.
+
+<div class="answer-box">
+<label for="q01_subscription">Az Azure-előfizetés azonosítója (Subscription ID)</label>
+<input id="q01_subscription" data-answer="Q01_SUBSCRIPTION_ID" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" maxlength="36" autocomplete="off">
+</div>
+
+## 2. feladat – Virtuális gép: Alapadatok
+
+Nyisd meg a **Virtuális gépek (Virtual machines)** szolgáltatást, majd kezdd el egy új **Azure-beli virtuális gép (Azure virtual machine)** létrehozását. Az **Alapadatok (Basics)** lapon végezd el az alábbi beállításokat.
+
+<div class="answer-box">
+<label for="q02_rg">Erőforráscsoport (Resource group) – hozz létre egy új erőforráscsoportot</label>
+<input id="q02_rg" data-answer="Q02_RESOURCEGROUP" placeholder="pl. rg-ABC123-week01">
+
+<label for="q02_vmname">Virtuális gép neve (Virtual machine name) – adj meg egy tetszőleges nevet</label>
+<input id="q02_vmname" data-answer="Q02_VMNAME" placeholder="pl. vm-ABC123-week01">
+
+<label for="q02_region">Régió (Region) – válassz egy támogatott régiót</label>
+<input id="q02_region" data-answer="Q02_REGION" placeholder="pl. North Europe">
+
+<details class="hint-box">
+<summary>ⓘ Hol találom a támogatott régiókat?</summary>
+<p>Az Azure for Students előfizetés korlátozhatja a használható régiókat. Ha az előfizetésedhez tartozik régiókorlátozó szabályzat, annak engedélyezett régióit a <strong>Szabályzat (Policy) → Hozzárendelések (Assignments)</strong> alatt találod. Ha ilyen hozzárendelés nem jelenik meg, válassz a virtuális gép létrehozásakor elérhető régiók közül.</p>
+</details>
+
+<p><strong>Rendelkezésre állási zóna (Availability zone):</strong> ne válassz rendelkezésre állási zónát.</p>
+<p><strong>Biztonság típusa (Security type):</strong> válaszd a <strong>Megbízható indítás (Trusted launch)</strong> lehetőséget.</p>
+<p><strong>Rendszerkép (Image):</strong> válassz az adott régióban elérhető, <strong>Microsoft által kiadott Windows kliens rendszerképet</strong>. Elsőként a <strong>Windows 11 Enterprise, version 25H2</strong> rendszerképet keresd. Ha ez nem érhető el, választhatsz például <strong>Windows 11 Pro</strong> vagy <strong>Windows 10 Enterprise</strong> rendszerképet is. Ne válassz külső gyártó fizetős Marketplace-rendszerképét.</p>
+<p><strong>Méret (Size):</strong> elsőként válaszd a <strong>Standard_B2ls_v2</strong> méretet.</p>
+
+::: {.callout-note title="Megjegyzés a gépmérethez"}
+Előfordulhat, hogy a B sorozatú virtuális gép az adott régióban vagy előfizetéssel nem telepíthető. Ha a rendszer elutasítja a választott B sorozatú méretet, válassz egy elérhető **D sorozatú** gépet, például **Standard_D2s_v3** méretet.
+:::
+
+<label for="q02_username">Felhasználónév (Username) – add meg a virtuális gép rendszergazdai felhasználónevét</label>
+<input id="q02_username" data-answer="Q02_USERNAME" placeholder="pl. azureuser" autocomplete="off">
+
+<div class="security-note"><strong>Jelszó (Password):</strong> adj meg egy megfelelő jelszót, majd erősítsd meg az Azure Portalon. <strong>A jelszót a munkafüzetbe ne írd be!</strong></div>
+
+<p>Az oldal alján fogadd el a Windows használatához szükséges <strong>licencfeltételeket</strong>. A többi beállítást hagyd változtatás nélkül.</p>
+</div>
+
+![Az Azure virtuális gép Alapadatok (Basics) beállításai](../../images/week01/vm-basics.png){width="90%"}
+
+## 3. feladat – Virtuális gép: Lemezek
+
+Nyisd meg a **Lemezek (Disks)** fület. Az **operációsrendszer-lemez típusánál (OS disk type)** válaszd a **Standard HDD** lehetőséget. Ez a gyakorlat céljára megfelelő és költségtakarékos választás.
+
+**A többi beállítást hagyd változtatás nélkül.**
+
+<div class="answer-box">
+<label for="q03_done">A beállítást elvégeztem</label>
+<select id="q03_done" data-answer="Q03_DONE"><option value=""></option><option>Igen</option></select>
+</div>
+
+![A Standard HDD kiválasztása a Lemezek (Disks) lapon](../../images/week01/vm-disks.png){width="90%"}
+
+## 4. feladat – Virtuális gép: Hálózatkezelés
+
+Nyisd meg a **Hálózatkezelés (Networking)** fület. A gyakorlat során használhatod az Azure által automatikusan létrehozott hálózati beállításokat.
+
+Mielőtt továbblépsz, győződj meg arról, hogy:
+
+- a **Virtuális hálózat (Virtual network)** ki van töltve;
+- az **Alhálózat (Subnet)** ki van töltve;
+- a **Nyilvános IP-cím (Public IP)** létrehozása engedélyezett;
+- az **RDP (3389)** bejövő port engedélyezett.
+
+::: {.callout-note title="Miért kell az RDP-port?"}
+A 3389-es RDP-port megnyitására azért van szükség, hogy a későbbi feladatban távolról kapcsolódni tudj a Windows virtuális géphez.
+:::
+
+**A többi beállítást hagyd változtatás nélkül.** A **Felügyelet (Management)**, **Monitorozás (Monitoring)** és **Speciális (Advanced)** füleken nem szükséges módosítanod semmit. Lépj tovább az **Áttekintés + létrehozás (Review + create)** fülre.
+
+<div class="answer-box">
+<label for="q04_done">A hálózati beállításokat ellenőriztem</label>
+<select id="q04_done" data-answer="Q04_DONE"><option value=""></option><option>Igen</option></select>
+</div>
+
+![A virtuális gép Hálózatkezelés (Networking) beállításai](../../images/week01/vm-networking.png){width="90%"}
+
+## 5. feladat – Áttekintés, létrehozás és a telepítés ellenőrzése
+
+Nyisd meg az **Áttekintés + létrehozás (Review + create)** oldalt. Várd meg a sikeres ellenőrzést, majd válaszd a **Létrehozás (Create)** gombot. Várd meg, amíg az Azure jelzi, hogy a virtuális gép telepítése sikeresen befejeződött, majd nyisd meg a létrehozott virtuális gép **Áttekintés (Overview)** oldalát.
+
+Keresd meg és add meg az alábbi adatokat.
+
+<div class="answer-box">
+<label for="q05_publicip">Nyilvános IP-cím (Public IP address)</label>
+<input id="q05_publicip" data-answer="Q05_PUBLICIP" placeholder="pl. 20.73.123.45">
+
+<label for="q05_privateip">Magánhálózati IP-cím (Private IP address)</label>
+<input id="q05_privateip" data-answer="Q05_PRIVATEIP" placeholder="pl. 10.0.0.4">
+
+<label for="q05_vnet">Virtuális hálózat (Virtual network)</label>
+<input id="q05_vnet" data-answer="Q05_VNET" placeholder="pl. vm-week01-vnet">
+</div>
+
+![A létrehozott virtuális gép Áttekintés (Overview) oldala](../../images/week01/vm-overview.png){width="90%"}
+
+## 6. feladat – Csatlakozás a virtuális géphez RDP-vel
+
+Mielőtt csatlakozol, a **tantermi gépen** nyiss meg egy PowerShell ablakot, és ellenőrizd, hogy elérhető-e a virtuális gép RDP-portja. A `<nyilvános-IP-cím>` helyére az előző feladatban feljegyzett címet írd:
+
+```powershell
+Test-NetConnection <nyilvános-IP-cím> -Port 3389
+```
+
+A parancs részletes működésével később foglalkozunk. Most keresd meg a `TcpTestSucceeded` sort.
+
+<div class="answer-box">
+<label for="q06_tcp">A TcpTestSucceeded értéke</label>
+<select id="q06_tcp" data-answer="Q06_TCP"><option value=""></option><option>True</option><option>False</option></select>
+</div>
+
+Ezután az Azure Portalon válaszd a **Csatlakozás (Connect) → RDP** lehetőséget, majd az **RDP-fájl letöltése (Download RDP File)** lehetőséget. Nyisd meg a letöltött `.rdp` fájlt.
+
+![Az RDP-fájl letöltése a Csatlakozás (Connect) oldalon](../../images/week01/vm-rdp.png){width="90%"}
+
+::: {.callout-warning title="Figyelem – Bejelentkezési adatok"}
+A virtuális gépre **ne az egyetemi hálózati felhasználóneveddel és jelszavaddal** próbálj bejelentkezni. Az RDP-kapcsolathoz a virtuális gép létrehozásakor, az **Alapadatok (Basics)** lapon megadott **helyi rendszergazdai felhasználónevet és jelszót** használd. Ha a Windows másik fiókot ajánl fel, válaszd a **További lehetőségek (More choices) → Másik fiók használata (Use a different account)** lehetőséget.
+:::
+
+::: {.callout-note title="Első bejelentkezés"}
+Az első bejelentkezéskor a Windows néhány kezdeti beállítással kapcsolatos kérdést jeleníthet meg, például az **adatvédelmi (Privacy)** beállításokról. Végezd el a szükséges kezdeti beállításokat, amíg meg nem jelenik a Windows asztal.
+:::
+
+A kapcsolat ellenőrzéséhez add meg azt a **PowerShell-parancsot**, amelyet a tantermi gépen futtattál. A parancsban a virtuális gép tényleges nyilvános IP-címe szerepeljen.
+
+<div class="answer-box">
+<label for="q06_command">A kapcsolat teszteléséhez használt PowerShell-parancs</label>
+<input id="q06_command" data-answer="Q06_COMMAND" placeholder="pl. Test-NetConnection 20.73.123.45 -Port 3389">
+</div>
+
+## 7. feladat – Azure Cloud Shell
+
+Indítsd el az **Azure Cloud Shellt**, és válaszd a **PowerShell** környezetet.
+
+![Az Azure Cloud Shell megnyitása](../../images/week01/azure-cloud-shell.png){width="90%"}
+
+Állítsd be aktív előfizetésként az **Azure for Students** előfizetést a `Set-AzContext` parancs segítségével.
+
+::: {.callout-tip title="Tipp"}
+Az előfizetés nevét idézőjelek között add meg.
+:::
+
+<div class="answer-box">
+<label for="q07_command">A használt PowerShell-parancs</label>
+<textarea id="q07_command" class="code-answer" data-answer="Q07_COMMAND" placeholder='pl. Set-AzContext -Subscription "Azure for Students"'></textarea>
+</div>
+
+## 8. feladat – Azure-előfizetések listázása
+
+Listázd az elérhető Azure-előfizetéseidet, majd jelenítsd meg csak a `Name` és `State` tulajdonságokat.
+
+::: {.callout-tip title="Tipp"}
+A PowerShellben a visszakapott objektumok kiválasztott tulajdonságait a `Select-Object` paranccsal jeleníthetjük meg.
+:::
+
+<div class="answer-box">
+<label for="q08_command">Az előfizetések listázására használt parancs</label>
+<textarea id="q08_command" class="code-answer" data-answer="Q08_COMMAND"></textarea>
+
+<label for="q08_filter">Csak a Name és State tulajdonságok megjelenítése</label>
+<textarea id="q08_filter" class="code-answer" data-answer="Q08_FILTER"></textarea>
+
+<label for="q08_output">A parancs eredménye</label>
+<textarea id="q08_output" class="code-answer" data-answer="Q08_OUTPUT"></textarea>
+</div>
+
+## 9. feladat – Resource Groupok lekérdezése
+
+Listázd az előfizetésed Resource Groupjait Azure PowerShellből.
+
+<div class="answer-box">
+<label for="q09_command">A használt parancs</label>
+<textarea id="q09_command" class="code-answer" data-answer="Q09_COMMAND"></textarea>
+
+<label for="q09_rg">A saját VM-ed Resource Groupjának neve</label>
+<input id="q09_rg" data-answer="Q09_RESOURCEGROUP">
+</div>
+
+## 10. feladat – Virtuális gépek lekérdezése
+
+Listázd az előfizetésed virtuális gépeit Azure PowerShellből.
+
+<div class="answer-box">
+<label for="q10_command">A használt parancs</label>
+<textarea id="q10_command" class="code-answer" data-answer="Q10_COMMAND"></textarea>
+
+<label for="q10_vmname">A saját virtuális géped neve</label>
+<input id="q10_vmname" data-answer="Q10_VMNAME">
+</div>
+
+## 11. feladat – A virtuális gép állapota és vezérlése
+
+Kérdezd le a VM állapotát. Ismerkedj meg a `Start-AzVM`, `Stop-AzVM` és `Restart-AzVM` parancsokkal.
+
+::: {.callout-note title="Fontos"}
+Ne állítsd le végleg a VM-et addig, amíg a következő feladatokhoz még szükséged van rá.
+:::
+
+<div class="answer-box">
+<label for="q11_command">Az állapot lekérdezésére használt parancs</label>
+<textarea id="q11_command" class="code-answer" data-answer="Q11_COMMAND"></textarea>
+
+<label for="q11_state">A VM aktuális állapota</label>
+<input id="q11_state" data-answer="Q11_STATE">
+</div>
+
+## 12. feladat – PowerShell script kiegészítése
+
+Ebben a feladatban egy részben elkészített PowerShell scriptet fogsz használni. A script lekérdezi a virtuális gép aktuális állapotát és az operációsrendszer-lemez méretét. **A kódvázat másold be**, és csak a két hiányzó sort egészítsd ki.
+
+::: {.callout-tip title="Script létrehozása a Cloud Shellben"}
+A Cloud Shellben indítsd el a beépített szerkesztőt:
+
+```powershell
+code .
+```
+
+Hozz létre egy `vm-info.ps1` nevű fájlt, másold bele az alábbi kódvázat, egészítsd ki a két hiányzó sort, majd mentsd el. A scriptet ezután így futtathatod:
+
+```powershell
+./vm-info.ps1
+```
+
+A PowerShell-scriptek létrehozásával és futtatásával az előadáson is foglalkoztunk.
+:::
+
+```powershell
+$resourceGroup = "SAJÁT ERŐFORRÁSCSOPORT"
+$vmName = "SAJÁT VM NÉV"
+
+# A virtuális gép állapotának lekérdezése
+$vmStatus = __________________________________________
+
+$powerState = ($vmStatus.Statuses |
+    Where-Object { $_.Code -like "PowerState/*" }).DisplayStatus
+
+Write-Host "A virtuális gép állapota: $powerState"
+
+# A virtuális gép és az OS-lemez adatainak lekérdezése
+$vm = Get-AzVM -ResourceGroupName $resourceGroup -Name $vmName
+$diskName = $vm.StorageProfile.OsDisk.Name
+$disk = Get-AzDisk -ResourceGroupName $resourceGroup -DiskName $diskName
+
+# Az OS-lemez méretének kiírása
+_____________________________________________________
+```
+
+<div class="answer-box">
+<label for="q12_line1">1. hiányzó PowerShell-sor</label>
+<textarea id="q12_line1" class="code-answer" data-answer="Q12_LINE1" placeholder="Írd ide a VM állapotát lekérdező parancsot..."></textarea>
+
+<label for="q12_line2">2. hiányzó PowerShell-sor</label>
+<textarea id="q12_line2" class="code-answer" data-answer="Q12_LINE2" placeholder="Írd ide az OS-lemez méretét kiíró Write-Host utasítást..."></textarea>
+</div>
+
+## 13. feladat – Ismeretlenebb PowerShell-kód megértése AI segítségével
+
+Az alábbi scriptben olyan PowerShell-elemek is szerepelnek, amelyekkel az előadáson még nem foglalkoztunk. Másold a kódot a Cloud Shellbe, futtasd le, majd használj generatív AI-eszközt a működésének megértéséhez.
+
+```powershell
+Get-AzVM -Status |
+    Select-Object Name, ResourceGroupName,
+        @{Name="PowerState"; Expression={
+            ($_.Statuses | Where-Object {$_.Code -like "PowerState/*"}).DisplayStatus
+        }} |
+    Format-Table -AutoSize
+```
+
+Kérd meg az AI-t, hogy a script működését **PowerShellt még csak alapszinten ismerő hallgató számára** magyarázza el. Ezután a saját szavaiddal foglald össze, mit csinál a script, és mi a `Select-Object` szerepe.
+
+<div class="answer-box">
+<label for="q13_prompt">Az AI-nak adott prompt</label>
+<textarea id="q13_prompt" data-answer="Q13_PROMPT" placeholder="Másold ide a használt promptot..."></textarea>
+
+<label for="q13_summary">Saját összefoglalásod (2–4 mondat)</label>
+<textarea id="q13_summary" data-answer="Q13_SUMMARY" placeholder="Fogalmazd meg saját szavaiddal, mit csinál a script..."></textarea>
+</div>
+
+## 14. feladat – Automatikus leállítás beállítása
+
+Nyisd meg a létrehozott virtuális gépet az Azure Portalon, és keresd meg az **Automatikus leállítás (Auto-shutdown)** beállítást.
+
+Állítsd be úgy, hogy a virtuális gép **minden nap 22:00-kor automatikusan leálljon**. Ha az adott felületen elérhető, állíts be **e-mailes értesítést** is az automatikus leállítás előtt.
+
+<div class="answer-box">
+<label for="q14_time">Beállított automatikus leállítási idő</label>
+<input id="q14_time" data-answer="Q14_TIME" placeholder="22:00" maxlength="5">
+
+<label for="q14_email">E-mailes értesítés</label>
+<select id="q14_email" data-answer="Q14_EMAIL"><option value=""></option><option>Bekapcsoltam</option><option>Nem kapcsoltam be</option><option>Nem volt elérhető</option></select>
+</div>
+
+## 15. feladat – A virtuális gép leállítása és ellenőrzése
+
+A gyakorlat végén állítsd le a virtuális gépet **PowerShell-paranccsal**, majd egy másik PowerShell-paranccsal ellenőrizd a gép állapotát. A leállítással elkerülheted, hogy a virtuális gép feleslegesen használja az Azure-kreditedet.
+
+<div class="answer-box">
+<label for="q15_stopcommand">A leállításhoz használt PowerShell-parancs</label>
+<textarea id="q15_stopcommand" class="code-answer" data-answer="Q15_STOPCOMMAND" placeholder="Stop-AzVM ..."></textarea>
+
+<label for="q15_statuscommand">Az állapot ellenőrzéséhez használt PowerShell-parancs</label>
+<textarea id="q15_statuscommand" class="code-answer" data-answer="Q15_STATUSCOMMAND" placeholder="Get-AzVM ... -Status"></textarea>
+
+<label for="q15_state">A VM végső állapota</label>
+<input id="q15_state" data-answer="Q15_STATE" placeholder="pl. VM deallocated">
+</div>
+
+::: {.callout-tip title="Opcionális feladat – Microsoft Azure mobilalkalmazás"}
+A **Microsoft Azure** alkalmazást Androidon a **Google Play Áruházban**, iPhone/iPad eszközön pedig az **App Store-ban** találod. Telepítés után jelentkezz be azzal a Microsoft-fiókkal, amelyhez az **Azure for Students** előfizetésed tartozik.
+
+Az alkalmazásban keresd meg a **Virtual Machines** erőforrásokat, majd válaszd ki a gyakorlaton létrehozott virtuális gépedet. Ellenőrizd az aktuális állapotát. Ha szeretnéd, próbáld ki a VM indítását és leállítását is a mobilalkalmazásból.
+
+**Ha újra elindítottad a gépet, a gyakorlat befejezésekor győződj meg róla, hogy az állapota ismét Leállítva (felszabadítva) / Stopped (deallocated).**
+:::
+
+
+::: {.callout-warning title="Prototípus – AI-ellenőrzés és beadás"}
+Ebben a kipróbálható verzióban az **AI-ellenőrzés még nem hív valódi AI-szolgáltatást**: helyi, szabályalapú visszajelzéssel szimuláljuk a későbbi Azure Function működését. A **Beadás** gomb szintén csak a beadási folyamatot demonstrálja, még nem küld adatot szerverre vagy GitHubra.
+:::
+
+::: {.callout-note title="Aktivitási adatok"}
+A munkafüzet kísérleti jelleggel **becsült aktív időt** és feladatonkénti szerkesztési eseményeket is rögzít.  
+Ez nem pontos munkaidőmérés: ha például az Azure Portal vagy a Cloud Shell másik böngészőlapon van, az ott töltött idő nem feltétlenül számít aktív időnek.
+:::
+
+<div id="tracking-panel" class="answer-box">
+<strong>Aktivitás ezen a gépen</strong>
+<p style="margin:.5rem 0 0 0">
+Időmérés: <span id="tracking-time-status">–</span><br>
+Eseménykövetés: <span id="tracking-event-status">–</span><br>
+Becsült aktív idő: <span id="activity-active-time">0:00</span><br>
+Szerkesztési események: <span id="activity-edit-count">0</span><br>
+Első megnyitás: <span id="activity-started">–</span><br>
+Utolsó aktivitás: <span id="activity-last">–</span>
+</p>
+</div>
+
+## Mentés és beadás
+
+<div class="actions">
+<button type="button" onclick="openSubmissionSummary()">📤 Beadás</button>
+<button type="button" onclick="clearAnswers()">Helyi adatok törlése</button>
+<span id="save-status"></span>
+</div>
+
+<div id="submission-summary" class="submission-summary" hidden>
+<h3 style="margin-top:0">Beadás előtti összesítés</h3>
+<div id="submission-summary-body"></div>
+<div class="actions">
+<button type="button" onclick="closeSubmissionSummary()">Vissza a javításhoz</button>
+<button id="confirm-submit-button" type="button" onclick="confirmSubmission()">Beadás megerősítése</button>
+</div>
+</div>
+
+<div id="submission-result"></div>
+
+::: {.callout-note title="Automatikus mentés"}
+A prototípus továbbra is a böngésző helyi tárhelyére menti a válaszokat, hogy a felület kipróbálható legyen. A végleges szerveres változatban az elsődleges mentés az Azure Functionön keresztül történhet, és a hallgatónak nem kell JSON-fájlt kezelnie.
+:::
+
+<script src="../../config/setup.js"></script>
+<script>
+const SETUP = Object.assign({
+  timeTracking: false,
+  eventTracking: false,
+  showTrackingPanel: false,
+  allowImport: false,
+  checksEnabled: true,
+  syntaxChecks: true,
+  aiChecks: true,
+  showChecksInSubmissionSummary: true,
+  requireChecksBeforeSubmission: false
+}, window.ITARCH_SETUP || {});
+
+const STORAGE_KEY = "itarch_week01_answers_beta1";
+const IDLE_LIMIT_MS = 120000;
+const TICK_MS = 1000;
+
+const TASKS = {
+  Q01: { title: "Belépés az Azure-ba", type: "syntax" },
+  Q02: { title: "Virtuális gép: Alapadatok", type: "syntax" },
+  Q03: { title: "Virtuális gép: Lemezek", type: "syntax" },
+  Q04: { title: "Virtuális gép: Hálózatkezelés", type: "syntax" },
+  Q05: { title: "Áttekintés, létrehozás és a telepítés ellenőrzése", type: "syntax" },
+  Q06: { title: "Csatlakozás a virtuális géphez RDP-vel", type: "syntax" },
+  Q07: { title: "Azure Cloud Shell", type: "syntax" },
+  Q08: { title: "Azure-előfizetések listázása", type: "syntax" },
+  Q09: { title: "Resource Groupok lekérdezése", type: "syntax" },
+  Q10: { title: "Virtuális gépek lekérdezése", type: "syntax" },
+  Q11: { title: "A virtuális gép állapota és vezérlése", type: "syntax" },
+  Q12: { title: "PowerShell script kiegészítése", type: "syntax" },
+  Q13: { title: "Ismeretlenebb PowerShell-kód megértése AI segítségével", type: "ai" },
+  Q14: { title: "Automatikus leállítás beállítása", type: "syntax" },
+  Q15: { title: "A virtuális gép leállítása és ellenőrzése", type: "syntax" }
+};
+
+function fields() {
+  return Array.from(document.querySelectorAll("[data-answer]"));
+}
+
+function taskFields(q) {
+  return fields().filter(el => String(el.dataset.answer || "").startsWith(q + "_"));
+}
+
+function nowIso() { return new Date().toISOString(); }
+
+function newSessionId() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return "session-" + Date.now() + "-" + Math.random().toString(36).slice(2);
+}
+
+function emptyActivity() {
+  return {
+    first_opened_at: SETUP.timeTracking ? nowIso() : null,
+    last_activity_at: SETUP.timeTracking ? nowIso() : null,
+    active_seconds_estimate: 0,
+    total_edit_events: 0,
+    questions: {},
+    sessions: [],
+    events: [],
+    submitted_at: null
+  };
+}
+
+let activity = emptyActivity();
+let checks = {};
+let currentSession = null;
+let lastInteractionMs = Date.now();
+
+function startSession() {
+  if (!SETUP.timeTracking && !SETUP.eventTracking) return;
+  currentSession = {
+    session_id: newSessionId(),
+    started_at: nowIso(),
+    last_activity_at: SETUP.timeTracking ? nowIso() : null,
+    active_seconds_estimate: 0,
+    edit_events: 0
+  };
+  activity.sessions.push(currentSession);
+  recordEvent("session_started");
+}
+
+startSession();
+
+function recordEvent(type, extra = {}) {
+  if (!SETUP.eventTracking) return;
+  activity.events.push({ type, timestamp: nowIso(), ...extra });
+}
+
+function questionKey(answerId) {
+  const m = String(answerId || "").match(/^(Q\d{2})_/);
+  return m ? m[1] : null;
+}
+
+function ensureQuestion(q) {
+  if (!q || !SETUP.eventTracking) return null;
+  if (!activity.questions[q]) {
+    activity.questions[q] = { first_edit_at: null, last_edit_at: null, edit_events: 0 };
+  }
+  return activity.questions[q];
+}
+
+function registerInteraction() {
+  lastInteractionMs = Date.now();
+  if (SETUP.timeTracking) {
+    activity.last_activity_at = nowIso();
+    if (currentSession) currentSession.last_activity_at = activity.last_activity_at;
+  }
+}
+
+const editSessions = new Map();
+
+function beginEditSession(el) {
+  registerInteraction();
+  editSessions.set(el.dataset.answer, { initialValue: el.value, startedAt: nowIso() });
+}
+
+function invalidateCheck(q) {
+  if (!q || !checks[q]) return;
+  if (checks[q].status !== "stale") {
+    checks[q].status = "stale";
+    checks[q].stale_at = nowIso();
+    recordEvent("check_invalidated", { question: q, check_type: checks[q].type });
+    renderCheckStatus(q);
+  }
+}
+
+function saveInput(el) {
+  registerInteraction();
+  invalidateCheck(questionKey(el.dataset.answer));
+  saveLocal(false);
+}
+
+function endEditSession(el) {
+  registerInteraction();
+  const answerId = el.dataset.answer;
+  const session = editSessions.get(answerId);
+  editSessions.delete(answerId);
+
+  if (!SETUP.eventTracking || !session) {
+    saveLocal(false);
+    refreshActivityPanel();
+    return;
+  }
+
+  if (el.value !== session.initialValue) {
+    activity.total_edit_events += 1;
+    if (currentSession) currentSession.edit_events += 1;
+    const q = questionKey(answerId);
+    const qa = ensureQuestion(q);
+    const ts = nowIso();
+    if (qa) {
+      if (!qa.first_edit_at) qa.first_edit_at = session.startedAt;
+      qa.last_edit_at = ts;
+      qa.edit_events += 1;
+    }
+    recordEvent("answer_edit_session", {
+      answer_id: answerId,
+      question: q,
+      started_at: session.startedAt,
+      ended_at: ts
+    });
+  }
+
+  saveLocal(false);
+  refreshActivityPanel();
+}
+
+function collectAnswers() {
+  const obj = {};
+  fields().forEach(el => obj[el.dataset.answer] = el.value);
+  obj._meta = {
+    week: "week01",
+    saved_at: nowIso(),
+    format_version: 7,
+    tracking: {
+      time_tracking_enabled: !!SETUP.timeTracking,
+      event_tracking_enabled: !!SETUP.eventTracking
+    },
+    checks: {
+      enabled: !!SETUP.checksEnabled,
+      syntax_enabled: !!SETUP.syntaxChecks,
+      ai_enabled: !!SETUP.aiChecks
+    }
+  };
+  obj._activity = JSON.parse(JSON.stringify(activity));
+  obj._checks = JSON.parse(JSON.stringify(checks));
+  return obj;
+}
+
+function storageAvailable() {
+  try {
+    const k = "__itarch_storage_test__";
+    localStorage.setItem(k, "1");
+    localStorage.removeItem(k);
+    return true;
+  } catch (e) { return false; }
+}
+
+const HAS_STORAGE = storageAvailable();
+
+function saveLocal(showStatus = true) {
+  if (!HAS_STORAGE) {
+    if (showStatus) {
+      const s = document.getElementById("save-status");
+      if (s) s.textContent = "Automatikus mentés nem érhető el";
+    }
+    return;
+  }
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(collectAnswers()));
+    if (showStatus) {
+      const s = document.getElementById("save-status");
+      if (s) {
+        s.textContent = "Mentve";
+        setTimeout(() => s.textContent = "", 1200);
+      }
+    }
+  } catch (e) {}
+}
+
+function loadLocal() {
+  if (!HAS_STORAGE) return;
+  let raw = null;
+  try { raw = localStorage.getItem(STORAGE_KEY); } catch(e) {}
+  if (!raw) return;
+
+  try {
+    const data = JSON.parse(raw);
+    fields().forEach(el => {
+      if (Object.prototype.hasOwnProperty.call(data, el.dataset.answer)) el.value = data[el.dataset.answer];
+    });
+
+    if (data._checks && typeof data._checks === "object") checks = data._checks;
+
+    if (data._activity && typeof data._activity === "object") {
+      const imported = data._activity;
+      if (SETUP.timeTracking) {
+        activity.first_opened_at = imported.first_opened_at || nowIso();
+        activity.last_activity_at = imported.last_activity_at || nowIso();
+        activity.active_seconds_estimate = Number(imported.active_seconds_estimate || 0);
+      }
+      if (SETUP.eventTracking) {
+        activity.total_edit_events = Number(imported.total_edit_events || 0);
+        activity.questions = imported.questions || {};
+        activity.events = Array.isArray(imported.events) ? imported.events : [];
+      }
+      activity.sessions = Array.isArray(imported.sessions) ? imported.sessions : [];
+      activity.submitted_at = imported.submitted_at || null;
+      startSession();
+    }
+  } catch(e) {}
+}
+
+function formatSeconds(seconds) {
+  seconds = Math.max(0, Math.floor(Number(seconds) || 0));
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
+  return h > 0 ? `${h}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}` : `${m}:${String(s).padStart(2,"0")}`;
+}
+
+function localDateTime(iso) {
+  if (!iso) return "–";
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? "–" : d.toLocaleString();
+}
+
+function refreshActivityPanel() {
+  const panel = document.getElementById("tracking-panel");
+  if (panel) panel.style.display = SETUP.showTrackingPanel ? "" : "none";
+  const ids = {
+    "tracking-time-status": SETUP.timeTracking ? "bekapcsolva" : "kikapcsolva",
+    "tracking-event-status": SETUP.eventTracking ? "bekapcsolva" : "kikapcsolva",
+    "activity-active-time": SETUP.timeTracking ? formatSeconds(activity.active_seconds_estimate) : "–",
+    "activity-edit-count": SETUP.eventTracking ? activity.total_edit_events : "–",
+    "activity-started": SETUP.timeTracking ? localDateTime(activity.first_opened_at) : "–",
+    "activity-last": SETUP.timeTracking ? localDateTime(activity.last_activity_at) : "–"
+  };
+  Object.entries(ids).forEach(([id, value]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  });
+}
+
+function checkEnabledFor(q) {
+  if (!SETUP.checksEnabled) return false;
+  const task = TASKS[q];
+  if (!task) return false;
+  return task.type === "syntax" ? !!SETUP.syntaxChecks : !!SETUP.aiChecks;
+}
+
+function valuesFor(q) {
+  const out = {};
+  taskFields(q).forEach(el => out[el.dataset.answer] = String(el.value || "").trim());
+  return out;
+}
+
+function allFilled(q) {
+  const fs = taskFields(q);
+  return fs.length > 0 && fs.every(el => String(el.value || "").trim() !== "");
+}
+
+function result(status, feedback) { return { status, feedback }; }
+
+function normalizeStudentId(value) {
+  return String(value || "").trim().toUpperCase();
+}
+
+function validStudentId(value) {
+  return /^[A-Z0-9]{6}$/.test(normalizeStudentId(value));
+}
+
+function validSubscriptionId(value) {
+  return /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(String(value || "").trim());
+}
+
+function refreshStudentIdStatus() {
+  const input = document.querySelector('[data-answer="STUDENT_ID"]');
+  const box = document.getElementById("student-id-status");
+  if (!input || !box) return;
+  const raw = String(input.value || "").trim();
+  if (!raw) {
+    box.className = "check-status needs_revision";
+    box.textContent = "⚠ A Neptun-kód megadása kötelező.";
+  } else if (!validStudentId(raw)) {
+    box.className = "check-status needs_revision";
+    box.textContent = "⚠ Hibás formátum. A Neptun-kód pontosan 6 betűből és/vagy számjegyből állhat.";
+  } else {
+    box.className = "check-status passed";
+    box.textContent = "✓ A Neptun-kód formátuma megfelelő.";
+  }
+}
+
+function runSyntaxRules(q) {
+  const v = valuesFor(q);
+  if (!allFilled(q)) return result("needs_revision", "Még van kitöltetlen válaszmező ebben a feladatban.");
+
+  const sid = String(document.querySelector('[data-answer="STUDENT_ID"]')?.value || "").trim().toUpperCase();
+  const has = (id, re) => re.test(v[id] || "");
+
+  switch(q) {
+    case "Q01":
+      if (!validSubscriptionId(v.Q01_SUBSCRIPTION_ID)) return result("needs_revision", "A Subscription ID formátuma nem megfelelő. 36 karakteres GUID szükséges, például: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.");
+      break;
+    case "Q02": {
+      if (!/^[A-Za-z0-9._()\-]{1,90}$/.test(v.Q02_RESOURCEGROUP || "")) return result("needs_revision", "Az erőforráscsoport neve formailag nem megfelelő.");
+      if (!/^[A-Za-z0-9\-]{1,64}$/.test(v.Q02_VMNAME || "")) return result("needs_revision", "A virtuális gép neve formailag nem megfelelő. Használj betűket, számjegyeket vagy kötőjelet.");
+      if (!String(v.Q02_REGION || "").trim()) return result("needs_revision", "Add meg a kiválasztott régiót.");
+      if (!/^[A-Za-z0-9._\-]{1,20}$/.test(v.Q02_USERNAME || "")) return result("needs_revision", "A felhasználónév formailag nem megfelelő.");
+      break;
+    }
+    case "Q05":
+      if (v.Q05_PRIVATEIP && !/^\d{1,3}(\.\d{1,3}){3}$/.test(v.Q05_PRIVATEIP)) return result("needs_revision", "A magánhálózati IP-cím formátuma nem tűnik IPv4-címnek.");
+      if (v.Q05_PUBLICIP && !/^\d{1,3}(\.\d{1,3}){3}$/.test(v.Q05_PUBLICIP)) return result("needs_revision", "A nyilvános IP-cím formátuma nem tűnik IPv4-címnek.");
+      if (!String(v.Q05_VNET || "").trim()) return result("needs_revision", "Add meg a virtuális hálózat nevét.");
+      break;
+    case "Q06":
+      if ((v.Q06_TCP || "") !== "True") return result("needs_revision", "Az RDP-port ellenőrzésénél a TcpTestSucceeded értékének True-nak kell lennie.");
+      if (!/\bTest-NetConnection\b/i.test(v.Q06_COMMAND || "")) return result("needs_revision", "A megadott parancsban nem találom a Test-NetConnection cmdletet.");
+      if (!/-Port\s+3389\b/i.test(v.Q06_COMMAND || "")) return result("needs_revision", "A parancsnak a 3389-es RDP-portot kell ellenőriznie.");
+      if (v.Q05_PUBLICIP && !String(v.Q06_COMMAND || "").includes(v.Q05_PUBLICIP)) return result("needs_revision", "A parancsban az 5. feladatban megadott nyilvános IP-cím szerepeljen.");
+      break;
+    case "Q07":
+      if (!has("Q07_COMMAND", /\bSet-AzContext\b/i)) return result("needs_revision", "A parancsban nem találom a Set-AzContext cmdletet.");
+      if (!/Azure\s+for\s+Students/i.test(v.Q07_COMMAND || "")) return result("needs_revision", "A parancsban az Azure for Students előfizetés nevét add meg.");
+      break;
+    case "Q08": {
+      const combined = `${v.Q08_COMMAND} ${v.Q08_FILTER}`;
+      if (!/Get-AzSubscription/i.test(combined)) return result("needs_revision", "A megadott parancsok között nem találom az előfizetések lekérdezésére szolgáló cmdletet.");
+      if (!/Select-Object/i.test(combined) || !/\bName\b/i.test(combined) || !/\bState\b/i.test(combined)) return result("needs_revision", "Ellenőrizd, hogy a kimenetet a Name és State tulajdonságokra szűkítetted-e.");
+      break;
+    }
+    case "Q09":
+      if (!has("Q09_COMMAND", /Get-AzResourceGroup/i)) return result("needs_revision", "A parancs nem tartalmazza a Resource Groupok lekérdezésére szolgáló cmdletet.");
+      break;
+    case "Q10":
+      if (!has("Q10_COMMAND", /Get-AzVM/i)) return result("needs_revision", "A parancs nem tartalmazza a virtuális gépek lekérdezésére szolgáló cmdletet.");
+      break;
+    case "Q11":
+      if (!has("Q11_COMMAND", /Get-AzVM/i) || !has("Q11_COMMAND", /-Status\b/i)) return result("needs_revision", "A VM aktuális állapotának lekérdezéséhez ellenőrizd a használt Get-AzVM paramétereket.");
+      break;
+    case "Q12":
+      if (!/\bGet-AzVM\b/i.test(v.Q12_LINE1 || "") || !/-ResourceGroupName\b/i.test(v.Q12_LINE1 || "") || !/-Name\b/i.test(v.Q12_LINE1 || "") || !/-Status\b/i.test(v.Q12_LINE1 || "")) return result("needs_revision", "Az első sorban a VM állapotát kell lekérdezni Get-AzVM segítségével, a ResourceGroupName, Name és Status paraméterekkel.");
+      if (!/\bWrite-Host\b/i.test(v.Q12_LINE2 || "") || !/DiskSizeGB/i.test(v.Q12_LINE2 || "")) return result("needs_revision", "A második sorban Write-Host segítségével írasd ki a $disk objektum DiskSizeGB tulajdonságát.");
+      break;
+    case "Q14":
+      if (String(v.Q14_TIME || "").trim() !== "22:00") return result("needs_revision", "Az automatikus leállítás időpontját 22:00-ra állítsd.");
+      break;
+    case "Q15":
+      if (!has("Q15_STOPCOMMAND", /\bStop-AzVM\b/i)) return result("needs_revision", "A leállítási parancsban nem találom a Stop-AzVM cmdletet.");
+      if (!has("Q15_STATUSCOMMAND", /\bGet-AzVM\b/i) || !has("Q15_STATUSCOMMAND", /-Status\b/i)) return result("needs_revision", "Az állapot ellenőrzéséhez használj Get-AzVM parancsot -Status paraméterrel.");
+      if (!/(deallocated|felszabadítva)/i.test(v.Q15_STATE || "")) return result("needs_revision", "Ellenőrizd, hogy a VM végső állapota leállított/felszabadított (deallocated) legyen.");
+      break;
+  }
+  return result("passed", "A megadott válaszok formailag megfelelnek a jelenlegi ellenőrzési szabályoknak.");
+}
+
+// PROTOTÍPUS: ez még nem valódi AI-hívás. A végleges verzióban ezt az Azure Function /api/check végpontja váltja fel.
+function runAiPrototype(q) {
+  const v = valuesFor(q);
+  if (!allFilled(q)) return result("needs_revision", "Még van kitöltetlen válaszmező. Először egészítsd ki a megoldást, majd kérj új ellenőrzést.");
+
+  if (q === "Q13") {
+    const prompt = String(v.Q13_PROMPT || "").trim();
+    const summary = String(v.Q13_SUMMARY || "").trim();
+    if (prompt.length < 20) return result("needs_revision", "A prompt nagyon rövid. Kérd az AI-tól a script érthető, kezdő PowerShell-használónak szóló magyarázatát.");
+    if (summary.length < 80) return result("needs_revision", "Az összefoglalás még túl rövid. 2–4 mondatban foglald össze a script működését.");
+    if (!/Select-Object/i.test(summary)) return result("needs_revision", "Az összefoglalásban térj ki arra is, mi a Select-Object szerepe.");
+    if (!/(állapot|status|PowerState|virtuális gép|VM)/i.test(summary)) return result("needs_revision", "Az összefoglalásból még nem derül ki egyértelműen, hogy a script a virtuális gépek állapotát is feldolgozza.");
+    return result("passed", "A válasz tartalmazza a feladat fő elemeit. A béta verzióban ez még szabályalapú ellenőrzés; a következő fejlesztési lépés a valódi AI-rubrika.");
+  }
+
+  return result("needs_revision", "Ehhez a feladathoz még nincs prototípus AI-szabály.");
+}
+
+function performCheck(q) {
+  if (!checkEnabledFor(q)) return;
+  registerInteraction();
+  const task = TASKS[q];
+  const r = task.type === "syntax" ? runSyntaxRules(q) : runAiPrototype(q);
+  checks[q] = {
+    type: task.type,
+    status: r.status,
+    feedback: r.feedback,
+    checked_at: nowIso()
+  };
+  recordEvent("check_performed", { question: q, check_type: task.type, result: r.status });
+  saveLocal(false);
+  renderCheckStatus(q);
+}
+
+function statusText(check) {
+  if (!check) return "";
+  if (check.status === "passed") return "✓ Megfelelő";
+  if (check.status === "needs_revision") return "⚠ Javítandó";
+  if (check.status === "stale") return "↻ A válasz az utolsó ellenőrzés óta módosult";
+  return "";
+}
+
+function renderCheckStatus(q) {
+  const box = document.getElementById(`check-status-${q}`);
+  if (!box) return;
+  const c = checks[q];
+  if (!c) {
+    box.className = "check-status";
+    box.textContent = "Még nincs ellenőrizve.";
+    return;
+  }
+  box.className = `check-status ${c.status}`;
+  box.innerHTML = `<strong>${statusText(c)}</strong>${c.feedback ? `<br>${escapeHtml(c.feedback)}` : ""}`;
+}
+
+function addCheckControls() {
+  document.querySelectorAll(".answer-box").forEach(box => {
+    const first = box.querySelector("[data-answer]");
+    if (!first) return;
+    const q = questionKey(first.dataset.answer);
+    if (!q || !TASKS[q] || box.querySelector(".task-check-controls")) return;
+
+    const wrap = document.createElement("div");
+    wrap.className = "task-check-controls";
+
+    if (checkEnabledFor(q)) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "check-button";
+      btn.textContent = TASKS[q].type === "syntax" ? "Szintaktikai ellenőrzés" : "AI-ellenőrzés";
+      btn.addEventListener("click", () => performCheck(q));
+      wrap.appendChild(btn);
+
+      const status = document.createElement("div");
+      status.id = `check-status-${q}`;
+      status.className = "check-status";
+      status.textContent = "Még nincs ellenőrizve.";
+      wrap.appendChild(status);
+    }
+
+    box.appendChild(wrap);
+    renderCheckStatus(q);
+  });
+}
+
+function taskCompletion(q) {
+  const fs = taskFields(q);
+  const filled = fs.filter(el => String(el.value || "").trim() !== "").length;
+  return { total: fs.length, filled, complete: fs.length > 0 && filled === fs.length };
+}
+
+function summaryCheckCounts(type) {
+  const qs = Object.keys(TASKS).filter(q => TASKS[q].type === type && checkEnabledFor(q));
+  const counts = { total: qs.length, passed: 0, needs_revision: 0, stale: 0, unchecked: 0 };
+  qs.forEach(q => {
+    const s = checks[q]?.status;
+    if (s && Object.prototype.hasOwnProperty.call(counts, s)) counts[s] += 1;
+    else counts.unchecked += 1;
+  });
+  return counts;
+}
+
+function summaryLine(label, c) {
+  return `<div class="check-summary-line"><strong>${label}:</strong> ✓ ${c.passed} megfelelő · ⚠ ${c.needs_revision} javítandó · ↻ ${c.stale} módosítva · ○ ${c.unchecked} nincs ellenőrizve</div>`;
+}
+
+function openSubmissionSummary() {
+  registerInteraction();
+  const taskIds = Object.keys(TASKS);
+  let totalFields = 0, filledFields = 0;
+  const remaining = [];
+
+  taskIds.forEach(q => {
+    const c = taskCompletion(q);
+    totalFields += c.total;
+    filledFields += c.filled;
+    if (!c.complete) remaining.push(`${q.slice(1)}. feladat – ${TASKS[q].title}`);
+  });
+
+  const pct = totalFields ? Math.round((filledFields / totalFields) * 100) : 0;
+  const panel = document.getElementById("submission-summary");
+  const body = document.getElementById("submission-summary-body");
+  if (!panel || !body) return;
+
+  const sid = normalizeStudentId(document.querySelector('[data-answer="STUDENT_ID"]')?.value || "");
+  const sidValid = validStudentId(sid);
+  let html = `
+    <div class="submission-grid">
+      <div><span>Kitöltöttség</span><strong>${pct}%</strong><small>${filledFields} / ${totalFields} mező</small></div>
+      <div><span>Aktív idő</span><strong>${SETUP.timeTracking ? formatSeconds(activity.active_seconds_estimate) : "–"}</strong><small>${SETUP.timeTracking ? "becsült érték" : "időmérés kikapcsolva"}</small></div>
+      <div><span>Befejezett feladat</span><strong>${taskIds.length - remaining.length} / ${taskIds.length}</strong><small>${remaining.length} feladat maradt</small></div>
+    </div>`;
+
+  if (!sidValid) html += `<div class="submission-warning">⚠ A Neptun-kód megadása kötelező, és pontosan 6 betűből és/vagy számjegyből kell állnia.</div>`;
+
+  html += `<h4>Hátralévő feladatok</h4>`;
+  html += remaining.length ? `<ul>${remaining.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>` : `<p>✓ Minden feladat valamennyi mezője ki van töltve.</p>`;
+
+  if (SETUP.checksEnabled && SETUP.showChecksInSubmissionSummary) {
+    html += `<h4>Ellenőrzések összesítése</h4>`;
+    if (SETUP.syntaxChecks) html += summaryLine("Szintaktikai ellenőrzések", summaryCheckCounts("syntax"));
+    if (SETUP.aiChecks) html += summaryLine("AI-ellenőrzések", summaryCheckCounts("ai"));
+    if (!SETUP.syntaxChecks && !SETUP.aiChecks) html += `<p>Az ellenőrzések ki vannak kapcsolva.</p>`;
+  }
+
+  html += `<div class="submission-question"><strong>Biztosan beadja a feladatsort?</strong><br><small>Az ellenőrző gombok használata ${SETUP.requireChecksBeforeSubmission ? "kötelező" : "nem kötelező"}.</small></div>`;
+  body.innerHTML = html;
+
+  const confirmBtn = document.getElementById("confirm-submit-button");
+  if (confirmBtn) {
+    const missingRequiredChecks = SETUP.requireChecksBeforeSubmission && Object.keys(TASKS).some(q => checkEnabledFor(q) && (!checks[q] || checks[q].status === "stale"));
+    confirmBtn.disabled = missingRequiredChecks || !sidValid;
+    confirmBtn.title = missingRequiredChecks ? "Van nem ellenőrzött vagy módosítás óta elavult ellenőrzés." : (!sidValid ? "Adj meg érvényes, 6 karakteres Neptun-kódot." : "");
+  }
+
+  panel.hidden = false;
+  panel.scrollIntoView({ behavior: "smooth", block: "start" });
+  recordEvent("submission_summary_opened", { completion_percent: pct, remaining_tasks: remaining.length });
+  saveLocal(false);
+}
+
+function closeSubmissionSummary() {
+  const panel = document.getElementById("submission-summary");
+  if (panel) panel.hidden = true;
+  recordEvent("submission_returned_to_editing");
+  saveLocal(false);
+}
+
+function confirmSubmission() {
+  registerInteraction();
+  const sid = normalizeStudentId(document.querySelector('[data-answer="STUDENT_ID"]')?.value || "");
+  if (!validStudentId(sid)) {
+    refreshStudentIdStatus();
+    const status = document.getElementById("submission-result");
+    if (status) status.innerHTML = `<strong>⚠ A beadás nem lehetséges.</strong><br>Adj meg érvényes, pontosan 6 karakteres Neptun-kódot.`;
+    return;
+  }
+  activity.submitted_at = nowIso();
+  recordEvent("submission_confirmed_prototype");
+  saveLocal(false);
+  const status = document.getElementById("submission-result");
+  if (status) status.innerHTML = `<strong>✓ Tesztbeadás rögzítve ezen a gépen.</strong><br>Ez a prototípus még nem küld adatot Azure Functionnek vagy GitHubra.`;
+  const panel = document.getElementById("submission-summary");
+  if (panel) panel.hidden = true;
+}
+
+function clearAnswers() {
+  if (!confirm("Biztosan törlöd az ezen a gépen mentett válaszokat, ellenőrzéseket és aktivitási adatokat?")) return;
+  if (HAS_STORAGE) {
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+  }
+  fields().forEach(el => el.value = "");
+  activity = emptyActivity();
+  checks = {};
+  currentSession = null;
+  startSession();
+  lastInteractionMs = Date.now();
+  Object.keys(TASKS).forEach(renderCheckStatus);
+  const status = document.getElementById("submission-result");
+  if (status) status.textContent = "";
+  saveLocal(false);
+  refreshActivityPanel();
+}
+
+function activityTick() {
+  if (!SETUP.timeTracking) return;
+  const recentlyActive = (Date.now() - lastInteractionMs) <= IDLE_LIMIT_MS;
+  if (!document.hidden && recentlyActive) {
+    activity.active_seconds_estimate += 1;
+    if (currentSession) currentSession.active_seconds_estimate += 1;
+    if (activity.active_seconds_estimate % 10 === 0) saveLocal(false);
+    refreshActivityPanel();
+  }
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadLocal();
+  addCheckControls();
+
+  fields().forEach(el => {
+    el.addEventListener("focus", () => beginEditSession(el));
+    el.addEventListener("input", () => {
+      if (el.dataset.answer === "STUDENT_ID") {
+        const pos = el.selectionStart;
+        el.value = el.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
+        if (pos !== null) el.setSelectionRange(Math.min(pos, el.value.length), Math.min(pos, el.value.length));
+        refreshStudentIdStatus();
+      }
+      saveInput(el);
+    });
+    el.addEventListener("change", () => {
+      if (el.dataset.answer === "STUDENT_ID") refreshStudentIdStatus();
+      saveInput(el);
+    });
+    el.addEventListener("blur", () => {
+      if (el.dataset.answer === "STUDENT_ID") refreshStudentIdStatus();
+      endEditSession(el);
+    });
+  });
+  refreshStudentIdStatus();
+
+  ["mousemove", "mousedown", "keydown", "touchstart", "scroll"].forEach(evt => {
+    document.addEventListener(evt, registerInteraction, {passive: true});
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) registerInteraction();
+    saveLocal(false);
+    refreshActivityPanel();
+  });
+
+  window.addEventListener("beforeunload", () => saveLocal(false));
+
+  recordEvent("workbook_opened");
+  refreshActivityPanel();
+  Object.keys(TASKS).forEach(renderCheckStatus);
+  setInterval(activityTick, TICK_MS);
+});
+</script>
+

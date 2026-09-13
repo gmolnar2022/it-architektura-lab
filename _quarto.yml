@@ -1,0 +1,24 @@
+project:
+  type: website
+  render:
+    - index.qmd
+    - weeks/**/*.qmd
+  resources:
+    - config/**
+
+website:
+  title: "IT Architektúra – Gyakorlati munkafüzet"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Kezdőlap
+      - href: weeks/week01/index.qmd
+        text: 1. hét
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    smooth-scroll: true

@@ -223,7 +223,14 @@ Mielőtt csatlakozol, a **tantermi gépen** nyiss meg egy PowerShell ablakot, é
 Test-NetConnection <nyilvános-IP-cím> -Port 3389
 ```
 
-A parancs részletes működésével később foglalkozunk. Most keresd meg a `TcpTestSucceeded` sort.
+A kapcsolat ellenőrzéséhez add meg azt a **PowerShell-parancsot**, amelyet a tantermi gépen futtattál. A parancsban a virtuális gép tényleges nyilvános IP-címe szerepeljen.
+
+<div class="answer-box">
+<label for="q06_command">A kapcsolat teszteléséhez használt PowerShell-parancs</label>
+<input id="q06_command" data-answer="Q06_COMMAND" autocomplete="off">
+</div>
+
+A parancs részletes működésével később foglalkozunk. Most keresd meg a `TcpTestSucceeded` sort, és add meg az ott kapott értéket.
 
 <div class="answer-box">
 <label for="q06_tcp">A `TcpTestSucceeded` sorban kapott érték</label>
@@ -241,13 +248,6 @@ A virtuális gépre **ne az egyetemi hálózati felhasználóneveddel és jelsza
 ::: {.callout-note title="Első bejelentkezés"}
 Az első bejelentkezéskor a Windows néhány kezdeti beállítással kapcsolatos kérdést jeleníthet meg, például az **adatvédelmi (Privacy)** beállításokról. Végezd el a szükséges kezdeti beállításokat, amíg meg nem jelenik a Windows asztal.
 :::
-
-A kapcsolat ellenőrzéséhez add meg azt a **PowerShell-parancsot**, amelyet a tantermi gépen futtattál. A parancsban a virtuális gép tényleges nyilvános IP-címe szerepeljen.
-
-<div class="answer-box">
-<label for="q06_command">A kapcsolat teszteléséhez használt PowerShell-parancs</label>
-<input id="q06_command" data-answer="Q06_COMMAND" autocomplete="off">
-</div>
 
 ## 7. feladat – Azure Cloud Shell
 

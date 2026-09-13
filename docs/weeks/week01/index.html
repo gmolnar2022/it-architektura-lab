@@ -414,7 +414,12 @@ Az oldal alján fogadd el a Windows használatához szükséges <strong>licencfe
 <h2 class="anchored" data-anchor-id="feladat-csatlakozás-a-virtuális-géphez-rdp-vel">6. feladat – Csatlakozás a virtuális géphez RDP-vel</h2>
 <p>Mielőtt csatlakozol, a <strong>tantermi gépen</strong> nyiss meg egy PowerShell ablakot, és ellenőrizd, hogy elérhető-e a virtuális gép RDP-portja. A <code>&lt;nyilvános-IP-cím&gt;</code> helyére az előző feladatban feljegyzett címet írd:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a aria-hidden="true" href="#cb1-1" tabindex="-1"></a>Test-NetConnection <span class="op">&lt;</span>nyilvános-IP-cím<span class="op">&gt;</span> <span class="op">-</span>Port <span class="dv">3389</span></span></code></pre></div><button class="code-copy-button" title="Copy to Clipboard"><i class="bi"></i></button></div>
-<p>A parancs részletes működésével később foglalkozunk. Most keresd meg a <code>TcpTestSucceeded</code> sort.</p>
+<p>A kapcsolat ellenőrzéséhez add meg azt a <strong>PowerShell-parancsot</strong>, amelyet a tantermi gépen futtattál. A parancsban a virtuális gép tényleges nyilvános IP-címe szerepeljen.</p>
+<div class="answer-box">
+<p><label for="q06_command">A kapcsolat teszteléséhez használt PowerShell-parancs</label> <input data-answer="Q06_COMMAND" id="q06_command"/></p>
+</div>
+
+<p>A parancs részletes működésével később foglalkozunk. Most keresd meg a <code>TcpTestSucceeded</code> sort, és add meg az ott kapott értéket.</p>
 <div class="answer-box">
 <p><label for="q06_tcp">A `TcpTestSucceeded` sorban kapott érték</label> <input autocomplete="off" data-answer="Q06_TCP" id="q06_tcp"/></p>
 </div>
@@ -450,10 +455,6 @@ Az oldal alján fogadd el a Windows használatához szükséges <strong>licencfe
 <div class="callout-body-container callout-body">
 <p>Az első bejelentkezéskor a Windows néhány kezdeti beállítással kapcsolatos kérdést jeleníthet meg, például az <strong>adatvédelmi (Privacy)</strong> beállításokról. Végezd el a szükséges kezdeti beállításokat, amíg meg nem jelenik a Windows asztal.</p>
 </div>
-</div>
-<p>A kapcsolat ellenőrzéséhez add meg azt a <strong>PowerShell-parancsot</strong>, amelyet a tantermi gépen futtattál. A parancsban a virtuális gép tényleges nyilvános IP-címe szerepeljen.</p>
-<div class="answer-box">
-<p><label for="q06_command">A kapcsolat teszteléséhez használt PowerShell-parancs</label> <input data-answer="Q06_COMMAND" id="q06_command"/></p>
 </div>
 </section>
 <section class="level2" id="feladat-azure-cloud-shell">

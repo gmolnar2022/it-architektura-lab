@@ -135,9 +135,26 @@ Nyisd meg a **Virtuális gépek (Virtual machines)** szolgáltatást, majd kezdd
 <label for="q02_region">Régió (Region) – válassz egy támogatott régiót</label>
 <input id="q02_region" data-answer="Q02_REGION" autocomplete="off">
 
-<details class="hint-box">
-<summary>ⓘ Hol találom a támogatott régiókat?</summary>
-<p>Az Azure for Students előfizetés korlátozhatja a használható régiókat. Ha az előfizetésedhez tartozik régiókorlátozó szabályzat, annak engedélyezett régióit a <strong>Szabályzat (Policy) → Hozzárendelések (Assignments)</strong> alatt találod. Ha ilyen hozzárendelés nem jelenik meg, válassz a virtuális gép létrehozásakor elérhető régiók közül.</p>
+<details class="answer-help">
+<summary>ⓘ Hogyan ellenőrizhetem, mely régiókat használhatom?</summary>
+
+<p>Az <strong>Azure for Students</strong> előfizetés korlátozhatja a használható Azure-régiókat. Ha a virtuális gép létrehozása régiókorlátozás miatt nem sikerül, az alábbi szkript segítségével ellenőrizheted az előfizetésedben használható régiókat.</p>
+
+<ol>
+<li>Nyisd meg az <strong>Azure Cloud Shellt</strong>.</li>
+<li>A Cloud Shell környezeteként válaszd a <strong>Bash</strong> lehetőséget.</li>
+<li>Töltsd le az <a href="../../files/azure-region-check.sh" download><strong>azure-region-check.sh</strong></a> fájlt.</li>
+<li>A Cloud Shellben válaszd a <strong>Manage files → Upload</strong> lehetőséget, majd töltsd fel a letöltött fájlt.</li>
+<li>Futtasd az alábbi két parancsot:</li>
+</ol>
+
+<pre><code>chmod +x azure-region-check.sh
+./azure-region-check.sh</code></pre>
+
+<p>A régiók ellenőrzése néhány percet vehet igénybe. A futás végén keresd meg az <strong>ALLOWED REGIONS</strong> részt, és a virtuális gép létrehozásakor próbáld meg az ott felsorolt régiók valamelyikét.</p>
+
+<p><strong>Megjegyzés:</strong> Attól, hogy egy régió használata engedélyezett, még nem biztos, hogy az adott régióban minden virtuálisgép-méret és rendszerkép elérhető.</p>
+
 </details>
 
 <p><strong>Rendelkezésre állási zóna (Availability zone):</strong> ne válassz rendelkezésre állási zónát.</p>

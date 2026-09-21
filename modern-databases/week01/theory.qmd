@@ -1,0 +1,332 @@
+---
+title: "1. hét – Bevezetés és speciális csoportosítás"
+---
+
+# Bevezetés
+
+## Kapcsolódó tantárgyak és területek
+
+A korszerű adatbázisok ismerete több területhez kapcsolódik:
+
+- szoftverfejlesztés,
+- üzleti intelligencia,
+- adatelemzés és adattudomány,
+- információs rendszerek,
+- döntéstámogatás,
+- IT-architektúrák.
+
+A megszerzett tudás ezekhez kapcsolódó munkakörökben is használható, például
+webfejlesztői, statisztikusi vagy gazdaságinformatikusi feladatokban.
+
+# Miért van szükségünk adatbázisokra?
+
+Az adatbázisok használatának néhány alapvető oka:
+
+- **nagy adatmennyiség** kezelése,
+- **sok felhasználó** egyidejű kiszolgálása,
+- az adatok **konzisztenciájának** biztosítása,
+- az adatok **elemzése**.
+
+Fontos követelmény, hogy az adatok hatékonyan lekérdezhetők legyenek.
+
+## Nagy adatmennyiség
+
+Az előadás példája szerint az előállított digitális adatmennyiség nagyságrendje
+zettabyte-okban mérhető.
+
+> 1 ZB = 1 milliárd terabyte = 1 billió gigabyte.
+
+## Konzisztencia
+
+A konzisztencia azt jelenti, hogy az adatok érvényes állapotban maradnak,
+és megfelelnek az előírt szabályoknak és integritási feltételeknek.
+
+Példák:
+
+- Banki átutaláskor az utaló egyenlege csökken, a fogadóé ugyanennyivel nő.
+- Webshopban eladáskor a készlet megfelelően csökken, és a rendelkezésre álló
+  mennyiségnél több termék nem adható el.
+
+### Mi történik inkonzisztencia esetén?
+
+- ellentmondó vagy hibás adatok jelenhetnek meg,
+- sérülhetnek az üzleti folyamatok,
+- pénzügyi vagy működési kár keletkezhet.
+
+# Történeti áttekintés
+
+## 1960 előtt
+
+Még nem voltak mai értelemben vett adatbázisok. Az adatokat a felhasználói
+programok kezelték, gyakran egyszerű fájlokban. A tárolás sémája esetleges volt,
+és az adatok lekérdezéséhez külön programokat kellett írni.
+
+## Az 1960-as évek
+
+Az adatkezelés növekvő problémái miatt megjelentek az első adatmodellek és
+adatbázis-kezelők.
+
+- **IDS (Integrated Data Store)** – az egyik legelső adatbázis-kezelő;
+  Charles Bachman fejlesztette ki.
+- **CODASYL** – a hálós adatmodell megfogalmazásához kapcsolódik.
+- **IMS (Information Management System)** – IBM-rendszer, hierarchikus
+  adatmodellt használt.
+
+## Az 1960-as évek után
+
+Új adatmodellek és az ezekre épülő adatbázis-kezelő rendszerek jelentek meg.
+A különböző adatmodellek közös elemei:
+
+- **egyedek** – dolgok, amelyekről adatokat tárolunk,
+- **tulajdonságok** – az egyedek jellemzői,
+- **kapcsolatok** – az egyedek közötti összefüggések.
+
+A domináns modell a relációs adatmodell lett.
+
+## Az adatmodellek fejlődésének mérföldkövei
+
+Az előadás időbeli áttekintése három fontos szakaszt emel ki:
+
+1. hálós és hierarchikus adatmodellek,
+2. relációs adatmodell és SQL,
+3. nem relációs, NoSQL adatmodellek.
+
+A korábbi modellek megjelenése nem jelenti azt, hogy a régebbi megoldások
+megszűntek volna.
+
+## Mi történt 1980 és 2010 között?
+
+- A relációs adatmodell meghatározóvá vált.
+- Megjelentek más adatmodellek is, például objektumorientált megoldások.
+- Elterjedtek az adattárházak.
+- Tömegessé váltak az internetes, adatbázisokra épülő alkalmazások.
+- A kezelendő adatmennyiség jelentősen nőtt.
+
+Mindez új kihívásokat jelentett a relációs adatbázisok számára.
+
+## 2010 után
+
+Megjelentek és elterjedtek a nem relációs, **NoSQL** adatmodellek.
+
+Jellemzőik az előadás szerint:
+
+- sok esetben korábbi ötletek újragondolásai,
+- nincs egységes, szabványos lekérdező nyelvük.
+
+# Napjaink és a közeljövő
+
+## Relációs és nem relációs rendszerek együttélése
+
+A relációs és nem relációs adatbázisok közötti határok részben elmosódnak.
+
+Példák az előadásból:
+
+- NewSQL: CockroachDB, TiDB, Google Spanner,
+- többmodelles rendszerek: ArangoDB, Cosmos DB, OrientDB.
+
+## Felhő, Data Lake és adatstream
+
+További fontos irányok:
+
+- felhős adatbázis-rendszerek (DBaaS),
+- serverless megoldások,
+- Data Lake,
+- Data Lakehouse,
+- adatstream-feldolgozás.
+
+Az előadás példái között szerepel az Azure SQL Database, AWS RDS, Google
+BigQuery, Azure Cosmos DB, Databricks, Snowflake, Kafka és Flink.
+
+## Mesterséges intelligencia és adatbázisok
+
+Az előadás két irányt emel ki:
+
+- AI által támogatott adatbázisok és automatikus optimalizálás,
+- generatív AI használata SQL-lekérdezések generálására és optimalizálására.
+
+# A csoportosítás speciális lehetőségei
+
+A gyakorlat fő témája a `GROUP BY` kiterjesztett használata részösszegek,
+végösszegek és többféle csoportosítás előállítására.
+
+## GROUP BY ROLLUP
+
+A `ROLLUP` hierarchikus részösszegeket és végösszeget készít. A csoportosító
+oszlopok száma jobbról balra csökken.
+
+```sql
+SELECT oszlop1,
+       oszlop2,
+       oszlop3,
+       SUM(oszlop4)
+FROM ...
+GROUP BY ROLLUP(oszlop1, oszlop2, oszlop3);
+```
+
+A létrejövő csoportok:
+
+| oszlop1 | oszlop2 | oszlop3 |
+|---|---|---|
+| érték | érték | érték |
+| érték | érték | NULL |
+| érték | NULL | NULL |
+| NULL | NULL | NULL |
+
+### Példa
+
+Készítsünk listát a raktáron lévő termékek összértékéről raktárkód,
+azon belül kategóriakód, majd mennyiségi egység szerinti bontásban.
+A lista tartalmazza a részösszegeket és a végösszeget, és csak az 5-ös
+és 9-es kategóriát vegyük figyelembe.
+
+```sql
+SELECT RAKTAR_KOD,
+       KAT_ID,
+       MEGYS,
+       SUM(LISTAAR * KESZLET) AS 'Készlet értéke'
+FROM Termek
+WHERE KAT_ID IN (5, 9)
+GROUP BY ROLLUP(RAKTAR_KOD, KAT_ID, MEGYS);
+```
+
+## GROUP BY CUBE
+
+A `CUBE` minden lehetséges csoportosítási kombinációt előállít, így
+részösszegeket és végösszeget is ad.
+
+```sql
+SELECT oszlop1,
+       oszlop2,
+       oszlop3,
+       SUM(oszlop4)
+FROM ...
+GROUP BY CUBE(oszlop1, oszlop2, oszlop3);
+```
+
+Három csoportosító oszlop esetén nyolc kombináció jön létre, beleértve a
+teljes részletezést és a végösszeget is.
+
+### Példa
+
+```sql
+SELECT RAKTAR_KOD,
+       KAT_ID,
+       MEGYS,
+       SUM(LISTAAR * KESZLET) AS 'Készlet értéke'
+FROM Termek
+WHERE KAT_ID IN (5, 9)
+GROUP BY CUBE(RAKTAR_KOD, KAT_ID, MEGYS);
+```
+
+## GROUPING SETS
+
+A `GROUPING SETS` segítségével pontosan megadhatjuk, mely csoportosításokat
+szeretnénk egyetlen lekérdezésben előállítani.
+
+```sql
+SELECT oszlop1,
+       oszlop2,
+       SUM(oszlop3)
+FROM tabla
+GROUP BY GROUPING SETS(
+    (oszlop1, oszlop2),
+    (oszlop1)
+);
+```
+
+A `GROUPING SETS` az egyes csoportosításokra kiadott lekérdezések
+`UNION ALL`-lal történő összekapcsolásának alternatívája.
+
+### Példa
+
+Készítsünk listát az egyes ügyfelek átlagos életkoráról az ügyfél neme,
+illetve születési éve szerint csoportosítva. Csak a D-vel vagy E-vel
+kezdődő nevű ügyfeleket vegyük figyelembe.
+
+```sql
+SELECT SZULEV,
+       NEM,
+       AVG(YEAR(GETDATE()) - SZULEV) AS 'Átlagos életkor'
+FROM Ugyfel
+WHERE NEV LIKE 'E%' OR NEV LIKE 'D%'
+GROUP BY GROUPING SETS(
+    (SZULEV),
+    (NEM)
+);
+```
+
+## GROUPING és GROUPING_ID
+
+A `GROUPING` értéke 1, ha az adott oszlopkifejezés az adott eredménysorban
+aggregált szintet jelöl, egyébként 0.
+
+A `GROUPING_ID` több oszlop aggregációs szintjét egyetlen számmal jelzi.
+
+Ezek egyik legfontosabb felhasználása, hogy megkülönböztessük a `ROLLUP`,
+`CUBE` vagy `GROUPING SETS` által létrehozott `NULL` értékeket az adatokban
+eredetileg is előforduló `NULL` értékektől.
+
+A függvények a `SELECT`, `HAVING` és `ORDER BY` részekben használhatók,
+ha a lekérdezés `GROUP BY` részt is tartalmaz.
+
+### Végösszeg feliratozása GROUPING segítségével
+
+```sql
+SELECT
+    CASE GROUPING(YEAR(REND_DATUM))
+        WHEN 0 THEN CAST(YEAR(REND_DATUM) AS nvarchar(4))
+        WHEN 1 THEN 'Összesen'
+    END AS ÉV,
+    COUNT(*) AS DB
+FROM Rendeles
+GROUP BY ROLLUP(YEAR(REND_DATUM));
+```
+
+### Részösszegek azonosítása GROUPING_ID segítségével
+
+```sql
+SELECT
+    IIF(
+        GROUPING(REND_DATUM) = 1,
+        'Összesen',
+        CAST(REND_DATUM AS nvarchar(10))
+    ) AS 'Rendelés dátuma',
+    CASE GROUPING_ID(REND_DATUM, FIZ_MOD)
+        WHEN 0 THEN FIZ_MOD
+        WHEN 1 THEN '**Fizetési módok összesen**'
+        WHEN 3 THEN 'Összesen'
+    END AS FIZ_MOD,
+    COUNT(*) AS DB
+FROM Rendeles
+GROUP BY ROLLUP(REND_DATUM, FIZ_MOD);
+```
+
+## A lehetőségek kombinálhatók
+
+A `GROUPING SETS`, `GROUPING`, `GROUPING_ID`, `ROLLUP` és `CUBE`
+egymással is kombinálható.
+
+```sql
+SELECT
+    CASE
+        WHEN GROUPING(SZULEV) = 0
+            THEN CAST(SZULEV AS nvarchar(4))
+        ELSE 'Minden év'
+    END AS 'Születési év',
+    CASE
+        WHEN GROUPING(NEM) = 1
+            THEN 'Minden nem'
+        ELSE NEM
+    END AS 'Nem',
+    AVG(YEAR(GETDATE()) - SZULEV) AS 'Átlagos életkor'
+FROM Ugyfel
+WHERE NEV LIKE 'E%' OR NEV LIKE 'D%'
+GROUP BY GROUPING SETS(
+    ROLLUP(SZULEV),
+    CUBE(NEM)
+);
+```
+
+# A gyakorlat adatbázisa
+
+Az első heti gyakorlati feladatok a **WebShop** adatbázist használják.

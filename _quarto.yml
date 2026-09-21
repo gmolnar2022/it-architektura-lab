@@ -16,6 +16,8 @@ website:
         text: Kezdőlap
       - href: weeks/week01/index.qmd
         text: 1. hét
+      - href: weeks/week02/index.qmd
+        text: 2. hét
 
 format:
   html:

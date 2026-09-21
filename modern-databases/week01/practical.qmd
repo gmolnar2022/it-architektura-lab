@@ -1,0 +1,198 @@
+---
+title: "1. hét – Gyakorlat"
+---
+
+# Feladatok
+
+Az első öt feladat ismétlés. A 6–10. feladatok kötelező, a 11–15. feladatok
+ajánlott feladatok.
+
+::: {.callout-note}
+A feladatok a **WebShop** adatbázist használják.
+:::
+
+## Ismétlő feladatok
+
+### 1. feladat
+
+Melyek azok a termékek, amelyek neve az átlagosnál hosszabb?
+
+- Csak a termékek kódja és megnevezése jelenjen meg!
+
+```sql
+-- Írd ide a megoldást
+```
+
+### 2. feladat
+
+Melyek azok a termékek, amelyekből ugyanannyi van készleten, mint DVD-ből?
+
+- Csak a termékek kódja és megnevezése jelenjen meg!
+- A DVD ne szerepeljen a listában!
+
+```sql
+-- Írd ide a megoldást
+```
+
+### 3. feladat
+
+Melyek azok a raktárak, amelyekben nincs olyan termék, amelynek nevében a
+**matrica** szó benne van?
+
+- A listában a raktárak minden adata jelenjen meg!
+
+```sql
+-- Írd ide a megoldást
+```
+
+### 4. feladat
+
+Mely nap(ok)on történt a legkevesebb megrendelés?
+
+```sql
+-- Írd ide a megoldást
+```
+
+### 5. feladat
+
+Listázzuk azon termékek adatait, amelyek listaára saját raktárukban a legkisebb!
+
+```sql
+-- Írd ide a megoldást
+```
+
+## Kötelező feladatok
+
+### 6. feladat
+
+Készítsünk listát arról, hogy ügyfelenként (`LOGIN`), azon belül szállítási
+módonként hány megrendelés történt!
+
+- A lista tartalmazza a részösszegeket és a végösszeget is!
+- Használjuk a `ROLLUP` záradékot!
+
+```sql
+-- Írd ide a megoldást
+```
+
+### 7. feladat
+
+Készítsünk listát a termékek számáról a következő csoportosítási szempontok szerint:
+
+- kategóriaazonosító,
+- raktárkód,
+- raktárkód + mennyiségi egység.
+
+A listát szűrjük azokra a csoportokra, ahol a termékek száma legalább 6!
+
+```sql
+-- Írd ide a megoldást
+```
+
+### 8. feladat
+
+Készítsünk listát az egyes termékkategóriákban lévő termékek számáról!
+
+- Elég megjeleníteni a kategóriák azonosítóit és a darabszámokat.
+- A lista megfelelően jelölve tartalmazza a végösszeget is.
+- Az oszlopokat nevezzük el értelemszerűen.
+- A listát rendezzük a darabszám szerint növekvő sorrendbe.
+
+```sql
+-- Írd ide a megoldást
+```
+
+### 9. feladat
+
+Készítsünk listát az ügyfelek számáról születési év szerint, azon belül nem
+szerinti bontásban!
+
+- A lista megfelelően jelölve tartalmazza a részösszegeket és a végösszeget is.
+- Az oszlopoknak adjunk nevet értelemszerűen.
+
+```sql
+-- Írd ide a megoldást
+```
+
+### 10. feladat
+
+Készítsünk listát a termékek számáról a felvitel hónapja, azon belül napja
+szerint csoportosítva.
+
+- A lista csak a részösszegeket és a végösszeget tartalmazza.
+- Az oszlopoknak adjunk megfelelő nevet.
+
+::: {.callout-tip}
+**Ötlet:** `HAVING` + `GROUPING_ID` együttes használata.
+:::
+
+```sql
+-- Írd ide a megoldást
+```
+
+## Ajánlott feladatok
+
+### 11. feladat
+
+Készítsünk listát éves bontásban a `norbert2` azonosítójú ügyfél rendeléseinek
+értékéről!
+
+- A lista megfelelően jelölve tartalmazza a végösszeget is.
+- Az oszlopokat nevezzük el értelemszerűen.
+
+```sql
+-- Írd ide a megoldást
+```
+
+### 12. feladat
+
+Készítsünk listát szállítási dátumonként, azon belül szállítási módonként az
+egyes rendelések összmennyiségéről!
+
+- Csak azokat a termékeket vegyük figyelembe, amelyek mennyiségi egysége `db`.
+- A listát szűrjük úgy, hogy csak a részösszegsorokat és a végösszeget tartalmazza.
+
+```sql
+-- Írd ide a megoldást
+```
+
+### 13. feladat
+
+Készítsünk listát a termékek átlagos listaárairól!
+
+A lista legyen csoportosítva a következő szempontok alapján:
+
+- kategórianév,
+- kategórianév + raktárnév.
+
+További követelmények:
+
+- a lista tartalmazzon végösszeget, vagyis az átlagos árat minden termékre,
+- az átlagos érték legfeljebb két tizedesjeggyel jelenjen meg.
+
+```sql
+-- Írd ide a megoldást
+```
+
+### 14. feladat
+
+Hány olyan ügyfél van, aki még nem rendelt semmit?
+
+- Csoportosítsuk őket nem szerint, azon belül életkor szerint.
+- A lista tartalmazza a részösszegeket és a végösszeget is.
+
+```sql
+-- Írd ide a megoldást
+```
+
+### 15. feladat
+
+Készítsünk listát arról, hogy évente hányszor rendelték meg azokat a termékeket,
+amelyek kategóriájukban a legdrágábbak!
+
+- A lista jelenítse meg az évet, a termék nevét és a rendelések számát.
+- Jelenjenek meg a részösszegek és a végösszeg is.
+
+```sql
+-- Írd ide a megoldást
+```

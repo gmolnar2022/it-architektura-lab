@@ -1,5 +1,145 @@
 [
   {
+    "objectID": "weeks/week02/index.html",
+    "href": "weeks/week02/index.html",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "",
+    "text": "A második heti gyakorlaton először egy Microsoft Skillable labor segítségével ismételjük át az Azure virtuális gép létrehozását. Ezután Visual Studio Code-ból használjuk az Azure PowerShell parancsokat, majd RDP-vel belépünk a virtuális gépre, és ott Windows PowerShell parancsokkal vizsgáljuk meg a gép erőforrásait. A gyakorlat végén pipeline-t, változókat és egy egyszerű PowerShell scriptet használunk."
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-regisztráció-a-skillable-rendszerbe",
+    "href": "weeks/week02/index.html#feladat-regisztráció-a-skillable-rendszerbe",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "1. feladat – Regisztráció a Skillable rendszerbe",
+    "text": "1. feladat – Regisztráció a Skillable rendszerbe\nNyisd meg a Skillable / Microsoft Learn for Educators laboroldalt: https://msle.learnondemand.net/.\n\nVálaszd a Register with Training Key lehetőséget.\nAdd meg az oktatótól kapott Training Key értéket, majd válaszd a Register gombot.\nTöltsd ki a regisztrációhoz szükséges adatokat, és hozd létre a fiókodat.\nA regisztráció után jelentkezz be a Skillable rendszerbe.\n\n\n\n\n\n\n\nWarningFontos\n\n\n\nA Training Key-t, a jelszavadat és más belépési adatot ne írd be ebbe a munkafüzetbe. Jegyezd meg a Skillable felhasználónevedet és jelszavadat, mert később is szükséged lehet rájuk.\n\n\n\nA Skillable-fiókot létrehoztam, és sikeresen be tudok jelentkezni Igen"
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-a-labor-megkeresése",
+    "href": "weeks/week02/index.html#feladat-a-labor-megkeresése",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "2. feladat – A labor megkeresése",
+    "text": "2. feladat – A labor megkeresése\nBejelentkezés után nyisd meg a Current Training részt, majd válaszd ki az oktató által megadott kurzust. Ha a rendszer kéri, végezd el a Get Ready / Software Check lépést és fogadd el a Microsoft End User License Agreementet.\nKeresd meg az elérhető laborok között a Deploy an Azure Virtual Machine [Guided] labort.\n\nMegtaláltam a Deploy an Azure Virtual Machine [Guided] labort Igen"
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-deploy-an-azure-virtual-machine-guided",
+    "href": "weeks/week02/index.html#feladat-deploy-an-azure-virtual-machine-guided",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "3. feladat – Deploy an Azure Virtual Machine [Guided]",
+    "text": "3. feladat – Deploy an Azure Virtual Machine [Guided]\nIndítsd el a Deploy an Azure Virtual Machine [Guided] labort, és végezd el a labor utasításait. A végrehajtás közben figyeld meg különösen az Azure VM legfontosabb beállításait: Region, Image, Size, Disks, Networking.\n\nMi a laborban létrehozott virtuális gép neve?  Melyik régióban hoztad létre a virtuális gépet?  Milyen operációs rendszert / image-et használtál?  Milyen VM-méretet használtál?"
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-visual-studio-code-előkészítése",
+    "href": "weeks/week02/index.html#feladat-visual-studio-code-előkészítése",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "4. feladat – Visual Studio Code előkészítése",
+    "text": "4. feladat – Visual Studio Code előkészítése\nIndítsd el a Visual Studio Code alkalmazást a tantermi gépen.\n\nNyisd meg az Extensions nézetet (Ctrl+Shift+X).\nKeresd meg az Azure Resources bővítményt.\nHa nincs telepítve, telepítsd.\nNyisd meg az Azure nézetet a VS Code bal oldali sávjában.\nJelentkezz be az Azure-ba az egyetemi Microsoft-fiókoddal.\nEllenőrizd, hogy az Azure-előfizetésed megjelenik-e a Resources nézetben.\n\n\nSikerült bejelentkezni, és megjelenik az Azure-előfizetésed a Resources nézetben? IgenNem\n\n\n\n\n\n\n\nNoteHa az Azure Resources nincs telepítve\n\n\n\nTelepítsd az Azure Resources bővítményt a VS Code Extensions nézetéből, majd jelentkezz be újra."
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-azure-bejelentkezés-és-előfizetés",
+    "href": "weeks/week02/index.html#feladat-azure-bejelentkezés-és-előfizetés",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "5. feladat – Azure bejelentkezés és előfizetés",
+    "text": "5. feladat – Azure bejelentkezés és előfizetés\nNyiss egy PowerShell terminált a VS Code-ban, majd a korábban tanult Azure PowerShell parancsok segítségével:\n\njelentkezz be az Azure-ba;\nlistázd az elérhető előfizetéseidet;\nha több előfizetésed van, válaszd ki azt, amelyet a gyakorlaton használsz.\n\n\nA használt előfizetés neve  A megfelelő előfizetés kiválasztásához használt parancs"
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-egy-erőforráscsoport-lekérdezése",
+    "href": "weeks/week02/index.html#feladat-egy-erőforráscsoport-lekérdezése",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "6. feladat – Egy erőforráscsoport lekérdezése",
+    "text": "6. feladat – Egy erőforráscsoport lekérdezése\nA korábban tanult Azure PowerShell parancs segítségével kérdezd le azt az erőforráscsoportot, amelyben a saját virtuális géped található.\nA lekérdezésben paraméterként add meg az erőforráscsoport nevét. A kimenet alapján add meg az erőforráscsoport helyét (Location) is.\n\nA használt PowerShell-parancs\n\nAz erőforráscsoport Location értéke"
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-egy-virtuális-gép-állapotának-lekérdezése",
+    "href": "weeks/week02/index.html#feladat-egy-virtuális-gép-állapotának-lekérdezése",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "7. feladat – Egy virtuális gép állapotának lekérdezése",
+    "text": "7. feladat – Egy virtuális gép állapotának lekérdezése\nA korábban tanult Azure PowerShell parancs segítségével csak a saját virtuális gépedet kérdezd le.\nA parancsban paraméterként add meg az erőforráscsoport nevét és a virtuális gép nevét, és kérdezd le a VM aktuális állapotát is.\n\nA használt PowerShell-parancs\n\nA virtuális géped aktuális állapota"
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-a-virtuális-gép-leállítása-és-elindítása",
+    "href": "weeks/week02/index.html#feladat-a-virtuális-gép-leállítása-és-elindítása",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "8. feladat – A virtuális gép leállítása és elindítása",
+    "text": "8. feladat – A virtuális gép leállítása és elindítása\nA korábban megismert Azure PowerShell parancsok segítségével:\n\nállítsd le a saját virtuális gépedet az erőforráscsoport és a VM nevének megadásával;\nvárd meg a leállítás befejezését;\nindítsd el újra ugyanazt a virtuális gépet;\nellenőrizd, hogy a VM ismét futó állapotba került-e.\n\n\nA VM elindításához használt PowerShell-parancs\n\nA VM állapota az indítás befejezése után"
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-kapcsolódás-rdp-vel-és-powershell-indítása",
+    "href": "weeks/week02/index.html#feladat-kapcsolódás-rdp-vel-és-powershell-indítása",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "9. feladat – Kapcsolódás RDP-vel és PowerShell indítása",
+    "text": "9. feladat – Kapcsolódás RDP-vel és PowerShell indítása\nAz Azure Portalon vagy a korábbi gyakorlaton megismert módon töltsd le a VM RDP-fájlját, majd kapcsolódj a virtuális géphez. Jelentkezz be a VM létrehozásakor megadott helyi rendszergazdai fiókkal.\nA virtuális gépen indíts el egy Windows PowerShell ablakot, majd futtasd:\n$env:COMPUTERNAME\n\nA virtuális gép PowerShellből lekérdezett számítógépneve \n\n\n\n\n\n\n\nNoteKét különböző menedzsmentszint\n\n\n\nA VS Code-ban használt Get-AzVM az Azure-ban lévő VM-erőforrást kérdezi le. Az RDP-kapcsolat után használt Get-Process, Get-Disk és hasonló parancsok már a virtuális gépen futó Windows operációs rendszert vizsgálják."
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-folyamatok-és-szolgáltatások",
+    "href": "weeks/week02/index.html#feladat-folyamatok-és-szolgáltatások",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "10. feladat – Folyamatok és szolgáltatások",
+    "text": "10. feladat – Folyamatok és szolgáltatások\nA virtuális gép PowerShell ablakában végezd el az alábbi lekérdezéseket. Ebben a feladatban még ne használj pipeline-t (|).\n\nA Get-Process paranccsal kérdezd le az explorer nevű folyamatot a megfelelő paraméter használatával.\nA Get-Service paranccsal kérdezd le a Windows Update (wuauserv) szolgáltatást a megfelelő paraméter használatával.\n\nMásold be az alábbi mezőbe a két használt PowerShell-parancsot.\n\nA két PowerShell-parancs"
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-cpu-memória-és-háttértár",
+    "href": "weeks/week02/index.html#feladat-cpu-memória-és-háttértár",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "11. feladat – CPU, memória és háttértár",
+    "text": "11. feladat – CPU, memória és háttértár\nAz előadáson a fizikai és virtuális erőforrások kapcsolatát vizsgáltuk. Most nézd meg, milyen erőforrásokat lát a Windows a saját Azure VM-edben. Ebben a feladatban még ne használj pipeline-t (|).\n\nKérdezd le a processzor adatait a Get-CimInstance segítségével a Win32_Processor osztályból.\nKérdezd le a memória adatait a Get-CimInstance segítségével a Win32_ComputerSystem osztályból.\nA Get-Disk paranccsal kérdezd le külön a 0. számú lemezt.\nA Get-Volume paranccsal kérdezd le külön a C: meghajtót.\n\n\nA négy használt PowerShell-parancs\n\nCPU-magok száma (NumberOfCores)  Logikai processzorok száma (NumberOfLogicalProcessors)  A 0. lemez neve / FriendlyName értéke"
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-hálózat-és-rendszerinformáció",
+    "href": "weeks/week02/index.html#feladat-hálózat-és-rendszerinformáció",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "12. feladat – Hálózat és rendszerinformáció",
+    "text": "12. feladat – Hálózat és rendszerinformáció\nMost kérdezd le a virtuális gép hálózati és rendszerinformációit. Ebben a feladatban még ne használj pipeline-t (|).\n\nA Get-NetIPAddress paranccsal csak az IPv4 címeket kérdezd le a megfelelő paraméter használatával.\nA Get-ComputerInfo paranccsal csak a WindowsProductName, WindowsVersion és OsArchitecture tulajdonságokat kérdezd le.\n\n\nA két használt PowerShell-parancs\n\nA VM egyik IPv4-címe  WindowsProductName  OsArchitecture"
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-parancsok-összefűzése-pipeline-nal",
+    "href": "weeks/week02/index.html#feladat-parancsok-összefűzése-pipeline-nal",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "13. feladat – Parancsok összefűzése pipeline-nal",
+    "text": "13. feladat – Parancsok összefűzése pipeline-nal\nA PowerShellben a | jel segítségével egy parancs kimenetét átadhatjuk a következő parancsnak. Keresd meg az 5 legtöbb working set memóriát használó folyamatot:\nGet-Process |\n    Sort-Object -Property WS |\n    Select-Object -Last 5\nEzután módosítsd a parancsot úgy, hogy a folyamatok csökkenő sorrendben jelenjenek meg, és csak a Name, Id és WS tulajdonságokat lásd.\n\nA módosított pipeline\n\nA legnagyobb memóriahasználatú folyamat neve"
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-változók-használata",
+    "href": "weeks/week02/index.html#feladat-változók-használata",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "14. feladat – Változók használata",
+    "text": "14. feladat – Változók használata\nTárold el a 0. számú lemez objektumát egy $disk nevű változóban, majd jelenítsd meg a lemez nevét, méretét és állapotát.\n$disk = Get-Disk -Number 0\nWrite-Host \"Lemez neve:\" $disk.FriendlyName\nWrite-Host \"Lemez mérete:\" ($disk.Size / 1GB) \"GB\"\nWrite-Host \"Állapot:\" $disk.OperationalStatus\n\nA lemez PowerShell által kijelzett mérete GB-ban  OperationalStatus"
+  },
+  {
+    "objectID": "weeks/week02/index.html#feladat-powershell-ise-és-az-első-script",
+    "href": "weeks/week02/index.html#feladat-powershell-ise-és-az-első-script",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "15. feladat – PowerShell ISE és az első script",
+    "text": "15. feladat – PowerShell ISE és az első script\nA virtuális gépen indítsd el a Windows PowerShell ISE alkalmazást. Válaszd a File → New lehetőséget, és készíts egy system-report.ps1 nevű scriptet.\nA script legalább az alábbi információkat jelenítse meg:\n\na számítógép neve;\na Windows verziója;\na 0. lemez neve és mérete;\naz 5 legtöbb memóriát használó folyamat neve, azonosítója és memóriahasználata.\n\nHasználd fel a korábbi feladatokban megismert parancsokat, pipeline-t és változókat. Mentsd el a scriptet .ps1 kiterjesztéssel, majd futtasd a PowerShell ISE-ben az F5 billentyűvel.\n\n\n\n\n\n\nNoteHa a script futtatását a rendszer korlátozza\n\n\n\nA PowerShell végrehajtási házirendje (Execution Policy) korlátozhatja a .ps1 fájlok futtatását. Ha ilyen üzenetet kapsz, jelezd az oktatónak; a biztonsági beállításokat ne módosítsd önállóan.\n\n\n\nMásold be ide a végleges system-report.ps1 scripted tartalmát\n\nA scriptet sikeresen lefuttattam a PowerShell ISE-ben Igen\n\n\n\n\n\n\n\nWarningA gyakorlat végén\n\n\n\nA feladatok befejezése után állítsd le az Azure virtuális gépedet, és ellenőrizd, hogy Stopped (deallocated) állapotba került. Ezzel elkerülheted a felesleges Azure-erőforrás-felhasználást."
+  },
+  {
+    "objectID": "weeks/week02/index.html#mentés-és-beadás",
+    "href": "weeks/week02/index.html#mentés-és-beadás",
+    "title": "2. hét – Azure VM menedzsment és PowerShell",
+    "section": "Mentés és beadás",
+    "text": "Mentés és beadás\n\n\n📤 Beadás\n\n\n💾 JSON export\n\n\nHelyi adatok törlése\n\n\n\n\n\nBeadás előtti összesítés\n\n\n\n\n\n\nVissza a javításhoz\n\n\nBeadás megerősítése\n\n\n\n\n\n\n\n\n\n\n\n\nNoteAktivitási adatok\n\n\n\nA munkafüzet kísérleti jelleggel becsült aktív időt és feladatonkénti szerkesztési eseményeket is rögzíthet. Ez nem pontos munkaidőmérés: a másik böngészőlapon, VS Code-ban, RDP-ben vagy Skillable-ben végzett munka nem feltétlenül számít aktív időnek.\n\n\n\nAktivitás ezen a gépen\n\nIdőmérés: – Eseménykövetés: – Becsült aktív idő: 0:00 Szerkesztési események: 0 Első megnyitás: – Utolsó aktivitás: –"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "IT Architektúra – Gyakorlati munkafüzet",
+    "section": "",
+    "text": "A kurzus gyakorlati anyagai hetenként külön oldalon jelennek meg.\nAz egyes heti oldalak interaktív munkafüzetként működnek:\n\na feladatleírásokat közvetlenül a böngészőben olvashatod;\na válaszokat ugyanazon az oldalon rögzítheted;\na böngésző automatikusan menti a kitöltött mezőket;\nminden feladatnál – a beállításoktól függően – szintaktikai vagy AI-ellenőrzést kérhetsz;\na Beadás gomb előbb összesítést mutat a kitöltöttségről, időről és hátralévő feladatokról."
+  },
+  {
+    "objectID": "index.html#gyakorlati-anyagok",
+    "href": "index.html#gyakorlati-anyagok",
+    "title": "IT Architektúra – Gyakorlati munkafüzet",
+    "section": "",
+    "text": "A kurzus gyakorlati anyagai hetenként külön oldalon jelennek meg.\nAz egyes heti oldalak interaktív munkafüzetként működnek:\n\na feladatleírásokat közvetlenül a böngészőben olvashatod;\na válaszokat ugyanazon az oldalon rögzítheted;\na böngésző automatikusan menti a kitöltött mezőket;\nminden feladatnál – a beállításoktól függően – szintaktikai vagy AI-ellenőrzést kérhetsz;\na Beadás gomb előbb összesítést mutat a kitöltöttségről, időről és hátralévő feladatokról."
+  },
+  {
+    "objectID": "index.html#heti-gyakorlatok",
+    "href": "index.html#heti-gyakorlatok",
+    "title": "IT Architektúra – Gyakorlati munkafüzet",
+    "section": "Heti gyakorlatok",
+    "text": "Heti gyakorlatok\n\n1. hét – Első virtuális gépünk az Azure-ban\nAzure Portal → Windows 11 VM → RDP → Cloud Shell → PowerShell → Script → AI\nAz első heti oldalon már közvetlenül kitölthető interaktív válaszmezők találhatók.\nA további hetek folyamatosan kerülnek hozzáadásra"
+  },
+  {
     "objectID": "weeks/week01/index.html",
     "href": "weeks/week01/index.html",
     "title": "1. hét – Első virtuális gépünk az Azure-ban",
@@ -117,26 +257,5 @@
     "title": "1. hét – Első virtuális gépünk az Azure-ban",
     "section": "Mentés és beadás",
     "text": "Mentés és beadás\n\n\n📤 Beadás\n\n\n💾 JSON export\n\n\nHelyi adatok törlése\n\n\n\n\n\nBeadás előtti összesítés\n\n\n\n\n\n\nVissza a javításhoz\n\n\nBeadás megerősítése\n\n\n\n\n\n\n\n\n\n\n\n\nNoteAktivitási adatok\n\n\n\nA munkafüzet kísérleti jelleggel becsült aktív időt és feladatonkénti szerkesztési eseményeket is rögzít.\nEz nem pontos munkaidőmérés: ha például az Azure Portal vagy a Cloud Shell másik böngészőlapon van, az ott töltött idő nem feltétlenül számít aktív időnek.\n\n\n\nAktivitás ezen a gépen\n\nIdőmérés: – Eseménykövetés: – Becsült aktív idő: 0:00 Szerkesztési események: 0 Első megnyitás: – Utolsó aktivitás: –"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "IT Architektúra – Gyakorlati munkafüzet",
-    "section": "",
-    "text": "A kurzus gyakorlati anyagai hetenként külön oldalon jelennek meg.\nAz egyes heti oldalak interaktív munkafüzetként működnek:\n\na feladatleírásokat közvetlenül a böngészőben olvashatod;\na válaszokat ugyanazon az oldalon rögzítheted;\na böngésző automatikusan menti a kitöltött mezőket;\nminden feladatnál – a beállításoktól függően – szintaktikai vagy AI-ellenőrzést kérhetsz;\na Beadás gomb előbb összesítést mutat a kitöltöttségről, időről és hátralévő feladatokról."
-  },
-  {
-    "objectID": "index.html#gyakorlati-anyagok",
-    "href": "index.html#gyakorlati-anyagok",
-    "title": "IT Architektúra – Gyakorlati munkafüzet",
-    "section": "",
-    "text": "A kurzus gyakorlati anyagai hetenként külön oldalon jelennek meg.\nAz egyes heti oldalak interaktív munkafüzetként működnek:\n\na feladatleírásokat közvetlenül a böngészőben olvashatod;\na válaszokat ugyanazon az oldalon rögzítheted;\na böngésző automatikusan menti a kitöltött mezőket;\nminden feladatnál – a beállításoktól függően – szintaktikai vagy AI-ellenőrzést kérhetsz;\na Beadás gomb előbb összesítést mutat a kitöltöttségről, időről és hátralévő feladatokról."
-  },
-  {
-    "objectID": "index.html#heti-gyakorlatok",
-    "href": "index.html#heti-gyakorlatok",
-    "title": "IT Architektúra – Gyakorlati munkafüzet",
-    "section": "Heti gyakorlatok",
-    "text": "Heti gyakorlatok\n\n1. hét – Első virtuális gépünk az Azure-ban\nAzure Portal → Windows 11 VM → RDP → Cloud Shell → PowerShell → Script → AI\nAz első heti oldalon már közvetlenül kitölthető interaktív válaszmezők találhatók.\nA további hetek folyamatosan kerülnek hozzáadásra"
   }
 ]

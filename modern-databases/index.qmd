@@ -1,0 +1,27 @@
+---
+title: "Korszerű adatbázisok"
+---
+
+# A kurzusról
+
+A tantárgy a relációs adatbázis-kezelés haladó lehetőségeit, valamint a korszerű
+nem relációs adatbázis-modelleket és adatbázis-technológiákat tekinti át.
+
+## Tematika
+
+- A `GROUP BY` speciális lehetőségei
+- Részösszegek és végösszegek
+- Analitikus függvények
+- Lekérdezés-optimalizálás
+- Programozás SQL-ben
+- Speciális SQL adattípusok
+- Dokumentum-adatbázisok
+- Gráfadatbázisok
+- Kulcs–érték adatbázisok
+- Oszlopalapú adatbázisok
+
+## 1. hét
+
+Az első héten röviden áttekintjük az adatbázisok szerepét és fejlődését, majd
+a `GROUP BY` speciális lehetőségeivel foglalkozunk: `ROLLUP`, `CUBE`,
+`GROUPING SETS`, `GROUPING` és `GROUPING_ID`.

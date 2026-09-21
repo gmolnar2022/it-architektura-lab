@@ -137,7 +137,7 @@
     "href": "index.html#heti-gyakorlatok",
     "title": "IT Architektúra – Gyakorlati munkafüzet",
     "section": "Heti gyakorlatok",
-    "text": "Heti gyakorlatok\n\n1. hét – Első virtuális gépünk az Azure-ban\nAzure Portal → Windows 11 VM → RDP → Cloud Shell → PowerShell → Script → AI\nAz első heti oldalon már közvetlenül kitölthető interaktív válaszmezők találhatók.\nA további hetek folyamatosan kerülnek hozzáadásra"
+    "text": "Heti gyakorlatok"
   },
   {
     "objectID": "weeks/week01/index.html",
@@ -257,5 +257,12 @@
     "title": "1. hét – Első virtuális gépünk az Azure-ban",
     "section": "Mentés és beadás",
     "text": "Mentés és beadás\n\n\n📤 Beadás\n\n\n💾 JSON export\n\n\nHelyi adatok törlése\n\n\n\n\n\nBeadás előtti összesítés\n\n\n\n\n\n\nVissza a javításhoz\n\n\nBeadás megerősítése\n\n\n\n\n\n\n\n\n\n\n\n\nNoteAktivitási adatok\n\n\n\nA munkafüzet kísérleti jelleggel becsült aktív időt és feladatonkénti szerkesztési eseményeket is rögzít.\nEz nem pontos munkaidőmérés: ha például az Azure Portal vagy a Cloud Shell másik böngészőlapon van, az ott töltött idő nem feltétlenül számít aktív időnek.\n\n\n\nAktivitás ezen a gépen\n\nIdőmérés: – Eseménykövetés: – Becsült aktív idő: 0:00 Szerkesztési események: 0 Első megnyitás: – Utolsó aktivitás: –"
+  },
+  {
+    "objectID": "index.html#heti-gyakorlatok-1",
+    "href": "index.html#heti-gyakorlatok-1",
+    "title": "IT Architektúra – Gyakorlati munkafüzet",
+    "section": "Heti gyakorlatok",
+    "text": "Heti gyakorlatok\n\n1. hét – Első virtuális gépünk az Azure-ban\nAzure Portal → Windows 11 VM → RDP → Cloud Shell → PowerShell → Script → AI\nAz első heti oldalon már közvetlenül kitölthető interaktív válaszmezők találhatók.\n\n\n2. hét – PowerShell és automatizálás\nSkillable → Azure VM → VS Code → Azure PowerShell → RDP → Windows PowerShell → Pipeline → Változók → Script\nA második héten a hallgatók egy vezetett Azure VM-labor után PowerShell segítségével vizsgálják és kezelik a virtuális gépet, majd pipeline-okkal, változókkal és egyszerű PowerShell-scripttel dolgoznak.\nA további hetek folyamatosan kerülnek hozzáadásra."
   }
 ]

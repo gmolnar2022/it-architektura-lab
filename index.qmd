@@ -17,7 +17,6 @@ Az egyes heti oldalak **interaktív munkafüzetként** működnek:
 
 ## Heti gyakorlatok
 
-## Heti gyakorlatok
 
 ### [1. hét – Első virtuális gépünk az Azure-ban](https://gmolnar2022.github.io/it-architektura-lab/weeks/week01/)
 

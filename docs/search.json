@@ -137,7 +137,7 @@
     "href": "index.html#heti-gyakorlatok",
     "title": "IT Architektúra – Gyakorlati munkafüzet",
     "section": "Heti gyakorlatok",
-    "text": "Heti gyakorlatok"
+    "text": "Heti gyakorlatok\n\n1. hét – Első virtuális gépünk az Azure-ban\nAzure Portal → Windows 11 VM → RDP → Cloud Shell → PowerShell → Script → AI\n\n\n2. hét – PowerShell és automatizálás\nSkillable → Azure VM → VS Code → Azure PowerShell → RDP → Windows PowerShell → Pipeline → Változók → Script\nA további hetek folyamatosan kerülnek hozzáadásra."
   },
   {
     "objectID": "weeks/week01/index.html",

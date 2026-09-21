@@ -470,11 +470,12 @@ Az alkalmazásban keresd meg a **Virtual Machines** erőforrásokat, majd válas
 ## Mentés és beadás
 
 <div class="actions">
-<button type="button" onclick="openSubmissionSummary()">📤 Beadás</button>
+<button id="submit-button" type="button" onclick="openSubmissionSummary()">📤 Beadás</button>
 <button type="button" onclick="exportSubmissionJson()">💾 JSON export</button>
 <button type="button" onclick="clearAnswers()">Helyi adatok törlése</button>
 <span id="save-status"></span>
 </div>
+<p id="submission-deadline-note"><strong>Beadási határidő:</strong> 2026. szeptember 24. 11:40</p>
 
 <div id="submission-summary" class="submission-summary" hidden>
 <h3 style="margin-top:0">Beadás előtti összesítés</h3>
@@ -1177,6 +1178,10 @@ function summaryLine(label, c) {
 }
 
 function openSubmissionSummary() {
+  if (submissionClosed()) {
+    refreshSubmissionDeadline();
+    return;
+  }
   registerInteraction();
   const taskIds = Object.keys(TASKS);
   let totalFields = 0, filledFields = 0;
@@ -1276,6 +1281,7 @@ function exportSubmissionJson() {
   const payload = buildSubmissionPayload();
   if (!validStudentId(payload.student_id)) {
     refreshStudentIdStatus();
+  refreshSubmissionDeadline();
     const status = document.getElementById("submission-result");
     if (status) status.innerHTML = `<strong>⚠ JSON export előtt adj meg érvényes Neptun-kódot.</strong>`;
     return;
@@ -1287,6 +1293,12 @@ function exportSubmissionJson() {
 
 async function confirmSubmission() {
   registerInteraction();
+  if (submissionClosed()) {
+    refreshSubmissionDeadline();
+    const status = document.getElementById("submission-result");
+    if (status) status.innerHTML = `<strong>⚠ A beadási határidő lejárt.</strong><br>${SUBMISSION_DEADLINE_TEXT} után már nem lehet beadni a feladatsort.`;
+    return;
+  }
   const payload = buildSubmissionPayload();
   if (!validStudentId(payload.student_id)) {
     refreshStudentIdStatus();
@@ -1366,6 +1378,30 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+const SUBMISSION_DEADLINE = new Date("2026-09-24T11:40:00+02:00");
+const SUBMISSION_DEADLINE_TEXT = "2026. szeptember 24. 11:40";
+
+function submissionClosed() {
+  return Date.now() > SUBMISSION_DEADLINE.getTime();
+}
+
+function refreshSubmissionDeadline() {
+  const closed = submissionClosed();
+  const submitBtn = document.getElementById("submit-button");
+  const confirmBtn = document.getElementById("confirm-submit-button");
+  const note = document.getElementById("submission-deadline-note");
+  if (submitBtn) {
+    submitBtn.disabled = closed;
+    submitBtn.title = closed ? "A beadási határidő lejárt." : `Beadási határidő: ${SUBMISSION_DEADLINE_TEXT}`;
+    if (closed) submitBtn.textContent = "🔒 Beadás lezárva";
+  }
+  if (closed && confirmBtn) {
+    confirmBtn.disabled = true;
+    confirmBtn.title = "A beadási határidő lejárt.";
+  }
+  if (note && closed) note.innerHTML = `<strong>Beadási határidő:</strong> ${SUBMISSION_DEADLINE_TEXT} – <strong>lejárt</strong>`;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   loadLocal();
   addCheckControls();
@@ -1408,6 +1444,7 @@ document.addEventListener("DOMContentLoaded", () => {
   refreshActivityPanel();
   Object.keys(TASKS).forEach(renderCheckStatus);
   setInterval(activityTick, TICK_MS);
+  setInterval(refreshSubmissionDeadline, 30000);
 });
 </script>
 

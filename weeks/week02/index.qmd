@@ -195,9 +195,9 @@ Nyiss egy **PowerShell terminált** a VS Code-ban, majd a korábban tanult Azure
 </div>
 
 ::: {.callout-note title="Ha a Powershell parancsot nem fogadja el"}
-Add ki egymás után a következő parancsokat:
-Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force -AllowClobber
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Add ki egymás után a következő parancsokat:  
+Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force -AllowClobber  
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser  
 Connect-AzAccount
 :::
 

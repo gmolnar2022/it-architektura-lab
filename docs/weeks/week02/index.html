@@ -406,6 +406,19 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <label for="q05_name">A használt előfizetés neve</label> <input id="q05_name" data-answer="Q05_NAME" autocomplete="off"> <label for="q05_command">A megfelelő előfizetés kiválasztásához használt parancs</label>
 <textarea id="q05_command" class="code-answer" data-answer="Q05_COMMAND"></textarea>
 </div>
+<div class="callout callout-style-default callout-note callout-titled" title="Ha a Powershell parancsot nem fogadja el">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Ha a Powershell parancsot nem fogadja el
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Add ki egymás után a következő parancsokat: Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force -AllowClobber Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser Connect-AzAccount</p>
+</div>
+</div>
 </section>
 <section id="feladat-egy-erőforráscsoport-lekérdezése" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-egy-erőforráscsoport-lekérdezése">6. feladat – Egy erőforráscsoport lekérdezése</h2>

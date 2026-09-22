@@ -194,6 +194,13 @@ Nyiss egy **PowerShell terminált** a VS Code-ban, majd a korábban tanult Azure
 <textarea id="q05_command" class="code-answer" data-answer="Q05_COMMAND"></textarea>
 </div>
 
+::: {.callout-note title="Ha a Powershell parancsot nem fogadja el"}
+Add ki egymás után a következő parancsokat:
+Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force -AllowClobber
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Connect-AzAccount
+:::
+
 ## 6. feladat – Egy erőforráscsoport lekérdezése
 
 A korábban tanult Azure PowerShell parancs segítségével **kérdezd le azt az erőforráscsoportot, amelyben a saját virtuális géped található**.

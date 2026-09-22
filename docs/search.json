@@ -39,7 +39,7 @@
     "href": "weeks/week02/index.html#feladat-azure-bejelentkezés-és-előfizetés",
     "title": "2. hét – Azure VM menedzsment és PowerShell",
     "section": "5. feladat – Azure bejelentkezés és előfizetés",
-    "text": "5. feladat – Azure bejelentkezés és előfizetés\nNyiss egy PowerShell terminált a VS Code-ban, majd a korábban tanult Azure PowerShell parancsok segítségével:\n\njelentkezz be az Azure-ba;\nlistázd az elérhető előfizetéseidet;\nha több előfizetésed van, válaszd ki azt, amelyet a gyakorlaton használsz.\n\n\nA használt előfizetés neve  A megfelelő előfizetés kiválasztásához használt parancs"
+    "text": "5. feladat – Azure bejelentkezés és előfizetés\nNyiss egy PowerShell terminált a VS Code-ban, majd a korábban tanult Azure PowerShell parancsok segítségével:\n\njelentkezz be az Azure-ba;\nlistázd az elérhető előfizetéseidet;\nha több előfizetésed van, válaszd ki azt, amelyet a gyakorlaton használsz.\n\n\nA használt előfizetés neve  A megfelelő előfizetés kiválasztásához használt parancs\n\n\n\n\n\n\n\n\nNoteHa a Powershell parancsot nem fogadja el\n\n\n\nAdd ki egymás után a következő parancsokat: Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force -AllowClobber Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser Connect-AzAccount"
   },
   {
     "objectID": "weeks/week02/index.html#feladat-egy-erőforráscsoport-lekérdezése",

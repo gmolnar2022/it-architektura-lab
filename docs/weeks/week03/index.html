@@ -172,6 +172,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#feladat-folyamatok-erőforrás-használat-és-szálak" id="toc-feladat-folyamatok-erőforrás-használat-és-szálak" class="nav-link" data-scroll-target="#feladat-folyamatok-erőforrás-használat-és-szálak">9. feladat – Folyamatok, erőforrás-használat és szálak</a></li>
   <li><a href="#feladat-szolgáltatás-állapotának-ellenőrzése-elágazással" id="toc-feladat-szolgáltatás-állapotának-ellenőrzése-elágazással" class="nav-link" data-scroll-target="#feladat-szolgáltatás-állapotának-ellenőrzése-elágazással">10. feladat – Szolgáltatás állapotának ellenőrzése elágazással</a></li>
   <li><a href="#feladat-skillable-labor-elindítása" id="toc-feladat-skillable-labor-elindítása" class="nav-link" data-scroll-target="#feladat-skillable-labor-elindítása">11. feladat – Skillable labor elindítása</a></li>
+  <li><a href="#feladat-action-group-létrehozása" id="toc-feladat-action-group-létrehozása" class="nav-link" data-scroll-target="#feladat-action-group-létrehozása">12. feladat – Action group létrehozása</a></li>
+  <li><a href="#feladat-service-health-alert-létrehozása" id="toc-feladat-service-health-alert-létrehozása" class="nav-link" data-scroll-target="#feladat-service-health-alert-létrehozása">13. feladat – Service Health alert létrehozása</a></li>
+  <li><a href="#feladat-activity-log-alert-létrehozása" id="toc-feladat-activity-log-alert-létrehozása" class="nav-link" data-scroll-target="#feladat-activity-log-alert-létrehozása">14. feladat – Activity Log alert létrehozása</a></li>
+  <li><a href="#feladat-a-virtuális-gép-leállítása" id="toc-feladat-a-virtuális-gép-leállítása" class="nav-link" data-scroll-target="#feladat-a-virtuális-gép-leállítása">15. feladat – A virtuális gép leállítása</a></li>
   <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
   </ul></li>
   </ul>
@@ -672,11 +676,11 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <p>Ha már a korábbi gyakorlaton regisztráltál, jelentkezz be a meglévő fiókoddal. Ha most regisztrálsz először, válaszd a <strong>Register with Training Key</strong> lehetőséget. A szükséges <strong>Training Key a Moodle kurzusfelületén található</strong>.</p>
 <p>Bejelentkezés után a <strong>Current Training</strong> részen keresd meg az alábbi labort:</p>
 <p><strong>Monitor Azure with Service Health and Activity Log alerts</strong></p>
-<p>Mielőtt elindítod a labort, ellenőrizd a labor adatlapját, és az alábbi mezőkben rögzítsd a megjelenő adatokat.</p>
+<p>Mielőtt elindítod a labort, ellenőrizd a labor adatlapját, és rögzítsd az alábbi adatokat.</p>
 <div class="answer-box">
-<p><label for="q11_duration">Duration</label> <input id="q11_duration" data-answer="Q11_DURATION" autocomplete="off"> <label for="q11_ram">RAM</label> <input id="q11_ram" data-answer="Q11_RAM" autocomplete="off"></p>
+<p><label>Duration</label><input data-answer="Q11_DURATION" autocomplete="off"> <label>RAM</label><input data-answer="Q11_RAM" autocomplete="off"></p>
 </div>
-<p>Ezután indítsd el a labort, várd meg, amíg a laborkörnyezet teljesen betöltődik, majd nyisd meg a labor által biztosított <strong>Azure Portalt</strong>.</p>
+<p>Ezután indítsd el a labort, és várd meg, amíg a laborkörnyezet teljesen betöltődik.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Fontos">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -687,8 +691,58 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A következő feladatokban a <strong>Skillable által biztosított Azure-környezetben</strong> dolgozz, ne a saját Azure-előfizetésedben. Kövesd a laborban és a feladatlapban megadott erőforrásneveket és beállításokat.</p>
+<p>A 12–14. feladatban a <strong>Skillable által biztosított Azure-környezetben</strong> dolgozz, ne a saját Azure-előfizetésedben. A részletes lépéseket a Skillable labor tartalmazza.</p>
 </div>
+</div>
+</section>
+<section id="feladat-action-group-létrehozása" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-action-group-létrehozása">12. feladat – Action group létrehozása</h2>
+<p>Végezd el a Skillable labor <strong>Create an action group</strong> részét.</p>
+<p>A létrehozás és a laborban szereplő teszt végrehajtása után add meg az alábbi adatokat. A <strong>Tracking ID</strong> értékét a teszt során kapott Service Health e-mailben keresd meg.</p>
+<div class="answer-box">
+<p><label>Action group name</label><input data-answer="Q12_NAME" autocomplete="off"> <label>Display name</label><input data-answer="Q12_DISPLAY" autocomplete="off"> <label>Tracking ID</label><input data-answer="Q12_TRACKING" autocomplete="off"></p>
+</div>
+</section>
+<section id="feladat-service-health-alert-létrehozása" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-service-health-alert-létrehozása">13. feladat – Service Health alert létrehozása</h2>
+<p>Végezd el a Skillable labor <strong>Create a Service Health alert</strong> részét.</p>
+<p>A riasztási szabály létrehozása után ellenőrizd annak tulajdonságait, majd add meg az alábbi adatokat.</p>
+<div class="answer-box">
+<label>Alert rule name</label><input data-answer="Q13_NAME" autocomplete="off"> <label>Region</label><input data-answer="Q13_REGION" autocomplete="off"> <label>Severity</label><input data-answer="Q13_SEVERITY" autocomplete="off">
+<p>
+<strong>Event types</strong> – jelöld be a szabályban beállított eseménytípusokat:
+</p>
+<p><label><input type="checkbox" data-answer="Q13_SERVICE_ISSUE"> Service issue</label><br> <label><input type="checkbox" data-answer="Q13_PLANNED"> Planned maintenance</label><br> <label><input type="checkbox" data-answer="Q13_HEALTH"> Health advisories</label><br> <label><input type="checkbox" data-answer="Q13_SECURITY"> Security advisories</label></p>
+</div>
+</section>
+<section id="feladat-activity-log-alert-létrehozása" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-activity-log-alert-létrehozása">14. feladat – Activity Log alert létrehozása</h2>
+<p>Végezd el a Skillable labor <strong>Create an Activity Log alert</strong> részét.</p>
+<p>A riasztási szabály létrehozása után ellenőrizd annak tulajdonságait, majd add meg az alábbi adatokat.</p>
+<div class="answer-box">
+<p><label>Alert rule name</label><input data-answer="Q14_NAME" autocomplete="off"> <label>Signal name</label><input data-answer="Q14_SIGNAL" autocomplete="off"> <label>Severity</label><input data-answer="Q14_SEVERITY" autocomplete="off"> <label>Action group</label><input data-answer="Q14_ACTION" autocomplete="off"> <label>Alert rule status</label> <select data-answer="Q14_STATUS"><option value="">– válassz –</option><option value="Enabled">Enabled</option><option value="Disabled">Disabled</option></select></p>
+</div>
+</section>
+<section id="feladat-a-virtuális-gép-leállítása" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-a-virtuális-gép-leállítása">15. feladat – A virtuális gép leállítása</h2>
+<p>A Skillable labor befejezése után térj vissza a <strong>Visual Studio Code</strong> PowerShell termináljához és a <strong>saját Azure-előfizetésedhez</strong>.</p>
+<p>Azure PowerShell használatával állítsd le a gyakorlat során használt saját virtuális gépedet. A szükséges Azure PowerShell parancsot már korábban használtad, ezért a kész parancsot itt nem adjuk meg.</p>
+<p>A leállítás után ellenőrizd a virtuális gép állapotát.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Fontos">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Fontos
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A virtuális gépet úgy állítsd le, hogy az Azure-ban is felszabadításra kerüljön (<strong>deallocated</strong> állapot).</p>
+</div>
+</div>
+<div class="answer-box">
+<p><label>VM neve</label><input data-answer="Q15_VM" autocomplete="off"> <label>PowerState</label><input data-answer="Q15_STATE" autocomplete="off"></p>
 </div>
 </section>
 <section id="mentés-és-beadás" class="level2">
@@ -775,7 +829,11 @@ const TASKS = {
   Q08: { title: "Guest OS és processzor", type: "syntax" },
   Q09: { title: "Folyamatok, erőforrás-használat és szálak", type: "syntax" },
   Q10: { title: "Szolgáltatás állapotának ellenőrzése", type: "syntax" },
-  Q11: { title: "Skillable labor elindítása", type: "syntax" }
+  Q11: { title: "Skillable labor elindítása", type: "syntax" },
+  Q12: { title: "Action group létrehozása", type: "syntax" },
+  Q13: { title: "Service Health alert létrehozása", type: "syntax" },
+  Q14: { title: "Activity Log alert létrehozása", type: "syntax" },
+  Q15: { title: "A virtuális gép leállítása", type: "syntax" }
 };
 
 function fields() {
@@ -1262,6 +1320,34 @@ function runSyntaxRules(q) {
         return result("needs_revision", "Ellenőrizd a labor adatlapján a Duration értékét.");
       if (!["8.5gb", "8,5gb"].includes(ram))
         return result("needs_revision", "Ellenőrizd a labor adatlapján a RAM értékét.");
+      break;
+    }
+    case "Q12": {
+      if (String(v.Q12_NAME || "").trim() !== "ag-gp-ops-email") return result("needs_revision", "Ellenőrizd az Action group name értékét.");
+      if (String(v.Q12_DISPLAY || "").trim() !== "OpsEmail") return result("needs_revision", "Ellenőrizd a Display name értékét.");
+      if (String(v.Q12_TRACKING || "").trim().length < 3) return result("needs_revision", "Add meg a teszt e-mail Tracking ID értékét.");
+      break;
+    }
+    case "Q13": {
+      if (String(v.Q13_NAME || "").trim() !== "ar-gp-service-health") return result("needs_revision", "Ellenőrizd az Alert rule name értékét.");
+      if (String(v.Q13_REGION || "").trim().toLowerCase() !== "global") return result("needs_revision", "Ellenőrizd a Region értékét.");
+      const sev13 = String(v.Q13_SEVERITY || "").toLowerCase();
+      if (!(sev13.includes("4") && sev13.includes("verbose"))) return result("needs_revision", "Ellenőrizd a Severity értékét.");
+      if (v.Q13_SERVICE_ISSUE !== true || v.Q13_PLANNED !== true || v.Q13_HEALTH === true || v.Q13_SECURITY === true) return result("needs_revision", "Ellenőrizd az Event type beállításokat.");
+      break;
+    }
+    case "Q14": {
+      if (String(v.Q14_NAME || "").trim() !== "ar-gp-activity-delete") return result("needs_revision", "Ellenőrizd az Alert rule name értékét.");
+      if (String(v.Q14_SIGNAL || "").trim().toLowerCase() !== "delete resource group") return result("needs_revision", "Ellenőrizd a Signal name értékét.");
+      const sev14 = String(v.Q14_SEVERITY || "").toLowerCase();
+      if (!(sev14.includes("2") && sev14.includes("warning"))) return result("needs_revision", "Ellenőrizd a Severity értékét.");
+      if (String(v.Q14_ACTION || "").trim() !== "ag-gp-ops-email") return result("needs_revision", "Ellenőrizd az Action Group nevét.");
+      if (String(v.Q14_STATUS || "") !== "Enabled") return result("needs_revision", "Ellenőrizd az Alert rule állapotát.");
+      break;
+    }
+    case "Q15": {
+      if (String(v.Q15_VM || "").trim().length < 2) return result("needs_revision", "Add meg a virtuális gép nevét.");
+      if (!String(v.Q15_STATE || "").trim().toLowerCase().includes("deallocated")) return result("needs_revision", "A VM állapotának deallocated állapotot kell jeleznie.");
       break;
     }
   }

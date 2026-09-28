@@ -81,7 +81,35 @@
     "href": "weeks/week03/index.html#feladat-skillable-labor-elindítása",
     "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
     "section": "11. feladat – Skillable labor elindítása",
-    "text": "11. feladat – Skillable labor elindítása\nA következő feladatokhoz ismét a Skillable laborkörnyezetét használjuk.\nNyisd meg a korábban használt Skillable felületet:\nSkillable – Microsoft Learn for Educators laborkörnyezet\nHa már a korábbi gyakorlaton regisztráltál, jelentkezz be a meglévő fiókoddal. Ha most regisztrálsz először, válaszd a Register with Training Key lehetőséget. A szükséges Training Key a Moodle kurzusfelületén található.\nBejelentkezés után a Current Training részen keresd meg az alábbi labort:\nMonitor Azure with Service Health and Activity Log alerts\nMielőtt elindítod a labort, ellenőrizd a labor adatlapját, és az alábbi mezőkben rögzítsd a megjelenő adatokat.\n\nDuration  RAM \n\nEzután indítsd el a labort, várd meg, amíg a laborkörnyezet teljesen betöltődik, majd nyisd meg a labor által biztosított Azure Portalt.\n\n\n\n\n\n\nImportantFontos\n\n\n\nA következő feladatokban a Skillable által biztosított Azure-környezetben dolgozz, ne a saját Azure-előfizetésedben. Kövesd a laborban és a feladatlapban megadott erőforrásneveket és beállításokat."
+    "text": "11. feladat – Skillable labor elindítása\nA következő feladatokhoz ismét a Skillable laborkörnyezetét használjuk.\nNyisd meg a korábban használt Skillable felületet:\nSkillable – Microsoft Learn for Educators laborkörnyezet\nHa már a korábbi gyakorlaton regisztráltál, jelentkezz be a meglévő fiókoddal. Ha most regisztrálsz először, válaszd a Register with Training Key lehetőséget. A szükséges Training Key a Moodle kurzusfelületén található.\nBejelentkezés után a Current Training részen keresd meg az alábbi labort:\nMonitor Azure with Service Health and Activity Log alerts\nMielőtt elindítod a labort, ellenőrizd a labor adatlapját, és rögzítsd az alábbi adatokat.\n\nDuration RAM\n\nEzután indítsd el a labort, és várd meg, amíg a laborkörnyezet teljesen betöltődik.\n\n\n\n\n\n\nImportantFontos\n\n\n\nA 12–14. feladatban a Skillable által biztosított Azure-környezetben dolgozz, ne a saját Azure-előfizetésedben. A részletes lépéseket a Skillable labor tartalmazza."
+  },
+  {
+    "objectID": "weeks/week03/index.html#feladat-action-group-létrehozása",
+    "href": "weeks/week03/index.html#feladat-action-group-létrehozása",
+    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
+    "section": "12. feladat – Action group létrehozása",
+    "text": "12. feladat – Action group létrehozása\nVégezd el a Skillable labor Create an action group részét.\nA létrehozás és a laborban szereplő teszt végrehajtása után add meg az alábbi adatokat. A Tracking ID értékét a teszt során kapott Service Health e-mailben keresd meg.\n\nAction group name Display name Tracking ID"
+  },
+  {
+    "objectID": "weeks/week03/index.html#feladat-service-health-alert-létrehozása",
+    "href": "weeks/week03/index.html#feladat-service-health-alert-létrehozása",
+    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
+    "section": "13. feladat – Service Health alert létrehozása",
+    "text": "13. feladat – Service Health alert létrehozása\nVégezd el a Skillable labor Create a Service Health alert részét.\nA riasztási szabály létrehozása után ellenőrizd annak tulajdonságait, majd add meg az alábbi adatokat.\n\nAlert rule name Region Severity\n\nEvent types – jelöld be a szabályban beállított eseménytípusokat:\n\n Service issue  Planned maintenance  Health advisories  Security advisories"
+  },
+  {
+    "objectID": "weeks/week03/index.html#feladat-activity-log-alert-létrehozása",
+    "href": "weeks/week03/index.html#feladat-activity-log-alert-létrehozása",
+    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
+    "section": "14. feladat – Activity Log alert létrehozása",
+    "text": "14. feladat – Activity Log alert létrehozása\nVégezd el a Skillable labor Create an Activity Log alert részét.\nA riasztási szabály létrehozása után ellenőrizd annak tulajdonságait, majd add meg az alábbi adatokat.\n\nAlert rule name Signal name Severity Action group Alert rule status – válassz –EnabledDisabled"
+  },
+  {
+    "objectID": "weeks/week03/index.html#feladat-a-virtuális-gép-leállítása",
+    "href": "weeks/week03/index.html#feladat-a-virtuális-gép-leállítása",
+    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
+    "section": "15. feladat – A virtuális gép leállítása",
+    "text": "15. feladat – A virtuális gép leállítása\nA Skillable labor befejezése után térj vissza a Visual Studio Code PowerShell termináljához és a saját Azure-előfizetésedhez.\nAzure PowerShell használatával állítsd le a gyakorlat során használt saját virtuális gépedet. A szükséges Azure PowerShell parancsot már korábban használtad, ezért a kész parancsot itt nem adjuk meg.\nA leállítás után ellenőrizd a virtuális gép állapotát.\n\n\n\n\n\n\nImportantFontos\n\n\n\nA virtuális gépet úgy állítsd le, hogy az Azure-ban is felszabadításra kerüljön (deallocated állapot).\n\n\n\nVM neve PowerState"
   },
   {
     "objectID": "weeks/week03/index.html#mentés-és-beadás",

@@ -77,6 +77,13 @@
     "text": "10. feladat – Szolgáltatás állapotának ellenőrzése elágazással\nListázd a Windows szolgáltatásait:\nGet-Service\nVálassz ki egy tetszőleges szolgáltatást, kérdezd le név alapján, majd az eredményt mentsd egy $service változóba.\n\n\n\n\n\n\nTipSegítség\n\n\n\nA szolgáltatás név szerinti lekéréséhez használd a Get-Service parancs -Name paraméterét.\n\n\nEzután készíts egy egyszerű feltételes elágazást, amely megvizsgálja a $service.Status értékét:\n\nha a szolgáltatás állapota Running, jelenjen meg: A szolgáltatás fut.\negyébként jelenjen meg: A szolgáltatás nem fut.\n\nAz if/else szerkezet általános alakja:\nif (feltétel) {\n    # utasítások\n}\nelse {\n    # utasítások\n}\nA konkrét feltételt neked kell megfogalmaznod.\n\nA választott szolgáltatás Name értéke  DisplayName  Status  – válassz – Running Stopped Other  Az elkészített if/else kódrészlet"
   },
   {
+    "objectID": "weeks/week03/index.html#feladat-skillable-labor-elindítása",
+    "href": "weeks/week03/index.html#feladat-skillable-labor-elindítása",
+    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
+    "section": "11. feladat – Skillable labor elindítása",
+    "text": "11. feladat – Skillable labor elindítása\nA következő feladatokhoz ismét a Skillable laborkörnyezetét használjuk.\nNyisd meg a korábban használt Skillable felületet:\nSkillable – Microsoft Learn for Educators laborkörnyezet\nHa már a korábbi gyakorlaton regisztráltál, jelentkezz be a meglévő fiókoddal. Ha most regisztrálsz először, válaszd a Register with Training Key lehetőséget. A szükséges Training Key a Moodle kurzusfelületén található.\nBejelentkezés után a Current Training részen keresd meg az alábbi labort:\nMonitor Azure with Service Health and Activity Log alerts\nMielőtt elindítod a labort, ellenőrizd a labor adatlapját, és az alábbi mezőkben rögzítsd a megjelenő adatokat.\n\nDuration  RAM \n\nEzután indítsd el a labort, várd meg, amíg a laborkörnyezet teljesen betöltődik, majd nyisd meg a labor által biztosított Azure Portalt.\n\n\n\n\n\n\nImportantFontos\n\n\n\nA következő feladatokban a Skillable által biztosított Azure-környezetben dolgozz, ne a saját Azure-előfizetésedben. Kövesd a laborban és a feladatlapban megadott erőforrásneveket és beállításokat."
+  },
+  {
     "objectID": "weeks/week03/index.html#mentés-és-beadás",
     "href": "weeks/week03/index.html#mentés-és-beadás",
     "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",

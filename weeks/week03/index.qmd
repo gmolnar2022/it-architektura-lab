@@ -263,7 +263,8 @@ Ellenőrizd, hogy a `Search-AzGraph` cmdlet elérhető-e:
 Get-Command Search-AzGraph
 ```
 
-Ha a parancs nem található, telepítsd az **Az.ResourceGraph** modult a saját felhasználói profilodhoz:
+::: {.callout-tip title="Ha a Search-AzGraph parancs nem érhető el"}
+Telepítsd az **Az.ResourceGraph** modult a saját felhasználói profilodhoz:
 
 ```powershell
 Install-Module -Name Az.ResourceGraph -Scope CurrentUser
@@ -280,6 +281,7 @@ Végül ellenőrizd újra, hogy a parancs elérhető-e:
 ```powershell
 Get-Command Search-AzGraph
 ```
+:::
 
 Ezután kérj segítséget egy **generatív AI-eszköztől** olyan `Search-AzGraph` lekérdezés elkészítéséhez, amely:
 

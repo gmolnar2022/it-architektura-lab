@@ -169,8 +169,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#feladat-az-rdp-kapcsolat-ellenőrzése" id="toc-feladat-az-rdp-kapcsolat-ellenőrzése" class="nav-link" data-scroll-target="#feladat-az-rdp-kapcsolat-ellenőrzése">6. feladat – Az RDP-kapcsolat ellenőrzése</a></li>
   <li><a href="#feladat-a-guest-os-adatainak-vizsgálata" id="toc-feladat-a-guest-os-adatainak-vizsgálata" class="nav-link" data-scroll-target="#feladat-a-guest-os-adatainak-vizsgálata">7. feladat – A Guest OS adatainak vizsgálata</a></li>
   <li><a href="#feladat-mit-lát-a-guest-os-a-processzorból" id="toc-feladat-mit-lát-a-guest-os-a-processzorból" class="nav-link" data-scroll-target="#feladat-mit-lát-a-guest-os-a-processzorból">8. feladat – Mit lát a Guest OS a processzorból?</a></li>
-  <li><a href="#feladat-folyamatok-és-szálak" id="toc-feladat-folyamatok-és-szálak" class="nav-link" data-scroll-target="#feladat-folyamatok-és-szálak">9. feladat – Folyamatok és szálak</a></li>
-  <li><a href="#feladat-windows-szolgáltatások-vizsgálata" id="toc-feladat-windows-szolgáltatások-vizsgálata" class="nav-link" data-scroll-target="#feladat-windows-szolgáltatások-vizsgálata">10. feladat – Windows-szolgáltatások vizsgálata</a></li>
+  <li><a href="#feladat-folyamatok-erőforrás-használat-és-szálak" id="toc-feladat-folyamatok-erőforrás-használat-és-szálak" class="nav-link" data-scroll-target="#feladat-folyamatok-erőforrás-használat-és-szálak">9. feladat – Folyamatok, erőforrás-használat és szálak</a></li>
+  <li><a href="#feladat-szolgáltatás-állapotának-ellenőrzése-elágazással" id="toc-feladat-szolgáltatás-állapotának-ellenőrzése-elágazással" class="nav-link" data-scroll-target="#feladat-szolgáltatás-állapotának-ellenőrzése-elágazással">10. feladat – Szolgáltatás állapotának ellenőrzése elágazással</a></li>
   <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
   </ul></li>
   </ul>
@@ -562,37 +562,105 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 </section>
 <section id="feladat-mit-lát-a-guest-os-a-processzorból" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-mit-lát-a-guest-os-a-processzorból">8. feladat – Mit lát a Guest OS a processzorból?</h2>
-<p>Vizsgáld meg, milyen processzort és hány feldolgozási egységet lát a Windows:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-CimInstance</span> Win32_Processor <span class="op">|</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Select-Object</span> Name<span class="op">,</span> NumberOfCores<span class="op">,</span> NumberOfLogicalProcessors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Vizsgáld meg, milyen processzort és hány feldolgozási egységet lát a Windows!</p>
+<p>Kérdezd le a <code>Win32_Processor</code> CIM-osztály adatait, és az eredményt mentsd egy <strong><code>$cpu</code> változóba</strong>. Ezután a változó felhasználásával jelenítsd meg az alábbi tulajdonságokat:</p>
+<ul>
+<li><code>Name</code></li>
+<li><code>NumberOfCores</code></li>
+<li><code>NumberOfLogicalProcessors</code></li>
+</ul>
+<p>Az eredményt <strong>táblázatos formában</strong> jelenítsd meg.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Segítség">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Segítség
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A feladat megoldásához a korábban megismert <code>Get-CimInstance</code>, <code>Select-Object</code> és <code>Format-Table</code> parancsokat használd. A CIM-osztály neve: <code>Win32_Processor</code>.</p>
+</div>
+</div>
 <div class="answer-box">
 <p><label for="q08_cpu">CPU neve</label> <input id="q08_cpu" data-answer="Q08_CPU" autocomplete="off"> <label for="q08_cores">NumberOfCores</label> <input id="q08_cores" data-answer="Q08_CORES" inputmode="numeric" autocomplete="off"> <label for="q08_logical">NumberOfLogicalProcessors</label> <input id="q08_logical" data-answer="Q08_LOGICAL" inputmode="numeric" autocomplete="off"> <label for="q08_azure">Melyik Azure VM-erőforrással áll legközvetlenebb kapcsolatban a Guest OS által látott logikai processzorok száma?</label> <select id="q08_azure" data-answer="Q08_AZURE"> <option value="">– válassz –</option> <option value="RAM">RAM</option> <option value="vCPU">vCPU</option> <option value="Virtual Disk">Virtual Disk</option> <option value="vNIC">vNIC</option> </select></p>
 </div>
 </section>
-<section id="feladat-folyamatok-és-szálak" class="level2">
-<h2 class="anchored" data-anchor-id="feladat-folyamatok-és-szálak">9. feladat – Folyamatok és szálak</h2>
-<p>Az előadáson láttuk, hogy egy futó <strong>processz egy vagy több szálat (threadet)</strong> tartalmazhat. Listázd a folyamatokat:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Process</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Válassz egy könnyen azonosítható folyamatot, majd mentsd el egy változóba. Például az <code>explorer</code> folyamat esetén:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="va">$p</span> <span class="op">=</span> <span class="fu">Get-Process</span> <span class="op">-</span>Name explorer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Vizsgáld meg a folyamathoz tartozó szálakat:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="va">$p</span><span class="op">.</span><span class="fu">Threads</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A szálak számát így kérdezheted le:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="va">$p</span><span class="op">.</span><span class="fu">Threads</span><span class="op">.</span><span class="fu">Count</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="feladat-folyamatok-erőforrás-használat-és-szálak" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-folyamatok-erőforrás-használat-és-szálak">9. feladat – Folyamatok, erőforrás-használat és szálak</h2>
+<p>Listázd a futó folyamatokat, majd:</p>
+<ol type="1">
+<li>rendezd őket a felhasznált memória alapján <strong>csökkenő sorrendbe</strong>;</li>
+<li>jelenítsd meg <strong>csak az első 10 folyamatot</strong>;</li>
+<li>a listában jelenjen meg a folyamat neve, PID-je és memóriahasználata;</li>
+<li>az eredményt táblázatos formában jelenítsd meg.</li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled" title="Segítség">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Segítség
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Használd a korábban megismert <code>Get-Process</code>, <code>Sort-Object</code>, <code>Select-Object -First</code> és <code>Format-Table</code> lehetőségeket. A memóriahasználathoz a <code>WorkingSet</code> tulajdonságot használhatod.</p>
+</div>
+</div>
+<p>Válassz ki <strong>egy folyamatot a saját Top 10 listádból</strong>, és mentsd el egy <strong><code>$p</code> változóba</strong>. Ezután a változó segítségével vizsgáld meg a folyamathoz tartozó szálakat, és határozd meg a szálak számát.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Segítség">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Segítség
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Egy folyamat név szerinti lekéréséhez használhatod a <code>Get-Process</code> <code>-Name</code> paraméterét. A processzhez tartozó szálakat a <code>Threads</code> tulajdonságon keresztül érheted el; a darabszám meghatározásához a <code>Count</code> tulajdonság használható.</p>
+</div>
+</div>
 <div class="answer-box">
-<p><label for="q09_process">A választott process neve</label> <input id="q09_process" data-answer="Q09_PROCESS" autocomplete="off"> <label for="q09_pid">PID</label> <input id="q09_pid" data-answer="Q09_PID" inputmode="numeric" autocomplete="off"> <label for="q09_threads">A process szálainak száma</label> <input id="q09_threads" data-answer="Q09_THREADS" inputmode="numeric" autocomplete="off"></p>
+<p><label for="q09_process">A Top 10 listából választott process neve</label> <input id="q09_process" data-answer="Q09_PROCESS" autocomplete="off"> <label for="q09_pid">PID</label> <input id="q09_pid" data-answer="Q09_PID" inputmode="numeric" autocomplete="off"> <label for="q09_threads">A process szálainak száma</label> <input id="q09_threads" data-answer="Q09_THREADS" inputmode="numeric" autocomplete="off"></p>
 </div>
 </section>
-<section id="feladat-windows-szolgáltatások-vizsgálata" class="level2">
-<h2 class="anchored" data-anchor-id="feladat-windows-szolgáltatások-vizsgálata">10. feladat – Windows-szolgáltatások vizsgálata</h2>
-<p>A Windows számos háttérben működő <strong>szolgáltatást (service)</strong> használ. Listázd a szolgáltatásokat:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Service</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Pipeline és <code>Where-Object</code> segítségével jelenítsd meg <strong>csak a futó (<code>Running</code>) szolgáltatásokat</strong>. A szűréshez használd az alábbi feltételt:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Where-Object</span> <span class="op">{</span> <span class="va">$_</span><span class="op">.</span><span class="fu">Status</span> <span class="op">-eq</span> <span class="st">'Running'</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Válassz ki a listából <strong>egy olyan szolgáltatást, amelynek a szerepét nem ismered</strong>. Szükség esetén generatív AI segítségével derítsd ki, mire szolgál, majd <strong>saját szavaiddal</strong>, röviden foglald össze a szerepét.</p>
+<section id="feladat-szolgáltatás-állapotának-ellenőrzése-elágazással" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-szolgáltatás-állapotának-ellenőrzése-elágazással">10. feladat – Szolgáltatás állapotának ellenőrzése elágazással</h2>
+<p>Listázd a Windows szolgáltatásait:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Service</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Válassz ki <strong>egy tetszőleges szolgáltatást</strong>, kérdezd le név alapján, majd az eredményt mentsd egy <strong><code>$service</code> változóba</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Segítség">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Segítség
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A szolgáltatás név szerinti lekéréséhez használd a <code>Get-Service</code> parancs <code>-Name</code> paraméterét.</p>
+</div>
+</div>
+<p>Ezután készíts egy egyszerű feltételes elágazást, amely megvizsgálja a <code>$service.Status</code> értékét:</p>
+<ul>
+<li>ha a szolgáltatás állapota <code>Running</code>, jelenjen meg: <strong>A szolgáltatás fut.</strong></li>
+<li>egyébként jelenjen meg: <strong>A szolgáltatás nem fut.</strong></li>
+</ul>
+<p>Az <code>if/else</code> szerkezet általános alakja:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>feltétel<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># utasítások</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># utasítások</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A konkrét feltételt neked kell megfogalmaznod.</p>
 <div class="answer-box">
-<label for="q10_name">Name</label> <input id="q10_name" data-answer="Q10_NAME" autocomplete="off"> <label for="q10_display">DisplayName</label> <input id="q10_display" data-answer="Q10_DISPLAY" autocomplete="off"> <label for="q10_desc">Mire szolgál? (1–2 mondat)</label>
-<textarea id="q10_desc" data-answer="Q10_DESC"></textarea>
+<label for="q10_name">A választott szolgáltatás Name értéke</label> <input id="q10_name" data-answer="Q10_NAME" autocomplete="off"> <label for="q10_display">DisplayName</label> <input id="q10_display" data-answer="Q10_DISPLAY" autocomplete="off"> <label for="q10_status">Status</label> <select id="q10_status" data-answer="Q10_STATUS"> <option value="">– válassz –</option> <option value="Running">Running</option> <option value="Stopped">Stopped</option> <option value="Other">Other</option> </select> <label for="q10_code">Az elkészített if/else kódrészlet</label>
+<textarea id="q10_code" class="code-answer" data-answer="Q10_CODE"></textarea>
 </div>
 </section>
 <section id="mentés-és-beadás" class="level2">
@@ -677,8 +745,8 @@ const TASKS = {
   Q06: { title: "RDP-kapcsolat ellenőrzése", type: "syntax" },
   Q07: { title: "Guest OS adatainak vizsgálata", type: "syntax" },
   Q08: { title: "Guest OS és processzor", type: "syntax" },
-  Q09: { title: "Folyamatok és szálak", type: "syntax" },
-  Q10: { title: "Windows-szolgáltatások", type: "syntax" }
+  Q09: { title: "Folyamatok, erőforrás-használat és szálak", type: "syntax" },
+  Q10: { title: "Szolgáltatás állapotának ellenőrzése", type: "syntax" }
 };
 
 function fields() {
@@ -1149,8 +1217,13 @@ function runSyntaxRules(q) {
     case "Q10": {
       if (String(v.Q10_NAME || "").trim().length < 2 || String(v.Q10_DISPLAY || "").trim().length < 2)
         return result("needs_revision", "Add meg a kiválasztott szolgáltatás Name és DisplayName értékét.");
-      if (String(v.Q10_DESC || "").trim().length < 20)
-        return result("needs_revision", "Írd le röviden, saját szavaiddal, mire szolgál a kiválasztott szolgáltatás.");
+      if (!["Running", "Stopped", "Other"].includes(String(v.Q10_STATUS || "")))
+        return result("needs_revision", "Add meg a kiválasztott szolgáltatás állapotát.");
+      const code = String(v.Q10_CODE || "");
+      if (!/\bif\s*\(/i.test(code) || !/\belse\b/i.test(code))
+        return result("needs_revision", "Az elkészített kódrészlet tartalmazzon if és else ágat.");
+      if (!/\.Status\b/i.test(code))
+        return result("needs_revision", "Az elágazás vizsgálja a szolgáltatás Status tulajdonságát.");
       break;
     }
   }

@@ -369,12 +369,19 @@ A parancs sok adatot jelenít meg. Pipeline és `Select-Object` segítségével 
 
 ## 8. feladat – Mit lát a Guest OS a processzorból?
 
-Vizsgáld meg, milyen processzort és hány feldolgozási egységet lát a Windows:
+Vizsgáld meg, milyen processzort és hány feldolgozási egységet lát a Windows!
 
-```powershell
-Get-CimInstance Win32_Processor |
-    Select-Object Name, NumberOfCores, NumberOfLogicalProcessors
-```
+Kérdezd le a `Win32_Processor` CIM-osztály adatait, és az eredményt mentsd egy **`$cpu` változóba**. Ezután a változó felhasználásával jelenítsd meg az alábbi tulajdonságokat:
+
+- `Name`
+- `NumberOfCores`
+- `NumberOfLogicalProcessors`
+
+Az eredményt **táblázatos formában** jelenítsd meg.
+
+::: {.callout-tip title="Segítség"}
+A feladat megoldásához a korábban megismert `Get-CimInstance`, `Select-Object` és `Format-Table` parancsokat használd. A CIM-osztály neve: `Win32_Processor`.
+:::
 
 <div class="answer-box">
 <label for="q08_cpu">CPU neve</label>
@@ -393,34 +400,27 @@ Get-CimInstance Win32_Processor |
 </select>
 </div>
 
-## 9. feladat – Folyamatok és szálak
+## 9. feladat – Folyamatok, erőforrás-használat és szálak
 
-Az előadáson láttuk, hogy egy futó **processz egy vagy több szálat (threadet)** tartalmazhat. Listázd a folyamatokat:
+Listázd a futó folyamatokat, majd:
 
-```powershell
-Get-Process
-```
+1. rendezd őket a felhasznált memória alapján **csökkenő sorrendbe**;
+2. jelenítsd meg **csak az első 10 folyamatot**;
+3. a listában jelenjen meg a folyamat neve, PID-je és memóriahasználata;
+4. az eredményt táblázatos formában jelenítsd meg.
 
-Válassz egy könnyen azonosítható folyamatot, majd mentsd el egy változóba. Például az `explorer` folyamat esetén:
+::: {.callout-tip title="Segítség"}
+Használd a korábban megismert `Get-Process`, `Sort-Object`, `Select-Object -First` és `Format-Table` lehetőségeket. A memóriahasználathoz a `WorkingSet` tulajdonságot használhatod.
+:::
 
-```powershell
-$p = Get-Process -Name explorer
-```
+Válassz ki **egy folyamatot a saját Top 10 listádból**, és mentsd el egy **`$p` változóba**. Ezután a változó segítségével vizsgáld meg a folyamathoz tartozó szálakat, és határozd meg a szálak számát.
 
-Vizsgáld meg a folyamathoz tartozó szálakat:
-
-```powershell
-$p.Threads
-```
-
-A szálak számát így kérdezheted le:
-
-```powershell
-$p.Threads.Count
-```
+::: {.callout-tip title="Segítség"}
+Egy folyamat név szerinti lekéréséhez használhatod a `Get-Process` `-Name` paraméterét. A processzhez tartozó szálakat a `Threads` tulajdonságon keresztül érheted el; a darabszám meghatározásához a `Count` tulajdonság használható.
+:::
 
 <div class="answer-box">
-<label for="q09_process">A választott process neve</label>
+<label for="q09_process">A Top 10 listából választott process neve</label>
 <input id="q09_process" data-answer="Q09_PROCESS" autocomplete="off">
 <label for="q09_pid">PID</label>
 <input id="q09_pid" data-answer="Q09_PID" inputmode="numeric" autocomplete="off">
@@ -428,29 +428,52 @@ $p.Threads.Count
 <input id="q09_threads" data-answer="Q09_THREADS" inputmode="numeric" autocomplete="off">
 </div>
 
-## 10. feladat – Windows-szolgáltatások vizsgálata
+## 10. feladat – Szolgáltatás állapotának ellenőrzése elágazással
 
-A Windows számos háttérben működő **szolgáltatást (service)** használ. Listázd a szolgáltatásokat:
+Listázd a Windows szolgáltatásait:
 
 ```powershell
 Get-Service
 ```
 
-Pipeline és `Where-Object` segítségével jelenítsd meg **csak a futó (`Running`) szolgáltatásokat**. A szűréshez használd az alábbi feltételt:
+Válassz ki **egy tetszőleges szolgáltatást**, kérdezd le név alapján, majd az eredményt mentsd egy **`$service` változóba**.
+
+::: {.callout-tip title="Segítség"}
+A szolgáltatás név szerinti lekéréséhez használd a `Get-Service` parancs `-Name` paraméterét.
+:::
+
+Ezután készíts egy egyszerű feltételes elágazást, amely megvizsgálja a `$service.Status` értékét:
+
+- ha a szolgáltatás állapota `Running`, jelenjen meg: **A szolgáltatás fut.**
+- egyébként jelenjen meg: **A szolgáltatás nem fut.**
+
+Az `if/else` szerkezet általános alakja:
 
 ```powershell
-Where-Object { $_.Status -eq 'Running' }
+if (feltétel) {
+    # utasítások
+}
+else {
+    # utasítások
+}
 ```
 
-Válassz ki a listából **egy olyan szolgáltatást, amelynek a szerepét nem ismered**. Szükség esetén generatív AI segítségével derítsd ki, mire szolgál, majd **saját szavaiddal**, röviden foglald össze a szerepét.
+A konkrét feltételt neked kell megfogalmaznod.
 
 <div class="answer-box">
-<label for="q10_name">Name</label>
+<label for="q10_name">A választott szolgáltatás Name értéke</label>
 <input id="q10_name" data-answer="Q10_NAME" autocomplete="off">
 <label for="q10_display">DisplayName</label>
 <input id="q10_display" data-answer="Q10_DISPLAY" autocomplete="off">
-<label for="q10_desc">Mire szolgál? (1–2 mondat)</label>
-<textarea id="q10_desc" data-answer="Q10_DESC"></textarea>
+<label for="q10_status">Status</label>
+<select id="q10_status" data-answer="Q10_STATUS">
+<option value="">– válassz –</option>
+<option value="Running">Running</option>
+<option value="Stopped">Stopped</option>
+<option value="Other">Other</option>
+</select>
+<label for="q10_code">Az elkészített if/else kódrészlet</label>
+<textarea id="q10_code" class="code-answer" data-answer="Q10_CODE"></textarea>
 </div>
 
 ## Mentés és beadás
@@ -517,8 +540,8 @@ const TASKS = {
   Q06: { title: "RDP-kapcsolat ellenőrzése", type: "syntax" },
   Q07: { title: "Guest OS adatainak vizsgálata", type: "syntax" },
   Q08: { title: "Guest OS és processzor", type: "syntax" },
-  Q09: { title: "Folyamatok és szálak", type: "syntax" },
-  Q10: { title: "Windows-szolgáltatások", type: "syntax" }
+  Q09: { title: "Folyamatok, erőforrás-használat és szálak", type: "syntax" },
+  Q10: { title: "Szolgáltatás állapotának ellenőrzése", type: "syntax" }
 };
 
 function fields() {
@@ -989,8 +1012,13 @@ function runSyntaxRules(q) {
     case "Q10": {
       if (String(v.Q10_NAME || "").trim().length < 2 || String(v.Q10_DISPLAY || "").trim().length < 2)
         return result("needs_revision", "Add meg a kiválasztott szolgáltatás Name és DisplayName értékét.");
-      if (String(v.Q10_DESC || "").trim().length < 20)
-        return result("needs_revision", "Írd le röviden, saját szavaiddal, mire szolgál a kiválasztott szolgáltatás.");
+      if (!["Running", "Stopped", "Other"].includes(String(v.Q10_STATUS || "")))
+        return result("needs_revision", "Add meg a kiválasztott szolgáltatás állapotát.");
+      const code = String(v.Q10_CODE || "");
+      if (!/\bif\s*\(/i.test(code) || !/\belse\b/i.test(code))
+        return result("needs_revision", "Az elkészített kódrészlet tartalmazzon if és else ágat.");
+      if (!/\.Status\b/i.test(code))
+        return result("needs_revision", "Az elágazás vizsgálja a szolgáltatás Status tulajdonságát.");
       break;
     }
   }

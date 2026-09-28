@@ -308,9 +308,150 @@ Bár csak egy virtuális gépet hoztál létre, az Azure-ban ehhez több kapcsol
 <input id="q05_topcount" data-answer="Q05_TOPCOUNT" inputmode="numeric" autocomplete="off">
 </div>
 
-::: {.callout-note title="Folytatás"}
-A 6–10. feladatban további PowerShell- és Guest OS-monitorozási feladatok következnek, a 11–15. feladat pedig az Azure Monitor, Service Health és Activity Log riasztások gyakorlati használatára épül majd.
+## 6. feladat – Az RDP-kapcsolat ellenőrzése
+
+Mielőtt távoli asztallal csatlakozol a virtuális géphez, ellenőrizd a **VS Code PowerShell termináljából**, hogy a VM RDP-szolgáltatása hálózaton keresztül elérhető-e.
+
+Keresd meg a virtuális géped **nyilvános IP-címét** a korábban megismert Azure PowerShell-parancsok segítségével, majd ellenőrizd a **3389-es TCP-portot**:
+
+```powershell
+Test-NetConnection <PUBLIC-IP> -Port 3389
+```
+
+A `<PUBLIC-IP>` helyére a saját virtuális géped nyilvános IP-címét írd. A kimenetben keresd meg a `RemoteAddress` és `TcpTestSucceeded` értékeket.
+
+<div class="answer-box">
+<label for="q06_address">RemoteAddress</label>
+<input id="q06_address" data-answer="Q06_ADDRESS" autocomplete="off">
+<label for="q06_tcp">TcpTestSucceeded</label>
+<select id="q06_tcp" data-answer="Q06_TCP">
+<option value="">– válassz –</option>
+<option value="True">True</option>
+<option value="False">False</option>
+</select>
+</div>
+
+::: {.callout-warning title="Ha a TcpTestSucceeded értéke False"}
+Ellenőrizd, hogy a virtuális gép fut-e, helyes nyilvános IP-címet adtál-e meg, illetve hogy az Azure hálózati beállításai engedélyezik-e az RDP-kapcsolatot a **TCP/3389** porton.
 :::
+
+Ha a `TcpTestSucceeded` értéke `True`, indítsd el a **Távoli asztali kapcsolat (Remote Desktop Connection)** alkalmazást, és csatlakozz a virtuális gépedhez.
+
+::: {.callout-important title="A következő feladatok helye"}
+A **7–10. feladatot már az RDP-vel elért virtuális gépen**, a Windows PowerShellben hajtsd végre.
+:::
+
+## 7. feladat – A Guest OS adatainak vizsgálata
+
+Nyisd meg a **Windows PowerShellt** a távoli gépen, majd kérdezd le a rendszer alapvető adatait:
+
+```powershell
+Get-ComputerInfo
+```
+
+A parancs sok adatot jelenít meg. Pipeline és `Select-Object` segítségével szűkítsd a kimenetet az alábbi tulajdonságokra:
+
+- `CsName`
+- `WindowsProductName`
+- `WindowsVersion`
+- `OsArchitecture`
+
+<div class="answer-box">
+<label for="q07_name">CsName</label>
+<input id="q07_name" data-answer="Q07_NAME" autocomplete="off">
+<label for="q07_product">WindowsProductName</label>
+<input id="q07_product" data-answer="Q07_PRODUCT" autocomplete="off">
+<label for="q07_version">WindowsVersion</label>
+<input id="q07_version" data-answer="Q07_VERSION" autocomplete="off">
+<label for="q07_arch">OsArchitecture</label>
+<input id="q07_arch" data-answer="Q07_ARCH" autocomplete="off">
+</div>
+
+## 8. feladat – Mit lát a Guest OS a processzorból?
+
+Vizsgáld meg, milyen processzort és hány feldolgozási egységet lát a Windows:
+
+```powershell
+Get-CimInstance Win32_Processor |
+    Select-Object Name, NumberOfCores, NumberOfLogicalProcessors
+```
+
+<div class="answer-box">
+<label for="q08_cpu">CPU neve</label>
+<input id="q08_cpu" data-answer="Q08_CPU" autocomplete="off">
+<label for="q08_cores">NumberOfCores</label>
+<input id="q08_cores" data-answer="Q08_CORES" inputmode="numeric" autocomplete="off">
+<label for="q08_logical">NumberOfLogicalProcessors</label>
+<input id="q08_logical" data-answer="Q08_LOGICAL" inputmode="numeric" autocomplete="off">
+<label for="q08_azure">Melyik Azure VM-erőforrással áll legközvetlenebb kapcsolatban a Guest OS által látott logikai processzorok száma?</label>
+<select id="q08_azure" data-answer="Q08_AZURE">
+<option value="">– válassz –</option>
+<option value="RAM">RAM</option>
+<option value="vCPU">vCPU</option>
+<option value="Virtual Disk">Virtual Disk</option>
+<option value="vNIC">vNIC</option>
+</select>
+</div>
+
+## 9. feladat – Folyamatok és szálak
+
+Az előadáson láttuk, hogy egy futó **processz egy vagy több szálat (threadet)** tartalmazhat. Listázd a folyamatokat:
+
+```powershell
+Get-Process
+```
+
+Válassz egy könnyen azonosítható folyamatot, majd mentsd el egy változóba. Például az `explorer` folyamat esetén:
+
+```powershell
+$p = Get-Process -Name explorer
+```
+
+Vizsgáld meg a folyamathoz tartozó szálakat:
+
+```powershell
+$p.Threads
+```
+
+A szálak számát így kérdezheted le:
+
+```powershell
+$p.Threads.Count
+```
+
+<div class="answer-box">
+<label for="q09_process">A választott process neve</label>
+<input id="q09_process" data-answer="Q09_PROCESS" autocomplete="off">
+<label for="q09_pid">PID</label>
+<input id="q09_pid" data-answer="Q09_PID" inputmode="numeric" autocomplete="off">
+<label for="q09_threads">A process szálainak száma</label>
+<input id="q09_threads" data-answer="Q09_THREADS" inputmode="numeric" autocomplete="off">
+</div>
+
+## 10. feladat – Windows-szolgáltatások vizsgálata
+
+A Windows számos háttérben működő **szolgáltatást (service)** használ. Listázd a szolgáltatásokat:
+
+```powershell
+Get-Service
+```
+
+Pipeline és `Where-Object` segítségével jelenítsd meg **csak a futó (`Running`) szolgáltatásokat**. A szűréshez használd az alábbi feltételt:
+
+```powershell
+Where-Object { $_.Status -eq 'Running' }
+```
+
+Válassz ki a listából **egy olyan szolgáltatást, amelynek a szerepét nem ismered**. Szükség esetén generatív AI segítségével derítsd ki, mire szolgál, majd **saját szavaiddal**, röviden foglald össze a szerepét.
+
+<div class="answer-box">
+<label for="q10_name">Name</label>
+<input id="q10_name" data-answer="Q10_NAME" autocomplete="off">
+<label for="q10_display">DisplayName</label>
+<input id="q10_display" data-answer="Q10_DISPLAY" autocomplete="off">
+<label for="q10_desc">Mire szolgál? (1–2 mondat)</label>
+<textarea id="q10_desc" data-answer="Q10_DESC"></textarea>
+</div>
 
 ## Mentés és beadás
 
@@ -372,7 +513,12 @@ const TASKS = {
   Q02: { title: "Folyamatok és EXE elérési hely", type: "syntax" },
   Q03: { title: "CPU-terhelés Get-Counter segítségével", type: "syntax" },
   Q04: { title: "AI-val készített CPU-monitor", type: "syntax" },
-  Q05: { title: "Azure Resource Graph AI segítségével", type: "syntax" }
+  Q05: { title: "Azure Resource Graph AI segítségével", type: "syntax" },
+  Q06: { title: "RDP-kapcsolat ellenőrzése", type: "syntax" },
+  Q07: { title: "Guest OS adatainak vizsgálata", type: "syntax" },
+  Q08: { title: "Guest OS és processzor", type: "syntax" },
+  Q09: { title: "Folyamatok és szálak", type: "syntax" },
+  Q10: { title: "Windows-szolgáltatások", type: "syntax" }
 };
 
 function fields() {
@@ -809,6 +955,42 @@ function runSyntaxRules(q) {
       if (!Number.isInteger(types) || types < 1 || types > total) return result("needs_revision", "A különböző erőforrástípusok száma legyen pozitív egész, és ne legyen több az összes erőforrás számánál.");
       if (String(v.Q05_TOPTYPE || "").trim().length < 3) return result("needs_revision", "Add meg, melyik erőforrástípusból találtad a legtöbbet.");
       if (!Number.isInteger(topcount) || topcount < 1 || topcount > total) return result("needs_revision", "Add meg a leggyakoribb erőforrástípus darabszámát.");
+      break;
+    }
+    case "Q06": {
+      const addr = String(v.Q06_ADDRESS || "").trim();
+      if (addr.length < 7) return result("needs_revision", "Add meg a Test-NetConnection által jelzett RemoteAddress értéket.");
+      if (String(v.Q06_TCP || "") !== "True") return result("needs_revision", "Az RDP-kapcsolat folytatásához a TcpTestSucceeded értéke legyen True.");
+      break;
+    }
+    case "Q07": {
+      if ([v.Q07_NAME, v.Q07_PRODUCT, v.Q07_VERSION, v.Q07_ARCH].some(x => String(x || "").trim().length < 2))
+        return result("needs_revision", "Töltsd ki a Get-ComputerInfo alapján mind a négy rendszeradatot.");
+      break;
+    }
+    case "Q08": {
+      const cores = Number(String(v.Q08_CORES || "").trim());
+      const logical = Number(String(v.Q08_LOGICAL || "").trim());
+      if (String(v.Q08_CPU || "").trim().length < 3) return result("needs_revision", "Add meg a processzor nevét.");
+      if (!Number.isInteger(cores) || cores < 1 || !Number.isInteger(logical) || logical < 1)
+        return result("needs_revision", "A magok és a logikai processzorok száma pozitív egész szám legyen.");
+      if (String(v.Q08_AZURE || "") !== "vCPU")
+        return result("needs_revision", "Gondold át, melyik Azure VM-erőforrás kapcsolódik közvetlenül a Guest OS által látott processzor-kapacitáshoz.");
+      break;
+    }
+    case "Q09": {
+      const pid = Number(String(v.Q09_PID || "").trim());
+      const threads = Number(String(v.Q09_THREADS || "").trim());
+      if (String(v.Q09_PROCESS || "").trim().length < 2) return result("needs_revision", "Add meg a választott process nevét.");
+      if (!Number.isInteger(pid) || pid < 1 || !Number.isInteger(threads) || threads < 1)
+        return result("needs_revision", "A PID és a szálak száma pozitív egész szám legyen.");
+      break;
+    }
+    case "Q10": {
+      if (String(v.Q10_NAME || "").trim().length < 2 || String(v.Q10_DISPLAY || "").trim().length < 2)
+        return result("needs_revision", "Add meg a kiválasztott szolgáltatás Name és DisplayName értékét.");
+      if (String(v.Q10_DESC || "").trim().length < 20)
+        return result("needs_revision", "Írd le röviden, saját szavaiddal, mire szolgál a kiválasztott szolgáltatás.");
       break;
     }
   }

@@ -166,6 +166,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#feladat-cpu-terhelés-mérése-get-counter-segítségével" id="toc-feladat-cpu-terhelés-mérése-get-counter-segítségével" class="nav-link" data-scroll-target="#feladat-cpu-terhelés-mérése-get-counter-segítségével">3. feladat – CPU-terhelés mérése <code>Get-Counter</code> segítségével</a></li>
   <li><a href="#feladat-paraméterezhető-cpu-monitorozó-script-ai-segítségével" id="toc-feladat-paraméterezhető-cpu-monitorozó-script-ai-segítségével" class="nav-link" data-scroll-target="#feladat-paraméterezhető-cpu-monitorozó-script-ai-segítségével">4. feladat – Paraméterezhető CPU-monitorozó script AI segítségével</a></li>
   <li><a href="#feladat-azure-erőforrások-vizsgálata-resource-graph-segítségével" id="toc-feladat-azure-erőforrások-vizsgálata-resource-graph-segítségével" class="nav-link" data-scroll-target="#feladat-azure-erőforrások-vizsgálata-resource-graph-segítségével">5. feladat – Azure-erőforrások vizsgálata Resource Graph segítségével</a></li>
+  <li><a href="#feladat-az-rdp-kapcsolat-ellenőrzése" id="toc-feladat-az-rdp-kapcsolat-ellenőrzése" class="nav-link" data-scroll-target="#feladat-az-rdp-kapcsolat-ellenőrzése">6. feladat – Az RDP-kapcsolat ellenőrzése</a></li>
+  <li><a href="#feladat-a-guest-os-adatainak-vizsgálata" id="toc-feladat-a-guest-os-adatainak-vizsgálata" class="nav-link" data-scroll-target="#feladat-a-guest-os-adatainak-vizsgálata">7. feladat – A Guest OS adatainak vizsgálata</a></li>
+  <li><a href="#feladat-mit-lát-a-guest-os-a-processzorból" id="toc-feladat-mit-lát-a-guest-os-a-processzorból" class="nav-link" data-scroll-target="#feladat-mit-lát-a-guest-os-a-processzorból">8. feladat – Mit lát a Guest OS a processzorból?</a></li>
+  <li><a href="#feladat-folyamatok-és-szálak" id="toc-feladat-folyamatok-és-szálak" class="nav-link" data-scroll-target="#feladat-folyamatok-és-szálak">9. feladat – Folyamatok és szálak</a></li>
+  <li><a href="#feladat-windows-szolgáltatások-vizsgálata" id="toc-feladat-windows-szolgáltatások-vizsgálata" class="nav-link" data-scroll-target="#feladat-windows-szolgáltatások-vizsgálata">10. feladat – Windows-szolgáltatások vizsgálata</a></li>
   <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
   </ul></li>
   </ul>
@@ -502,18 +507,92 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <textarea id="q05_query" class="code-answer" data-answer="Q05_QUERY"></textarea>
 <p><label for="q05_total">Hány Azure-erőforrást találtál összesen?</label> <input id="q05_total" data-answer="Q05_TOTAL" inputmode="numeric" autocomplete="off"> <label for="q05_types">Hány különböző erőforrástípust találtál?</label> <input id="q05_types" data-answer="Q05_TYPES" inputmode="numeric" autocomplete="off"> <label for="q05_toptype">Melyik erőforrástípusból találtad a legtöbbet?</label> <input id="q05_toptype" data-answer="Q05_TOPTYPE" autocomplete="off"> <label for="q05_topcount">Hány ilyen erőforrás található?</label> <input id="q05_topcount" data-answer="Q05_TOPCOUNT" inputmode="numeric" autocomplete="off"></p>
 </div>
-<div class="callout callout-style-default callout-note callout-titled" title="Folytatás">
+</section>
+<section id="feladat-az-rdp-kapcsolat-ellenőrzése" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-az-rdp-kapcsolat-ellenőrzése">6. feladat – Az RDP-kapcsolat ellenőrzése</h2>
+<p>Mielőtt távoli asztallal csatlakozol a virtuális géphez, ellenőrizd a <strong>VS Code PowerShell termináljából</strong>, hogy a VM RDP-szolgáltatása hálózaton keresztül elérhető-e.</p>
+<p>Keresd meg a virtuális géped <strong>nyilvános IP-címét</strong> a korábban megismert Azure PowerShell-parancsok segítségével, majd ellenőrizd a <strong>3389-es TCP-portot</strong>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Test-NetConnection <span class="op">&lt;</span>PUBLIC-IP<span class="op">&gt;</span> <span class="op">-</span>Port <span class="dv">3389</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A <code>&lt;PUBLIC-IP&gt;</code> helyére a saját virtuális géped nyilvános IP-címét írd. A kimenetben keresd meg a <code>RemoteAddress</code> és <code>TcpTestSucceeded</code> értékeket.</p>
+<div class="answer-box">
+<p><label for="q06_address">RemoteAddress</label> <input id="q06_address" data-answer="Q06_ADDRESS" autocomplete="off"> <label for="q06_tcp">TcpTestSucceeded</label> <select id="q06_tcp" data-answer="Q06_TCP"> <option value="">– válassz –</option> <option value="True">True</option> <option value="False">False</option> </select></p>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Ha a TcpTestSucceeded értéke False">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Folytatás
+<span class="screen-reader-only">Warning</span>Ha a TcpTestSucceeded értéke False
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A 6–10. feladatban további PowerShell- és Guest OS-monitorozási feladatok következnek, a 11–15. feladat pedig az Azure Monitor, Service Health és Activity Log riasztások gyakorlati használatára épül majd.</p>
+<p>Ellenőrizd, hogy a virtuális gép fut-e, helyes nyilvános IP-címet adtál-e meg, illetve hogy az Azure hálózati beállításai engedélyezik-e az RDP-kapcsolatot a <strong>TCP/3389</strong> porton.</p>
 </div>
+</div>
+<p>Ha a <code>TcpTestSucceeded</code> értéke <code>True</code>, indítsd el a <strong>Távoli asztali kapcsolat (Remote Desktop Connection)</strong> alkalmazást, és csatlakozz a virtuális gépedhez.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="A következő feladatok helye">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>A következő feladatok helye
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>7–10. feladatot már az RDP-vel elért virtuális gépen</strong>, a Windows PowerShellben hajtsd végre.</p>
+</div>
+</div>
+</section>
+<section id="feladat-a-guest-os-adatainak-vizsgálata" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-a-guest-os-adatainak-vizsgálata">7. feladat – A Guest OS adatainak vizsgálata</h2>
+<p>Nyisd meg a <strong>Windows PowerShellt</strong> a távoli gépen, majd kérdezd le a rendszer alapvető adatait:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Get-ComputerInfo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A parancs sok adatot jelenít meg. Pipeline és <code>Select-Object</code> segítségével szűkítsd a kimenetet az alábbi tulajdonságokra:</p>
+<ul>
+<li><code>CsName</code></li>
+<li><code>WindowsProductName</code></li>
+<li><code>WindowsVersion</code></li>
+<li><code>OsArchitecture</code></li>
+</ul>
+<div class="answer-box">
+<p><label for="q07_name">CsName</label> <input id="q07_name" data-answer="Q07_NAME" autocomplete="off"> <label for="q07_product">WindowsProductName</label> <input id="q07_product" data-answer="Q07_PRODUCT" autocomplete="off"> <label for="q07_version">WindowsVersion</label> <input id="q07_version" data-answer="Q07_VERSION" autocomplete="off"> <label for="q07_arch">OsArchitecture</label> <input id="q07_arch" data-answer="Q07_ARCH" autocomplete="off"></p>
+</div>
+</section>
+<section id="feladat-mit-lát-a-guest-os-a-processzorból" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-mit-lát-a-guest-os-a-processzorból">8. feladat – Mit lát a Guest OS a processzorból?</h2>
+<p>Vizsgáld meg, milyen processzort és hány feldolgozási egységet lát a Windows:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-CimInstance</span> Win32_Processor <span class="op">|</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Select-Object</span> Name<span class="op">,</span> NumberOfCores<span class="op">,</span> NumberOfLogicalProcessors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="answer-box">
+<p><label for="q08_cpu">CPU neve</label> <input id="q08_cpu" data-answer="Q08_CPU" autocomplete="off"> <label for="q08_cores">NumberOfCores</label> <input id="q08_cores" data-answer="Q08_CORES" inputmode="numeric" autocomplete="off"> <label for="q08_logical">NumberOfLogicalProcessors</label> <input id="q08_logical" data-answer="Q08_LOGICAL" inputmode="numeric" autocomplete="off"> <label for="q08_azure">Melyik Azure VM-erőforrással áll legközvetlenebb kapcsolatban a Guest OS által látott logikai processzorok száma?</label> <select id="q08_azure" data-answer="Q08_AZURE"> <option value="">– válassz –</option> <option value="RAM">RAM</option> <option value="vCPU">vCPU</option> <option value="Virtual Disk">Virtual Disk</option> <option value="vNIC">vNIC</option> </select></p>
+</div>
+</section>
+<section id="feladat-folyamatok-és-szálak" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-folyamatok-és-szálak">9. feladat – Folyamatok és szálak</h2>
+<p>Az előadáson láttuk, hogy egy futó <strong>processz egy vagy több szálat (threadet)</strong> tartalmazhat. Listázd a folyamatokat:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Process</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Válassz egy könnyen azonosítható folyamatot, majd mentsd el egy változóba. Például az <code>explorer</code> folyamat esetén:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="va">$p</span> <span class="op">=</span> <span class="fu">Get-Process</span> <span class="op">-</span>Name explorer</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Vizsgáld meg a folyamathoz tartozó szálakat:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="va">$p</span><span class="op">.</span><span class="fu">Threads</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A szálak számát így kérdezheted le:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="va">$p</span><span class="op">.</span><span class="fu">Threads</span><span class="op">.</span><span class="fu">Count</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="answer-box">
+<p><label for="q09_process">A választott process neve</label> <input id="q09_process" data-answer="Q09_PROCESS" autocomplete="off"> <label for="q09_pid">PID</label> <input id="q09_pid" data-answer="Q09_PID" inputmode="numeric" autocomplete="off"> <label for="q09_threads">A process szálainak száma</label> <input id="q09_threads" data-answer="Q09_THREADS" inputmode="numeric" autocomplete="off"></p>
+</div>
+</section>
+<section id="feladat-windows-szolgáltatások-vizsgálata" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-windows-szolgáltatások-vizsgálata">10. feladat – Windows-szolgáltatások vizsgálata</h2>
+<p>A Windows számos háttérben működő <strong>szolgáltatást (service)</strong> használ. Listázd a szolgáltatásokat:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Service</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pipeline és <code>Where-Object</code> segítségével jelenítsd meg <strong>csak a futó (<code>Running</code>) szolgáltatásokat</strong>. A szűréshez használd az alábbi feltételt:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Where-Object</span> <span class="op">{</span> <span class="va">$_</span><span class="op">.</span><span class="fu">Status</span> <span class="op">-eq</span> <span class="st">'Running'</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Válassz ki a listából <strong>egy olyan szolgáltatást, amelynek a szerepét nem ismered</strong>. Szükség esetén generatív AI segítségével derítsd ki, mire szolgál, majd <strong>saját szavaiddal</strong>, röviden foglald össze a szerepét.</p>
+<div class="answer-box">
+<label for="q10_name">Name</label> <input id="q10_name" data-answer="Q10_NAME" autocomplete="off"> <label for="q10_display">DisplayName</label> <input id="q10_display" data-answer="Q10_DISPLAY" autocomplete="off"> <label for="q10_desc">Mire szolgál? (1–2 mondat)</label>
+<textarea id="q10_desc" data-answer="Q10_DESC"></textarea>
 </div>
 </section>
 <section id="mentés-és-beadás" class="level2">
@@ -594,7 +673,12 @@ const TASKS = {
   Q02: { title: "Folyamatok és EXE elérési hely", type: "syntax" },
   Q03: { title: "CPU-terhelés Get-Counter segítségével", type: "syntax" },
   Q04: { title: "AI-val készített CPU-monitor", type: "syntax" },
-  Q05: { title: "Azure Resource Graph AI segítségével", type: "syntax" }
+  Q05: { title: "Azure Resource Graph AI segítségével", type: "syntax" },
+  Q06: { title: "RDP-kapcsolat ellenőrzése", type: "syntax" },
+  Q07: { title: "Guest OS adatainak vizsgálata", type: "syntax" },
+  Q08: { title: "Guest OS és processzor", type: "syntax" },
+  Q09: { title: "Folyamatok és szálak", type: "syntax" },
+  Q10: { title: "Windows-szolgáltatások", type: "syntax" }
 };
 
 function fields() {
@@ -1031,6 +1115,42 @@ function runSyntaxRules(q) {
       if (!Number.isInteger(types) || types < 1 || types > total) return result("needs_revision", "A különböző erőforrástípusok száma legyen pozitív egész, és ne legyen több az összes erőforrás számánál.");
       if (String(v.Q05_TOPTYPE || "").trim().length < 3) return result("needs_revision", "Add meg, melyik erőforrástípusból találtad a legtöbbet.");
       if (!Number.isInteger(topcount) || topcount < 1 || topcount > total) return result("needs_revision", "Add meg a leggyakoribb erőforrástípus darabszámát.");
+      break;
+    }
+    case "Q06": {
+      const addr = String(v.Q06_ADDRESS || "").trim();
+      if (addr.length < 7) return result("needs_revision", "Add meg a Test-NetConnection által jelzett RemoteAddress értéket.");
+      if (String(v.Q06_TCP || "") !== "True") return result("needs_revision", "Az RDP-kapcsolat folytatásához a TcpTestSucceeded értéke legyen True.");
+      break;
+    }
+    case "Q07": {
+      if ([v.Q07_NAME, v.Q07_PRODUCT, v.Q07_VERSION, v.Q07_ARCH].some(x => String(x || "").trim().length < 2))
+        return result("needs_revision", "Töltsd ki a Get-ComputerInfo alapján mind a négy rendszeradatot.");
+      break;
+    }
+    case "Q08": {
+      const cores = Number(String(v.Q08_CORES || "").trim());
+      const logical = Number(String(v.Q08_LOGICAL || "").trim());
+      if (String(v.Q08_CPU || "").trim().length < 3) return result("needs_revision", "Add meg a processzor nevét.");
+      if (!Number.isInteger(cores) || cores < 1 || !Number.isInteger(logical) || logical < 1)
+        return result("needs_revision", "A magok és a logikai processzorok száma pozitív egész szám legyen.");
+      if (String(v.Q08_AZURE || "") !== "vCPU")
+        return result("needs_revision", "Gondold át, melyik Azure VM-erőforrás kapcsolódik közvetlenül a Guest OS által látott processzor-kapacitáshoz.");
+      break;
+    }
+    case "Q09": {
+      const pid = Number(String(v.Q09_PID || "").trim());
+      const threads = Number(String(v.Q09_THREADS || "").trim());
+      if (String(v.Q09_PROCESS || "").trim().length < 2) return result("needs_revision", "Add meg a választott process nevét.");
+      if (!Number.isInteger(pid) || pid < 1 || !Number.isInteger(threads) || threads < 1)
+        return result("needs_revision", "A PID és a szálak száma pozitív egész szám legyen.");
+      break;
+    }
+    case "Q10": {
+      if (String(v.Q10_NAME || "").trim().length < 2 || String(v.Q10_DISPLAY || "").trim().length < 2)
+        return result("needs_revision", "Add meg a kiválasztott szolgáltatás Name és DisplayName értékét.");
+      if (String(v.Q10_DESC || "").trim().length < 20)
+        return result("needs_revision", "Írd le röviden, saját szavaiddal, mire szolgál a kiválasztott szolgáltatás.");
       break;
     }
   }

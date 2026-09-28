@@ -3,6 +3,7 @@ project:
   output-dir: docs
   render:
     - index.qmd
+    - utemterv.qmd
     - weeks/**/*.qmd
   resources:
     - config/**
@@ -12,6 +13,8 @@ website:
   title: "IT Architektúra – Gyakorlati munkafüzet"
   navbar:
     left:
+      - href: utemterv.qmd
+        text: Féléves ütemterv és értékelés
       - href: index.qmd
         text: Kezdőlap
       - href: weeks/week01/index.qmd

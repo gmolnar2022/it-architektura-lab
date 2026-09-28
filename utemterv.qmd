@@ -1,0 +1,99 @@
+---
+title: "Féléves ütemterv és értékelés"
+lang: hu
+---
+
+## Féléves ütemterv
+
+| Hét | Előadás | Gyakorlat | Számonkérés / feladat |
+|---|---|---|---|
+| **1.** | IT-architektúra és felhő alapjai | Azure alapok, VM, Cloud Shell, Azure PowerShell | |
+| **2.** | CPU-tól az Azure VM-ig – CPU, memória, háttértár, virtualizáció | VS Code, Azure VM, Azure PowerShell, pipeline, változók, script | |
+| **3.** | Az Azure VM belsejében – operációs rendszer, folyamatok, szálak, scheduling, monitoring | Windows PowerShell, folyamatok, CPU, szolgáltatások, Azure Monitor, Alerts | |
+| **4.** | Hálózatok alapjai – TCP/IP, IP-címzés, subnet, portok, DNS, routing, tűzfal | Azure hálózatok – VNet, subnet, NSG, public/private IP, hálózati diagnosztika | |
+| **5.** | Hálózati szolgáltatások és szerverek – kliens–szerver, DNS, HTTP/HTTPS, fájlmegosztás | Windows Server az Azure-ban – IIS, SMB/DNS, kliens–szerver kapcsolat | **ZH1 a gyakorlat elején** – az 1–4. előadások anyagából, 20 perc |
+| **6.** | Linux operációs rendszer – fájlrendszer, felhasználók, jogosultságok, folyamatok, szolgáltatások | Linux az Azure-ban – Linux VM, SSH, Bash, fájlok, jogosultságok, folyamatok, systemd | **Egyéni HF kiadása** – határidő: 1 hét |
+| **7.** | Git és verziókezelés – repository, staging, commit, branch, remote | Git Linux alatt – init/clone, add/commit, branch, merge, push/pull, GitHub | **Egyéni HF beadási határideje** |
+| **8.** | Konténerek és Docker – VM vs. container, image, registry, Dockerfile | Docker Linux alatt – image-ek, konténerek, Dockerfile, build és run | **Projektfeladat kiadása** – határidő: 12. heti gyakorlat |
+| **9.** | Konténerek a felhőben és DevOps – registry, deployment, CI/CD | Azure Container Apps + GitHub Actions – container deployment és automatizálás | |
+| **10.** | AWS alapok és Azure–AWS megfeleltetések – infrastruktúra, EC2, VPC, S3, IAM | AWS Academy alaplaborok – AWS-környezet és alapvető szolgáltatások | **ZH2 a gyakorlat elején** – az 5–9. előadások anyagából, 20 perc |
+| **11.** | Azure ↔ AWS – felhőarchitektúrák összehasonlítása | Komplex AWS feladatsor – az Azure-ban tanult feladatok megvalósítása AWS-ben | |
+| **12.** | Összefoglalás – nincs új tananyag | **Félévzáró ZH** – Azure/AWS gépes feladatok, 90 perc | **Projektfeladat beadási határideje** |
+
+::: {.callout-note title="Tervezett ütemezés"}
+Az ütemterv egyes témakörei és gyakorlati feladatai a félév során kisebb mértékben változhatnak.
+:::
+
+## Féléves értékelés
+
+| Értékelési elem | Súly |
+|---|---:|
+| ZH1 | 15% |
+| ZH2 | 15% |
+| Egyéni házi feladat | 10% |
+| Projektfeladat | 20% |
+| Félévzáró ZH | 40% |
+| **Összesen** | **100%** |
+
+### ZH1 és ZH2
+
+A két rövid ZH az előadások elméleti anyagának számonkérésére szolgál.
+
+- **ZH1:** az 5. gyakorlat elején, az **1–4. előadások** anyagából, **20 perc**.
+- **ZH2:** a 10. gyakorlat elején, az **5–9. előadások** anyagából, **20 perc**.
+
+A két ZH együttesen a féléves eredmény **30%-át** adja.
+
+### Egyéni házi feladat
+
+Az egyénileg megoldandó házi feladat kiadása a **6. gyakorlaton** történik. A beadási határidő a kiadástól számított **1 hét**.
+
+A házi feladat a féléves eredmény **10%-át** adja.
+
+### Projektfeladat
+
+A projektfeladat kiadása a **8. gyakorlaton** történik. A beadási határidő a **12. heti gyakorlat**.
+
+A projektfeladat a féléves eredmény **20%-át** adja.
+
+### Félévzáró ZH
+
+A félévzáró ZH a **12. gyakorlaton** lesz.
+
+- Időtartam: **90 perc**
+- Típus: **gyakorlati, gépes feladatsor**
+- Tartalom: **Azure- és AWS-feladatok**
+
+A félévzáró ZH a féléves eredmény **40%-át** adja.
+
+## Bónuszlehetőségek
+
+A félév során kétféle módon szerezhető bónusz:
+
+1. **Előadási Kahoot-helyezés** – maximum **10%** bónusz.  
+   A félév során szerzett Kahoot-pontok alapján összesített rangsor készül. Az első 20 helyezett a helyezésével lineárisan csökkenő bónuszt kap:
+
+   | Helyezés | Bónusz | Helyezés | Bónusz |
+   |---:|---:|---:|---:|
+   | 1. | 10,0% | 11. | 5,0% |
+   | 2. | 9,5% | 12. | 4,5% |
+   | 3. | 9,0% | 13. | 4,0% |
+   | 4. | 8,5% | 14. | 3,5% |
+   | 5. | 8,0% | 15. | 3,0% |
+   | 6. | 7,5% | 16. | 2,5% |
+   | 7. | 7,0% | 17. | 2,0% |
+   | 8. | 6,5% | 18. | 1,5% |
+   | 9. | 6,0% | 19. | 1,0% |
+   | 10. | 5,5% | 20. | 0,5% |
+
+2. **Órai feladatlapok határidőre történő feltöltése** – maximum **10%** bónusz.  
+   A bónusz feltétele, hogy az adott feladatlapon **legalább 12 feladat helyesen legyen megoldva**.
+
+::: {.callout-important title="Bónuszok felső korlátja"}
+A két bónuszforrásból megszerzett bónuszok **együttesen legfeljebb 10%-kal** növelhetik a féléves eredményt.
+:::
+
+## Egyéb tudnivalók
+
+- **Megajánlott jegy:** legalább **77%-os** teljesítménytől adható.
+- **Vizsgára bocsátás feltétele:** legalább **51%-os** teljesítmény.

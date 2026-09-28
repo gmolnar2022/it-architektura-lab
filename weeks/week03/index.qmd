@@ -476,6 +476,35 @@ A konkrét feltételt neked kell megfogalmaznod.
 <textarea id="q10_code" class="code-answer" data-answer="Q10_CODE"></textarea>
 </div>
 
+## 11. feladat – Skillable labor elindítása
+
+A következő feladatokhoz ismét a **Skillable** laborkörnyezetét használjuk.
+
+Nyisd meg a korábban használt Skillable felületet:
+
+[**Skillable – Microsoft Learn for Educators laborkörnyezet**](https://msle.learnondemand.net/)
+
+Ha már a korábbi gyakorlaton regisztráltál, jelentkezz be a meglévő fiókoddal. Ha most regisztrálsz először, válaszd a **Register with Training Key** lehetőséget. A szükséges **Training Key a Moodle kurzusfelületén található**.
+
+Bejelentkezés után a **Current Training** részen keresd meg az alábbi labort:
+
+**Monitor Azure with Service Health and Activity Log alerts**
+
+Mielőtt elindítod a labort, ellenőrizd a labor adatlapját, és az alábbi mezőkben rögzítsd a megjelenő adatokat.
+
+<div class="answer-box">
+<label for="q11_duration">Duration</label>
+<input id="q11_duration" data-answer="Q11_DURATION" autocomplete="off">
+<label for="q11_ram">RAM</label>
+<input id="q11_ram" data-answer="Q11_RAM" autocomplete="off">
+</div>
+
+Ezután indítsd el a labort, várd meg, amíg a laborkörnyezet teljesen betöltődik, majd nyisd meg a labor által biztosított **Azure Portalt**.
+
+::: {.callout-important title="Fontos"}
+A következő feladatokban a **Skillable által biztosított Azure-környezetben** dolgozz, ne a saját Azure-előfizetésedben. Kövesd a laborban és a feladatlapban megadott erőforrásneveket és beállításokat.
+:::
+
 ## Mentés és beadás
 
 <div class="actions">
@@ -541,7 +570,8 @@ const TASKS = {
   Q07: { title: "Guest OS adatainak vizsgálata", type: "syntax" },
   Q08: { title: "Guest OS és processzor", type: "syntax" },
   Q09: { title: "Folyamatok, erőforrás-használat és szálak", type: "syntax" },
-  Q10: { title: "Szolgáltatás állapotának ellenőrzése", type: "syntax" }
+  Q10: { title: "Szolgáltatás állapotának ellenőrzése", type: "syntax" },
+  Q11: { title: "Skillable labor elindítása", type: "syntax" }
 };
 
 function fields() {
@@ -1019,6 +1049,15 @@ function runSyntaxRules(q) {
         return result("needs_revision", "Az elkészített kódrészlet tartalmazzon if és else ágat.");
       if (!/\.Status\b/i.test(code))
         return result("needs_revision", "Az elágazás vizsgálja a szolgáltatás Status tulajdonságát.");
+      break;
+    }
+    case "Q11": {
+      const duration = String(v.Q11_DURATION || "").trim().toLowerCase().replace(/\s+/g, " ");
+      const ram = String(v.Q11_RAM || "").trim().toLowerCase().replace(/\s+/g, "");
+      if (!["1 hour", "1hour"].includes(duration))
+        return result("needs_revision", "Ellenőrizd a labor adatlapján a Duration értékét.");
+      if (!["8.5gb", "8,5gb"].includes(ram))
+        return result("needs_revision", "Ellenőrizd a labor adatlapján a RAM értékét.");
       break;
     }
   }

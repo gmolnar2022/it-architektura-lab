@@ -117,41 +117,52 @@ A gyakorlat végén add meg a Neptun-kódodat, majd válaszd a **Beadás** gombo
 Az **1. és 5. feladatban** az Azure-erőforrást vizsgáljuk a VS Code PowerShell termináljából. A **2–4. feladatban** a virtuális gép Windows operációs rendszerében dolgozunk. Ez ugyanaz a két nézőpont, amelyet az előadáson is megkülönböztettünk: **Azure platform** és **Guest OS**.
 :::
 
-## 1. feladat – A virtuális gép elindítása és ellenőrzése
+## 1. feladat – A virtuális gép elindítása és az indítás ellenőrzése
 
 Nyisd meg a **Visual Studio Code** alkalmazást, majd egy **PowerShell terminált**. Jelentkezz be az Azure-ba, és válaszd ki a gyakorlaton használt előfizetést.
 
-A korábban tanult Azure PowerShell parancsok segítségével:
+A korábban tanult `Start-AzVM` paranccsal indítsd el a saját virtuális gépedet. A parancsban a **saját erőforráscsoportod és VM-ed nevét** használd.
 
-1. indítsd el a saját virtuális gépedet az **erőforráscsoport és a VM nevének megadásával**;
-2. várd meg az indítás befejezését;
-3. egy külön paranccsal kérdezd le a VM aktuális állapotát;
-4. csak akkor folytasd a következő feladattal, ha a gép már fut.
+Példa a parancs felépítésére:
 
-::: {.callout-tip title="Ismétlés"}
-Az indítás és az állapotlekérdezés parancsait ezen a héten már nem adjuk meg. Használd a korábbi gyakorlaton megismert `Az` cmdleteket.
-:::
+```powershell
+Start-AzVM -ResourceGroupName win11rg2 -Name pc001
+```
+
+Vizsgáld meg a parancs kimenetét. Az indítás sikerességét a `Status` mező jelzi, a `StartTime` és `EndTime` pedig az indítási művelet időadatait mutatja.
 
 <div class="answer-box">
 <label for="q01_vmname">A saját virtuális géped neve</label>
 <input id="q01_vmname" data-answer="Q01_VMNAME" autocomplete="off">
-<label for="q01_command">A VM indításához használt PowerShell-parancs</label>
-<textarea id="q01_command" class="code-answer" data-answer="Q01_COMMAND"></textarea>
-<label for="q01_state">A VM állapota az indítás befejezése után</label>
-<select id="q01_state" data-answer="Q01_STATE"><option value=""></option><option>VM running</option><option>VM stopped</option><option>VM deallocated</option><option>Egyéb</option></select>
+<label for="q01_start">StartTime</label>
+<input id="q01_start" data-answer="Q01_START" autocomplete="off">
+<label for="q01_end">EndTime</label>
+<input id="q01_end" data-answer="Q01_END" autocomplete="off">
+<label for="q01_status">Milyen Status értéket kaptál?</label>
+<select id="q01_status" data-answer="Q01_STATUS"><option value=""></option><option>Succeeded</option><option>Failed</option><option>Egyéb</option></select>
 </div>
 
 ## 2. feladat – Folyamatok és az EXE fájlok helye
 
 Kapcsolódj **RDP-vel** a saját Azure VM-edhez, majd indíts Windows PowerShellt.
 
-A `Get-Process` segítségével listázd a futó folyamatokat úgy, hogy a kimenetben legalább a következő adatok jelenjenek meg:
+A `Get-Process` segítségével listázd a futó folyamatokat. A sok találat miatt:
 
-- a folyamat neve (`Name`);
-- a folyamatazonosító (`Id`);
-- a végrehajtható fájl teljes elérési útja (`Path`).
+1. csak azok a folyamatok maradjanak, amelyeknél a `Path` értéke **nem üres**;
+2. csak az **első 10 találatot** jelenítsd meg;
+3. a kimenetben a `Name`, `Id` és `Path` mezők szerepeljenek.
 
-Válassz a listából **egy olyan folyamatot, amelynél a `Path` érték is megjelenik**, és add meg az adatait.
+::: {.callout-tip title="Segítség a szűréshez"}
+A nem üres `Path` értékek szűréséhez ezt a pipeline-elemet használhatod:
+
+```powershell
+Where-Object { $_.Path }
+```
+
+Az első 10 találat kiválasztásához a korábban megismert `Select-Object` parancs `-First` paraméterét használd.
+:::
+
+Válassz a megjelenített 10 folyamatból **egy folyamatot**, és add meg az adatait.
 
 ::: {.callout-note title="Miért érdekes a fájl helye?"}
 Egy ismeretlen vagy gyanús folyamat vizsgálatakor az EXE fájl helye hasznos információ lehet. A fájl elérési útja azonban **önmagában nem bizonyítja**, hogy egy program biztonságos vagy kártékony.
@@ -170,19 +181,39 @@ Egy ismeretlen vagy gyanús folyamat vizsgálatakor az EXE fájl helye hasznos i
 <select id="q02_location" data-answer="Q02_LOCATION"><option value=""></option><option>C:\Windows alatt</option><option>C:\Program Files alatt</option><option>Felhasználói könyvtárban</option><option>Egyéb helyen</option></select>
 </div>
 
-## 3. feladat – CPU-terhelés mérése Get-Counter segítségével
+## 3. feladat – CPU-terhelés mérése `Get-Counter` segítségével
 
-A `Get-Counter` egy új PowerShell-parancs, amellyel Windows teljesítményszámlálókat kérdezhetünk le.
+A `Get-Counter` PowerShell-paranccsal a Windows teljesítményszámlálóit kérdezheted le. Most a processzor kihasználtságát fogod megmérni.
 
-Készíts **5 CPU-mérést 2 másodperces időközzel**. A méréshez használd a teljes processzorterhelést (`% Processor Time`) mutató számlálót.
+Először keresd meg a processzorhoz kapcsolódó számlálócsoportokat:
 
-A kimenet alapján keresd meg az **5 mérés közül a legmagasabb CPU-terhelést**.
+```powershell
+Get-Counter -ListSet * |
+    Where-Object { $_.CounterSetName -match 'processzor|processor' } |
+    Select-Object CounterSetName
+```
 
-::: {.callout-tip title="Tipp"}
-A `Get-Counter` `-SampleInterval` és `-MaxSamples` paramétereivel több mérést is készíthetsz egymás után. A számláló elérési útját a PowerShell kimenetében szereplő formában használd.
+A megfelelő **Processzor / Processor** csoport számlálóit a `Get-Counter -ListSet` segítségével tudod megjeleníteni. Magyar Windows esetén például:
+
+```powershell
+(Get-Counter -ListSet 'Processzor').Paths
+```
+
+Keresd meg a CPU kihasználtságát (%) mutató számlálót. A listában a számláló útvonalában `(*)` szerepelhet. A teljes rendszer összesített CPU-terhelésének méréséhez a `*` helyett használd a **`_Total`** példányt.
+
+Készíts **5 mérést 2 másodperces időközzel**.
+
+::: {.callout-tip title="Segítség"}
+Több egymást követő méréshez a következő paramétereket használd:
+
+```text
+-SampleInterval 2 -MaxSamples 5
+```
 :::
 
 <div class="answer-box">
+<label for="q03_counter">A CPU-terhelés mérésére használt számláló teljes elérési útja</label>
+<input id="q03_counter" data-answer="Q03_COUNTER" autocomplete="off">
 <label for="q03_command">A használt Get-Counter parancs</label>
 <textarea id="q03_command" class="code-answer" data-answer="Q03_COMMAND"></textarea>
 <label for="q03_max">Az 5 mérés közül a legmagasabb CPU-terhelés (%)</label>
@@ -191,65 +222,94 @@ A `Get-Counter` `-SampleInterval` és `-MaxSamples` paramétereivel több méré
 <select id="q03_level" data-answer="Q03_LEVEL"><option value=""></option><option>0–25%</option><option>25–50%</option><option>50–75%</option><option>75–100%</option></select>
 </div>
 
-## 4. feladat – AI-val készített CPU-monitorozó script
+## 4. feladat – Paraméterezhető CPU-monitorozó script AI segítségével
 
-Használj egy általad választott **generatív AI-eszközt** egy egyszerű PowerShell script elkészítéséhez.
+Készíts egy új PowerShell scriptet a **VS Code-ban**:
 
-A script:
+1. válaszd a **File → New Text File** lehetőséget;
+2. mentsd el a fájlt **`cpu-monitor.ps1`** néven;
+3. ellenőrizd, hogy a VS Code terminálja PowerShellt használ.
 
-1. mérje meg a CPU aktuális terhelését;
-2. tartalmazzon egy `$threshold` változót;
-3. ha a CPU-terhelés nagyobb a küszöbértéknél, írjon ki **piros** `HIGH CPU` üzenetet;
-4. egyébként írjon ki **zöld** `CPU OK` üzenetet;
-5. az üzenetben jelenítse meg a mért CPU-terhelést is.
+Ezután kérj segítséget egy általad választott **generatív AI-eszköztől** a script elkészítéséhez.
 
-A `$threshold` kezdeti értékét **te válaszd meg 30 és 80% között**. Ezután módosítsd a küszöbértéket úgy, hogy a script **mindkét ága** (`CPU OK` és `HIGH CPU`) legalább egyszer lefusson.
+A script követelményei:
 
-::: {.callout-important title="AI használata"}
+- a futtatáskor **`Threshold` paraméterként** kapja meg a CPU-terhelés küszöbértékét;
+- a 3. feladatban megismert `Get-Counter` segítségével mérje meg az aktuális CPU-kihasználtságot;
+- ha a CPU-terhelés nagyobb a megadott küszöbértéknél, jelenítsen meg **piros `HIGH CPU`** üzenetet;
+- egyébként jelenítsen meg **zöld `CPU OK`** üzenetet;
+- az üzenet tartalmazza a mért CPU-terhelést és a megadott küszöbértéket is.
+
+A scriptet például így futtathatod:
+
+```powershell
+.\cpu-monitor.ps1 -Threshold 50
+```
+
+::: {.callout-important title="Teszteld mindkét ágat!"}
+A script tartalmát a teszteléshez **ne módosítsd**. Futtasd különböző `Threshold` paraméterekkel úgy, hogy egyszer `CPU OK`, egyszer pedig `HIGH CPU` eredményt kapj. Ehhez nem szükséges mesterségesen terhelni a CPU-t: a futtatáskor megadott küszöbértéket változtasd.
+:::
+
+::: {.callout-note title="AI használata"}
 Az AI által generált kódot futtatás előtt olvasd át. Csak olyan parancsot futtass, amelynek érted a célját. Ha szükséges, módosítsd az AI első megoldását.
 :::
 
 <div class="answer-box">
 <label for="q04_prompt">Az AI-nak adott promptod</label>
 <textarea id="q04_prompt" class="code-answer" data-answer="Q04_PROMPT"></textarea>
-<label for="q04_threshold">Az általad választott kezdeti threshold (%)</label>
-<input id="q04_threshold" data-answer="Q04_THRESHOLD" inputmode="numeric" autocomplete="off">
-<label for="q04_cpu">Egy futtatás során mért CPU-terhelés (%)</label>
-<input id="q04_cpu" data-answer="Q04_CPU" inputmode="decimal" autocomplete="off">
-<label for="q04_result">Az adott futtatás eredménye</label>
-<select id="q04_result" data-answer="Q04_RESULT"><option value=""></option><option>CPU OK</option><option>HIGH CPU</option></select>
-<label for="q04_both">Sikerült mindkét kimeneti ágat kipróbálnod?</label>
-<select id="q04_both" data-answer="Q04_BOTH"><option value=""></option><option>Igen</option><option>Nem</option></select>
+<label for="q04_ok_threshold">A CPU OK eredményhez használt Threshold (%)</label>
+<input id="q04_ok_threshold" data-answer="Q04_OK_THRESHOLD" inputmode="decimal" autocomplete="off">
+<label for="q04_ok_cpu">A CPU OK futtatáskor mért CPU-terhelés (%)</label>
+<input id="q04_ok_cpu" data-answer="Q04_OK_CPU" inputmode="decimal" autocomplete="off">
+<label for="q04_high_threshold">A HIGH CPU eredményhez használt Threshold (%)</label>
+<input id="q04_high_threshold" data-answer="Q04_HIGH_THRESHOLD" inputmode="decimal" autocomplete="off">
+<label for="q04_high_cpu">A HIGH CPU futtatáskor mért CPU-terhelés (%)</label>
+<input id="q04_high_cpu" data-answer="Q04_HIGH_CPU" inputmode="decimal" autocomplete="off">
 </div>
 
-## 5. feladat – Azure Resource Graph lekérdezés AI segítségével
+## 5. feladat – Azure-erőforrások vizsgálata Resource Graph segítségével
 
-Térj vissza a **VS Code PowerShell termináljához**. Az Azure Resource Graph segítségével egyszerre sok Azure-erőforrás adatait lehet lekérdezni.
+Térj vissza a **VS Code PowerShell termináljához**. Az Azure Resource Graph segítségével az előfizetésed erőforrásait lekérdezhető adatokként vizsgálhatod.
 
-Kérj segítséget egy generatív AI-eszköztől olyan **Azure Resource Graph** lekérdezés elkészítéséhez, amely a virtuális gépekről legalább az alábbi adatokat jeleníti meg:
+Ellenőrizd, hogy a `Search-AzGraph` cmdlet elérhető-e:
 
-- VM neve;
-- erőforráscsoport (`resourceGroup`);
-- régió (`location`);
-- VM-méret (`vmSize`).
+```powershell
+Get-Command Search-AzGraph
+```
 
-A lekérdezést PowerShellből futtasd a `Search-AzGraph` cmdlettel. A kimenetben keresd meg **a saját virtuális gépedet**, és add meg az adatait.
+Ha a parancs elérhető, próbáld ki egy egyszerű lekérdezéssel:
+
+```powershell
+Search-AzGraph -Query "Resources | project name, type, location | limit 10"
+```
+
+Ezután kérj segítséget egy **generatív AI-eszköztől** olyan Resource Graph lekérdezés elkészítéséhez, amely:
+
+- kilistázza az Azure-erőforrásaidat;
+- megjeleníti a `name`, `type`, `resourceGroup` és `location` adatokat;
+- az eredményt erőforrástípus szerint rendezi.
+
+Ezután módosítsd vagy egészítsd ki a lekérdezést úgy, hogy **erőforrástípusonként számolja össze** az erőforrásokat, és a legtöbb előfordulástól a legkevesebb felé rendezze az eredményt.
+
+::: {.callout-note title="Miért érdekes?"}
+Bár csak egy virtuális gépet hoztál létre, az Azure-ban ehhez több kapcsolódó erőforrás is tartozhat, például lemez, hálózati interfész, virtuális hálózat vagy nyilvános IP-cím. A Resource Graph segítségével ezeket egyetlen lekérdezésben áttekintheted.
+:::
 
 ::: {.callout-note title="Ha a Search-AzGraph nem érhető el"}
 A cmdlet az **Az.ResourceGraph** modul része. Ha a modul nincs telepítve vagy a parancs nem érhető el, jelezd az oktatónak.
 :::
 
 <div class="answer-box">
-<label for="q05_query">Az AI segítségével elkészített Resource Graph query</label>
+<label for="q05_query">Az AI segítségével elkészített, erőforrásokat listázó Resource Graph query</label>
 <textarea id="q05_query" class="code-answer" data-answer="Q05_QUERY"></textarea>
-<label for="q05_vmname">A saját VM-ed neve a lekérdezés eredményében</label>
-<input id="q05_vmname" data-answer="Q05_VMNAME" autocomplete="off">
-<label for="q05_rg">Resource group</label>
-<input id="q05_rg" data-answer="Q05_RG" autocomplete="off">
-<label for="q05_location">Location</label>
-<input id="q05_location" data-answer="Q05_LOCATION" autocomplete="off">
-<label for="q05_size">VM size</label>
-<input id="q05_size" data-answer="Q05_SIZE" autocomplete="off">
+<label for="q05_total">Hány Azure-erőforrást találtál összesen?</label>
+<input id="q05_total" data-answer="Q05_TOTAL" inputmode="numeric" autocomplete="off">
+<label for="q05_types">Hány különböző erőforrástípust találtál?</label>
+<input id="q05_types" data-answer="Q05_TYPES" inputmode="numeric" autocomplete="off">
+<label for="q05_toptype">Melyik erőforrástípusból találtad a legtöbbet?</label>
+<input id="q05_toptype" data-answer="Q05_TOPTYPE" autocomplete="off">
+<label for="q05_topcount">Hány ilyen erőforrás található?</label>
+<input id="q05_topcount" data-answer="Q05_TOPCOUNT" inputmode="numeric" autocomplete="off">
 </div>
 
 ::: {.callout-note title="Folytatás"}

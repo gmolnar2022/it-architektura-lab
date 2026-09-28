@@ -773,7 +773,7 @@ function collectAnswers() {
   const obj = {};
   fields().forEach(el => obj[el.dataset.answer] = el.value);
   obj._meta = {
-    week: "week02",
+    week: "week03",
     saved_at: nowIso(),
     format_version: 10,
     tracking: {
@@ -1407,7 +1407,7 @@ function buildSubmissionPayload() {
 
 function downloadJsonPayload(payload) {
   const safeTs = String(payload.submitted_at || nowIso()).replace(/[:.]/g, "-");
-  const filename = `ITARCH_week02_${payload.student_id || "UNKNOWN"}_${safeTs}.json`;
+  const filename = `ITARCH_week03_${payload.student_id || "UNKNOWN"}_${safeTs}.json`;
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -1521,7 +1521,7 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
-const SUBMISSION_DEADLINE = new Date("2026-10-01T11:40:00+02:00");
+const SUBMISSION_DEADLINE = new Date("2026-10-08T11:40:00+02:00");
 const SUBMISSION_DEADLINE_TEXT = "2026. október 8. 11:40";
 
 function submissionClosed() {

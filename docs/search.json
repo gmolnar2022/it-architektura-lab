@@ -63,18 +63,18 @@
     "text": "8. feladat – Mit lát a Guest OS a processzorból?\nVizsgáld meg, milyen processzort és hány feldolgozási egységet lát a Windows!\nKérdezd le a Win32_Processor CIM-osztály adatait, és az eredményt mentsd egy $cpu változóba. Ezután a változó felhasználásával jelenítsd meg az alábbi tulajdonságokat:\n\nName\nNumberOfCores\nNumberOfLogicalProcessors\n\nAz eredményt táblázatos formában jelenítsd meg.\n\n\n\n\n\n\nTipSegítség\n\n\n\nA feladat megoldásához a korábban megismert Get-CimInstance, Select-Object és Format-Table parancsokat használd. A CIM-osztály neve: Win32_Processor.\n\n\n\nCPU neve  NumberOfCores  NumberOfLogicalProcessors  Melyik Azure VM-erőforrással áll legközvetlenebb kapcsolatban a Guest OS által látott logikai processzorok száma?  – válassz – RAM vCPU Virtual Disk vNIC"
   },
   {
-    "objectID": "weeks/week03/index.html#feladat-folyamatok-és-szálak",
-    "href": "weeks/week03/index.html#feladat-folyamatok-és-szálak",
+    "objectID": "weeks/week03/index.html#feladat-folyamatok-erőforrás-használat-és-szálak",
+    "href": "weeks/week03/index.html#feladat-folyamatok-erőforrás-használat-és-szálak",
     "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
-    "section": "9. feladat – Folyamatok és szálak",
-    "text": "9. feladat – Folyamatok és szálak\nAz előadáson láttuk, hogy egy futó processz egy vagy több szálat (threadet) tartalmazhat. Listázd a folyamatokat:\nGet-Process\nVálassz egy könnyen azonosítható folyamatot, majd mentsd el egy változóba. Például az explorer folyamat esetén:\n$p = Get-Process -Name explorer\nVizsgáld meg a folyamathoz tartozó szálakat:\n$p.Threads\nA szálak számát így kérdezheted le:\n$p.Threads.Count\n\nA választott process neve  PID  A process szálainak száma"
+    "section": "9. feladat – Folyamatok, erőforrás-használat és szálak",
+    "text": "9. feladat – Folyamatok, erőforrás-használat és szálak\nListázd a futó folyamatokat, majd:\n\nrendezd őket a felhasznált memória alapján csökkenő sorrendbe;\njelenítsd meg csak az első 10 folyamatot;\na listában jelenjen meg a folyamat neve, PID-je és memóriahasználata;\naz eredményt táblázatos formában jelenítsd meg.\n\n\n\n\n\n\n\nTipSegítség\n\n\n\nHasználd a korábban megismert Get-Process, Sort-Object, Select-Object -First és Format-Table lehetőségeket. A memóriahasználathoz a WorkingSet tulajdonságot használhatod.\n\n\nVálassz ki egy folyamatot a saját Top 10 listádból, és mentsd el egy $p változóba. Ezután a változó segítségével vizsgáld meg a folyamathoz tartozó szálakat, és határozd meg a szálak számát.\n\n\n\n\n\n\nTipSegítség\n\n\n\nEgy folyamat név szerinti lekéréséhez használhatod a Get-Process -Name paraméterét. A processzhez tartozó szálakat a Threads tulajdonságon keresztül érheted el; a darabszám meghatározásához a Count tulajdonság használható.\n\n\n\nA Top 10 listából választott process neve  PID  A process szálainak száma"
   },
   {
-    "objectID": "weeks/week03/index.html#feladat-windows-szolgáltatások-vizsgálata",
-    "href": "weeks/week03/index.html#feladat-windows-szolgáltatások-vizsgálata",
+    "objectID": "weeks/week03/index.html#feladat-szolgáltatás-állapotának-ellenőrzése-elágazással",
+    "href": "weeks/week03/index.html#feladat-szolgáltatás-állapotának-ellenőrzése-elágazással",
     "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
-    "section": "10. feladat – Windows-szolgáltatások vizsgálata",
-    "text": "10. feladat – Windows-szolgáltatások vizsgálata\nA Windows számos háttérben működő szolgáltatást (service) használ. Listázd a szolgáltatásokat:\nGet-Service\nPipeline és Where-Object segítségével jelenítsd meg csak a futó (Running) szolgáltatásokat. A szűréshez használd az alábbi feltételt:\nWhere-Object { $_.Status -eq 'Running' }\nVálassz ki a listából egy olyan szolgáltatást, amelynek a szerepét nem ismered. Szükség esetén generatív AI segítségével derítsd ki, mire szolgál, majd saját szavaiddal, röviden foglald össze a szerepét.\n\nName  DisplayName  Mire szolgál? (1–2 mondat)"
+    "section": "10. feladat – Szolgáltatás állapotának ellenőrzése elágazással",
+    "text": "10. feladat – Szolgáltatás állapotának ellenőrzése elágazással\nListázd a Windows szolgáltatásait:\nGet-Service\nVálassz ki egy tetszőleges szolgáltatást, kérdezd le név alapján, majd az eredményt mentsd egy $service változóba.\n\n\n\n\n\n\nTipSegítség\n\n\n\nA szolgáltatás név szerinti lekéréséhez használd a Get-Service parancs -Name paraméterét.\n\n\nEzután készíts egy egyszerű feltételes elágazást, amely megvizsgálja a $service.Status értékét:\n\nha a szolgáltatás állapota Running, jelenjen meg: A szolgáltatás fut.\negyébként jelenjen meg: A szolgáltatás nem fut.\n\nAz if/else szerkezet általános alakja:\nif (feltétel) {\n    # utasítások\n}\nelse {\n    # utasítások\n}\nA konkrét feltételt neked kell megfogalmaznod.\n\nA választott szolgáltatás Name értéke  DisplayName  Status  – válassz – Running Stopped Other  Az elkészített if/else kódrészlet"
   },
   {
     "objectID": "weeks/week03/index.html#mentés-és-beadás",
@@ -341,19 +341,5 @@
     "title": "2. hét – Azure VM menedzsment és PowerShell",
     "section": "Mentés és beadás",
     "text": "Mentés és beadás\n\n\n📤 Beadás\n\n\n💾 JSON export\n\n\nHelyi adatok törlése\n\n\n\n\nBeadási határidő: 2026. október 1. 11:40\n\n\n\nBeadás előtti összesítés\n\n\n\n\n\n\nVissza a javításhoz\n\n\nBeadás megerősítése\n\n\n\n\n\n\n\n\n\n\n\n\nNoteAktivitási adatok\n\n\n\nA munkafüzet kísérleti jelleggel becsült aktív időt és feladatonkénti szerkesztési eseményeket is rögzíthet. Ez nem pontos munkaidőmérés: a másik böngészőlapon, VS Code-ban, RDP-ben vagy Skillable-ben végzett munka nem feltétlenül számít aktív időnek.\n\n\n\nAktivitás ezen a gépen\n\nIdőmérés: – Eseménykövetés: – Becsült aktív idő: 0:00 Szerkesztési események: 0 Első megnyitás: – Utolsó aktivitás: –"
-  },
-  {
-    "objectID": "weeks/week03/index.html#feladat-folyamatok-erőforrás-használat-és-szálak",
-    "href": "weeks/week03/index.html#feladat-folyamatok-erőforrás-használat-és-szálak",
-    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
-    "section": "9. feladat – Folyamatok, erőforrás-használat és szálak",
-    "text": "9. feladat – Folyamatok, erőforrás-használat és szálak\nListázd a futó folyamatokat, majd:\n\nrendezd őket a felhasznált memória alapján csökkenő sorrendbe;\njelenítsd meg csak az első 10 folyamatot;\na listában jelenjen meg a folyamat neve, PID-je és memóriahasználata;\naz eredményt táblázatos formában jelenítsd meg.\n\n\n\n\n\n\n\nTipSegítség\n\n\n\nHasználd a korábban megismert Get-Process, Sort-Object, Select-Object -First és Format-Table lehetőségeket. A memóriahasználathoz a WorkingSet tulajdonságot használhatod.\n\n\nVálassz ki egy folyamatot a saját Top 10 listádból, és mentsd el egy $p változóba. Ezután a változó segítségével vizsgáld meg a folyamathoz tartozó szálakat, és határozd meg a szálak számát.\n\n\n\n\n\n\nTipSegítség\n\n\n\nEgy folyamat név szerinti lekéréséhez használhatod a Get-Process -Name paraméterét. A processzhez tartozó szálakat a Threads tulajdonságon keresztül érheted el; a darabszám meghatározásához a Count tulajdonság használható.\n\n\n\nA Top 10 listából választott process neve  PID  A process szálainak száma"
-  },
-  {
-    "objectID": "weeks/week03/index.html#feladat-szolgáltatás-állapotának-ellenőrzése-elágazással",
-    "href": "weeks/week03/index.html#feladat-szolgáltatás-állapotának-ellenőrzése-elágazással",
-    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
-    "section": "10. feladat – Szolgáltatás állapotának ellenőrzése elágazással",
-    "text": "10. feladat – Szolgáltatás állapotának ellenőrzése elágazással\nListázd a Windows szolgáltatásait:\nGet-Service\nVálassz ki egy tetszőleges szolgáltatást, kérdezd le név alapján, majd az eredményt mentsd egy $service változóba.\n\n\n\n\n\n\nTipSegítség\n\n\n\nA szolgáltatás név szerinti lekéréséhez használd a Get-Service parancs -Name paraméterét.\n\n\nEzután készíts egy egyszerű feltételes elágazást, amely megvizsgálja a $service.Status értékét:\n\nha a szolgáltatás állapota Running, jelenjen meg: A szolgáltatás fut.\negyébként jelenjen meg: A szolgáltatás nem fut.\n\nAz if/else szerkezet általános alakja:\nif (feltétel) {\n    # utasítások\n}\nelse {\n    # utasítások\n}\nA konkrét feltételt neked kell megfogalmaznod.\n\nA választott szolgáltatás Name értéke  DisplayName  Status  – válassz – Running Stopped Other  Az elkészített if/else kódrészlet"
   }
 ]

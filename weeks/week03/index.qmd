@@ -123,12 +123,6 @@ Nyisd meg a **Visual Studio Code** alkalmazást, majd egy **PowerShell terminál
 
 A korábban tanult `Start-AzVM` paranccsal indítsd el a saját virtuális gépedet. A parancsban a **saját erőforráscsoportod és VM-ed nevét** használd.
 
-Példa a parancs felépítésére:
-
-```powershell
-Start-AzVM -ResourceGroupName win11rg2 -Name pc001
-```
-
 Vizsgáld meg a parancs kimenetét. Az indítás sikerességét a `Status` mező jelzi, a `StartTime` és `EndTime` pedig az indítási művelet időadatait mutatja.
 
 <div class="answer-box">
@@ -185,15 +179,7 @@ Egy ismeretlen vagy gyanús folyamat vizsgálatakor az EXE fájl helye hasznos i
 
 A `Get-Counter` PowerShell-paranccsal a Windows teljesítményszámlálóit kérdezheted le. Most a processzor kihasználtságát fogod megmérni.
 
-Először keresd meg a processzorhoz kapcsolódó számlálócsoportokat:
-
-```powershell
-Get-Counter -ListSet * |
-    Where-Object { $_.CounterSetName -match 'processzor|processor' } |
-    Select-Object CounterSetName
-```
-
-A megfelelő **Processzor / Processor** csoport számlálóit a `Get-Counter -ListSet` segítségével tudod megjeleníteni. Magyar Windows esetén például:
+A processzorhoz tartozó számlálócsoport neve magyar Windows esetén **`Processzor`**, angol Windows esetén **`Processor`**. Listázd ki a csoporthoz tartozó számlálókat. Magyar Windows esetén például:
 
 ```powershell
 (Get-Counter -ListSet 'Processzor').Paths
@@ -277,26 +263,34 @@ Ellenőrizd, hogy a `Search-AzGraph` cmdlet elérhető-e:
 Get-Command Search-AzGraph
 ```
 
-Ha a parancs elérhető, próbáld ki egy egyszerű lekérdezéssel:
+Ha a parancs nem található, telepítsd az **Az.ResourceGraph** modult a saját felhasználói profilodhoz:
 
 ```powershell
-Search-AzGraph -Query "Resources | project name, type, location | limit 10"
+Install-Module -Name Az.ResourceGraph -Scope CurrentUser
 ```
 
-Ezután kérj segítséget egy **generatív AI-eszköztől** olyan Resource Graph lekérdezés elkészítéséhez, amely:
+Ezután töltsd be a modult:
+
+```powershell
+Import-Module Az.ResourceGraph
+```
+
+Végül ellenőrizd újra, hogy a parancs elérhető-e:
+
+```powershell
+Get-Command Search-AzGraph
+```
+
+Ezután kérj segítséget egy **generatív AI-eszköztől** olyan `Search-AzGraph` lekérdezés elkészítéséhez, amely:
 
 - kilistázza az Azure-erőforrásaidat;
 - megjeleníti a `name`, `type`, `resourceGroup` és `location` adatokat;
 - az eredményt erőforrástípus szerint rendezi.
 
-Ezután módosítsd vagy egészítsd ki a lekérdezést úgy, hogy **erőforrástípusonként számolja össze** az erőforrásokat, és a legtöbb előfordulástól a legkevesebb felé rendezze az eredményt.
+Futtasd és ellenőrizd a lekérdezést. Ezután módosítsd vagy egészítsd ki AI segítségével úgy, hogy **erőforrástípusonként számolja össze** az erőforrásokat, és a legtöbb előfordulástól a legkevesebb felé rendezze az eredményt.
 
 ::: {.callout-note title="Miért érdekes?"}
 Bár csak egy virtuális gépet hoztál létre, az Azure-ban ehhez több kapcsolódó erőforrás is tartozhat, például lemez, hálózati interfész, virtuális hálózat vagy nyilvános IP-cím. A Resource Graph segítségével ezeket egyetlen lekérdezésben áttekintheted.
-:::
-
-::: {.callout-note title="Ha a Search-AzGraph nem érhető el"}
-A cmdlet az **Az.ResourceGraph** modul része. Ha a modul nincs telepítve vagy a parancs nem érhető el, jelezd az oktatónak.
 :::
 
 <div class="answer-box">
@@ -767,11 +761,9 @@ function runSyntaxRules(q) {
 
   switch(q) {
     case "Q01": {
-      const command = String(v.Q01_COMMAND || "").replace(/[\r\n`]+/g, " ");
       if (String(v.Q01_VMNAME || "").trim().length < 2) return result("needs_revision", "Add meg a saját virtuális géped tényleges nevét.");
-      if (!/\bStart-AzVM\b/i.test(command)) return result("needs_revision", "A megadott parancsban nem találom a virtuális gép indítására szolgáló Azure PowerShell cmdletet.");
-      if (!/-ResourceGroupName\s+\S+/i.test(command) || !/-Name\s+\S+/i.test(command)) return result("needs_revision", "Az indítási parancsban add meg az erőforráscsoport és a virtuális gép nevét is.");
-      if (!/^VM running$/i.test(String(v.Q01_STATE || "").trim())) return result("needs_revision", "Az indítás után ellenőrizd újra az állapotot, és csak Running állapotban folytasd.");
+      if (String(v.Q01_START || "").trim().length < 5 || String(v.Q01_END || "").trim().length < 5) return result("needs_revision", "Add meg a Start-AzVM kimenetéből a StartTime és EndTime értékeket.");
+      if (!/^(Succeeded|Failed|Egyéb)$/i.test(String(v.Q01_STATUS || "").trim())) return result("needs_revision", "Válaszd ki a Start-AzVM kimenetében kapott Status értéket.");
       break;
     }
     case "Q02": {
@@ -793,20 +785,28 @@ function runSyntaxRules(q) {
       break;
     }
     case "Q04": {
-      const t = Number(String(v.Q04_THRESHOLD || "").replace(',', '.'));
-      const cpu = Number(String(v.Q04_CPU || "").replace(',', '.'));
+      const okT = Number(String(v.Q04_OK_THRESHOLD || "").replace(',', '.'));
+      const okCpu = Number(String(v.Q04_OK_CPU || "").replace(',', '.'));
+      const highT = Number(String(v.Q04_HIGH_THRESHOLD || "").replace(',', '.'));
+      const highCpu = Number(String(v.Q04_HIGH_CPU || "").replace(',', '.'));
       if (String(v.Q04_PROMPT || "").trim().length < 20) return result("needs_revision", "Másold be az AI-nak adott, érdemi promptodat.");
-      if (!Number.isFinite(t) || t < 30 || t > 80) return result("needs_revision", "A kezdeti threshold 30 és 80% közötti érték legyen.");
-      if (!Number.isFinite(cpu) || cpu < 0 || cpu > 100) return result("needs_revision", "A mért CPU-terhelést 0 és 100 közötti értékként add meg.");
-      if (!/^Igen$/i.test(String(v.Q04_BOTH || "").trim())) return result("needs_revision", "Módosítsd a thresholdot, és próbáld ki a script CPU OK és HIGH CPU ágát is.");
+      if (![okT, okCpu, highT, highCpu].every(Number.isFinite)) return result("needs_revision", "Mindkét futtatáshoz add meg a Threshold és a mért CPU-terhelés számszerű értékét.");
+      if ([okT, okCpu, highT, highCpu].some(x => x < 0 || x > 100)) return result("needs_revision", "A Threshold és CPU-terhelés értékek 0 és 100 közé essenek.");
+      if (!(okCpu <= okT)) return result("needs_revision", "A CPU OK futtatásnál a mért CPU-terhelés ne legyen nagyobb a Threshold értéknél.");
+      if (!(highCpu > highT)) return result("needs_revision", "A HIGH CPU futtatásnál a mért CPU-terhelés legyen nagyobb a Threshold értéknél.");
       break;
     }
     case "Q05": {
       const query = String(v.Q05_QUERY || "");
       if (query.trim().length < 25 || !/Resources/i.test(query)) return result("needs_revision", "Másold be a tényleges Azure Resource Graph queryt.");
-      if (!/microsoft\.compute\/virtualmachines/i.test(query)) return result("needs_revision", "A query a virtuális gép erőforrásokra szűrjön.");
-      if (!/resourceGroup/i.test(query) || !/location/i.test(query) || !/vmSize|hardwareProfile/i.test(query)) return result("needs_revision", "A lekérdezés jelenítse meg a resource group, location és VM size adatokat is.");
-      if (String(v.Q05_VMNAME || "").trim().length < 2 || String(v.Q05_RG || "").trim().length < 2 || String(v.Q05_LOCATION || "").trim().length < 2 || String(v.Q05_SIZE || "").trim().length < 2) return result("needs_revision", "Töltsd ki a saját VM-ed lekérdezésből kapott adatait.");
+      if (!/name/i.test(query) || !/type/i.test(query) || !/resourceGroup/i.test(query) || !/location/i.test(query)) return result("needs_revision", "A listázó lekérdezés jelenítse meg a name, type, resourceGroup és location adatokat.");
+      const total = Number(String(v.Q05_TOTAL || "").trim());
+      const types = Number(String(v.Q05_TYPES || "").trim());
+      const topcount = Number(String(v.Q05_TOPCOUNT || "").trim());
+      if (!Number.isInteger(total) || total < 1) return result("needs_revision", "Az összes erőforrás száma pozitív egész szám legyen.");
+      if (!Number.isInteger(types) || types < 1 || types > total) return result("needs_revision", "A különböző erőforrástípusok száma legyen pozitív egész, és ne legyen több az összes erőforrás számánál.");
+      if (String(v.Q05_TOPTYPE || "").trim().length < 3) return result("needs_revision", "Add meg, melyik erőforrástípusból találtad a legtöbbet.");
+      if (!Number.isInteger(topcount) || topcount < 1 || topcount > total) return result("needs_revision", "Add meg a leggyakoribb erőforrástípus darabszámát.");
       break;
     }
   }

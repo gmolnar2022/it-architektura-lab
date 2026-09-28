@@ -327,8 +327,6 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <h2 class="anchored" data-anchor-id="feladat-a-virtuális-gép-elindítása-és-az-indítás-ellenőrzése">1. feladat – A virtuális gép elindítása és az indítás ellenőrzése</h2>
 <p>Nyisd meg a <strong>Visual Studio Code</strong> alkalmazást, majd egy <strong>PowerShell terminált</strong>. Jelentkezz be az Azure-ba, és válaszd ki a gyakorlaton használt előfizetést.</p>
 <p>A korábban tanult <code>Start-AzVM</code> paranccsal indítsd el a saját virtuális gépedet. A parancsban a <strong>saját erőforráscsoportod és VM-ed nevét</strong> használd.</p>
-<p>Példa a parancs felépítésére:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Start-AzVM <span class="op">-</span>ResourceGroupName win11rg2 <span class="op">-</span>Name pc001</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Vizsgáld meg a parancs kimenetét. Az indítás sikerességét a <code>Status</code> mező jelzi, a <code>StartTime</code> és <code>EndTime</code> pedig az indítási művelet időadatait mutatja.</p>
 <div class="answer-box">
 <p><label for="q01_vmname">A saját virtuális géped neve</label> <input id="q01_vmname" data-answer="Q01_VMNAME" autocomplete="off"> <label for="q01_start">StartTime</label> <input id="q01_start" data-answer="Q01_START" autocomplete="off"> <label for="q01_end">EndTime</label> <input id="q01_end" data-answer="Q01_END" autocomplete="off"> <label for="q01_status">Milyen Status értéket kaptál?</label> <select id="q01_status" data-answer="Q01_STATUS"><option value=""></option><option>Succeeded</option><option>Failed</option><option>Egyéb</option></select></p>
@@ -354,7 +352,7 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 </div>
 <div class="callout-body-container callout-body">
 <p>A nem üres <code>Path</code> értékek szűréséhez ezt a pipeline-elemet használhatod:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Where-Object</span> <span class="op">{</span> <span class="va">$_</span><span class="op">.</span><span class="fu">Path</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Where-Object</span> <span class="op">{</span> <span class="va">$_</span><span class="op">.</span><span class="fu">Path</span> <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Az első 10 találat kiválasztásához a korábban megismert <code>Select-Object</code> parancs <code>-First</code> paraméterét használd.</p>
 </div>
 </div>
@@ -381,12 +379,8 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <section id="feladat-cpu-terhelés-mérése-get-counter-segítségével" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-cpu-terhelés-mérése-get-counter-segítségével">3. feladat – CPU-terhelés mérése <code>Get-Counter</code> segítségével</h2>
 <p>A <code>Get-Counter</code> PowerShell-paranccsal a Windows teljesítményszámlálóit kérdezheted le. Most a processzor kihasználtságát fogod megmérni.</p>
-<p>Először keresd meg a processzorhoz kapcsolódó számlálócsoportokat:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Counter</span> <span class="op">-</span>ListSet <span class="op">*</span> <span class="op">|</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Where-Object</span> <span class="op">{</span> <span class="va">$_</span><span class="op">.</span><span class="fu">CounterSetName</span> <span class="op">-match</span> <span class="st">'processzor|processor'</span> <span class="op">}</span> <span class="op">|</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Select-Object</span> CounterSetName</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A megfelelő <strong>Processzor / Processor</strong> csoport számlálóit a <code>Get-Counter -ListSet</code> segítségével tudod megjeleníteni. Magyar Windows esetén például:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">(</span><span class="fu">Get-Counter</span> <span class="op">-</span>ListSet <span class="st">'Processzor'</span><span class="op">).</span><span class="fu">Paths</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A processzorhoz tartozó számlálócsoport neve magyar Windows esetén <strong><code>Processzor</code></strong>, angol Windows esetén <strong><code>Processor</code></strong>. Listázd ki a csoporthoz tartozó számlálókat. Magyar Windows esetén például:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">(</span><span class="fu">Get-Counter</span> <span class="op">-</span>ListSet <span class="st">'Processzor'</span><span class="op">).</span><span class="fu">Paths</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Keresd meg a CPU kihasználtságát (%) mutató számlálót. A listában a számláló útvonalában <code>(*)</code> szerepelhet. A teljes rendszer összesített CPU-terhelésének méréséhez a <code>*</code> helyett használd a <strong><code>_Total</code></strong> példányt.</p>
 <p>Készíts <strong>5 mérést 2 másodperces időközzel</strong>.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Segítség">
@@ -427,7 +421,7 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <li>az üzenet tartalmazza a mért CPU-terhelést és a megadott küszöbértéket is.</li>
 </ul>
 <p>A scriptet például így futtathatod:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\cpu-monitor<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>Threshold <span class="dv">50</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\cpu-monitor<span class="op">.</span><span class="fu">ps1</span> <span class="op">-</span>Threshold <span class="dv">50</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-important callout-titled" title="Teszteld mindkét ágat!">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -464,16 +458,20 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <h2 class="anchored" data-anchor-id="feladat-azure-erőforrások-vizsgálata-resource-graph-segítségével">5. feladat – Azure-erőforrások vizsgálata Resource Graph segítségével</h2>
 <p>Térj vissza a <strong>VS Code PowerShell termináljához</strong>. Az Azure Resource Graph segítségével az előfizetésed erőforrásait lekérdezhető adatokként vizsgálhatod.</p>
 <p>Ellenőrizd, hogy a <code>Search-AzGraph</code> cmdlet elérhető-e:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Command</span> Search-AzGraph</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Ha a parancs elérhető, próbáld ki egy egyszerű lekérdezéssel:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Search-AzGraph <span class="op">-</span>Query <span class="st">"Resources | project name, type, location | limit 10"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Ezután kérj segítséget egy <strong>generatív AI-eszköztől</strong> olyan Resource Graph lekérdezés elkészítéséhez, amely:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Command</span> Search-AzGraph</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ha a parancs nem található, telepítsd az <strong>Az.ResourceGraph</strong> modult a saját felhasználói profilodhoz:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Install-Module <span class="op">-</span>Name Az<span class="op">.</span><span class="fu">ResourceGraph</span> <span class="op">-</span>Scope CurrentUser</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ezután töltsd be a modult:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Import-Module</span> Az<span class="op">.</span><span class="fu">ResourceGraph</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Végül ellenőrizd újra, hogy a parancs elérhető-e:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Command</span> Search-AzGraph</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ezután kérj segítséget egy <strong>generatív AI-eszköztől</strong> olyan <code>Search-AzGraph</code> lekérdezés elkészítéséhez, amely:</p>
 <ul>
 <li>kilistázza az Azure-erőforrásaidat;</li>
 <li>megjeleníti a <code>name</code>, <code>type</code>, <code>resourceGroup</code> és <code>location</code> adatokat;</li>
 <li>az eredményt erőforrástípus szerint rendezi.</li>
 </ul>
-<p>Ezután módosítsd vagy egészítsd ki a lekérdezést úgy, hogy <strong>erőforrástípusonként számolja össze</strong> az erőforrásokat, és a legtöbb előfordulástól a legkevesebb felé rendezze az eredményt.</p>
+<p>Futtasd és ellenőrizd a lekérdezést. Ezután módosítsd vagy egészítsd ki AI segítségével úgy, hogy <strong>erőforrástípusonként számolja össze</strong> az erőforrásokat, és a legtöbb előfordulástól a legkevesebb felé rendezze az eredményt.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Miért érdekes?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -485,19 +483,6 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 </div>
 <div class="callout-body-container callout-body">
 <p>Bár csak egy virtuális gépet hoztál létre, az Azure-ban ehhez több kapcsolódó erőforrás is tartozhat, például lemez, hálózati interfész, virtuális hálózat vagy nyilvános IP-cím. A Resource Graph segítségével ezeket egyetlen lekérdezésben áttekintheted.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Ha a Search-AzGraph nem érhető el">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Ha a Search-AzGraph nem érhető el
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>A cmdlet az <strong>Az.ResourceGraph</strong> modul része. Ha a modul nincs telepítve vagy a parancs nem érhető el, jelezd az oktatónak.</p>
 </div>
 </div>
 <div class="answer-box">
@@ -988,11 +973,9 @@ function runSyntaxRules(q) {
 
   switch(q) {
     case "Q01": {
-      const command = String(v.Q01_COMMAND || "").replace(/[\r\n`]+/g, " ");
       if (String(v.Q01_VMNAME || "").trim().length < 2) return result("needs_revision", "Add meg a saját virtuális géped tényleges nevét.");
-      if (!/\bStart-AzVM\b/i.test(command)) return result("needs_revision", "A megadott parancsban nem találom a virtuális gép indítására szolgáló Azure PowerShell cmdletet.");
-      if (!/-ResourceGroupName\s+\S+/i.test(command) || !/-Name\s+\S+/i.test(command)) return result("needs_revision", "Az indítási parancsban add meg az erőforráscsoport és a virtuális gép nevét is.");
-      if (!/^VM running$/i.test(String(v.Q01_STATE || "").trim())) return result("needs_revision", "Az indítás után ellenőrizd újra az állapotot, és csak Running állapotban folytasd.");
+      if (String(v.Q01_START || "").trim().length < 5 || String(v.Q01_END || "").trim().length < 5) return result("needs_revision", "Add meg a Start-AzVM kimenetéből a StartTime és EndTime értékeket.");
+      if (!/^(Succeeded|Failed|Egyéb)$/i.test(String(v.Q01_STATUS || "").trim())) return result("needs_revision", "Válaszd ki a Start-AzVM kimenetében kapott Status értéket.");
       break;
     }
     case "Q02": {
@@ -1014,20 +997,28 @@ function runSyntaxRules(q) {
       break;
     }
     case "Q04": {
-      const t = Number(String(v.Q04_THRESHOLD || "").replace(',', '.'));
-      const cpu = Number(String(v.Q04_CPU || "").replace(',', '.'));
+      const okT = Number(String(v.Q04_OK_THRESHOLD || "").replace(',', '.'));
+      const okCpu = Number(String(v.Q04_OK_CPU || "").replace(',', '.'));
+      const highT = Number(String(v.Q04_HIGH_THRESHOLD || "").replace(',', '.'));
+      const highCpu = Number(String(v.Q04_HIGH_CPU || "").replace(',', '.'));
       if (String(v.Q04_PROMPT || "").trim().length < 20) return result("needs_revision", "Másold be az AI-nak adott, érdemi promptodat.");
-      if (!Number.isFinite(t) || t < 30 || t > 80) return result("needs_revision", "A kezdeti threshold 30 és 80% közötti érték legyen.");
-      if (!Number.isFinite(cpu) || cpu < 0 || cpu > 100) return result("needs_revision", "A mért CPU-terhelést 0 és 100 közötti értékként add meg.");
-      if (!/^Igen$/i.test(String(v.Q04_BOTH || "").trim())) return result("needs_revision", "Módosítsd a thresholdot, és próbáld ki a script CPU OK és HIGH CPU ágát is.");
+      if (![okT, okCpu, highT, highCpu].every(Number.isFinite)) return result("needs_revision", "Mindkét futtatáshoz add meg a Threshold és a mért CPU-terhelés számszerű értékét.");
+      if ([okT, okCpu, highT, highCpu].some(x => x < 0 || x > 100)) return result("needs_revision", "A Threshold és CPU-terhelés értékek 0 és 100 közé essenek.");
+      if (!(okCpu <= okT)) return result("needs_revision", "A CPU OK futtatásnál a mért CPU-terhelés ne legyen nagyobb a Threshold értéknél.");
+      if (!(highCpu > highT)) return result("needs_revision", "A HIGH CPU futtatásnál a mért CPU-terhelés legyen nagyobb a Threshold értéknél.");
       break;
     }
     case "Q05": {
       const query = String(v.Q05_QUERY || "");
       if (query.trim().length < 25 || !/Resources/i.test(query)) return result("needs_revision", "Másold be a tényleges Azure Resource Graph queryt.");
-      if (!/microsoft\.compute\/virtualmachines/i.test(query)) return result("needs_revision", "A query a virtuális gép erőforrásokra szűrjön.");
-      if (!/resourceGroup/i.test(query) || !/location/i.test(query) || !/vmSize|hardwareProfile/i.test(query)) return result("needs_revision", "A lekérdezés jelenítse meg a resource group, location és VM size adatokat is.");
-      if (String(v.Q05_VMNAME || "").trim().length < 2 || String(v.Q05_RG || "").trim().length < 2 || String(v.Q05_LOCATION || "").trim().length < 2 || String(v.Q05_SIZE || "").trim().length < 2) return result("needs_revision", "Töltsd ki a saját VM-ed lekérdezésből kapott adatait.");
+      if (!/name/i.test(query) || !/type/i.test(query) || !/resourceGroup/i.test(query) || !/location/i.test(query)) return result("needs_revision", "A listázó lekérdezés jelenítse meg a name, type, resourceGroup és location adatokat.");
+      const total = Number(String(v.Q05_TOTAL || "").trim());
+      const types = Number(String(v.Q05_TYPES || "").trim());
+      const topcount = Number(String(v.Q05_TOPCOUNT || "").trim());
+      if (!Number.isInteger(total) || total < 1) return result("needs_revision", "Az összes erőforrás száma pozitív egész szám legyen.");
+      if (!Number.isInteger(types) || types < 1 || types > total) return result("needs_revision", "A különböző erőforrástípusok száma legyen pozitív egész, és ne legyen több az összes erőforrás számánál.");
+      if (String(v.Q05_TOPTYPE || "").trim().length < 3) return result("needs_revision", "Add meg, melyik erőforrástípusból találtad a legtöbbet.");
+      if (!Number.isInteger(topcount) || topcount < 1 || topcount > total) return result("needs_revision", "Add meg a leggyakoribb erőforrástípus darabszámát.");
       break;
     }
   }

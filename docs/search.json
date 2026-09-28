@@ -42,6 +42,41 @@
     "text": "5. feladat – Azure-erőforrások vizsgálata Resource Graph segítségével\nTérj vissza a VS Code PowerShell termináljához. Az Azure Resource Graph segítségével az előfizetésed erőforrásait lekérdezhető adatokként vizsgálhatod.\nEllenőrizd, hogy a Search-AzGraph cmdlet elérhető-e:\nGet-Command Search-AzGraph\n\n\n\n\n\n\nTipHa a Search-AzGraph parancs nem érhető el\n\n\n\nTelepítsd az Az.ResourceGraph modult a saját felhasználói profilodhoz:\nInstall-Module -Name Az.ResourceGraph -Scope CurrentUser\nEzután töltsd be a modult:\nImport-Module Az.ResourceGraph\nVégül ellenőrizd újra, hogy a parancs elérhető-e:\nGet-Command Search-AzGraph\n\n\nEzután kérj segítséget egy generatív AI-eszköztől olyan Search-AzGraph lekérdezés elkészítéséhez, amely:\n\nkilistázza az Azure-erőforrásaidat;\nmegjeleníti a name, type, resourceGroup és location adatokat;\naz eredményt erőforrástípus szerint rendezi.\n\nFuttasd és ellenőrizd a lekérdezést. Ezután módosítsd vagy egészítsd ki AI segítségével úgy, hogy erőforrástípusonként számolja össze az erőforrásokat, és a legtöbb előfordulástól a legkevesebb felé rendezze az eredményt.\n\n\n\n\n\n\nNoteMiért érdekes?\n\n\n\nBár csak egy virtuális gépet hoztál létre, az Azure-ban ehhez több kapcsolódó erőforrás is tartozhat, például lemez, hálózati interfész, virtuális hálózat vagy nyilvános IP-cím. A Resource Graph segítségével ezeket egyetlen lekérdezésben áttekintheted.\n\n\n\nAz AI segítségével elkészített, erőforrásokat listázó Resource Graph query\n\nHány Azure-erőforrást találtál összesen?  Hány különböző erőforrástípust találtál?  Melyik erőforrástípusból találtad a legtöbbet?  Hány ilyen erőforrás található?"
   },
   {
+    "objectID": "weeks/week03/index.html#feladat-az-rdp-kapcsolat-ellenőrzése",
+    "href": "weeks/week03/index.html#feladat-az-rdp-kapcsolat-ellenőrzése",
+    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
+    "section": "6. feladat – Az RDP-kapcsolat ellenőrzése",
+    "text": "6. feladat – Az RDP-kapcsolat ellenőrzése\nMielőtt távoli asztallal csatlakozol a virtuális géphez, ellenőrizd a VS Code PowerShell termináljából, hogy a VM RDP-szolgáltatása hálózaton keresztül elérhető-e.\nKeresd meg a virtuális géped nyilvános IP-címét a korábban megismert Azure PowerShell-parancsok segítségével, majd ellenőrizd a 3389-es TCP-portot:\nTest-NetConnection &lt;PUBLIC-IP&gt; -Port 3389\nA &lt;PUBLIC-IP&gt; helyére a saját virtuális géped nyilvános IP-címét írd. A kimenetben keresd meg a RemoteAddress és TcpTestSucceeded értékeket.\n\nRemoteAddress  TcpTestSucceeded  – válassz – True False \n\n\n\n\n\n\n\nWarningHa a TcpTestSucceeded értéke False\n\n\n\nEllenőrizd, hogy a virtuális gép fut-e, helyes nyilvános IP-címet adtál-e meg, illetve hogy az Azure hálózati beállításai engedélyezik-e az RDP-kapcsolatot a TCP/3389 porton.\n\n\nHa a TcpTestSucceeded értéke True, indítsd el a Távoli asztali kapcsolat (Remote Desktop Connection) alkalmazást, és csatlakozz a virtuális gépedhez.\n\n\n\n\n\n\nImportantA következő feladatok helye\n\n\n\nA 7–10. feladatot már az RDP-vel elért virtuális gépen, a Windows PowerShellben hajtsd végre."
+  },
+  {
+    "objectID": "weeks/week03/index.html#feladat-a-guest-os-adatainak-vizsgálata",
+    "href": "weeks/week03/index.html#feladat-a-guest-os-adatainak-vizsgálata",
+    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
+    "section": "7. feladat – A Guest OS adatainak vizsgálata",
+    "text": "7. feladat – A Guest OS adatainak vizsgálata\nNyisd meg a Windows PowerShellt a távoli gépen, majd kérdezd le a rendszer alapvető adatait:\nGet-ComputerInfo\nA parancs sok adatot jelenít meg. Pipeline és Select-Object segítségével szűkítsd a kimenetet az alábbi tulajdonságokra:\n\nCsName\nWindowsProductName\nWindowsVersion\nOsArchitecture\n\n\nCsName  WindowsProductName  WindowsVersion  OsArchitecture"
+  },
+  {
+    "objectID": "weeks/week03/index.html#feladat-mit-lát-a-guest-os-a-processzorból",
+    "href": "weeks/week03/index.html#feladat-mit-lát-a-guest-os-a-processzorból",
+    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
+    "section": "8. feladat – Mit lát a Guest OS a processzorból?",
+    "text": "8. feladat – Mit lát a Guest OS a processzorból?\nVizsgáld meg, milyen processzort és hány feldolgozási egységet lát a Windows:\nGet-CimInstance Win32_Processor |\n    Select-Object Name, NumberOfCores, NumberOfLogicalProcessors\n\nCPU neve  NumberOfCores  NumberOfLogicalProcessors  Melyik Azure VM-erőforrással áll legközvetlenebb kapcsolatban a Guest OS által látott logikai processzorok száma?  – válassz – RAM vCPU Virtual Disk vNIC"
+  },
+  {
+    "objectID": "weeks/week03/index.html#feladat-folyamatok-és-szálak",
+    "href": "weeks/week03/index.html#feladat-folyamatok-és-szálak",
+    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
+    "section": "9. feladat – Folyamatok és szálak",
+    "text": "9. feladat – Folyamatok és szálak\nAz előadáson láttuk, hogy egy futó processz egy vagy több szálat (threadet) tartalmazhat. Listázd a folyamatokat:\nGet-Process\nVálassz egy könnyen azonosítható folyamatot, majd mentsd el egy változóba. Például az explorer folyamat esetén:\n$p = Get-Process -Name explorer\nVizsgáld meg a folyamathoz tartozó szálakat:\n$p.Threads\nA szálak számát így kérdezheted le:\n$p.Threads.Count\n\nA választott process neve  PID  A process szálainak száma"
+  },
+  {
+    "objectID": "weeks/week03/index.html#feladat-windows-szolgáltatások-vizsgálata",
+    "href": "weeks/week03/index.html#feladat-windows-szolgáltatások-vizsgálata",
+    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
+    "section": "10. feladat – Windows-szolgáltatások vizsgálata",
+    "text": "10. feladat – Windows-szolgáltatások vizsgálata\nA Windows számos háttérben működő szolgáltatást (service) használ. Listázd a szolgáltatásokat:\nGet-Service\nPipeline és Where-Object segítségével jelenítsd meg csak a futó (Running) szolgáltatásokat. A szűréshez használd az alábbi feltételt:\nWhere-Object { $_.Status -eq 'Running' }\nVálassz ki a listából egy olyan szolgáltatást, amelynek a szerepét nem ismered. Szükség esetén generatív AI segítségével derítsd ki, mire szolgál, majd saját szavaiddal, röviden foglald össze a szerepét.\n\nName  DisplayName  Mire szolgál? (1–2 mondat)"
+  },
+  {
     "objectID": "weeks/week03/index.html#mentés-és-beadás",
     "href": "weeks/week03/index.html#mentés-és-beadás",
     "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
@@ -306,40 +341,5 @@
     "title": "2. hét – Azure VM menedzsment és PowerShell",
     "section": "Mentés és beadás",
     "text": "Mentés és beadás\n\n\n📤 Beadás\n\n\n💾 JSON export\n\n\nHelyi adatok törlése\n\n\n\n\nBeadási határidő: 2026. október 1. 11:40\n\n\n\nBeadás előtti összesítés\n\n\n\n\n\n\nVissza a javításhoz\n\n\nBeadás megerősítése\n\n\n\n\n\n\n\n\n\n\n\n\nNoteAktivitási adatok\n\n\n\nA munkafüzet kísérleti jelleggel becsült aktív időt és feladatonkénti szerkesztési eseményeket is rögzíthet. Ez nem pontos munkaidőmérés: a másik böngészőlapon, VS Code-ban, RDP-ben vagy Skillable-ben végzett munka nem feltétlenül számít aktív időnek.\n\n\n\nAktivitás ezen a gépen\n\nIdőmérés: – Eseménykövetés: – Becsült aktív idő: 0:00 Szerkesztési események: 0 Első megnyitás: – Utolsó aktivitás: –"
-  },
-  {
-    "objectID": "weeks/week03/index.html#feladat-az-rdp-kapcsolat-ellenőrzése",
-    "href": "weeks/week03/index.html#feladat-az-rdp-kapcsolat-ellenőrzése",
-    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
-    "section": "6. feladat – Az RDP-kapcsolat ellenőrzése",
-    "text": "6. feladat – Az RDP-kapcsolat ellenőrzése\nMielőtt távoli asztallal csatlakozol a virtuális géphez, ellenőrizd a VS Code PowerShell termináljából, hogy a VM RDP-szolgáltatása hálózaton keresztül elérhető-e.\nKeresd meg a virtuális géped nyilvános IP-címét a korábban megismert Azure PowerShell-parancsok segítségével, majd ellenőrizd a 3389-es TCP-portot:\nTest-NetConnection &lt;PUBLIC-IP&gt; -Port 3389\nA &lt;PUBLIC-IP&gt; helyére a saját virtuális géped nyilvános IP-címét írd. A kimenetben keresd meg a RemoteAddress és TcpTestSucceeded értékeket.\n\nRemoteAddress  TcpTestSucceeded  – válassz – True False \n\n\n\n\n\n\n\nWarningHa a TcpTestSucceeded értéke False\n\n\n\nEllenőrizd, hogy a virtuális gép fut-e, helyes nyilvános IP-címet adtál-e meg, illetve hogy az Azure hálózati beállításai engedélyezik-e az RDP-kapcsolatot a TCP/3389 porton.\n\n\nHa a TcpTestSucceeded értéke True, indítsd el a Távoli asztali kapcsolat (Remote Desktop Connection) alkalmazást, és csatlakozz a virtuális gépedhez.\n\n\n\n\n\n\nImportantA következő feladatok helye\n\n\n\nA 7–10. feladatot már az RDP-vel elért virtuális gépen, a Windows PowerShellben hajtsd végre."
-  },
-  {
-    "objectID": "weeks/week03/index.html#feladat-a-guest-os-adatainak-vizsgálata",
-    "href": "weeks/week03/index.html#feladat-a-guest-os-adatainak-vizsgálata",
-    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
-    "section": "7. feladat – A Guest OS adatainak vizsgálata",
-    "text": "7. feladat – A Guest OS adatainak vizsgálata\nNyisd meg a Windows PowerShellt a távoli gépen, majd kérdezd le a rendszer alapvető adatait:\nGet-ComputerInfo\nA parancs sok adatot jelenít meg. Pipeline és Select-Object segítségével szűkítsd a kimenetet az alábbi tulajdonságokra:\n\nCsName\nWindowsProductName\nWindowsVersion\nOsArchitecture\n\n\nCsName  WindowsProductName  WindowsVersion  OsArchitecture"
-  },
-  {
-    "objectID": "weeks/week03/index.html#feladat-mit-lát-a-guest-os-a-processzorból",
-    "href": "weeks/week03/index.html#feladat-mit-lát-a-guest-os-a-processzorból",
-    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
-    "section": "8. feladat – Mit lát a Guest OS a processzorból?",
-    "text": "8. feladat – Mit lát a Guest OS a processzorból?\nVizsgáld meg, milyen processzort és hány feldolgozási egységet lát a Windows:\nGet-CimInstance Win32_Processor |\n    Select-Object Name, NumberOfCores, NumberOfLogicalProcessors\n\nCPU neve  NumberOfCores  NumberOfLogicalProcessors  Melyik Azure VM-erőforrással áll legközvetlenebb kapcsolatban a Guest OS által látott logikai processzorok száma?  – válassz – RAM vCPU Virtual Disk vNIC"
-  },
-  {
-    "objectID": "weeks/week03/index.html#feladat-folyamatok-és-szálak",
-    "href": "weeks/week03/index.html#feladat-folyamatok-és-szálak",
-    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
-    "section": "9. feladat – Folyamatok és szálak",
-    "text": "9. feladat – Folyamatok és szálak\nAz előadáson láttuk, hogy egy futó processz egy vagy több szálat (threadet) tartalmazhat. Listázd a folyamatokat:\nGet-Process\nVálassz egy könnyen azonosítható folyamatot, majd mentsd el egy változóba. Például az explorer folyamat esetén:\n$p = Get-Process -Name explorer\nVizsgáld meg a folyamathoz tartozó szálakat:\n$p.Threads\nA szálak számát így kérdezheted le:\n$p.Threads.Count\n\nA választott process neve  PID  A process szálainak száma"
-  },
-  {
-    "objectID": "weeks/week03/index.html#feladat-windows-szolgáltatások-vizsgálata",
-    "href": "weeks/week03/index.html#feladat-windows-szolgáltatások-vizsgálata",
-    "title": "3. hét – Folyamatok, teljesítmény és Azure monitoring",
-    "section": "10. feladat – Windows-szolgáltatások vizsgálata",
-    "text": "10. feladat – Windows-szolgáltatások vizsgálata\nA Windows számos háttérben működő szolgáltatást (service) használ. Listázd a szolgáltatásokat:\nGet-Service\nPipeline és Where-Object segítségével jelenítsd meg csak a futó (Running) szolgáltatásokat. A szűréshez használd az alábbi feltételt:\nWhere-Object { $_.Status -eq 'Running' }\nVálassz ki a listából egy olyan szolgáltatást, amelynek a szerepét nem ismered. Szükség esetén generatív AI segítségével derítsd ki, mire szolgál, majd saját szavaiddal, röviden foglald össze a szerepét.\n\nName  DisplayName  Mire szolgál? (1–2 mondat)"
   }
 ]

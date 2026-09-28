@@ -27,5 +27,11 @@ Az egyes heti oldalak **interaktív munkafüzetként** működnek:
 
 **Skillable → Azure VM → VS Code → Azure PowerShell → RDP → Windows PowerShell → Pipeline → Változók → Script**
 
+
+### [3. hét – Folyamatok, teljesítmény és Azure monitoring](weeks/week03/)
+
+**VS Code → Azure PowerShell → Guest OS → Get-Counter → AI → Resource Graph → Azure Monitor**
+
+
 A további hetek folyamatosan kerülnek hozzáadásra.
 

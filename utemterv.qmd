@@ -56,6 +56,12 @@ A projektfeladat kiadása a **8. gyakorlaton** történik. A beadási határidő
 
 A projektfeladat a féléves eredmény **20%-át** adja.
 
+::: {.callout-note title="Csapatmunka"}
+A projektfeladat **3 fős csapatokra** van tervezve. Szükség esetén a projekt **2 fős csapatban is teljesíthető**.
+
+A csapattagoknak nem szükséges ugyanahhoz a gyakorlati csoporthoz tartozniuk, a csapat **különböző gyakorlati csoportok hallgatóiból is összeállítható**.
+:::
+
 ### Félévzáró ZH
 
 A félévzáró ZH a **12. gyakorlaton** lesz.
@@ -93,7 +99,12 @@ A félév során kétféle módon szerezhető bónusz:
 A két bónuszforrásból megszerzett bónuszok **együttesen legfeljebb 10%-kal** növelhetik a féléves eredményt.
 :::
 
-## Egyéb tudnivalók
+## A tárgy teljesítésének feltételei
 
-- **Megajánlott jegy:** legalább **77%-os** teljesítménytől adható.
-- **Vizsgára bocsátás feltétele:** legalább **51%-os** teljesítmény.
+::: {.callout-important title="Vizsgára bocsátás"}
+A vizsgára bocsátás feltétele legalább **51%-os féléves teljesítmény**.
+:::
+
+::: {.callout-tip title="Megajánlott jegy"}
+Legalább **77%-os féléves teljesítmény** esetén **megajánlott jegy adható**.
+:::

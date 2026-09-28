@@ -277,7 +277,7 @@
     "href": "utemterv.html#féléves-értékelés",
     "title": "Féléves ütemterv és értékelés",
     "section": "Féléves értékelés",
-    "text": "Féléves értékelés\n\n\n\nÉrtékelési elem\nSúly\n\n\n\n\nZH1\n15%\n\n\nZH2\n15%\n\n\nEgyéni házi feladat\n10%\n\n\nProjektfeladat\n20%\n\n\nFélévzáró ZH\n40%\n\n\nÖsszesen\n100%\n\n\n\n\nZH1 és ZH2\nA két rövid ZH az előadások elméleti anyagának számonkérésére szolgál.\n\nZH1: az 5. gyakorlat elején, az 1–4. előadások anyagából, 20 perc.\nZH2: a 10. gyakorlat elején, az 5–9. előadások anyagából, 20 perc.\n\nA két ZH együttesen a féléves eredmény 30%-át adja.\n\n\nEgyéni házi feladat\nAz egyénileg megoldandó házi feladat kiadása a 6. gyakorlaton történik. A beadási határidő a kiadástól számított 1 hét.\nA házi feladat a féléves eredmény 10%-át adja.\n\n\nProjektfeladat\nA projektfeladat kiadása a 8. gyakorlaton történik. A beadási határidő a 12. heti gyakorlat.\nA projektfeladat a féléves eredmény 20%-át adja.\n\n\nFélévzáró ZH\nA félévzáró ZH a 12. gyakorlaton lesz.\n\nIdőtartam: 90 perc\nTípus: gyakorlati, gépes feladatsor\nTartalom: Azure- és AWS-feladatok\n\nA félévzáró ZH a féléves eredmény 40%-át adja."
+    "text": "Féléves értékelés\n\n\n\nÉrtékelési elem\nSúly\n\n\n\n\nZH1\n15%\n\n\nZH2\n15%\n\n\nEgyéni házi feladat\n10%\n\n\nProjektfeladat\n20%\n\n\nFélévzáró ZH\n40%\n\n\nÖsszesen\n100%\n\n\n\n\nZH1 és ZH2\nA két rövid ZH az előadások elméleti anyagának számonkérésére szolgál.\n\nZH1: az 5. gyakorlat elején, az 1–4. előadások anyagából, 20 perc.\nZH2: a 10. gyakorlat elején, az 5–9. előadások anyagából, 20 perc.\n\nA két ZH együttesen a féléves eredmény 30%-át adja.\n\n\nEgyéni házi feladat\nAz egyénileg megoldandó házi feladat kiadása a 6. gyakorlaton történik. A beadási határidő a kiadástól számított 1 hét.\nA házi feladat a féléves eredmény 10%-át adja.\n\n\nProjektfeladat\nA projektfeladat kiadása a 8. gyakorlaton történik. A beadási határidő a 12. heti gyakorlat.\nA projektfeladat a féléves eredmény 20%-át adja.\n\n\n\n\n\n\nNoteCsapatmunka\n\n\n\nA projektfeladat 3 fős csapatokra van tervezve. Szükség esetén a projekt 2 fős csapatban is teljesíthető.\nA csapattagoknak nem szükséges ugyanahhoz a gyakorlati csoporthoz tartozniuk, a csapat különböző gyakorlati csoportok hallgatóiból is összeállítható.\n\n\n\n\nFélévzáró ZH\nA félévzáró ZH a 12. gyakorlaton lesz.\n\nIdőtartam: 90 perc\nTípus: gyakorlati, gépes feladatsor\nTartalom: Azure- és AWS-feladatok\n\nA félévzáró ZH a féléves eredmény 40%-át adja."
   },
   {
     "objectID": "utemterv.html#bónuszlehetőségek",
@@ -287,11 +287,11 @@
     "text": "Bónuszlehetőségek\nA félév során kétféle módon szerezhető bónusz:\n\nElőadási Kahoot-helyezés – maximum 10% bónusz.\nA félév során szerzett Kahoot-pontok alapján összesített rangsor készül. Az első 20 helyezett a helyezésével lineárisan csökkenő bónuszt kap:\n\n\n\nHelyezés\nBónusz\nHelyezés\nBónusz\n\n\n\n\n1.\n10,0%\n11.\n5,0%\n\n\n2.\n9,5%\n12.\n4,5%\n\n\n3.\n9,0%\n13.\n4,0%\n\n\n4.\n8,5%\n14.\n3,5%\n\n\n5.\n8,0%\n15.\n3,0%\n\n\n6.\n7,5%\n16.\n2,5%\n\n\n7.\n7,0%\n17.\n2,0%\n\n\n8.\n6,5%\n18.\n1,5%\n\n\n9.\n6,0%\n19.\n1,0%\n\n\n10.\n5,5%\n20.\n0,5%\n\n\n\nÓrai feladatlapok határidőre történő feltöltése – maximum 10% bónusz.\nA bónusz feltétele, hogy az adott feladatlapon legalább 12 feladat helyesen legyen megoldva.\n\n\n\n\n\n\n\nImportantBónuszok felső korlátja\n\n\n\nA két bónuszforrásból megszerzett bónuszok együttesen legfeljebb 10%-kal növelhetik a féléves eredményt."
   },
   {
-    "objectID": "utemterv.html#egyéb-tudnivalók",
-    "href": "utemterv.html#egyéb-tudnivalók",
+    "objectID": "utemterv.html#a-tárgy-teljesítésének-feltételei",
+    "href": "utemterv.html#a-tárgy-teljesítésének-feltételei",
     "title": "Féléves ütemterv és értékelés",
-    "section": "Egyéb tudnivalók",
-    "text": "Egyéb tudnivalók\n\nMegajánlott jegy: legalább 77%-os teljesítménytől adható.\nVizsgára bocsátás feltétele: legalább 51%-os teljesítmény."
+    "section": "A tárgy teljesítésének feltételei",
+    "text": "A tárgy teljesítésének feltételei\n\n\n\n\n\n\nImportantVizsgára bocsátás\n\n\n\nA vizsgára bocsátás feltétele legalább 51%-os féléves teljesítmény.\n\n\n\n\n\n\n\n\nTipMegajánlott jegy\n\n\n\nLegalább 77%-os féléves teljesítmény esetén megajánlott jegy adható."
   },
   {
     "objectID": "weeks/week02/index.html",

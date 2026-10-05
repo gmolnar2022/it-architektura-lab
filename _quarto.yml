@@ -8,6 +8,7 @@ project:
   resources:
     - config/**
     - files/**
+    - assets/**
 
 website:
   title: "IT Architektúra – Gyakorlati munkafüzet"

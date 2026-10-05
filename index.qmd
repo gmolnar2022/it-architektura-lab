@@ -32,6 +32,9 @@ Az egyes heti oldalak **interaktív munkafüzetként** működnek:
 
 **VS Code → Azure PowerShell → Guest OS → Get-Counter → AI → Resource Graph → Azure Monitor**
 
+### [4 hét – Hálózati eszközök Azure-ban](weeks/week04/)
+
+**VS Code → Azure PowerShell → AI → IIS -> Web page -> Dashboard**
 
 A további hetek folyamatosan kerülnek hozzáadásra.
 

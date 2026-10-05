@@ -123,7 +123,7 @@
     "href": "weeks/week04/index.html#feladat-a-virtuális-gép-leállítása",
     "title": "4. hét – Hálózatok és hálózati biztonság az Azure-ban",
     "section": "15. feladat – A virtuális gép leállítása",
-    "text": "15. feladat – A virtuális gép leállítása\nHely: Saját számítógép\nEszköz: VS Code → PowerShell Terminal\nAI: nem szükséges\nAzure PowerShell használatával állítsd le a gyakorlat során használt saját virtuális gépedet. A VM-et úgy állítsd le, hogy az Azure-ban is felszabadításra kerüljön (deallocated állapot). Ezután ellenőrizd a végső állapotot.\n\nVM neve A leállításhoz használt parancs\n\nPowerState"
+    "text": "15. feladat – A virtuális gép leállítása\nHely: Saját számítógép\nEszköz: VS Code → PowerShell Terminal\nAI: nem szükséges\nAzure PowerShell használatával állítsd le a gyakorlat során használt saját virtuális gépedet. A VM-et úgy állítsd le, hogy az Azure-ban is felszabadításra kerüljön (deallocated állapot). Ezután ellenőrizd a végső állapotot.\n\nVM neve A leállításhoz használt parancs\n\nPowerState\n\n\n\n\n\n\n\nTipAjánlott kiegészítő Skillable labor\n\n\n\nA heti gyakorlat kiegészítéseként ajánlott elvégezni a következő Skillable labort:\nAZ-900 – Implement a Network Security Group\nA labor jó lehetőséget ad az ezen a héten megismert Network Security Group (NSG) és hálózati biztonsági szabályok további gyakorlására."
   },
   {
     "objectID": "weeks/week04/index.html#mentés-és-beadás",

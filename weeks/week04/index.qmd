@@ -411,6 +411,14 @@ Azure PowerShell használatával állítsd le a gyakorlat során használt sajá
 <label>PowerState</label><input data-answer="Q15_STATE" placeholder="pl. VM deallocated" autocomplete="off">
 </div>
 
+::: {.callout-tip title="Ajánlott kiegészítő Skillable labor"}
+A heti gyakorlat kiegészítéseként ajánlott elvégezni a következő **Skillable labort**:
+
+**AZ-900 – Implement a Network Security Group**
+
+A labor jó lehetőséget ad az ezen a héten megismert **Network Security Group (NSG)** és hálózati biztonsági szabályok további gyakorlására.
+:::
+
 ## Mentés és beadás
 
 <div class="actions">

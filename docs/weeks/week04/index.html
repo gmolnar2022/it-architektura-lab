@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -363,29 +398,74 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <p><strong>Hely:</strong> Saját számítógép<br>
 <strong>Eszköz:</strong> VS Code → PowerShell Terminal<br>
 <strong>AI:</strong> nem szükséges</p>
-<p>Jelentkezz be az Azure-ba, válaszd ki a megfelelő előfizetést, majd a korábban tanult Azure PowerShell-paranccsal indítsd el a saját virtuális gépedet. Ellenőrizd az állapotát is.</p>
+<p>Jelentkezz be az Azure-ba, majd a korábban tanult Azure PowerShell-parancsokkal indítsd el a saját virtuális gépedet, és ellenőrizd az állapotát. Add meg a ténylegesen használt, megfelelően paraméterezett parancsokat.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Ha a virtuális gép nem indul el">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Ha a virtuális gép nem indul el
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ha a virtuális gép <strong>legalább két próbálkozás után sem indul el</strong>, az Azure Portalon méretezd át egy másik, az adott régióban rendelkezésre álló VM-méretre, majd próbáld meg újra elindítani.</p>
+</div>
+</div>
 <div class="answer-box">
-<p><label>VM neve</label><input data-answer="Q01_VMNAME" autocomplete="off"> <label>PowerState az indítás után</label><input data-answer="Q01_STATE" placeholder="pl. VM running" autocomplete="off"></p>
+<label>Connect-AzAccount parancs</label>
+<textarea class="code-answer" data-answer="Q01_CONNECT"></textarea>
+<label>Start-AzVM parancs</label>
+<textarea class="code-answer" data-answer="Q01_START"></textarea>
+<label>Get-AzVM állapotellenőrző parancs</label>
+<textarea class="code-answer" data-answer="Q01_STATUS"></textarea>
 </div>
 </section>
 <section id="feladat-a-vm-azure-erőforrásadatainak-lekérdezése" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-a-vm-azure-erőforrásadatainak-lekérdezése">2. feladat – A VM Azure-erőforrásadatainak lekérdezése</h2>
 <p><strong>Hely:</strong> Saját számítógép<br>
 <strong>Eszköz:</strong> VS Code → PowerShell Terminal<br>
-<strong>AI:</strong> használható</p>
-<p>Kérj segítséget az AI-tól ahhoz, hogyan kérdezhető le Azure PowerShellből a VM neve, erőforráscsoportja, régiója, mérete és futási állapota. <strong>Ne kérj még dashboardot.</strong> Először próbáld ki a szükséges <code>Get-AzVM</code> parancsokat, és ellenőrizd az eredményt.</p>
+<strong>AI:</strong> nem szükséges</p>
+<p>Kérdezd le Azure PowerShellből a VM nevét, erőforráscsoportját, régióját és futási állapotát.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Támpont">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Támpont
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Indulj ki a <code>Get-AzVM</code> parancsból, és használd a <code>-Status</code> kapcsolót. A VM-et kiválaszthatod közvetlenül például a <code>-Name</code> paraméterrel, vagy használhatsz szűrést (<code>Where-Object</code>). A megjelenített adatokat <code>Select-Object</code> segítségével szűkítheted.</p>
+<p><strong>Hasznos property-k:</strong> <code>Name</code>, <code>ResourceGroupName</code>, <code>Location</code>, <code>PowerState</code></p>
+</div>
+</div>
 <div class="answer-box">
 <label>A használt Azure PowerShell-parancs(ok)</label>
 <textarea class="code-answer" data-answer="Q02_COMMAND"></textarea>
-<p><label>Resource Group</label><input data-answer="Q02_RG" autocomplete="off"> <label>Azure Location</label><input data-answer="Q02_LOCATION" autocomplete="off"> <label>VM size</label><input data-answer="Q02_SIZE" autocomplete="off"> <label>Power State</label><input data-answer="Q02_STATE" autocomplete="off"></p>
+<p><label>Resource Group</label><input data-answer="Q02_RG" autocomplete="off"> <label>Azure Location</label><input data-answer="Q02_LOCATION" autocomplete="off"> <label>Power State</label><input data-answer="Q02_STATE" autocomplete="off"></p>
 </div>
 </section>
 <section id="feladat-azure-hálózati-adatok-lekérdezése" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-azure-hálózati-adatok-lekérdezése">3. feladat – Azure hálózati adatok lekérdezése</h2>
 <p><strong>Hely:</strong> Saját számítógép<br>
 <strong>Eszköz:</strong> VS Code → PowerShell Terminal<br>
-<strong>AI:</strong> használható</p>
-<p>Azure PowerShell segítségével keresd meg a VM-hez tartozó <strong>nyilvános IP-címet</strong> és <strong>hálózati interfészt (NIC)</strong>. Ha szükséges, kérj segítséget az AI-tól a megfelelő <code>Get-Az...</code> parancsok megtalálásához.</p>
+<strong>AI:</strong> nem szükséges</p>
+<p>Azure PowerShell segítségével keresd meg a VM-hez tartozó <strong>nyilvános IP-címet</strong> és <strong>hálózati interfészt (NIC)</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Támpont">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Támpont
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A publikus IP-címhez használd a <code>Get-AzPublicIpAddress</code>, a hálózati interfészhez a <code>Get-AzNetworkInterface</code> parancsot. A keresést szűkítheted a <code>-ResourceGroupName</code> paraméterrel. Hasznos property-k: <code>IpAddress</code>, <code>Name</code>. A megjelenítést <code>Select-Object</code> segítségével is szűkítheted.</p>
+</div>
+</div>
 <div class="answer-box">
 <label>A használt parancs(ok)</label>
 <textarea class="code-answer" data-answer="Q03_COMMAND"></textarea>
@@ -397,7 +477,21 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <p><strong>Hely:</strong> Saját számítógép<br>
 <strong>Eszköz:</strong> VS Code → PowerShell Terminal, majd Remote Desktop Connection<br>
 <strong>AI:</strong> nem szükséges</p>
-<p>Mielőtt RDP-vel kapcsolódsz, teszteld a VM nyilvános IP-címének <strong>TCP/3389</strong> portját <code>Test-NetConnection</code> segítségével. Ha a teszt sikeres, kapcsolódj RDP-vel a VM-hez.</p>
+<p>Mielőtt RDP-vel kapcsolódsz, teszteld a VM nyilvános IP-címének <strong>TCP/3389</strong> portját. Ha a teszt sikeres, kapcsolódj RDP-vel a VM-hez.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Támpont">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Támpont
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Használd a <code>Test-NetConnection</code> parancsot. Add meg célként a VM <strong>publikus IP-címét</strong>, a <code>-Port</code> paraméterrel pedig az RDP <strong>3389-es TCP-portját</strong>. Figyeld a <code>TcpTestSucceeded</code> értékét.</p>
+<p><strong>Hasznos elemek:</strong> <code>Test-NetConnection</code> · <code>-Port</code> · <code>3389</code> · <code>TcpTestSucceeded</code></p>
+</div>
+</div>
 <div class="answer-box">
 <label>A használt Test-NetConnection parancs</label>
 <textarea class="code-answer" data-answer="Q04_COMMAND"></textarea>
@@ -411,31 +505,66 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <h2 class="anchored" data-anchor-id="feladat-iis-webkiszolgáló-engedélyezése">5. feladat – IIS webkiszolgáló engedélyezése</h2>
 <p><strong>Hely:</strong> Azure VM<br>
 <strong>Eszköz:</strong> RDP → Windows PowerShell rendszergazdaként<br>
-<strong>AI:</strong> használható</p>
-<p>Ellenőrizd a <code>IIS-WebServerRole</code> Windows opcionális szolgáltatás állapotát. Ha nincs engedélyezve, kapcsold be. Ezután ellenőrizd a <code>W3SVC</code> szolgáltatást, majd kérd le a <code>http://localhost</code> HTTP státuszkódját.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Windows 11">
+<strong>AI:</strong> nem szükséges</p>
+<div class="callout callout-style-default callout-note callout-titled" title="PowerShell indítása rendszergazdaként a virtuális gépen">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Windows 11
+<span class="screen-reader-only">Note</span>PowerShell indítása rendszergazdaként a virtuális gépen
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Windows 11 esetén az IIS szerepkör állapotának vizsgálatához a <code>Get-WindowsOptionalFeature</code>, engedélyezéséhez az <code>Enable-WindowsOptionalFeature</code> használható.</p>
+<p>Nyisd meg a <strong>Start menüt</strong>, keress rá a <strong>Windows PowerShell</strong> alkalmazásra, majd jobb egérgomb → <strong>Run as administrator / Futtatás rendszergazdaként</strong>. Ha megjelenik a UAC ablak, válaszd a <strong>Yes / Igen</strong> lehetőséget. A címsorban az <strong>Administrator: Windows PowerShell</strong> felirat jelzi a rendszergazdai módot.</p>
 </div>
 </div>
+<p>Ellenőrizd az <code>IIS-WebServerRole</code> állapotát a <code>Get-WindowsOptionalFeature</code> paranccsal, majd a <code>W3SVC</code> szolgáltatást a <code>Get-Service -Name ...</code> paranccsal.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Ha az IIS nincs engedélyezve">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Ha az IIS nincs engedélyezve
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ha az <code>IIS-WebServerRole</code> nincs engedélyezve, futtasd:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Enable-WindowsOptionalFeature <span class="op">-</span>Online <span class="op">-</span>FeatureName IIS-WebServerRole <span class="op">-</span>All <span class="op">-</span>NoRestart</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ezután ellenőrizd újra az IIS állapotát. Ezt az opcionális engedélyező parancsot <strong>nem kell beadnod</strong>.</p>
+</div>
+</div>
+<p>Végül futtasd a megadott HTTP-tesztet:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">(</span><span class="fu">Invoke-WebRequest</span> http<span class="op">://</span>localhost <span class="op">-</span>UseBasicParsing<span class="op">).</span><span class="fu">StatusCode</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="answer-box">
-<p><label>IIS-WebServerRole állapota</label><select data-answer="Q05_IIS"><option value=""></option><option>Enabled</option><option>Disabled</option></select> <label>W3SVC állapota</label><input data-answer="Q05_W3SVC" autocomplete="off"> <label>http://localhost StatusCode</label><input data-answer="Q05_HTTP" inputmode="numeric" autocomplete="off"></p>
+<label>Get-WindowsOptionalFeature parancs</label>
+<textarea class="code-answer" data-answer="Q05_FEATURE_COMMAND"></textarea>
+<label>Get-Service parancs a W3SVC ellenőrzéséhez</label>
+<textarea class="code-answer" data-answer="Q05_SERVICE_COMMAND"></textarea>
+<p><label>http://localhost StatusCode</label><input data-answer="Q05_HTTP" inputmode="numeric" autocomplete="off"></p>
 </div>
 </section>
 <section id="feladat-ip-konfiguráció-vizsgálata" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-ip-konfiguráció-vizsgálata">6. feladat – IP-konfiguráció vizsgálata</h2>
 <p><strong>Hely:</strong> Azure VM<br>
 <strong>Eszköz:</strong> RDP → Windows PowerShell<br>
-<strong>AI:</strong> használható</p>
+<strong>AI:</strong> nem szükséges</p>
 <p>A <code>Get-NetIPConfiguration</code> segítségével vizsgáld meg, mit lát a Windows a VM hálózati konfigurációjából. Jegyezd fel a privát IPv4-címet, az alapértelmezett átjárót és a DNS-szervert.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Támpont">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Támpont
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A megjelenített adatokat <code>Select-Object</code> segítségével szűkítheted.</p>
+<p><strong>Hasznos property-k:</strong> <code>InterfaceAlias</code>, <code>IPv4Address</code>, <code>IPv4DefaultGateway</code>, <code>DNSServer</code></p>
+</div>
+</div>
 <div class="answer-box">
 <label>A használt parancs</label>
 <textarea class="code-answer" data-answer="Q06_COMMAND"></textarea>
@@ -446,8 +575,21 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <h2 class="anchored" data-anchor-id="feladat-dns-diagnosztika">7. feladat – DNS-diagnosztika</h2>
 <p><strong>Hely:</strong> Azure VM<br>
 <strong>Eszköz:</strong> RDP → Windows PowerShell<br>
-<strong>AI:</strong> használható</p>
+<strong>AI:</strong> nem szükséges</p>
 <p>A <code>Resolve-DnsName</code> segítségével oldd fel a <code>www.microsoft.com</code> nevet. Vizsgáld meg, milyen IP-címet kapsz vissza.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Támpont">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Támpont
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Hasznos elemek:</strong> <code>Resolve-DnsName</code> · <code>www.microsoft.com</code> · <code>IPAddress</code></p>
+</div>
+</div>
 <div class="answer-box">
 <label>A használt parancs</label>
 <textarea class="code-answer" data-answer="Q07_COMMAND"></textarea>
@@ -458,8 +600,21 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <h2 class="anchored" data-anchor-id="feladat-tcp-port-diagnosztika">8. feladat – TCP-port diagnosztika</h2>
 <p><strong>Hely:</strong> Azure VM<br>
 <strong>Eszköz:</strong> RDP → Windows PowerShell<br>
-<strong>AI:</strong> használható</p>
+<strong>AI:</strong> nem szükséges</p>
 <p>A <code>Test-NetConnection</code> segítségével ellenőrizd, hogy a VM képes-e TCP-kapcsolatot létrehozni a <code>www.microsoft.com</code> <strong>443-as portjára</strong>.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Támpont">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Támpont
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Hasznos elemek:</strong> <code>Test-NetConnection</code> · <code>www.microsoft.com</code> · <code>-Port</code> · <code>443</code> · <code>RemoteAddress</code> · <code>TcpTestSucceeded</code></p>
+</div>
+</div>
 <div class="answer-box">
 <label>A használt parancs</label>
 <textarea class="code-answer" data-answer="Q08_COMMAND"></textarea>
@@ -469,8 +624,21 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <section id="feladat-network-diagnostic-dashboard-készítése-ai-segítségével" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-network-diagnostic-dashboard-készítése-ai-segítségével">9. feladat – Network Diagnostic Dashboard készítése AI segítségével</h2>
 <p><strong>Hely:</strong> Azure VM<br>
-<strong>Eszköz:</strong> RDP → Windows PowerShell / VS Code, ha elérhető<br>
+<strong>Eszköz:</strong> RDP → Windows PowerShell ISE<br>
 <strong>AI:</strong> használható és ajánlott</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Hol találod a PowerShell ISE-t?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Hol találod a PowerShell ISE-t?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A VM-en nyisd meg a <strong>Start menüt</strong>, keress rá a <strong>Windows PowerShell ISE</strong> alkalmazásra, majd indítsd el <strong>rendszergazdaként</strong>. A felső szerkesztőablakban írhatod és mentheted a <code>.ps1</code> scriptet, az alsó konzolban pedig futtathatod és tesztelheted a parancsokat.</p>
+</div>
+</div>
 <p>Most már három külön parancsot kipróbáltál: <code>Get-NetIPConfiguration</code>, <code>Resolve-DnsName</code> és <code>Test-NetConnection</code>. Kérd meg az AI-t, hogy ezekből készítsen egy <strong>paraméterezhető PowerShell scriptet</strong>, amely HTML-oldalt generál az IIS alapértelmezett webhelyére.</p>
 <p>A script neve legyen <strong><code>network-dashboard.ps1</code></strong>, és legalább a következőket jelenítse meg:</p>
 <ul>
@@ -478,7 +646,22 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <li>a megadott célgép DNS-feloldásának eredménye;</li>
 <li>a megadott TCP-port kapcsolatának eredménye.</li>
 </ul>
-<p>A célgép és a port legyen paraméter, például <code>Target</code> és <code>Port</code>. Futtatás előtt olvasd át az AI által készített scriptet, majd mentsd el (<strong>Ctrl+S</strong>), futtasd, és ellenőrizd a létrehozott oldalt.</p>
+<p>A célgép és a port legyen paraméter, például <code>Target</code> és <code>Port</code>. A teszthez választhatsz tetszőleges, értelmes célgépet. Futtatás előtt olvasd át az AI által készített scriptet, majd mentsd el (<strong>Ctrl+S</strong>), futtasd, és ellenőrizd a létrehozott oldalt. Böngészőben is ellenőrizd, hogy a dashboard adatai megfelelnek-e a 6–8. feladat eredményeinek.</p>
+<div class="callout callout-style-default callout-warning callout-titled" title="Ha az AI által készített kód hibát ad">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Ha az AI által készített kód hibát ad
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Az AI első megoldása nem feltétlenül működik azonnal. Ha hibát kapsz, másold ki a <strong>teljes hibaüzenetet</strong>, add vissza az AI-nak, és kérd meg, hogy <strong>javítsa a kódot a hiba alapján</strong>. Ezután futtasd újra és ellenőrizd az eredményt.</p>
+<p>Ne csak azt írd, hogy „nem működik”: a hibaüzenet alapján az AI pontosabban tud javítani.</p>
+<p><strong>Mintaprompt:</strong> „Az általad készített PowerShell-kód az alábbi hibát adja. Javítsd úgy, hogy Windows PowerShellben is működjön: [hibaüzenet]”</p>
+</div>
+</div>
 <div class="answer-box">
 <label>Az AI-nak adott prompt</label>
 <textarea class="code-answer" data-answer="Q09_PROMPT"></textarea>
@@ -494,6 +677,21 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <strong>Eszköz:</strong> PowerShell mindkét gépen<br>
 <strong>AI:</strong> nem szükséges</p>
 <p>Először a VM-en ellenőrizd a 80-as portot <code>localhost</code> címmel. Ezután a <strong>saját számítógépedről</strong> teszteld a VM nyilvános IP-címének 80-as portját.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Támpont">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Támpont
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Használd a <code>Test-NetConnection</code> parancsot, a <code>-Port</code> paraméterrel a <strong>80-as TCP-portot</strong>, és figyeld a <code>TcpTestSucceeded</code> értékét.</p>
+<p><strong>Hasznos elemek:</strong> <code>Test-NetConnection</code> · <code>localhost</code> · publikus IP-cím · <code>-Port 80</code> · <code>TcpTestSucceeded</code></p>
+<p>Az első tesztet <strong>a VM-en</strong>, a másodikat <strong>a saját számítógépeden</strong> futtasd.</p>
+</div>
+</div>
 <div class="answer-box">
 <p><label>localhost:80 – TcpTestSucceeded</label><select data-answer="Q10_LOCAL"><option value=""></option><option>True</option><option>False</option></select> <label>PUBLIC-IP:80 – TcpTestSucceeded az NSG ellenőrzése előtt</label><select data-answer="Q10_EXTERNAL"><option value=""></option><option>True</option><option>False</option></select></p>
 </div>
@@ -504,6 +702,30 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <strong>Eszköz:</strong> Azure Portal + VS Code → PowerShell Terminal + böngésző<br>
 <strong>AI:</strong> használható</p>
 <p>Ha a 80-as port kívülről nem érhető el, az Azure Portalon hozz létre olyan <strong>Inbound NSG szabályt</strong>, amely a <strong>saját nyilvános IP-címedről</strong> engedélyezi a TCP/80 forgalmat. Ne nyisd meg szükségtelenül az egész internet felé.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Útmutató – HTTP-forgalom engedélyezése">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Útmutató – HTTP-forgalom engedélyezése
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Az Azure Portalon nyisd meg a VM-et → <strong>Hálózati beállítások (Networking / Network settings)</strong> → <strong>Portszabály létrehozása (Create port rule)</strong> → <strong>Bejövő portszabály (Inbound port rule)</strong>.</p>
+<ul>
+<li><strong>Source:</strong> saját publikus IP-címed (<code>/32</code>)</li>
+<li><strong>Source port ranges:</strong> <code>*</code></li>
+<li><strong>Destination:</strong> <code>Any</code></li>
+<li><strong>Service:</strong> <code>HTTP</code></li>
+<li><strong>Destination port:</strong> <code>80</code></li>
+<li><strong>Protocol:</strong> <code>TCP</code></li>
+<li><strong>Action:</strong> <code>Allow</code></li>
+<li><strong>Priority:</strong> például <code>310</code></li>
+<li><strong>Name:</strong> például <code>Allow-HTTP-MyIP</code></li>
+</ul>
+</div>
+</div>
 <p>Ezután ismételd meg a külső <code>Test-NetConnection</code> tesztet, majd böngészőből nyisd meg a Network Diagnostic Dashboardot.</p>
 <div class="answer-box">
 <p><label>NSG rule name</label><input data-answer="Q11_NAME" autocomplete="off"> <label>Destination port</label><input data-answer="Q11_PORT" inputmode="numeric" autocomplete="off"> <label>Source beállítás röviden</label><input data-answer="Q11_SOURCE" placeholder="pl. saját IP /32" autocomplete="off"> <label>TcpTestSucceeded az NSG-szabály után</label><select data-answer="Q11_TCP"><option value=""></option><option>True</option><option>False</option></select></p>
@@ -543,6 +765,20 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <strong>AI:</strong> használható</p>
 <p>Hozd létre a <code>C:\inetpub\azure-dashboard</code> könyvtárat, és helyezd el benne az előző feladatban elkészített HTML-oldalt <code>index.html</code> néven. A <code>WebAdministration</code> modul és a <code>New-Website</code> segítségével hozz létre egy második IIS-webhelyet <strong>AzureDashboard</strong> néven a <strong>8080-as porton</strong>.</p>
 <p>Ellenőrizd a webhelyet a VM-en <code>localhost:8080</code> címmel.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Támpont a teszteléshez">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Támpont a teszteléshez
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Használd a <code>Test-NetConnection</code> parancsot. Célként add meg a <code>localhost</code> értéket, a <code>-Port</code> paraméterrel pedig a <strong>8080-as portot</strong>. Figyeld a <code>TcpTestSucceeded</code> értékét.</p>
+<p><strong>Hasznos elemek:</strong> <code>Test-NetConnection</code> · <code>localhost</code> · <code>-Port</code> · <code>8080</code> · <code>TcpTestSucceeded</code></p>
+</div>
+</div>
 <div class="answer-box">
 <p><label>IIS site neve</label><input data-answer="Q13_SITE" autocomplete="off"> <label>Physical path</label><input data-answer="Q13_PATH" autocomplete="off"> <label>Port</label><input data-answer="Q13_PORT" inputmode="numeric" autocomplete="off"> <label>localhost:8080 – TcpTestSucceeded</label><select data-answer="Q13_LOCAL"><option value=""></option><option>True</option><option>False</option></select></p>
 </div>
@@ -552,13 +788,13 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <p><strong>Hely:</strong> Saját számítógép és Azure VM<br>
 <strong>Eszköz:</strong> VS Code → PowerShell Terminal, Azure Portal, RDP → Administrator PowerShell<br>
 <strong>AI:</strong> használható és ajánlott</p>
-<p>A saját számítógépedről teszteld a VM nyilvános IP-címének <strong>8080-as portját</strong>. A pilot alapján itt kezdetben várhatóan sikertelen kapcsolatot kapsz, miközben a <code>localhost:8080</code> működik.</p>
+<p>A saját számítógépedről teszteld a VM nyilvános IP-címének <strong>8080-as portját</strong>. Használd a <strong>13. feladatban már alkalmazott <code>Test-NetConnection</code> parancsot</strong>, de <code>localhost</code> helyett a VM <strong>publikus IP-címét</strong> add meg, a port pedig legyen <code>8080</code>.</p>
 <ol type="1">
-<li>Engedélyezd az <strong>Azure NSG-ben</strong> a TCP/8080 forgalmat kizárólag a saját nyilvános IP-címedről.</li>
-<li>Teszteld újra.</li>
+<li><strong>NSG-szabály:</strong> a <strong>11. feladatban megismert módon</strong> hozz létre új bejövő szabályt. Most a <code>80</code> helyett a <code>8080</code> célportot engedélyezd, továbbra is csak a saját publikus IP-címedről (<code>/32</code>).</li>
+<li><strong>Teszteld újra:</strong> használd ismét a <code>Test-NetConnection</code> parancsot a VM publikus IP-címével és a <code>-Port 8080</code> paraméterrel.</li>
 <li>Ha továbbra sem érhető el, kérj az AI-tól hibakeresési javaslatot. Vizsgáld meg a <strong>Windows Defender Firewall</strong> szerepét.</li>
 <li>Szükség esetén hozz létre Windows Firewall inbound szabályt a TCP/8080 portra.</li>
-<li>Ismételd meg a külső tesztet, majd nyisd meg böngészőben az Azure Resource Dashboardot.</li>
+<li><strong>Végső ellenőrzés:</strong> futtasd újra a <code>Test-NetConnection</code> parancsot a <strong>saját számítógépeden</strong>, a VM publikus IP-címére és a <code>8080</code>-as portra. A <code>TcpTestSucceeded</code> értékének ekkor már <code>True</code> értéket kell mutatnia. Ezután nyisd meg böngészőben az Azure Resource Dashboardot.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled" title="Mit tanulunk ebből?">
 <div class="callout-header d-flex align-content-center">
@@ -1089,26 +1325,31 @@ function runSyntaxRules(q) {
 
   switch(q) {
     case "Q01":
-      if (String(v.Q01_VMNAME || "").trim().length < 2) return result("needs_revision", "Add meg a saját VM nevét.");
-      if (!/running/i.test(String(v.Q01_STATE || ""))) return result("needs_revision", "Az indítás után a VM állapota legyen running.");
+      if (!has("Q01_CONNECT", /\bConnect-AzAccount\b/i)) return result("needs_revision", "Add meg a Connect-AzAccount parancsot.");
+      if (!has("Q01_START", /\bStart-AzVM\b/i) || !/-ResourceGroupName\s+\S+/i.test(v.Q01_START) || !/-Name\s+\S+/i.test(v.Q01_START)) return result("needs_revision", "A Start-AzVM tartalmazza a -ResourceGroupName és -Name paramétert.");
+      if (!has("Q01_STATUS", /\bGet-AzVM\b/i) || !/-ResourceGroupName\s+\S+/i.test(v.Q01_STATUS) || !/-Name\s+\S+/i.test(v.Q01_STATUS) || !/-Status\b/i.test(v.Q01_STATUS)) return result("needs_revision", "A Get-AzVM tartalmazza a -ResourceGroupName, -Name és -Status paramétert.");
       break;
     case "Q02":
-      if (!has("Q02_COMMAND", /\bGet-AzVM\b/i)) return result("needs_revision", "A lekérdezés használja a Get-AzVM parancsot.");
-      if (String(v.Q02_RG || "").trim().length < 2 || String(v.Q02_LOCATION || "").trim().length < 3 || String(v.Q02_SIZE || "").trim().length < 3)
-        return result("needs_revision", "Add meg az erőforráscsoportot, régiót és VM-méretet.");
+      if (!has("Q02_COMMAND", /\bGet-AzVM\b/i) || !/-Status\b/i.test(v.Q02_COMMAND)) return result("needs_revision", "Használd a Get-AzVM parancsot a -Status kapcsolóval.");
+      if (String(v.Q02_RG || "").trim().length < 2 || String(v.Q02_LOCATION || "").trim().length < 3) return result("needs_revision", "Add meg az erőforráscsoportot és a régiót.");
+      if (!/running|stopped|deallocated|starting|stopping/i.test(v.Q02_STATE)) return result("needs_revision", "Add meg a VM PowerState értékét.");
       break;
     case "Q03":
+      if (!has("Q03_COMMAND", /\bGet-AzPublicIpAddress\b/i) || !has("Q03_COMMAND", /\bGet-AzNetworkInterface\b/i)) return result("needs_revision", "A megoldásban szerepeljen a Get-AzPublicIpAddress és Get-AzNetworkInterface.");
       if (!isPublicIPv4(v.Q03_PUBLICIP)) return result("needs_revision", "Adj meg érvényes nyilvános IPv4-címet.");
       if (String(v.Q03_NIC || "").trim().length < 2) return result("needs_revision", "Add meg a hálózati interfész nevét.");
       break;
     case "Q04":
+      if (!has("Q04_COMMAND", /\bTest-NetConnection\b/i) || !/-Port\s+3389\b/i.test(v.Q04_COMMAND)) return result("needs_revision", "Használd a Test-NetConnection parancsot a 3389-es porttal.");
       if (String(v.Q04_TCP || "") !== "True") return result("needs_revision", "Az RDP-port tesztjének sikeresnek kell lennie.");
       break;
     case "Q05":
-      if (String(v.Q05_IIS || "") !== "Enabled") return result("needs_revision", "Az IIS-WebServerRole állapota legyen Enabled.");
+      if (!has("Q05_FEATURE_COMMAND", /\bGet-WindowsOptionalFeature\b/i) || !/-FeatureName\s+IIS-WebServerRole\b/i.test(v.Q05_FEATURE_COMMAND)) return result("needs_revision", "Használd a Get-WindowsOptionalFeature parancsot az IIS-WebServerRole ellenőrzéséhez.");
+      if (!has("Q05_SERVICE_COMMAND", /\bGet-Service\b/i) || !/-Name\s+W3SVC\b/i.test(v.Q05_SERVICE_COMMAND)) return result("needs_revision", "Használd a Get-Service -Name W3SVC parancsot.");
       if (String(v.Q05_HTTP || "") !== "200") return result("needs_revision", "A localhost HTTP teszt várt státuszkódja 200.");
       break;
     case "Q06":
+      if (!has("Q06_COMMAND", /\bGet-NetIPConfiguration\b/i)) return result("needs_revision", "Használd a Get-NetIPConfiguration parancsot.");
       if (!isPrivateIPv4(v.Q06_IPV4)) return result("needs_revision", "A VM belső IPv4-címe privát IPv4-cím legyen.");
       if (!isPrivateIPv4(v.Q06_GATEWAY)) return result("needs_revision", "Add meg a VM által látott alapértelmezett átjáró privát IPv4-címét.");
       break;
@@ -1123,6 +1364,8 @@ function runSyntaxRules(q) {
       break;
     case "Q09":
       if (String(v.Q09_FILENAME || "").trim().toLowerCase() !== "network-dashboard.ps1") return result("needs_revision", "A script neve legyen network-dashboard.ps1.");
+      if (String(v.Q09_TARGET || "").trim().length < 3) return result("needs_revision", "Adj meg egy értelmes tesztcélpontot.");
+      if (!Number.isInteger(num("Q09_PORT")) || num("Q09_PORT") < 1 || num("Q09_PORT") > 65535) return result("needs_revision", "Adj meg érvényes TCP-portot.");
       if (String(v.Q09_HTTP || "") !== "200") return result("needs_revision", "A dashboard localhost tesztje adjon 200-as státuszkódot.");
       break;
     case "Q10":
@@ -1157,41 +1400,7 @@ function runSyntaxRules(q) {
 const AI_CHECK_ENDPOINT = "https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/check";
 
 async function runAiCheck(q) {
-  const v = valuesFor(q);
-
-  if (!allFilled(q)) {
-    return result("needs_revision", "Még van kitöltetlen válaszmező. Először egészítsd ki a megoldást, majd kérj új ellenőrzést.");
-  }
-
-  if (q !== "Q13") {
-    return result("needs_revision", "Ehhez a feladathoz még nincs AI-ellenőrzés beállítva.");
-  }
-
-  const response = await fetch(AI_CHECK_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      task_id: "Q13",
-      task: "A hallgató a saját szavaival 2–4 mondatban foglalja össze, mit csinál a megadott Get-AzVM -Status PowerShell script, és térjen ki a Select-Object szerepére is.",
-      answer: String(v.Q13_SUMMARY || "").trim(),
-      prompt: String(v.Q13_PROMPT || "").trim()
-    })
-  });
-
-  let data = null;
-  try {
-    data = await response.json();
-  } catch (_) {}
-
-  if (!response.ok || !data || data.success !== true) {
-    const detail = data?.details || data?.error || `HTTP ${response.status}`;
-    throw new Error(detail);
-  }
-
-  const status = data.status === "pass" ? "passed" :
-                 data.status === "needs_revision" ? "needs_revision" : "invalid";
-
-  return result(status, String(data.feedback || "Az AI-ellenőrzés befejeződött."));
+  return result("needs_revision", "Ehhez a feladathoz nincs külön AI-ellenőrzés beállítva.");
 }
 
 async function performCheck(q) {

@@ -122,13 +122,13 @@ A feladatok váltakozva futnak a **saját számítógépeden** és az **Azure VM
 
 ## Minta – Network Diagnostic Dashboard
 
-![](assets/network-dashboard.png){fig-alt="Network Diagnostic Dashboard minta" width=90%}
+![](../assets/network-dashboard.png){fig-alt="Network Diagnostic Dashboard minta" width=90%}
 
 *1. ábra – Példa a Network Diagnostic Dashboardra. A megjelenés csak minta; a szükséges adatok és működés a fontos.*
 
 ## Minta – Azure Resource Dashboard
 
-![](assets/azure-dashboard.png){fig-alt="Azure Resource Dashboard minta" width=90%}
+![](../assets/azure-dashboard.png){fig-alt="Azure Resource Dashboard minta" width=90%}
 
 *2. ábra – Példa az Azure Resource Dashboardra. A megjelenés csak minta; nem szükséges pixelpontosan lemásolni.*
 

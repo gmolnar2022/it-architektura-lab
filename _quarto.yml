@@ -23,6 +23,8 @@ website:
         text: 2. hét
       - href: weeks/week03/index.qmd
         text: 3. hét
+      - href: weeks/week04/index.qmd
+        text: 4. hét
 
 
 format:

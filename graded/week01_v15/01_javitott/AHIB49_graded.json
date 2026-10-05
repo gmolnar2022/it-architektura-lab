@@ -1,0 +1,979 @@
+﻿{
+    "schema_version":  1,
+    "course":  "ITARCH",
+    "week":  1,
+    "student_id":  "AHIB49",
+    "submitted_at":  "2026-09-15T17:34:52.150Z",
+    "answers":  {
+                    "Q01_SUBSCRIPTION_ID":  "8ebc2aeb-4264-4c41-9355-17280cfb3b4e",
+                    "Q02_RESOURCEGROUP":  "win11",
+                    "Q02_VMNAME":  "virtualismasina",
+                    "Q02_REGION":  " Sweden Central",
+                    "Q02_USERNAME":  "azureuser",
+                    "Q03_DONE":  "Igen",
+                    "Q04_DONE":  "Igen",
+                    "Q05_PUBLICIP":  "4.223.134.32",
+                    "Q05_PRIVATEIP":  "172.16.0.4",
+                    "Q05_VNET":  "vnet-swedencentral-1",
+                    "Q06_COMMAND":  "Test-NetConnection  4.223.134.32 -Port 3389",
+                    "Q06_TCP":  "True",
+                    "Q07_COMMAND":  "Set-AzContext -Subscription \"Azure for Students\"",
+                    "Q08_COMMAND":  "Get-AzSubscription",
+                    "Q08_FILTER":  "Get-AzSubscription | Select-Object Name, State",
+                    "Q08_OUTPUT":  "Azure for Students         Enabled\nAzureSubscription D365 HSZ Enabled",
+                    "Q09_COMMAND":  "Get-AzResourceGroup",
+                    "Q09_RESOURCEGROUP":  "win11",
+                    "Q10_COMMAND":  "Get-AzVM",
+                    "Q10_VMNAME":  "virtualismasina",
+                    "Q11_COMMAND":  "Get-AzVM -ResourceGroupName \"win11\" -Name \"virtualismasina\" -Status",
+                    "Q11_STATE":  "Running",
+                    "Q12_LINE1":  "Get-AzVM -ResourceGroupName $resourceGroup -Name $vmName -Status",
+                    "Q12_LINE2":  "Write-Host \"Az OS-lemez mérete: $($disk.DiskSizeGB) GB\"",
+                    "Q13_PROMPT":  "Magyarázd el légyszi ezt a PowerShell kódot egy olyan diáknak, aki még csak most tanulja az alapokat. Mit csinál pontosan az egész script, és mi a Select-Object szerepe benne?\nGet-AzVM -Status | Select-Object Name, ResourceGroupName, @{Name=\"PowerState\"; Expression={ ($_.Statuses \\vert{} Where-Object {$_.Code -like \"PowerState/*\"}).DisplayStatus }} | Format-Table -AutoSize",
+                    "Q13_SUMMARY":  "Lekérdezi az Azureban a virtualis gépeimet és táblázatbafoglalja név, rg név és futasi status (ami amugy objektum) szerint. A select object meg kiszűri a megjelenitendo infót és csinalni lehet vele uj kalkulalt oszlopokat",
+                    "Q14_COMMAND":  "Get-AzResource `\n    -ResourceGroupName \"win11\" `\n    -ResourceType \"Microsoft.DevTestLab/schedules\" `\n    -ExpandProperties |\n    Select-Object -ExpandProperty Properties",
+                    "Q14_DAILYRECURRENCE":  "@{time=2200}",
+                    "Q14_NOTIFICATIONSETTINGS":  "@{status=Disabled; timeInMinutes=30; notificationLocale=en}",
+                    "Q15_STOPCOMMAND":  "Stop-AzVM -ResourceGroupName \"win11\" -Name \"virtualismasina\" -Force",
+                    "Q15_STATUSCOMMAND":  "(Get-AzVM -ResourceGroupName \"win11\" -Name \"virtualismasina\" -Status).Statuses | Where-Object { $_.Code -like \"PowerState/*\" } | Select-Object -ExpandProperty DisplayStatus",
+                    "Q15_STATE":  "VM deallocated"
+                },
+    "checks":  {
+                   "Q01":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T16:13:46.602Z"
+                           },
+                   "Q02":  {
+                               "type":  "syntax",
+                               "status":  "stale",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T16:20:13.311Z",
+                               "stale_at":  "2026-09-15T16:26:57.495Z"
+                           },
+                   "Q03":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T16:21:12.423Z"
+                           },
+                   "Q04":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T16:22:22.856Z"
+                           },
+                   "Q05":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T16:35:23.123Z"
+                           },
+                   "Q06":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T16:54:14.384Z"
+                           },
+                   "Q07":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T16:59:43.979Z"
+                           },
+                   "Q08":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T17:01:56.157Z"
+                           },
+                   "Q09":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T17:02:49.475Z"
+                           },
+                   "Q10":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T17:03:43.146Z"
+                           },
+                   "Q11":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T17:04:48.422Z"
+                           },
+                   "Q12":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T17:08:57.126Z"
+                           },
+                   "Q13":  {
+                               "type":  "ai",
+                               "status":  "passed",
+                               "feedback":  "JÃ³ Ã¶sszefoglalÃ¡s: a parancs lekÃ©ri az Azure VM-eket Ã©s a futÃ¡sÃ¡llapot-informÃ¡ciÃ³kat (-Status), a Select-Object pedig a megjelenÃ­tett tulajdonsÃ¡gokat szÅ±ri Ã©s kalkulÃ¡lt oszlopokat lÃ©trehozÃ¡sÃ¡ra is hasznÃ¡lhatÃ³. Ãrdemes mÃ©g rÃ¶viden megemlÃ­teni, hogy az Ã¡llapotok az instance view \u0027Statuses\u0027 mezÅjÃ©ben talÃ¡lhatÃ³k.",
+                               "checked_at":  "2026-09-15T17:16:50.394Z"
+                           },
+                   "Q14":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T17:31:54.146Z"
+                           },
+                   "Q15":  {
+                               "type":  "syntax",
+                               "status":  "passed",
+                               "feedback":  "A megadott vÃ¡laszok formailag megfelelnek a jelenlegi ellenÅrzÃ©si szabÃ¡lyoknak.",
+                               "checked_at":  "2026-09-15T17:33:51.004Z"
+                           }
+               },
+    "activity_summary":  {
+                             "first_opened_at":  "2026-09-15T16:13:13.492Z",
+                             "last_activity_at":  "2026-09-15T17:34:52.150Z",
+                             "active_seconds_estimate":  2344,
+                             "total_edit_events":  50,
+                             "questions":  {
+                                               "Q01":  {
+                                                           "first_edit_at":  "2026-09-15T16:13:45.227Z",
+                                                           "last_edit_at":  "2026-09-15T16:13:46.491Z",
+                                                           "edit_events":  1
+                                                       },
+                                               "Q02":  {
+                                                           "first_edit_at":  "2026-09-15T16:17:23.832Z",
+                                                           "last_edit_at":  "2026-09-15T16:27:04.608Z",
+                                                           "edit_events":  6
+                                                       },
+                                               "Q03":  {
+                                                           "first_edit_at":  "2026-09-15T16:21:08.873Z",
+                                                           "last_edit_at":  "2026-09-15T16:21:12.334Z",
+                                                           "edit_events":  1
+                                                       },
+                                               "Q04":  {
+                                                           "first_edit_at":  "2026-09-15T16:22:21.580Z",
+                                                           "last_edit_at":  "2026-09-15T16:22:22.750Z",
+                                                           "edit_events":  1
+                                                       },
+                                               "Q05":  {
+                                                           "first_edit_at":  "2026-09-15T16:34:09.744Z",
+                                                           "last_edit_at":  "2026-09-15T16:35:23.020Z",
+                                                           "edit_events":  5
+                                                       },
+                                               "Q06":  {
+                                                           "first_edit_at":  "2026-09-15T16:51:14.887Z",
+                                                           "last_edit_at":  "2026-09-15T16:54:14.301Z",
+                                                           "edit_events":  4
+                                                       },
+                                               "Q07":  {
+                                                           "first_edit_at":  "2026-09-15T16:59:42.136Z",
+                                                           "last_edit_at":  "2026-09-15T16:59:43.918Z",
+                                                           "edit_events":  1
+                                                       },
+                                               "Q08":  {
+                                                           "first_edit_at":  "2026-09-15T17:00:55.656Z",
+                                                           "last_edit_at":  "2026-09-15T17:01:56.078Z",
+                                                           "edit_events":  5
+                                                       },
+                                               "Q09":  {
+                                                           "first_edit_at":  "2026-09-15T17:02:25.714Z",
+                                                           "last_edit_at":  "2026-09-15T17:02:49.400Z",
+                                                           "edit_events":  2
+                                                       },
+                                               "Q10":  {
+                                                           "first_edit_at":  "2026-09-15T17:03:20.176Z",
+                                                           "last_edit_at":  "2026-09-15T17:03:42.694Z",
+                                                           "edit_events":  4
+                                                       },
+                                               "Q11":  {
+                                                           "first_edit_at":  "2026-09-15T17:04:05.918Z",
+                                                           "last_edit_at":  "2026-09-15T17:04:48.348Z",
+                                                           "edit_events":  2
+                                                       },
+                                               "Q12":  {
+                                                           "first_edit_at":  "2026-09-15T17:08:37.681Z",
+                                                           "last_edit_at":  "2026-09-15T17:08:57.002Z",
+                                                           "edit_events":  2
+                                                       },
+                                               "Q13":  {
+                                                           "first_edit_at":  "2026-09-15T17:11:35.722Z",
+                                                           "last_edit_at":  "2026-09-15T17:16:41.362Z",
+                                                           "edit_events":  7
+                                                       },
+                                               "Q14":  {
+                                                           "first_edit_at":  "2026-09-15T17:29:21.641Z",
+                                                           "last_edit_at":  "2026-09-15T17:31:54.096Z",
+                                                           "edit_events":  5
+                                                       },
+                                               "Q15":  {
+                                                           "first_edit_at":  "2026-09-15T17:32:14.576Z",
+                                                           "last_edit_at":  "2026-09-15T17:33:50.533Z",
+                                                           "edit_events":  3
+                                                       }
+                                           },
+                             "sessions":  [
+                                              {
+                                                  "session_id":  "1776e503-8cfe-4afb-bdd7-fc0297fcec8c",
+                                                  "started_at":  "2026-09-15T16:13:13.493Z",
+                                                  "last_activity_at":  "2026-09-15T17:34:52.150Z",
+                                                  "active_seconds_estimate":  2344,
+                                                  "edit_events":  50
+                                              }
+                                          ],
+                             "events":  [
+                                            {
+                                                "type":  "session_started",
+                                                "timestamp":  "2026-09-15T16:13:13.493Z"
+                                            },
+                                            {
+                                                "type":  "workbook_opened",
+                                                "timestamp":  "2026-09-15T16:13:13.524Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:13:39.488Z",
+                                                "answer_id":  "STUDENT_ID",
+                                                "question":  null,
+                                                "started_at":  "2026-09-15T16:13:29.900Z",
+                                                "ended_at":  "2026-09-15T16:13:39.488Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:13:46.491Z",
+                                                "answer_id":  "Q01_SUBSCRIPTION_ID",
+                                                "question":  "Q01",
+                                                "started_at":  "2026-09-15T16:13:45.227Z",
+                                                "ended_at":  "2026-09-15T16:13:46.491Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T16:13:46.602Z",
+                                                "question":  "Q01",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:17:27.295Z",
+                                                "answer_id":  "Q02_RESOURCEGROUP",
+                                                "question":  "Q02",
+                                                "started_at":  "2026-09-15T16:17:23.832Z",
+                                                "ended_at":  "2026-09-15T16:17:27.295Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:17:41.487Z",
+                                                "answer_id":  "Q02_VMNAME",
+                                                "question":  "Q02",
+                                                "started_at":  "2026-09-15T16:17:40.314Z",
+                                                "ended_at":  "2026-09-15T16:17:41.487Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:18:19.792Z",
+                                                "answer_id":  "Q02_REGION",
+                                                "question":  "Q02",
+                                                "started_at":  "2026-09-15T16:17:41.488Z",
+                                                "ended_at":  "2026-09-15T16:18:19.792Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:19:33.559Z",
+                                                "answer_id":  "Q02_USERNAME",
+                                                "question":  "Q02",
+                                                "started_at":  "2026-09-15T16:19:17.890Z",
+                                                "ended_at":  "2026-09-15T16:19:33.559Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T16:19:39.926Z",
+                                                "question":  "Q02",
+                                                "check_type":  "syntax",
+                                                "result":  "needs_revision"
+                                            },
+                                            {
+                                                "type":  "check_invalidated",
+                                                "timestamp":  "2026-09-15T16:20:10.824Z",
+                                                "question":  "Q02",
+                                                "check_type":  "syntax"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:20:13.223Z",
+                                                "answer_id":  "Q02_REGION",
+                                                "question":  "Q02",
+                                                "started_at":  "2026-09-15T16:20:06.260Z",
+                                                "ended_at":  "2026-09-15T16:20:13.223Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T16:20:13.311Z",
+                                                "question":  "Q02",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:21:12.334Z",
+                                                "answer_id":  "Q03_DONE",
+                                                "question":  "Q03",
+                                                "started_at":  "2026-09-15T16:21:08.873Z",
+                                                "ended_at":  "2026-09-15T16:21:12.334Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T16:21:12.423Z",
+                                                "question":  "Q03",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:22:22.750Z",
+                                                "answer_id":  "Q04_DONE",
+                                                "question":  "Q04",
+                                                "started_at":  "2026-09-15T16:22:21.580Z",
+                                                "ended_at":  "2026-09-15T16:22:22.750Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T16:22:22.856Z",
+                                                "question":  "Q04",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "check_invalidated",
+                                                "timestamp":  "2026-09-15T16:26:57.495Z",
+                                                "question":  "Q02",
+                                                "check_type":  "syntax"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:27:04.608Z",
+                                                "answer_id":  "Q02_REGION",
+                                                "question":  "Q02",
+                                                "started_at":  "2026-09-15T16:26:56.394Z",
+                                                "ended_at":  "2026-09-15T16:27:04.608Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:34:12.219Z",
+                                                "answer_id":  "Q05_PUBLICIP",
+                                                "question":  "Q05",
+                                                "started_at":  "2026-09-15T16:34:09.744Z",
+                                                "ended_at":  "2026-09-15T16:34:12.219Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:34:18.433Z",
+                                                "answer_id":  "Q05_PRIVATEIP",
+                                                "question":  "Q05",
+                                                "started_at":  "2026-09-15T16:34:14.714Z",
+                                                "ended_at":  "2026-09-15T16:34:18.433Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:34:22.122Z",
+                                                "answer_id":  "Q05_VNET",
+                                                "question":  "Q05",
+                                                "started_at":  "2026-09-15T16:34:21.273Z",
+                                                "ended_at":  "2026-09-15T16:34:22.122Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T16:34:22.185Z",
+                                                "question":  "Q05",
+                                                "check_type":  "syntax",
+                                                "result":  "invalid"
+                                            },
+                                            {
+                                                "type":  "check_invalidated",
+                                                "timestamp":  "2026-09-15T16:34:30.325Z",
+                                                "question":  "Q05",
+                                                "check_type":  "syntax"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:34:31.502Z",
+                                                "answer_id":  "Q05_VNET",
+                                                "question":  "Q05",
+                                                "started_at":  "2026-09-15T16:34:26.327Z",
+                                                "ended_at":  "2026-09-15T16:34:31.502Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T16:34:32.148Z",
+                                                "question":  "Q05",
+                                                "check_type":  "syntax",
+                                                "result":  "invalid"
+                                            },
+                                            {
+                                                "type":  "check_invalidated",
+                                                "timestamp":  "2026-09-15T16:35:01.580Z",
+                                                "question":  "Q05",
+                                                "check_type":  "syntax"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T16:35:04.038Z",
+                                                "question":  "Q05",
+                                                "check_type":  "syntax",
+                                                "result":  "invalid"
+                                            },
+                                            {
+                                                "type":  "check_invalidated",
+                                                "timestamp":  "2026-09-15T16:35:22.108Z",
+                                                "question":  "Q05",
+                                                "check_type":  "syntax"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:35:23.020Z",
+                                                "answer_id":  "Q05_VNET",
+                                                "question":  "Q05",
+                                                "started_at":  "2026-09-15T16:35:20.243Z",
+                                                "ended_at":  "2026-09-15T16:35:23.020Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T16:35:23.123Z",
+                                                "question":  "Q05",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:51:17.117Z",
+                                                "answer_id":  "Q06_COMMAND",
+                                                "question":  "Q06",
+                                                "started_at":  "2026-09-15T16:51:14.887Z",
+                                                "ended_at":  "2026-09-15T16:51:17.117Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:51:26.954Z",
+                                                "answer_id":  "Q06_COMMAND",
+                                                "question":  "Q06",
+                                                "started_at":  "2026-09-15T16:51:21.203Z",
+                                                "ended_at":  "2026-09-15T16:51:26.954Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:53:17.808Z",
+                                                "answer_id":  "Q06_COMMAND",
+                                                "question":  "Q06",
+                                                "started_at":  "2026-09-15T16:53:10.470Z",
+                                                "ended_at":  "2026-09-15T16:53:17.808Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:54:14.301Z",
+                                                "answer_id":  "Q06_TCP",
+                                                "question":  "Q06",
+                                                "started_at":  "2026-09-15T16:54:12.883Z",
+                                                "ended_at":  "2026-09-15T16:54:14.301Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T16:54:14.384Z",
+                                                "question":  "Q06",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T16:59:43.918Z",
+                                                "answer_id":  "Q07_COMMAND",
+                                                "question":  "Q07",
+                                                "started_at":  "2026-09-15T16:59:42.136Z",
+                                                "ended_at":  "2026-09-15T16:59:43.918Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T16:59:43.979Z",
+                                                "question":  "Q07",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:00:58.960Z",
+                                                "answer_id":  "Q08_COMMAND",
+                                                "question":  "Q08",
+                                                "started_at":  "2026-09-15T17:00:55.656Z",
+                                                "ended_at":  "2026-09-15T17:00:58.960Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:01:07.174Z",
+                                                "answer_id":  "Q08_COMMAND",
+                                                "question":  "Q08",
+                                                "started_at":  "2026-09-15T17:01:03.547Z",
+                                                "ended_at":  "2026-09-15T17:01:07.174Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:01:09.993Z",
+                                                "answer_id":  "Q08_FILTER",
+                                                "question":  "Q08",
+                                                "started_at":  "2026-09-15T17:01:07.176Z",
+                                                "ended_at":  "2026-09-15T17:01:09.993Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:01:17.242Z",
+                                                "answer_id":  "Q08_COMMAND",
+                                                "question":  "Q08",
+                                                "started_at":  "2026-09-15T17:01:15.909Z",
+                                                "ended_at":  "2026-09-15T17:01:17.242Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:01:56.078Z",
+                                                "answer_id":  "Q08_OUTPUT",
+                                                "question":  "Q08",
+                                                "started_at":  "2026-09-15T17:01:55.095Z",
+                                                "ended_at":  "2026-09-15T17:01:56.078Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T17:01:56.157Z",
+                                                "question":  "Q08",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:02:40.660Z",
+                                                "answer_id":  "Q09_COMMAND",
+                                                "question":  "Q09",
+                                                "started_at":  "2026-09-15T17:02:25.714Z",
+                                                "ended_at":  "2026-09-15T17:02:40.660Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:02:49.400Z",
+                                                "answer_id":  "Q09_RESOURCEGROUP",
+                                                "question":  "Q09",
+                                                "started_at":  "2026-09-15T17:02:46.382Z",
+                                                "ended_at":  "2026-09-15T17:02:49.400Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T17:02:49.475Z",
+                                                "question":  "Q09",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:03:22.274Z",
+                                                "answer_id":  "Q10_COMMAND",
+                                                "question":  "Q10",
+                                                "started_at":  "2026-09-15T17:03:20.176Z",
+                                                "ended_at":  "2026-09-15T17:03:22.274Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:03:33.030Z",
+                                                "answer_id":  "Q10_VMNAME",
+                                                "question":  "Q10",
+                                                "started_at":  "2026-09-15T17:03:32.414Z",
+                                                "ended_at":  "2026-09-15T17:03:33.030Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T17:03:33.113Z",
+                                                "question":  "Q10",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "check_invalidated",
+                                                "timestamp":  "2026-09-15T17:03:36.183Z",
+                                                "question":  "Q10",
+                                                "check_type":  "syntax"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:03:38.397Z",
+                                                "answer_id":  "Q10_COMMAND",
+                                                "question":  "Q10",
+                                                "started_at":  "2026-09-15T17:03:35.466Z",
+                                                "ended_at":  "2026-09-15T17:03:38.397Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T17:03:38.481Z",
+                                                "question":  "Q10",
+                                                "check_type":  "syntax",
+                                                "result":  "needs_revision"
+                                            },
+                                            {
+                                                "type":  "check_invalidated",
+                                                "timestamp":  "2026-09-15T17:03:40.463Z",
+                                                "question":  "Q10",
+                                                "check_type":  "syntax"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:03:42.694Z",
+                                                "answer_id":  "Q10_COMMAND",
+                                                "question":  "Q10",
+                                                "started_at":  "2026-09-15T17:03:39.663Z",
+                                                "ended_at":  "2026-09-15T17:03:42.694Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T17:03:43.146Z",
+                                                "question":  "Q10",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:04:16.085Z",
+                                                "answer_id":  "Q11_COMMAND",
+                                                "question":  "Q11",
+                                                "started_at":  "2026-09-15T17:04:05.918Z",
+                                                "ended_at":  "2026-09-15T17:04:16.085Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:04:48.348Z",
+                                                "answer_id":  "Q11_STATE",
+                                                "question":  "Q11",
+                                                "started_at":  "2026-09-15T17:04:43.423Z",
+                                                "ended_at":  "2026-09-15T17:04:48.348Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T17:04:48.422Z",
+                                                "question":  "Q11",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:08:51.703Z",
+                                                "answer_id":  "Q12_LINE1",
+                                                "question":  "Q12",
+                                                "started_at":  "2026-09-15T17:08:37.681Z",
+                                                "ended_at":  "2026-09-15T17:08:51.703Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:08:57.002Z",
+                                                "answer_id":  "Q12_LINE2",
+                                                "question":  "Q12",
+                                                "started_at":  "2026-09-15T17:08:55.744Z",
+                                                "ended_at":  "2026-09-15T17:08:57.002Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T17:08:57.126Z",
+                                                "question":  "Q12",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:11:38.769Z",
+                                                "answer_id":  "Q13_PROMPT",
+                                                "question":  "Q13",
+                                                "started_at":  "2026-09-15T17:11:35.722Z",
+                                                "ended_at":  "2026-09-15T17:11:38.769Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:12:43.998Z",
+                                                "answer_id":  "Q13_SUMMARY",
+                                                "question":  "Q13",
+                                                "started_at":  "2026-09-15T17:12:16.731Z",
+                                                "ended_at":  "2026-09-15T17:12:43.998Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:13:09.811Z",
+                                                "answer_id":  "Q13_SUMMARY",
+                                                "question":  "Q13",
+                                                "started_at":  "2026-09-15T17:12:50.660Z",
+                                                "ended_at":  "2026-09-15T17:13:09.811Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:13:56.997Z",
+                                                "answer_id":  "Q13_SUMMARY",
+                                                "question":  "Q13",
+                                                "started_at":  "2026-09-15T17:13:43.533Z",
+                                                "ended_at":  "2026-09-15T17:13:56.997Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:14:12.985Z",
+                                                "answer_id":  "Q13_SUMMARY",
+                                                "question":  "Q13",
+                                                "started_at":  "2026-09-15T17:14:04.032Z",
+                                                "ended_at":  "2026-09-15T17:14:12.985Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T17:14:27.751Z",
+                                                "question":  "Q13",
+                                                "check_type":  "ai",
+                                                "result":  "needs_revision"
+                                            },
+                                            {
+                                                "type":  "check_invalidated",
+                                                "timestamp":  "2026-09-15T17:14:59.477Z",
+                                                "question":  "Q13",
+                                                "check_type":  "ai"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:15:29.163Z",
+                                                "answer_id":  "Q13_SUMMARY",
+                                                "question":  "Q13",
+                                                "started_at":  "2026-09-15T17:14:58.568Z",
+                                                "ended_at":  "2026-09-15T17:15:29.163Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T17:15:36.136Z",
+                                                "question":  "Q13",
+                                                "check_type":  "ai",
+                                                "result":  "needs_revision"
+                                            },
+                                            {
+                                                "type":  "check_invalidated",
+                                                "timestamp":  "2026-09-15T17:16:17.515Z",
+                                                "question":  "Q13",
+                                                "check_type":  "ai"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:16:41.362Z",
+                                                "answer_id":  "Q13_SUMMARY",
+                                                "question":  "Q13",
+                                                "started_at":  "2026-09-15T17:16:15.842Z",
+                                                "ended_at":  "2026-09-15T17:16:41.362Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T17:16:50.394Z",
+                                                "question":  "Q13",
+                                                "check_type":  "ai",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:29:33.970Z",
+                                                "answer_id":  "Q14_COMMAND",
+                                                "question":  "Q14",
+                                                "started_at":  "2026-09-15T17:29:21.641Z",
+                                                "ended_at":  "2026-09-15T17:29:33.970Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:30:02.789Z",
+                                                "answer_id":  "Q14_COMMAND",
+                                                "question":  "Q14",
+                                                "started_at":  "2026-09-15T17:29:58.746Z",
+                                                "ended_at":  "2026-09-15T17:30:02.789Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:30:12.510Z",
+                                                "answer_id":  "Q14_COMMAND",
+                                                "question":  "Q14",
+                                                "started_at":  "2026-09-15T17:30:09.763Z",
+                                                "ended_at":  "2026-09-15T17:30:12.510Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:31:49.022Z",
+                                                "answer_id":  "Q14_DAILYRECURRENCE",
+                                                "question":  "Q14",
+                                                "started_at":  "2026-09-15T17:31:41.937Z",
+                                                "ended_at":  "2026-09-15T17:31:49.022Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:31:54.096Z",
+                                                "answer_id":  "Q14_NOTIFICATIONSETTINGS",
+                                                "question":  "Q14",
+                                                "started_at":  "2026-09-15T17:31:53.478Z",
+                                                "ended_at":  "2026-09-15T17:31:54.096Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T17:31:54.146Z",
+                                                "question":  "Q14",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:32:16.616Z",
+                                                "answer_id":  "Q15_STOPCOMMAND",
+                                                "question":  "Q15",
+                                                "started_at":  "2026-09-15T17:32:14.576Z",
+                                                "ended_at":  "2026-09-15T17:32:16.616Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:33:42.742Z",
+                                                "answer_id":  "Q15_STATE",
+                                                "question":  "Q15",
+                                                "started_at":  "2026-09-15T17:33:41.597Z",
+                                                "ended_at":  "2026-09-15T17:33:42.742Z"
+                                            },
+                                            {
+                                                "type":  "answer_edit_session",
+                                                "timestamp":  "2026-09-15T17:33:50.533Z",
+                                                "answer_id":  "Q15_STATUSCOMMAND",
+                                                "question":  "Q15",
+                                                "started_at":  "2026-09-15T17:33:48.859Z",
+                                                "ended_at":  "2026-09-15T17:33:50.533Z"
+                                            },
+                                            {
+                                                "type":  "check_performed",
+                                                "timestamp":  "2026-09-15T17:33:51.004Z",
+                                                "question":  "Q15",
+                                                "check_type":  "syntax",
+                                                "result":  "passed"
+                                            },
+                                            {
+                                                "type":  "submission_summary_opened",
+                                                "timestamp":  "2026-09-15T17:34:11.239Z",
+                                                "completion_percent":  100,
+                                                "remaining_tasks":  0
+                                            },
+                                            {
+                                                "type":  "submission_succeeded",
+                                                "timestamp":  "2026-09-15T17:34:26.030Z",
+                                                "submission_id":  "87b08028-3323-410e-8f38-7181def27e0b"
+                                            },
+                                            {
+                                                "type":  "submission_summary_opened",
+                                                "timestamp":  "2026-09-15T17:34:44.146Z",
+                                                "completion_percent":  100,
+                                                "remaining_tasks":  0
+                                            }
+                                        ],
+                             "submitted_at":  "2026-09-15T17:34:21.581Z",
+                             "last_submission_id":  "87b08028-3323-410e-8f38-7181def27e0b"
+                         },
+    "grading":  {
+                    "Q01":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q02":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q03":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q04":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q05":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q06":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q07":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q08":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q09":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q10":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q11":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q12":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q13":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "ai",
+                                "feedback":  "Jó összefoglalás, érthet�?en leírtad a célját: lekéri az Azure VM-eket és a futásállapotot is (-Status az InstanceView/Statuses mez�?t adja vissza). Pontosításként érdemes megjegyezni, hogy a Status többnyire beágyazott/gyűjtemény típusú mez�?, és a Select-Object tulajdonképpen a tulajdonságok kiválasztására szolgál (nem maga a formázás), illetve valóban lehet vele kalkulált oszlopokat létrehozni."
+                            },
+                    "Q14":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "Q15":  {
+                                "points":  1,
+                                "max_points":  1,
+                                "status":  "correct",
+                                "method":  "automatic",
+                                "feedback":  ""
+                            },
+                    "total_points":  15,
+                    "max_points":  15
+                }
+}

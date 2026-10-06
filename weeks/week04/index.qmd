@@ -166,7 +166,7 @@ Ha a virtuális gép **legalább két próbálkozás után sem indul el**, az Az
 <label>Connect-AzAccount parancs</label><textarea class="code-answer" data-answer="Q01_CONNECT"></textarea>
 <label>Start-AzVM parancs</label><textarea class="code-answer" data-answer="Q01_START"></textarea>
 <label>Get-AzVM állapotellenőrző parancs</label><textarea class="code-answer" data-answer="Q01_STATUS"></textarea>
-</div>
+</div> 
 
 ## 2. feladat – A VM Azure-erőforrásadatainak lekérdezése
 

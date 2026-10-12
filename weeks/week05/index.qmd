@@ -101,12 +101,8 @@ subtitle: "1–15. feladat · Azure PowerShell → RDP → File Server → IIS �
 
 Az első heti Windows 11 telepítését ismételjük meg, ezúttal **Windows Server 2025 Datacenter (Gen2, Desktop Experience)** operációs rendszerrel. A korábbi Windows 11 környezetet előbb eltávolítod, majd **AI segítségével készített Azure PowerShell-szkripttel** hozod létre az új virtuális gépet.
 
-::: {.callout-important title="Mielőtt elkezded"}
-A feladatok a **saját számítógépen, VS Code PowerShell-terminálban** indulnak. Az erőforráscsoport törlése **végleges és az összes benne lévő erőforrást érinti**. Csak a saját Windows 11 gyakorlati erőforráscsoportodat töröld! A telepítés Azure-költséggel járhat. **Jelszót, titkos kulcsot vagy hozzáférési tokent soha ne írj a válaszmezőkbe vagy az AI-promptba!**
-:::
-
 ::: {.callout-note title="A munkafüzet használata"}
-A válaszmezők automatikusan mentődnek a böngésződben. A **JSON export** segítségével bármikor lementheted a munkádat. A szerveres beadás a 4. heti munkafüzetből átvett felületen érhető el; ez a fájl egyelőre **kipróbálásra készült**, beadási határidő nincs beállítva.
+A válaszmezők automatikusan mentődnek a böngésződben. A **JSON export** segítségével bármikor lementheted a munkádat. 
 :::
 
 <div class="answer-box">

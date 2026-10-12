@@ -315,6 +315,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="i.-blokk-windows-server-2025-virtuális-gép-telepítése" class="level1">
 <h1>I. blokk – Windows Server 2025 virtuális gép telepítése</h1>
 <p>Az első heti Windows 11 telepítését ismételjük meg, ezúttal <strong>Windows Server 2025 Datacenter (Gen2, Desktop Experience)</strong> operációs rendszerrel. A korábbi Windows 11 környezetet előbb eltávolítod, majd <strong>AI segítségével készített Azure PowerShell-szkripttel</strong> hozod létre az új virtuális gépet.</p>
+<div class="callout callout-style-default callout-important callout-titled" title="Mielőtt elkezded">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Mielőtt elkezded
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A feladatok a <strong>saját számítógépen, VS Code PowerShell-terminálban</strong> indulnak. Az erőforráscsoport törlése <strong>végleges és az összes benne lévő erőforrást érinti</strong>. Csak a saját Windows 11 gyakorlati erőforráscsoportodat töröld! A telepítés Azure-költséggel járhat. <strong>Jelszót, titkos kulcsot vagy hozzáférési tokent soha ne írj a válaszmezőkbe vagy az AI-promptba!</strong></p>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled" title="A munkafüzet használata">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -325,7 +338,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A válaszmezők automatikusan mentődnek a böngésződben. A <strong>JSON export</strong> segítségével bármikor lementheted a munkádat.</p>
+<p>A válaszmezők automatikusan mentődnek a böngésződben. A <strong>JSON export</strong> segítségével bármikor lementheted a munkádat. A szerveres beadás a 4. heti munkafüzetből átvett felületen érhető el; ez a fájl egyelőre <strong>kipróbálásra készült</strong>, beadási határidő nincs beállítva.</p>
 </div>
 </div>
 <div class="answer-box">
@@ -360,6 +373,10 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <strong>AI:</strong> nem szükséges</p>
 <p>Az első heti Windows 11 telepítéséhez hasonlóan készítsd elő az új VM adatait. A <strong>rögzített követelményeket</strong> már kitöltöttük; a többi mezőt te add meg. A kitöltött adatlapot a 3. feladatban használd fel az AI-promptodhoz.</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Telepítési adat</th>
@@ -388,6 +405,10 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <td><strong>Standard HDD (<code>Standard_LRS</code>)</strong></td>
 </tr>
 <tr class="even">
+<td>Availability Zone</td>
+<td><strong>Nincs megadva</strong> – ne rendelj a VM-hez rendelkezésre állási zónát (<code>-Zone</code> nélkül)</td>
+</tr>
+<tr class="odd">
 <td>RDP</td>
 <td><strong>TCP 3389</strong>, lehetőleg csak a saját nyilvános IP-címről</td>
 </tr>
@@ -429,6 +450,7 @@ Telepítési adatok másolása AI-hoz
 <li>hozza létre a szükséges Azure-erőforrásokat (erőforráscsoport, VNet, subnet, NIC, NSG, nyilvános IP);</li>
 <li>Windows Server 2025 Datacenter <strong>Gen2 Desktop Experience</strong> lemezképet használjon;</li>
 <li>az OS-lemez <strong>Standard HDD (<code>Standard_LRS</code>)</strong> legyen;</li>
+<li><strong>ne rendelje a VM-et Availability Zone-hoz</strong>, a <code>New-AzVM</code> hívásban ne legyen <code>-Zone</code> paraméter;</li>
 <li><strong>biztonságosan, futás közben</strong> kérje be a rendszergazdai jelszót;</li>
 <li>a <strong>TCP 3389</strong> RDP-portot lehetőleg csak a saját publikus IP-címedről engedje;</li>
 <li>végül írja ki a VM nevét és nyilvános IP-címét.</li>
@@ -458,7 +480,7 @@ Telepítési adatok másolása AI-hoz
 <strong>Eszköz:</strong> VS Code → <code>create-server.ps1</code><br>
 <strong>AI:</strong> szükséges (generálás és szükség szerinti javítás)</p>
 <p>Másold át az AI által generált szkriptet a VS Code-ban létrehozott <strong><code>create-server.ps1</code></strong> fájlba. Olvasd át, és ha szükséges, kérj javítást az AI-tól.</p>
-<p><strong>Ellenőrző szempontok:</strong> <code>New-AzVM</code> szerepel a kódban; a lemezkép, a VM-méret és a régió helyes; az OS-lemez <code>Standard_LRS</code>; a jelszó nincs beégetve; az NSG csak a szükséges RDP-hozzáférést engedélyezi. Az AI nem tévedhetetlen: az általa javasolt parancsokat neked kell ellenőrizned.</p>
+<p><strong>Ellenőrző szempontok:</strong> <code>New-AzVM</code> szerepel a kódban; a lemezkép, a VM-méret és a régió helyes; az OS-lemez <code>Standard_LRS</code>; a jelszó nincs beégetve; az NSG csak a szükséges RDP-hozzáférést engedélyezi; <strong>a VM nincs Availability Zone-hoz rendelve, és a <code>New-AzVM</code> nem kap <code>-Zone</code> paramétert</strong>. Az AI nem tévedhetetlen: az általa javasolt parancsokat neked kell ellenőrizned.</p>
 <div class="answer-box">
 <label>A végleges <code>create-server.ps1</code> teljes tartalma (titkok és jelszavak nélkül)</label>
 <textarea class="code-answer" style="min-height:360px" data-answer="Q04_SCRIPT" placeholder="# A teljes ellenőrzött PowerShell-szkript..."></textarea>
@@ -1173,24 +1195,22 @@ function runSyntaxRules(q) {
 
   switch(q) {
     case "Q01":
-      if (!has("Q01_CONNECT", /\bConnect-AzAccount\b/i)) return result("needs_revision", "Add meg a Connect-AzAccount parancsot.");
-      if (!has("Q01_START", /\bStart-AzVM\b/i) || !/-ResourceGroupName\s+\S+/i.test(v.Q01_START) || !/-Name\s+\S+/i.test(v.Q01_START)) return result("needs_revision", "A Start-AzVM tartalmazza a -ResourceGroupName és -Name paramétert.");
-      if (!has("Q01_STATUS", /\bGet-AzVM\b/i) || !/-ResourceGroupName\s+\S+/i.test(v.Q01_STATUS) || !/-Name\s+\S+/i.test(v.Q01_STATUS) || !/-Status\b/i.test(v.Q01_STATUS)) return result("needs_revision", "A Get-AzVM tartalmazza a -ResourceGroupName, -Name és -Status paramétert.");
+      if (!has("Q01_COMMAND", /\bRemove-AzResourceGroup\b/i) || !has("Q01_COMMAND", /-Name\s+\S+/i)) return result("needs_revision", "A törléshez Remove-AzResourceGroup -Name ... parancs szükséges.");
+      if (v.Q01_RESULT !== "Az erőforráscsoport már nem szerepel a listában") return result("needs_revision", "Ellenőrizd, hogy az erőforráscsoport eltűnt a listából.");
       break;
     case "Q02":
-      if (!has("Q02_COMMAND", /\bGet-AzVM\b/i) || !/-Status\b/i.test(v.Q02_COMMAND)) return result("needs_revision", "Használd a Get-AzVM parancsot a -Status kapcsolóval.");
-      if (String(v.Q02_RG || "").trim().length < 2 || String(v.Q02_LOCATION || "").trim().length < 3) return result("needs_revision", "Add meg az erőforráscsoportot és a régiót.");
-      if (!/running|stopped|deallocated|starting|stopping/i.test(v.Q02_STATE)) return result("needs_revision", "Add meg a VM PowerState értékét.");
+      if (["Q02_SUBSCRIPTION","Q02_RG","Q02_LOCATION","Q02_VM","Q02_SIZE","Q02_VNET","Q02_SUBNET","Q02_ADMIN"].some(k => !String(v[k] || "").trim())) return result("needs_revision", "Töltsd ki az összes telepítési adatot.");
       break;
     case "Q03":
-      if (!has("Q03_COMMAND", /\bGet-AzPublicIpAddress\b/i) || !has("Q03_COMMAND", /\bGet-AzNetworkInterface\b/i)) return result("needs_revision", "A megoldásban szerepeljen a Get-AzPublicIpAddress és Get-AzNetworkInterface.");
-      if (!isPublicIPv4(v.Q03_PUBLICIP)) return result("needs_revision", "Adj meg érvényes nyilvános IPv4-címet.");
-      if (String(v.Q03_NIC || "").trim().length < 2) return result("needs_revision", "Add meg a hálózati interfész nevét.");
+      if (!has("Q03_PROMPT", /\bNew-AzVM\b/i) || !has("Q03_PROMPT", /(?:-Zone|availability\s*zone|rendelkezésre állási zóna|zóna)/i)) return result("needs_revision", "A prompt tartalmazza a New-AzVM követelményt és a zóna nélküli telepítést.");
       break;
-    case "Q04":
-      if (!has("Q04_COMMAND", /\bTest-NetConnection\b/i) || !/-Port\s+3389\b/i.test(v.Q04_COMMAND)) return result("needs_revision", "Használd a Test-NetConnection parancsot a 3389-es porttal.");
-      if (String(v.Q04_TCP || "") !== "True") return result("needs_revision", "Az RDP-port tesztjének sikeresnek kell lennie.");
+    case "Q04": {
+      const script = String(v.Q04_SCRIPT || "");
+      if (!/\bNew-AzVM\b/i.test(script)) return result("needs_revision", "A szkriptben szerepeljen a New-AzVM.");
+      if (script.split(/\r?\n/).some(line => !/^\s*#/.test(line) && /\s-Zone\b/i.test(line))) return result("needs_revision", "Ne használj -Zone paramétert a VM telepítéséhez.");
+      if (!/Standard_LRS/i.test(script)) return result("needs_revision", "Az OS-lemez típusa Standard_LRS legyen.");
       break;
+    }
     case "Q05":
       if (!isPublicIPv4(v.Q05_PUBLICIP)) return result("needs_revision", "Adj meg érvényes nyilvános IPv4-címet.");
       if (!String(v.Q05_STATUSCODE || "").trim()) return result("needs_revision", "Add meg a szkript által kiírt StatusCode értékét.");
@@ -1626,6 +1646,7 @@ async function copyVmParameters() {
     "Felület: Desktop Experience (GUI)",
     "Lemezkép: MicrosoftWindowsServer:WindowsServer:2025-datacenter-g2:latest",
     "OS-lemez: Standard HDD (Standard_LRS)",
+    "Availability Zone: nincs megadva; a New-AzVM hívásban ne használj -Zone paramétert (nincs szükség zónaredundanciára).",
     "RDP: TCP 3389, lehetőleg csak a saját nyilvános IP-címről",
     "A rendszergazdai jelszót futás közben biztonságosan kérje be, ne tárolja a kódban."
   ];

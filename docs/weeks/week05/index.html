@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5. hét – Windows Server 2025 telepítése Azure-ban – IT Architektúra – Gyakorlati munkafüzet</title>
+<title>5. hét – Windows Server 2025: telepítés és szerepkörök – IT Architektúra – Gyakorlati munkafüzet</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -178,6 +178,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#feladat-ai-prompt-a-telepítőszkripthez" id="toc-feladat-ai-prompt-a-telepítőszkripthez" class="nav-link" data-scroll-target="#feladat-ai-prompt-a-telepítőszkripthez">3. feladat – AI-prompt a telepítőszkripthez</a></li>
   <li><a href="#feladat-a-generált-powershell-szkript-ellenőrzése" id="toc-feladat-a-generált-powershell-szkript-ellenőrzése" class="nav-link" data-scroll-target="#feladat-a-generált-powershell-szkript-ellenőrzése">4. feladat – A generált PowerShell-szkript ellenőrzése</a></li>
   <li><a href="#feladat-windows-server-telepítése-és-rdp-kapcsolat" id="toc-feladat-windows-server-telepítése-és-rdp-kapcsolat" class="nav-link" data-scroll-target="#feladat-windows-server-telepítése-és-rdp-kapcsolat">5. feladat – Windows Server telepítése és RDP-kapcsolat</a></li>
+  </ul></li>
+  <li><a href="#ii.-blokk-windows-server-szerepkörök-és-szolgáltatások" id="toc-ii.-blokk-windows-server-szerepkörök-és-szolgáltatások" class="nav-link" data-scroll-target="#ii.-blokk-windows-server-szerepkörök-és-szolgáltatások">II. blokk – Windows Server-szerepkörök és szolgáltatások</a>
+  <ul class="collapse">
+  <li><a href="#feladat-file-server-szerepkör-telepítése" id="toc-feladat-file-server-szerepkör-telepítése" class="nav-link" data-scroll-target="#feladat-file-server-szerepkör-telepítése">6. feladat – File Server szerepkör telepítése</a></li>
+  <li><a href="#feladat-smb-megosztás-létrehozása-varázslóval" id="toc-feladat-smb-megosztás-létrehozása-varázslóval" class="nav-link" data-scroll-target="#feladat-smb-megosztás-létrehozása-varázslóval">7. feladat – SMB-megosztás létrehozása varázslóval</a></li>
+  <li><a href="#feladat-iis-webkiszolgáló-szerepkör-telepítése" id="toc-feladat-iis-webkiszolgáló-szerepkör-telepítése" class="nav-link" data-scroll-target="#feladat-iis-webkiszolgáló-szerepkör-telepítése">8. feladat – IIS webkiszolgáló szerepkör telepítése</a></li>
+  <li><a href="#feladat-ai-val-készített-weboldal-az-iis-alapértelmezett-webhelyén" id="toc-feladat-ai-val-készített-weboldal-az-iis-alapértelmezett-webhelyén" class="nav-link" data-scroll-target="#feladat-ai-val-készített-weboldal-az-iis-alapértelmezett-webhelyén">9. feladat – AI-val készített weboldal az IIS alapértelmezett webhelyén</a></li>
+  <li><a href="#feladat-a-http-80-as-port-engedélyezése-powershellből" id="toc-feladat-a-http-80-as-port-engedélyezése-powershellből" class="nav-link" data-scroll-target="#feladat-a-http-80-as-port-engedélyezése-powershellből">10. feladat – A HTTP 80-as port engedélyezése PowerShellből</a></li>
   <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
   </ul></li>
   </ul>
@@ -188,8 +196,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">5. hét – Windows Server 2025 telepítése Azure-ban</h1>
-<p class="subtitle lead">1–5. feladat · VS Code → Azure PowerShell → AI → Windows Server → RDP</p>
+<h1 class="title">5. hét – Windows Server 2025: telepítés és szerepkörök</h1>
+<p class="subtitle lead">1–10. feladat · Azure PowerShell → RDP → File Server → IIS</p>
 </div>
 
 
@@ -469,12 +477,34 @@ Telepítési adatok másolása AI-hoz
 </section>
 <section id="feladat-windows-server-telepítése-és-rdp-kapcsolat" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-windows-server-telepítése-és-rdp-kapcsolat">5. feladat – Windows Server telepítése és RDP-kapcsolat</h2>
-<p><strong>Hely:</strong> Saját számítógép, majd Azure Windows Server VM<br>
-<strong>Eszköz:</strong> VS Code PowerShell Terminal → Remote Desktop Connection<br>
+<p><strong>Hely:</strong> Saját számítógép (az RDP-csatlakozás célja a Windows Server VM)<br>
+<strong>Eszköz:</strong> VS Code PowerShell Terminal → Azure Portal → letöltött RDP-fájl<br>
 <strong>AI:</strong> szükség esetén hibakereséshez</p>
 <p>Futtasd a létrehozott szkriptet:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\create-server<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Várd meg a telepítés befejezését. Ellenőrizd a VM-et és a nyilvános IP-címét az Azure Portalon vagy Azure PowerShellben. A <strong>TCP 3389</strong> port elérhetőségét a <code>Test-NetConnection</code> paranccsal ellenőrizheted. Ezután nyisd meg a <strong>Távoli asztali kapcsolatot (<code>mstsc</code>)</strong>, és jelentkezz be a Windows Serverre.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Telepítési idő és ellenőrzés">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Telepítési idő és ellenőrzés
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>A Windows Server telepítése körülbelül 3–10 percig is eltarthat.</strong> Várd meg, amíg a PowerShell-szkript befejeződik. A virtuális gép az Azure Portalon már a szkript befejezése előtt is megjelenhet, sőt akár RDP-vel is elérhető lehet.</p>
+<p>A telepítés sikerességét <strong>az Azure Portal grafikus felületén is ellenőrizheted</strong>: nyisd meg a <strong>Virtual machines</strong> menüpontot, válaszd ki a létrehozott gépet, és nézd meg az állapotát. A cél: <strong>Provisioning state: Succeeded</strong> és <strong>Status: Running</strong>.</p>
+</div>
+</div>
+<p>Ellenőrizd a VM-et és a nyilvános IP-címét az Azure Portalon vagy Azure PowerShellben. A <strong>TCP 3389</strong> port elérhetőségét a <code>Test-NetConnection</code> paranccsal ellenőrizheted.</p>
+<p><strong>Csatlakozás a letöltött RDP-fájllal:</strong></p>
+<ol type="1">
+<li>Az <strong>Azure Portalon</strong> nyisd meg a létrehozott virtuális gépet.</li>
+<li>Válaszd a <strong>Connect / Csatlakozás → Connect via RDP (RDP)</strong> lehetőséget.</li>
+<li>Ellenőrizd a megjelenített IP-címet és a <strong>3389-es portot</strong>, majd kattints a <strong>Download RDP File / RDP-fájl letöltése</strong> gombra.</li>
+<li>Nyisd meg a letöltött <strong><code>.rdp</code></strong> fájlt, és jelentkezz be a telepítéskor megadott rendszergazdai fiókkal.</li>
+<li>Ellenőrizd, hogy megjelenik a Windows Server asztala és a <strong>Server Manager</strong>.</li>
+</ol>
 <div class="callout callout-style-default callout-important callout-titled" title="RDP-biztonság">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -489,12 +519,105 @@ Telepítési adatok másolása AI-hoz
 </div>
 </div>
 <div class="answer-box">
-<label>A telepített VM neve</label><input data-answer="Q05_VM" autocomplete="off"> <label>A VM nyilvános IP-címe</label><input data-answer="Q05_PUBLICIP" autocomplete="off"> <label>RDP-port ellenőrzéséhez használt PowerShell-parancs</label>
-<textarea class="code-answer" data-answer="Q05_TEST" placeholder="Test-NetConnection ..."></textarea>
-<label>RDP-csatlakozás eredménye</label><select data-answer="Q05_RDP"><option value=""></option><option>Sikeres – a Windows Server asztala megjelent</option><option>Nem sikerült – hibaelhárítás szükséges</option></select> <label>Rövid tapasztalat / hiba és megoldás (ha volt)</label>
-<textarea data-answer="Q05_NOTE" placeholder="Mi történt a telepítéskor és a csatlakozáskor?"></textarea>
+<p><label>A VM nyilvános IP-címe</label><input data-answer="Q05_PUBLICIP" autocomplete="off" placeholder="Pl. 20.123.45.67"> <label>A szkript által kiírt StatusCode</label><input data-answer="Q05_STATUSCODE" autocomplete="off" placeholder="A szkript kimenetében szereplő StatusCode"></p>
 </div>
-<p><strong>Elfogadási feltétel:</strong> a Windows Server 2025 VM működik, az RDP-kapcsolat sikeres, és a Server Manager elindítható.</p>
+<p><strong>Elfogadási feltétel:</strong> a Windows Server 2025 VM működik, az RDP-kapcsolat sikeres, és a nyilvános IP-cím, valamint a szkript által kiírt <code>StatusCode</code> szerepel a válaszban.</p>
+</section>
+</section>
+<section id="ii.-blokk-windows-server-szerepkörök-és-szolgáltatások" class="level1">
+<h1>II. blokk – Windows Server-szerepkörök és szolgáltatások</h1>
+<p>A következő feladatokat már <strong>a Windows Server virtuális gépen</strong>, a letöltött RDP-fájllal megnyitott távoli asztalon végezd. A Server Manager varázslóival két szerepkört telepítesz, majd PowerShellből állítod be a webkiszolgáló tűzfalszabályát.</p>
+<section id="feladat-file-server-szerepkör-telepítése" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-file-server-szerepkör-telepítése">6. feladat – File Server szerepkör telepítése</h2>
+<p><strong>Hely:</strong> Windows Server VM (RDP)<br>
+<strong>Eszköz:</strong> Server Manager → Add Roles and Features Wizard<br>
+<strong>AI:</strong> nem szükséges</p>
+<ol type="1">
+<li>Nyisd meg a <strong>Server Manager</strong> alkalmazást.</li>
+<li>Válaszd a <strong>Manage → Add Roles and Features</strong> lehetőséget.</li>
+<li>A <strong>Role-based or feature-based installation</strong> telepítési típust válaszd, majd jelöld ki a saját szerveredet.</li>
+<li>A <strong>File and Storage Services → File and iSCSI Services</strong> alatt ellenőrizd a <strong>File Server</strong> szerepkörszolgáltatást; ha még nincs telepítve, jelöld be és telepítsd.</li>
+<li>A varázsló végén ellenőrizd a telepítés eredményét. Ha a File Server már telepítve volt, ezt rögzítsd.</li>
+</ol>
+<div class="answer-box">
+<p><label>A File Server szerepkör állapota</label><select data-answer="Q06_ROLE"><option value="">Válassz…</option><option value="Installed">Most telepítettem</option><option value="AlreadyInstalled">Már telepítve volt</option></select> <label>A telepítés vagy ellenőrzés eredménye</label><input data-answer="Q06_RESULT" placeholder="Pl. Installation succeeded / Installed"></p>
+</div>
+<p><strong>Elfogadási feltétel:</strong> a File Server szerepkör telepítve van, az eredményt rögzítetted.</p>
+</section>
+<section id="feladat-smb-megosztás-létrehozása-varázslóval" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-smb-megosztás-létrehozása-varázslóval">7. feladat – SMB-megosztás létrehozása varázslóval</h2>
+<p><strong>Hely:</strong> Windows Server VM (RDP)<br>
+<strong>Eszköz:</strong> Server Manager → File and Storage Services → Shares → New Share Wizard<br>
+<strong>AI:</strong> nem szükséges</p>
+<ol type="1">
+<li>Hozd létre a <code>C:\Megosztas</code> mappát.</li>
+<li>A Server Managerben nyisd meg a <strong>File and Storage Services → Shares</strong> nézetet, és indítsd a <strong>New Share</strong> varázslót.</li>
+<li>Válaszd az <strong>SMB Share – Quick</strong> profilt, majd a létrehozott mappát.</li>
+<li>A megosztás neve legyen <strong><code>Tananyag</code></strong>. A megosztás UNC-útvonala például <code>\\SZERVERNEV\Tananyag</code>.</li>
+<li>A jogosultságoknál a rendszergazdának legyen hozzáférése; <strong>ne adj teljes hozzáférést az Everyone csoportnak</strong>. A gyakorlatban elegendő a rendszergazdai hozzáférés.</li>
+<li>Fejezd be a varázslót, és a szerveren a Fájlkezelő címsorából nyisd meg a megosztást a saját szervernevével.</li>
+</ol>
+<div class="answer-box">
+<p><label>A megosztás neve</label><input data-answer="Q07_NAME" placeholder="Tananyag"> <label>A megosztás UNC-útvonala</label><input data-answer="Q07_UNC" placeholder="\SZERVERNEV\Tananyag"> <label>A megosztás elérhető a szerveren?</label><select data-answer="Q07_TEST"><option value="">Válassz…</option><option value="Yes">Igen</option><option value="No">Nem</option></select></p>
+</div>
+<p><strong>Elfogadási feltétel:</strong> a <code>Tananyag</code> SMB-megosztás létrejött, és a szerveren megnyitható. <strong>Az SMB 445-ös portját ne nyisd meg az internet felé.</strong></p>
+</section>
+<section id="feladat-iis-webkiszolgáló-szerepkör-telepítése" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-iis-webkiszolgáló-szerepkör-telepítése">8. feladat – IIS webkiszolgáló szerepkör telepítése</h2>
+<p><strong>Hely:</strong> Windows Server VM (RDP)<br>
+<strong>Eszköz:</strong> Server Manager → Add Roles and Features Wizard; ellenőrzés böngészővel<br>
+<strong>AI:</strong> nem szükséges</p>
+<ol type="1">
+<li>A <strong>Server Manager → Manage → Add Roles and Features</strong> varázslóval telepítsd a <strong>Web Server (IIS)</strong> szerepkört.</li>
+<li>A felkínált szükséges összetevőket fogadd el; az alapértelmezett szerepkörszolgáltatások elegendők.</li>
+<li>A telepítés után a szerveren nyisd meg a böngészőben a <code>http://localhost</code> címet.</li>
+<li>Ellenőrizd, hogy megjelenik az IIS alapértelmezett oldala.</li>
+</ol>
+<div class="answer-box">
+<p><label>Az IIS telepítés eredménye</label><input data-answer="Q08_RESULT" placeholder="Pl. Installation succeeded"> <label>Megjelenik az alapértelmezett IIS-oldal a localhost címen?</label><select data-answer="Q08_LOCAL"><option value="">Válassz…</option><option value="Yes">Igen</option><option value="No">Nem</option></select></p>
+</div>
+<p><strong>Elfogadási feltétel:</strong> az IIS működik, és a <code>http://localhost</code> oldala betöltődik.</p>
+</section>
+<section id="feladat-ai-val-készített-weboldal-az-iis-alapértelmezett-webhelyén" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-ai-val-készített-weboldal-az-iis-alapértelmezett-webhelyén">9. feladat – AI-val készített weboldal az IIS alapértelmezett webhelyén</h2>
+<p><strong>Hely:</strong> Windows Server VM (RDP)<br>
+<strong>Eszköz:</strong> Server Manager → Tools → Internet Information Services (IIS) Manager; szövegszerkesztő és böngésző<br>
+<strong>AI:</strong> szükséges a HTML-oldal elkészítéséhez</p>
+<ol type="1">
+<li>Kérj az AI-tól <strong>egyetlen, önálló HTML-fájlból álló</strong>, magyar nyelvű bemutatkozó oldalt a Windows Serverről, amely tartalmaz címet, rövid leírást és legalább három felsorolt szerverfunkciót. Ne használjon külső képeket vagy JavaScript-könyvtárakat.</li>
+<li>Az IIS Managerben keresd meg a <strong>Sites → Default Web Site</strong> webhelyet, és ellenőrizd, hogy a kötése (<strong>Bindings</strong>) <strong>HTTP, 80-as port</strong>.</li>
+<li>A webhely alapértelmezett fizikai mappájában (<code>C:\inetpub\wwwroot</code>) helyezd el az AI által készített oldalt <strong><code>index.html</code></strong> néven. Ha nincs jogosultságod a mentéshez, rendszergazdaként végezd a másolást.</li>
+<li>Az IIS Manager <strong>Default Document</strong> beállításában ellenőrizd, hogy az <code>index.html</code> engedélyezett és az alapértelmezett IIS-nyitólap előtt szerepel; szükség esetén módosítsd a sorrendet.</li>
+<li>Nyisd meg a <code>http://localhost</code> címet, és ellenőrizd, hogy már <strong>a saját oldalad</strong> jelenik meg.</li>
+</ol>
+<div class="answer-box">
+<label>Az AI-nak adott prompt</label>
+<textarea data-answer="Q09_PROMPT" placeholder="A weboldal generálásához használt teljes prompt..."></textarea>
+<label>Az elkészített index.html tartalma</label>
+<textarea class="code-answer" style="min-height:240px" data-answer="Q09_HTML" placeholder="<!DOCTYPE html>..."></textarea>
+<p><label>A weboldal elérhető a http://localhost címen?</label><select data-answer="Q09_LOCAL"><option value="">Válassz…</option><option value="Yes">Igen</option><option value="No">Nem</option></select></p>
+</div>
+<p><strong>Elfogadási feltétel:</strong> az AI-generált weboldal a <strong>Default Web Site</strong> alatt, <strong>HTTP 80-as porton</strong>, a <code>http://localhost</code> címen megjelenik.</p>
+</section>
+<section id="feladat-a-http-80-as-port-engedélyezése-powershellből" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-a-http-80-as-port-engedélyezése-powershellből">10. feladat – A HTTP 80-as port engedélyezése PowerShellből</h2>
+<p><strong>Hely:</strong> Windows Server VM (RDP)<br>
+<strong>Eszköz:</strong> Windows PowerShell (rendszergazdaként); ellenőrzés böngészővel<br>
+<strong>AI:</strong> szükséges a PowerShell-parancs megfogalmazásához</p>
+<ol type="1">
+<li>Kérd meg az AI-t, hogy adjon egy <strong>PowerShell-parancsot a Windows Defender Firewall bejövő TCP 80-as portjának engedélyezésére</strong>, <code>New-NetFirewallRule</code> használatával. A szabály neve legyen egyértelmű, például <code>ITArch-IIS-HTTP80</code>.</li>
+<li>Ellenőrizd az AI válaszát, majd <strong>rendszergazdai Windows PowerShellben</strong> futtasd a szerveren.</li>
+<li>A Windows tűzfalszabályt ellenőrizd PowerShellből. A szerveren a <code>http://localhost</code> címnek továbbra is működnie kell.</li>
+<li>Ha a saját géped böngészőjéből is meg szeretnéd nyitni a VM nyilvános IP-címét (<code>http://PUBLIKUS_IP</code>), <strong>az Azure NSG-ben külön engedélyezni kell a TCP 80-as bejövő forgalmat is</strong>. Ezt kizárólag a saját publikus IP-címedről engedélyezd, és a teszt után szüntesd meg a szabályt. A Windows tűzfal és az Azure NSG két külön védelmi réteg.</li>
+</ol>
+<div class="answer-box">
+<label>Az AI-nak adott utasítás</label>
+<textarea data-answer="Q10_PROMPT" placeholder="A Windows tűzfalszabály létrehozásához adott prompt..."></textarea>
+<label>A végrehajtott PowerShell-parancs</label>
+<textarea class="code-answer" data-answer="Q10_COMMAND" placeholder="New-NetFirewallRule ..."></textarea>
+<p><label>A Windows tűzfalszabály sikeresen létrejött?</label><select data-answer="Q10_RESULT"><option value="">Válassz…</option><option value="Yes">Igen</option><option value="No">Nem</option></select></p>
+</div>
+<p><strong>Elfogadási feltétel:</strong> a TCP 80-as porthoz tartozó bejövő Windows tűzfalszabály létrejött, és a használt PowerShell-parancs szerepel a válaszban. <strong>Az Azure NSG módosítása nem kötelező része ennek a feladatnak.</strong></p>
 </section>
 <section id="mentés-és-beadás" class="level2">
 <h2 class="anchored" data-anchor-id="mentés-és-beadás">Mentés és beadás</h2>
@@ -576,7 +699,12 @@ const TASKS = {
  Q02: { title: "Windows Server telepítési adatlap", type: "syntax" },
  Q03: { title: "AI-prompt", type: "syntax" },
  Q04: { title: "PowerShell telepítőszkript", type: "syntax" },
- Q05: { title: "Telepítés és RDP", type: "syntax" }
+ Q05: { title: "Telepítés és RDP", type: "syntax" },
+ Q06: { title: "File Server szerepkör", type: "syntax" },
+ Q07: { title: "SMB-megosztás", type: "syntax" },
+ Q08: { title: "IIS telepítése", type: "syntax" },
+ Q09: { title: "AI-generált IIS-weboldal", type: "syntax" },
+ Q10: { title: "HTTP tűzfalszabály", type: "syntax" }
 };
 
 function fields() {
@@ -986,33 +1114,27 @@ function runSyntaxRules(q) {
       if (String(v.Q04_TCP || "") !== "True") return result("needs_revision", "Az RDP-port tesztjének sikeresnek kell lennie.");
       break;
     case "Q05":
-      if (!has("Q05_FEATURE_COMMAND", /\bGet-WindowsOptionalFeature\b/i) || !/-FeatureName\s+IIS-WebServerRole\b/i.test(v.Q05_FEATURE_COMMAND)) return result("needs_revision", "Használd a Get-WindowsOptionalFeature parancsot az IIS-WebServerRole ellenőrzéséhez.");
-      if (!has("Q05_SERVICE_COMMAND", /\bGet-Service\b/i) || !/-Name\s+W3SVC\b/i.test(v.Q05_SERVICE_COMMAND)) return result("needs_revision", "Használd a Get-Service -Name W3SVC parancsot.");
-      if (String(v.Q05_HTTP || "") !== "200") return result("needs_revision", "A localhost HTTP teszt várt státuszkódja 200.");
+      if (!isPublicIPv4(v.Q05_PUBLICIP)) return result("needs_revision", "Adj meg érvényes nyilvános IPv4-címet.");
+      if (!String(v.Q05_STATUSCODE || "").trim()) return result("needs_revision", "Add meg a szkript által kiírt StatusCode értékét.");
       break;
     case "Q06":
-      if (!has("Q06_COMMAND", /\bGet-NetIPConfiguration\b/i)) return result("needs_revision", "Használd a Get-NetIPConfiguration parancsot.");
-      if (!isPrivateIPv4(v.Q06_IPV4)) return result("needs_revision", "A VM belső IPv4-címe privát IPv4-cím legyen.");
-      if (!isPrivateIPv4(v.Q06_GATEWAY)) return result("needs_revision", "Add meg a VM által látott alapértelmezett átjáró privát IPv4-címét.");
+      if (!["Installed", "AlreadyInstalled"].includes(v.Q06_ROLE)) return result("needs_revision", "Jelöld a File Server szerepkör állapotát.");
       break;
     case "Q07":
-      if (!has("Q07_COMMAND", /\bResolve-DnsName\b/i)) return result("needs_revision", "A DNS-teszt használja a Resolve-DnsName parancsot.");
-      if (String(v.Q07_RESULT || "") !== "Success") return result("needs_revision", "A DNS-feloldás legyen sikeres.");
+      if (String(v.Q07_NAME || "").trim().toLowerCase() !== "tananyag") return result("needs_revision", "A megosztás neve Tananyag legyen.");
+      if (!/^\\\\[^\\]+\\tananyag$/i.test(String(v.Q07_UNC || "").trim())) return result("needs_revision", "Adj meg \\\\SZERVERNEV\\Tananyag formátumú UNC-útvonalat.");
+      if (v.Q07_TEST !== "Yes") return result("needs_revision", "A megosztásnak elérhetőnek kell lennie.");
       break;
     case "Q08":
-      if (!has("Q08_COMMAND", /\bTest-NetConnection\b/i) || !/-Port\s+443\b/i.test(String(v.Q08_COMMAND || "")))
-        return result("needs_revision", "A TCP-teszt használja a Test-NetConnection parancsot a 443-as porttal.");
-      if (String(v.Q08_TCP || "") !== "True") return result("needs_revision", "A TCP 443 teszt legyen sikeres.");
+      if (v.Q08_LOCAL !== "Yes") return result("needs_revision", "Az IIS alapértelmezett oldalának működnie kell.");
       break;
     case "Q09":
-      if (String(v.Q09_FILENAME || "").trim().toLowerCase() !== "network-dashboard.ps1") return result("needs_revision", "A script neve legyen network-dashboard.ps1.");
-      if (String(v.Q09_TARGET || "").trim().length < 3) return result("needs_revision", "Adj meg egy értelmes tesztcélpontot.");
-      if (!Number.isInteger(num("Q09_PORT")) || num("Q09_PORT") < 1 || num("Q09_PORT") > 65535) return result("needs_revision", "Adj meg érvényes TCP-portot.");
-      if (String(v.Q09_HTTP || "") !== "200") return result("needs_revision", "A dashboard localhost tesztje adjon 200-as státuszkódot.");
+      if (!/<html\b/i.test(v.Q09_HTML) || !/<body\b/i.test(v.Q09_HTML)) return result("needs_revision", "Illeszd be a teljes HTML-oldalt.");
+      if (v.Q09_LOCAL !== "Yes") return result("needs_revision", "A saját oldalnak a localhost címen meg kell jelennie.");
       break;
     case "Q10":
-      if (String(v.Q10_LOCAL || "") !== "True") return result("needs_revision", "A VM-en a 80-as port legyen elérhető.");
-      if (!["True","False"].includes(String(v.Q10_EXTERNAL || ""))) return result("needs_revision", "Add meg a saját gépről végzett 80-as portteszt eredményét.");
+      if (!/\bNew-NetFirewallRule\b/i.test(v.Q10_COMMAND) || !/-LocalPort\s+80\b/i.test(v.Q10_COMMAND)) return result("needs_revision", "A parancs használja a New-NetFirewallRule utasítást a 80-as porttal.");
+      if (v.Q10_RESULT !== "Yes") return result("needs_revision", "A Windows tűzfalszabálynak létre kell jönnie.");
       break;
     case "Q11":
       if (num("Q11_PORT") !== 80) return result("needs_revision", "Az NSG-szabály célportja 80 legyen.");

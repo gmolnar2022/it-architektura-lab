@@ -130,7 +130,7 @@ Connect-AzAccount
 Listázd az erőforráscsoportokat:
 
 ```powershell
-Get-AzResourceGroup
+Get-AzResourceGroup | Select-Object ResourceGroupName
 ```
 
 Azonosítsd a **saját Windows 11 VM-ed** erőforráscsoportját, és ellenőrizd a benne található erőforrásokat. Ehhez segítség:
@@ -139,7 +139,7 @@ Azonosítsd a **saját Windows 11 VM-ed** erőforráscsoportját, és ellenőriz
 Get-AzResource -ResourceGroupName "SAJAT_EROFORRASCSOPORT"
 ```
 
-A törléshez a **`Remove-AzResourceGroup`** parancsot használd. A **`-Name`** paraméterrel add meg a csoport nevét. **A teljes, paraméterezett törlőparancsot neked kell összeállítanod!** A futtatás előtt ellenőrizd újra a csoport nevét. Törlés után a `Get-AzResourceGroup` paranccsal győződj meg arról, hogy a csoport már nem szerepel a listában.
+A törléshez a **`Remove-AzResourceGroup`** parancsot használd. A **`-Name`** paraméterrel add meg a csoport nevét. A futtatás előtt ellenőrizd újra a csoport nevét. **A törlés több percig is eltarthat; várd meg a művelet befejezését!** Törlés után a `Get-AzResourceGroup | Select-Object ResourceGroupName` paranccsal győződj meg arról, hogy a csoport már nem szerepel a listában.
 
 <div class="answer-box">
 <label>Az eltávolított erőforráscsoport neve</label><input data-answer="Q01_RG" autocomplete="off">
@@ -172,23 +172,24 @@ Az első heti Windows 11 telepítéséhez hasonlóan készítsd elő az új VM a
 <label>Azure-régió</label><input data-answer="Q02_LOCATION" placeholder="az előfizetésedben engedélyezett régió" autocomplete="off">
 <label>Windows Server VM neve</label><input data-answer="Q02_VM" placeholder="pl. winserver2025" autocomplete="off">
 <label>VM-méret (ellenőrzött, tényleges választás)</label><input data-answer="Q02_SIZE" placeholder="pl. Standard_DS2_v2" autocomplete="off">
-<label>Windows Server 2025 Datacenter Gen2 Desktop Experience – image SKU</label><input data-answer="Q02_IMAGE" placeholder="Azure-ban ellenőrzött SKU" autocomplete="off">
+
 <label>Virtuális hálózat neve</label><input data-answer="Q02_VNET" placeholder="pl. vnet-week05" autocomplete="off">
 <label>Alhálózat neve</label><input data-answer="Q02_SUBNET" placeholder="pl. subnet-server" autocomplete="off">
 <label>Rendszergazdai felhasználónév (jelszó nélkül!)</label><input data-answer="Q02_ADMIN" placeholder="pl. azureadmin" autocomplete="off">
 </div>
 
-::: {.callout-tip title="A lemezkép ellenőrzése"}
-A Windows Server lemezképének SKU-ját az adott régióban lekérdezheted:
+::: {.callout-note title="A telepítéshez használt lemezkép"}
+A lemezkép azonosítóját most **nem kell külön lekérdezned**. A szkriptben ezt használd:
 
-```powershell
-Get-AzVMImageSku -Location "SAJAT_REGIO" `
-  -PublisherName "MicrosoftWindowsServer" -Offer "WindowsServer" |
-  Where-Object Skus -Like "*2025*"
-```
+`MicrosoftWindowsServer:WindowsServer:2025-datacenter-g2:latest`
 
-A **Desktop Experience** változatot válaszd, ne a Server Core-t. Ha a javasolt gépméret nem elérhető, válassz megfelelő másikat, és a tényleges választást rögzítsd.
+Ez a Windows Server 2025 Datacenter Gen2 grafikus felületű változata. A javasolt `Standard_DS2_v2` méret helyett, ha szükséges, válassz az előfizetésedben elérhető másik méretet.
 :::
+
+<button type="button" id="copy-vm-parameters" class="check-button">Telepítési adatok másolása AI-hoz</button>
+<span id="copy-vm-status" role="status" aria-live="polite"></span>
+
+A gomb a kitöltött adatokat a rögzített követelményekkel együtt másolja a vágólapra. Illeszd be őket az AI-asszisztensbe, majd egészítsd ki a saját utasításaiddal. **Jelszót ne adj meg!**
 
 **Elfogadási feltétel:** minden kitöltendő adat megvan, és a választott régió, image és VM-méret használható az előfizetésben.
 
@@ -198,7 +199,7 @@ A **Desktop Experience** változatot válaszd, ne a Server Core-t. Ha a javasolt
 **Eszköz:** VS Code + választott AI-asszisztens  
 **AI:** szükséges
 
-A **2. feladat kitöltött adatai alapján** írj promptot, amelyben az AI-t egy **`New-AzVM`-re épülő Azure PowerShell-szkript** elkészítésére kéred. A promptodban szerepeljenek az előkészített paraméterek, és kérd, hogy a szkript:
+A **2. feladat kitöltött adatai alapján** (a „Telepítési adatok másolása AI-hoz” gombbal) írj promptot, amelyben az AI-t egy **`New-AzVM`-re épülő Azure PowerShell-szkript** elkészítésére kéred. A promptodban szerepeljenek az előkészített paraméterek, és kérd, hogy a szkript:
 
 - hozza létre a szükséges Azure-erőforrásokat (erőforráscsoport, VNet, subnet, NIC, NSG, nyilvános IP);
 - Windows Server 2025 Datacenter **Gen2 Desktop Experience** lemezképet használjon;
@@ -1142,7 +1143,56 @@ function refreshSubmissionDeadline() {
   if (note && closed) note.innerHTML = `<strong>Beadási határidő:</strong> ${SUBMISSION_DEADLINE_TEXT} – <strong>lejárt</strong>`;
 }
 
+async function copyVmParameters() {
+  const keys = [
+    ["Q02_SUBSCRIPTION", "Azure-előfizetés"],
+    ["Q02_RG", "Erőforráscsoport"],
+    ["Q02_LOCATION", "Régió"],
+    ["Q02_VM", "Virtuális gép neve"],
+    ["Q02_SIZE", "VM-méret"],
+    ["Q02_VNET", "Virtuális hálózat"],
+    ["Q02_SUBNET", "Alhálózat"],
+    ["Q02_ADMIN", "Rendszergazda felhasználóneve"]
+  ];
+  const status = document.getElementById("copy-vm-status");
+  const missing = keys.filter(([key]) => !String(document.querySelector(`[data-answer="${key}"]`)?.value || "").trim());
+  if (missing.length) {
+    status.textContent = " Előbb töltsd ki az összes telepítési mezőt!";
+    return;
+  }
+  const lines = [
+    "Windows Server 2025 Azure telepítési paraméterek",
+    ...keys.map(([key, label]) => `${label}: ${document.querySelector(`[data-answer="${key}"]`).value.trim()}`),
+    "Operációs rendszer: Windows Server 2025 Datacenter",
+    "Generáció: Gen2",
+    "Felület: Desktop Experience (GUI)",
+    "Lemezkép: MicrosoftWindowsServer:WindowsServer:2025-datacenter-g2:latest",
+    "OS-lemez: Standard HDD (Standard_LRS)",
+    "RDP: TCP 3389, lehetőleg csak a saját nyilvános IP-címről",
+    "A rendszergazdai jelszót futás közben biztonságosan kérje be, ne tárolja a kódban."
+  ];
+  const value = lines.join("\n");
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(value);
+    } else {
+      const temp = document.createElement("textarea");
+      temp.value = value;
+      temp.style.position = "fixed";
+      temp.style.opacity = "0";
+      document.body.appendChild(temp);
+      temp.select();
+      if (!document.execCommand("copy")) throw new Error("Clipboard unavailable");
+      temp.remove();
+    }
+    status.textContent = " ✓ Az adatok a vágólapra kerültek.";
+  } catch (_) {
+    status.textContent = " A másolás nem sikerült. Ellenőrizd a böngésző vágólapengedélyét.";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("copy-vm-parameters")?.addEventListener("click", copyVmParameters);
   loadLocal();
   addCheckControls();
 

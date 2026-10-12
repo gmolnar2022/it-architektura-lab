@@ -1,6 +1,6 @@
 ---
 title: "5. hét – Windows Server 2025: telepítés és szerepkörök"
-subtitle: "1–10. feladat · Azure PowerShell → RDP → File Server → IIS"
+subtitle: "1–15. feladat · Azure PowerShell → RDP → File Server → IIS → fájlkezelés"
 ---
 
 <style>
@@ -385,6 +385,94 @@ A következő feladatokat már **a Windows Server virtuális gépen**, a letölt
 
 **Elfogadási feltétel:** a két külön tűzfalszinthez tartozó AI-generált parancs szerepel a válaszban, és a weboldal a saját gépről is megnyitható. A Windows tűzfala és az Azure NSG egymástól független védelmi réteg.
 
+## 11. feladat – Mappa és szöveges fájl létrehozása PowerShellből
+
+**Hely:** Windows Server VM (RDP)  
+**Eszköz:** PowerShell (a szerveren)
+
+Hozz létre egy **`C:\Users\Public\ITARCH`** nevű mappát, majd benne egy **`bemutatkozas.txt`** nevű szöveges fájlt. A fájl legalább két sort tartalmazzon, például a szerver nevét és a gyakorlat témáját. A fájlt ne grafikus fájlkezelővel készítsd el.
+
+**Kiinduló parancs:** `New-Item`  
+**Hasznos paraméterek:** `-Path` (elérési út), `-Name` (név), `-ItemType Directory` vagy `-ItemType File` (típus), `-Value` (kezdeti fájltartalom), `-Force` (szükség esetén már létező elem kezelése). Többsoros szöveg megadásához a PowerShell tömbszintaxisát is használhatod, vagy a fájlba íráshoz a `Set-Content` parancsot.
+
+**Feladat:** állítsd össze és futtasd a megfelelő PowerShell-parancsokat. Ellenőrizd, hogy a mappa és a fájl létezik.
+
+<div class="answer-box">
+<label>A mappa és a szöveges fájl létrehozásához futtatott parancsok</label><textarea class="code-answer" data-answer="Q11_COMMANDS" rows="5" placeholder="New-Item ..."></textarea>
+</div>
+
+**Elfogadási feltétel:** a `C:\Users\Public\ITARCH\bemutatkozas.txt` fájl létrejött, és legalább két sornyi szöveget tartalmaz.
+
+## 12. feladat – Fájl másolása a megosztott mappába
+
+**Hely:** Windows Server VM (RDP)  
+**Eszköz:** PowerShell (a szerveren)
+
+Másold át a 11. feladatban készített **`bemutatkozas.txt`** fájlt a 7. feladatban létrehozott **`Tananyag`** megosztás mögötti mappába. A célmappa fizikai elérési útját a `Get-SmbShare -Name Tananyag` paranccsal ellenőrizheted; a szerveren helyi útvonallal dolgozz. Az eredeti fájl maradjon meg.
+
+**Kiinduló parancs:** `Copy-Item`  
+**Hasznos paraméterek:** `-Path` (forrás), `-Destination` (cél), `-Force` (felülírás engedélyezése), `-PassThru` (másolt elem megjelenítése), `-WhatIf` (próba végrehajtás nélkül). A `-Recurse` almappák másolásához használható, de ennél az egy fájlnál nem szükséges.
+
+<div class="answer-box">
+<label>A másoláshoz végrehajtott PowerShell-parancs</label><textarea class="code-answer" data-answer="Q12_COMMAND" rows="3" placeholder="Copy-Item ..."></textarea>
+<label>A Tananyag megosztás fizikai mappájának útvonala</label><input data-answer="Q12_DEST" placeholder="C:\..." />
+</div>
+
+**Elfogadási feltétel:** a fájl az eredeti helyén és a megosztott mappában is megtalálható.
+
+## 13. feladat – A másolt fájl tartalmának megjelenítése
+
+**Hely:** Windows Server VM (RDP)  
+**Eszköz:** PowerShell (a szerveren)
+
+Olvasd ki a **megosztott mappába átmásolt** `bemutatkozas.txt` fájl tartalmát, és másold be a kimenetet a válaszmezőbe.
+
+**Kiinduló parancs:** `Get-Content`  
+**Hasznos paraméterek:** `-Path` (fájlútvonal), `-Raw` (teljes tartalom egy szövegként), `-TotalCount` (első néhány sor), `-Tail` (utolsó néhány sor), `-Encoding` (karakterkódolás). A teljes, rövid fájlhoz elegendő a `-Path`.
+
+<div class="answer-box">
+<label>A futtatott Get-Content parancs</label><textarea class="code-answer" data-answer="Q13_COMMAND" rows="2" placeholder="Get-Content ..."></textarea>
+<label>A parancs kimenete (a fájl tartalma)</label><textarea data-answer="Q13_OUTPUT" rows="4" placeholder="A fájl két vagy több sora..."></textarea>
+</div>
+
+**Elfogadási feltétel:** a megosztásba másolt fájl tartalma helyesen megjelenik.
+
+## 14. feladat – A Public mappa tartalmának listázása
+
+**Hely:** Windows Server VM (RDP)  
+**Eszköz:** PowerShell (a szerveren)
+
+Listázd ki a **`C:\Users\Public`** mappa közvetlen tartalmát PowerShellből. A kimenetben keresd meg a 11. feladatban létrehozott `ITARCH` mappát.
+
+**Kiinduló parancs:** `Get-ChildItem`  
+**Hasznos paraméterek:** `-Path` (mappaútvonal), `-Directory` (csak mappák), `-File` (csak fájlok), `-Recurse` (almappák tartalma is), `-Force` (rejtett elemek is), `-Name` (csak nevek). **Ehhez a feladathoz ne használj `-Recurse` kapcsolót**, hogy a Public mappa közvetlen tartalmát kapd.
+
+<div class="answer-box">
+<label>A futtatott Get-ChildItem parancs</label><textarea class="code-answer" data-answer="Q14_COMMAND" rows="2" placeholder="Get-ChildItem ..."></textarea>
+<label>A parancs kimenete</label><textarea class="code-answer" data-answer="Q14_OUTPUT" rows="6" placeholder="Mode  LastWriteTime  Length  Name ..."></textarea>
+</div>
+
+**Elfogadási feltétel:** a `C:\Users\Public` tartalma megjelenik, benne az `ITARCH` mappával.
+
+## 15. feladat – Calculated property: Azure VM energiaállapota
+
+**Hely:** saját számítógép  
+**Eszköz:** VS Code → PowerShell (Azure PowerShell / Az modul)
+
+Kérdezd le az Azure virtuális gépeidet, majd készíts **calculated property** segítségével egy `Allapot` nevű oszlopot. Az oszlop a VM energiaállapotát mutassa a `PowerState` tulajdonságból úgy, hogy a `VM ` előtag ne szerepeljen benne (például `running`, `stopped`, `deallocated`). A listában a gép neve is jelenjen meg.
+
+**Kiinduló parancsok:** `Get-AzVM -Status` és `Select-Object`  
+**Hasznos paraméterek és elemek:** `Get-AzVM -ResourceGroupName` (szűrés erőforráscsoportra), `-Status` (futási állapot lekérése), `Select-Object -Property` (oszlopok), `@{Name='Allapot'; Expression={...}}` (calculated property), `$_.PowerState` (az aktuális VM állapota), `-replace '^VM ', ''` (a `VM ` előtag eltávolítása). A `Name` és `Expression` hashtable-kulcsok nem önálló cmdletparaméterek.
+
+**Segítség a szintaxishoz:** `Select-Object Name, @{Name='Allapot'; Expression={ ... }}`. A kapcsos zárójelek közé neked kell beírnod az állapotot átalakító kifejezést.
+
+<div class="answer-box">
+<label>A calculated property-t használó teljes PowerShell-parancs</label><textarea class="code-answer" data-answer="Q15_COMMAND" rows="4" placeholder="Get-AzVM -Status | Select-Object Name, @{Name='Allapot'; Expression={...}}"></textarea>
+<label>A parancs kimenete (VM neve és Allapot)</label><textarea class="code-answer" data-answer="Q15_OUTPUT" rows="5" placeholder="Name  Allapot ..."></textarea>
+</div>
+
+**Elfogadási feltétel:** a VM neve és a calculated property-vel előállított `Allapot` oszlop megjelenik, és az állapotból hiányzik a `VM ` előtag.
+
 ## Mentés és beadás
 
 <div class="actions">
@@ -451,7 +539,12 @@ const TASKS = {
  Q07: { title: "SMB-megosztás", type: "syntax" },
  Q08: { title: "IIS telepítése", type: "syntax" },
  Q09: { title: "AI-generált IIS-weboldal és konfiguráció", type: "syntax" },
- Q10: { title: "HTTP Windows és Azure tűzfalszabály", type: "syntax" }
+ Q10: { title: "HTTP Windows és Azure tűzfalszabály", type: "syntax" },
+ Q11: { title: "Mappa és fájl létrehozása", type: "syntax" },
+ Q12: { title: "Másolás a megosztásba", type: "syntax" },
+ Q13: { title: "Fájltartalom olvasása", type: "syntax" },
+ Q14: { title: "Public mappa listázása", type: "syntax" },
+ Q15: { title: "Azure VM calculated property", type: "syntax" }
 };
 
 function fields() {
@@ -592,7 +685,7 @@ function collectAnswers() {
   obj._meta = {
     week: "week05",
     saved_at: nowIso(),
-    format_version: 10,
+    format_version: 15,
     tracking: {
       time_tracking_enabled: !!SETUP.timeTracking,
       event_tracking_enabled: !!SETUP.eventTracking
@@ -884,25 +977,30 @@ function runSyntaxRules(q) {
       if (v.Q10_RESULT !== "Yes") return result("needs_revision", "A weboldalnak a saját gépedről is elérhetőnek kell lennie.");
       break;
     case "Q11":
-      if (num("Q11_PORT") !== 80) return result("needs_revision", "Az NSG-szabály célportja 80 legyen.");
-      if (String(v.Q11_TCP || "") !== "True") return result("needs_revision", "Az NSG-szabály után a 80-as port legyen kívülről elérhető.");
+      if (!has("Q11_COMMANDS", /\bNew-Item\b/i) || !/ITARCH/i.test(v.Q11_COMMANDS) || !/bemutatkozas\.txt/i.test(v.Q11_COMMANDS)) return result("needs_revision", "Használd a New-Item parancsot az ITARCH mappa és a bemutatkozas.txt fájl létrehozásához.");
+      if (!/C:\\Users\\Public/i.test(v.Q11_COMMANDS)) return result("needs_revision", "A létrehozás a C:\\Users\\Public útvonalon történjen.");
+      if (!/-ItemType\s+(?:Directory|File)\b/i.test(v.Q11_COMMANDS)) return result("needs_revision", "Add meg a létrehozott elemek típusát (-ItemType).");
+      if (!/-Value\b|\bSet-Content\b|\bAdd-Content\b|\bOut-File\b|>/i.test(v.Q11_COMMANDS)) return result("needs_revision", "A fájlba szöveget is írj (-Value vagy fájlíró parancs).");
       break;
     case "Q12":
-      if (!has("Q12_COMMANDS", /\bGet-AzVM\b/i) || !has("Q12_COMMANDS", /\bGet-AzPublicIpAddress\b/i))
-        return result("needs_revision", "A megoldásban jelenjen meg a Get-AzVM és Get-AzPublicIpAddress használata.");
-      if (String(v.Q12_FILE || "").trim().toLowerCase() !== "azure-dashboard.html") return result("needs_revision", "A létrehozott fájl neve legyen azure-dashboard.html.");
+      if (!has("Q12_COMMAND", /\bCopy-Item\b/i) || !/bemutatkozas\.txt/i.test(v.Q12_COMMAND)) return result("needs_revision", "A Copy-Item paranccsal másold a bemutatkozas.txt fájlt.");
+      if (!/-Destination\b/i.test(v.Q12_COMMAND)) return result("needs_revision", "Add meg a -Destination paramétert.");
+      if (!/^[A-Za-z]:\\|^\\\\/.test(String(v.Q12_DEST || "").trim())) return result("needs_revision", "Adj meg egy érvényesnek tűnő helyi vagy UNC célútvonalat.");
       break;
     case "Q13":
-      if (num("Q13_PORT") !== 8080) return result("needs_revision", "A második IIS-webhely portja 8080 legyen.");
-      if (String(v.Q13_LOCAL || "") !== "True") return result("needs_revision", "A VM-en a localhost:8080 kapcsolat legyen sikeres.");
+      if (!has("Q13_COMMAND", /\bGet-Content\b/i) || !/bemutatkozas\.txt/i.test(v.Q13_COMMAND)) return result("needs_revision", "Használd a Get-Content parancsot a bemutatkozas.txt fájlra.");
+      if (String(v.Q13_OUTPUT || "").trim().split(/\r?\n/).filter(Boolean).length < 2) return result("needs_revision", "Másold be a fájl legalább két sorát.");
       break;
     case "Q14":
-      if (String(v.Q14_BEFORE || "") !== "False") return result("needs_revision", "A hibakeresési folyamat elején a külső 8080-as teszt várt eredménye False.");
-      if (String(v.Q14_AFTER || "") !== "True") return result("needs_revision", "Az NSG és Windows Firewall beállítása után a 8080-as teszt legyen True.");
-      if (!has("Q14_FIREWALL", /\bNew-NetFirewallRule\b/i)) return result("needs_revision", "Add meg a Windows Firewallhoz használt New-NetFirewallRule parancsot.");
+      if (!has("Q14_COMMAND", /\bGet-ChildItem\b/i) || !/C:\\Users\\Public/i.test(v.Q14_COMMAND)) return result("needs_revision", "Listázd a C:\\Users\\Public mappát a Get-ChildItem paranccsal.");
+      if (/-Recurse\b/i.test(v.Q14_COMMAND)) return result("needs_revision", "A feladatban csak a Public mappa közvetlen tartalmát listázd (-Recurse nélkül).");
+      if (!/ITARCH/i.test(v.Q14_OUTPUT)) return result("needs_revision", "A bemásolt kimenetben szerepeljen az ITARCH mappa.");
       break;
     case "Q15":
-      if (!/deallocated/i.test(String(v.Q15_STATE || ""))) return result("needs_revision", "A VM végső állapota legyen deallocated.");
+      if (!has("Q15_COMMAND", /\bGet-AzVM\b/i) || !/-Status\b/i.test(v.Q15_COMMAND) || !/\bSelect-Object\b/i.test(v.Q15_COMMAND)) return result("needs_revision", "Használd a Get-AzVM -Status és Select-Object parancsokat.");
+      if (!/@\s*\{[\s\S]*?Name\s*=\s*['"]Allapot['"][\s\S]*?Expression\s*=\s*\{/i.test(v.Q15_COMMAND) || !/\$_\.PowerState/i.test(v.Q15_COMMAND)) return result("needs_revision", "A calculated property neve Allapot legyen, a kifejezés a $_.PowerState értékét használja.");
+      if (!/-replace\s*['"]\^VM\s/i.test(v.Q15_COMMAND)) return result("needs_revision", "A -replace művelettel távolítsd el a VM előtagot.");
+      if (!/\bAllapot\b/i.test(v.Q15_OUTPUT) || !/running|stopped|deallocated/i.test(v.Q15_OUTPUT)) return result("needs_revision", "A kimenetben szerepeljen az Allapot oszlop és egy energiaállapot.");
       break;
   }
   return result("passed", "✓ A válasz megfelel a feladat ellenőrzési feltételeinek.");
@@ -1115,7 +1213,7 @@ function buildSubmissionPayload() {
   return {
     schema_version: 1,
     course: "ITARCH",
-    week: 4,
+    week: 5,
     student_id: sid,
     submitted_at: nowIso(),
     answers,

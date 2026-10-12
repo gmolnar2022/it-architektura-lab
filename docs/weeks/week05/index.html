@@ -184,8 +184,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#feladat-file-server-szerepkör-telepítése" id="toc-feladat-file-server-szerepkör-telepítése" class="nav-link" data-scroll-target="#feladat-file-server-szerepkör-telepítése">6. feladat – File Server szerepkör telepítése</a></li>
   <li><a href="#feladat-smb-megosztás-létrehozása-varázslóval" id="toc-feladat-smb-megosztás-létrehozása-varázslóval" class="nav-link" data-scroll-target="#feladat-smb-megosztás-létrehozása-varázslóval">7. feladat – SMB-megosztás létrehozása varázslóval</a></li>
   <li><a href="#feladat-iis-webkiszolgáló-szerepkör-telepítése" id="toc-feladat-iis-webkiszolgáló-szerepkör-telepítése" class="nav-link" data-scroll-target="#feladat-iis-webkiszolgáló-szerepkör-telepítése">8. feladat – IIS webkiszolgáló szerepkör telepítése</a></li>
-  <li><a href="#feladat-ai-val-készített-weboldal-az-iis-alapértelmezett-webhelyén" id="toc-feladat-ai-val-készített-weboldal-az-iis-alapértelmezett-webhelyén" class="nav-link" data-scroll-target="#feladat-ai-val-készített-weboldal-az-iis-alapértelmezett-webhelyén">9. feladat – AI-val készített weboldal az IIS alapértelmezett webhelyén</a></li>
-  <li><a href="#feladat-a-http-80-as-port-engedélyezése-powershellből" id="toc-feladat-a-http-80-as-port-engedélyezése-powershellből" class="nav-link" data-scroll-target="#feladat-a-http-80-as-port-engedélyezése-powershellből">10. feladat – A HTTP 80-as port engedélyezése PowerShellből</a></li>
+  <li><a href="#feladat-teljes-iis-webhely-létrehozása-ai-segítségével" id="toc-feladat-teljes-iis-webhely-létrehozása-ai-segítségével" class="nav-link" data-scroll-target="#feladat-teljes-iis-webhely-létrehozása-ai-segítségével">9. feladat – Teljes IIS-webhely létrehozása AI segítségével</a></li>
+  <li><a href="#feladat-http-80-as-port-engedélyezése-windows-és-azure-tűzfalon" id="toc-feladat-http-80-as-port-engedélyezése-windows-és-azure-tűzfalon" class="nav-link" data-scroll-target="#feladat-http-80-as-port-engedélyezése-windows-és-azure-tűzfalon">10. feladat – HTTP 80-as port engedélyezése Windows és Azure tűzfalon</a></li>
   <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
   </ul></li>
   </ul>
@@ -540,27 +540,32 @@ Telepítési adatok másolása AI-hoz
 <li>A varázsló végén ellenőrizd a telepítés eredményét. Ha a File Server már telepítve volt, ezt rögzítsd.</li>
 </ol>
 <div class="answer-box">
-<p><label>A File Server szerepkör állapota</label><select data-answer="Q06_ROLE"><option value="">Válassz…</option><option value="Installed">Most telepítettem</option><option value="AlreadyInstalled">Már telepítve volt</option></select> <label>A telepítés vagy ellenőrzés eredménye</label><input data-answer="Q06_RESULT" placeholder="Pl. Installation succeeded / Installed"></p>
+<p><label>A File Server szerepkör állapota</label><select data-answer="Q06_ROLE"><option value="">Válassz…</option><option value="Installed">Most telepítettem</option><option value="AlreadyInstalled">Már telepítve volt</option></select></p>
 </div>
 <p><strong>Elfogadási feltétel:</strong> a File Server szerepkör telepítve van, az eredményt rögzítetted.</p>
 </section>
 <section id="feladat-smb-megosztás-létrehozása-varázslóval" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-smb-megosztás-létrehozása-varázslóval">7. feladat – SMB-megosztás létrehozása varázslóval</h2>
 <p><strong>Hely:</strong> Windows Server VM (RDP)<br>
-<strong>Eszköz:</strong> Server Manager → File and Storage Services → Shares → New Share Wizard<br>
+<strong>Eszköz:</strong> Server Manager → File and Storage Services → Shares → New Share Wizard; ellenőrzés: PowerShell<br>
 <strong>AI:</strong> nem szükséges</p>
 <ol type="1">
-<li>Hozd létre a <code>C:\Megosztas</code> mappát.</li>
-<li>A Server Managerben nyisd meg a <strong>File and Storage Services → Shares</strong> nézetet, és indítsd a <strong>New Share</strong> varázslót.</li>
-<li>Válaszd az <strong>SMB Share – Quick</strong> profilt, majd a létrehozott mappát.</li>
-<li>A megosztás neve legyen <strong><code>Tananyag</code></strong>. A megosztás UNC-útvonala például <code>\\SZERVERNEV\Tananyag</code>.</li>
-<li>A jogosultságoknál a rendszergazdának legyen hozzáférése; <strong>ne adj teljes hozzáférést az Everyone csoportnak</strong>. A gyakorlatban elegendő a rendszergazdai hozzáférés.</li>
-<li>Fejezd be a varázslót, és a szerveren a Fájlkezelő címsorából nyisd meg a megosztást a saját szervernevével.</li>
+<li><p>Hozd létre a <code>C:\Megosztas</code> mappát.</p></li>
+<li><p>A Server Managerben nyisd meg a <strong>File and Storage Services → Shares</strong> nézetet, és indítsd a <strong>New Share</strong> varázslót.</p></li>
+<li><p>Válaszd az <strong>SMB Share – Quick</strong> profilt, majd a létrehozott mappát.</p></li>
+<li><p>A megosztás neve legyen <strong><code>Tananyag</code></strong>. A megosztás UNC-útvonala például <code>\\SZERVERNEV\Tananyag</code>.</p></li>
+<li><p>A jogosultságoknál a rendszergazdának legyen hozzáférése; <strong>ne adj teljes hozzáférést az Everyone csoportnak</strong>. A gyakorlatban elegendő a rendszergazdai hozzáférés.</p></li>
+<li><p>Fejezd be a varázslót, és a szerveren a Fájlkezelő címsorából nyisd meg a megosztást a saját szervernevével.</p></li>
+<li><p><strong>A szerveren</strong>, az RDP-munkamenetben nyiss egy <strong>PowerShell</strong>-ablakot, és futtasd a következő parancsot:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Get-SmbShare</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Másold be a parancs <strong>teljes, szöveges kimenetét</strong> a válaszmezőbe. A listában szerepelnie kell a <code>Tananyag</code> megosztásnak.</p></li>
 </ol>
 <div class="answer-box">
-<p><label>A megosztás neve</label><input data-answer="Q07_NAME" placeholder="Tananyag"> <label>A megosztás UNC-útvonala</label><input data-answer="Q07_UNC" placeholder="\SZERVERNEV\Tananyag"> <label>A megosztás elérhető a szerveren?</label><select data-answer="Q07_TEST"><option value="">Válassz…</option><option value="Yes">Igen</option><option value="No">Nem</option></select></p>
+<label>A Get-SmbShare parancs kimenete</label>
+<textarea data-answer="Q07_OUTPUT" rows="7" placeholder="Name    ScopeName    Path    Description
+Tananyag    *    C:\Megosztas"></textarea>
 </div>
-<p><strong>Elfogadási feltétel:</strong> a <code>Tananyag</code> SMB-megosztás létrejött, és a szerveren megnyitható. <strong>Az SMB 445-ös portját ne nyisd meg az internet felé.</strong></p>
+<p><strong>Elfogadási feltétel:</strong> a <code>Get-SmbShare</code> kimenetében szerepel a <code>Tananyag</code> megosztás. <strong>Az SMB 445-ös portját ne nyisd meg az internet felé.</strong></p>
 </section>
 <section id="feladat-iis-webkiszolgáló-szerepkör-telepítése" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-iis-webkiszolgáló-szerepkör-telepítése">8. feladat – IIS webkiszolgáló szerepkör telepítése</h2>
@@ -571,53 +576,55 @@ Telepítési adatok másolása AI-hoz
 <li>A <strong>Server Manager → Manage → Add Roles and Features</strong> varázslóval telepítsd a <strong>Web Server (IIS)</strong> szerepkört.</li>
 <li>A felkínált szükséges összetevőket fogadd el; az alapértelmezett szerepkörszolgáltatások elegendők.</li>
 <li>A telepítés után a szerveren nyisd meg a böngészőben a <code>http://localhost</code> címet.</li>
-<li>Ellenőrizd, hogy megjelenik az IIS alapértelmezett oldala.</li>
+<li>Figyeld meg, mi jelenik meg a böngészőben, majd válaszd ki a megfelelő választ.</li>
 </ol>
 <div class="answer-box">
-<p><label>Az IIS telepítés eredménye</label><input data-answer="Q08_RESULT" placeholder="Pl. Installation succeeded"> <label>Megjelenik az alapértelmezett IIS-oldal a localhost címen?</label><select data-answer="Q08_LOCAL"><option value="">Válassz…</option><option value="Yes">Igen</option><option value="No">Nem</option></select></p>
+<p><label>Mi jelenik meg a szerveren a http://localhost cím megnyitásakor?</label> <select data-answer="Q08_LOCAL"> <option value="">Válassz…</option> <option value="IISDefault">Az IIS alapértelmezett üdvözlőoldala (Internet Information Services)</option> <option value="DirectoryListing">A C:\inetpub\wwwroot mappa fájljainak listája</option> <option value="ConnectionError">A böngésző nem tud kapcsolódni a webhelyhez</option> <option value="ServerManager">A Windows Server Manager kezdőoldala</option> </select></p>
 </div>
 <p><strong>Elfogadási feltétel:</strong> az IIS működik, és a <code>http://localhost</code> oldala betöltődik.</p>
 </section>
-<section id="feladat-ai-val-készített-weboldal-az-iis-alapértelmezett-webhelyén" class="level2">
-<h2 class="anchored" data-anchor-id="feladat-ai-val-készített-weboldal-az-iis-alapértelmezett-webhelyén">9. feladat – AI-val készített weboldal az IIS alapértelmezett webhelyén</h2>
+<section id="feladat-teljes-iis-webhely-létrehozása-ai-segítségével" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-teljes-iis-webhely-létrehozása-ai-segítségével">9. feladat – Teljes IIS-webhely létrehozása AI segítségével</h2>
 <p><strong>Hely:</strong> Windows Server VM (RDP)<br>
-<strong>Eszköz:</strong> Server Manager → Tools → Internet Information Services (IIS) Manager; szövegszerkesztő és böngésző<br>
-<strong>AI:</strong> szükséges a HTML-oldal elkészítéséhez</p>
+<strong>Eszköz:</strong> AI + rendszergazdai PowerShell; ellenőrzés IIS Managerrel és böngészővel<br>
+<strong>AI:</strong> a teljes folyamat megtervezéséhez és a PowerShell-szkript előállításához</p>
 <ol type="1">
-<li>Kérj az AI-tól <strong>egyetlen, önálló HTML-fájlból álló</strong>, magyar nyelvű bemutatkozó oldalt a Windows Serverről, amely tartalmaz címet, rövid leírást és legalább három felsorolt szerverfunkciót. Ne használjon külső képeket vagy JavaScript-könyvtárakat.</li>
-<li>Az IIS Managerben keresd meg a <strong>Sites → Default Web Site</strong> webhelyet, és ellenőrizd, hogy a kötése (<strong>Bindings</strong>) <strong>HTTP, 80-as port</strong>.</li>
-<li>A webhely alapértelmezett fizikai mappájában (<code>C:\inetpub\wwwroot</code>) helyezd el az AI által készített oldalt <strong><code>index.html</code></strong> néven. Ha nincs jogosultságod a mentéshez, rendszergazdaként végezd a másolást.</li>
-<li>Az IIS Manager <strong>Default Document</strong> beállításában ellenőrizd, hogy az <code>index.html</code> engedélyezett és az alapértelmezett IIS-nyitólap előtt szerepel; szükség esetén módosítsd a sorrendet.</li>
-<li>Nyisd meg a <code>http://localhost</code> címet, és ellenőrizd, hogy már <strong>a saját oldalad</strong> jelenik meg.</li>
+<li>Kérj az AI-tól <strong>egyetlen PowerShell-szkriptet</strong>, amely elkészít egy önálló, magyar nyelvű HTML-bemutatkozó oldalt (cím, rövid leírás, legalább három szerverfunkció és egyszerű CSS), majd elhelyezi a <strong><code>C:\inetpub\wwwroot\index.html</code></strong> fájlban. Külső képeket és JavaScript-könyvtárakat ne használjon.</li>
+<li>A szkript ellenőrizze a <strong>Default Web Site</strong> webhelyet, és gondoskodjon arról, hogy az oldal <strong>HTTP 80-as porton</strong> működjön. A hiányzó bindingot hozza létre, de meglévő bindingot ne duplikáljon. Ellenőrizze az <code>index.html</code> alapértelmezett dokumentumként való használatát is; szükség esetén állítsa a kezdőoldalak sorrendjében az IIS üdvözlőoldala elé.</li>
+<li><strong>Olvasd át</strong> az AI által generált kódot: csak a saját tesztwebhelyet módosíthatja, és nem törölhet más IIS-webhelyeket. Ezután futtasd a szerveren rendszergazdai PowerShellben.</li>
+<li>Az <strong>IIS Manager → Sites → Default Web Site → Bindings</strong> menüben ellenőrizd a HTTP/80 kötést, majd a szerver böngészőjében nyisd meg a <code>http://localhost</code> címet. A <strong>saját weboldaladnak</strong> kell megjelennie.</li>
 </ol>
 <div class="answer-box">
-<label>Az AI-nak adott prompt</label>
-<textarea data-answer="Q09_PROMPT" placeholder="A weboldal generálásához használt teljes prompt..."></textarea>
-<label>Az elkészített index.html tartalma</label>
-<textarea class="code-answer" style="min-height:240px" data-answer="Q09_HTML" placeholder="<!DOCTYPE html>..."></textarea>
-<p><label>A weboldal elérhető a http://localhost címen?</label><select data-answer="Q09_LOCAL"><option value="">Válassz…</option><option value="Yes">Igen</option><option value="No">Nem</option></select></p>
+<label>Az AI-nak adott teljes prompt</label>
+<textarea data-answer="Q09_PROMPT" rows="5" placeholder="A HTML, elhelyezés, binding és kezdőoldal beállítására adott utasítás..."></textarea>
+<label>A létrehozott index.html tartalma</label>
+<textarea class="code-answer" style="min-height:200px" data-answer="Q09_HTML" placeholder="<!DOCTYPE html>..."></textarea>
+<label>Az AI-generált és végrehajtott PowerShell-szkript</label>
+<textarea class="code-answer" style="min-height:240px" data-answer="Q09_SCRIPT" placeholder="A fájl létrehozását és az IIS-beállításokat végző PowerShell-szkript..."></textarea>
+<p><label>A saját weboldal jelenik meg a http://localhost címen?</label><select data-answer="Q09_LOCAL"><option value="">Válassz…</option><option value="Yes">Igen</option><option value="No">Nem</option></select></p>
 </div>
-<p><strong>Elfogadási feltétel:</strong> az AI-generált weboldal a <strong>Default Web Site</strong> alatt, <strong>HTTP 80-as porton</strong>, a <code>http://localhost</code> címen megjelenik.</p>
+<p><strong>Elfogadási feltétel:</strong> a szkript elhelyezi a HTML-oldalt, kezeli a HTTP/80 bindingot és az alapértelmezett dokumentumot; a saját oldal megjelenik a <code>http://localhost</code> címen.</p>
 </section>
-<section id="feladat-a-http-80-as-port-engedélyezése-powershellből" class="level2">
-<h2 class="anchored" data-anchor-id="feladat-a-http-80-as-port-engedélyezése-powershellből">10. feladat – A HTTP 80-as port engedélyezése PowerShellből</h2>
-<p><strong>Hely:</strong> Windows Server VM (RDP)<br>
-<strong>Eszköz:</strong> Windows PowerShell (rendszergazdaként); ellenőrzés böngészővel<br>
-<strong>AI:</strong> szükséges a PowerShell-parancs megfogalmazásához</p>
+<section id="feladat-http-80-as-port-engedélyezése-windows-és-azure-tűzfalon" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-http-80-as-port-engedélyezése-windows-és-azure-tűzfalon">10. feladat – HTTP 80-as port engedélyezése Windows és Azure tűzfalon</h2>
+<p><strong>Hely és eszköz:</strong> (1) Windows Server VM → <strong>RDP / rendszergazdai PowerShell</strong>; (2) saját számítógép → <strong>VS Code / Azure PowerShell</strong><br>
+<strong>AI:</strong> két külön PowerShell-parancs előállításához</p>
 <ol type="1">
-<li>Kérd meg az AI-t, hogy adjon egy <strong>PowerShell-parancsot a Windows Defender Firewall bejövő TCP 80-as portjának engedélyezésére</strong>, <code>New-NetFirewallRule</code> használatával. A szabály neve legyen egyértelmű, például <code>ITArch-IIS-HTTP80</code>.</li>
-<li>Ellenőrizd az AI válaszát, majd <strong>rendszergazdai Windows PowerShellben</strong> futtasd a szerveren.</li>
-<li>A Windows tűzfalszabályt ellenőrizd PowerShellből. A szerveren a <code>http://localhost</code> címnek továbbra is működnie kell.</li>
-<li>Ha a saját géped böngészőjéből is meg szeretnéd nyitni a VM nyilvános IP-címét (<code>http://PUBLIKUS_IP</code>), <strong>az Azure NSG-ben külön engedélyezni kell a TCP 80-as bejövő forgalmat is</strong>. Ezt kizárólag a saját publikus IP-címedről engedélyezd, és a teszt után szüntesd meg a szabályt. A Windows tűzfal és az Azure NSG két külön védelmi réteg.</li>
+<li>Kérj az AI-tól <strong>egy Windows PowerShell-parancsot</strong>, amely a szerver <strong>Windows Defender Firewall</strong> tűzfalában engedélyezi a bejövő <strong>TCP 80</strong> forgalmat (<code>New-NetFirewallRule</code>). A szerveren rendszergazdai PowerShellben futtasd. Ha már van megfelelő engedélyező szabály, ne hozz létre felesleges duplikátumot.</li>
+<li>Kérj az AI-tól <strong>egy Azure PowerShell-parancsot vagy egyetlen parancsláncot</strong>, amely a VM-hez tartozó <strong>Network Security Group (NSG)</strong> bejövő szabályai közé felveszi a <strong>TCP 80</strong> engedélyezését (<code>Get-AzNetworkSecurityGroup</code>, <code>Add-AzNetworkSecurityRuleConfig</code>, <code>Set-AzNetworkSecurityGroup</code>). A parancs a megfelelő erőforráscsoportot és NSG-t módosítsa, <strong>csak a saját géped aktuális nyilvános IP-címéről</strong> engedje a forgalmat (<code>/32</code>), és ne ütközzön meglévő szabálynévvel vagy prioritással. Futtasd a <strong>saját gépeden, VS Code PowerShell-terminálban</strong>, a megfelelő Azure-előfizetésben.</li>
+<li>A saját géped böngészőjében nyisd meg a <code>http://VM_PUBLIKUS_IP</code> címet, és ellenőrizd, hogy a 9. feladatban készített weboldal jelenik-e meg.</li>
+<li>A teszt után az ideiglenes NSG-engedélyezést szüntesd meg, ha már nincs rá szükség. <strong>Az SMB 445-ös és RDP 3389-es portokat ne nyisd meg széles körben az internet felé.</strong></li>
 </ol>
 <div class="answer-box">
-<label>Az AI-nak adott utasítás</label>
-<textarea data-answer="Q10_PROMPT" placeholder="A Windows tűzfalszabály létrehozásához adott prompt..."></textarea>
-<label>A végrehajtott PowerShell-parancs</label>
+<label>Az AI-nak adott utasítás (mindkét tűzfalszintre)</label>
+<textarea data-answer="Q10_PROMPT" rows="4" placeholder="Két parancs: Windows Defender TCP 80 + Azure NSG TCP 80, saját IP /32..."></textarea>
+<label>1. Windows Defender – végrehajtott PowerShell-parancs (RDP)</label>
 <textarea class="code-answer" data-answer="Q10_COMMAND" placeholder="New-NetFirewallRule ..."></textarea>
-<p><label>A Windows tűzfalszabály sikeresen létrejött?</label><select data-answer="Q10_RESULT"><option value="">Válassz…</option><option value="Yes">Igen</option><option value="No">Nem</option></select></p>
+<label>2. Azure NSG – végrehajtott Azure PowerShell-parancs vagy parancslánc (VS Code)</label>
+<textarea class="code-answer" data-answer="Q10_AZURE" rows="4" placeholder="Get-AzNetworkSecurityGroup ... | Add-AzNetworkSecurityRuleConfig ... | Set-AzNetworkSecurityGroup"></textarea>
+<p><label>A weboldal megjelenik a saját számítógép böngészőjében a VM nyilvános IP-címén?</label><select data-answer="Q10_RESULT"><option value="">Válassz…</option><option value="Yes">Igen</option><option value="No">Nem</option></select></p>
 </div>
-<p><strong>Elfogadási feltétel:</strong> a TCP 80-as porthoz tartozó bejövő Windows tűzfalszabály létrejött, és a használt PowerShell-parancs szerepel a válaszban. <strong>Az Azure NSG módosítása nem kötelező része ennek a feladatnak.</strong></p>
+<p><strong>Elfogadási feltétel:</strong> a két külön tűzfalszinthez tartozó AI-generált parancs szerepel a válaszban, és a weboldal a saját gépről is megnyitható. A Windows tűzfala és az Azure NSG egymástól független védelmi réteg.</p>
 </section>
 <section id="mentés-és-beadás" class="level2">
 <h2 class="anchored" data-anchor-id="mentés-és-beadás">Mentés és beadás</h2>
@@ -703,8 +710,8 @@ const TASKS = {
  Q06: { title: "File Server szerepkör", type: "syntax" },
  Q07: { title: "SMB-megosztás", type: "syntax" },
  Q08: { title: "IIS telepítése", type: "syntax" },
- Q09: { title: "AI-generált IIS-weboldal", type: "syntax" },
- Q10: { title: "HTTP tűzfalszabály", type: "syntax" }
+ Q09: { title: "AI-generált IIS-weboldal és konfiguráció", type: "syntax" },
+ Q10: { title: "HTTP Windows és Azure tűzfalszabály", type: "syntax" }
 };
 
 function fields() {
@@ -1121,20 +1128,20 @@ function runSyntaxRules(q) {
       if (!["Installed", "AlreadyInstalled"].includes(v.Q06_ROLE)) return result("needs_revision", "Jelöld a File Server szerepkör állapotát.");
       break;
     case "Q07":
-      if (String(v.Q07_NAME || "").trim().toLowerCase() !== "tananyag") return result("needs_revision", "A megosztás neve Tananyag legyen.");
-      if (!/^\\\\[^\\]+\\tananyag$/i.test(String(v.Q07_UNC || "").trim())) return result("needs_revision", "Adj meg \\\\SZERVERNEV\\Tananyag formátumú UNC-útvonalat.");
-      if (v.Q07_TEST !== "Yes") return result("needs_revision", "A megosztásnak elérhetőnek kell lennie.");
+      if (!/\btananyag\b/i.test(String(v.Q07_OUTPUT || ""))) return result("needs_revision", "Másold be a Get-SmbShare kimenetét, amelyben szerepel a Tananyag megosztás.");
       break;
     case "Q08":
-      if (v.Q08_LOCAL !== "Yes") return result("needs_revision", "Az IIS alapértelmezett oldalának működnie kell.");
+      if (v.Q08_LOCAL !== "IISDefault") return result("needs_revision", "Sikeres telepítés esetén a localhost címen az IIS alapértelmezett üdvözlőoldala jelenik meg.");
       break;
     case "Q09":
       if (!/<html\b/i.test(v.Q09_HTML) || !/<body\b/i.test(v.Q09_HTML)) return result("needs_revision", "Illeszd be a teljes HTML-oldalt.");
+      if (!/\b(?:New-WebBinding|Get-WebBinding|WebAdministration|IIS:|Get-Website)\b/i.test(v.Q09_SCRIPT) || !/index\.html|wwwroot/i.test(v.Q09_SCRIPT)) return result("needs_revision", "A szkript tartalmazza az IIS-beállításokat és a HTML-fájl elhelyezését.");
       if (v.Q09_LOCAL !== "Yes") return result("needs_revision", "A saját oldalnak a localhost címen meg kell jelennie.");
       break;
     case "Q10":
       if (!/\bNew-NetFirewallRule\b/i.test(v.Q10_COMMAND) || !/-LocalPort\s+80\b/i.test(v.Q10_COMMAND)) return result("needs_revision", "A parancs használja a New-NetFirewallRule utasítást a 80-as porttal.");
-      if (v.Q10_RESULT !== "Yes") return result("needs_revision", "A Windows tűzfalszabálynak létre kell jönnie.");
+      if (!/\bGet-AzNetworkSecurityGroup\b/i.test(v.Q10_AZURE) || !/\bAdd-AzNetworkSecurityRuleConfig\b/i.test(v.Q10_AZURE) || !/\bSet-AzNetworkSecurityGroup\b/i.test(v.Q10_AZURE) || !/-DestinationPortRange\s+["']?80\b/i.test(v.Q10_AZURE)) return result("needs_revision", "Az NSG-parancs tartalmazza a megfelelő Az.Network utasításokat és a TCP 80 célportot.");
+      if (v.Q10_RESULT !== "Yes") return result("needs_revision", "A weboldalnak a saját gépedről is elérhetőnek kell lennie.");
       break;
     case "Q11":
       if (num("Q11_PORT") !== 80) return result("needs_revision", "Az NSG-szabály célportja 80 legyen.");

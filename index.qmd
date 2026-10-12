@@ -36,5 +36,9 @@ Az egyes heti oldalak **interaktív munkafüzetként** működnek:
 
 **VS Code → Azure PowerShell → AI → IIS -> Web page -> Dashboard**
 
+### [5 hét – Hálózati szolgáltatások](weeks/week05/)
+
+**VS Code -> Windows Server -> SMB, IIS, AD, GP ***
+
 A további hetek folyamatosan kerülnek hozzáadásra.
 

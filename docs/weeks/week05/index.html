@@ -703,7 +703,7 @@ Tananyag    *    C:\Megosztas"></textarea>
 <label>A parancs kimenete (VM neve és Allapot)</label>
 <textarea class="code-answer" data-answer="Q15_OUTPUT" rows="5" placeholder="Name  Allapot ..."></textarea>
 </div>
-<p><strong>Elfogadási feltétel:</strong> a VM neve és a calculated property-vel előállított <code>Allapot</code> oszlop megjelenik, és az állapotból hiányzik a <code>VM</code> előtag.</p>
+<p><strong>Elfogadási feltétel:</strong> a VM neve és a calculated property-vel előállított <code>Allapot</code> oszlop megjelenik, és az állapotból hiányzik a <code>VM</code> előtag (például <code>running</code>).</p>
 </section>
 <section id="mentés-és-beadás" class="level2">
 <h2 class="anchored" data-anchor-id="mentés-és-beadás">Mentés és beadás</h2>
@@ -720,7 +720,7 @@ Helyi adatok törlése
 <p><span id="save-status"></span></p>
 </div>
 <p id="submission-deadline-note">
-<strong>Beadási határidő:</strong> próbaverzió – még nincs megadva
+<strong>Beadási határidő:</strong> 2026. október 22. 11:40 (magyar idő)
 </p>
 <div id="submission-summary" class="submission-summary" hidden="">
 <h3 style="margin-top:0" class="anchored">
@@ -773,10 +773,10 @@ const SETUP = Object.assign({
   showChecksInSubmissionSummary: true,
   requireChecksBeforeSubmission: false
 }, window.ITARCH_SETUP || {});
-// Pilot: az új feladatokhoz még nincs kész automatikus ellenőrző.
-SETUP.checksEnabled = false;
+// A feladatok kliensoldali, formai/szintaktikai ellenőrzése bekapcsolva.
+SETUP.checksEnabled = true;
 
-const STORAGE_KEY = "itarch_week05_answers_pilot1";
+const STORAGE_KEY = "itarch_week05_answers_2026";
 const IDLE_LIMIT_MS = 120000;
 const TICK_MS = 1000;
 
@@ -1589,8 +1589,8 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
-const SUBMISSION_DEADLINE = new Date("2099-12-31T23:59:00+01:00");
-const SUBMISSION_DEADLINE_TEXT = "próbaverzió – még nincs megadva";
+const SUBMISSION_DEADLINE = new Date("2026-10-22T11:40:00+02:00");
+const SUBMISSION_DEADLINE_TEXT = "2026. október 22. 11:40 (magyar idő)";
 
 function submissionClosed() {
   return Date.now() > SUBMISSION_DEADLINE.getTime();
@@ -1603,6 +1603,7 @@ function refreshSubmissionDeadline() {
   const note = document.getElementById("submission-deadline-note");
   if (submitBtn) {
     submitBtn.disabled = closed;
+    submitBtn.style.display = closed ? "none" : "";
     submitBtn.title = closed ? "A beadási határidő lejárt." : `Beadási határidő: ${SUBMISSION_DEADLINE_TEXT}`;
     if (closed) submitBtn.textContent = "🔒 Beadás lezárva";
   }

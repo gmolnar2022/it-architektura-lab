@@ -342,10 +342,10 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <p>Az előző hetek Windows 11 virtuális gépére már nincs szükség. Először jelentkezz be az Azure-ba:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Connect-AzAccount</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Listázd az erőforráscsoportokat:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Get-AzResourceGroup</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Get-AzResourceGroup <span class="op">|</span> <span class="fu">Select-Object</span> ResourceGroupName</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Azonosítsd a <strong>saját Windows 11 VM-ed</strong> erőforráscsoportját, és ellenőrizd a benne található erőforrásokat. Ehhez segítség:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Get-AzResource <span class="op">-</span>ResourceGroupName <span class="st">"SAJAT_EROFORRASCSOPORT"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A törléshez a <strong><code>Remove-AzResourceGroup</code></strong> parancsot használd. A <strong><code>-Name</code></strong> paraméterrel add meg a csoport nevét. <strong>A teljes, paraméterezett törlőparancsot neked kell összeállítanod!</strong> A futtatás előtt ellenőrizd újra a csoport nevét. Törlés után a <code>Get-AzResourceGroup</code> paranccsal győződj meg arról, hogy a csoport már nem szerepel a listában.</p>
+<p>A törléshez a <strong><code>Remove-AzResourceGroup</code></strong> parancsot használd. A <strong><code>-Name</code></strong> paraméterrel add meg a csoport nevét. A futtatás előtt ellenőrizd újra a csoport nevét. <strong>A törlés több percig is eltarthat; várd meg a művelet befejezését!</strong> Törlés után a <code>Get-AzResourceGroup | Select-Object ResourceGroupName</code> paranccsal győződj meg arról, hogy a csoport már nem szerepel a listában.</p>
 <div class="answer-box">
 <label>Az eltávolított erőforráscsoport neve</label><input data-answer="Q01_RG" autocomplete="off"> <label>A ténylegesen használt törlőparancs</label>
 <textarea class="code-answer" data-answer="Q01_COMMAND" placeholder="A teljes PowerShell-parancs..."></textarea>
@@ -394,25 +394,29 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 </tbody>
 </table>
 <div class="answer-box">
-<p><label>Azure-előfizetés (név vagy azonosító)</label><input data-answer="Q02_SUBSCRIPTION" autocomplete="off"> <label>Új erőforráscsoport neve</label><input data-answer="Q02_RG" placeholder="pl. rg-server-week05" autocomplete="off"> <label>Azure-régió</label><input data-answer="Q02_LOCATION" placeholder="az előfizetésedben engedélyezett régió" autocomplete="off"> <label>Windows Server VM neve</label><input data-answer="Q02_VM" placeholder="pl. winserver2025" autocomplete="off"> <label>VM-méret (ellenőrzött, tényleges választás)</label><input data-answer="Q02_SIZE" placeholder="pl. Standard_DS2_v2" autocomplete="off"> <label>Windows Server 2025 Datacenter Gen2 Desktop Experience – image SKU</label><input data-answer="Q02_IMAGE" placeholder="Azure-ban ellenőrzött SKU" autocomplete="off"> <label>Virtuális hálózat neve</label><input data-answer="Q02_VNET" placeholder="pl. vnet-week05" autocomplete="off"> <label>Alhálózat neve</label><input data-answer="Q02_SUBNET" placeholder="pl. subnet-server" autocomplete="off"> <label>Rendszergazdai felhasználónév (jelszó nélkül!)</label><input data-answer="Q02_ADMIN" placeholder="pl. azureadmin" autocomplete="off"></p>
+<p><label>Azure-előfizetés (név vagy azonosító)</label><input data-answer="Q02_SUBSCRIPTION" autocomplete="off"> <label>Új erőforráscsoport neve</label><input data-answer="Q02_RG" placeholder="pl. rg-server-week05" autocomplete="off"> <label>Azure-régió</label><input data-answer="Q02_LOCATION" placeholder="az előfizetésedben engedélyezett régió" autocomplete="off"> <label>Windows Server VM neve</label><input data-answer="Q02_VM" placeholder="pl. winserver2025" autocomplete="off"> <label>VM-méret (ellenőrzött, tényleges választás)</label><input data-answer="Q02_SIZE" placeholder="pl. Standard_DS2_v2" autocomplete="off"></p>
+<p><label>Virtuális hálózat neve</label><input data-answer="Q02_VNET" placeholder="pl. vnet-week05" autocomplete="off"> <label>Alhálózat neve</label><input data-answer="Q02_SUBNET" placeholder="pl. subnet-server" autocomplete="off"> <label>Rendszergazdai felhasználónév (jelszó nélkül!)</label><input data-answer="Q02_ADMIN" placeholder="pl. azureadmin" autocomplete="off"></p>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="A lemezkép ellenőrzése">
+<div class="callout callout-style-default callout-note callout-titled" title="A telepítéshez használt lemezkép">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>A lemezkép ellenőrzése
+<span class="screen-reader-only">Note</span>A telepítéshez használt lemezkép
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A Windows Server lemezképének SKU-ját az adott régióban lekérdezheted:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Get-AzVMImageSku <span class="op">-</span>Location <span class="st">"SAJAT_REGIO"</span> `</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">-</span>PublisherName <span class="st">"MicrosoftWindowsServer"</span> <span class="op">-</span>Offer <span class="st">"WindowsServer"</span> <span class="op">|</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Where-Object</span> Skus <span class="op">-Like</span> <span class="st">"*2025*"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A <strong>Desktop Experience</strong> változatot válaszd, ne a Server Core-t. Ha a javasolt gépméret nem elérhető, válassz megfelelő másikat, és a tényleges választást rögzítsd.</p>
+<p>A lemezkép azonosítóját most <strong>nem kell külön lekérdezned</strong>. A szkriptben ezt használd:</p>
+<p><code>MicrosoftWindowsServer:WindowsServer:2025-datacenter-g2:latest</code></p>
+<p>Ez a Windows Server 2025 Datacenter Gen2 grafikus felületű változata. A javasolt <code>Standard_DS2_v2</code> méret helyett, ha szükséges, válassz az előfizetésedben elérhető másik méretet.</p>
 </div>
 </div>
+<button type="button" id="copy-vm-parameters" class="check-button">
+Telepítési adatok másolása AI-hoz
+</button>
+<p><span id="copy-vm-status" role="status" aria-live="polite"></span></p>
+<p>A gomb a kitöltött adatokat a rögzített követelményekkel együtt másolja a vágólapra. Illeszd be őket az AI-asszisztensbe, majd egészítsd ki a saját utasításaiddal. <strong>Jelszót ne adj meg!</strong></p>
 <p><strong>Elfogadási feltétel:</strong> minden kitöltendő adat megvan, és a választott régió, image és VM-méret használható az előfizetésben.</p>
 </section>
 <section id="feladat-ai-prompt-a-telepítőszkripthez" class="level2">
@@ -420,7 +424,7 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <p><strong>Hely:</strong> Saját számítógép<br>
 <strong>Eszköz:</strong> VS Code + választott AI-asszisztens<br>
 <strong>AI:</strong> szükséges</p>
-<p>A <strong>2. feladat kitöltött adatai alapján</strong> írj promptot, amelyben az AI-t egy <strong><code>New-AzVM</code>-re épülő Azure PowerShell-szkript</strong> elkészítésére kéred. A promptodban szerepeljenek az előkészített paraméterek, és kérd, hogy a szkript:</p>
+<p>A <strong>2. feladat kitöltött adatai alapján</strong> (a „Telepítési adatok másolása AI-hoz” gombbal) írj promptot, amelyben az AI-t egy <strong><code>New-AzVM</code>-re épülő Azure PowerShell-szkript</strong> elkészítésére kéred. A promptodban szerepeljenek az előkészített paraméterek, és kérd, hogy a szkript:</p>
 <ul>
 <li>hozza létre a szükséges Azure-erőforrásokat (erőforráscsoport, VNet, subnet, NIC, NSG, nyilvános IP);</li>
 <li>Windows Server 2025 Datacenter <strong>Gen2 Desktop Experience</strong> lemezképet használjon;</li>
@@ -469,7 +473,7 @@ A Neptun-kód 6 betűből és/vagy számjegyből áll.
 <strong>Eszköz:</strong> VS Code PowerShell Terminal → Remote Desktop Connection<br>
 <strong>AI:</strong> szükség esetén hibakereséshez</p>
 <p>Futtasd a létrehozott szkriptet:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\create-server<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\create-server<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Várd meg a telepítés befejezését. Ellenőrizd a VM-et és a nyilvános IP-címét az Azure Portalon vagy Azure PowerShellben. A <strong>TCP 3389</strong> port elérhetőségét a <code>Test-NetConnection</code> paranccsal ellenőrizheted. Ezután nyisd meg a <strong>Távoli asztali kapcsolatot (<code>mstsc</code>)</strong>, és jelentkezz be a Windows Serverre.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="RDP-biztonság">
 <div class="callout-header d-flex align-content-center">
@@ -1391,7 +1395,56 @@ function refreshSubmissionDeadline() {
   if (note && closed) note.innerHTML = `<strong>Beadási határidő:</strong> ${SUBMISSION_DEADLINE_TEXT} – <strong>lejárt</strong>`;
 }
 
+async function copyVmParameters() {
+  const keys = [
+    ["Q02_SUBSCRIPTION", "Azure-előfizetés"],
+    ["Q02_RG", "Erőforráscsoport"],
+    ["Q02_LOCATION", "Régió"],
+    ["Q02_VM", "Virtuális gép neve"],
+    ["Q02_SIZE", "VM-méret"],
+    ["Q02_VNET", "Virtuális hálózat"],
+    ["Q02_SUBNET", "Alhálózat"],
+    ["Q02_ADMIN", "Rendszergazda felhasználóneve"]
+  ];
+  const status = document.getElementById("copy-vm-status");
+  const missing = keys.filter(([key]) => !String(document.querySelector(`[data-answer="${key}"]`)?.value || "").trim());
+  if (missing.length) {
+    status.textContent = " Előbb töltsd ki az összes telepítési mezőt!";
+    return;
+  }
+  const lines = [
+    "Windows Server 2025 Azure telepítési paraméterek",
+    ...keys.map(([key, label]) => `${label}: ${document.querySelector(`[data-answer="${key}"]`).value.trim()}`),
+    "Operációs rendszer: Windows Server 2025 Datacenter",
+    "Generáció: Gen2",
+    "Felület: Desktop Experience (GUI)",
+    "Lemezkép: MicrosoftWindowsServer:WindowsServer:2025-datacenter-g2:latest",
+    "OS-lemez: Standard HDD (Standard_LRS)",
+    "RDP: TCP 3389, lehetőleg csak a saját nyilvános IP-címről",
+    "A rendszergazdai jelszót futás közben biztonságosan kérje be, ne tárolja a kódban."
+  ];
+  const value = lines.join("\n");
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(value);
+    } else {
+      const temp = document.createElement("textarea");
+      temp.value = value;
+      temp.style.position = "fixed";
+      temp.style.opacity = "0";
+      document.body.appendChild(temp);
+      temp.select();
+      if (!document.execCommand("copy")) throw new Error("Clipboard unavailable");
+      temp.remove();
+    }
+    status.textContent = " ✓ Az adatok a vágólapra kerültek.";
+  } catch (_) {
+    status.textContent = " A másolás nem sikerült. Ellenőrizd a böngésző vágólapengedélyét.";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("copy-vm-parameters")?.addEventListener("click", copyVmParameters);
   loadLocal();
   addCheckControls();
 

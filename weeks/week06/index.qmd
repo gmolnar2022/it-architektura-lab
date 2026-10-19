@@ -39,7 +39,7 @@ Az **Azure for Students** előfizetés nem feltétlenül engedélyez minden rég
 
 **A) Azure Portal:** kezdd el egy VM létrehozását, ellenőrizd a régióválasztót és a kiválasztott Debian-lemezkép/VM-méret elérhetőségét. Még ne indítsd el a telepítést.
 
-**B) Azure Cloud Shell (Bash):** [Töltsd le az azure-region-check.sh szkriptet](azure-region-check.sh), töltsd fel a Cloud Shellbe, majd futtasd:
+**B) Azure Cloud Shell (Bash):** [Töltsd le az azure-region-check.sh szkriptet](../azure-region-check.sh), töltsd fel a Cloud Shellbe, majd futtasd:
 
 ```bash
 chmod +x azure-region-check.sh
@@ -146,7 +146,7 @@ Az Azure Portalon keresd meg az **Ingyenes szolgáltatások (Free services)** ol
 
 **Környezet:** saját gép, VS Code PowerShell terminál · **AI:** használható.
 
-A saját gép **VS Code PowerShell-termináljában** futtasd a [letölthető ellenőrző szkriptet](check-linux-vm.ps1):
+A saját gép **VS Code PowerShell-termináljában** futtasd a [letölthető ellenőrző szkriptet](../check-linux-vm.ps1):
 
 ```powershell
 .\check-linux-vm.ps1

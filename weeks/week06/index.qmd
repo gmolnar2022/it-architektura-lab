@@ -1,0 +1,139 @@
+---
+title: "6. hét – Linux VM az Azure-ban"
+subtitle: "Próbaváltozat · 1–5. feladat · saját gép / VS Code / Azure Portal / Cloud Shell"
+format:
+  html:
+    toc: true
+    theme: cosmo
+---
+
+::: {.callout-important}
+## Munkakörnyezet és AI-használat
+A fő munkakörnyezet **a saját számítógép VS Code terminálja**. Az Azure Cloud Shell (Bash) **csak a régióellenőrzés egyik lehetősége**. A VM telepítése Azure Portalon vagy a saját gépen futtatott Azure PowerShell-szkripttel történhet. **AI a 2–4. feladatban használható; az 1. és 5. feladatban nem.** Jelszót, privát SSH-kulcsot, hozzáférési tokent ne másolj a munkafüzetbe vagy AI-beszélgetésbe.
+:::
+
+**Neptun-kód (kötelező, 6 karakter):** <input id="neptun" maxlength="6" pattern="[A-Za-z0-9]{6}" required placeholder="ABC123" />
+
+## 1. feladat – A korábbi Windows Server erőforráscsoport törlése
+
+**Környezet:** saját gép, VS Code PowerShell terminál · **AI:** nem használható.
+
+1. Ellenőrizd, hogy a megfelelő Azure-előfizetés aktív.
+2. Listázd a korábbi Windows Serverhez tartozó erőforráscsoport tartalmát.
+3. **Csak a saját, előző heti Windows Server gyakorlathoz tartozó** erőforráscsoportot töröld. A törlés minden benne lévő erőforrást érint, és nem visszavonható.
+4. Ellenőrizd, hogy az erőforráscsoport már nem létezik.
+
+**Törölt erőforráscsoport neve:** <input data-answer="Q01_RG" />
+
+**Az ellenőrzéshez használt PowerShell-parancs és eredmény:**
+<textarea data-answer="Q01_CHECK" rows="3"></textarea>
+
+**Elfogadási feltétel:** a megfelelő csoport törlése és a törlés utáni ellenőrzés dokumentálása.
+
+## 2. feladat – Debian VM telepítési adatlap és régióellenőrzés
+
+**Környezet:** Azure Portal **vagy** Azure Cloud Shell (Bash) a régióellenőrzéshez; a többi előkészítés saját gépen · **AI:** használható.
+
+### Régió kiválasztása – kötelező ellenőrzés
+
+Az **Azure for Students** előfizetés nem feltétlenül engedélyez minden régiót. A telepítés előtt válassz az alábbi két módszer közül:
+
+**A) Azure Portal:** kezdd el egy VM létrehozását, ellenőrizd a régióválasztót és a kiválasztott Debian-lemezkép/VM-méret elérhetőségét. Még ne indítsd el a telepítést.
+
+**B) Azure Cloud Shell (Bash):** töltsd fel a mellékelt `azure-region-check.sh` fájlt a Cloud Shellbe, majd futtasd:
+
+```bash
+chmod +x azure-region-check.sh
+./azure-region-check.sh
+```
+
+A szkript az Azure for Students előfizetést próbálja kiválasztani, szükség esetén létrehozza a `region-check-rg` erőforráscsoportot, és **VNet ARM-validációt** futtat a fizikai régiókon. **Nem telepít VM-et vagy teszt-VNetet.** Az `ALLOWED` csak a tesztelt VNet validációjának sikerét jelzi, **nem garantálja** a Debian-lemezkép, a VM-méret vagy a kvóta elérhetőségét. A `BLOCKED` és `OTHER ERROR` eredményeket ne kezeld azonosként. A tesztcsoportot a szkript nem törli automatikusan; csak akkor töröld, ha meggyőződtél róla, hogy nem tartalmaz szükséges erőforrást.
+
+**Régióellenőrzés módja:** <select data-answer="Q02_METHOD"><option value="">Válassz...</option><option>Azure Portal</option><option>Cloud Shell Bash-szkript</option></select>
+
+**Választott régió (Azure-kód, pl. `northeurope`):** <input data-answer="Q02_REGION" />
+
+**Mi bizonyítja, hogy a régió megfelelő? Milyen korlátot kellett még ellenőrizni?**
+<textarea data-answer="Q02_EVIDENCE" rows="4"></textarea>
+
+### Telepítési adatlap
+
+| Paraméter | Követelmény / kitöltendő érték |
+|---|---|
+| Előfizetés | Azure for Students |
+| Erőforráscsoport | `rg-linux` (vagy egyedi, saját név) |
+| VM neve | `debian01` (vagy egyedi, saját név) |
+| Operációs rendszer | Debian 12 vagy Debian 13, elérhető Azure image |
+| Régió | Az előbb ellenőrzött régió |
+| VM-méret | Költség- és kvótaellenőrzés után kiválasztva |
+| OS-lemez | Standard HDD (`Standard_LRS`), ha elérhető |
+| Adminisztrátor | `azureuser` |
+| Hitelesítés | SSH-kulcs vagy – ha engedélyezett – erős jelszó |
+| Bejövő kapcsolat | SSH / TCP 22, lehetőleg csak saját publikus IP (`/32`) |
+| Availability Zone | Nem szükséges |
+
+**A végleges telepítési paraméterek és legalább három különbség a Windows Server VM-hez képest:**
+<textarea data-answer="Q02_PARAMS" rows="6"></textarea>
+
+## 3. feladat – Debian VM telepítése két választható módon
+
+**Környezet:** saját gép VS Code PowerShell **vagy** Azure Portal · **AI:** használható.
+
+Válassz **egyetlen** megoldási útvonalat:
+
+- **A – PowerShell-szkript:** készíts vagy készíttess AI-val `create-linux.ps1` szkriptet, amely a 2. feladat paramétereivel létrehozza a szükséges Azure-erőforrásokat és a Debian VM-et. A titkos adatokat ne égesd be a kódba; a szkript kérje be biztonságosan. Ne engedélyezzen nyitott SSH-t az egész internet felől, ha ez elkerülhető. Hibakezelésnél csak a saját maga által létrehozott erőforrásokat törölhesse, meglévő erőforráscsoportot automatikusan ne.
+- **B – Azure Portal:** a 2. feladat adatlapjával hozd létre a VM-et a grafikus felületen. Az NSG és a lemez beállításait külön ellenőrizd.
+
+**Választott módszer:** <select data-answer="Q03_METHOD"><option value="">Válassz...</option><option>PowerShell-szkript</option><option>Azure Portal</option></select>
+
+**AI-prompt vagy a portálon követett fő lépések:**
+<textarea data-answer="Q03_WORK" rows="7"></textarea>
+
+**A szkript fő részlete / a lényeges portálbeállítások dokumentálása:**
+<textarea data-answer="Q03_EVIDENCE" rows="7"></textarea>
+
+## 4. feladat – Ellenőrzés és hibajavítás
+
+**Környezet:** Azure Portal vagy saját gép VS Code PowerShell · **AI:** használható.
+
+Ellenőrizd a VM állapotát, a régiót, a VM-méretet, a Debian-lemezképet, a virtuális hálózatot, az NSG TCP 22-es szabályát és a publikus IP-t. Ha hiba történt, dokumentáld a hibaüzenetet és a javítást. **A `Running` állapot önmagában nem bizonyítja az SSH-elérhetőséget.**
+
+**VM neve, régiója, mérete, publikus IP-címe:**
+<textarea data-answer="Q04_VM" rows="3"></textarea>
+
+**NSG-szabály forrása és célportja, telepítési ellenőrzés eredménye:**
+<textarea data-answer="Q04_NSG" rows="4"></textarea>
+
+**AI által javasolt és saját magad által ellenőrzött javítás (ha nem volt hiba: „nem volt szükség javításra”):**
+<textarea data-answer="Q04_FIX" rows="4"></textarea>
+
+## 5. feladat – SSH-kapcsolat VS Code terminálból
+
+**Környezet:** saját gép, VS Code terminál, majd a Debian VM Bash-shellje · **AI:** nem használható.
+
+A saját gépen, a VS Code termináljában csatlakozz a Debian VM-hez (a címet cseréld a saját VM-ed publikus IP-címére):
+
+```powershell
+ssh azureuser@VM_PUBLIC_IP
+```
+
+Sikeres bejelentkezés után a **távoli Debian VM-en** add ki:
+
+```bash
+whoami
+hostname
+pwd
+cat /etc/os-release
+```
+
+**A négy parancs kimenete (személyes vagy titkos adat nélkül):**
+<textarea data-answer="Q05_OUTPUT" rows="8"></textarea>
+
+**Magyarázat: a `hostname` melyik gép nevét írja ki, és miért?**
+<textarea data-answer="Q05_EXPLAIN" rows="3"></textarea>
+
+**Elfogadási feltétel:** működő SSH-kapcsolat, a Debian VM-en kiadott négy parancs kimenete és a helyi/távoli környezet helyes megkülönböztetése.
+
+---
+
+**Megjegyzés:** ez az 1–5. feladat tartalmi és megjelenítési próbaváltozata. A korábbi munkafüzet összesített ellenőrző, JSON-mentési és beadási funkciói még nincsenek átvezetve.

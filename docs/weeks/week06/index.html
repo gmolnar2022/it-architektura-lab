@@ -234,7 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A fő munkakörnyezet <strong>a saját számítógép VS Code terminálja</strong>. Az Azure Cloud Shell (Bash) <strong>csak a régióellenőrzés egyik lehetősége</strong>. A VM telepítése Azure Portalon vagy a saját gépen futtatott Azure PowerShell-szkripttel történhet. <strong>AI a 2–4. és 11–15. feladatban használható; az 1., 5–10. feladatban nem.</strong> Jelszót, privát SSH-kulcsot, hozzáférési tokent ne másolj a munkafüzetbe vagy AI-beszélgetésbe.</p>
 </div>
 </div>
-<p><strong>Neptun-kód (kötelező, 6 karakter):</strong> <input id="neptun" maxlength="6" pattern="[A-Za-z0-9]{6}" required="" placeholder="ABC123"></p>
+<p><strong>Neptun-kód (kötelező, 6 karakter):</strong> <input id="neptun" data-answer="STUDENT_ID" maxlength="6" pattern="[A-Za-z0-9]{6}" required="" placeholder="ABC123"></p>
 <section id="feladat-a-korábbi-windows-server-erőforráscsoport-törlése" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-a-korábbi-windows-server-erőforráscsoport-törlése">1. feladat – A korábbi Windows Server erőforráscsoport törlése</h2>
 <p><strong>Környezet:</strong> saját gép, VS Code PowerShell terminál · <strong>AI:</strong> nem használható.</p>
@@ -792,6 +792,43 @@ Szintaktikai ellenőrzés
 .lab-feedback.ok { color:#176b36; }
 .lab-feedback.warn { color:#a45c00; }
 </style>
+## Mentés és beadás
+
+A válaszok automatikusan mentődnek ebben a böngészőben. A beadás előtt ellenőrizd a Neptun-kódot és a kitöltött mezőket. A szintaktikai ellenőrzés nem helyettesíti a parancsok tényleges futtatását.
+
+<div class="actions">
+<button id="submit-button" type="button" onclick="openSubmissionSummary()">📤 Beadás</button>
+<button type="button" onclick="exportSubmissionJson()">💾 JSON export</button>
+<button type="button" onclick="clearAnswers()">Helyi adatok törlése</button>
+<span id="save-status" role="status"></span>
+</div>
+<p id="submission-deadline-note"><strong>Beadási határidő:</strong> még nincs beállítva a munkafüzetben.</p>
+<div id="submission-summary" class="submission-summary" hidden="">
+<h3 class="anchored">Beadás előtti összesítés</h3>
+<div id="submission-summary-body"></div>
+<div class="actions"><button type="button" onclick="closeSubmissionSummary()">Vissza a javításhoz</button><button id="confirm-submit-button" type="button" onclick="confirmSubmission()">Beadás megerősítése</button></div>
+</div>
+<div id="submission-result" role="status" aria-live="polite"></div>
+
+::: {.callout-note title="Aktivitási adatok"}
+Az időmérés és az eseménykövetés a projekt `config/setup.js` fájljából konfigurálható. Az SSH-terminálban végzett munka nem feltétlenül számít böngészőbeli aktív időnek.
+:::
+<div id="tracking-panel" class="submission-summary">
+<strong>Aktivitás ezen a gépen</strong>
+<p>Időmérés: <span id="tracking-time-status">–</span> · Eseménykövetés: <span id="tracking-event-status">–</span></p>
+<p>Becsült aktív idő: <span id="activity-active-time">0:00</span> · Szerkesztések: <span id="activity-edit-count">0</span></p>
+<p>Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: <span id="activity-last">–</span></p>
+</div>
+
+<style>
+.actions {display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;margin:1rem 0}
+.actions button {padding:.55rem .9rem;border:1px solid #77808a;border-radius:6px;background:#fff;cursor:pointer}
+.actions button:disabled {opacity:.5;cursor:not-allowed}
+.submission-summary {border:1px solid #c8d0d8;border-radius:9px;padding:1rem;margin:1rem 0;background:#fafbfc}
+.submission-summary[hidden] {display:none}
+#submission-result {margin:1rem 0}
+</style>
+<script src="../../config/setup.js"></script>
 <script>
 (function(){
   function validIPv4(s){
@@ -831,6 +868,118 @@ Szintaktikai ellenőrzés
     const bad=/^Adj|^Másold|^A mező|^Azure régiókódot|^3–8|^Használj|^Szerepeljen|^Legyen|^Add meg/.test(msg);
     f.textContent=msg+' (Csak formai ellenőrzés, nem Azure-hitelesítés.)';
     f.className='lab-feedback '+(bad?'warn':'ok');
+  });
+})();
+</script>
+<script>
+(() => {
+  'use strict';
+  const CONFIG = Object.assign({timeTracking:false,eventTracking:false,showTrackingPanel:false},window.ITARCH_SETUP||{});
+  const STORAGE_KEY = 'itarch_week06_answers_2026';
+  // OKTATÓI BEÁLLÍTÁS: a végleges határidőt itt add meg ISO 8601 formában,
+  // pl. '2026-10-29T11:40:00+01:00'. A null azt jelenti, hogy nincs korlátozás.
+  const SUBMISSION_DEADLINE_ISO = null;
+  const ENDPOINT = 'https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/submit';
+  const $ = id => document.getElementById(id);
+  const fields = () => [...document.querySelectorAll('[data-answer]')];
+  const studentId = () => ($('neptun')?.value||'').trim().toUpperCase();
+  const validId = () => /^[A-Z0-9]{6}$/.test(studentId());
+  const nowIso = () => new Date().toISOString();
+  const deadline = SUBMISSION_DEADLINE_ISO ? new Date(SUBMISSION_DEADLINE_ISO) : null;
+  const closed = () => deadline && !isNaN(deadline.getTime()) && Date.now() > deadline.getTime();
+  const started = nowIso();
+  let activity = {started_at:started,last_activity_at:started,active_seconds_estimate:0,edit_count:0,events:[]};
+  let lastInteraction = Date.now();
+  const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const logEvent = (type) => {if(CONFIG.eventTracking) activity.events.push({type,at:nowIso()});};
+  const answers = () => Object.fromEntries(fields().filter(f=>f.dataset.answer!=='STUDENT_ID').map(f=>[f.dataset.answer,f.value]));
+  const save = (message=false) => {
+    activity.last_activity_at=nowIso();
+    try {localStorage.setItem(STORAGE_KEY,JSON.stringify({student_id:studentId(),answers:answers(),activity}));
+      if(message) $('save-status').textContent='✓ Helyi mentés kész';
+    } catch(e) {if(message) $('save-status').textContent='⚠ Helyi mentés nem érhető el';}
+  };
+  const load = () => {
+    try {const stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null'); if(!stored)return;
+      if(stored.student_id) $('neptun').value=stored.student_id;
+      fields().forEach(f=>{if(f.dataset.answer!=='STUDENT_ID' && Object.hasOwn(stored.answers||{},f.dataset.answer))f.value=stored.answers[f.dataset.answer]});
+      if(stored.activity)activity=Object.assign(activity,stored.activity);
+    }catch(e){}
+  };
+  const renderActivity = () => {
+    $('tracking-panel').hidden=!CONFIG.showTrackingPanel;
+    $('tracking-time-status').textContent=CONFIG.timeTracking?'bekapcsolva':'kikapcsolva';
+    $('tracking-event-status').textContent=CONFIG.eventTracking?'bekapcsolva':'kikapcsolva';
+    const sec=activity.active_seconds_estimate||0;
+    $('activity-active-time').textContent=`${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;
+    $('activity-edit-count').textContent=activity.edit_count||0;
+    $('activity-started').textContent=activity.started_at||'–';
+    $('activity-last').textContent=activity.last_activity_at||'–';
+  };
+  const refreshDeadline = () => {
+    const isClosed=closed();
+    $('submit-button').hidden=!!isClosed;
+    if($('confirm-submit-button'))$('confirm-submit-button').disabled=!!isClosed||!validId();
+    $('submission-deadline-note').textContent=deadline && !isNaN(deadline.getTime())
+      ? `Beadási határidő: ${deadline.toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})} (magyar idő)${isClosed?' – lejárt':''}`
+      : 'Beadási határidő: még nincs beállítva a munkafüzetben.';
+  };
+  const payload = () => ({schema_version:1,course:'ITARCH',week:6,student_id:studentId(),submitted_at:nowIso(),answers:answers(),checks:{},activity_summary:activity});
+  window.openSubmissionSummary = () => {
+    refreshDeadline();if(closed())return;
+    const fs=fields().filter(f=>f.dataset.answer!=='STUDENT_ID');
+    const missing=fs.filter(f=>!f.value.trim());
+    const groups=[...new Set(missing.map(f=>(f.dataset.answer.match(/^Q(\d\d)/)||[])[1]).filter(Boolean))];
+    const complete=fs.length-missing.length;
+    $('submission-summary-body').innerHTML=`<p><strong>Neptun:</strong> ${esc(studentId()||'nincs megadva')} ${validId()?'✓':'⚠ 6 betű/szám szükséges'}</p>
+      <p><strong>Kitöltött mezők:</strong> ${complete}/${fs.length} (${Math.round(100*complete/Math.max(1,fs.length))}%)</p>
+      <p><strong>Hiányos feladatok:</strong> ${groups.length?groups.map(x=>Number(x)).join(', '):'nincs'}</p>
+      ${missing.length?`<p>Összesen ${missing.length} mező üres. A beadás ettől még lehetséges, de ellenőrizd a válaszokat.</p>`:''}
+      <p>A szintaktikai ellenőrző gombok használata nem kötelező. Biztosan beadod?</p>`;
+    $('submission-summary').hidden=false;
+    $('submission-summary').scrollIntoView({behavior:'smooth',block:'start'});
+    logEvent('submission_summary_opened');save();refreshDeadline();
+  };
+  window.closeSubmissionSummary=()=>{$('submission-summary').hidden=true;};
+  const download = data => {
+    const file=`ITARCH_week06_${data.student_id}_${data.submitted_at.replace(/[:.]/g,'-')}.json`;
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'});
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=file;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  };
+  window.exportSubmissionJson=()=>{if(!validId()){$('submission-result').textContent='⚠ A JSON exporthoz 6 karakteres Neptun-kód szükséges.';return;}logEvent('submission_json_exported');save();download(payload());};
+  window.confirmSubmission=async()=>{
+    if(closed()){$('submission-result').textContent='⚠ A beadási határidő lejárt.';refreshDeadline();return;}
+    if(!validId()){$('submission-result').textContent='⚠ Adj meg érvényes, 6 karakteres Neptun-kódot.';return;}
+    const btn=$('confirm-submit-button');btn.disabled=true;
+    $('submission-result').textContent='Beadás folyamatban…';
+    try {
+      const response=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload())});
+      const result=await response.json().catch(()=>null);
+      if(!response.ok||!result||result.success!==true)throw new Error(`HTTP ${response.status}`);
+      logEvent('submission_succeeded');save();$('submission-summary').hidden=true;
+      $('submission-result').textContent=`✓ Beadás sikeres. Azonosító: ${result.submission_id||'–'}`;
+    }catch(e){logEvent('submission_failed');save();$('submission-result').textContent='⚠ A szerveres beadás nem sikerült. A helyi mentés megmaradt; próbáld újra, vagy készíts JSON exportot.';}
+    finally {btn.disabled=false;refreshDeadline();}
+  };
+  window.clearAnswers=()=>{
+    if(!confirm('Biztosan törlöd az összes helyben mentett választ és aktivitási adatot?'))return;
+    fields().forEach(f=>f.value='');
+    try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
+    activity={started_at:nowIso(),last_activity_at:nowIso(),active_seconds_estimate:0,edit_count:0,events:[]};
+    $('submission-summary').hidden=true;$('submission-result').textContent='';$('save-status').textContent='Helyi adatok törölve.';renderActivity();
+  };
+  document.addEventListener('DOMContentLoaded',()=>{
+    load();refreshDeadline();renderActivity();
+    fields().forEach(f=>{f.addEventListener('input',()=>{
+      if(f.dataset.answer==='STUDENT_ID')f.value=f.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);
+      activity.edit_count++;lastInteraction=Date.now();logEvent('answer_edited');save();renderActivity();
+    });f.addEventListener('change',()=>save());});
+    document.addEventListener('keydown',()=>lastInteraction=Date.now());
+    document.addEventListener('mousemove',()=>lastInteraction=Date.now(),{passive:true});
+    document.addEventListener('visibilitychange',()=>save());
+    window.addEventListener('beforeunload',()=>save());
+    setInterval(()=>{if(CONFIG.timeTracking&&!document.hidden&&Date.now()-lastInteraction<120000){activity.active_seconds_estimate++;if(activity.active_seconds_estimate%10===0)save();renderActivity();}},1000);
+    setInterval(refreshDeadline,30000);
   });
 })();
 </script>

@@ -23,10 +23,9 @@ A fő munkakörnyezet **a saját számítógép VS Code terminálja**. Az Azure 
 3. **Csak a saját, előző heti Windows Server gyakorlathoz tartozó** erőforráscsoportot töröld. A törlés minden benne lévő erőforrást érint, és nem visszavonható.
 4. Ellenőrizd, hogy az erőforráscsoport már nem létezik.
 
-**Törölt erőforráscsoport neve:** <input data-answer="Q01_RG" />
+<div class="lab-answer"><label for="q01rg"><strong>Törölt erőforráscsoport neve:</strong></label><input id="q01rg" data-answer="Q01_RG" /><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="rg">Szintaktikai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
-**Az ellenőrzéshez használt PowerShell-parancs és eredmény:**
-<textarea data-answer="Q01_CHECK" rows="3"></textarea>
+<div class="lab-answer"><label for="q01check"><strong>Az ellenőrzéshez használt PowerShell-parancs és eredmény:</strong></label><textarea id="q01check" data-answer="Q01_CHECK" rows="3"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="command">Szintaktikai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 **Elfogadási feltétel:** a megfelelő csoport törlése és a törlés utáni ellenőrzés dokumentálása.
 
@@ -40,7 +39,7 @@ Az **Azure for Students** előfizetés nem feltétlenül engedélyez minden rég
 
 **A) Azure Portal:** kezdd el egy VM létrehozását, ellenőrizd a régióválasztót és a kiválasztott Debian-lemezkép/VM-méret elérhetőségét. Még ne indítsd el a telepítést.
 
-**B) Azure Cloud Shell (Bash):** töltsd fel a mellékelt `azure-region-check.sh` fájlt a Cloud Shellbe, majd futtasd:
+**B) Azure Cloud Shell (Bash):** [Töltsd le az azure-region-check.sh szkriptet](azure-region-check.sh), töltsd fel a Cloud Shellbe, majd futtasd:
 
 ```bash
 chmod +x azure-region-check.sh
@@ -51,7 +50,7 @@ A szkript az Azure for Students előfizetést próbálja kiválasztani, szüksé
 
 **Régióellenőrzés módja (nem kötelező):** <select data-answer="Q02_METHOD"><option value="">Nem végeztem külön ellenőrzést</option><option>Azure Portal</option><option>Cloud Shell Bash-szkript</option></select>
 
-**Választott régió (Azure-kód, pl. `northeurope`):** <input data-answer="Q02_REGION" />
+<div class="lab-answer"><label for="q02region"><strong>Választott régió (Azure-kód, pl. <code>northeurope</code>):</strong></label><input id="q02region" data-answer="Q02_REGION" /><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="region">Szintaktikai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ### Telepítési adatlap
 
@@ -136,7 +135,7 @@ Válassz **egyetlen** megoldási útvonalat:
 
 **Választott módszer:** <select data-answer="Q03_METHOD"><option value="">Válassz...</option><option>PowerShell-szkript</option><option>Azure Portal</option></select>
 
-**Sikeres telepítés visszaigazolása – a létrehozott VM publikus IP-címe:** <input data-answer="Q03_PUBLIC_IP" placeholder="például: 203.0.113.10" />
+<div class="lab-answer"><label for="q03ip"><strong>Sikeres telepítés visszaigazolása – a VM publikus IP-címe:</strong></label><input id="q03ip" data-answer="Q03_PUBLIC_IP" placeholder="például: 203.0.113.10" /><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="ip">Szintaktikai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ::: {.callout-warning}
 ## Tartalék megoldás, ha a telepítés egyik módszerrel sem sikerül
@@ -147,43 +146,24 @@ Az Azure Portalon keresd meg az **Ingyenes szolgáltatások (Free services)** ol
 
 **Környezet:** saját gép, VS Code PowerShell terminál · **AI:** használható.
 
-A következő parancsokat **a saját Windows-gépeden, Azure PowerShellben** futtasd. A `$rg` és `$vmName` értékét szükség esetén módosítsd a saját erőforrásaid nevére. Előfeltétel: bejelentkezett Azure PowerShell-munkamenet és megfelelő előfizetés.
+A saját gép **VS Code PowerShell-termináljában** futtasd a [letölthető ellenőrző szkriptet](check-linux-vm.ps1):
 
 ```powershell
-$rg = "rg-linux"
-$vmName = "debian01"
-
-# 1. VM állapota, régiója és mérete
-Get-AzVM -ResourceGroupName $rg -Name $vmName -Status |
-    Select-Object Name, Location, @{N='VMSize';E={$_.HardwareProfile.VmSize}},
-                  @{N='PowerState';E={($_.Statuses | Where-Object Code -like 'PowerState/*').DisplayStatus}}
-
-# 2. Publikus IP-cím
-Get-AzPublicIpAddress -ResourceGroupName $rg |
-    Select-Object Name, IpAddress
-
-# 3. NSG bejövő SSH-szabályai
-Get-AzNetworkSecurityGroup -ResourceGroupName $rg |
-    ForEach-Object {
-        $nsgName = $_.Name
-        $_.SecurityRules | Where-Object {
-            $_.Direction -eq 'Inbound' -and $_.Access -eq 'Allow' -and
-            ($_.DestinationPortRange -eq '22' -or $_.DestinationPortRange -eq '*')
-        } | Select-Object @{N='NSG';E={$nsgName}}, Name, SourceAddressPrefix, DestinationPortRange
-    }
+.\check-linux-vm.ps1
 ```
 
-**1. parancs eredménye – VM neve, régiója, mérete, állapota:**
-<textarea data-answer="Q04_VM" rows="3"></textarea>
+A szkript **sorszámozott listából kiválaszthatóvá teszi az erőforráscsoportot és azon belül a virtuális gépet**. Nem kell átírni a változókat. A már aktív Azure PowerShell-bejelentkezést használja. Ha még nem jelentkeztél be, előbb futtasd a `Connect-AzAccount` parancsot.
 
-**2. parancs eredménye – publikus IP-cím:**
-<textarea data-answer="Q04_IP" rows="2"></textarea>
+A szkript három eredménycsoportot jelenít meg. Másold be őket külön a megfelelő mezőbe:
 
-**3. parancs eredménye – NSG-szabály(ok):**
-<textarea data-answer="Q04_NSG" rows="3"></textarea>
+<div class="lab-answer"><label for="q04vm"><strong>1. eredmény – VM neve, régiója, mérete és állapota</strong></label><textarea id="q04vm" data-answer="Q04_VM" rows="5" placeholder="ResourceGroup : ...&#10;VMName : ...&#10;Region : ...&#10;VMSize : ...&#10;PowerState : ..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="vm">Szintaktikai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+<div class="lab-answer"><label for="q04ip"><strong>2. eredmény – a VM publikus IP-címe</strong></label><textarea id="q04ip" data-answer="Q04_IP" rows="3" placeholder="PublicIPName ... IpAddress ..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="ip-output">Szintaktikai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+<div class="lab-answer"><label for="q04nsg"><strong>3. eredmény – NSG bejövő szabályai</strong></label><textarea id="q04nsg" data-answer="Q04_NSG" rows="5" placeholder="NSG: ...&#10;Name Priority Access Protocol ..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="nsg">Szintaktikai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ::: {.callout-note}
-A 3. parancs a szabályok **egy részét** mutatja: a közvetlenül megadott, bejövő engedélyező szabályokat vizsgálja. A tényleges SSH-elérhetőséget az 5. feladatban ellenőrizzük.
+A szkript a kiválasztott VM hálózati adapteréhez és alhálózatához kapcsolódó NSG-k **egyéni bejövő szabályait** listázza. Ez nem azonos a teljes effektív szabálykészlettel, és nem bizonyítja az SSH tényleges elérhetőségét. Ezt az 5. feladatban ellenőrzöd.
 :::
 
 ## 5. feladat – SSH-kapcsolat VS Code terminálból
@@ -205,11 +185,54 @@ pwd
 cat /etc/os-release
 ```
 
-**Az SSH-bejelentkezés után kiadott parancsok kimenete (személyes vagy titkos adat nélkül):**
-<textarea data-answer="Q05_OUTPUT" rows="8"></textarea>
+<div class="lab-answer"><label for="q05output"><strong>Az SSH-bejelentkezés után kiadott parancsok kimenete (titkos adat nélkül):</strong></label><textarea id="q05output" data-answer="Q05_OUTPUT" rows="8"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="ssh">Szintaktikai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 **Elfogadási feltétel:** működő SSH-kapcsolat, a Debian VM-en kiadott négy parancs kimenete.
 
 ---
 
 **Megjegyzés:** ez az 1–5. feladat tartalmi és megjelenítési próbaváltozata. A korábbi munkafüzet összesített ellenőrző, JSON-mentési és beadási funkciói még nincsenek átvezetve.
+
+```{=html}
+<style>
+.lab-answer { display:flex; flex-direction:column; align-items:stretch; gap:.45rem; margin:1.1rem 0 1.5rem; clear:both; width:100%; }
+.lab-answer label { display:block; width:100%; }
+.lab-answer input, .lab-answer textarea { display:block; box-sizing:border-box; width:100%; max-width:100%; min-width:0; padding:.65rem; border:1px solid #9ca3af; border-radius:.3rem; font:inherit; }
+.lab-answer textarea { min-height:6rem; resize:vertical; }
+.lab-answer button { align-self:flex-start; }
+.lab-feedback { display:block; font-size:.92rem; }
+.lab-feedback.ok { color:#176b36; }
+.lab-feedback.warn { color:#a45c00; }
+</style>
+<script>
+(function(){
+  function validIPv4(s){
+    const m=s.match(/(?:^|[^\d])((?:\d{1,3}\.){3}\d{1,3})(?!\d)/);
+    if(!m) return false;
+    return m[1].split('.').every(x=>Number(x)>=0 && Number(x)<=255);
+  }
+  const checks={
+    rg: v => /^[a-zA-Z0-9_.()\-]{1,90}$/.test(v) ? 'A név formátuma megfelelő.' : 'Adj meg egy érvényes erőforráscsoport-nevet.',
+    command: v => v.length>15 && /Get-AzResourceGroup|az group show|ResourceGroupNotFound|not found|nem található/i.test(v) ? 'A válasz parancsot vagy ellenőrzési eredményt tartalmaz; ellenőrizd, hogy mindkettő szerepel-e.' : 'Másold be a parancsot és a törlés utáni ellenőrzés eredményét.',
+    region: v => /^[a-z][a-z0-9]{2,29}$/.test(v) ? 'A régiókód formátuma megfelelő; elérhetősége nem ellenőrzött.' : 'Azure régiókódot adj meg (például northeurope).',
+    ip: v => validIPv4(v) ? 'IPv4-cím formátuma megfelelő; az elérhetőség nem ellenőrzött.' : 'Adj meg érvényes IPv4-címet.',
+    vm: v => /VMName\s*:/i.test(v) && /Region\s*:/i.test(v) && /VMSize\s*:/i.test(v) && /PowerState\s*:/i.test(v) ? 'A négy elvárt adatmező szerepel.' : 'A teljes 1. eredményblokkot másold be (VMName, Region, VMSize, PowerState).',
+    'ip-output': v => validIPv4(v) ? 'Az eredmény IPv4-címet tartalmaz.' : 'A 2. parancs kimenetét másold be egy IPv4-címmel.',
+    nsg: v => /NSG\s*:/i.test(v) && (/Priority|Access|Nincs egyéni|Nincs a VM/i.test(v)) ? 'Az NSG-kimenet szerkezete megfelelőnek tűnik.' : 'Másold be a teljes NSG-kimenetet, a fejlécet vagy a hiányt jelző üzenetet is.',
+    ssh: v => /^(?:.*\n){3,}/.test(v) && /(debian|PRETTY_NAME|VERSION_ID|ID=)/i.test(v) ? 'A kimenet több sort és OS-azonosítót tartalmaz.' : 'Másold be a whoami, hostname, pwd és cat /etc/os-release kimenetét.'
+  };
+  document.addEventListener('click',function(e){
+    const b=e.target.closest('.lab-check'); if(!b) return;
+    const wrap=b.closest('.lab-answer');
+    const field=wrap.querySelector('input,textarea');
+    const f=wrap.querySelector('.lab-feedback');
+    const v=(field.value||'').trim();
+    if(!v){f.textContent='A mező üres.';f.className='lab-feedback warn';return;}
+    const msg=checks[b.dataset.check](v);
+    const bad=/^Adj|^Másold|^A mező|^Azure régiókódot/.test(msg);
+    f.textContent=msg+' (Csak formai ellenőrzés, nem Azure-hitelesítés.)';
+    f.className='lab-feedback '+(bad?'warn':'ok');
+  });
+})();
+</script>
+```

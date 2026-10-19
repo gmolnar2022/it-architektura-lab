@@ -180,6 +180,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#feladat-debian-vm-telepítése-két-választható-módon" id="toc-feladat-debian-vm-telepítése-két-választható-módon" class="nav-link" data-scroll-target="#feladat-debian-vm-telepítése-két-választható-módon">3. feladat – Debian VM telepítése két választható módon</a></li>
   <li><a href="#feladat-a-debian-vm-ellenőrzése-powershellből" id="toc-feladat-a-debian-vm-ellenőrzése-powershellből" class="nav-link" data-scroll-target="#feladat-a-debian-vm-ellenőrzése-powershellből">4. feladat – A Debian VM ellenőrzése PowerShellből</a></li>
   <li><a href="#feladat-ssh-kapcsolat-vs-code-terminálból" id="toc-feladat-ssh-kapcsolat-vs-code-terminálból" class="nav-link" data-scroll-target="#feladat-ssh-kapcsolat-vs-code-terminálból">5. feladat – SSH-kapcsolat VS Code terminálból</a></li>
+  <li><a href="#feladat-saját-munkamappa-létrehozása" id="toc-feladat-saját-munkamappa-létrehozása" class="nav-link" data-scroll-target="#feladat-saját-munkamappa-létrehozása">6. feladat – Saját munkamappa létrehozása</a></li>
+  <li><a href="#feladat-szöveges-fájl-létrehozása-és-másolása" id="toc-feladat-szöveges-fájl-létrehozása-és-másolása" class="nav-link" data-scroll-target="#feladat-szöveges-fájl-létrehozása-és-másolása">7. feladat – Szöveges fájl létrehozása és másolása</a></li>
+  <li><a href="#feladat-fájljogosultságok-és-hozzáférés-megtagadása" id="toc-feladat-fájljogosultságok-és-hozzáférés-megtagadása" class="nav-link" data-scroll-target="#feladat-fájljogosultságok-és-hozzáférés-megtagadása">8. feladat – Fájljogosultságok és hozzáférés megtagadása</a></li>
+  <li><a href="#feladat-hálózati-interfészek-és-útvonalak" id="toc-feladat-hálózati-interfészek-és-útvonalak" class="nav-link" data-scroll-target="#feladat-hálózati-interfészek-és-útvonalak">9. feladat – Hálózati interfészek és útvonalak</a></li>
+  <li><a href="#feladat-hálózati-elérés-és-névfeloldás-ellenőrzése" id="toc-feladat-hálózati-elérés-és-névfeloldás-ellenőrzése" class="nav-link" data-scroll-target="#feladat-hálózati-elérés-és-névfeloldás-ellenőrzése">10. feladat – Hálózati elérés és névfeloldás ellenőrzése</a></li>
+  <li><a href="#feladat-ai-val-támogatott-bash-projekt-linux-vm-health-monitor" id="toc-feladat-ai-val-támogatott-bash-projekt-linux-vm-health-monitor" class="nav-link" data-scroll-target="#feladat-ai-val-támogatott-bash-projekt-linux-vm-health-monitor">11–15. feladat – AI-val támogatott Bash-projekt: Linux VM Health Monitor</a></li>
+  <li><a href="#feladat-rendszeradatok-lekérdezése-változókba" id="toc-feladat-rendszeradatok-lekérdezése-változókba" class="nav-link" data-scroll-target="#feladat-rendszeradatok-lekérdezése-változókba">11. feladat – Rendszeradatok lekérdezése változókba</a></li>
+  <li><a href="#feladat-állapotminősítés-elágazással" id="toc-feladat-állapotminősítés-elágazással" class="nav-link" data-scroll-target="#feladat-állapotminősítés-elágazással">12. feladat – Állapotminősítés elágazással</a></li>
+  <li><a href="#feladat-ismételt-ellenőrzés-ciklussal" id="toc-feladat-ismételt-ellenőrzés-ciklussal" class="nav-link" data-scroll-target="#feladat-ismételt-ellenőrzés-ciklussal">13. feladat – Ismételt ellenőrzés ciklussal</a></li>
+  <li><a href="#feladat-paraméterek-és-naplózás" id="toc-feladat-paraméterek-és-naplózás" class="nav-link" data-scroll-target="#feladat-paraméterek-és-naplózás">14. feladat – Paraméterek és naplózás</a></li>
+  <li><a href="#feladat-futtatási-jog-automatizálás-és-az-azure-vm-leállítása" id="toc-feladat-futtatási-jog-automatizálás-és-az-azure-vm-leállítása" class="nav-link" data-scroll-target="#feladat-futtatási-jog-automatizálás-és-az-azure-vm-leállítása">15. feladat – Futtatási jog, automatizálás és az Azure VM leállítása</a></li>
   </ul>
 </nav>
     </div>
@@ -189,7 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">6. hét – Linux VM az Azure-ban</h1>
-<p class="subtitle lead">Próbaváltozat · 1–5. feladat · saját gép / VS Code / Azure Portal / Cloud Shell</p>
+<p class="subtitle lead">Próbaváltozat · 1–15. feladat · saját gép / VS Code / Azure Portal / Cloud Shell</p>
 </div>
 
 
@@ -216,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A fő munkakörnyezet <strong>a saját számítógép VS Code terminálja</strong>. Az Azure Cloud Shell (Bash) <strong>csak a régióellenőrzés egyik lehetősége</strong>. A VM telepítése Azure Portalon vagy a saját gépen futtatott Azure PowerShell-szkripttel történhet. <strong>AI a 2–4. feladatban használható; az 1. és 5. feladatban nem.</strong> Jelszót, privát SSH-kulcsot, hozzáférési tokent ne másolj a munkafüzetbe vagy AI-beszélgetésbe.</p>
+<p>A fő munkakörnyezet <strong>a saját számítógép VS Code terminálja</strong>. Az Azure Cloud Shell (Bash) <strong>csak a régióellenőrzés egyik lehetősége</strong>. A VM telepítése Azure Portalon vagy a saját gépen futtatott Azure PowerShell-szkripttel történhet. <strong>AI a 2–4. és 11–15. feladatban használható; az 1., 5–10. feladatban nem.</strong> Jelszót, privát SSH-kulcsot, hozzáférési tokent ne másolj a munkafüzetbe vagy AI-beszélgetésbe.</p>
 </div>
 </div>
 <p><strong>Neptun-kód (kötelező, 6 karakter):</strong> <input id="neptun" maxlength="6" pattern="[A-Za-z0-9]{6}" required="" placeholder="ABC123"></p>
@@ -249,7 +260,7 @@ Szintaktikai ellenőrzés
 <h3 class="anchored" data-anchor-id="régió-kiválasztása-javasolt-ellenőrzés">Régió kiválasztása – javasolt ellenőrzés</h3>
 <p>Az <strong>Azure for Students</strong> előfizetés nem feltétlenül engedélyez minden régiót. A telepítés előtt <strong>javasolt</strong> ellenőrizni a régió elérhetőségét az alábbi módszerek valamelyikével. Az ellenőrzés nem kötelező; sikertelen telepítésnél érdemes visszatérni rá:</p>
 <p><strong>A) Azure Portal:</strong> kezdd el egy VM létrehozását, ellenőrizd a régióválasztót és a kiválasztott Debian-lemezkép/VM-méret elérhetőségét. Még ne indítsd el a telepítést.</p>
-<p><strong>B) Azure Cloud Shell (Bash):</strong> <a href="../azure-region-check.sh">Töltsd le az azure-region-check.sh szkriptet</a>, töltsd fel a Cloud Shellbe, majd futtasd:</p>
+<p><strong>B) Azure Cloud Shell (Bash):</strong> <a href="../../azure-region-check.sh">Töltsd le az azure-region-check.sh szkriptet</a>, töltsd fel a Cloud Shellbe, majd futtasd:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x azure-region-check.sh</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./azure-region-check.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A szkript az Azure for Students előfizetést próbálja kiválasztani, szükség esetén létrehozza a <code>region-check-rg</code> erőforráscsoportot, és <strong>VNet ARM-validációt</strong> futtat a fizikai régiókon. <strong>Nem telepít VM-et vagy teszt-VNetet.</strong> Az <code>ALLOWED</code> csak a tesztelt VNet validációjának sikerét jelzi, <strong>nem garantálja</strong> a Debian-lemezkép, a VM-méret vagy a kvóta elérhetőségét. A <code>BLOCKED</code> és <code>OTHER ERROR</code> eredményeket ne kezeld azonosként. A tesztcsoportot a szkript nem törli automatikusan; csak akkor töröld, ha meggyőződtél róla, hogy nem tartalmaz szükséges erőforrást.</p>
@@ -411,7 +422,7 @@ document.addEventListener('DOMContentLoaded', function () {
 <section id="feladat-a-debian-vm-ellenőrzése-powershellből" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-a-debian-vm-ellenőrzése-powershellből">4. feladat – A Debian VM ellenőrzése PowerShellből</h2>
 <p><strong>Környezet:</strong> saját gép, VS Code PowerShell terminál · <strong>AI:</strong> használható.</p>
-<p>A saját gép <strong>VS Code PowerShell-termináljában</strong> futtasd a <a href="../check-linux-vm.ps1">letölthető ellenőrző szkriptet</a>:</p>
+<p>A saját gép <strong>VS Code PowerShell-termináljában</strong> futtasd a <a href="../../check-linux-vm.ps1">letölthető ellenőrző szkriptet</a>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">.</span>\check-linux-vm<span class="op">.</span><span class="fu">ps1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A szkript <strong>sorszámozott listából kiválaszthatóvá teszi az erőforráscsoportot és azon belül a virtuális gépet</strong>. Nem kell átírni a változókat. A már aktív Azure PowerShell-bejelentkezést használja. Ha még nem jelentkeztél be, előbb futtasd a <code>Connect-AzAccount</code> parancsot.</p>
 <p>A szkript három eredménycsoportot jelenít meg. Másold be őket külön a megfelelő mezőbe:</p>
@@ -477,8 +488,296 @@ Szintaktikai ellenőrzés
 <span class="lab-feedback" role="status" aria-live="polite"></span>
 </div>
 <p><strong>Elfogadási feltétel:</strong> működő SSH-kapcsolat, a Debian VM-en kiadott négy parancs kimenete.</p>
+</section>
+<section id="feladat-saját-munkamappa-létrehozása" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-saját-munkamappa-létrehozása">6. feladat – Saját munkamappa létrehozása</h2>
+<p><strong>Környezet:</strong> Debian VM, SSH-n keresztül · <strong>AI:</strong> nem használható.</p>
+<p>Válassz egy <strong>egyedi azonosítót</strong> (3–8 kisbetű vagy szám), amely nem jelszó és nem személyes adat. Például <code>k7m42</code>. A további feladatokban következetesen ezt használd. A munkamappa neve legyen <code>linux-&lt;azonosító&gt;</code>, és a <strong>saját felhasználói könyvtáradban</strong> hozd létre. Ne használj <code>sudo</code>-t.</p>
+<p><strong>Parancssegítség:</strong> <code>pwd</code> (aktuális könyvtár), <code>mkdir</code> (mappa létrehozása), <code>cd</code> (könyvtárváltás), <code>ls</code> (listázás). Hasznos kapcsolók: <code>mkdir -p</code> (szükség esetén szülőmappák is), <code>ls -ld</code> (a mappa saját adatai), <code>ls -la</code> (rejtett elemekkel). A <code>~</code> a saját home könyvtár rövidítése.</p>
+<div class="lab-answer">
+<label for="q06id"><strong>Egyedi azonosítód:</strong></label><input id="q06id" data-answer="Q06_ID" placeholder="például k7m42"><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="personal-id">Szintaktikai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<div class="lab-answer">
+<label for="q06cmd"><strong>A mappa létrehozására és ellenőrzésére használt parancsok (soronként):</strong></label>
+<textarea id="q06cmd" data-answer="Q06_COMMANDS" rows="4" placeholder="mkdir ...
+ls ..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task6">
+Szintaktikai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> a <code>~/linux-&lt;azonosító&gt;</code> mappa létezik, és a megadott parancsokkal ellenőrizhető.</p>
+</section>
+<section id="feladat-szöveges-fájl-létrehozása-és-másolása" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-szöveges-fájl-létrehozása-és-másolása">7. feladat – Szöveges fájl létrehozása és másolása</h2>
+<p><strong>Környezet:</strong> Debian VM · <strong>AI:</strong> nem használható.</p>
+<p>A 6. feladatban létrehozott mappában készíts <code>jegyzet-&lt;azonosító&gt;.txt</code> nevű fájlt. Írj bele <strong>legalább két sort</strong>: az egyik tartalmazza a saját azonosítódat, a másik a VM <code>hostname</code> parancsával lekért gépnevét. Másold le a fájlt <code>masolat-&lt;azonosító&gt;.txt</code> néven, majd listázd a mappa tartalmát. A szövegbe ne írj jelszót vagy hozzáférési tokent.</p>
+<p><strong>Parancssegítség:</strong> <code>echo</code> (szöveg kiírása), <code>hostname</code> (gépnév), <code>&gt;</code> (fájl létrehozása/felülírása), <code>&gt;&gt;</code> (hozzáfűzés), <code>cp FORRÁS CÉL</code> (másolás), <code>ls -l</code> (fájllista). A <code>$(hostname)</code> a parancs eredményét illeszti a szövegbe. <strong>Figyelem:</strong> a <code>&gt;</code> felülírja a meglévő fájl tartalmát.</p>
+<div class="lab-answer">
+<label for="q07cmd"><strong>A fájl létrehozásához, másolásához és ellenőrzéséhez használt parancsok:</strong></label>
+<textarea id="q07cmd" data-answer="Q07_COMMANDS" rows="6" placeholder="echo ... > ...
+echo ... >> ...
+cp ... ...
+ls -l ..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task7">
+Szintaktikai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> két különböző nevű <code>.txt</code> fájl található a saját mappádban, kezdetben azonos tartalommal.</p>
+</section>
+<section id="feladat-fájljogosultságok-és-hozzáférés-megtagadása" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-fájljogosultságok-és-hozzáférés-megtagadása">8. feladat – Fájljogosultságok és hozzáférés megtagadása</h2>
+<p><strong>Környezet:</strong> Debian VM · <strong>AI:</strong> nem használható.</p>
+<p>Dolgozz <strong>csak</strong> a <code>masolat-&lt;azonosító&gt;.txt</code> fájlon! Először állítsd a jogosultságát <code>600</code>-ra (csak a tulajdonos olvashatja és írhatja). Nézd meg a jogosultságot és a tartalmat. Ezután állítsd <code>000</code>-ra, és próbáld ismét megjeleníteni a tartalmat. Végül <strong>kötelezően állítsd vissza <code>600</code>-ra</strong>, majd ismét jelenítsd meg a fájlt. Jegyezd fel, mikor sikerült a megnyitás és mikor kaptál <code>Permission denied</code> hibát.</p>
+<p><strong>Parancssegítség:</strong> <code>chmod 600 FÁJL</code>, <code>chmod 000 FÁJL</code>, <code>ls -l FÁJL</code>, <code>cat FÁJL</code>. A <code>600</code> jelentése <code>rw-------</code>, a <code>000</code> jelentése <code>----------</code>. Ne használj <code>sudo</code>-t, és ne módosítsd a mappa vagy rendszerfájlok jogosultságát. A feladatot normál felhasználóként végezd, ne rootként.</p>
+<div class="lab-answer">
+<label for="q08cmd"><strong>A jogosultságmódosítások, megtekintési próbák és visszaállítás parancsai, sorrendben:</strong></label>
+<textarea id="q08cmd" data-answer="Q08_COMMANDS" rows="8" placeholder="chmod 600 ...
+ls -l ...
+cat ...
+chmod 000 ...
+cat ...
+chmod 600 ...
+cat ..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task8">
+Szintaktikai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<strong>Tapasztalat (röviden):</strong>
+<textarea data-answer="Q08_OBSERVATION" rows="2" style="display:block;width:100%;max-width:100%;" placeholder="Mikor jelent meg a Permission denied, és miért?"></textarea>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <code>chmod 000</code> után <strong>ugyanazzal a felhasználóval</strong> próbáld olvasni a fájlt. A root felhasználó jogosultságai eltérnek, ezért rootként a próba nem ugyanazt mutatja. A feladat végén ellenőrizd a visszaállított <code>600</code> jogosultságot.</p>
+</div>
+</div>
+</section>
+<section id="feladat-hálózati-interfészek-és-útvonalak" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-hálózati-interfészek-és-útvonalak">9. feladat – Hálózati interfészek és útvonalak</h2>
+<p><strong>Környezet:</strong> Debian VM · <strong>AI:</strong> nem használható.</p>
+<p>Derítsd ki, milyen hálózati interfészeket lát a Debian, melyik rendelkezik IPv4-címmel, és mi az alapértelmezett átjáró. <strong>A VM belső IP-címe eltérhet az Azure Portalon látott publikus IP-címtől</strong>; ez normális, mert az Azure hálózati címfordítást is használhat.</p>
+<p><strong>Parancssegítség:</strong> <code>ip -br addr</code> (rövid interfészlista és címek), <code>ip -4 addr show</code> (IPv4-címek), <code>ip route</code> vagy <code>ip -4 route</code> (útvonalak), <code>hostname -I</code> (a géphez rendelt IP-címek). A <code>-br</code> rövid formátumot, a <code>-4</code> IPv4-szűrést jelent.</p>
+<div class="lab-answer">
+<label for="q09cmd"><strong>A hálózati interfészek és az alapértelmezett útvonal lekérdezéséhez használt parancsok:</strong></label>
+<textarea id="q09cmd" data-answer="Q09_COMMANDS" rows="4" placeholder="ip ...
+ip ..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task9">
+Szintaktikai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Az alapértelmezett átjáró IP-címe:</strong> <input data-answer="Q09_GATEWAY" placeholder="például 10.0.0.1"></p>
+</section>
+<section id="feladat-hálózati-elérés-és-névfeloldás-ellenőrzése" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-hálózati-elérés-és-névfeloldás-ellenőrzése">10. feladat – Hálózati elérés és névfeloldás ellenőrzése</h2>
+<p><strong>Környezet:</strong> Debian VM · <strong>AI:</strong> nem használható.</p>
+<p>Próbáld ki, elérhető-e egy külső IP-cím (<code>1.1.1.1</code>), majd egy tartománynév (<code>example.com</code>). Végezz legfeljebb <strong>3–3 ping-kísérletet</strong>, és nézd meg a névfeloldás eredményét. Hasonlítsd össze, mit vizsgál az IP-címes ping, a névvel végzett ping és a külön DNS-lekérdezés. Ha a ping nem kap választ, az <strong>nem bizonyítja önmagában</strong>, hogy nincs hálózati kapcsolat: ICMP-forgalom tiltva is lehet.</p>
+<p><strong>Parancssegítség:</strong> <code>ping -c 3 CÉL</code> (három ICMP-kérés), <code>nslookup example.com</code> (névfeloldás a rendszer beállításaival), opcionálisan <code>ip route get 1.1.1.1</code> (a kiválasztott útvonal). A <code>-c 3</code> automatikusan leállítja a pinget három próbálkozás után.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Ha az nslookup parancs nem érhető el">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Ha az nslookup parancs nem érhető el
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ha az <code>nslookup</code> futtatásakor a <code>command not found</code> hibaüzenet jelenik meg, telepítsd a <code>dnsutils</code> csomagot a Debian virtuális gépen:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get update</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install dnsutils</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A telepítés után próbáld újra:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nslookup</span> example.com</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A <code>sudo</code> a rendszergazdai jogosultsággal történő végrehajtáshoz szükséges. A telepítés megerősítést kérhet.</p>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q10cmd"><strong>A két ping és a DNS-ellenőrzés parancsai:</strong></label>
+<textarea id="q10cmd" data-answer="Q10_COMMANDS" rows="5" placeholder="ping -c 3 ...
+ping -c 3 ...
+nslookup ..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task10">
+Szintaktikai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<strong>Rövid tapasztalat (sikeres/sikertelen ping, DNS):</strong>
+<textarea data-answer="Q10_OBSERVATION" rows="3" style="display:block;width:100%;max-width:100%;" placeholder="Melyik teszt sikerült? Mit mutatott a névfeloldás?"></textarea>
+<p><strong>Elfogadási feltétel:</strong> mindhárom vizsgálathoz megadtad a ténylegesen használt parancsot, és röviden értelmezted az eredményt.</p>
+</section>
+<section id="feladat-ai-val-támogatott-bash-projekt-linux-vm-health-monitor" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-ai-val-támogatott-bash-projekt-linux-vm-health-monitor">11–15. feladat – AI-val támogatott Bash-projekt: Linux VM Health Monitor</h2>
+<p><strong>Környezet:</strong> SSH-kapcsolattal elért Debian VM, VS Code terminál · <strong>AI:</strong> használható. Az öt feladatban <strong>ugyanazt a szkriptet</strong> (<code>monitor-&lt;azonosító&gt;.sh</code>) fejleszted tovább. A 6. feladatban választott azonosítódat használd; a fájlt a saját <code>~/linux-&lt;azonosító&gt;/</code> mappádban tárold. A szkript <strong>csak állapotot figyeljen meg</strong>, ne módosítson rendszerszolgáltatást, ne töröljön fájlokat, és ne tartalmazzon jelszót vagy tokent.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="AI-használat és ellenőrzés">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>AI-használat és ellenőrzés
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Az AI segíthet a szkript megírásában és javításában, de <strong>minden új változatot neked kell átnézned és a Debian VM-en kipróbálnod</strong>. Minden feladatnál add meg a ténylegesen használt parancsokat, az AI-nak adott rövid utasítást és a kért ellenőrzési eredményt. A „Szintaktikai ellenőrzés” gomb csak a munkafüzetbe írt szöveget vizsgálja; <strong>nem futtatja és nem minősíti a szkriptet</strong>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Bash-szkript készítése a nano szerkesztővel">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Bash-szkript készítése a nano szerkesztővel
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A szkriptet a Debian VM-en, az SSH-kapcsolatban megnyitott terminálban készítsd el. Lépj a 6. feladatban létrehozott saját mappádba, majd indítsd el a <code>nano</code> szövegszerkesztőt (az <code>AZONOSITO</code> helyére a saját azonosítódat írd):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/linux-AZONOSITO</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> monitor-AZONOSITO.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A szerkesztőben írd be vagy módosítsd a Bash-kódot. <strong>Mentés:</strong> <code>Ctrl+O</code>, majd <code>Enter</code>. <strong>Kilépés:</strong> <code>Ctrl+X</code>. A következő feladatban ugyanígy nyisd meg a meglévő fájlt, és bővítsd tovább.</p>
+<p>A mentett szkriptet először ellenőrizd, majd futtasd:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> <span class="at">-n</span> monitor-AZONOSITO.sh</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> monitor-AZONOSITO.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A <code>bash -n</code> a Bash szintaxisát ellenőrzi, de nem futtatja a szkriptet. A <code>bash fájlnév.sh</code> paranccsal <strong>még végrehajtási jogosultság nélkül is</strong> elindíthatod. A <code>chmod</code> használatát és a közvetlen <code>./monitor-AZONOSITO.sh</code> futtatást a 15. feladatban gyakoroljuk.</p>
+</div>
+</div>
+</section>
+<section id="feladat-rendszeradatok-lekérdezése-változókba" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-rendszeradatok-lekérdezése-változókba">11. feladat – Rendszeradatok lekérdezése változókba</h2>
+<p>Készíts egy <code>monitor-&lt;azonosító&gt;.sh</code> nevű Bash-szkriptet. Lekérdezéssel tölts fel <strong>legalább négy változót</strong>: gépnév, aktuális felhasználó, üzemidő és a <code>/</code> fájlrendszer foglaltsága százalékban. Az értékeket jelenítsd meg áttekinthető formában. A lemezfoglaltságot később <strong>egész számként</strong> kell összehasonlítani, tehát a <code>%</code> jelet el kell távolítanod. Opcionálisan a szabad memóriát is jelenítsd meg.</p>
+<p><strong>Parancssegítség:</strong> <code>hostname</code>, <code>whoami</code>, <code>uptime -p</code>, <code>df -P /</code>, <code>free -m</code>, <code>awk</code>, <code>tr -d '%'</code>, <code>echo</code>, <code>printf</code>; Bash: <code>VALTOZO=$(parancs)</code> (parancshelyettesítés), <code>"$VALTOZO"</code> (változó biztonságos kiírása). A <code>df -P /</code> kimenetéből a megfelelő oszlopot kell kiválasztani; a fejlécsort hagyd ki.</p>
+<div class="lab-answer">
+<label for="q11cmd"><strong>A szkript létrehozásának, a szintaxisellenőrzésnek és az első futtatásnak a parancsai:</strong></label>
+<textarea id="q11cmd" data-answer="Q11_COMMANDS" rows="5" placeholder="nano monitor-...sh
+bash -n monitor-...sh
+bash monitor-...sh"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task11">
+Szintaktikai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<strong>A szkript változóit létrehozó kódrészlet:</strong>
+<textarea data-answer="Q11_CODE" rows="6" style="display:block;width:100%;max-width:100%;" placeholder="Például: HOST=$(hostname) ..."></textarea>
+<strong>AI-nak adott utasítás (röviden):</strong>
+<textarea data-answer="Q11_PROMPT" rows="2" style="display:block;width:100%;max-width:100%;"></textarea>
+<p><strong>Elfogadási feltétel:</strong> a szkript hiba nélkül fut, és a négy kért adatot megjeleníti.</p>
+</section>
+<section id="feladat-állapotminősítés-elágazással" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-állapotminősítés-elágazással">12. feladat – Állapotminősítés elágazással</h2>
+<p>Bővítsd <strong>ugyanazt a szkriptet</strong> lemezfoglaltság-ellenőrzéssel. A foglaltság alapján írjon ki <strong>OK</strong>, <strong>WARNING</strong> vagy <strong>CRITICAL</strong> állapotot: 75% alatt OK; 75–89% között WARNING; 90%-tól CRITICAL. Az ellenőrzéshez használd a 11. feladatban előállított numerikus változót.</p>
+<p><strong>Parancssegítség:</strong> <code>if</code>, <code>elif</code>, <code>else</code>, <code>fi</code>; numerikus összehasonlítás: <code>-ge</code> (nagyobb vagy egyenlő), <code>-lt</code> (kisebb). Bash-ben használható a <code>[[ ... ]]</code> vagy a <code>[ ... ]</code> szerkezet. <strong>Előbb a magasabb (90%) küszöböt vizsgáld</strong>, különben hibás lehet a besorolás.</p>
+<p>A működést ne a VM lemezének mesterséges feltöltésével teszteld! Ideiglenesen adj a kódnak <strong>tesztértékeket</strong> (például 40, 80 és 95), és ellenőrizd mindhárom ágat, majd állítsd vissza a valódi <code>df</code>-alapú lekérdezést.</p>
+<div class="lab-answer">
+<label for="q12code"><strong>Az elágazást tartalmazó Bash-kódrészlet:</strong></label>
+<textarea id="q12code" data-answer="Q12_CODE" rows="8" placeholder="if ...
+  ...
+elif ...
+  ...
+else
+  ...
+fi"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task12">
+Szintaktikai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<strong>Tesztelési parancsok és a három kapott állapot:</strong>
+<textarea data-answer="Q12_TEST" rows="4" style="display:block;width:100%;max-width:100%;"></textarea>
+<strong>AI-nak adott utasítás (röviden):</strong>
+<textarea data-answer="Q12_PROMPT" rows="2" style="display:block;width:100%;max-width:100%;"></textarea>
+</section>
+<section id="feladat-ismételt-ellenőrzés-ciklussal" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-ismételt-ellenőrzés-ciklussal">13. feladat – Ismételt ellenőrzés ciklussal</h2>
+<p>Bővítsd a szkriptet úgy, hogy <strong>háromszor</strong> lekérdezze és minősítse a lemezhasználatot, az ellenőrzések között <strong>5 másodperc</strong> szünettel. Minden körben friss lekérdezés történjen (ne csak ugyanazt a korábban elmentett értéket írd ki). A gépnevet és a felhasználót elég egyszer lekérdezni.</p>
+<p><strong>Parancssegítség:</strong> <code>for</code>, <code>do</code>, <code>done</code>, <code>sleep 5</code>, <code>date '+%Y-%m-%d %H:%M:%S'</code>; Bash-számláló: <code>for ((i=1; i&lt;=3; i++))</code>. Alternatíva: <code>while</code> ciklus. A ciklusban szerepeljen a foglaltság új lekérdezése és a 12. feladat elágazása is.</p>
+<div class="lab-answer">
+<label for="q13code"><strong>A ciklust és az ismételt lekérdezést tartalmazó kódrészlet:</strong></label>
+<textarea id="q13code" data-answer="Q13_CODE" rows="8" placeholder="for ...; do
+  DISK_USAGE=$(...)
+  ...
+  sleep 5
+done"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task13">
+Szintaktikai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<strong>Futtatási parancs és a három ellenőrzés rövid eredménye:</strong>
+<textarea data-answer="Q13_TEST" rows="4" style="display:block;width:100%;max-width:100%;"></textarea>
+<strong>AI-nak adott utasítás (röviden):</strong>
+<textarea data-answer="Q13_PROMPT" rows="2" style="display:block;width:100%;max-width:100%;"></textarea>
+</section>
+<section id="feladat-paraméterek-és-naplózás" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-paraméterek-és-naplózás">14. feladat – Paraméterek és naplózás</h2>
+<p>Tedd paraméterezhetővé a szkriptet: az <strong>első paraméter</strong> az ellenőrzések száma (alapérték: <code>3</code>), a <strong>második paraméter</strong> a WARNING-küszöb százalékban (alapérték: <code>75</code>). A CRITICAL-küszöb maradjon <code>90</code>. Ellenőrizd, hogy az ismétlésszám 1–5 közötti egész szám, a WARNING-küszöb pedig 1–89 közötti egész szám legyen. Hibás paraméternél írj ki rövid használati útmutatót és lépj ki. A szkript minden ellenőrzés eredményét fűzze hozzá a saját mappában lévő <code>monitor-&lt;azonosító&gt;.log</code> fájlhoz, dátummal és állapottal.</p>
+<p><strong>Parancssegítség:</strong> <code>$1</code>, <code>$2</code> (pozicionális paraméterek), <code>${1:-3}</code> (alapérték), <code>[[ ... ]]</code>, <code>=~</code> (szabályos kifejezés), <code>-gt</code>, <code>-lt</code>, <code>exit 1</code>, <code>date</code>, <code>&gt;&gt;</code> (hozzáfűzés), <code>tail -n 5 FÁJL</code> (utolsó öt sor). Opcionális: <code>case</code> a paraméterek kezelésére. <strong>A naplóhoz abszolút útvonalat használj</strong> (például <code>$HOME/linux-&lt;azonosító&gt;/...</code>), hogy később cronból is működjön.</p>
+<p>Próbáld ki legalább egyszer az alapértékeket, egyszer az <code>1 5</code> paraméterpárt (így várhatóan tesztelhető a WARNING ág), és egyszer egy hibás paramétert. Az <code>1 5</code> nem garantál figyelmeztetést, ha a tényleges foglaltság 5% alatt van.</p>
+<div class="lab-answer">
+<label for="q14cmd"><strong>A három tesztfuttatás és a naplóellenőrzés parancsai:</strong></label>
+<textarea id="q14cmd" data-answer="Q14_COMMANDS" rows="6" placeholder="bash monitor-...sh
+bash monitor-...sh 1 5
+bash monitor-...sh 0 75
+tail -n 5 ...log"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task14">
+Szintaktikai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<strong>A paraméterkezelés és a naplózás kódrészlete:</strong>
+<textarea data-answer="Q14_CODE" rows="7" style="display:block;width:100%;max-width:100%;"></textarea>
+<strong>AI-nak adott utasítás (röviden):</strong>
+<textarea data-answer="Q14_PROMPT" rows="2" style="display:block;width:100%;max-width:100%;"></textarea>
+</section>
+<section id="feladat-futtatási-jog-automatizálás-és-az-azure-vm-leállítása" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-futtatási-jog-automatizálás-és-az-azure-vm-leállítása">15. feladat – Futtatási jog, automatizálás és az Azure VM leállítása</h2>
+<p><strong>A) Üzembe helyezés.</strong> Ellenőrizd a kész szkript Bash-szintaxisát, adj neki futtatási jogot, majd futtasd közvetlenül, paraméterekkel. Ellenőrizd a naplófájlt is. <strong>Parancssegítség:</strong> <code>bash -n FÁJL</code>, <code>chmod u+x FÁJL</code>, <code>ls -l FÁJL</code>, <code>./FÁJL 1 75</code>, <code>tail -n 5 NAPLÓ</code>.</p>
+<p><strong>B) Időzítés rövid tesztje.</strong> A <code>crontab -e</code> segítségével állíts be <strong>percenkénti</strong> futtatást, a szkript és a napló <strong>abszolút elérési útjával</strong>. Az időzített futtatás csak <strong>egy ellenőrzést</strong> végezzen, ne háromszor várakozzon. Várj legfeljebb 2–3 percet, és ellenőrizd, hogy megjelent-e új sor a naplóban. Ha a <code>crontab</code> parancs nem érhető el, a telepítéshez kérj segítséget az oktatótól; a feladat kedvéért ne módosíts önállóan rendszerkonfigurációt.</p>
+<p><strong>Parancssegítség:</strong> <code>crontab -e</code> (szerkesztés), <code>crontab -l</code> (megjelenítés). A percenkénti cron-kifejezés: <code>* * * * *</code>. Cronban a <code>~</code> helyett használj abszolút útvonalat, például <code>/home/FELHASZNALO/linux-AZONOSITO/monitor-AZONOSITO.sh 1 75</code>. A naplózást maga a szkript végezze.</p>
+<p><strong>C) Takarítás.</strong> A sikeres teszt után a <code>crontab -e</code> paranccsal <strong>töröld csak az általad létrehozott sort</strong> (más cron-feladatot ne módosíts), majd a <code>crontab -l</code> paranccsal ellenőrizd, hogy a saját időzítésed már nem szerepel.</p>
+<div class="lab-answer">
+<label for="q15cmd"><strong>A szintaxisellenőrzés, jogosultságállítás, futtatás és cron-ellenőrzés parancsai:</strong></label>
+<textarea id="q15cmd" data-answer="Q15_COMMANDS" rows="7" placeholder="bash -n ...
+chmod u+x ...
+./monitor-...sh 1 75
+crontab -e
+crontab -l"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task15">
+Szintaktikai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<strong>A beállított (majd eltávolított) cron-sor:</strong>
+<textarea data-answer="Q15_CRON" rows="2" style="display:block;width:100%;max-width:100%;" placeholder="* * * * * /home/.../monitor-...sh 1 75"></textarea>
+<strong>Az időzített futtatás bizonyítéka (naplórészlet):</strong>
+<textarea data-answer="Q15_LOG" rows="3" style="display:block;width:100%;max-width:100%;"></textarea>
+<strong>AI-nak adott utasítás (röviden):</strong>
+<textarea data-answer="Q15_PROMPT" rows="2" style="display:block;width:100%;max-width:100%;"></textarea>
+<div class="callout callout-style-default callout-warning callout-titled" title="Kötelező utolsó lépés – az Azure VM leállítása">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Kötelező utolsó lépés – az Azure VM leállítása
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A gyakorlat végén <strong>az Azure Portalon</strong> nyisd meg a saját Debian virtuális gépedet, kattints a <strong>Stop / Leállítás</strong> gombra, és várd meg a <strong>Stopped (deallocated)</strong> állapotot. <strong>Ne elégedj meg</strong> a Linuxon kiadott <code>shutdown</code> vagy <code>poweroff</code> paranccsal: ezek nem feltétlenül szabadítják fel az Azure számítási erőforrásait. A VM számítási díja a deallokálással megszűnik, de a lemez és más erőforrások továbbra is költségesek lehetnek. <strong>Ne töröld a VM-et</strong>, mert a következő gyakorlaton még szükség lehet rá.</p>
+</div>
+</div>
+<p><strong>A VM végső állapota az Azure Portalon:</strong> <input data-answer="Q15_VM_STATE" placeholder="Stopped (deallocated)" style="display:block;width:100%;max-width:100%;"></p>
+<p><strong>Elfogadási feltétel:</strong> a kész szkript futtatható, a naplóban megjelenik az időzített ellenőrzés, a saját cron-bejegyzést eltávolítottad, és a VM állapota <strong>Stopped (deallocated)</strong>.</p>
 <hr>
-<p><strong>Megjegyzés:</strong> ez az 1–5. feladat tartalmi és megjelenítési próbaváltozata. A korábbi munkafüzet összesített ellenőrző, JSON-mentési és beadási funkciói még nincsenek átvezetve.</p>
+<p><strong>Megjegyzés:</strong> ez az 1–15. feladat tartalmi és megjelenítési próbaváltozata. A korábbi munkafüzet összesített ellenőrző, JSON-mentési és beadási funkciói még nincsenek átvezetve.</p>
 <style>
 .lab-answer { display:flex; flex-direction:column; align-items:stretch; gap:.45rem; margin:1.1rem 0 1.5rem; clear:both; width:100%; }
 .lab-answer label { display:block; width:100%; }
@@ -504,6 +803,17 @@ Szintaktikai ellenőrzés
     vm: v => /VMName\s*:/i.test(v) && /Region\s*:/i.test(v) && /VMSize\s*:/i.test(v) && /PowerState\s*:/i.test(v) ? 'A négy elvárt adatmező szerepel.' : 'A teljes 1. eredményblokkot másold be (VMName, Region, VMSize, PowerState).',
     'ip-output': v => validIPv4(v) ? 'Az eredmény IPv4-címet tartalmaz.' : 'A 2. parancs kimenetét másold be egy IPv4-címmel.',
     nsg: v => /NSG\s*:/i.test(v) && (/Priority|Access|Nincs egyéni|Nincs a VM/i.test(v)) ? 'Az NSG-kimenet szerkezete megfelelőnek tűnik.' : 'Másold be a teljes NSG-kimenetet, a fejlécet vagy a hiányt jelző üzenetet is.',
+    'personal-id': v => /^[a-z0-9]{3,8}$/.test(v) ? 'Az azonosító formátuma megfelelő.' : '3–8 kisbetűt vagy számot használj, ékezet és szóköz nélkül.',
+    task6: v => /\bmkdir\b/.test(v) && /\bls\b/.test(v) && /linux-[a-z0-9]{3,8}/.test(v) ? 'A létrehozás és ellenőrzés parancsai felismerhetők.' : 'Használj mkdir és ls parancsot, és szerepeljen a saját linux-azonosító nevű mappa.',
+    task7: v => /\becho\b/.test(v) && />>?/.test(v) && /\bcp\b/.test(v) && /\bls\b/.test(v) && /\.txt/.test(v) ? 'A létrehozás, másolás és listázás parancsai felismerhetők.' : 'Szerepeljen echo, átirányítás (> vagy >>), cp, ls és .txt fájlnév.',
+    task8: v => /chmod\s+600\b/.test(v) && /chmod\s+000\b/.test(v) && (v.match(/chmod\s+600\b/g)||[]).length>=2 && (v.match(/\bcat\s+/g)||[]).length>=3 && /\bls\s+-l/.test(v) && v.lastIndexOf('chmod 600')>v.indexOf('chmod 000') ? 'A 600 → 000 → 600 sorrend és a megtekintési próbák felismerhetők.' : 'Legyen chmod 600, chmod 000, végül ismét chmod 600; legalább három cat és egy ls -l.',
+    task9: v => /\bip\s+(?:-br\s+addr|-4\s+addr|addr)/.test(v) && /\bip\s+(?:-4\s+)?route\b/.test(v) ? 'Az interfész- és útvonal-lekérdezés felismerhető.' : 'Adj meg ip -br addr (vagy ip -4 addr show) és ip route (vagy ip -4 route) parancsot.',
+    task10: v => /ping\s+-c\s+3\s+1\.1\.1\.1/.test(v) && /ping\s+-c\s+3\s+example\.com/.test(v) && /nslookup\s+example\.com/.test(v) ? 'Mindhárom hálózati teszt parancsa felismerhető.' : 'Add meg a ping -c 3 1.1.1.1, ping -c 3 example.com és nslookup example.com parancsokat.',
+    task11: v => /(?:nano|vim|vi|code|cat\s*>)/.test(v) && /bash\s+-n/.test(v) && /bash\s+/.test(v) ? 'A létrehozás és a Bash-ellenőrzés felismerhető.' : 'Add meg a fájl létrehozásának, a bash -n ellenőrzésnek és a futtatásnak a parancsát.',
+    task12: v => /\bif\b/.test(v) && /\belif\b/.test(v) && /\belse\b/.test(v) && /\bfi\b/.test(v) && /(?:-ge|>=)/.test(v) ? 'Az elágazás szerkezete felismerhető.' : 'Legyen if, elif, else, fi és numerikus összehasonlítás.',
+    task13: v => /\b(for|while)\b/.test(v) && /\bdo\b/.test(v) && /\bdone\b/.test(v) && /\bsleep\s+5/.test(v) && /(?:df\s|DISK_USAGE)/.test(v) ? 'A ciklus és az ismételt ellenőrzés felismerhető.' : 'Legyen for/while, do, done, sleep 5 és friss foglaltság-lekérdezés.',
+    task14: v => /monitor-/.test(v) && /\b1\s+5\b/.test(v) && /\btail\s+-n\s+5/.test(v) ? 'A paraméteres teszt és a naplóellenőrzés felismerhető.' : 'Add meg az 1 5 tesztet és a tail -n 5 naplóellenőrzést.',
+    task15: v => /bash\s+-n/.test(v) && /chmod\s+u\+x/.test(v) && /crontab\s+-e/.test(v) && /crontab\s+-l/.test(v) ? 'A futtatási jog és cron-ellenőrzés parancsai felismerhetők.' : 'Legyen bash -n, chmod u+x, crontab -e és crontab -l.',
     ssh: v => /^(?:.*\n){3,}/.test(v) && /(debian|PRETTY_NAME|VERSION_ID|ID=)/i.test(v) ? 'A kimenet több sort és OS-azonosítót tartalmaz.' : 'Másold be a whoami, hostname, pwd és cat /etc/os-release kimenetét.'
   };
   document.addEventListener('click',function(e){
@@ -514,7 +824,7 @@ Szintaktikai ellenőrzés
     const v=(field.value||'').trim();
     if(!v){f.textContent='A mező üres.';f.className='lab-feedback warn';return;}
     const msg=checks[b.dataset.check](v);
-    const bad=/^Adj|^Másold|^A mező|^Azure régiókódot/.test(msg);
+    const bad=/^Adj|^Másold|^A mező|^Azure régiókódot|^3–8|^Használj|^Szerepeljen|^Legyen|^Add meg/.test(msg);
     f.textContent=msg+' (Csak formai ellenőrzés, nem Azure-hitelesítés.)';
     f.className='lab-feedback '+(bad?'warn':'ok');
   });

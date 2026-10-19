@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6. hét – Linux VM az Azure-ban – IT Architektúra – Gyakorlati munkafüzet</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-2c169b83e1fc2996b25bcc8774810429.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">IT Architektúra – Gyakorlati munkafüzet</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../utemterv.html"> 
+<span class="menu-text">Féléves ütemterv és értékelés</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Kezdőlap</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week01/index.html"> 
+<span class="menu-text">1. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week02/index.html"> 
+<span class="menu-text">2. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week03/index.html"> 
+<span class="menu-text">3. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week04/index.html"> 
+<span class="menu-text">4. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week05/index.html"> 
+<span class="menu-text">5. hét</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#feladat-a-korábbi-windows-server-erőforráscsoport-törlése" id="toc-feladat-a-korábbi-windows-server-erőforráscsoport-törlése" class="nav-link active" data-scroll-target="#feladat-a-korábbi-windows-server-erőforráscsoport-törlése">1. feladat – A korábbi Windows Server erőforráscsoport törlése</a></li>
+  <li><a href="#feladat-debian-vm-telepítési-adatlap-és-régióellenőrzés" id="toc-feladat-debian-vm-telepítési-adatlap-és-régióellenőrzés" class="nav-link" data-scroll-target="#feladat-debian-vm-telepítési-adatlap-és-régióellenőrzés">2. feladat – Debian VM telepítési adatlap és régióellenőrzés</a>
+  <ul class="collapse">
+  <li><a href="#régió-kiválasztása-javasolt-ellenőrzés" id="toc-régió-kiválasztása-javasolt-ellenőrzés" class="nav-link" data-scroll-target="#régió-kiválasztása-javasolt-ellenőrzés">Régió kiválasztása – javasolt ellenőrzés</a></li>
+  <li><a href="#telepítési-adatlap" id="toc-telepítési-adatlap" class="nav-link" data-scroll-target="#telepítési-adatlap">Telepítési adatlap</a></li>
+  </ul></li>
+  <li><a href="#feladat-debian-vm-telepítése-két-választható-módon" id="toc-feladat-debian-vm-telepítése-két-választható-módon" class="nav-link" data-scroll-target="#feladat-debian-vm-telepítése-két-választható-módon">3. feladat – Debian VM telepítése két választható módon</a></li>
+  <li><a href="#feladat-a-debian-vm-ellenőrzése-powershellből" id="toc-feladat-a-debian-vm-ellenőrzése-powershellből" class="nav-link" data-scroll-target="#feladat-a-debian-vm-ellenőrzése-powershellből">4. feladat – A Debian VM ellenőrzése PowerShellből</a></li>
+  <li><a href="#feladat-ssh-kapcsolat-vs-code-terminálból" id="toc-feladat-ssh-kapcsolat-vs-code-terminálból" class="nav-link" data-scroll-target="#feladat-ssh-kapcsolat-vs-code-terminálból">5. feladat – SSH-kapcsolat VS Code terminálból</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">6. hét – Linux VM az Azure-ban</h1>
+<p class="subtitle lead">Próbaváltozat · 1–5. feladat · saját gép / VS Code / Azure Portal / Cloud Shell</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Munkakörnyezet és AI-használat
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A fő munkakörnyezet <strong>a saját számítógép VS Code terminálja</strong>. Az Azure Cloud Shell (Bash) <strong>csak a régióellenőrzés egyik lehetősége</strong>. A VM telepítése Azure Portalon vagy a saját gépen futtatott Azure PowerShell-szkripttel történhet. <strong>AI a 2–4. feladatban használható; az 1. és 5. feladatban nem.</strong> Jelszót, privát SSH-kulcsot, hozzáférési tokent ne másolj a munkafüzetbe vagy AI-beszélgetésbe.</p>
+</div>
+</div>
+<p><strong>Neptun-kód (kötelező, 6 karakter):</strong> <input id="neptun" maxlength="6" pattern="[A-Za-z0-9]{6}" required="" placeholder="ABC123"></p>
+<section id="feladat-a-korábbi-windows-server-erőforráscsoport-törlése" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-a-korábbi-windows-server-erőforráscsoport-törlése">1. feladat – A korábbi Windows Server erőforráscsoport törlése</h2>
+<p><strong>Környezet:</strong> saját gép, VS Code PowerShell terminál · <strong>AI:</strong> nem használható.</p>
+<ol type="1">
+<li>Ellenőrizd, hogy a megfelelő Azure-előfizetés aktív.</li>
+<li>Listázd a korábbi Windows Serverhez tartozó erőforráscsoport tartalmát.</li>
+<li><strong>Csak a saját, előző heti Windows Server gyakorlathoz tartozó</strong> erőforráscsoportot töröld. A törlés minden benne lévő erőforrást érint, és nem visszavonható.</li>
+<li>Ellenőrizd, hogy az erőforráscsoport már nem létezik.</li>
+</ol>
+<p><strong>Törölt erőforráscsoport neve:</strong> <input data-answer="Q01_RG"></p>
+<strong>Az ellenőrzéshez használt PowerShell-parancs és eredmény:</strong>
+<textarea data-answer="Q01_CHECK" rows="3"></textarea>
+<p><strong>Elfogadási feltétel:</strong> a megfelelő csoport törlése és a törlés utáni ellenőrzés dokumentálása.</p>
+</section>
+<section id="feladat-debian-vm-telepítési-adatlap-és-régióellenőrzés" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-debian-vm-telepítési-adatlap-és-régióellenőrzés">2. feladat – Debian VM telepítési adatlap és régióellenőrzés</h2>
+<p><strong>Környezet:</strong> Azure Portal <strong>vagy</strong> Azure Cloud Shell (Bash) a régióellenőrzéshez; a többi előkészítés saját gépen · <strong>AI:</strong> használható.</p>
+<section id="régió-kiválasztása-javasolt-ellenőrzés" class="level3">
+<h3 class="anchored" data-anchor-id="régió-kiválasztása-javasolt-ellenőrzés">Régió kiválasztása – javasolt ellenőrzés</h3>
+<p>Az <strong>Azure for Students</strong> előfizetés nem feltétlenül engedélyez minden régiót. A telepítés előtt <strong>javasolt</strong> ellenőrizni a régió elérhetőségét az alábbi módszerek valamelyikével. Az ellenőrzés nem kötelező; sikertelen telepítésnél érdemes visszatérni rá:</p>
+<p><strong>A) Azure Portal:</strong> kezdd el egy VM létrehozását, ellenőrizd a régióválasztót és a kiválasztott Debian-lemezkép/VM-méret elérhetőségét. Még ne indítsd el a telepítést.</p>
+<p><strong>B) Azure Cloud Shell (Bash):</strong> töltsd fel a mellékelt <code>azure-region-check.sh</code> fájlt a Cloud Shellbe, majd futtasd:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x azure-region-check.sh</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./azure-region-check.sh</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A szkript az Azure for Students előfizetést próbálja kiválasztani, szükség esetén létrehozza a <code>region-check-rg</code> erőforráscsoportot, és <strong>VNet ARM-validációt</strong> futtat a fizikai régiókon. <strong>Nem telepít VM-et vagy teszt-VNetet.</strong> Az <code>ALLOWED</code> csak a tesztelt VNet validációjának sikerét jelzi, <strong>nem garantálja</strong> a Debian-lemezkép, a VM-méret vagy a kvóta elérhetőségét. A <code>BLOCKED</code> és <code>OTHER ERROR</code> eredményeket ne kezeld azonosként. A tesztcsoportot a szkript nem törli automatikusan; csak akkor töröld, ha meggyőződtél róla, hogy nem tartalmaz szükséges erőforrást.</p>
+<p><strong>Régióellenőrzés módja (nem kötelező):</strong> <select data-answer="Q02_METHOD"><option value="">Nem végeztem külön ellenőrzést</option><option>Azure Portal</option><option>Cloud Shell Bash-szkript</option></select></p>
+<p><strong>Választott régió (Azure-kód, pl. <code>northeurope</code>):</strong> <input data-answer="Q02_REGION"></p>
+</section>
+<section id="telepítési-adatlap" class="level3">
+<h3 class="anchored" data-anchor-id="telepítési-adatlap">Telepítési adatlap</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Paraméter</th>
+<th>Követelmény / kitöltendő érték</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Előfizetés</td>
+<td>Azure for Students</td>
+</tr>
+<tr class="even">
+<td>Erőforráscsoport</td>
+<td><code>rg-linux</code> (vagy egyedi, saját név)</td>
+</tr>
+<tr class="odd">
+<td>VM neve</td>
+<td><code>debian01</code> (vagy egyedi, saját név)</td>
+</tr>
+<tr class="even">
+<td>Operációs rendszer</td>
+<td>Debian 12 vagy Debian 13, elérhető Azure image</td>
+</tr>
+<tr class="odd">
+<td>Régió</td>
+<td>Választott régió (ellenőrzés javasolt)</td>
+</tr>
+<tr class="even">
+<td>VM-méret</td>
+<td>Költség- és kvótaellenőrzés után kiválasztva</td>
+</tr>
+<tr class="odd">
+<td>OS-lemez</td>
+<td>Standard HDD (<code>Standard_LRS</code>), ha elérhető</td>
+</tr>
+<tr class="even">
+<td>Adminisztrátor</td>
+<td><code>azureuser</code></td>
+</tr>
+<tr class="odd">
+<td>Hitelesítés</td>
+<td><strong>Jelszó (Password)</strong>; erős, egyedi jelszó, biztonságos megadás</td>
+</tr>
+<tr class="even">
+<td>Bejövő kapcsolat</td>
+<td>SSH / TCP 22, lehetőleg csak saját publikus IP (<code>/32</code>)</td>
+</tr>
+<tr class="odd">
+<td>Availability Zone</td>
+<td>Nem szükséges</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Telepítési adatok másolása AI-asszisztenshez
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>„Táblázat másolása AI-hoz”</strong> gomb a fenti paramétereket és egy rövid, egyértelmű kérést másol a vágólapra. Az AI-tól <strong>jelszavas SSH-hitelesítéssel</strong> kérd a Debian VM létrehozását, <strong>ne SSH-kulcsos módszerrel</strong>. A tényleges jelszót soha ne add meg az AI-nak; a szkript futás közben kérje be biztonságosan.</p>
+<button type="button" id="copy-linux-ai" class="btn btn-primary">
+Táblázat másolása AI-hoz
+</button>
+<p><span id="copy-linux-ai-status" role="status" aria-live="polite" style="margin-left: 0.75rem;"></span></p>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const button = document.getElementById('copy-linux-ai');
+  const status = document.getElementById('copy-linux-ai-status');
+  if (!button) return;
+  button.addEventListener('click', async function () {
+    const region = document.querySelector('[data-answer="Q02_REGION"]')?.value?.trim() || '[választott régió]';
+    const prompt = [
+      'Készíts Azure PowerShell-szkriptet Debian Linux VM létrehozásához Azure for Students előfizetésben.',
+      'A hitelesítés kötelezően JELSZAVAS (Password authentication), NEM SSH-kulcsos.',
+      'A jelszót a szkript futás közben, biztonságosan kérje be; ne legyen a kódba írva.',
+      '',
+      'Paraméter | Érték',
+      'Előfizetés | Azure for Students',
+      'Erőforráscsoport | rg-linux (vagy egyedi saját név)',
+      'VM neve | debian01 (vagy egyedi saját név)',
+      'Operációs rendszer | Debian 12 vagy Debian 13, elérhető Azure-lemezkép',
+      'Régió | ' + region,
+      'VM-méret | elérhető, költség- és kvótaellenőrzés után',
+      'OS-lemez | Standard HDD (Standard_LRS), ha elérhető',
+      'Adminisztrátor | azureuser',
+      'Hitelesítés | Jelszó (Password), NEM SSH-kulcs',
+      'Bejövő kapcsolat | SSH TCP 22, lehetőleg csak a saját publikus IP-ről (/32)',
+      'Availability Zone | nincs megadva',
+      '',
+      'A szkript az erőforrásokat csak a szükséges mértékben hozza létre, és hibakor ne töröljön már meglévő erőforráscsoportot.',
+      'Ha egy régióban vagy VM-mérettel nem sikerül a telepítés, adjon értelmezhető hibaüzenetet és javasoljon alternatívát.'
+    ].join('\n');
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(prompt);
+      } else {
+        const t = document.createElement('textarea');
+        t.value = prompt; t.style.position = 'fixed'; t.style.opacity = '0';
+        document.body.appendChild(t); t.select();
+        const ok = document.execCommand('copy'); t.remove();
+        if (!ok) throw new Error('A másolás nem sikerült.');
+      }
+      status.textContent = 'Másolva! Illeszd be az AI-beszélgetésbe.';
+    } catch (e) {
+      status.textContent = 'A böngésző nem engedte a másolást. Próbáld HTTPS-en megnyitni a munkafüzetet.';
+    }
+  });
+});
+</script>
+</section>
+</section>
+<section id="feladat-debian-vm-telepítése-két-választható-módon" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-debian-vm-telepítése-két-választható-módon">3. feladat – Debian VM telepítése két választható módon</h2>
+<p><strong>Környezet:</strong> saját gép VS Code PowerShell <strong>vagy</strong> Azure Portal · <strong>AI:</strong> használható.</p>
+<p>Válassz <strong>egyetlen</strong> megoldási útvonalat:</p>
+<ul>
+<li><strong>A – PowerShell-szkript:</strong> készíts vagy készíttess AI-val <code>create-linux.ps1</code> szkriptet, amely a 2. feladat paramétereivel létrehozza a szükséges Azure-erőforrásokat és a Debian VM-et. <strong>Jelszavas SSH-hitelesítést</strong> használj, ne SSH-kulcsot. A titkos adatokat ne égesd be a kódba; a szkript kérje be biztonságosan. Ne engedélyezzen nyitott SSH-t az egész internet felől, ha ez elkerülhető. Hibakezelésnél csak a saját maga által létrehozott erőforrásokat törölhesse, meglévő erőforráscsoportot automatikusan ne.</li>
+<li><strong>B – Azure Portal:</strong> a 2. feladat adatlapjával hozd létre a VM-et a grafikus felületen. Az NSG és a lemez beállításait külön ellenőrizd.</li>
+</ul>
+<p><strong>Választott módszer:</strong> <select data-answer="Q03_METHOD"><option value="">Válassz…</option><option>PowerShell-szkript</option><option>Azure Portal</option></select></p>
+<p><strong>Sikeres telepítés visszaigazolása – a létrehozott VM publikus IP-címe:</strong> <input data-answer="Q03_PUBLIC_IP" placeholder="például: 203.0.113.10"></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Tartalék megoldás, ha a telepítés egyik módszerrel sem sikerül
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Az Azure Portalon keresd meg az <strong>Ingyenes szolgáltatások (Free services)</strong> oldalt, és ellenőrizd, elérhető-e ott egy <strong>Debian 11</strong> virtuális gép. Ez lehet alternatíva, de az elérhetőség előfizetés- és régiófüggő, nem garantált. A létrehozáskor <strong>Password / Jelszó</strong> hitelesítést válassz (ne SSH public key-t), és az SSH TCP 22-es portját lehetőleg csak a saját publikus IP-címedről engedélyezd. A véglegesítés előtt ellenőrizd a várható költségeket.</p>
+</div>
+</div>
+</section>
+<section id="feladat-a-debian-vm-ellenőrzése-powershellből" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-a-debian-vm-ellenőrzése-powershellből">4. feladat – A Debian VM ellenőrzése PowerShellből</h2>
+<p><strong>Környezet:</strong> saját gép, VS Code PowerShell terminál · <strong>AI:</strong> használható.</p>
+<p>A következő parancsokat <strong>a saját Windows-gépeden, Azure PowerShellben</strong> futtasd. A <code>$rg</code> és <code>$vmName</code> értékét szükség esetén módosítsd a saját erőforrásaid nevére. Előfeltétel: bejelentkezett Azure PowerShell-munkamenet és megfelelő előfizetés.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">$rg</span> <span class="op">=</span> <span class="st">"rg-linux"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$vmName</span> <span class="op">=</span> <span class="st">"debian01"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. VM állapota, régiója és mérete</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Get-AzVM <span class="op">-</span>ResourceGroupName <span class="va">$rg</span> <span class="op">-</span>Name <span class="va">$vmName</span> <span class="op">-</span>Status <span class="op">|</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Select-Object</span> Name<span class="op">,</span> Location<span class="op">,</span> @<span class="op">{</span>N<span class="op">=</span><span class="st">'VMSize'</span><span class="op">;</span>E<span class="op">={</span><span class="va">$_</span><span class="op">.</span><span class="fu">HardwareProfile</span><span class="op">.</span><span class="fu">VmSize</span><span class="op">}},</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                  @<span class="op">{</span>N<span class="op">=</span><span class="st">'PowerState'</span><span class="op">;</span>E<span class="op">={(</span><span class="va">$_</span><span class="op">.</span><span class="fu">Statuses</span> <span class="op">|</span> <span class="fu">Where-Object</span> Code <span class="op">-like</span> <span class="st">'PowerState/*'</span><span class="op">).</span><span class="fu">DisplayStatus</span><span class="op">}}</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Publikus IP-cím</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>Get-AzPublicIpAddress <span class="op">-</span>ResourceGroupName <span class="va">$rg</span> <span class="op">|</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">Select-Object</span> Name<span class="op">,</span> IpAddress</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. NSG bejövő SSH-szabályai</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>Get-AzNetworkSecurityGroup <span class="op">-</span>ResourceGroupName <span class="va">$rg</span> <span class="op">|</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ForEach-Object</span> <span class="op">{</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="va">$nsgName</span> <span class="op">=</span> <span class="va">$_</span><span class="op">.</span><span class="fu">Name</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">$_</span><span class="op">.</span><span class="fu">SecurityRules</span> <span class="op">|</span> <span class="fu">Where-Object</span> <span class="op">{</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            <span class="va">$_</span><span class="op">.</span><span class="fu">Direction</span> <span class="op">-eq</span> <span class="st">'Inbound'</span> <span class="op">-and</span> <span class="va">$_</span><span class="op">.</span><span class="fu">Access</span> <span class="op">-eq</span> <span class="st">'Allow'</span> <span class="op">-and</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            <span class="op">(</span><span class="va">$_</span><span class="op">.</span><span class="fu">DestinationPortRange</span> <span class="op">-eq</span> <span class="st">'22'</span> <span class="op">-or</span> <span class="va">$_</span><span class="op">.</span><span class="fu">DestinationPortRange</span> <span class="op">-eq</span> <span class="st">'*'</span><span class="op">)</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="op">|</span> <span class="fu">Select-Object</span> @<span class="op">{</span>N<span class="op">=</span><span class="st">'NSG'</span><span class="op">;</span>E<span class="op">={</span><span class="va">$nsgName</span><span class="op">}},</span> Name<span class="op">,</span> SourceAddressPrefix<span class="op">,</span> DestinationPortRange</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<strong>1. parancs eredménye – VM neve, régiója, mérete, állapota:</strong>
+<textarea data-answer="Q04_VM" rows="3"></textarea>
+<strong>2. parancs eredménye – publikus IP-cím:</strong>
+<textarea data-answer="Q04_IP" rows="2"></textarea>
+<strong>3. parancs eredménye – NSG-szabály(ok):</strong>
+<textarea data-answer="Q04_NSG" rows="3"></textarea>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A 3. parancs a szabályok <strong>egy részét</strong> mutatja: a közvetlenül megadott, bejövő engedélyező szabályokat vizsgálja. A tényleges SSH-elérhetőséget az 5. feladatban ellenőrizzük.</p>
+</div>
+</div>
+</section>
+<section id="feladat-ssh-kapcsolat-vs-code-terminálból" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-ssh-kapcsolat-vs-code-terminálból">5. feladat – SSH-kapcsolat VS Code terminálból</h2>
+<p><strong>Környezet:</strong> saját gép, VS Code terminál, majd a Debian VM Bash-shellje · <strong>AI:</strong> nem használható.</p>
+<p>A saját gépen, a VS Code termináljában csatlakozz a Debian VM-hez (a címet cseréld a saját VM-ed publikus IP-címére):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ssh azureuser@VM_PUBLIC_IP</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Sikeres bejelentkezés után a <strong>távoli Debian VM-en</strong> add ki:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">whoami</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hostname</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /etc/os-release</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<strong>Az SSH-bejelentkezés után kiadott parancsok kimenete (személyes vagy titkos adat nélkül):</strong>
+<textarea data-answer="Q05_OUTPUT" rows="8"></textarea>
+<p><strong>Elfogadási feltétel:</strong> működő SSH-kapcsolat, a Debian VM-en kiadott négy parancs kimenete.</p>
+<hr>
+<p><strong>Megjegyzés:</strong> ez az 1–5. feladat tartalmi és megjelenítési próbaváltozata. A korábbi munkafüzet összesített ellenőrző, JSON-mentési és beadási funkciói még nincsenek átvezetve.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

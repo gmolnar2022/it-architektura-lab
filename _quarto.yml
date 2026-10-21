@@ -5,6 +5,7 @@ project:
     - index.qmd
     - utemterv.qmd
     - weeks/**/*.qmd
+    - hf01\index.qmd
   resources:
     - config/**
     - files/**

@@ -852,5 +852,75 @@
     "title": "Házi feladat 01 – Generatív AI és Microsoft Foundry",
     "section": "Mentés és beadás",
     "text": "Mentés és beadás\nA válaszok automatikusan mentődnek ebben a böngészőben. A Beadás gomb először összesítést mutat, majd a megerősítés után az Azure backendnek küldi a JSON-adatokat. A JSON export biztonsági másolat; önmagában nem jelent szerveres beadást.\n\n\n📤 Beadás\n\n\n💾 JSON export\n\n\nHelyi adatok törlése\n\n\n\n\nBeadási határidő: 2026. november 6. 11:40 (magyar idő).\n\n\n\nBeadás előtti összesítés\n\n\n\n\n\n\nVissza a javításhoz\n\n\nBeadás megerősítése\n\n\n\n\n\n\n\nAktivitás ezen a gépen\n\nIdőmérés: – · Eseménykövetés: –\n\n\nBecsült aktív idő: 0:00 · Szerkesztések: 0\n\n\nElső megnyitás: – · Utolsó aktivitás: –"
+  },
+  {
+    "objectID": "hf01/index.html",
+    "href": "hf01/index.html",
+    "title": "Házi feladat 01 – Generatív AI és Microsoft Foundry",
+    "section": "",
+    "text": "ImportantBeadási határidő\n\n\n\n2026. november 6. (péntek), 11:40 – magyar idő szerint. A beadás a munkafüzet alján található Beadás gombbal történik, az Azure Blob Storage submissions/hf01/ útvonalára. A sikeres szerveres beadást azonosító igazolja vissza.\nNeptun-kód (kötelező, 6 karakter):"
+  },
+  {
+    "objectID": "hf01/index.html#a-feladat-célja-és-forrása",
+    "href": "hf01/index.html#a-feladat-célja-és-forrása",
+    "title": "Házi feladat 01 – Generatív AI és Microsoft Foundry",
+    "section": "A feladat célja és forrása",
+    "text": "A feladat célja és forrása\nA házi feladatban egy Azure-ban elérhető generatív AI-modellt próbálsz ki, rövid időre saját szakterületi asszisztenssé alakítod a Playground Instructions mezőjével, majd folytatod a Microsoft eredeti mintagyakorlatát.\nRészletes eredeti útmutató: Explore Microsoft Foundry – Microsoft Learning. Ha a portál menüpontjai eltérnek az alábbi leírástól, használd a Microsoft útmutatóját is. A Foundry felülete és az elérhető modellek idővel változhatnak.\nSzükséges: Azure for Students előfizetés, böngésző, Microsoft Foundry hozzáférés. A modellhívások díjkötelesek lehetnek, ezért csak a feladatban szükséges számú tesztet végezd el. Ne másolj be jelszót, API-kulcsot, hozzáférési tokent, személyes vagy bizalmas adatot sem a Playgroundba, sem ebbe a munkafüzetbe.\n\n\n\n\n\n\nTipMunkamódszer\n\n\n\nA feladatok végén töltsd ki a válaszmezőket. A válaszok ebben a böngészőben automatikusan mentődnek. A kitöltéshez nem kell külön AI-agentet létrehozni vagy fájlt feltölteni."
+  },
+  {
+    "objectID": "hf01/index.html#feladat-foundry-projekt-létrehozása-8-perc",
+    "href": "hf01/index.html#feladat-foundry-projekt-létrehozása-8-perc",
+    "title": "Házi feladat 01 – Generatív AI és Microsoft Foundry",
+    "section": "1. feladat – Foundry-projekt létrehozása (8 perc)",
+    "text": "1. feladat – Foundry-projekt létrehozása (8 perc)\n\nNyisd meg a Microsoft Foundry portált, és jelentkezz be az egyetemi vagy az Azure for Students előfizetésedhez kapcsolódó fiókoddal.\nVálaszd ki az Azure for Students előfizetést, majd az eredeti Microsoft-útmutató Create a project lépései szerint hozz létre egy projektet.\nAdj a projektnek felismerhető, saját nevet (például itarch-hf01-...). Ha régiót kell választanod, olyat használj, ahol a feladat modellje elérhető.\nNyisd meg a létrejött projektet.\n\n\nProjekt neve:\n\n\nAzure-régió:\n\nElfogadási feltétel: létrehozott és megnyitott Foundry-projekt, név és régió dokumentálása."
+  },
+  {
+    "objectID": "hf01/index.html#feladat-gpt-5-mini-modell-telepítése-7-perc",
+    "href": "hf01/index.html#feladat-gpt-5-mini-modell-telepítése-7-perc",
+    "title": "Házi feladat 01 – Generatív AI és Microsoft Foundry",
+    "section": "2. feladat – GPT-5 Mini modell telepítése (7 perc)",
+    "text": "2. feladat – GPT-5 Mini modell telepítése (7 perc)\n\nA projekt modellkatalógusában vagy a Models + endpoints felületen keresd meg a GPT-5 Mini modellt.\nKövesd a Microsoft-leírás modelltelepítési lépéseit. Jegyezd fel a deployment nevét (nem feltétlenül egyezik a modell nevével).\nNyisd meg a telepített modell Playground felületét, és küldj egy rövid tesztkérdést.\nHa a modell vagy a telepítési régió nem érhető el az előfizetésedben, ne hozz létre drága alternatív infrastruktúrát. Jegyezd fel a pontos akadályt; ha az eredeti gyakorlat más, elérhető, kis költségű szöveges modellt is megenged, azzal folytathatod.\n\n\nModell és deployment neve (vagy az akadály leírása):\n\n\nElfogadási feltétel: a modell elérhető a Playgroundban, vagy az akadály pontosan dokumentált."
+  },
+  {
+    "objectID": "hf01/index.html#feladat-saját-szakterületi-ai-asszisztens-15-perc",
+    "href": "hf01/index.html#feladat-saját-szakterületi-ai-asszisztens-15-perc",
+    "title": "Házi feladat 01 – Generatív AI és Microsoft Foundry",
+    "section": "3. feladat – Saját szakterületi AI-asszisztens (15 perc)",
+    "text": "3. feladat – Saját szakterületi AI-asszisztens (15 perc)\nEz a feladat a modell telepítése után, még a Microsoft mintagyakorlat folytatása előtt következik. Nem kell külön agentet létrehozni: a telepített modell Playgroundjában ideiglenesen módosítod az Instructions mezőt.\n\nVálassz egy szakterületet: Azure, Linux/Debian vagy Windows Server/PowerShell.\nAz Instructions mezőbe írj saját, legalább 4–5 mondatos instrukciót. Határozd meg a szerepet, a célközönséget, a válaszok részletességét, a biztonsági korlátokat és a témán kívüli kérdések kezelését.\nKüldj három tesztkérdést: (a) egy alapfogalom vagy egyszerű művelet; (b) egy összetettebb, gyakorlati hibaelhárítás; (c) egy szándékosan témán kívüli kérdés.\nFigyeld meg, hogy a válaszok mennyire tartják be a saját instrukciódat. A három kérdést és a megfigyeléseidet rögzítsd az alábbi mezőkben.\n\nPélda a megfogalmazásra (ne másold változtatás nélkül): „Debian Linux rendszergazdai asszisztens vagy kezdő egyetemistáknak. Rövid magyarázat után adj ellenőrizhető Bash-parancsokat. Veszélyes műveletek előtt figyelmeztess. Jelszót és titkos adatot soha ne kérj. A Linux rendszergazdai témán kívüli kérdéseket udvariasan utasítsd el.”\n\nVálasztott szakterület:Válassz…AzureLinux/DebianWindows Server/PowerShell\n\n\nSaját Instructions (teljes szöveg):\n\n\n\n1. tesztkérdés és a válasz rövid értékelése:\n\n\n\n2. tesztkérdés és a válasz rövid értékelése:\n\n\n\n3. (témán kívüli) tesztkérdés és a válasz rövid értékelése:\n\n\n\nÖsszegzés: miben követte, illetve miben nem követte a modell az instrukciókat?\n\n\nElfogadási feltétel: saját instrukció, három különböző teszt és érdemi értékelés."
+  },
+  {
+    "objectID": "hf01/index.html#feladat-visszaállítás-az-eredeti-gyakorlatra-2-perc",
+    "href": "hf01/index.html#feladat-visszaállítás-az-eredeti-gyakorlatra-2-perc",
+    "title": "Házi feladat 01 – Generatív AI és Microsoft Foundry",
+    "section": "4. feladat – Visszaállítás az eredeti gyakorlatra (2 perc)",
+    "text": "4. feladat – Visszaállítás az eredeti gyakorlatra (2 perc)\n\nTöröld a saját szakterületi Instructions tartalmát a Playgroundban.\nIndíts új beszélgetést, hogy az előző kérdések kontextusa ne befolyásolja a következő tesztet.\nA telepített modellt nem kell törölni vagy újratelepíteni.\n\n\nVisszaállítás megtörtént?Válassz…Igen, töröltem az Instructions szöveget és új chatet indítottamNem, akadályba ütköztem (részletezem lent)\n\n\nRövid megjegyzés (ha szükséges):"
+  },
+  {
+    "objectID": "hf01/index.html#feladat-computing-history-webalkalmazás-8-perc",
+    "href": "hf01/index.html#feladat-computing-history-webalkalmazás-8-perc",
+    "title": "Házi feladat 01 – Generatív AI és Microsoft Foundry",
+    "section": "5. feladat – Computing History webalkalmazás (8 perc)",
+    "text": "5. feladat – Computing History webalkalmazás (8 perc)\n\nNyisd meg a Microsoft által megadott Computing History Agent webalkalmazást.\nA Microsoft eredeti leírásának megfelelően kapcsold össze a saját Foundry-projektedben telepített modellel. A webalkalmazás a projekt endpointját, a deployment nevét és az API-kulcsot kérheti.\nAz API-kulcsot csak a feladatban megadott, ellenőrzött Microsoft-demó felületén használd. Soha ne írd be a munkafüzetbe, és ne add be JSON-ban! Ha nem tudod ellenőrizni a céloldalt vagy nem szeretnél kulcsot megadni, dokumentáld ezt és folytasd a következő feladattal.\nKérdezz a számítástechnika történetéről, majd tegyél fel egy mai Azure- vagy Linux-rendszergazdai kérdést. Hasonlítsd össze a válaszokat.\n\n\nTörténeti kérdés és a kapott válasz lényege:\n\n\n\nTémán kívüli kérdés és a webalkalmazás reakciója:\n\n\n\nMiért viselkedhet másként ez a webalkalmazás, mint a korábbi Playground-beszélgetés?\n\n\nFontos különbség: a Playgroundba írt ideiglenes instrukció nem azonos a külső webalkalmazás saját, alkalmazásszintű utasításaival. Ugyanaz a modelltelepítés különböző kliensekben másként viselkedhet."
+  },
+  {
+    "objectID": "hf01/index.html#feladat-szöveg-és-kép-a-generatív-ai-ban-8-perc",
+    "href": "hf01/index.html#feladat-szöveg-és-kép-a-generatív-ai-ban-8-perc",
+    "title": "Házi feladat 01 – Generatív AI és Microsoft Foundry",
+    "section": "6. feladat – Szöveg és kép a generatív AI-ban (8 perc)",
+    "text": "6. feladat – Szöveg és kép a generatív AI-ban (8 perc)\n\nA Playgroundban kérj a modelltől rövid, közérthető magyarázatot arról, hogy mi a különbség a generatív AI és a hagyományos, szabályalapú program között.\nKérd meg, hogy az eredményt alakítsa át hárompontos, kezdőknek szóló összefoglalóvá.\nPróbálj ki egy képpel kapcsolatos lehetőséget a Foundry felületén, csak ha a rendelkezésre álló modell és a felület támogatja, és a költség elfogadható. Ez lehet például képgenerálási lehetőség megtekintése vagy támogatott képes modell képességeinek áttekintése. Kép vagy fájl feltöltése nem szükséges. Ne telepíts emiatt külön fizetős modellt.\n\n\nAz első és a második szöveges prompt, valamint a különbség a válaszok között:\n\n\n\nMilyen képes funkciót találtál? Ha nem volt elérhető, miért?"
+  },
+  {
+    "objectID": "hf01/index.html#feladat-biztonság-költség-és-takarítás-5-perc",
+    "href": "hf01/index.html#feladat-biztonság-költség-és-takarítás-5-perc",
+    "title": "Házi feladat 01 – Generatív AI és Microsoft Foundry",
+    "section": "7. feladat – Biztonság, költség és takarítás (5 perc)",
+    "text": "7. feladat – Biztonság, költség és takarítás (5 perc)\n\nEllenőrizd a projekt vagy az előfizetés költség- és használati adatait az Azure Portal megfelelő felületén. A megjelenő összeg késhet; ha még nem látszik, ezt írd le.\nFogalmazz meg két konkrét óvintézkedést az AI-szolgáltatások biztonságos használatához.\nA Microsoft-útmutató Clean up részének megfelelően töröld a kizárólag ehhez a feladathoz létrehozott, már nem szükséges erőforrásokat. A törlés előtt ellenőrizd, hogy a projektet vagy erőforráscsoportot más feladathoz nem használod-e. A takarítás nem helyettesíti a költségfigyelést.\n\n\nKöltség / használat ellenőrzésének eredménye:\n\n\n\nKét biztonsági óvintézkedés:\n\n\n\nTakarítás eredménye (mit töröltél, vagy miért maradt meg):"
+  },
+  {
+    "objectID": "hf01/index.html#mentés-és-beadás",
+    "href": "hf01/index.html#mentés-és-beadás",
+    "title": "Házi feladat 01 – Generatív AI és Microsoft Foundry",
+    "section": "Mentés és beadás",
+    "text": "Mentés és beadás\nA válaszok automatikusan mentődnek ebben a böngészőben. A Beadás gomb először összesítést mutat, majd a megerősítés után az Azure backendnek küldi a JSON-adatokat. A JSON export biztonsági másolat; önmagában nem jelent szerveres beadást.\n\n\n📤 Beadás\n\n\n💾 JSON export\n\n\nHelyi adatok törlése\n\n\n\n\nBeadási határidő: 2026. november 6. 11:40 (magyar idő).\n\n\n\nBeadás előtti összesítés\n\n\n\n\n\n\nVissza a javításhoz\n\n\nBeadás megerősítése\n\n\n\n\n\n\n\nAktivitás ezen a gépen\n\nIdőmérés: – · Eseménykövetés: –\n\n\nBecsült aktív idő: 0:00 · Szerkesztések: 0\n\n\nElső megnyitás: – · Utolsó aktivitás: –"
   }
 ]

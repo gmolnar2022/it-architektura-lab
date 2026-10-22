@@ -232,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="a-feladat-célja-és-forrása">A feladat célja és forrása</h2>
 <p>A házi feladatban egy Azure-ban elérhető generatív AI-modellt próbálsz ki, rövid időre saját szakterületi asszisztenssé alakítod a Playground <em>Instructions</em> mezőjével, majd folytatod a Microsoft eredeti mintagyakorlatát.</p>
 <p><strong>Részletes eredeti útmutató:</strong> <a href="https://microsoftlearning.github.io/mslearn-ai-fundamentals/Instructions/Exercises/00-explore-foundry.html">Explore Microsoft Foundry – Microsoft Learning</a>. Ha a portál menüpontjai eltérnek az alábbi leírástól, használd a Microsoft útmutatóját is. A Foundry felülete és az elérhető modellek idővel változhatnak.</p>
-<p><strong>Szükséges:</strong> Azure for Students előfizetés, böngésző, Microsoft Foundry hozzáférés. A modellhívások <strong>Azure-kreditbe kerülhetnek</strong>, ezért csak a feladatban szükséges számú tesztet végezd el. Az Azure for Students kreditkeretének fogyását érdemes ellenőrizni. <strong>Ne másolj be jelszót, API-kulcsot, hozzáférési tokent, személyes vagy bizalmas adatot</strong> sem a Playgroundba, sem ebbe a munkafüzetbe.</p>
+<p><strong>Szükséges:</strong> Azure for Students előfizetés, böngésző, Microsoft Foundry hozzáférés. A <strong>GPT-5 Mini nem ingyenes modell</strong>, de rövid, néhány kérdésből álló kipróbálása általában csak kevés Azure-kreditet fogyaszt. A modell telepítése önmagában nem feltétlenül jár költséggel; a modellhívások (a kérések és válaszok feldolgozása) viszont Azure-kreditbe kerülhetnek. Ezért csak a feladatban szükséges számú tesztet végezd el. Az Azure for Students kreditkeretének fogyását érdemes ellenőrizni. <strong>Ne másolj be jelszót, API-kulcsot, hozzáférési tokent, személyes vagy bizalmas adatot</strong> sem a Playgroundba, sem ebbe a munkafüzetbe.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -270,10 +270,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="feladat-gpt-5-mini-modell-telepítése-7-perc" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-gpt-5-mini-modell-telepítése-7-perc">2. feladat – GPT-5 Mini modell telepítése (7 perc)</h2>
 <ol type="1">
-<li>A projekt modellkatalógusában vagy a <em>Models + endpoints</em> felületen keresd meg a <strong>GPT-5 Mini</strong> modellt.</li>
+<li>A projekt modellkatalógusában vagy a <em>Models + endpoints</em> felületen keresd meg a Microsoft útmutatójában használt <strong>GPT-5 Mini</strong> modellt. <strong>Ezt használd a házi feladathoz</strong>; nem szükséges ingyenes alternatívát keresned.</li>
 <li>Kövesd a Microsoft-leírás modelltelepítési lépéseit. Jegyezd fel a <strong>deployment nevét</strong> (nem feltétlenül egyezik a modell nevével).</li>
-<li>Nyisd meg a telepített modell <strong>Playground</strong> felületét, és küldj egy rövid tesztkérdést.</li>
-<li>Ha a modell vagy a telepítési régió nem érhető el az előfizetésedben, <strong>ne hozz létre drága alternatív infrastruktúrát</strong>. Jegyezd fel a pontos akadályt; ha az eredeti gyakorlat más, elérhető, kis költségű szöveges modellt is megenged, azzal folytathatod.</li>
+<li>Nyisd meg a telepített modell <strong>Playground</strong> felületét, és küldj egy rövid tesztkérdést. Kerüld a feleslegesen hosszú beszélgetéseket és a további, költséges szolgáltatások létrehozását.</li>
+<li>Ha a GPT-5 Mini vagy a telepítési régió nem érhető el az előfizetésedben, jegyezd fel a pontos akadályt. <strong>Ne hozz létre további, jelentős Azure-kreditet fogyasztó infrastruktúrát.</strong> Más modellt csak akkor válassz, ha azt az oktató vagy a Microsoft eredeti útmutatója kifejezetten megengedi.</li>
 </ol>
 <div class="lab-answer">
 <label><strong>Modell és deployment neve (vagy az akadály leírása):</strong></label>
@@ -326,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>A projekt <strong>Build / Agents</strong> felületén válaszd az új agent létrehozását (az elnevezés a portál verziójától függhet).</li>
 <li>Adj neki egyedi nevet, például <code>itarch-linux-assistant</code> vagy <code>itarch-azure-assistant</code>.</li>
 <li>Válaszd ki a már telepített, támogatott modellt, és adj meg az előző feladat alapján rövid <strong>Instructions</strong> szöveget.</li>
-<li>Teszteld az agentet egy szakmai kérdéssel. Ha az agent létrehozása jogosultsági, modell- vagy költségkorlát miatt nem lehetséges, <strong>ne telepíts új, drága szolgáltatást</strong>: dokumentáld az akadályt.</li>
+<li>Teszteld az agentet egy szakmai kérdéssel. Lehetőleg a már telepített <strong>GPT-5 Mini</strong> modellt használd; <strong>csak ingyenes (free) vagy kevés Azure-kreditbe kerülő további szolgáltatást válassz</strong>. Ha az agent létrehozása jogosultsági, modell- vagy költségkorlát miatt nem lehetséges, dokumentáld az akadályt.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -369,20 +369,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="feladat-computing-history-szöveg-és-képfelismerés-15-perc">7. feladat – Computing History: szöveg és képfelismerés (15 perc)</h2>
 <p>A Microsoft eredeti gyakorlatának végén a <strong>Computing History</strong> webalkalmazással teszteled a saját Foundry-projektedben telepített modellt. Ehhez <strong>nem a saját agent nevét</strong>, hanem a <strong>modell deployment nevét</strong> kell megadnod.</p>
 <ol type="1">
-<li><p>A Foundry-projekt kezdőlapján keresd meg a <strong>Project endpoint</strong> értéket (ne az Azure OpenAI endpointot), a <strong>deployment nevét</strong> és a <strong>Project API key</strong> értéket.</p></li>
-<li><p>Nyisd meg a <a href="https://aka.ms/computing-history-foundry">Computing History Agent webalkalmazást</a>. Az alkalmazás konfigurációs részén add meg a szükséges kapcsolati adatokat. <strong>Az API-kulcsot soha ne másold be ebbe a munkafüzetbe, és ne add be JSON-ban!</strong> Ha nem bízol a demóoldalban vagy nem szeretnél kulcsot megadni, dokumentáld az akadályt.</p></li>
-<li><p>Kérdezz rá az <strong>ELIZA chatbot</strong> történetére, majd tegyél fel egy mai Azure- vagy Linux-rendszergazdai kérdést. Figyeld meg a webalkalmazás témaköri korlátait.</p></li>
-<li><p>Próbáld ki a szövegelemzést: kérj egy rövid számítástechnika-történeti szövegről összefoglalást és személyek, helyek, dátumok kinyerését.</p></li>
-<li><p><strong>Képfelismerés:</strong> töltsd le a Microsoft által biztosított <a href="https://aka.ms/computer-images">computers.zip – történeti számítógépek képei</a> állományt, csomagold ki, majd az alkalmazás <strong>Attach image (📎)</strong> funkciójával csatolj egy képet. Kérdezd: <em>Tell me about this computer.</em> Próbálj ki egy második képet is.</p></li>
-<li><p><strong>Választható kiegészítés:</strong> a <a href="https://aka.ms/pcb-images">pcbs.zip – áramköri lapok képei</a> csomag egyik képével próbáld ki az alkatrész vagy felirat felismerését. Nem kell minden képet feltölteni.</p></li>
-<li><p><strong>Kötelező lezárás – Azure-erőforrások takarítása:</strong> ha az 1. feladatban létrehozott erőforráscsoport <strong>kizárólag a HF01-hez tartozik</strong>, a tesztek után <strong>a teljes erőforráscsoportot töröld</strong>. Ezzel az abban található projekt és kapcsolódó erőforrások is törlődnek. <strong>A törlés végleges; előtte ellenőrizd a csoport nevét és tartalmát.</strong> Ha más feladathoz is használt erőforrások vannak benne, <strong>ne töröld a teljes csoportot</strong>: csak a HF01-hez tartozó, biztosan azonosított erőforrásokat távolítsd el, vagy egyeztess az oktatóval.</p>
+<li>A Foundry-projekt kezdőlapján keresd meg a <strong>Project endpoint</strong> értéket (ne az Azure OpenAI endpointot), a <strong>deployment nevét</strong> és a <strong>Project API key</strong> értéket.</li>
+<li>Nyisd meg a <a href="https://aka.ms/computing-history-foundry">Computing History Agent webalkalmazást</a>. Az alkalmazás konfigurációs részén add meg a szükséges kapcsolati adatokat. <strong>Az API-kulcsot soha ne másold be ebbe a munkafüzetbe, és ne add be JSON-ban!</strong> Ha nem bízol a demóoldalban vagy nem szeretnél kulcsot megadni, dokumentáld az akadályt.</li>
+<li>Kérdezz rá az <strong>ELIZA chatbot</strong> történetére, majd tegyél fel egy mai Azure- vagy Linux-rendszergazdai kérdést. Figyeld meg a webalkalmazás témaköri korlátait.</li>
+</ol>
+<p>3 4. Próbáld ki a szövegelemzést: kérj egy rövid számítástechnika-történeti szövegről összefoglalást és személyek, helyek, dátumok kinyerését.</p>
+<p>4 5. <strong>Képfelismerés:</strong> töltsd le a Microsoft által biztosított <a href="https://aka.ms/computer-images">computers.zip – történeti számítógépek képei</a> állományt, csomagold ki, majd az alkalmazás <strong>Attach image (📎)</strong> funkciójával csatolj egy képet. Kérdezd: <em>Tell me about this computer.</em> Próbálj ki egy második képet is.</p>
+<p>5 6. <strong>Választható kiegészítés:</strong> a <a href="https://aka.ms/pcb-images">pcbs.zip – áramköri lapok képei</a> csomag egyik képével próbáld ki az alkatrész vagy felirat felismerését. Nem kell minden képet feltölteni.</p>
+<p>6 7. <strong>Kötelező lezárás – Azure-erőforrások takarítása:</strong> ha az 1. feladatban létrehozott erőforráscsoport <strong>kizárólag a HF01-hez tartozik</strong>, a tesztek után <strong>a teljes erőforráscsoportot töröld</strong>. Ezzel az abban található projekt és kapcsolódó erőforrások is törlődnek. <strong>A törlés végleges; előtte ellenőrizd a csoport nevét és tartalmát.</strong> Ha más feladathoz is használt erőforrások vannak benne, <strong>ne töröld a teljes csoportot</strong>: csak a HF01-hez tartozó, biztosan azonosított erőforrásokat távolítsd el, vagy egyeztess az oktatóval.</p>
 <p><strong>A lehetőség – Azure Portal:</strong> nyisd meg az <a href="https://portal.azure.com/">Azure Portalt</a> → <strong>Resource groups / Erőforráscsoportok</strong> → válaszd ki a HF01 erőforráscsoportját → <strong>Delete resource group / Erőforráscsoport törlése</strong> → ellenőrizd a nevet és erősítsd meg a törlést.</p>
 <p><strong>B lehetőség – PowerShell (VS Code vagy PowerShell terminál):</strong> ha már be vagy jelentkezve az Azure PowerShellbe, és a megfelelő előfizetés van kiválasztva, ellenőrizd a csoport nevét, majd töröld:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Get-AzContext</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Get-AzResourceGroup <span class="op">-</span>Name <span class="st">"SAJAT_HF01_EROFORRASCSOPORT"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Remove-AzResourceGroup <span class="op">-</span>Name <span class="st">"SAJAT_HF01_EROFORRASCSOPORT"</span> <span class="op">-</span>Force</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>A <code>SAJAT_HF01_EROFORRASCSOPORT</code> helyére az <strong>1. feladatban rögzített pontos nevet</strong> írd. A <code>-Force</code> miatt a parancs nem kér külön megerősítést, ezért <strong>csak a név és a tartalom ellenőrzése után</strong> futtasd. Ha a törlés még folyamatban van, várd meg a befejezését.</p></li>
-</ol>
+<p>A <code>SAJAT_HF01_EROFORRASCSOPORT</code> helyére az <strong>1. feladatban rögzített pontos nevet</strong> írd. A <code>-Force</code> miatt a parancs nem kér külön megerősítést, ezért <strong>csak a név és a tartalom ellenőrzése után</strong> futtasd. Ha a törlés még folyamatban van, várd meg a befejezését.</p>
+<p>7</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -395,26 +396,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="callout-body-container callout-body">
 <p>A képcsomagokat a Microsoft eredeti útmutatója hivatkozza. Csak a feladat céljára használd őket, és a ZIP-et ellenőrizd a szokásos vírusvédelmi eszközökkel. Ha a letöltést a böngésző vagy a vírusvédelem blokkolja, ne kerüld meg a védelmet; írd le az akadályt. A Computing History webalkalmazás <strong>saját képfeltöltő funkcióját</strong> használd, a Quarto-beadáshoz nem kell képet csatolni.</p>
 </div>
-</div>
-<div class="lab-answer">
-<label>7/3. ELIZA és témán kívüli kérdés – mit tapasztaltál?</label>
-<textarea data-answer="Q07_CHAT" rows="3" placeholder="A két kérdés és a webalkalmazás reakciója…"></textarea>
-</div>
-<div class="lab-answer">
-<label>7/4. Szövegelemzés – milyen információkat nyert ki?</label>
-<textarea data-answer="Q07_TEXT" rows="3" placeholder="Összefoglalás, személyek, helyek, dátumok…"></textarea>
-</div>
-<div class="lab-answer">
-<label>7/5. Képfelismerés – melyik két képet próbáltad ki, és mit ismert fel?</label>
-<textarea data-answer="Q07_IMAGE" rows="3" placeholder="Képfájlok neve, a felismerés eredménye és pontossága…"></textarea>
-</div>
-<div class="lab-answer">
-<label>7/6. Áramköri lap felismerése (választható)</label>
-<textarea data-answer="Q07_PCB" rows="2" placeholder="Melyik képet próbáltad ki, mit ismert fel? Ha kihagytad, üresen maradhat."></textarea>
-</div>
-<div class="lab-answer">
-<label>7/7. Erőforráscsoport törlése / a megőrzés indoka</label>
-<textarea data-answer="Q07_CLEANUP" rows="3" placeholder="Az erőforráscsoport neve, a törlés módja és eredménye; ha nem törölhető biztonságosan, az ok…"></textarea>
 </div>
 </section>
 <section id="mentés-és-beadás" class="level2">

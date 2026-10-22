@@ -21,7 +21,7 @@ A házi feladatban egy Azure-ban elérhető generatív AI-modellt próbálsz ki,
 
 **Részletes eredeti útmutató:** [Explore Microsoft Foundry – Microsoft Learning](https://microsoftlearning.github.io/mslearn-ai-fundamentals/Instructions/Exercises/00-explore-foundry.html). Ha a portál menüpontjai eltérnek az alábbi leírástól, használd a Microsoft útmutatóját is. A Foundry felülete és az elérhető modellek idővel változhatnak.
 
-**Szükséges:** Azure for Students előfizetés, böngésző, Microsoft Foundry hozzáférés. A modellhívások **Azure-kreditbe kerülhetnek**, ezért csak a feladatban szükséges számú tesztet végezd el. Az Azure for Students kreditkeretének fogyását érdemes ellenőrizni. **Ne másolj be jelszót, API-kulcsot, hozzáférési tokent, személyes vagy bizalmas adatot** sem a Playgroundba, sem ebbe a munkafüzetbe.
+**Szükséges:** Azure for Students előfizetés, böngésző, Microsoft Foundry hozzáférés. A **GPT-5 Mini nem ingyenes modell**, de rövid, néhány kérdésből álló kipróbálása általában csak kevés Azure-kreditet fogyaszt. A modell telepítése önmagában nem feltétlenül jár költséggel; a modellhívások (a kérések és válaszok feldolgozása) viszont Azure-kreditbe kerülhetnek. Ezért csak a feladatban szükséges számú tesztet végezd el. Az Azure for Students kreditkeretének fogyását érdemes ellenőrizni. **Ne másolj be jelszót, API-kulcsot, hozzáférési tokent, személyes vagy bizalmas adatot** sem a Playgroundba, sem ebbe a munkafüzetbe.
 
 ::: {.callout-tip}
 ## Munkamódszer
@@ -45,10 +45,10 @@ A feladatok végén töltsd ki a válaszmezőket. A válaszok ebben a böngész�
 
 ## 2. feladat – GPT-5 Mini modell telepítése (7 perc)
 
-1. A projekt modellkatalógusában vagy a *Models + endpoints* felületen keresd meg a **GPT-5 Mini** modellt.
+1. A projekt modellkatalógusában vagy a *Models + endpoints* felületen keresd meg a Microsoft útmutatójában használt **GPT-5 Mini** modellt. **Ezt használd a házi feladathoz**; nem szükséges ingyenes alternatívát keresned.
 2. Kövesd a Microsoft-leírás modelltelepítési lépéseit. Jegyezd fel a **deployment nevét** (nem feltétlenül egyezik a modell nevével).
-3. Nyisd meg a telepített modell **Playground** felületét, és küldj egy rövid tesztkérdést.
-4. Ha a modell vagy a telepítési régió nem érhető el az előfizetésedben, **ne hozz létre drága alternatív infrastruktúrát**. Jegyezd fel a pontos akadályt; ha az eredeti gyakorlat más, elérhető, kis költségű szöveges modellt is megenged, azzal folytathatod.
+3. Nyisd meg a telepített modell **Playground** felületét, és küldj egy rövid tesztkérdést. Kerüld a feleslegesen hosszú beszélgetéseket és a további, költséges szolgáltatások létrehozását.
+4. Ha a GPT-5 Mini vagy a telepítési régió nem érhető el az előfizetésedben, jegyezd fel a pontos akadályt. **Ne hozz létre további, jelentős Azure-kreditet fogyasztó infrastruktúrát.** Más modellt csak akkor válassz, ha azt az oktató vagy a Microsoft eredeti útmutatója kifejezetten megengedi.
 
 <div class="lab-answer"><label><strong>Modell és deployment neve (vagy az akadály leírása):</strong></label><textarea data-answer="Q02_DEPLOYMENT" rows="3"></textarea></div>
 
@@ -86,7 +86,7 @@ Most a Playground ideiglenes instrukciójától eltérően próbálj meg **kül�
 1. A projekt **Build / Agents** felületén válaszd az új agent létrehozását (az elnevezés a portál verziójától függhet).
 2. Adj neki egyedi nevet, például `itarch-linux-assistant` vagy `itarch-azure-assistant`.
 3. Válaszd ki a már telepített, támogatott modellt, és adj meg az előző feladat alapján rövid **Instructions** szöveget.
-4. Teszteld az agentet egy szakmai kérdéssel. Ha az agent létrehozása jogosultsági, modell- vagy költségkorlát miatt nem lehetséges, **ne telepíts új, drága szolgáltatást**: dokumentáld az akadályt.
+4. Teszteld az agentet egy szakmai kérdéssel. Lehetőleg a már telepített **GPT-5 Mini** modellt használd; **csak ingyenes (free) vagy kevés Azure-kreditbe kerülő további szolgáltatást válassz**. Ha az agent létrehozása jogosultsági, modell- vagy költségkorlát miatt nem lehetséges, dokumentáld az akadályt.
 
 ::: {.callout-note}
 ## Két különböző megoldás
@@ -115,9 +115,17 @@ A Microsoft eredeti gyakorlatának végén a **Computing History** webalkalmazá
 1. A Foundry-projekt kezdőlapján keresd meg a **Project endpoint** értéket (ne az Azure OpenAI endpointot), a **deployment nevét** és a **Project API key** értéket.
 2. Nyisd meg a [Computing History Agent webalkalmazást](https://aka.ms/computing-history-foundry). Az alkalmazás konfigurációs részén add meg a szükséges kapcsolati adatokat. **Az API-kulcsot soha ne másold be ebbe a munkafüzetbe, és ne add be JSON-ban!** Ha nem bízol a demóoldalban vagy nem szeretnél kulcsot megadni, dokumentáld az akadályt.
 3. Kérdezz rá az **ELIZA chatbot** történetére, majd tegyél fel egy mai Azure- vagy Linux-rendszergazdai kérdést. Figyeld meg a webalkalmazás témaköri korlátait.
+
+3
 4. Próbáld ki a szövegelemzést: kérj egy rövid számítástechnika-történeti szövegről összefoglalást és személyek, helyek, dátumok kinyerését.
+
+4
 5. **Képfelismerés:** töltsd le a Microsoft által biztosított [computers.zip – történeti számítógépek képei](https://aka.ms/computer-images) állományt, csomagold ki, majd az alkalmazás **Attach image (📎)** funkciójával csatolj egy képet. Kérdezd: *Tell me about this computer.* Próbálj ki egy második képet is.
+
+5
 6. **Választható kiegészítés:** a [pcbs.zip – áramköri lapok képei](https://aka.ms/pcb-images) csomag egyik képével próbáld ki az alkatrész vagy felirat felismerését. Nem kell minden képet feltölteni.
+
+6
 7. **Kötelező lezárás – Azure-erőforrások takarítása:** ha az 1. feladatban létrehozott erőforráscsoport **kizárólag a HF01-hez tartozik**, a tesztek után **a teljes erőforráscsoportot töröld**. Ezzel az abban található projekt és kapcsolódó erőforrások is törlődnek. **A törlés végleges; előtte ellenőrizd a csoport nevét és tartalmát.** Ha más feladathoz is használt erőforrások vannak benne, **ne töröld a teljes csoportot**: csak a HF01-hez tartozó, biztosan azonosított erőforrásokat távolítsd el, vagy egyeztess az oktatóval.
 
    **A lehetőség – Azure Portal:** nyisd meg az [Azure Portalt](https://portal.azure.com/) → **Resource groups / Erőforráscsoportok** → válaszd ki a HF01 erőforráscsoportját → **Delete resource group / Erőforráscsoport törlése** → ellenőrizd a nevet és erősítsd meg a törlést.
@@ -132,16 +140,13 @@ A Microsoft eredeti gyakorlatának végén a **Computing History** webalkalmazá
 
    A `SAJAT_HF01_EROFORRASCSOPORT` helyére az **1. feladatban rögzített pontos nevet** írd. A `-Force` miatt a parancs nem kér külön megerősítést, ezért **csak a név és a tartalom ellenőrzése után** futtasd. Ha a törlés még folyamatban van, várd meg a befejezését.
 
+7
+
 ::: {.callout-warning}
 ## Biztonság és letöltések
 A képcsomagokat a Microsoft eredeti útmutatója hivatkozza. Csak a feladat céljára használd őket, és a ZIP-et ellenőrizd a szokásos vírusvédelmi eszközökkel. Ha a letöltést a böngésző vagy a vírusvédelem blokkolja, ne kerüld meg a védelmet; írd le az akadályt. A Computing History webalkalmazás **saját képfeltöltő funkcióját** használd, a Quarto-beadáshoz nem kell képet csatolni.
 :::
 
-<div class="lab-answer"><label>7/3. ELIZA és témán kívüli kérdés – mit tapasztaltál?</label><textarea data-answer="Q07_CHAT" rows="3" placeholder="A két kérdés és a webalkalmazás reakciója…"></textarea></div>
-<div class="lab-answer"><label>7/4. Szövegelemzés – milyen információkat nyert ki?</label><textarea data-answer="Q07_TEXT" rows="3" placeholder="Összefoglalás, személyek, helyek, dátumok…"></textarea></div>
-<div class="lab-answer"><label>7/5. Képfelismerés – melyik két képet próbáltad ki, és mit ismert fel?</label><textarea data-answer="Q07_IMAGE" rows="3" placeholder="Képfájlok neve, a felismerés eredménye és pontossága…"></textarea></div>
-<div class="lab-answer"><label>7/6. Áramköri lap felismerése (választható)</label><textarea data-answer="Q07_PCB" rows="2" placeholder="Melyik képet próbáltad ki, mit ismert fel? Ha kihagytad, üresen maradhat."></textarea></div>
-<div class="lab-answer"><label>7/7. Erőforráscsoport törlése / a megőrzés indoka</label><textarea data-answer="Q07_CLEANUP" rows="3" placeholder="Az erőforráscsoport neve, a törlés módja és eredménye; ha nem törölhető biztonságosan, az ok…"></textarea></div>
 
 ## Mentés és beadás
 

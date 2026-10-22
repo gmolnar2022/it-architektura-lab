@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -124,6 +159,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../weeks/week06/index.html"> 
 <span class="menu-text">6. hét</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../hf01/index.html" aria-current="page"> 
+<span class="menu-text">HF01</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
@@ -143,11 +182,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#a-feladat-célja-és-forrása" id="toc-a-feladat-célja-és-forrása" class="nav-link active" data-scroll-target="#a-feladat-célja-és-forrása">A feladat célja és forrása</a></li>
   <li><a href="#feladat-foundry-projekt-létrehozása-8-perc" id="toc-feladat-foundry-projekt-létrehozása-8-perc" class="nav-link" data-scroll-target="#feladat-foundry-projekt-létrehozása-8-perc">1. feladat – Foundry-projekt létrehozása (8 perc)</a></li>
   <li><a href="#feladat-gpt-5-mini-modell-telepítése-7-perc" id="toc-feladat-gpt-5-mini-modell-telepítése-7-perc" class="nav-link" data-scroll-target="#feladat-gpt-5-mini-modell-telepítése-7-perc">2. feladat – GPT-5 Mini modell telepítése (7 perc)</a></li>
-  <li><a href="#feladat-saját-szakterületi-ai-asszisztens-15-perc" id="toc-feladat-saját-szakterületi-ai-asszisztens-15-perc" class="nav-link" data-scroll-target="#feladat-saját-szakterületi-ai-asszisztens-15-perc">3. feladat – Saját szakterületi AI-asszisztens (15 perc)</a></li>
-  <li><a href="#feladat-visszaállítás-az-eredeti-gyakorlatra-2-perc" id="toc-feladat-visszaállítás-az-eredeti-gyakorlatra-2-perc" class="nav-link" data-scroll-target="#feladat-visszaállítás-az-eredeti-gyakorlatra-2-perc">4. feladat – Visszaállítás az eredeti gyakorlatra (2 perc)</a></li>
-  <li><a href="#feladat-computing-history-webalkalmazás-8-perc" id="toc-feladat-computing-history-webalkalmazás-8-perc" class="nav-link" data-scroll-target="#feladat-computing-history-webalkalmazás-8-perc">5. feladat – Computing History webalkalmazás (8 perc)</a></li>
-  <li><a href="#feladat-szöveg-és-kép-a-generatív-ai-ban-8-perc" id="toc-feladat-szöveg-és-kép-a-generatív-ai-ban-8-perc" class="nav-link" data-scroll-target="#feladat-szöveg-és-kép-a-generatív-ai-ban-8-perc">6. feladat – Szöveg és kép a generatív AI-ban (8 perc)</a></li>
-  <li><a href="#feladat-biztonság-költség-és-takarítás-5-perc" id="toc-feladat-biztonság-költség-és-takarítás-5-perc" class="nav-link" data-scroll-target="#feladat-biztonság-költség-és-takarítás-5-perc">7. feladat – Biztonság, költség és takarítás (5 perc)</a></li>
+  <li><a href="#feladat-saját-asszisztens-a-playgroundban-10-perc" id="toc-feladat-saját-asszisztens-a-playgroundban-10-perc" class="nav-link" data-scroll-target="#feladat-saját-asszisztens-a-playgroundban-10-perc">3. feladat – Saját asszisztens a Playgroundban (10 perc)</a></li>
+  <li><a href="#feladat-határok-tesztelése-és-a-playground-visszaállítása-5-perc" id="toc-feladat-határok-tesztelése-és-a-playground-visszaállítása-5-perc" class="nav-link" data-scroll-target="#feladat-határok-tesztelése-és-a-playground-visszaállítása-5-perc">4. feladat – Határok tesztelése és a Playground visszaállítása (5 perc)</a></li>
+  <li><a href="#feladat-saját-foundry-agent-létrehozása-10-perc" id="toc-feladat-saját-foundry-agent-létrehozása-10-perc" class="nav-link" data-scroll-target="#feladat-saját-foundry-agent-létrehozása-10-perc">5. feladat – Saját Foundry-agent létrehozása (10 perc)</a></li>
+  <li><a href="#feladat-azure-kredit-és-erőforrások-ellenőrzése-4-perc" id="toc-feladat-azure-kredit-és-erőforrások-ellenőrzése-4-perc" class="nav-link" data-scroll-target="#feladat-azure-kredit-és-erőforrások-ellenőrzése-4-perc">6. feladat – Azure-kredit és erőforrások ellenőrzése (4 perc)</a></li>
+  <li><a href="#feladat-computing-history-szöveg-és-képfelismerés-15-perc" id="toc-feladat-computing-history-szöveg-és-képfelismerés-15-perc" class="nav-link" data-scroll-target="#feladat-computing-history-szöveg-és-képfelismerés-15-perc">7. feladat – Computing History: szöveg és képfelismerés (15 perc)</a></li>
   <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
   </ul>
 </nav>
@@ -193,7 +232,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="a-feladat-célja-és-forrása">A feladat célja és forrása</h2>
 <p>A házi feladatban egy Azure-ban elérhető generatív AI-modellt próbálsz ki, rövid időre saját szakterületi asszisztenssé alakítod a Playground <em>Instructions</em> mezőjével, majd folytatod a Microsoft eredeti mintagyakorlatát.</p>
 <p><strong>Részletes eredeti útmutató:</strong> <a href="https://microsoftlearning.github.io/mslearn-ai-fundamentals/Instructions/Exercises/00-explore-foundry.html">Explore Microsoft Foundry – Microsoft Learning</a>. Ha a portál menüpontjai eltérnek az alábbi leírástól, használd a Microsoft útmutatóját is. A Foundry felülete és az elérhető modellek idővel változhatnak.</p>
-<p><strong>Szükséges:</strong> Azure for Students előfizetés, böngésző, Microsoft Foundry hozzáférés. A modellhívások <strong>díjkötelesek lehetnek</strong>, ezért csak a feladatban szükséges számú tesztet végezd el. <strong>Ne másolj be jelszót, API-kulcsot, hozzáférési tokent, személyes vagy bizalmas adatot</strong> sem a Playgroundba, sem ebbe a munkafüzetbe.</p>
+<p><strong>Szükséges:</strong> Azure for Students előfizetés, böngésző, Microsoft Foundry hozzáférés. A modellhívások <strong>Azure-kreditbe kerülhetnek</strong>, ezért csak a feladatban szükséges számú tesztet végezd el. Az Azure for Students kreditkeretének fogyását érdemes ellenőrizni. <strong>Ne másolj be jelszót, API-kulcsot, hozzáférési tokent, személyes vagy bizalmas adatot</strong> sem a Playgroundba, sem ebbe a munkafüzetbe.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -204,7 +243,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A feladatok végén töltsd ki a válaszmezőket. A válaszok ebben a böngészőben automatikusan mentődnek. A kitöltéshez nem kell külön AI-agentet létrehozni vagy fájlt feltölteni.</p>
+<p>A feladatok végén töltsd ki a válaszmezőket. A válaszok ebben a böngészőben automatikusan mentődnek. A feladatokban egy külön Foundry-agentet is kipróbálsz, és a Computing History alkalmazás saját képfeltöltőjét használod; a Quarto-felületre nem kell fájlt feltölteni.</p>
 </div>
 </div>
 </section>
@@ -222,7 +261,11 @@ ul.task-list li input[type="checkbox"] {
 <div class="lab-answer">
 <label><strong>Azure-régió:</strong></label><input data-answer="Q01_REGION" placeholder="Például: swedencentral">
 </div>
-<p><strong>Elfogadási feltétel:</strong> létrehozott és megnyitott Foundry-projekt, név és régió dokumentálása.</p>
+<div class="lab-answer">
+<label><strong>Erőforráscsoport neve:</strong></label><input data-answer="Q01_RG" placeholder="Például: rg-itarch-hf01">
+</div>
+<p><strong>Fontos:</strong> lehetőleg kizárólag ehhez a házi feladathoz tartozó erőforráscsoportot használj. Ha a projekt egy már meglévő, más célra is használt erőforráscsoportba kerül, azt a feladat végén <strong>nem szabad teljes egészében törölni</strong>.</p>
+<p><strong>Elfogadási feltétel:</strong> létrehozott és megnyitott Foundry-projekt, projekt-, erőforráscsoport-név és régió dokumentálása.</p>
 </section>
 <section id="feladat-gpt-5-mini-modell-telepítése-7-perc" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-gpt-5-mini-modell-telepítése-7-perc">2. feladat – GPT-5 Mini modell telepítése (7 perc)</h2>
@@ -238,117 +281,145 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p><strong>Elfogadási feltétel:</strong> a modell elérhető a Playgroundban, vagy az akadály pontosan dokumentált.</p>
 </section>
-<section id="feladat-saját-szakterületi-ai-asszisztens-15-perc" class="level2">
-<h2 class="anchored" data-anchor-id="feladat-saját-szakterületi-ai-asszisztens-15-perc">3. feladat – Saját szakterületi AI-asszisztens (15 perc)</h2>
-<p><strong>Ez a feladat a modell telepítése után, még a Microsoft mintagyakorlat folytatása előtt következik.</strong> Nem kell külön agentet létrehozni: a telepített modell Playgroundjában ideiglenesen módosítod az <em>Instructions</em> mezőt.</p>
+<section id="feladat-saját-asszisztens-a-playgroundban-10-perc" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-saját-asszisztens-a-playgroundban-10-perc">3. feladat – Saját asszisztens a Playgroundban (10 perc)</h2>
+<p>A telepített modell <strong>Playground</strong> felületén ideiglenesen saját <em>Instructions</em> szöveget adsz meg. Ez <strong>még nem külön Foundry-agent</strong>, csak a modell kipróbálása más utasításokkal.</p>
 <ol type="1">
-<li>Válassz <strong>egy</strong> szakterületet: <strong>Azure</strong>, <strong>Linux/Debian</strong> vagy <strong>Windows Server/PowerShell</strong>.</li>
-<li>Az <em>Instructions</em> mezőbe írj <strong>saját, legalább 4–5 mondatos instrukciót</strong>. Határozd meg a szerepet, a célközönséget, a válaszok részletességét, a biztonsági korlátokat és a témán kívüli kérdések kezelését.</li>
-<li>Küldj <strong>három tesztkérdést</strong>: (a) egy alapfogalom vagy egyszerű művelet; (b) egy összetettebb, gyakorlati hibaelhárítás; (c) egy szándékosan témán kívüli kérdés.</li>
-<li>Figyeld meg, hogy a válaszok mennyire tartják be a saját instrukciódat. A három kérdést és a megfigyeléseidet rögzítsd az alábbi mezőkben.</li>
+<li>Válassz egy témát: <strong>Azure</strong>, <strong>Linux/Debian</strong> vagy <strong>Windows Server/PowerShell</strong>.</li>
+<li>Írj saját instrukciót, amely megadja az asszisztens szerepét, a válaszok stílusát, a biztonsági szabályokat és a témakör határait.</li>
+<li>Próbáld ki két kérdéssel: egy egyszerű szakmai kérdéssel és egy összetettebb hibaelhárítási problémával.</li>
+<li>Figyeld meg, hogy az asszisztens követi-e az utasításaidat.</li>
 </ol>
-<p><strong>Példa a megfogalmazásra (ne másold változtatás nélkül):</strong> „Debian Linux rendszergazdai asszisztens vagy kezdő egyetemistáknak. Rövid magyarázat után adj ellenőrizhető Bash-parancsokat. Veszélyes műveletek előtt figyelmeztess. Jelszót és titkos adatot soha ne kérj. A Linux rendszergazdai témán kívüli kérdéseket udvariasan utasítsd el.”</p>
+<p><strong>Ötlet:</strong> Linux-asszisztensnél kérdezhetsz lemezterület-ellenőrzésről és SSH-hibakeresésről; Azure-asszisztensnél virtuális gépek indításáról és hálózati hibákról.</p>
 <div class="lab-answer">
-<label><strong>Választott szakterület:</strong></label><select data-answer="Q03_TOPIC"><option value="">Válassz…</option><option>Azure</option><option>Linux/Debian</option><option>Windows Server/PowerShell</option></select>
+<label>Választott szakterület</label><select data-answer="Q03_TOPIC"><option value="">Válassz…</option><option>Azure</option><option>Linux/Debian</option><option>Windows Server/PowerShell</option></select>
 </div>
 <div class="lab-answer">
-<label><strong>Saját Instructions (teljes szöveg):</strong></label>
-<textarea data-answer="Q03_INSTRUCTIONS" rows="7" placeholder="Másold ide a saját instrukciódat – titkos adatok nélkül."></textarea>
+<label>Saját Instructions szöveged</label>
+<textarea data-answer="Q03_INSTRUCTIONS" rows="5" placeholder="Az asszisztens szerepe, válaszadási szabályai, korlátai…"></textarea>
 </div>
 <div class="lab-answer">
-<label><strong>1. tesztkérdés és a válasz rövid értékelése:</strong></label>
-<textarea data-answer="Q03_TEST1" rows="3"></textarea>
-</div>
-<div class="lab-answer">
-<label><strong>2. tesztkérdés és a válasz rövid értékelése:</strong></label>
-<textarea data-answer="Q03_TEST2" rows="3"></textarea>
-</div>
-<div class="lab-answer">
-<label><strong>3. (témán kívüli) tesztkérdés és a válasz rövid értékelése:</strong></label>
-<textarea data-answer="Q03_TEST3" rows="3"></textarea>
-</div>
-<div class="lab-answer">
-<label><strong>Összegzés: miben követte, illetve miben nem követte a modell az instrukciókat?</strong></label>
-<textarea data-answer="Q03_EVALUATION" rows="4"></textarea>
-</div>
-<p><strong>Elfogadási feltétel:</strong> saját instrukció, három különböző teszt és érdemi értékelés.</p>
-</section>
-<section id="feladat-visszaállítás-az-eredeti-gyakorlatra-2-perc" class="level2">
-<h2 class="anchored" data-anchor-id="feladat-visszaállítás-az-eredeti-gyakorlatra-2-perc">4. feladat – Visszaállítás az eredeti gyakorlatra (2 perc)</h2>
-<ol type="1">
-<li><strong>Töröld a saját szakterületi Instructions tartalmát</strong> a Playgroundban.</li>
-<li>Indíts <strong>új beszélgetést</strong>, hogy az előző kérdések kontextusa ne befolyásolja a következő tesztet.</li>
-<li>A telepített modellt <strong>nem kell törölni vagy újratelepíteni</strong>.</li>
-</ol>
-<div class="lab-answer">
-<label><strong>Visszaállítás megtörtént?</strong></label><select data-answer="Q04_RESET"><option value="">Válassz…</option><option>Igen, töröltem az Instructions szöveget és új chatet indítottam</option><option>Nem, akadályba ütköztem (részletezem lent)</option></select>
-</div>
-<div class="lab-answer">
-<label><strong>Rövid megjegyzés (ha szükséges):</strong></label>
-<textarea data-answer="Q04_NOTE" rows="2"></textarea>
+<label>Két tesztkérdésed és rövid megfigyelésed</label>
+<textarea data-answer="Q03_TESTS" rows="4" placeholder="1. kérdés és tapasztalat…
+2. kérdés és tapasztalat…"></textarea>
 </div>
 </section>
-<section id="feladat-computing-history-webalkalmazás-8-perc" class="level2">
-<h2 class="anchored" data-anchor-id="feladat-computing-history-webalkalmazás-8-perc">5. feladat – Computing History webalkalmazás (8 perc)</h2>
+<section id="feladat-határok-tesztelése-és-a-playground-visszaállítása-5-perc" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-határok-tesztelése-és-a-playground-visszaállítása-5-perc">4. feladat – Határok tesztelése és a Playground visszaállítása (5 perc)</h2>
 <ol type="1">
-<li>Nyisd meg a Microsoft által megadott <a href="https://aka.ms/computing-history-foundry">Computing History Agent webalkalmazást</a>.</li>
-<li>A Microsoft eredeti leírásának megfelelően kapcsold össze a <strong>saját Foundry-projektedben telepített modellel</strong>. A webalkalmazás a projekt <strong>endpointját</strong>, a <strong>deployment nevét</strong> és az <strong>API-kulcsot</strong> kérheti.</li>
-<li>Az API-kulcsot <strong>csak a feladatban megadott, ellenőrzött Microsoft-demó felületén</strong> használd. <strong>Soha ne írd be a munkafüzetbe, és ne add be JSON-ban!</strong> Ha nem tudod ellenőrizni a céloldalt vagy nem szeretnél kulcsot megadni, dokumentáld ezt és folytasd a következő feladattal.</li>
-<li>Kérdezz a számítástechnika történetéről, majd tegyél fel egy <strong>mai Azure- vagy Linux-rendszergazdai</strong> kérdést. Hasonlítsd össze a válaszokat.</li>
+<li>Tegyél fel egy <strong>szándékosan témán kívüli kérdést</strong>. Megtartja-e az asszisztens a szakterületi korlátot?</li>
+<li>Ha szükséges, pontosítsd az <em>Instructions</em> szöveget, majd ismételd meg a kérdést.</li>
+<li><strong>Töröld a saját Instructions szöveget</strong>, és <strong>indíts új beszélgetést</strong>. A modelltelepítést nem kell törölni.</li>
 </ol>
 <div class="lab-answer">
-<label><strong>Történeti kérdés és a kapott válasz lényege:</strong></label>
-<textarea data-answer="Q05_HISTORY" rows="4"></textarea>
+<label>Témán kívüli kérdés és az asszisztens reakciója</label>
+<textarea data-answer="Q04_OUTSIDE" rows="3" placeholder="Mit kérdeztél, hogyan válaszolt, szükséges volt-e módosítani az instrukciót?"></textarea>
 </div>
 <div class="lab-answer">
-<label><strong>Témán kívüli kérdés és a webalkalmazás reakciója:</strong></label>
-<textarea data-answer="Q05_OUTSIDE" rows="4"></textarea>
-</div>
-<div class="lab-answer">
-<label><strong>Miért viselkedhet másként ez a webalkalmazás, mint a korábbi Playground-beszélgetés?</strong></label>
-<textarea data-answer="Q05_COMPARE" rows="3"></textarea>
-</div>
-<p><strong>Fontos különbség:</strong> a Playgroundba írt ideiglenes instrukció nem azonos a külső webalkalmazás saját, alkalmazásszintű utasításaival. Ugyanaz a modelltelepítés különböző kliensekben másként viselkedhet.</p>
-</section>
-<section id="feladat-szöveg-és-kép-a-generatív-ai-ban-8-perc" class="level2">
-<h2 class="anchored" data-anchor-id="feladat-szöveg-és-kép-a-generatív-ai-ban-8-perc">6. feladat – Szöveg és kép a generatív AI-ban (8 perc)</h2>
-<ol type="1">
-<li>A Playgroundban kérj a modelltől <strong>rövid, közérthető magyarázatot</strong> arról, hogy mi a különbség a generatív AI és a hagyományos, szabályalapú program között.</li>
-<li>Kérd meg, hogy az eredményt alakítsa át <strong>hárompontos, kezdőknek szóló összefoglalóvá</strong>.</li>
-<li>Próbálj ki egy <strong>képpel kapcsolatos</strong> lehetőséget a Foundry felületén, <strong>csak ha a rendelkezésre álló modell és a felület támogatja, és a költség elfogadható</strong>. Ez lehet például képgenerálási lehetőség megtekintése vagy támogatott képes modell képességeinek áttekintése. <strong>Kép vagy fájl feltöltése nem szükséges.</strong> Ne telepíts emiatt külön fizetős modellt.</li>
-</ol>
-<div class="lab-answer">
-<label><strong>Az első és a második szöveges prompt, valamint a különbség a válaszok között:</strong></label>
-<textarea data-answer="Q06_TEXT" rows="5"></textarea>
-</div>
-<div class="lab-answer">
-<label><strong>Milyen képes funkciót találtál? Ha nem volt elérhető, miért?</strong></label>
-<textarea data-answer="Q06_IMAGE" rows="3"></textarea>
+<label>Visszaállítás állapota</label><select data-answer="Q04_RESET"><option value="">Válassz…</option><option>Instructions törölve, új beszélgetés indítva</option><option>Nem sikerült, a megjegyzésben jelzem</option></select>
 </div>
 </section>
-<section id="feladat-biztonság-költség-és-takarítás-5-perc" class="level2">
-<h2 class="anchored" data-anchor-id="feladat-biztonság-költség-és-takarítás-5-perc">7. feladat – Biztonság, költség és takarítás (5 perc)</h2>
+<section id="feladat-saját-foundry-agent-létrehozása-10-perc" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-saját-foundry-agent-létrehozása-10-perc">5. feladat – Saját Foundry-agent létrehozása (10 perc)</h2>
+<p>Most a Playground ideiglenes instrukciójától eltérően próbálj meg <strong>külön agentet</strong> létrehozni a Foundry projektben.</p>
 <ol type="1">
-<li>Ellenőrizd a projekt vagy az előfizetés <strong>költség- és használati adatait</strong> az Azure Portal megfelelő felületén. A megjelenő összeg késhet; ha még nem látszik, ezt írd le.</li>
-<li>Fogalmazz meg <strong>két konkrét óvintézkedést</strong> az AI-szolgáltatások biztonságos használatához.</li>
-<li>A Microsoft-útmutató <em>Clean up</em> részének megfelelően <strong>töröld a kizárólag ehhez a feladathoz létrehozott, már nem szükséges erőforrásokat</strong>. A törlés előtt ellenőrizd, hogy a projektet vagy erőforráscsoportot más feladathoz nem használod-e. A takarítás nem helyettesíti a költségfigyelést.</li>
+<li>A projekt <strong>Build / Agents</strong> felületén válaszd az új agent létrehozását (az elnevezés a portál verziójától függhet).</li>
+<li>Adj neki egyedi nevet, például <code>itarch-linux-assistant</code> vagy <code>itarch-azure-assistant</code>.</li>
+<li>Válaszd ki a már telepített, támogatott modellt, és adj meg az előző feladat alapján rövid <strong>Instructions</strong> szöveget.</li>
+<li>Teszteld az agentet egy szakmai kérdéssel. Ha az agent létrehozása jogosultsági, modell- vagy költségkorlát miatt nem lehetséges, <strong>ne telepíts új, drága szolgáltatást</strong>: dokumentáld az akadályt.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Két különböző megoldás
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A Playground <em>Instructions</em> mezője a modell kipróbálásához használt utasítás. A Foundry-agent külön projekt-erőforrás lehet, saját beállításokkal. A következő Computing History webalkalmazás <strong>nem ezt az agentet fogja meghívni</strong>, hanem a korábban telepített modellt a projekt endpointján keresztül.</p>
+</div>
+</div>
+<div class="lab-answer">
+<label>Agent neve vagy a létrehozás akadálya</label><input data-answer="Q05_AGENT" placeholder="Például: itarch-linux-assistant">
+</div>
+<div class="lab-answer">
+<label>Tesztkérdés és tapasztalat</label>
+<textarea data-answer="Q05_TEST" rows="3" placeholder="Miben különbözött az agent beállítása a Playground használatától?"></textarea>
+</div>
+</section>
+<section id="feladat-azure-kredit-és-erőforrások-ellenőrzése-4-perc" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-azure-kredit-és-erőforrások-ellenőrzése-4-perc">6. feladat – Azure-kredit és erőforrások ellenőrzése (4 perc)</h2>
+<p>Mielőtt a Computing History alkalmazáshoz kapcsolódnál, nézd meg, <strong>milyen Azure-erőforrások tartoznak a projektedhez</strong>, és hol tudod ellenőrizni az Azure-kredit felhasználását.</p>
+<ol type="1">
+<li>Nyisd meg az <a href="https://portal.azure.com/">Azure Portalt</a>, és keresd meg az <strong>1. feladatban feljegyzett erőforráscsoportot</strong>. Nézd meg, milyen erőforrások szerepelnek benne.</li>
+<li>Az Azure-előfizetésednél keresd meg a <strong>Cost Management / Költségkezelés</strong> vagy az elérhető kredit- és költséginformációkat. A friss modellhasználat költsége <strong>késleltetve jelenhet meg</strong>, ezért nem kell konkrét összeget látnod.</li>
+<li>Ellenőrizd, hogy az erőforráscsoportot kizárólag ehhez a feladathoz hoztad-e létre. <strong>Most még ne törölj semmit:</strong> a 7. feladatban szükséged lesz a modellre.</li>
 </ol>
 <div class="lab-answer">
-<label><strong>Költség / használat ellenőrzésének eredménye:</strong></label>
-<textarea data-answer="Q07_COST" rows="3"></textarea>
+<label>Milyen erőforrásokat találtál, és hol ellenőrizhető az Azure-kredit felhasználása?</label>
+<textarea data-answer="Q06_RESOURCES" rows="3" placeholder="Erőforrástípusok; a költség- vagy kreditinformáció elérési helye; ha nem látható, azt is jelezheted."></textarea>
 </div>
 <div class="lab-answer">
-<label><strong>Két biztonsági óvintézkedés:</strong></label>
-<textarea data-answer="Q07_SAFETY" rows="3"></textarea>
+<label>Az erőforráscsoport kizárólag a HF01-hez tartozik?</label><select data-answer="Q06_DEDICATED"><option value="">Válassz…</option><option>Igen, kizárólag ehhez a házi feladathoz</option><option>Nem, más erőforrásokat is tartalmaz</option><option>Nem tudtam megállapítani</option></select>
+</div>
+</section>
+<section id="feladat-computing-history-szöveg-és-képfelismerés-15-perc" class="level2">
+<h2 class="anchored" data-anchor-id="feladat-computing-history-szöveg-és-képfelismerés-15-perc">7. feladat – Computing History: szöveg és képfelismerés (15 perc)</h2>
+<p>A Microsoft eredeti gyakorlatának végén a <strong>Computing History</strong> webalkalmazással teszteled a saját Foundry-projektedben telepített modellt. Ehhez <strong>nem a saját agent nevét</strong>, hanem a <strong>modell deployment nevét</strong> kell megadnod.</p>
+<ol type="1">
+<li><p>A Foundry-projekt kezdőlapján keresd meg a <strong>Project endpoint</strong> értéket (ne az Azure OpenAI endpointot), a <strong>deployment nevét</strong> és a <strong>Project API key</strong> értéket.</p></li>
+<li><p>Nyisd meg a <a href="https://aka.ms/computing-history-foundry">Computing History Agent webalkalmazást</a>. Az alkalmazás konfigurációs részén add meg a szükséges kapcsolati adatokat. <strong>Az API-kulcsot soha ne másold be ebbe a munkafüzetbe, és ne add be JSON-ban!</strong> Ha nem bízol a demóoldalban vagy nem szeretnél kulcsot megadni, dokumentáld az akadályt.</p></li>
+<li><p>Kérdezz rá az <strong>ELIZA chatbot</strong> történetére, majd tegyél fel egy mai Azure- vagy Linux-rendszergazdai kérdést. Figyeld meg a webalkalmazás témaköri korlátait.</p></li>
+<li><p>Próbáld ki a szövegelemzést: kérj egy rövid számítástechnika-történeti szövegről összefoglalást és személyek, helyek, dátumok kinyerését.</p></li>
+<li><p><strong>Képfelismerés:</strong> töltsd le a Microsoft által biztosított <a href="https://aka.ms/computer-images">computers.zip – történeti számítógépek képei</a> állományt, csomagold ki, majd az alkalmazás <strong>Attach image (📎)</strong> funkciójával csatolj egy képet. Kérdezd: <em>Tell me about this computer.</em> Próbálj ki egy második képet is.</p></li>
+<li><p><strong>Választható kiegészítés:</strong> a <a href="https://aka.ms/pcb-images">pcbs.zip – áramköri lapok képei</a> csomag egyik képével próbáld ki az alkatrész vagy felirat felismerését. Nem kell minden képet feltölteni.</p></li>
+<li><p><strong>Kötelező lezárás – Azure-erőforrások takarítása:</strong> ha az 1. feladatban létrehozott erőforráscsoport <strong>kizárólag a HF01-hez tartozik</strong>, a tesztek után <strong>a teljes erőforráscsoportot töröld</strong>. Ezzel az abban található projekt és kapcsolódó erőforrások is törlődnek. <strong>A törlés végleges; előtte ellenőrizd a csoport nevét és tartalmát.</strong> Ha más feladathoz is használt erőforrások vannak benne, <strong>ne töröld a teljes csoportot</strong>: csak a HF01-hez tartozó, biztosan azonosított erőforrásokat távolítsd el, vagy egyeztess az oktatóval.</p>
+<p><strong>A lehetőség – Azure Portal:</strong> nyisd meg az <a href="https://portal.azure.com/">Azure Portalt</a> → <strong>Resource groups / Erőforráscsoportok</strong> → válaszd ki a HF01 erőforráscsoportját → <strong>Delete resource group / Erőforráscsoport törlése</strong> → ellenőrizd a nevet és erősítsd meg a törlést.</p>
+<p><strong>B lehetőség – PowerShell (VS Code vagy PowerShell terminál):</strong> ha már be vagy jelentkezve az Azure PowerShellbe, és a megfelelő előfizetés van kiválasztva, ellenőrizd a csoport nevét, majd töröld:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Get-AzContext</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Get-AzResourceGroup <span class="op">-</span>Name <span class="st">"SAJAT_HF01_EROFORRASCSOPORT"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Remove-AzResourceGroup <span class="op">-</span>Name <span class="st">"SAJAT_HF01_EROFORRASCSOPORT"</span> <span class="op">-</span>Force</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A <code>SAJAT_HF01_EROFORRASCSOPORT</code> helyére az <strong>1. feladatban rögzített pontos nevet</strong> írd. A <code>-Force</code> miatt a parancs nem kér külön megerősítést, ezért <strong>csak a név és a tartalom ellenőrzése után</strong> futtasd. Ha a törlés még folyamatban van, várd meg a befejezését.</p></li>
+</ol>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Biztonság és letöltések
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A képcsomagokat a Microsoft eredeti útmutatója hivatkozza. Csak a feladat céljára használd őket, és a ZIP-et ellenőrizd a szokásos vírusvédelmi eszközökkel. Ha a letöltést a böngésző vagy a vírusvédelem blokkolja, ne kerüld meg a védelmet; írd le az akadályt. A Computing History webalkalmazás <strong>saját képfeltöltő funkcióját</strong> használd, a Quarto-beadáshoz nem kell képet csatolni.</p>
+</div>
 </div>
 <div class="lab-answer">
-<label><strong>Takarítás eredménye (mit töröltél, vagy miért maradt meg):</strong></label>
-<textarea data-answer="Q07_CLEANUP" rows="3"></textarea>
+<label>7/3. ELIZA és témán kívüli kérdés – mit tapasztaltál?</label>
+<textarea data-answer="Q07_CHAT" rows="3" placeholder="A két kérdés és a webalkalmazás reakciója…"></textarea>
+</div>
+<div class="lab-answer">
+<label>7/4. Szövegelemzés – milyen információkat nyert ki?</label>
+<textarea data-answer="Q07_TEXT" rows="3" placeholder="Összefoglalás, személyek, helyek, dátumok…"></textarea>
+</div>
+<div class="lab-answer">
+<label>7/5. Képfelismerés – melyik két képet próbáltad ki, és mit ismert fel?</label>
+<textarea data-answer="Q07_IMAGE" rows="3" placeholder="Képfájlok neve, a felismerés eredménye és pontossága…"></textarea>
+</div>
+<div class="lab-answer">
+<label>7/6. Áramköri lap felismerése (választható)</label>
+<textarea data-answer="Q07_PCB" rows="2" placeholder="Melyik képet próbáltad ki, mit ismert fel? Ha kihagytad, üresen maradhat."></textarea>
+</div>
+<div class="lab-answer">
+<label>7/7. Erőforráscsoport törlése / a megőrzés indoka</label>
+<textarea data-answer="Q07_CLEANUP" rows="3" placeholder="Az erőforráscsoport neve, a törlés módja és eredménye; ha nem törölhető biztonságosan, az ok…"></textarea>
 </div>
 </section>
 <section id="mentés-és-beadás" class="level2">
 <h2 class="anchored" data-anchor-id="mentés-és-beadás">Mentés és beadás</h2>
-<p>A válaszok automatikusan mentődnek ebben a böngészőben. A <strong>Beadás</strong> gomb először összesítést mutat, majd a megerősítés után az Azure backendnek küldi a JSON-adatokat. A <strong>JSON export</strong> biztonsági másolat; önmagában nem jelent szerveres beadást.</p>
+<p>A válaszok automatikusan mentődnek ebben a böngészőben. <strong>Csak a Neptun-kód kötelező</strong>; az üres válaszmezők nem akadályozzák a beadást. A <strong>Beadás</strong> gomb először összesítést mutat, majd a megerősítés után az Azure backendnek küldi a JSON-adatokat. A <strong>JSON export</strong> biztonsági másolat; önmagában nem jelent szerveres beadást.</p>
 <div class="actions">
 <button id="submit-button" type="button" onclick="openSubmissionSummary()">
 📤 Beadás
@@ -396,6 +467,11 @@ Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: 
 </p>
 </div>
 <style>
+.lab-answer {margin:1.1rem 0 1.4rem;padding:1rem 1.1rem;background:var(--bs-tertiary-bg,#f7f9fb);border:1px solid var(--bs-border-color,#dee2e6);border-radius:10px;}
+.lab-answer label {display:block;font-weight:600;margin:0 0 .55rem;line-height:1.45;}
+.lab-answer input,.lab-answer select,.lab-answer textarea {display:block;box-sizing:border-box;width:100%;max-width:100%;padding:.7rem .85rem;border:1px solid #adb5bd;border-radius:7px;background:var(--bs-body-bg,#fff);color:var(--bs-body-color,#212529);font:inherit;line-height:1.5;}
+.lab-answer textarea {min-height:6.5rem;resize:vertical;white-space:pre-wrap;}
+.lab-answer input:focus,.lab-answer textarea:focus,.lab-answer select:focus {outline:2px solid #387ac5;outline-offset:1px;}
 .actions {display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;margin:1rem 0}
 .actions button {padding:.55rem .9rem;border:1px solid #77808a;border-radius:6px;background:#fff;cursor:pointer}
 .actions button:disabled {opacity:.5;cursor:not-allowed}
@@ -467,7 +543,7 @@ Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: 
     $('submission-summary-body').innerHTML=`<p><strong>Neptun:</strong> ${esc(studentId()||'nincs megadva')} ${validId()?'✓':'⚠ 6 betű/szám szükséges'}</p>
       <p><strong>Kitöltött mezők:</strong> ${complete}/${fs.length} (${Math.round(100*complete/Math.max(1,fs.length))}%)</p>
       <p><strong>Hiányos feladatok:</strong> ${groups.length?groups.map(x=>Number(x)).join(', '):'nincs'}</p>
-      ${missing.length?`<p>Összesen ${missing.length} mező üres. A beadás ettől még lehetséges, de ellenőrizd a válaszokat.</p>`:''}
+      ${missing.length?`<p>Összesen ${missing.length} mező üres. A beadás ettől még lehetséges; ellenőrizd, hogy szándékosan hagytad-e üresen.</p>`:''}
       <p>A szintaktikai ellenőrző gombok használata nem kötelező. Biztosan beadod?</p>`;
     $('submission-summary').hidden=false;
     $('submission-summary').scrollIntoView({behavior:'smooth',block:'start'});
@@ -483,9 +559,6 @@ Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: 
   window.confirmSubmission=async()=>{
     if(closed()){$('submission-result').textContent='⚠ A beadási határidő lejárt.';refreshDeadline();return;}
     if(!validId()){$('submission-result').textContent='⚠ Adj meg érvényes, 6 karakteres Neptun-kódot.';return;}
-    const required=['Q01_PROJECT','Q02_DEPLOYMENT','Q03_TOPIC','Q03_INSTRUCTIONS','Q03_TEST1','Q03_TEST2','Q03_TEST3','Q03_EVALUATION','Q04_RESET','Q05_HISTORY','Q05_OUTSIDE','Q05_COMPARE','Q06_TEXT','Q06_IMAGE','Q07_COST','Q07_SAFETY','Q07_CLEANUP'];
-    const incomplete=required.filter(k=>!String(answers()[k]||'').trim());
-    if(incomplete.length){$('submission-result').textContent='⚠ A beadáshoz még '+incomplete.length+' kötelező válasz hiányzik. Ellenőrizd a feladatokat.';return;}
     const btn=$('confirm-submit-button');btn.disabled=true;
     $('submission-result').textContent='Beadás folyamatban…';
     try {

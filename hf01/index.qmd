@@ -21,7 +21,7 @@ A házi feladatban egy Azure-ban elérhető generatív AI-modellt próbálsz ki,
 
 **Részletes eredeti útmutató:** [Explore Microsoft Foundry – Microsoft Learning](https://microsoftlearning.github.io/mslearn-ai-fundamentals/Instructions/Exercises/00-explore-foundry.html). Ha a portál menüpontjai eltérnek az alábbi leírástól, használd a Microsoft útmutatóját is. A Foundry felülete és az elérhető modellek idővel változhatnak.
 
-**Szükséges:** Azure for Students előfizetés, böngésző, Microsoft Foundry hozzáférés. A modellhívások **díjkötelesek lehetnek**, ezért csak a feladatban szükséges számú tesztet végezd el. **Ne másolj be jelszót, API-kulcsot, hozzáférési tokent, személyes vagy bizalmas adatot** sem a Playgroundba, sem ebbe a munkafüzetbe.
+**Szükséges:** Azure for Students előfizetés, böngésző, Microsoft Foundry hozzáférés. A modellhívások **Azure-kreditbe kerülhetnek**, ezért csak a feladatban szükséges számú tesztet végezd el. Az Azure for Students kreditkeretének fogyását érdemes ellenőrizni. **Ne másolj be jelszót, API-kulcsot, hozzáférési tokent, személyes vagy bizalmas adatot** sem a Playgroundba, sem ebbe a munkafüzetbe.
 
 ::: {.callout-tip}
 ## Munkamódszer
@@ -37,8 +37,11 @@ A feladatok végén töltsd ki a válaszmezőket. A válaszok ebben a böngész�
 
 <div class="lab-answer"><label><strong>Projekt neve:</strong></label><input data-answer="Q01_PROJECT" placeholder="Saját Foundry-projekt neve" /></div>
 <div class="lab-answer"><label><strong>Azure-régió:</strong></label><input data-answer="Q01_REGION" placeholder="Például: swedencentral" /></div>
+<div class="lab-answer"><label><strong>Erőforráscsoport neve:</strong></label><input data-answer="Q01_RG" placeholder="Például: rg-itarch-hf01" /></div>
 
-**Elfogadási feltétel:** létrehozott és megnyitott Foundry-projekt, név és régió dokumentálása.
+**Fontos:** lehetőleg kizárólag ehhez a házi feladathoz tartozó erőforráscsoportot használj. Ha a projekt egy már meglévő, más célra is használt erőforráscsoportba kerül, azt a feladat végén **nem szabad teljes egészében törölni**.
+
+**Elfogadási feltétel:** létrehozott és megnyitott Foundry-projekt, projekt-, erőforráscsoport-név és régió dokumentálása.
 
 ## 2. feladat – GPT-5 Mini modell telepítése (7 perc)
 
@@ -93,13 +96,17 @@ A Playground *Instructions* mezője a modell kipróbálásához használt utasí
 <div class="lab-answer"><label>Agent neve vagy a létrehozás akadálya</label><input data-answer="Q05_AGENT" placeholder="Például: itarch-linux-assistant" /></div>
 <div class="lab-answer"><label>Tesztkérdés és tapasztalat</label><textarea data-answer="Q05_TEST" rows="3" placeholder="Miben különbözött az agent beállítása a Playground használatától?"></textarea></div>
 
-## 6. feladat – Biztonság, költség és erőforrások (5 perc)
+## 6. feladat – Azure-kredit és erőforrások ellenőrzése (4 perc)
 
-1. Az Azure Portalon ellenőrizd a projekt erőforrásait és az előfizetés költségadatait. A fogyasztás megjelenése késhet.
-2. Fogalmazz meg két szabályt a biztonságos AI-használathoz (például titkos adatok védelme, válaszok ellenőrzése).
-3. **A következő feladathoz még szükséged lesz a modelltelepítésre és a projekt kapcsolati adataira, ezért most ne töröld a projektet!** A takarítást a Computing History tesztje után végezd el.
+Mielőtt a Computing History alkalmazáshoz kapcsolódnál, nézd meg, **milyen Azure-erőforrások tartoznak a projektedhez**, és hol tudod ellenőrizni az Azure-kredit felhasználását.
 
-<div class="lab-answer"><label>Költség- és biztonsági megfigyelések</label><textarea data-answer="Q06_COST_SAFETY" rows="4" placeholder="Látható fogyasztás, két biztonsági szabály…"></textarea></div>
+1. Nyisd meg az [Azure Portalt](https://portal.azure.com/), és keresd meg az **1. feladatban feljegyzett erőforráscsoportot**. Nézd meg, milyen erőforrások szerepelnek benne.
+2. Az Azure-előfizetésednél keresd meg a **Cost Management / Költségkezelés** vagy az elérhető kredit- és költséginformációkat. A friss modellhasználat költsége **késleltetve jelenhet meg**, ezért nem kell konkrét összeget látnod.
+3. Ellenőrizd, hogy az erőforráscsoportot kizárólag ehhez a feladathoz hoztad-e létre. **Most még ne törölj semmit:** a 7. feladatban szükséged lesz a modellre.
+
+<div class="lab-answer"><label>Milyen erőforrásokat találtál, és hol ellenőrizhető az Azure-kredit felhasználása?</label><textarea data-answer="Q06_RESOURCES" rows="3" placeholder="Erőforrástípusok; a költség- vagy kreditinformáció elérési helye; ha nem látható, azt is jelezheted."></textarea></div>
+
+<div class="lab-answer"><label>Az erőforráscsoport kizárólag a HF01-hez tartozik?</label><select data-answer="Q06_DEDICATED"><option value="">Válassz…</option><option>Igen, kizárólag ehhez a házi feladathoz</option><option>Nem, más erőforrásokat is tartalmaz</option><option>Nem tudtam megállapítani</option></select></div>
 
 ## 7. feladat – Computing History: szöveg és képfelismerés (15 perc)
 
@@ -111,17 +118,30 @@ A Microsoft eredeti gyakorlatának végén a **Computing History** webalkalmazá
 4. Próbáld ki a szövegelemzést: kérj egy rövid számítástechnika-történeti szövegről összefoglalást és személyek, helyek, dátumok kinyerését.
 5. **Képfelismerés:** töltsd le a Microsoft által biztosított [computers.zip – történeti számítógépek képei](https://aka.ms/computer-images) állományt, csomagold ki, majd az alkalmazás **Attach image (📎)** funkciójával csatolj egy képet. Kérdezd: *Tell me about this computer.* Próbálj ki egy második képet is.
 6. **Választható kiegészítés:** a [pcbs.zip – áramköri lapok képei](https://aka.ms/pcb-images) csomag egyik képével próbáld ki az alkatrész vagy felirat felismerését. Nem kell minden képet feltölteni.
-7. A tesztelés végén töröld a kizárólag ehhez a házi feladathoz létrehozott, már nem szükséges Azure-erőforrásokat, **ha biztosan nem használod őket más célra**.
+7. **Kötelező lezárás – Azure-erőforrások takarítása:** ha az 1. feladatban létrehozott erőforráscsoport **kizárólag a HF01-hez tartozik**, a tesztek után **a teljes erőforráscsoportot töröld**. Ezzel az abban található projekt és kapcsolódó erőforrások is törlődnek. **A törlés végleges; előtte ellenőrizd a csoport nevét és tartalmát.** Ha más feladathoz is használt erőforrások vannak benne, **ne töröld a teljes csoportot**: csak a HF01-hez tartozó, biztosan azonosított erőforrásokat távolítsd el, vagy egyeztess az oktatóval.
+
+   **A lehetőség – Azure Portal:** nyisd meg az [Azure Portalt](https://portal.azure.com/) → **Resource groups / Erőforráscsoportok** → válaszd ki a HF01 erőforráscsoportját → **Delete resource group / Erőforráscsoport törlése** → ellenőrizd a nevet és erősítsd meg a törlést.
+
+   **B lehetőség – PowerShell (VS Code vagy PowerShell terminál):** ha már be vagy jelentkezve az Azure PowerShellbe, és a megfelelő előfizetés van kiválasztva, ellenőrizd a csoport nevét, majd töröld:
+
+   ```powershell
+   Get-AzContext
+   Get-AzResourceGroup -Name "SAJAT_HF01_EROFORRASCSOPORT"
+   Remove-AzResourceGroup -Name "SAJAT_HF01_EROFORRASCSOPORT" -Force
+   ```
+
+   A `SAJAT_HF01_EROFORRASCSOPORT` helyére az **1. feladatban rögzített pontos nevet** írd. A `-Force` miatt a parancs nem kér külön megerősítést, ezért **csak a név és a tartalom ellenőrzése után** futtasd. Ha a törlés még folyamatban van, várd meg a befejezését.
 
 ::: {.callout-warning}
 ## Biztonság és letöltések
 A képcsomagokat a Microsoft eredeti útmutatója hivatkozza. Csak a feladat céljára használd őket, és a ZIP-et ellenőrizd a szokásos vírusvédelmi eszközökkel. Ha a letöltést a böngésző vagy a vírusvédelem blokkolja, ne kerüld meg a védelmet; írd le az akadályt. A Computing History webalkalmazás **saját képfeltöltő funkcióját** használd, a Quarto-beadáshoz nem kell képet csatolni.
 :::
 
-<div class="lab-answer"><label>Történeti és témán kívüli kérdés: mit tapasztaltál?</label><textarea data-answer="Q07_CHAT" rows="4" placeholder="ELIZA és a szakterületen kívüli kérdés tapasztalatai…"></textarea></div>
-<div class="lab-answer"><label>Szövegelemzés: milyen információkat nyert ki?</label><textarea data-answer="Q07_TEXT" rows="3" placeholder="Összefoglalás, személyek, helyek, dátumok…"></textarea></div>
-<div class="lab-answer"><label>Képfelismerés: melyik képet próbáltad ki, és mit ismert fel?</label><textarea data-answer="Q07_IMAGE" rows="3" placeholder="Kép neve, válasz pontossága, vagy technikai akadály…"></textarea></div>
-<div class="lab-answer"><label>Erőforrások takarítása / megőrzésének oka</label><textarea data-answer="Q07_CLEANUP" rows="2" placeholder="Mit töröltél, vagy miért tartottad meg?"></textarea></div>
+<div class="lab-answer"><label>7/3. ELIZA és témán kívüli kérdés – mit tapasztaltál?</label><textarea data-answer="Q07_CHAT" rows="3" placeholder="A két kérdés és a webalkalmazás reakciója…"></textarea></div>
+<div class="lab-answer"><label>7/4. Szövegelemzés – milyen információkat nyert ki?</label><textarea data-answer="Q07_TEXT" rows="3" placeholder="Összefoglalás, személyek, helyek, dátumok…"></textarea></div>
+<div class="lab-answer"><label>7/5. Képfelismerés – melyik két képet próbáltad ki, és mit ismert fel?</label><textarea data-answer="Q07_IMAGE" rows="3" placeholder="Képfájlok neve, a felismerés eredménye és pontossága…"></textarea></div>
+<div class="lab-answer"><label>7/6. Áramköri lap felismerése (választható)</label><textarea data-answer="Q07_PCB" rows="2" placeholder="Melyik képet próbáltad ki, mit ismert fel? Ha kihagytad, üresen maradhat."></textarea></div>
+<div class="lab-answer"><label>7/7. Erőforráscsoport törlése / a megőrzés indoka</label><textarea data-answer="Q07_CLEANUP" rows="3" placeholder="Az erőforráscsoport neve, a törlés módja és eredménye; ha nem törölhető biztonságosan, az ok…"></textarea></div>
 
 ## Mentés és beadás
 

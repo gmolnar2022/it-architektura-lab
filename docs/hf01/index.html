@@ -186,7 +186,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#feladat-határok-tesztelése-és-a-playground-visszaállítása-5-perc" id="toc-feladat-határok-tesztelése-és-a-playground-visszaállítása-5-perc" class="nav-link" data-scroll-target="#feladat-határok-tesztelése-és-a-playground-visszaállítása-5-perc">4. feladat – Határok tesztelése és a Playground visszaállítása (5 perc)</a></li>
   <li><a href="#feladat-saját-foundry-agent-létrehozása-10-perc" id="toc-feladat-saját-foundry-agent-létrehozása-10-perc" class="nav-link" data-scroll-target="#feladat-saját-foundry-agent-létrehozása-10-perc">5. feladat – Saját Foundry-agent létrehozása (10 perc)</a></li>
   <li><a href="#feladat-azure-kredit-és-erőforrások-ellenőrzése-4-perc" id="toc-feladat-azure-kredit-és-erőforrások-ellenőrzése-4-perc" class="nav-link" data-scroll-target="#feladat-azure-kredit-és-erőforrások-ellenőrzése-4-perc">6. feladat – Azure-kredit és erőforrások ellenőrzése (4 perc)</a></li>
-  <li><a href="#feladat-computing-history-szöveg-és-képfelismerés-15-perc" id="toc-feladat-computing-history-szöveg-és-képfelismerés-15-perc" class="nav-link" data-scroll-target="#feladat-computing-history-szöveg-és-képfelismerés-15-perc">7. feladat – Computing History: szöveg és képfelismerés (15 perc)</a></li>
+  <li><a href="#feladat-computing-history-szöveg-és-képfelismerés-15-perc" id="toc-feladat-computing-history-szöveg-és-képfelismerés-15-perc" class="nav-link" data-scroll-target="#feladat-computing-history-szöveg-és-képfelismerés-15-perc">7. feladat – Computing History: szöveg és képfelismerés (15 perc)</a>
+  <ul class="collapse">
+  <li><a href="#kapcsolódási-adatok-előkészítése" id="toc-kapcsolódási-adatok-előkészítése" class="nav-link" data-scroll-target="#kapcsolódási-adatok-előkészítése">7.1. Kapcsolódási adatok előkészítése</a></li>
+  <li><a href="#a-webalkalmazás-csatlakoztatása" id="toc-a-webalkalmazás-csatlakoztatása" class="nav-link" data-scroll-target="#a-webalkalmazás-csatlakoztatása">7.2. A webalkalmazás csatlakoztatása</a></li>
+  <li><a href="#témaköri-korlátok-kipróbálása" id="toc-témaköri-korlátok-kipróbálása" class="nav-link" data-scroll-target="#témaköri-korlátok-kipróbálása">7.3. Témaköri korlátok kipróbálása</a></li>
+  <li><a href="#szövegelemzés" id="toc-szövegelemzés" class="nav-link" data-scroll-target="#szövegelemzés">7.4. Szövegelemzés</a></li>
+  <li><a href="#képfelismerés" id="toc-képfelismerés" class="nav-link" data-scroll-target="#képfelismerés">7.5. Képfelismerés</a></li>
+  <li><a href="#választható-kiegészítés-áramköri-lapok" id="toc-választható-kiegészítés-áramköri-lapok" class="nav-link" data-scroll-target="#választható-kiegészítés-áramköri-lapok">7.6. Választható kiegészítés – áramköri lapok</a></li>
+  <li><a href="#kötelező-lezárás-azure-erőforrások-takarítása" id="toc-kötelező-lezárás-azure-erőforrások-takarítása" class="nav-link" data-scroll-target="#kötelező-lezárás-azure-erőforrások-takarítása">7.7. Kötelező lezárás – Azure-erőforrások takarítása</a></li>
+  </ul></li>
   <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
   </ul>
 </nav>
@@ -368,22 +377,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="feladat-computing-history-szöveg-és-képfelismerés-15-perc" class="level2">
 <h2 class="anchored" data-anchor-id="feladat-computing-history-szöveg-és-képfelismerés-15-perc">7. feladat – Computing History: szöveg és képfelismerés (15 perc)</h2>
 <p>A Microsoft eredeti gyakorlatának végén a <strong>Computing History</strong> webalkalmazással teszteled a saját Foundry-projektedben telepített modellt. Ehhez <strong>nem a saját agent nevét</strong>, hanem a <strong>modell deployment nevét</strong> kell megadnod.</p>
-<ol type="1">
-<li>A Foundry-projekt kezdőlapján keresd meg a <strong>Project endpoint</strong> értéket (ne az Azure OpenAI endpointot), a <strong>deployment nevét</strong> és a <strong>Project API key</strong> értéket.</li>
-<li>Nyisd meg a <a href="https://aka.ms/computing-history-foundry">Computing History Agent webalkalmazást</a>. Az alkalmazás konfigurációs részén add meg a szükséges kapcsolati adatokat. <strong>Az API-kulcsot soha ne másold be ebbe a munkafüzetbe, és ne add be JSON-ban!</strong> Ha nem bízol a demóoldalban vagy nem szeretnél kulcsot megadni, dokumentáld az akadályt.</li>
-<li>Kérdezz rá az <strong>ELIZA chatbot</strong> történetére, majd tegyél fel egy mai Azure- vagy Linux-rendszergazdai kérdést. Figyeld meg a webalkalmazás témaköri korlátait.</li>
-</ol>
-<p>3 4. Próbáld ki a szövegelemzést: kérj egy rövid számítástechnika-történeti szövegről összefoglalást és személyek, helyek, dátumok kinyerését.</p>
-<p>4 5. <strong>Képfelismerés:</strong> töltsd le a Microsoft által biztosított <a href="https://aka.ms/computer-images">computers.zip – történeti számítógépek képei</a> állományt, csomagold ki, majd az alkalmazás <strong>Attach image (📎)</strong> funkciójával csatolj egy képet. Kérdezd: <em>Tell me about this computer.</em> Próbálj ki egy második képet is.</p>
-<p>5 6. <strong>Választható kiegészítés:</strong> a <a href="https://aka.ms/pcb-images">pcbs.zip – áramköri lapok képei</a> csomag egyik képével próbáld ki az alkatrész vagy felirat felismerését. Nem kell minden képet feltölteni.</p>
-<p>6 7. <strong>Kötelező lezárás – Azure-erőforrások takarítása:</strong> ha az 1. feladatban létrehozott erőforráscsoport <strong>kizárólag a HF01-hez tartozik</strong>, a tesztek után <strong>a teljes erőforráscsoportot töröld</strong>. Ezzel az abban található projekt és kapcsolódó erőforrások is törlődnek. <strong>A törlés végleges; előtte ellenőrizd a csoport nevét és tartalmát.</strong> Ha más feladathoz is használt erőforrások vannak benne, <strong>ne töröld a teljes csoportot</strong>: csak a HF01-hez tartozó, biztosan azonosított erőforrásokat távolítsd el, vagy egyeztess az oktatóval.</p>
+<section id="kapcsolódási-adatok-előkészítése" class="level3">
+<h3 class="anchored" data-anchor-id="kapcsolódási-adatok-előkészítése">7.1. Kapcsolódási adatok előkészítése</h3>
+<p>A Foundry-projekt kezdőlapján keresd meg a <strong>Project endpoint</strong> értéket (ne az Azure OpenAI endpointot), a <strong>deployment nevét</strong> és a <strong>Project API key</strong> értéket. <strong>Az API-kulcsot ne írd a munkafüzetbe!</strong></p>
+</section>
+<section id="a-webalkalmazás-csatlakoztatása" class="level3">
+<h3 class="anchored" data-anchor-id="a-webalkalmazás-csatlakoztatása">7.2. A webalkalmazás csatlakoztatása</h3>
+<p>Nyisd meg a <a href="https://aka.ms/computing-history-foundry">Computing History Agent webalkalmazást</a>, és add meg a szükséges kapcsolati adatokat. <strong>Az API-kulcsot soha ne másold be ebbe a munkafüzetbe, és ne add be JSON-ban!</strong> Ha nem bízol a demóoldalban, vagy nem szeretnél kulcsot megadni, dokumentáld az akadályt.</p>
+</section>
+<section id="témaköri-korlátok-kipróbálása" class="level3">
+<h3 class="anchored" data-anchor-id="témaköri-korlátok-kipróbálása">7.3. Témaköri korlátok kipróbálása</h3>
+<p>Kérdezz rá az <strong>ELIZA chatbot</strong> történetére, majd tegyél fel egy mai Azure- vagy Linux-rendszergazdai kérdést. Figyeld meg a webalkalmazás témaköri korlátait.</p>
+<div class="lab-answer">
+<label for="hf07_eliza">Mit kérdeztél, és hogyan reagált a témán kívüli kérdésre?</label>
+<textarea id="hf07_eliza" data-answer="Q07_ELIZA" rows="3"></textarea>
+</div>
+</section>
+<section id="szövegelemzés" class="level3">
+<h3 class="anchored" data-anchor-id="szövegelemzés">7.4. Szövegelemzés</h3>
+<p>Kérj egy rövid számítástechnika-történeti szövegről összefoglalást és személyek, helyek, dátumok kinyerését.</p>
+<div class="lab-answer">
+<label for="hf07_text">Milyen szöveget vagy témát használtál, és mi lett az eredmény?</label>
+<textarea id="hf07_text" data-answer="Q07_TEXT" rows="3"></textarea>
+</div>
+</section>
+<section id="képfelismerés" class="level3">
+<h3 class="anchored" data-anchor-id="képfelismerés">7.5. Képfelismerés</h3>
+<p>Töltsd le a Microsoft által biztosított <a href="https://aka.ms/computer-images">computers.zip – történeti számítógépek képei</a> állományt, csomagold ki, majd az alkalmazás <strong>Attach image (📎)</strong> funkciójával csatolj egy képet. Kérdezd: <em>Tell me about this computer.</em> Próbálj ki egy második képet is.</p>
+<div class="lab-answer">
+<label for="hf07_images">Mely képeket próbáltad ki, és mennyire volt pontos a felismerés?</label>
+<textarea id="hf07_images" data-answer="Q07_IMAGES" rows="3"></textarea>
+</div>
+</section>
+<section id="választható-kiegészítés-áramköri-lapok" class="level3">
+<h3 class="anchored" data-anchor-id="választható-kiegészítés-áramköri-lapok">7.6. Választható kiegészítés – áramköri lapok</h3>
+<p>A <a href="https://aka.ms/pcb-images">pcbs.zip – áramköri lapok képei</a> csomag egyik képével próbáld ki az alkatrész- vagy feliratfelismerést. Nem kell minden képet feltölteni. Ha kihagyod, ezt is jelezheted.</p>
+<div class="lab-answer">
+<label for="hf07_pcb">Milyen eredményt kaptál? (Választható)</label>
+<textarea id="hf07_pcb" data-answer="Q07_PCB" rows="3"></textarea>
+</div>
+</section>
+<section id="kötelező-lezárás-azure-erőforrások-takarítása" class="level3">
+<h3 class="anchored" data-anchor-id="kötelező-lezárás-azure-erőforrások-takarítása">7.7. Kötelező lezárás – Azure-erőforrások takarítása</h3>
+<p>Ha az 1. feladatban létrehozott erőforráscsoport <strong>kizárólag a HF01-hez tartozik</strong>, a tesztek után <strong>a teljes erőforráscsoportot töröld</strong>. Ezzel az abban található projekt és kapcsolódó erőforrások is törlődnek. <strong>A törlés végleges; előtte ellenőrizd a csoport nevét és tartalmát.</strong> Ha más feladathoz is használt erőforrások vannak benne, <strong>ne töröld a teljes csoportot</strong>: csak a HF01-hez tartozó, biztosan azonosított erőforrásokat távolítsd el, vagy egyeztess az oktatóval.</p>
 <p><strong>A lehetőség – Azure Portal:</strong> nyisd meg az <a href="https://portal.azure.com/">Azure Portalt</a> → <strong>Resource groups / Erőforráscsoportok</strong> → válaszd ki a HF01 erőforráscsoportját → <strong>Delete resource group / Erőforráscsoport törlése</strong> → ellenőrizd a nevet és erősítsd meg a törlést.</p>
 <p><strong>B lehetőség – PowerShell (VS Code vagy PowerShell terminál):</strong> ha már be vagy jelentkezve az Azure PowerShellbe, és a megfelelő előfizetés van kiválasztva, ellenőrizd a csoport nevét, majd töröld:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Get-AzContext</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Get-AzResourceGroup <span class="op">-</span>Name <span class="st">"SAJAT_HF01_EROFORRASCSOPORT"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Remove-AzResourceGroup <span class="op">-</span>Name <span class="st">"SAJAT_HF01_EROFORRASCSOPORT"</span> <span class="op">-</span>Force</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>A <code>SAJAT_HF01_EROFORRASCSOPORT</code> helyére az <strong>1. feladatban rögzített pontos nevet</strong> írd. A <code>-Force</code> miatt a parancs nem kér külön megerősítést, ezért <strong>csak a név és a tartalom ellenőrzése után</strong> futtasd. Ha a törlés még folyamatban van, várd meg a befejezését.</p>
-<p>7</p>
+<div class="lab-answer">
+<label for="hf07_cleanup">Melyik erőforráscsoportot törölted, milyen módszerrel, vagy miért nem tudtad törölni?</label>
+<textarea id="hf07_cleanup" data-answer="Q07_CLEANUP" rows="3"></textarea>
+</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -397,6 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>A képcsomagokat a Microsoft eredeti útmutatója hivatkozza. Csak a feladat céljára használd őket, és a ZIP-et ellenőrizd a szokásos vírusvédelmi eszközökkel. Ha a letöltést a böngésző vagy a vírusvédelem blokkolja, ne kerüld meg a védelmet; írd le az akadályt. A Computing History webalkalmazás <strong>saját képfeltöltő funkcióját</strong> használd, a Quarto-beadáshoz nem kell képet csatolni.</p>
 </div>
 </div>
+</section>
 </section>
 <section id="mentés-és-beadás" class="level2">
 <h2 class="anchored" data-anchor-id="mentés-és-beadás">Mentés és beadás</h2>

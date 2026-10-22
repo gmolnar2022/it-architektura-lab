@@ -112,35 +112,55 @@ Mielőtt a Computing History alkalmazáshoz kapcsolódnál, nézd meg, **milyen 
 
 A Microsoft eredeti gyakorlatának végén a **Computing History** webalkalmazással teszteled a saját Foundry-projektedben telepített modellt. Ehhez **nem a saját agent nevét**, hanem a **modell deployment nevét** kell megadnod.
 
-1. A Foundry-projekt kezdőlapján keresd meg a **Project endpoint** értéket (ne az Azure OpenAI endpointot), a **deployment nevét** és a **Project API key** értéket.
-2. Nyisd meg a [Computing History Agent webalkalmazást](https://aka.ms/computing-history-foundry). Az alkalmazás konfigurációs részén add meg a szükséges kapcsolati adatokat. **Az API-kulcsot soha ne másold be ebbe a munkafüzetbe, és ne add be JSON-ban!** Ha nem bízol a demóoldalban vagy nem szeretnél kulcsot megadni, dokumentáld az akadályt.
-3. Kérdezz rá az **ELIZA chatbot** történetére, majd tegyél fel egy mai Azure- vagy Linux-rendszergazdai kérdést. Figyeld meg a webalkalmazás témaköri korlátait.
+### 7.1. Kapcsolódási adatok előkészítése
 
-3
-4. Próbáld ki a szövegelemzést: kérj egy rövid számítástechnika-történeti szövegről összefoglalást és személyek, helyek, dátumok kinyerését.
+A Foundry-projekt kezdőlapján keresd meg a **Project endpoint** értéket (ne az Azure OpenAI endpointot), a **deployment nevét** és a **Project API key** értéket. **Az API-kulcsot ne írd a munkafüzetbe!**
 
-4
-5. **Képfelismerés:** töltsd le a Microsoft által biztosított [computers.zip – történeti számítógépek képei](https://aka.ms/computer-images) állományt, csomagold ki, majd az alkalmazás **Attach image (📎)** funkciójával csatolj egy képet. Kérdezd: *Tell me about this computer.* Próbálj ki egy második képet is.
+### 7.2. A webalkalmazás csatlakoztatása
 
-5
-6. **Választható kiegészítés:** a [pcbs.zip – áramköri lapok képei](https://aka.ms/pcb-images) csomag egyik képével próbáld ki az alkatrész vagy felirat felismerését. Nem kell minden képet feltölteni.
+Nyisd meg a [Computing History Agent webalkalmazást](https://aka.ms/computing-history-foundry), és add meg a szükséges kapcsolati adatokat. **Az API-kulcsot soha ne másold be ebbe a munkafüzetbe, és ne add be JSON-ban!** Ha nem bízol a demóoldalban, vagy nem szeretnél kulcsot megadni, dokumentáld az akadályt.
 
-6
-7. **Kötelező lezárás – Azure-erőforrások takarítása:** ha az 1. feladatban létrehozott erőforráscsoport **kizárólag a HF01-hez tartozik**, a tesztek után **a teljes erőforráscsoportot töröld**. Ezzel az abban található projekt és kapcsolódó erőforrások is törlődnek. **A törlés végleges; előtte ellenőrizd a csoport nevét és tartalmát.** Ha más feladathoz is használt erőforrások vannak benne, **ne töröld a teljes csoportot**: csak a HF01-hez tartozó, biztosan azonosított erőforrásokat távolítsd el, vagy egyeztess az oktatóval.
+### 7.3. Témaköri korlátok kipróbálása
 
-   **A lehetőség – Azure Portal:** nyisd meg az [Azure Portalt](https://portal.azure.com/) → **Resource groups / Erőforráscsoportok** → válaszd ki a HF01 erőforráscsoportját → **Delete resource group / Erőforráscsoport törlése** → ellenőrizd a nevet és erősítsd meg a törlést.
+Kérdezz rá az **ELIZA chatbot** történetére, majd tegyél fel egy mai Azure- vagy Linux-rendszergazdai kérdést. Figyeld meg a webalkalmazás témaköri korlátait.
 
-   **B lehetőség – PowerShell (VS Code vagy PowerShell terminál):** ha már be vagy jelentkezve az Azure PowerShellbe, és a megfelelő előfizetés van kiválasztva, ellenőrizd a csoport nevét, majd töröld:
+<div class="lab-answer"><label for="hf07_eliza">Mit kérdeztél, és hogyan reagált a témán kívüli kérdésre?</label><textarea id="hf07_eliza" data-answer="Q07_ELIZA" rows="3"></textarea></div>
 
-   ```powershell
-   Get-AzContext
-   Get-AzResourceGroup -Name "SAJAT_HF01_EROFORRASCSOPORT"
-   Remove-AzResourceGroup -Name "SAJAT_HF01_EROFORRASCSOPORT" -Force
-   ```
+### 7.4. Szövegelemzés
 
-   A `SAJAT_HF01_EROFORRASCSOPORT` helyére az **1. feladatban rögzített pontos nevet** írd. A `-Force` miatt a parancs nem kér külön megerősítést, ezért **csak a név és a tartalom ellenőrzése után** futtasd. Ha a törlés még folyamatban van, várd meg a befejezését.
+Kérj egy rövid számítástechnika-történeti szövegről összefoglalást és személyek, helyek, dátumok kinyerését.
 
-7
+<div class="lab-answer"><label for="hf07_text">Milyen szöveget vagy témát használtál, és mi lett az eredmény?</label><textarea id="hf07_text" data-answer="Q07_TEXT" rows="3"></textarea></div>
+
+### 7.5. Képfelismerés
+
+Töltsd le a Microsoft által biztosított [computers.zip – történeti számítógépek képei](https://aka.ms/computer-images) állományt, csomagold ki, majd az alkalmazás **Attach image (📎)** funkciójával csatolj egy képet. Kérdezd: *Tell me about this computer.* Próbálj ki egy második képet is.
+
+<div class="lab-answer"><label for="hf07_images">Mely képeket próbáltad ki, és mennyire volt pontos a felismerés?</label><textarea id="hf07_images" data-answer="Q07_IMAGES" rows="3"></textarea></div>
+
+### 7.6. Választható kiegészítés – áramköri lapok
+
+A [pcbs.zip – áramköri lapok képei](https://aka.ms/pcb-images) csomag egyik képével próbáld ki az alkatrész- vagy feliratfelismerést. Nem kell minden képet feltölteni. Ha kihagyod, ezt is jelezheted.
+
+<div class="lab-answer"><label for="hf07_pcb">Milyen eredményt kaptál? (Választható)</label><textarea id="hf07_pcb" data-answer="Q07_PCB" rows="3"></textarea></div>
+
+### 7.7. Kötelező lezárás – Azure-erőforrások takarítása
+
+Ha az 1. feladatban létrehozott erőforráscsoport **kizárólag a HF01-hez tartozik**, a tesztek után **a teljes erőforráscsoportot töröld**. Ezzel az abban található projekt és kapcsolódó erőforrások is törlődnek. **A törlés végleges; előtte ellenőrizd a csoport nevét és tartalmát.** Ha más feladathoz is használt erőforrások vannak benne, **ne töröld a teljes csoportot**: csak a HF01-hez tartozó, biztosan azonosított erőforrásokat távolítsd el, vagy egyeztess az oktatóval.
+
+**A lehetőség – Azure Portal:** nyisd meg az [Azure Portalt](https://portal.azure.com/) → **Resource groups / Erőforráscsoportok** → válaszd ki a HF01 erőforráscsoportját → **Delete resource group / Erőforráscsoport törlése** → ellenőrizd a nevet és erősítsd meg a törlést.
+
+**B lehetőség – PowerShell (VS Code vagy PowerShell terminál):** ha már be vagy jelentkezve az Azure PowerShellbe, és a megfelelő előfizetés van kiválasztva, ellenőrizd a csoport nevét, majd töröld:
+
+```powershell
+Get-AzContext
+Get-AzResourceGroup -Name "SAJAT_HF01_EROFORRASCSOPORT"
+Remove-AzResourceGroup -Name "SAJAT_HF01_EROFORRASCSOPORT" -Force
+```
+
+A `SAJAT_HF01_EROFORRASCSOPORT` helyére az **1. feladatban rögzített pontos nevet** írd. A `-Force` miatt a parancs nem kér külön megerősítést, ezért **csak a név és a tartalom ellenőrzése után** futtasd. Ha a törlés még folyamatban van, várd meg a befejezését.
+
+<div class="lab-answer"><label for="hf07_cleanup">Melyik erőforráscsoportot törölted, milyen módszerrel, vagy miért nem tudtad törölni?</label><textarea id="hf07_cleanup" data-answer="Q07_CLEANUP" rows="3"></textarea></div>
 
 ::: {.callout-warning}
 ## Biztonság és letöltések

@@ -9,7 +9,7 @@ format:
 
 ::: {.callout-important}
 ## Munkakörnyezet és határidő
-A gyakorlat a korábbi héten létrehozott **Debian VM-en** zajlik, PowerShellből vagy VS Code Remote – SSH kapcsolattal. **Beadási határidő: 2026. november 12., csütörtök, 11:40 (magyar idő).** Az 1–10. feladatban a parancsokat önállóan hajtsd végre; a 11–15. feladatban dokumentáció és AI használható. **Jelszót, hozzáférési tokent és privát kulcsot ne illessz be a válaszmezőkbe.**
+A gyakorlat a korábbi héten létrehozott **Debian VM-en** zajlik, PowerShellből vagy VS Code Remote – SSH kapcsolattal. **Beadási határidő: 2026. november 12., csütörtök, 11:40 (magyar idő).** A feladatokat önállóan oldd meg. Kétféle segítség áll rendelkezésre: **(1) parancstipp**, amely csak a parancs nevét és fontosabb kapcsolóit adja meg; **(2) AI-segítség**, amelyhez kérdésmintát kapsz. Az AI válaszait ellenőrizd, és a beadásban jelezd a használatát. **Jelszót, hozzáférési tokent és privát kulcsot ne illessz be a válaszmezőkbe.**
 :::
 
 **Neptun-kód (kötelező, 6 karakter):** <input id="neptun" data-answer="STUDENT_ID" maxlength="6" pattern="[A-Za-z0-9]{6}" required placeholder="ABC123" />
@@ -39,218 +39,244 @@ A 6–15. feladatban **csak a `project/` könyvtárat** tesszük Git-repositoryv
 
 ## I. A Git nélküli fejlesztés problémája (1–5. feladat)
 
+::: {.callout-tip}
+## Kétféle segítség minden feladathoz
+- **Parancstipp:** a szükséges parancsok neve és néhány kapcsolója, de nem a teljes megoldás.
+- **AI-segítség:** egy kérdésminta, amelyet tetszőleges AI-asszisztensben használhatsz. Először magad próbálkozz; az AI-tól lehetőleg **magyarázatot vagy hibakeresési segítséget**, ne kész beadandót kérj.
+
+Az AI-használatot a válaszmezőben röviden dokumentáld. Jelszót, tokent, személyes adatot ne adj meg AI-eszköznek.
+:::
+
 ### 1. feladat – SSH-kapcsolat és Jed telepítése
 
-**Környezet:** PowerShell vagy VS Code terminál → Debian VM · **AI:** nem használható.
+**Környezet:** PowerShell vagy VS Code terminál → Debian VM · **AI:** segítségként használható.
 
-Csatlakozz a Debian VM-hez, ellenőrizd a felhasználót és a munkakönyvtárat, majd telepítsd a Jed szövegszerkesztőt. Hozd létre a `~/team-project/project` könyvtárat.
-```bash
-ssh azureuser@PUBLIC_IP
-whoami
-pwd
-sudo apt update
-sudo apt install -y jed
-mkdir -p ~/team-project/project
-cd ~/team-project
-jed --version
-```
-A `PUBLIC_IP` helyére a saját VM-címedet írd. Ha a `jed --version` nem támogatott a telepített változatban, ellenőrizd a `command -v jed` paranccsal.
+Csatlakozz a Debian VM-hez, ellenőrizd a felhasználót és a munkakönyvtárat, telepítsd a Jed szövegszerkesztőt, és hozd létre a `~/team-project/project` könyvtárat. Ellenőrizd, hogy a Jed elindítható.
 
-<div class="lab-answer"><label for="q01result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label><textarea id="q01result" data-answer="Q01_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="ssh">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<details><summary>1. segítség – parancstipp</summary>
+
+`ssh felhasznalo@IP`, `whoami`, `pwd`, `sudo apt update`, `sudo apt install`, `mkdir -p`, `command -v`.
+
+</details>
+<details><summary>2. segítség – AI-kérdésminta</summary>
+
+„Debian VM-hez csatlakozom SSH-val. Magyarázd el, hogyan ellenőrizhetem a kapcsolatot, és hogyan telepíthetek egy terminálos szövegszerkesztőt. Ne írj kész megoldássort; lépésenként segíts ellenőrizni a saját parancsaimat.”
+
+</details>
+
+<div class="lab-answer"><label for="q01result"><strong>Parancsok, eredmények, rövid magyarázat; AI-használat, ha volt:</strong></label><textarea id="q01result" data-answer="Q01_RESULT" rows="5" placeholder="Saját parancsok, eredmények, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="ssh">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 **Elfogadási feltétel:** A Jed elérhető, és a projektkönyvtár létrejött.
-
 
 ### 2. feladat – Fejlesztői adatok és szövegfeldolgozás
 
-**Környezet:** Debian, Jed és shell · **AI:** nem használható.
+**Környezet:** Debian, Jed és shell · **AI:** segítségként használható.
 
-Hozd létre Jedben a `developers.csv` fájlt. Az állomány **pontosvesszővel tagolt** (nem vesszővel):
+Hozd létre Jedben a `developers.csv` fájlt az alábbi **pontosvesszővel tagolt bemeneti adatokkal** (ez a feladat adatforrása, nem a megoldása):
+
 ```text
 id;name;username;role;hours
 1;Anna Kovacs;anna;backend;32
 2;Bela Nagy;bela;frontend;24
 3;Csilla Toth;csilla;tester;20
 ```
-Listázd a felhasználóneveket, számold meg a fejlesztőket és add össze a munkaórákat.
-```bash
-jed developers.csv
-cut -d';' -f3 developers.csv
-tail -n +2 developers.csv | wc -l
-awk -F';' 'NR>1 {sum+=$5} END {print sum}' developers.csv
-```
-**Elvárt összeg: 76 óra.**
 
-<div class="lab-answer"><label for="q02result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label><textarea id="q02result" data-answer="Q02_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="csv">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
-**Elfogadási feltétel:** A három fejlesztő és a 76 munkaóra ellenőrizhető.
+Írasd ki csak a felhasználóneveket **fejléc nélkül**, számold meg a fejlesztőket, és számítsd ki a heti munkaórák összegét. A parancsokat és az eredményeket dokumentáld.
 
+<details><summary>1. segítség – parancstipp</summary>
+
+`jed`, `tail -n +2` (fejléc kihagyása), `cut -d';' -f...` (oszlop kiválasztása), `wc -l`, `awk -F';'` (mezők feldolgozása, összegzés).
+
+</details>
+<details><summary>2. segítség – AI-kérdésminta</summary>
+
+„Pontosvesszővel tagolt szövegfájlból szeretnék oszlopokat kinyerni Linuxon. Mutasd meg a `cut`, `tail` és `awk` működésének elvét egy másik példán; a saját feladatom parancsát én állítom össze.”
+
+</details>
+
+<div class="lab-answer"><label for="q02result"><strong>Parancsok, kimenetek és értelmezés; AI-használat, ha volt:</strong></label><textarea id="q02result" data-answer="Q02_RESULT" rows="5"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="csv">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+**Elfogadási feltétel:** A felhasználónevek, a fejlesztők száma és az összes munkaóra helyes.
 
 ### 3. feladat – Közös program és fejlesztői munkapéldányok
 
-**Környezet:** Debian, Bash · **AI:** nem használható.
+**Környezet:** Debian, Bash · **AI:** segítségként használható.
 
-Készítsd el Jedben a `project/report.sh` fájlt:
-```bash
-#!/bin/bash
-echo "PROJECT STATUS REPORT"
-echo "Hostname: $(hostname)"
-echo "User: $(whoami)"
-echo "Date: $(date '+%Y-%m-%d')"
-```
-Hozz létre egy `setup.sh` szkriptet, amely a `developers.csv` fájlból olvassa a neveket, minden fejlesztőnek könyvtárat készít, és bemásolja a közös programot. Kiinduló ciklus:
-```bash
-#!/bin/bash
-set -e
-cd "$(dirname "$0")"
-while IFS=';' read -r id name username role hours; do
-  mkdir -p "developers/$username"
-  cp project/report.sh "developers/$username/report.sh"
-done < <(tail -n +2 developers.csv)
-```
-Ellenőrizd a szintaxist és a másolatokat:
-```bash
-bash -n setup.sh
-bash setup.sh
-find developers -type f -name 'report.sh'
-```
-**Figyelem:** a `setup.sh` újrafuttatása felülírja a fejlesztői példányokat! A 4–5. feladatban ne futtasd újra.
+Hozd létre a `project/report.sh` szkriptet. A program jelenítse meg a `PROJECT STATUS REPORT` címet, a gépnevet, az aktuális felhasználót és a dátumot. Ezután írj `setup.sh` szkriptet, amely a `developers.csv` sorait feldolgozva minden fejlesztőnek saját mappát készít a `developers/` könyvtár alatt, és oda másolja a közös `report.sh` fájlt. Ellenőrizd a Bash-szintaxist és a másolatok azonosságát.
 
-<div class="lab-answer"><label for="q03result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label><textarea id="q03result" data-answer="Q03_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="bash">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
-**Elfogadási feltétel:** Három különálló, azonos tartalmú másolat készült.
+<details><summary>1. segítség – parancstipp</summary>
 
+`hostname`, `whoami`, `date '+%Y-%m-%d'`, `while IFS=';' read -r ...`, `mkdir -p`, `cp`, `bash -n`, `find`, `cmp`. A fejlécet ne dolgozd fel adatként (`tail -n +2` vagy első sor kihagyása).
+
+</details>
+<details><summary>2. segítség – AI-kérdésminta</summary>
+
+„Bash-szkriptben egy pontosvesszővel tagolt fájl minden adatsorához külön könyvtárat szeretnék létrehozni. Magyarázd el a `while read`, az `IFS` és az idézőjelek szerepét; segíts a saját ciklusom hibakeresésében, de ne készítsd el helyettem a teljes szkriptet.”
+
+</details>
+
+**Figyelem:** ha a `setup.sh` feltétel nélkül másol, újrafuttatáskor felülírhatja a fejlesztői példányokat. A 4–5. feladatban ne futtasd újra.
+
+<div class="lab-answer"><label for="q03result"><strong>A két szkript lényegi részei, ellenőrzések és AI-használat:</strong></label><textarea id="q03result" data-answer="Q03_RESULT" rows="6"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="bash">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+**Elfogadási feltétel:** Három különálló, kezdetben azonos tartalmú másolat készült.
 
 ### 4. feladat – Párhuzamos módosítások Git nélkül
 
-**Környezet:** Debian, Jed · **AI:** nem használható.
+**Környezet:** Debian, Jed · **AI:** segítségként használható.
 
-Anna saját `developers/anna/report.sh` fájljának végére írja:
-```bash
-echo "Uptime: $(uptime -p)"
-```
-Béla saját `developers/bela/report.sh` fájljának végére írja:
-```bash
-echo "Memory:"
-free -h
-```
-Csilla nem változtat. Futtasd mindhárom változatot, és ellenőrizd, hogy a `project/report.sh` érintetlen maradt. Ezután Anna és Béla **ugyanazt a fejlécsort** is módosítsa, de eltérő szövegre (`ANNA STATUS REPORT`, illetve `BELA STATUS REPORT`).
+Anna saját `developers/anna/report.sh` fájlját egészítse ki **üzemidővel**, Béla a saját `developers/bela/report.sh` fájlját **memóriaadatokkal**. Csilla ne módosítson. Ezután Anna és Béla ugyanazt a fejlécsort is írja át eltérő szövegre: `ANNA STATUS REPORT`, illetve `BELA STATUS REPORT`. Futtasd a változatokat, és ellenőrizd, hogy a közös fájl változatlan maradt.
 
-<div class="lab-answer"><label for="q04result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label><textarea id="q04result" data-answer="Q04_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="bash">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<details><summary>1. segítség – parancstipp</summary>
+
+`jed`, `uptime -p`, `free -h`, `bash`, `cat`, `cmp`.
+
+</details>
+<details><summary>2. segítség – AI-kérdésminta</summary>
+
+„Egy Bash-program két másolatát különböző funkciókkal bővítem. Hogyan ellenőrizhetem, hogy mindkét változat futtatható, és az eredeti változat nem módosult? Csak ellenőrzési ötleteket adj.”
+
+</details>
+
+<div class="lab-answer"><label for="q04result"><strong>Módosítások, futtatási eredmények és AI-használat:</strong></label><textarea id="q04result" data-answer="Q04_RESULT" rows="5"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="bash">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 **Elfogadási feltétel:** Anna és Béla változata eltér a közös programtól, Csilláé azonos.
-
 
 ### 5. feladat – Különbségek és manuális integrációs probléma
 
-**Környezet:** Debian, diff · **AI:** nem használható.
+**Környezet:** Debian, diff · **AI:** segítségként használható.
 
-Hasonlítsd össze a közös változatot mindhárom fejlesztő fájljával, majd Anna és Béla fájlját egymással:
-```bash
-diff -u project/report.sh developers/anna/report.sh
-diff -u project/report.sh developers/bela/report.sh
-diff -u project/report.sh developers/csilla/report.sh
-diff -u developers/anna/report.sh developers/bela/report.sh
-```
-A `diff` **1-es kilépési kódja eltérést jelent, nem feltétlenül hibát**. Írd le, mely változtatások integrálhatók könnyen, és hol jelentkezik ütközés. **Ne írd felül a közös fájlt**: a megoldást a Git-feladatokban készíted el.
+Hasonlítsd össze a közös változatot Anna, Béla és Csilla változatával, majd Anna és Béla fájlját egymással. Dokumentáld, mely sorok módosultak, mely fejlesztések egyesíthetők könnyen, és melyik sor okozhat ütközést. **Ne írd felül a közös fájlt**: a megoldást később Gittel készíted el.
 
-<div class="lab-answer"><label for="q05result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label><textarea id="q05result" data-answer="Q05_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="diff">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
-**Elfogadási feltétel:** A három összehasonlítás eredménye és az ütköző fejléc magyarázata szerepel.
+<details><summary>1. segítség – parancstipp</summary>
+
+`diff -u EREDETI MODOSITOTT` (egységes diff), `cmp` (azonosság vizsgálata), `echo $?` (utolsó parancs kilépési kódja). A `diff` 1-es kilépési kódja eltérést jelent, nem feltétlenül hibát.
+
+</details>
+<details><summary>2. segítség – AI-kérdésminta</summary>
+
+„Magyarázd el a `diff -u` kimenetében a `+`, `-` és `@@` jelöléseket. Hogyan ismerhető fel, ha két fejlesztő ugyanazt a sort másképp módosította? A konkrét összehasonlítást én végzem el.”
+
+</details>
+
+<div class="lab-answer"><label for="q05result"><strong>Összehasonlítások, következtetések és AI-használat:</strong></label><textarea id="q05result" data-answer="Q05_RESULT" rows="6"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="diff">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+**Elfogadási feltétel:** Mind a négy összehasonlítás és az ütköző fejléc magyarázata szerepel.
 
 
 ## II. Helyi Git-verziókövetés (6–10. feladat)
 
+::: {.callout-tip}
+## Hogyan használd a segítségeket?
+A feladatok **célállapotot** adnak meg, nem másolható parancssorozatot. Először önállóan dolgozz. Elakadás esetén nyisd meg az **1. segítség – parancstipp** részt; a **2. segítség – AI-kérdésminta** magyarázatot vagy hibakeresést kér, nem kész megoldást. A beadásban röviden jelezd, ha AI-t használtál.
+:::
+
 ### 6. feladat – Git telepítése és konfigurálása
 
-**Környezet:** Debian, Git · **AI:** nem használható.
+**Környezet:** Debian VM · **Cél:** a Git elérhető, a commitok szerzői adatai be vannak állítva.
 
-Ellenőrizd vagy telepítsd a Gitet, majd állítsd be a saját commit-nevedet és e-mail-címedet. Az e-mail-cím lehet a GitHub-fiókodhoz tartozó no-reply cím is.
-```bash
-git --version
-sudo apt install -y git
-git config --global user.name "Sajat Nev"
-git config --global user.email "email@example.com"
-git config --global --list
-```
-**Ne írj valódi jelszót a Git-konfigurációba.**
+Ellenőrizd a Git telepítését, szükség esetén telepítsd. Állítsd be globálisan a commitokhoz használt nevet és e-mail-címet, majd ellenőrizd a beállításokat. Az e-mail lehet a GitHub no-reply címed. **Jelszót vagy tokent ne írj a konfigurációba.**
 
-<div class="lab-answer"><label for="q06result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label><textarea id="q06result" data-answer="Q06_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
-**Elfogadási feltétel:** A Git működik, és a szerzői adatok be vannak állítva.
+<details><summary>1. segítség – parancstipp</summary>
 
+`git --version` · `apt install` · `git config --global` · `git config --list --show-origin`. A `user.name` és `user.email` konfigurációs kulcsokra lesz szükség.
+
+</details>
+<details><summary>2. segítség – AI-kérdésminta</summary>
+
+„Debianon szeretném ellenőrizni a Git telepítését és a commitok szerzői beállításait. Magyarázd el a globális konfiguráció szerepét, és segíts értelmezni a saját parancsom kimenetét. Ne állíts össze kész parancssorozatot.”
+
+</details>
+
+<div class="lab-answer"><label for="q06result"><strong>6. válasz – Milyen parancsokat használtál, és milyen Git-verziót kaptál? Milyen beállításokat ellenőriztél? AI-használat:</strong></label><textarea id="q06result" data-answer="Q06_RESULT" rows="5"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+**Elfogadási feltétel:** Git-verzió és ellenőrzött szerzői beállítások dokumentálva.
 
 ### 7. feladat – Helyi repository és első commit
 
-**Környezet:** Debian, Git · **AI:** nem használható.
+**Környezet:** Debian VM · **Cél:** a közös `report.sh` első verziója Git-commitként megmarad.
 
-Lépj be **kizárólag** a `~/team-project/project` könyvtárba, inicializálj Git-repositoryt, majd rögzítsd a közös `report.sh` kiinduló változatát.
-```bash
-cd ~/team-project/project
-git init -b main
-git status
-git add report.sh
-git commit -m "Initial shared report"
-git log --oneline
-```
-A `developers/` mappák a repositoryn kívül maradnak.
+A `~/team-project/project` könyvtárban hozz létre helyi repositoryt `main` kezdőággal. Ellenőrizd, mely fájlok nincsenek még verziókövetés alatt, majd rögzítsd a közös `report.sh` kiinduló változatát. A `developers/` könyvtár maradjon a repositoryn kívül.
 
-<div class="lab-answer"><label for="q07result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label><textarea id="q07result" data-answer="Q07_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
-**Elfogadási feltétel:** Létezik az első commit a main ágon.
+<details><summary>1. segítség – parancstipp</summary>
 
+`cd` · `git init -b` · `git status` · `git add` · `git commit -m` · `git log --oneline`. Figyelj arra, **melyik könyvtárban** futtatod az inicializálást.
 
-### 8. feladat – Változtatások és commitok követése
+</details>
+<details><summary>2. segítség – AI-kérdésminta</summary>
 
-**Környezet:** Debian, Git · **AI:** nem használható.
+„Egy meglévő Bash-projektet szeretnék helyi Git-repositoryvá alakítani. Mi a különbség a repository inicializálása, a staging és az első commit között? Segíts ellenőrizni a lépéseimet, de ne add meg a kész megoldást.”
 
-Bővítsd a közös `report.sh` programot az üzemidő kiírásával (Anna ötlete), majd vizsgáld meg a módosítást és készíts commitot.
-```bash
-git status
-git diff
-git add report.sh
-git diff --staged
-git commit -m "Add uptime to report"
-git log --oneline
-```
-Magyarázd meg a munkakönyvtár, staging area és repository közti különbséget.
+</details>
 
-<div class="lab-answer"><label for="q08result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label><textarea id="q08result" data-answer="Q08_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
-**Elfogadási feltétel:** Az új commit és a staged/unstaged állapotok dokumentáltak.
+<div class="lab-answer"><label for="q07result"><strong>7. válasz – A műveletek sorrendje, az első commit rövid azonosítója és a verziókövetett fájlok; AI-használat:</strong></label><textarea id="q07result" data-answer="Q07_RESULT" rows="5"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+**Elfogadási feltétel:** A `main` ágon létrejött az első commit.
 
+### 8. feladat – Módosítások és commitok követése
+
+**Környezet:** Debian VM · **Cél:** Anna üzemidőre vonatkozó fejlesztésének rögzítése.
+
+A közös `report.sh` fájlt bővítsd üzemidő-információval. A módosítás rögzítése **előtt és után** vizsgáld meg a munkakönyvtár és a staging area állapotát. Készíts új commitot, majd ellenőrizd a történetet.
+
+<details><summary>1. segítség – parancstipp</summary>
+
+`git status` · `git diff` · `git add` · `git diff --staged` · `git commit -m` · `git log --oneline`. A sima `diff` és a `--staged` kapcsoló nem ugyanazt mutatja.
+
+</details>
+<details><summary>2. segítség – AI-kérdésminta</summary>
+
+„Magyarázd el a working directory, staging area és repository közötti különbséget egy egyszerű példával. A saját `git status` és `git diff` kimenetemet szeretném értelmezni; ne írd meg helyettem a feladat parancsait.”
+
+</details>
+
+<div class="lab-answer"><label for="q08result"><strong>8/A – A saját műveleteid és a létrejött commit rövid azonosítója; AI-használat:</strong></label><textarea id="q08result" data-answer="Q08_RESULT" rows="4"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<div class="lab-answer"><label for="q08concept"><strong>8/B – Mi a különbség a `git add` és a `git commit` között? Mi változik a staging area-ban?</strong></label><textarea id="q08concept" data-answer="Q08_CONCEPT" rows="3"></textarea></div>
+**Elfogadási feltétel:** Új commit készült, a staging szerepét a hallgató saját szavaival megmagyarázza.
 
 ### 9. feladat – Fejlesztési ág létrehozása
 
-**Környezet:** Debian, Git · **AI:** nem használható.
+**Környezet:** Debian VM · **Cél:** Béla memóriahasználatra vonatkozó módosítása külön ágon maradjon.
 
-Hozz létre `feature/memory` ágat, és Béla ötlete alapján add hozzá a memóriahasználatot. Commitold a változást, majd válts vissza a main ágra.
-```bash
-git switch -c feature/memory
-# szerkeszd a report.sh fájlt
-git add report.sh
-git commit -m "Add memory information"
-git switch main
-git branch -v
-```
-Ellenőrizd, hogy a `main` és a `feature/memory` eltérő állapotot mutat.
+A jelenlegi `main` állapotából hozz létre `feature/memory` nevű fejlesztési ágat. Bővítsd a programot memóriaadatokkal, rögzítsd a változást, majd térj vissza a `main` ágra. Vizsgáld meg, miben tér el a két ág, és miért nem látszik a fejlesztés a `main` változatában.
 
-<div class="lab-answer"><label for="q09result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label><textarea id="q09result" data-answer="Q09_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
-**Elfogadási feltétel:** A feature ág commitja elkülönül a main ágtól.
+<details><summary>1. segítség – parancstipp</summary>
 
+`git switch -c` · `git branch -v` · `git status` · `git add` · `git commit` · `git switch` · `git log --all --oneline --graph`. A memóriaadatokhoz a Linux `free` parancsa segíthet.
+
+</details>
+<details><summary>2. segítség – AI-kérdésminta</summary>
+
+„Egy Git-projektben külön fejlesztési ágat készítettem. Magyarázd el, hogyan kapcsolódnak a branchek a commitokhoz, és miért más a fájl tartalma két ág között. Ne add meg a konkrét feladat megoldását.”
+
+</details>
+
+<div class="lab-answer"><label for="q09result"><strong>9/A – Az ágak neve, a fejlesztési commit azonosítója és az ellenőrzés módja; AI-használat:</strong></label><textarea id="q09result" data-answer="Q09_RESULT" rows="4"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<div class="lab-answer"><label for="q09concept"><strong>9/B – Miért nem tartalmazza még a `main` ág Béla módosítását?</strong></label><textarea id="q09concept" data-answer="Q09_CONCEPT" rows="3"></textarea></div>
+**Elfogadási feltétel:** A `feature/memory` külön commitot tartalmaz, a `main` még nem.
 
 ### 10. feladat – Merge és valódi konfliktus
 
-**Környezet:** Debian, Git · **AI:** nem használható.
+**Környezet:** Debian VM · **Cél:** kétféle egyesítési helyzet megfigyelése.
 
-Először egyesítsd Béla fejlesztését:
-```bash
-git merge feature/memory
-git log --oneline --graph --all
-```
-**Konfliktusdemó külön ágon:** a tiszta `main` állapotából hozz létre `feature/title` ágat, írd át a fejlécet `ANNA STATUS REPORT` szövegre és commitold. Válts vissza `main`-re, írd át **ugyanazt a sort** `BELA STATUS REPORT` szövegre, és ezt is commitold. Ezután próbáld meg a `git merge feature/title` parancsot. Nézd meg a `<<<<<<<`, `=======`, `>>>>>>>` jelöléseket; szerkeszd a fájlt egységes fejlécűre, majd `git add report.sh` és `git commit` segítségével zárd le a merge-et. Végül ellenőrizd: `bash -n report.sh`.
+**A. Egyszerű egyesítés.** A `main` ágon egyesítsd a `feature/memory` fejlesztést. Ellenőrizd, hogy az üzemidő és a memóriaadatok is szerepelnek a programban, majd vizsgáld meg a commitok történetét.
 
-<div class="lab-answer"><label for="q10result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label><textarea id="q10result" data-answer="Q10_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
-**Elfogadási feltétel:** A konfliktus és a feloldás dokumentált, a szkript szintaktikailag helyes.
+**B. Konfliktus.** A `main` állapotából hozz létre `feature/title` ágat, és azon módosítsd a `PROJECT STATUS REPORT` fejlécsort `ANNA STATUS REPORT` szövegre. Rögzítsd. Ezután a `main` ágon ugyanazt a sort módosítsd `BELA STATUS REPORT` szövegre, és azt is rögzítsd. Próbáld egyesíteni a két ágat. Vizsgáld meg a konfliktusjelölőket, dönts a végleges fejléc szövegéről, és fejezd be az egyesítést. Ellenőrizd a Bash-szintaxist.
+
+<details><summary>1. segítség – parancstipp</summary>
+
+`git switch` · `git switch -c` · `git merge` · `git status` · `git diff` · `git add` · `git commit` · `git log --graph --all` · `bash -n`. Konfliktus esetén a `<<<<<<<`, `=======`, `>>>>>>>` jelölések segítenek a két változat felismerésében.
+
+</details>
+<details><summary>2. segítség – AI-kérdésminta</summary>
+
+„Egy Git merge során konfliktusjelölőket látok egy Bash-fájlban. Magyarázd el a jelölők jelentését és a konfliktusfeloldás ellenőrzésének lépéseit, de ne válaszd ki helyettem a végleges tartalmat.”
+
+</details>
+
+<div class="lab-answer"><label for="q10result"><strong>10/A – Az egyesítések eredménye, a konfliktusban érintett sor és a végső ellenőrzés; AI-használat:</strong></label><textarea id="q10result" data-answer="Q10_RESULT" rows="5"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<div class="lab-answer"><label for="q10concept"><strong>10/B – Miért keletkezett konfliktus, és hogyan döntöttél a feloldásról?</strong></label><textarea id="q10concept" data-answer="Q10_CONCEPT" rows="3"></textarea></div>
+**Elfogadási feltétel:** A két fejlesztés egyesült, a konfliktus feloldása dokumentált, a szkript szintaktikailag helyes.
 
 
 ## III. GitHub és távoli repository (11–13. feladat)
 
 ### 11. feladat – GitHub-fiók és üres repository
 
-**Környezet:** GitHub web, Debian · **AI:** használható.
+**Környezet:** GitHub web, Debian · **AI:** segítségként használható, a felhasznált javaslatokat jelöld.
 
 Jelentkezz be a GitHubra (szükség esetén regisztrálj). Hozz létre **üres privát** repositoryt `linux-monitor-<azonosito>` néven, README és `.gitignore` automatikus létrehozása nélkül. Ellenőrizd a `gh` CLI telepítését; ha hiányzik, használd a GitHub hivatalos Debian telepítési útmutatóját. Hitelesítés:
 ```bash
@@ -266,7 +292,7 @@ A CLI-ben **GitHub.com → HTTPS → Authenticate Git with your GitHub credentia
 
 ### 12. feladat – Remote és első push
 
-**Környezet:** Debian, GitHub · **AI:** használható.
+**Környezet:** Debian, GitHub · **AI:** segítségként használható, a felhasznált javaslatokat jelöld.
 
 A helyi `project` repositoryban add hozzá a távoli URL-t (a saját URL-edet használd), és töltsd fel a `main` ágat:
 ```bash
@@ -283,7 +309,7 @@ Ha már van `origin`, ellenőrizd az URL-t; ne adj hozzá másodszor azonos nev�
 
 ### 13. feladat – Fetch és pull különbsége
 
-**Környezet:** GitHub web és Debian · **AI:** használható.
+**Környezet:** GitHub web és Debian · **AI:** segítségként használható, a felhasznált javaslatokat jelöld.
 
 A GitHub webes felületén módosítsd a `report.sh` egyik **nem konfliktusos** megjegyzését, és commitold. Ezután:
 ```bash
@@ -300,24 +326,59 @@ Ellenőrizd, hogy a `fetch` után a munkafájl változatlan, a `pull` után pedi
 
 ## IV. VS Code grafikus Git-kezelés (14–15. feladat)
 
-### 14. feladat – VS Code Source Control – grafikus commit
+::: {.callout-important}
+## Ebben a két feladatban ne használj Git-parancsokat!
+A Git-műveleteket **a VS Code grafikus Source Control felületén** hajtsd végre. A válaszmezőkbe ne parancssorokat írj, hanem a létrejött commitok adatait és a műveletek értelmezését. A Remote – SSH kapcsolat a Debian VM `~/team-project/project` könyvtárára mutasson.
+:::
 
-**Környezet:** Windows VS Code Remote – SSH · **AI:** használható.
+### 14. feladat – VS Code Source Control: módosítás és commit
 
-Telepítsd/használd a **Remote – SSH** bővítményt, és nyisd meg a Debian VM `~/team-project/project` mappáját VS Code-ban. A **Source Control** panelen módosítsd a `report.sh` egyik kommentjét, nézd meg a diffet, majd grafikus felületen végezz **Stage Changes** és **Commit** műveleteket. A GitHub-böngésző itt még nem szükséges.
+**Környezet:** Windows VS Code + Remote – SSH · **Cél:** commit készítése kizárólag grafikus Git-műveletekkel.
 
-<div class="lab-answer"><label for="q14result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label><textarea id="q14result" data-answer="Q14_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="vscode">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
-**Elfogadási feltétel:** A Source Control panel és a létrejött commit dokumentált.
+Nyisd meg a Debian VM projektmappáját a VS Code-ban. A szerkesztőben bővítsd a `README.md` fájlt a projekt rövid leírásával (ha még nem létezik, hozd létre). A **Source Control** panelen tekintsd meg a módosításokat, végezd el a **Stage Changes**, majd a **Commit** műveletet. Keresd meg a commit rövid azonosítóját a VS Code előzmény-/gráfnézetében. A feltöltés még nem része ennek a feladatnak.
 
+<details><summary>1. segítség – felülettipp</summary>
 
-### 15. feladat – VS Code Push/Pull és zárás
+**Explorer** → fájlszerkesztés; **Source Control** → Changes / Staged Changes; **Stage Changes (+)**; commitüzenet; **Commit**; Git-előzmények vagy **Graph** nézet. A bővítmény neve: **Remote – SSH**.
 
-**Környezet:** Windows VS Code, GitHub, Azure Portal · **AI:** használható.
+</details>
+<details><summary>2. segítség – AI-kérdésminta</summary>
 
-A VS Code Source Control felületén végezd el a **Push** vagy **Sync Changes** műveletet. Ellenőrizd a GitHubon, hogy a 14. feladat commitja megjelent. Írd le a `push`, `fetch` és `pull` különbségét egy-egy mondatban. Végül az Azure Portalon **állítsd le és deallokáld** a VM-et; ellenőrizd a `Stopped (deallocated)` állapotot. A helyi és távoli repository szinkronizáltságát is dokumentáld.
+„A VS Code Remote – SSH és Source Control felületét használom. Magyarázd el, hol láthatók a módosítások, a staging és a commitok. Ne javasolj terminálos Git-parancsokat, és ne végezd el helyettem a feladatot.”
 
-<div class="lab-answer"><label for="q15result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label><textarea id="q15result" data-answer="Q15_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="vscode">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
-**Elfogadási feltétel:** A GitHubon megjelent a commit, és a VM deallokált állapotú.
+</details>
+
+<div class="lab-answer"><label for="q14message"><strong>14/A – A VS Code-ban létrehozott commit üzenete:</strong></label><input id="q14message" data-answer="Q14_MESSAGE" type="text" placeholder="Saját commitüzenet"></div>
+<div class="lab-answer"><label for="q14sha"><strong>14/B – A commit rövid azonosítója (7–12 hexadecimális karakter):</strong></label><input id="q14sha" data-answer="Q14_SHA" type="text" placeholder="például: a1b2c3d"><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="sha">Azonosító formátumának ellenőrzése</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<div class="lab-answer"><label for="q14steps"><strong>14/C – Melyik két grafikus művelettel készítetted elő és rögzítetted a módosítást? Hol ellenőrizted az eredményt? AI-használat, ha volt:</strong></label><textarea id="q14steps" data-answer="Q14_STEPS" rows="3"></textarea></div>
+**Elfogadási feltétel:** A README módosult, commit készült a VS Code-ban, és a hallgató meg tudja nevezni a két grafikus műveletet.
+
+### 15. feladat – VS Code: Push, Pull és GitHub-ellenőrzés
+
+**Környezet:** VS Code Source Control + GitHub webes felület + Azure Portal · **Cél:** a helyi és a távoli repository szinkronizálása grafikus eszközökkel.
+
+A VS Code grafikus felületén **Push** (vagy **Sync Changes**) művelettel töltsd fel a 14. feladat commitját. Ellenőrizd a GitHubon. Ezután a GitHub webes szerkesztőjében módosítsd a `README.md` fájlt, és hozz létre új commitot. Térj vissza a VS Code-ba, és **Pull** (vagy megfelelő szinkronizálási) művelettel töltsd le a módosítást. Ellenőrizd, hogy a helyi és távoli `main` ugyanarra a legutolsó commitra mutat. Végül az Azure Portalon állítsd le a VM-et, és ellenőrizd a **Stopped (deallocated)** állapotot.
+
+<details><summary>1. segítség – felülettipp</summary>
+
+**Source Control** → **…** menü → **Push**, **Pull**, **Sync Changes**; GitHub → repository → `README.md` → szerkesztés → commit; VS Code → commitelőzmények / Graph. A **Push** feltölt, a **Pull** letölt és integrál.
+
+</details>
+<details><summary>2. segítség – AI-kérdésminta</summary>
+
+„A VS Code Source Control felületén szeretném a GitHubbal szinkronizálni a projektet. Magyarázd el a Push, Pull és Sync Changes közötti különbséget, és segíts ellenőrizni a szinkronizáltságot. Ne használj terminálos Git-parancsokat.”
+
+</details>
+
+<div class="lab-answer"><label for="q15url"><strong>15/A – A saját GitHub-repository teljes URL-je:</strong></label><input id="q15url" data-answer="Q15_URL" type="url" placeholder="https://github.com/felhasznalo/repository"><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="repo-url">URL formátumának ellenőrzése</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<div class="lab-answer"><label for="q15sha"><strong>15/B – A GitHubon látható legutolsó commit rövid azonosítója (7–12 hexadecimális karakter):</strong></label><input id="q15sha" data-answer="Q15_SHA" type="text" placeholder="például: 1a2b3c4"><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="sha">Azonosító formátumának ellenőrzése</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<div class="lab-answer"><label for="q15concept"><strong>15/C – Mi a különbség a Push és a Pull között? Hogyan ellenőrizted a szinkronizálást és a VM leállítását? AI-használat, ha volt:</strong></label><textarea id="q15concept" data-answer="Q15_CONCEPT" rows="4"></textarea></div>
+**Elfogadási feltétel:** A GitHubon láthatók a változások, a két `main` ág azonos commitra mutat, a VM deallokált állapotú.
+
+::: {.callout-note}
+## Az ellenőrzés korlátja
+A rövid commitazonosító és a repository URL **formátumellenőrzése nem bizonyítja**, hogy a commit ténylegesen létezik. A GitHubon végzett ellenőrzés külön szükséges.
+:::
 
 
 ---
@@ -383,9 +444,9 @@ Az időmérés és az eseménykövetés a projekt `config/setup.js` fájljából
     const b=e.target.closest('.lab-check'); if(!b)return;
     const wrap=b.closest('.lab-answer'), field=wrap?.querySelector('input,textarea');
     const feedback=wrap?.querySelector('.lab-feedback'); if(!field||!feedback)return;
-    const v=field.value.trim(),p=patterns[b.dataset.check]||/\S{12}/;
-    const ok=v.length>=8&&p.test(v);
-    feedback.textContent=ok?'A válasz formailag megfelelőnek tűnik. A tényleges végrehajtást ez nem igazolja.':'Egészítsd ki konkrét parancsokkal, kimenettel vagy a kért magyarázattal.';
+    const v=field.value.trim(),type=b.dataset.check,p=patterns[type]||/\S{12}/;
+    const ok=type==='sha'?/^[0-9a-fA-F]{7,12}$/.test(v):type==='repo-url'?/^https:\/\/github\.com\/[A-Za-z0-9-]+\/[A-Za-z0-9._-]+\/?$/.test(v):v.length>=8&&p.test(v);
+    feedback.textContent=ok?'A válasz formátuma megfelelőnek tűnik. A tényleges végrehajtást ez nem igazolja.':(type==='sha'?'Adj meg 7–12 hexadecimális karaktert.':type==='repo-url'?'Adj meg teljes GitHub-repository URL-t.':'Egészítsd ki konkrét parancsokkal, kimenettel vagy a kért magyarázattal.');
     feedback.className='lab-feedback '+(ok?'ok':'warn');
   });
 })();

@@ -35,6 +35,8 @@ website:
         text: 6. hét
       - href: hf01\index.qmd
         text: HF01
+      - href: weeks/week07/index.qmd
+        text: 7. hét
 
 
 format:

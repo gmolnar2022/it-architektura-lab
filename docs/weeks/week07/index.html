@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7. hét – Git, GitHub és csapatmunka Linuxon – IT Architektúra – Gyakorlati munkafüzet</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-2c169b83e1fc2996b25bcc8774810429.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">IT Architektúra – Gyakorlati munkafüzet</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../utemterv.html"> 
+<span class="menu-text">Féléves ütemterv és értékelés</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Kezdőlap</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week01/index.html"> 
+<span class="menu-text">1. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week02/index.html"> 
+<span class="menu-text">2. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week03/index.html"> 
+<span class="menu-text">3. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week04/index.html"> 
+<span class="menu-text">4. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week05/index.html"> 
+<span class="menu-text">5. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week06/index.html"> 
+<span class="menu-text">6. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../hf01/index.html"> 
+<span class="menu-text">HF01</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../weeks/week07/index.html" aria-current="page"> 
+<span class="menu-text">7. hét</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a-probléma-három-fejlesztő-három-különböző-fájl" id="toc-a-probléma-három-fejlesztő-három-különböző-fájl" class="nav-link active" data-scroll-target="#a-probléma-három-fejlesztő-három-különböző-fájl">A probléma: három fejlesztő, három különböző fájl</a></li>
+  <li><a href="#i.-a-git-nélküli-fejlesztés-problémája-15.-feladat" id="toc-i.-a-git-nélküli-fejlesztés-problémája-15.-feladat" class="nav-link" data-scroll-target="#i.-a-git-nélküli-fejlesztés-problémája-15.-feladat">I. A Git nélküli fejlesztés problémája (1–5. feladat)</a>
+  <ul class="collapse">
+  <li><a href="#feladat-ssh-kapcsolat-és-jed-telepítése" id="toc-feladat-ssh-kapcsolat-és-jed-telepítése" class="nav-link" data-scroll-target="#feladat-ssh-kapcsolat-és-jed-telepítése">1. feladat – SSH-kapcsolat és Jed telepítése</a></li>
+  <li><a href="#feladat-fejlesztői-adatok-és-szövegfeldolgozás" id="toc-feladat-fejlesztői-adatok-és-szövegfeldolgozás" class="nav-link" data-scroll-target="#feladat-fejlesztői-adatok-és-szövegfeldolgozás">2. feladat – Fejlesztői adatok és szövegfeldolgozás</a></li>
+  <li><a href="#feladat-közös-program-és-fejlesztői-munkapéldányok" id="toc-feladat-közös-program-és-fejlesztői-munkapéldányok" class="nav-link" data-scroll-target="#feladat-közös-program-és-fejlesztői-munkapéldányok">3. feladat – Közös program és fejlesztői munkapéldányok</a></li>
+  <li><a href="#feladat-párhuzamos-módosítások-git-nélkül" id="toc-feladat-párhuzamos-módosítások-git-nélkül" class="nav-link" data-scroll-target="#feladat-párhuzamos-módosítások-git-nélkül">4. feladat – Párhuzamos módosítások Git nélkül</a></li>
+  <li><a href="#feladat-különbségek-és-manuális-integrációs-probléma" id="toc-feladat-különbségek-és-manuális-integrációs-probléma" class="nav-link" data-scroll-target="#feladat-különbségek-és-manuális-integrációs-probléma">5. feladat – Különbségek és manuális integrációs probléma</a></li>
+  </ul></li>
+  <li><a href="#ii.-helyi-git-verziókövetés-610.-feladat" id="toc-ii.-helyi-git-verziókövetés-610.-feladat" class="nav-link" data-scroll-target="#ii.-helyi-git-verziókövetés-610.-feladat">II. Helyi Git-verziókövetés (6–10. feladat)</a>
+  <ul class="collapse">
+  <li><a href="#feladat-git-telepítése-és-konfigurálása" id="toc-feladat-git-telepítése-és-konfigurálása" class="nav-link" data-scroll-target="#feladat-git-telepítése-és-konfigurálása">6. feladat – Git telepítése és konfigurálása</a></li>
+  <li><a href="#feladat-helyi-repository-és-első-commit" id="toc-feladat-helyi-repository-és-első-commit" class="nav-link" data-scroll-target="#feladat-helyi-repository-és-első-commit">7. feladat – Helyi repository és első commit</a></li>
+  <li><a href="#feladat-változtatások-és-commitok-követése" id="toc-feladat-változtatások-és-commitok-követése" class="nav-link" data-scroll-target="#feladat-változtatások-és-commitok-követése">8. feladat – Változtatások és commitok követése</a></li>
+  <li><a href="#feladat-fejlesztési-ág-létrehozása" id="toc-feladat-fejlesztési-ág-létrehozása" class="nav-link" data-scroll-target="#feladat-fejlesztési-ág-létrehozása">9. feladat – Fejlesztési ág létrehozása</a></li>
+  <li><a href="#feladat-merge-és-valódi-konfliktus" id="toc-feladat-merge-és-valódi-konfliktus" class="nav-link" data-scroll-target="#feladat-merge-és-valódi-konfliktus">10. feladat – Merge és valódi konfliktus</a></li>
+  </ul></li>
+  <li><a href="#iii.-github-és-távoli-repository-1113.-feladat" id="toc-iii.-github-és-távoli-repository-1113.-feladat" class="nav-link" data-scroll-target="#iii.-github-és-távoli-repository-1113.-feladat">III. GitHub és távoli repository (11–13. feladat)</a>
+  <ul class="collapse">
+  <li><a href="#feladat-github-fiók-és-üres-repository" id="toc-feladat-github-fiók-és-üres-repository" class="nav-link" data-scroll-target="#feladat-github-fiók-és-üres-repository">11. feladat – GitHub-fiók és üres repository</a></li>
+  <li><a href="#feladat-remote-és-első-push" id="toc-feladat-remote-és-első-push" class="nav-link" data-scroll-target="#feladat-remote-és-első-push">12. feladat – Remote és első push</a></li>
+  <li><a href="#feladat-fetch-és-pull-különbsége" id="toc-feladat-fetch-és-pull-különbsége" class="nav-link" data-scroll-target="#feladat-fetch-és-pull-különbsége">13. feladat – Fetch és pull különbsége</a></li>
+  </ul></li>
+  <li><a href="#iv.-vs-code-grafikus-git-kezelés-1415.-feladat" id="toc-iv.-vs-code-grafikus-git-kezelés-1415.-feladat" class="nav-link" data-scroll-target="#iv.-vs-code-grafikus-git-kezelés-1415.-feladat">IV. VS Code grafikus Git-kezelés (14–15. feladat)</a>
+  <ul class="collapse">
+  <li><a href="#feladat-vs-code-source-control-grafikus-commit" id="toc-feladat-vs-code-source-control-grafikus-commit" class="nav-link" data-scroll-target="#feladat-vs-code-source-control-grafikus-commit">14. feladat – VS Code Source Control – grafikus commit</a></li>
+  <li><a href="#feladat-vs-code-pushpull-és-zárás" id="toc-feladat-vs-code-pushpull-és-zárás" class="nav-link" data-scroll-target="#feladat-vs-code-pushpull-és-zárás">15. feladat – VS Code Push/Pull és zárás</a></li>
+  </ul></li>
+  <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">7. hét – Git, GitHub és csapatmunka Linuxon</h1>
+<p class="subtitle lead">15 feladat · Debian VM / PowerShell vagy VS Code SSH / GitHub</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Munkakörnyezet és határidő
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A gyakorlat a korábbi héten létrehozott <strong>Debian VM-en</strong> zajlik, PowerShellből vagy VS Code Remote – SSH kapcsolattal. <strong>Beadási határidő: 2026. november 12., csütörtök, 11:40 (magyar idő).</strong> Az 1–10. feladatban a parancsokat önállóan hajtsd végre; a 11–15. feladatban dokumentáció és AI használható. <strong>Jelszót, hozzáférési tokent és privát kulcsot ne illessz be a válaszmezőkbe.</strong></p>
+</div>
+</div>
+<p><strong>Neptun-kód (kötelező, 6 karakter):</strong> <input id="neptun" data-answer="STUDENT_ID" maxlength="6" pattern="[A-Za-z0-9]{6}" required="" placeholder="ABC123"></p>
+<section id="a-probléma-három-fejlesztő-három-különböző-fájl" class="level2">
+<h2 class="anchored" data-anchor-id="a-probléma-három-fejlesztő-három-különböző-fájl">A probléma: három fejlesztő, három különböző fájl</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/git-workflow.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>A közös fejlesztés problémái és a Git-alapú megoldás</figcaption>
+</figure>
+</div>
+<p><strong>Projektforgatókönyv.</strong> Anna, Béla és Csilla ugyanannak a <code>report.sh</code> Bash-szkriptnek a másolatával indul. Anna az üzemidőt, Béla a memóriaadatokat bővíti, majd mindketten ugyanazt a fejlécsort is átírják. Melyik változat a legfrissebb? Hogyan őrizhető meg mindkét fejlesztés? Először a <code>diff</code> segítségével vizsgálod meg a problémát, utána Gittel oldod meg.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Tervezett projektstruktúra
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>team-project/
+├── developers.csv
+├── setup.sh
+├── project/
+│   └── report.sh          # közös kiinduló változat
+└── developers/
+    ├── anna/report.sh
+    ├── bela/report.sh
+    └── csilla/report.sh</code></pre>
+<p>A 6–15. feladatban <strong>csak a <code>project/</code> könyvtárat</strong> tesszük Git-repositoryvá. A fejlesztői másolatok a manuális verziókezelés szemléltetésére maradnak meg.</p>
+</div>
+</div>
+</section>
+<section id="i.-a-git-nélküli-fejlesztés-problémája-15.-feladat" class="level2">
+<h2 class="anchored" data-anchor-id="i.-a-git-nélküli-fejlesztés-problémája-15.-feladat">I. A Git nélküli fejlesztés problémája (1–5. feladat)</h2>
+<section id="feladat-ssh-kapcsolat-és-jed-telepítése" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-ssh-kapcsolat-és-jed-telepítése">1. feladat – SSH-kapcsolat és Jed telepítése</h3>
+<p><strong>Környezet:</strong> PowerShell vagy VS Code terminál → Debian VM · <strong>AI:</strong> nem használható.</p>
+<p>Csatlakozz a Debian VM-hez, ellenőrizd a felhasználót és a munkakönyvtárat, majd telepítsd a Jed szövegszerkesztőt. Hozd létre a <code>~/team-project/project</code> könyvtárat.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> azureuser@PUBLIC_IP</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">whoami</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> jed</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/team-project/project</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/team-project</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="ex">jed</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A <code>PUBLIC_IP</code> helyére a saját VM-címedet írd. Ha a <code>jed --version</code> nem támogatott a telepített változatban, ellenőrizd a <code>command -v jed</code> paranccsal.</p>
+<div class="lab-answer">
+<label for="q01result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q01result" data-answer="Q01_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="ssh">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> A Jed elérhető, és a projektkönyvtár létrejött.</p>
+</section>
+<section id="feladat-fejlesztői-adatok-és-szövegfeldolgozás" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-fejlesztői-adatok-és-szövegfeldolgozás">2. feladat – Fejlesztői adatok és szövegfeldolgozás</h3>
+<p><strong>Környezet:</strong> Debian, Jed és shell · <strong>AI:</strong> nem használható.</p>
+<p>Hozd létre Jedben a <code>developers.csv</code> fájlt. Az állomány <strong>pontosvesszővel tagolt</strong> (nem vesszővel):</p>
+<pre class="text"><code>id;name;username;role;hours
+1;Anna Kovacs;anna;backend;32
+2;Bela Nagy;bela;frontend;24
+3;Csilla Toth;csilla;tester;20</code></pre>
+<p>Listázd a felhasználóneveket, számold meg a fejlesztőket és add össze a munkaórákat.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">jed</span> developers.csv</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cut</span> <span class="at">-d</span><span class="st">';'</span> <span class="at">-f3</span> developers.csv</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span> <span class="at">-n</span> +2 developers.csv <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-l</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span><span class="st">';'</span> <span class="st">'NR&gt;1 {sum+=$5} END {print sum}'</span> developers.csv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Elvárt összeg: 76 óra.</strong></p>
+<div class="lab-answer">
+<label for="q02result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q02result" data-answer="Q02_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="csv">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> A három fejlesztő és a 76 munkaóra ellenőrizhető.</p>
+</section>
+<section id="feladat-közös-program-és-fejlesztői-munkapéldányok" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-közös-program-és-fejlesztői-munkapéldányok">3. feladat – Közös program és fejlesztői munkapéldányok</h3>
+<p><strong>Környezet:</strong> Debian, Bash · <strong>AI:</strong> nem használható.</p>
+<p>Készítsd el Jedben a <code>project/report.sh</code> fájlt:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"PROJECT STATUS REPORT"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Hostname: </span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"User: </span><span class="va">$(</span><span class="fu">whoami</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Date: </span><span class="va">$(</span><span class="fu">date</span> <span class="st">'+%Y-%m-%d'</span><span class="va">)</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Hozz létre egy <code>setup.sh</code> szkriptet, amely a <code>developers.csv</code> fájlból olvassa a neveket, minden fejlesztőnek könyvtárat készít, és bemásolja a közös programot. Kiinduló ciklus:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-e</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="st">"</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">"</span><span class="va">$0</span><span class="st">"</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="va">IFS</span><span class="op">=</span><span class="st">';'</span> <span class="bu">read</span> <span class="at">-r</span> <span class="va">id</span> <span class="va">name</span> <span class="va">username</span> <span class="va">role</span> <span class="va">hours</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"developers/</span><span class="va">$username</span><span class="st">"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cp</span> project/report.sh <span class="st">"developers/</span><span class="va">$username</span><span class="st">/report.sh"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> <span class="op">&lt;(</span><span class="fu">tail</span> <span class="at">-n</span> +2 developers.csv<span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ellenőrizd a szintaxist és a másolatokat:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> <span class="at">-n</span> setup.sh</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> setup.sh</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">find</span> developers <span class="at">-type</span> f <span class="at">-name</span> <span class="st">'report.sh'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Figyelem:</strong> a <code>setup.sh</code> újrafuttatása felülírja a fejlesztői példányokat! A 4–5. feladatban ne futtasd újra.</p>
+<div class="lab-answer">
+<label for="q03result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q03result" data-answer="Q03_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="bash">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> Három különálló, azonos tartalmú másolat készült.</p>
+</section>
+<section id="feladat-párhuzamos-módosítások-git-nélkül" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-párhuzamos-módosítások-git-nélkül">4. feladat – Párhuzamos módosítások Git nélkül</h3>
+<p><strong>Környezet:</strong> Debian, Jed · <strong>AI:</strong> nem használható.</p>
+<p>Anna saját <code>developers/anna/report.sh</code> fájljának végére írja:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Uptime: </span><span class="va">$(</span><span class="fu">uptime</span> <span class="at">-p</span><span class="va">)</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Béla saját <code>developers/bela/report.sh</code> fájljának végére írja:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Memory:"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">free</span> <span class="at">-h</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Csilla nem változtat. Futtasd mindhárom változatot, és ellenőrizd, hogy a <code>project/report.sh</code> érintetlen maradt. Ezután Anna és Béla <strong>ugyanazt a fejlécsort</strong> is módosítsa, de eltérő szövegre (<code>ANNA STATUS REPORT</code>, illetve <code>BELA STATUS REPORT</code>).</p>
+<div class="lab-answer">
+<label for="q04result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q04result" data-answer="Q04_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="bash">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> Anna és Béla változata eltér a közös programtól, Csilláé azonos.</p>
+</section>
+<section id="feladat-különbségek-és-manuális-integrációs-probléma" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-különbségek-és-manuális-integrációs-probléma">5. feladat – Különbségek és manuális integrációs probléma</h3>
+<p><strong>Környezet:</strong> Debian, diff · <strong>AI:</strong> nem használható.</p>
+<p>Hasonlítsd össze a közös változatot mindhárom fejlesztő fájljával, majd Anna és Béla fájlját egymással:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span> <span class="at">-u</span> project/report.sh developers/anna/report.sh</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span> <span class="at">-u</span> project/report.sh developers/bela/report.sh</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span> <span class="at">-u</span> project/report.sh developers/csilla/report.sh</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">diff</span> <span class="at">-u</span> developers/anna/report.sh developers/bela/report.sh</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A <code>diff</code> <strong>1-es kilépési kódja eltérést jelent, nem feltétlenül hibát</strong>. Írd le, mely változtatások integrálhatók könnyen, és hol jelentkezik ütközés. <strong>Ne írd felül a közös fájlt</strong>: a megoldást a Git-feladatokban készíted el.</p>
+<div class="lab-answer">
+<label for="q05result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q05result" data-answer="Q05_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="diff">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> A három összehasonlítás eredménye és az ütköző fejléc magyarázata szerepel.</p>
+</section>
+</section>
+<section id="ii.-helyi-git-verziókövetés-610.-feladat" class="level2">
+<h2 class="anchored" data-anchor-id="ii.-helyi-git-verziókövetés-610.-feladat">II. Helyi Git-verziókövetés (6–10. feladat)</h2>
+<section id="feladat-git-telepítése-és-konfigurálása" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-git-telepítése-és-konfigurálása">6. feladat – Git telepítése és konfigurálása</h3>
+<p><strong>Környezet:</strong> Debian, Git · <strong>AI:</strong> nem használható.</p>
+<p>Ellenőrizd vagy telepítsd a Gitet, majd állítsd be a saját commit-nevedet és e-mail-címedet. Az e-mail-cím lehet a GitHub-fiókodhoz tartozó no-reply cím is.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">--version</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> git</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Sajat Nev"</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"email@example.com"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> <span class="at">--list</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Ne írj valódi jelszót a Git-konfigurációba.</strong></p>
+<div class="lab-answer">
+<label for="q06result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q06result" data-answer="Q06_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> A Git működik, és a szerzői adatok be vannak állítva.</p>
+</section>
+<section id="feladat-helyi-repository-és-első-commit" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-helyi-repository-és-első-commit">7. feladat – Helyi repository és első commit</h3>
+<p><strong>Környezet:</strong> Debian, Git · <strong>AI:</strong> nem használható.</p>
+<p>Lépj be <strong>kizárólag</strong> a <code>~/team-project/project</code> könyvtárba, inicializálj Git-repositoryt, majd rögzítsd a közös <code>report.sh</code> kiinduló változatát.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/team-project/project</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init <span class="at">-b</span> main</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add report.sh</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Initial shared report"</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A <code>developers/</code> mappák a repositoryn kívül maradnak.</p>
+<div class="lab-answer">
+<label for="q07result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q07result" data-answer="Q07_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> Létezik az első commit a main ágon.</p>
+</section>
+<section id="feladat-változtatások-és-commitok-követése" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-változtatások-és-commitok-követése">8. feladat – Változtatások és commitok követése</h3>
+<p><strong>Környezet:</strong> Debian, Git · <strong>AI:</strong> nem használható.</p>
+<p>Bővítsd a közös <code>report.sh</code> programot az üzemidő kiírásával (Anna ötlete), majd vizsgáld meg a módosítást és készíts commitot.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> status</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add report.sh</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff <span class="at">--staged</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add uptime to report"</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Magyarázd meg a munkakönyvtár, staging area és repository közti különbséget.</p>
+<div class="lab-answer">
+<label for="q08result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q08result" data-answer="Q08_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> Az új commit és a staged/unstaged állapotok dokumentáltak.</p>
+</section>
+<section id="feladat-fejlesztési-ág-létrehozása" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-fejlesztési-ág-létrehozása">9. feladat – Fejlesztési ág létrehozása</h3>
+<p><strong>Környezet:</strong> Debian, Git · <strong>AI:</strong> nem használható.</p>
+<p>Hozz létre <code>feature/memory</code> ágat, és Béla ötlete alapján add hozzá a memóriahasználatot. Commitold a változást, majd válts vissza a main ágra.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> feature/memory</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># szerkeszd a report.sh fájlt</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add report.sh</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Add memory information"</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch main</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> branch <span class="at">-v</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ellenőrizd, hogy a <code>main</code> és a <code>feature/memory</code> eltérő állapotot mutat.</p>
+<div class="lab-answer">
+<label for="q09result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q09result" data-answer="Q09_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> A feature ág commitja elkülönül a main ágtól.</p>
+</section>
+<section id="feladat-merge-és-valódi-konfliktus" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-merge-és-valódi-konfliktus">10. feladat – Merge és valódi konfliktus</h3>
+<p><strong>Környezet:</strong> Debian, Git · <strong>AI:</strong> nem használható.</p>
+<p>Először egyesítsd Béla fejlesztését:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> merge feature/memory</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--graph</span> <span class="at">--all</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Konfliktusdemó külön ágon:</strong> a tiszta <code>main</code> állapotából hozz létre <code>feature/title</code> ágat, írd át a fejlécet <code>ANNA STATUS REPORT</code> szövegre és commitold. Válts vissza <code>main</code>-re, írd át <strong>ugyanazt a sort</strong> <code>BELA STATUS REPORT</code> szövegre, és ezt is commitold. Ezután próbáld meg a <code>git merge feature/title</code> parancsot. Nézd meg a <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> jelöléseket; szerkeszd a fájlt egységes fejlécűre, majd <code>git add report.sh</code> és <code>git commit</code> segítségével zárd le a merge-et. Végül ellenőrizd: <code>bash -n report.sh</code>.</p>
+<div class="lab-answer">
+<label for="q10result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q10result" data-answer="Q10_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> A konfliktus és a feloldás dokumentált, a szkript szintaktikailag helyes.</p>
+</section>
+</section>
+<section id="iii.-github-és-távoli-repository-1113.-feladat" class="level2">
+<h2 class="anchored" data-anchor-id="iii.-github-és-távoli-repository-1113.-feladat">III. GitHub és távoli repository (11–13. feladat)</h2>
+<section id="feladat-github-fiók-és-üres-repository" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-github-fiók-és-üres-repository">11. feladat – GitHub-fiók és üres repository</h3>
+<p><strong>Környezet:</strong> GitHub web, Debian · <strong>AI:</strong> használható.</p>
+<p>Jelentkezz be a GitHubra (szükség esetén regisztrálj). Hozz létre <strong>üres privát</strong> repositoryt <code>linux-monitor-&lt;azonosito&gt;</code> néven, README és <code>.gitignore</code> automatikus létrehozása nélkül. Ellenőrizd a <code>gh</code> CLI telepítését; ha hiányzik, használd a GitHub hivatalos Debian telepítési útmutatóját. Hitelesítés:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> <span class="at">--version</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> auth login</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="ex">gh</span> auth status</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A CLI-ben <strong>GitHub.com → HTTPS → Authenticate Git with your GitHub credentials: Yes → Login with a web browser</strong> beállításokat válaszd. A böngészős kódot a saját gépeden add meg. <strong>Tokeneket ne másolj a beadásba.</strong></p>
+<div class="lab-answer">
+<label for="q11result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q11result" data-answer="Q11_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="github">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> Létezik az üres GitHub-repository, a CLI hitelesített.</p>
+</section>
+<section id="feladat-remote-és-első-push" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-remote-és-első-push">12. feladat – Remote és első push</h3>
+<p><strong>Környezet:</strong> Debian, GitHub · <strong>AI:</strong> használható.</p>
+<p>A helyi <code>project</code> repositoryban add hozzá a távoli URL-t (a saját URL-edet használd), és töltsd fel a <code>main</code> ágat:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/team-project/project</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/FELHASZNALO/REPOSITORY.git</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote <span class="at">-v</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ha már van <code>origin</code>, ellenőrizd az URL-t; ne adj hozzá másodszor azonos nevű remote-ot. A GitHub webes felületén ellenőrizd a commitokat.</p>
+<div class="lab-answer">
+<label for="q12result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q12result" data-answer="Q12_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> A main ág és a report.sh megjelent a GitHubon.</p>
+</section>
+<section id="feladat-fetch-és-pull-különbsége" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-fetch-és-pull-különbsége">13. feladat – Fetch és pull különbsége</h3>
+<p><strong>Környezet:</strong> GitHub web és Debian · <strong>AI:</strong> használható.</p>
+<p>A GitHub webes felületén módosítsd a <code>report.sh</code> egyik <strong>nem konfliktusos</strong> megjegyzését, és commitold. Ezután:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> fetch origin</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> main..origin/main</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff main origin/main</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull <span class="at">--ff-only</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ellenőrizd, hogy a <code>fetch</code> után a munkafájl változatlan, a <code>pull</code> után pedig frissült. A feladatot tiszta munkakönyvtárból indítsd.</p>
+<div class="lab-answer">
+<label for="q13result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q13result" data-answer="Q13_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="git">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> A fetch és pull különbségét konkrét eredménnyel magyarázza.</p>
+</section>
+</section>
+<section id="iv.-vs-code-grafikus-git-kezelés-1415.-feladat" class="level2">
+<h2 class="anchored" data-anchor-id="iv.-vs-code-grafikus-git-kezelés-1415.-feladat">IV. VS Code grafikus Git-kezelés (14–15. feladat)</h2>
+<section id="feladat-vs-code-source-control-grafikus-commit" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-vs-code-source-control-grafikus-commit">14. feladat – VS Code Source Control – grafikus commit</h3>
+<p><strong>Környezet:</strong> Windows VS Code Remote – SSH · <strong>AI:</strong> használható.</p>
+<p>Telepítsd/használd a <strong>Remote – SSH</strong> bővítményt, és nyisd meg a Debian VM <code>~/team-project/project</code> mappáját VS Code-ban. A <strong>Source Control</strong> panelen módosítsd a <code>report.sh</code> egyik kommentjét, nézd meg a diffet, majd grafikus felületen végezz <strong>Stage Changes</strong> és <strong>Commit</strong> műveleteket. A GitHub-böngésző itt még nem szükséges.</p>
+<div class="lab-answer">
+<label for="q14result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q14result" data-answer="Q14_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="vscode">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> A Source Control panel és a létrejött commit dokumentált.</p>
+</section>
+<section id="feladat-vs-code-pushpull-és-zárás" class="level3">
+<h3 class="anchored" data-anchor-id="feladat-vs-code-pushpull-és-zárás">15. feladat – VS Code Push/Pull és zárás</h3>
+<p><strong>Környezet:</strong> Windows VS Code, GitHub, Azure Portal · <strong>AI:</strong> használható.</p>
+<p>A VS Code Source Control felületén végezd el a <strong>Push</strong> vagy <strong>Sync Changes</strong> műveletet. Ellenőrizd a GitHubon, hogy a 14. feladat commitja megjelent. Írd le a <code>push</code>, <code>fetch</code> és <code>pull</code> különbségét egy-egy mondatban. Végül az Azure Portalon <strong>állítsd le és deallokáld</strong> a VM-et; ellenőrizd a <code>Stopped (deallocated)</code> állapotot. A helyi és távoli repository szinkronizáltságát is dokumentáld.</p>
+<div class="lab-answer">
+<label for="q15result"><strong>A végrehajtott parancsok, kimenetek és rövid magyarázat:</strong></label>
+<textarea id="q15result" data-answer="Q15_RESULT" rows="5" placeholder="Parancsok, eredmények, rövid magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="vscode">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p><strong>Elfogadási feltétel:</strong> A GitHubon megjelent a commit, és a VM deallokált állapotú.</p>
+<hr>
+<style>
+.lab-answer {display:flex;flex-direction:column;gap:.45rem;margin:1rem 0 1.5rem}
+.lab-answer input,.lab-answer textarea {width:100%;max-width:100%;padding:.65rem;border:1px solid #9ca3af;border-radius:5px;font:inherit}
+.lab-answer textarea {min-height:6rem;resize:vertical}
+.lab-answer button {align-self:flex-start}
+.lab-feedback.ok {color:#176b36}.lab-feedback.warn {color:#a45c00}
+</style>
+</section>
+</section>
+<section id="mentés-és-beadás" class="level2">
+<h2 class="anchored" data-anchor-id="mentés-és-beadás">Mentés és beadás</h2>
+<p>A válaszok automatikusan mentődnek ebben a böngészőben. A beadás előtt ellenőrizd a Neptun-kódot és a kitöltött mezőket. A szintaktikai ellenőrzés nem helyettesíti a parancsok tényleges futtatását.</p>
+<div class="actions">
+<button id="submit-button" type="button" onclick="openSubmissionSummary()">
+📤 Beadás
+</button>
+<button type="button" onclick="exportSubmissionJson()">
+💾 JSON export
+</button>
+<button type="button" onclick="clearAnswers()">
+Helyi adatok törlése
+</button>
+<p><span id="save-status" role="status"></span></p>
+</div>
+<p id="submission-deadline-note">
+<strong>Beadási határidő:</strong> 2026. november 12. 11:40 (magyar idő).
+</p>
+<div id="submission-summary" class="submission-summary" hidden="">
+<h3 class="anchored">
+Beadás előtti összesítés
+</h3>
+<div id="submission-summary-body">
+
+</div>
+<div class="actions">
+<button type="button" onclick="closeSubmissionSummary()">
+Vissza a javításhoz
+</button>
+<button id="confirm-submit-button" type="button" onclick="confirmSubmission()">
+Beadás megerősítése
+</button>
+</div>
+</div>
+<div id="submission-result" role="status" aria-live="polite">
+
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Aktivitási adatok">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Aktivitási adatok
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Az időmérés és az eseménykövetés a projekt <code>config/setup.js</code> fájljából konfigurálható. Az SSH-terminálban végzett munka nem feltétlenül számít böngészőbeli aktív időnek.</p>
+</div>
+</div>
+<div id="tracking-panel" class="submission-summary">
+<strong>Aktivitás ezen a gépen</strong>
+<p>
+Időmérés: <span id="tracking-time-status">–</span> · Eseménykövetés: <span id="tracking-event-status">–</span>
+</p>
+<p>
+Becsült aktív idő: <span id="activity-active-time">0:00</span> · Szerkesztések: <span id="activity-edit-count">0</span>
+</p>
+<p>
+Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: <span id="activity-last">–</span>
+</p>
+</div>
+<style>
+.actions {display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;margin:1rem 0}
+.actions button {padding:.55rem .9rem;border:1px solid #77808a;border-radius:6px;background:#fff;cursor:pointer}
+.actions button:disabled {opacity:.5;cursor:not-allowed}
+.submission-summary {border:1px solid #c8d0d8;border-radius:9px;padding:1rem;margin:1rem 0;background:#fafbfc}
+.submission-summary[hidden] {display:none}
+#submission-result {margin:1rem 0}
+</style>
+<script src="../../config/setup.js"></script>
+<script>
+(function(){
+  const patterns={
+    ssh:/\b(ssh|whoami|hostname|pwd)\b/i, csv:/[;]|\b(cut|awk|grep|tail)\b/i,
+    bash:/\b(while|for|read|mkdir|cp|bash|chmod|jed)\b/i,
+    diff:/\bdiff\b|---|\+\+\+/i,
+    git:/\bgit\s+(init|status|add|commit|log|diff|branch|switch|merge|remote|push|fetch|pull|config)\b/i,
+    github:/github\.com|gh auth|https/i,
+    vscode:/Source Control|Remote.SSH|VS Code|stage|commit|sync/i
+  };
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('.lab-check'); if(!b)return;
+    const wrap=b.closest('.lab-answer'), field=wrap?.querySelector('input,textarea');
+    const feedback=wrap?.querySelector('.lab-feedback'); if(!field||!feedback)return;
+    const v=field.value.trim(),p=patterns[b.dataset.check]||/\S{12}/;
+    const ok=v.length>=8&&p.test(v);
+    feedback.textContent=ok?'A válasz formailag megfelelőnek tűnik. A tényleges végrehajtást ez nem igazolja.':'Egészítsd ki konkrét parancsokkal, kimenettel vagy a kért magyarázattal.';
+    feedback.className='lab-feedback '+(ok?'ok':'warn');
+  });
+})();
+</script>
+<p>```</p>
+<script>
+(() => {
+  'use strict';
+  const CONFIG = Object.assign({timeTracking:false,eventTracking:false,showTrackingPanel:false},window.ITARCH_SETUP||{});
+  const STORAGE_KEY = 'itarch_week07_answers_2026';
+  // OKTATÓI BEÁLLÍTÁS: a végleges határidőt itt add meg ISO 8601 formában,
+  // pl. '2026-10-29T11:40:00+01:00'. A null azt jelenti, hogy nincs korlátozás.
+  const SUBMISSION_DEADLINE_ISO = '2026-11-12T11:40:00+01:00';
+  const ENDPOINT = 'https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/submit';
+  const $ = id => document.getElementById(id);
+  const fields = () => [...document.querySelectorAll('[data-answer]')];
+  const studentId = () => ($('neptun')?.value||'').trim().toUpperCase();
+  const validId = () => /^[A-Z0-9]{6}$/.test(studentId());
+  const nowIso = () => new Date().toISOString();
+  const deadline = SUBMISSION_DEADLINE_ISO ? new Date(SUBMISSION_DEADLINE_ISO) : null;
+  const closed = () => deadline && !isNaN(deadline.getTime()) && Date.now() > deadline.getTime();
+  const started = nowIso();
+  let activity = {started_at:started,last_activity_at:started,active_seconds_estimate:0,edit_count:0,events:[]};
+  let lastInteraction = Date.now();
+  const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const logEvent = (type) => {if(CONFIG.eventTracking) activity.events.push({type,at:nowIso()});};
+  const answers = () => Object.fromEntries(fields().filter(f=>f.dataset.answer!=='STUDENT_ID').map(f=>[f.dataset.answer,f.value]));
+  const save = (message=false) => {
+    activity.last_activity_at=nowIso();
+    try {localStorage.setItem(STORAGE_KEY,JSON.stringify({student_id:studentId(),answers:answers(),activity}));
+      if(message) $('save-status').textContent='✓ Helyi mentés kész';
+    } catch(e) {if(message) $('save-status').textContent='⚠ Helyi mentés nem érhető el';}
+  };
+  const load = () => {
+    try {const stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null'); if(!stored)return;
+      if(stored.student_id) $('neptun').value=stored.student_id;
+      fields().forEach(f=>{if(f.dataset.answer!=='STUDENT_ID' && Object.hasOwn(stored.answers||{},f.dataset.answer))f.value=stored.answers[f.dataset.answer]});
+      if(stored.activity)activity=Object.assign(activity,stored.activity);
+    }catch(e){}
+  };
+  const renderActivity = () => {
+    $('tracking-panel').hidden=!CONFIG.showTrackingPanel;
+    $('tracking-time-status').textContent=CONFIG.timeTracking?'bekapcsolva':'kikapcsolva';
+    $('tracking-event-status').textContent=CONFIG.eventTracking?'bekapcsolva':'kikapcsolva';
+    const sec=activity.active_seconds_estimate||0;
+    $('activity-active-time').textContent=`${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;
+    $('activity-edit-count').textContent=activity.edit_count||0;
+    $('activity-started').textContent=activity.started_at||'–';
+    $('activity-last').textContent=activity.last_activity_at||'–';
+  };
+  const refreshDeadline = () => {
+    const isClosed=closed();
+    $('submit-button').hidden=!!isClosed;
+    if($('confirm-submit-button'))$('confirm-submit-button').disabled=!!isClosed||!validId();
+    $('submission-deadline-note').textContent=deadline && !isNaN(deadline.getTime())
+      ? `Beadási határidő: ${deadline.toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})} (magyar idő)${isClosed?' – lejárt':''}`
+      : 'Beadási határidő: még nincs beállítva a munkafüzetben.';
+  };
+  const payload = () => ({schema_version:1,course:'ITARCH',week:7,student_id:studentId(),submitted_at:nowIso(),answers:answers(),checks:{},activity_summary:activity});
+  window.openSubmissionSummary = () => {
+    refreshDeadline();if(closed())return;
+    const fs=fields().filter(f=>f.dataset.answer!=='STUDENT_ID');
+    const missing=fs.filter(f=>!f.value.trim());
+    const groups=[...new Set(missing.map(f=>(f.dataset.answer.match(/^Q(\d\d)/)||[])[1]).filter(Boolean))];
+    const complete=fs.length-missing.length;
+    $('submission-summary-body').innerHTML=`<p><strong>Neptun:</strong> ${esc(studentId()||'nincs megadva')} ${validId()?'✓':'⚠ 6 betű/szám szükséges'}</p>
+      <p><strong>Kitöltött mezők:</strong> ${complete}/${fs.length} (${Math.round(100*complete/Math.max(1,fs.length))}%)</p>
+      <p><strong>Hiányos feladatok:</strong> ${groups.length?groups.map(x=>Number(x)).join(', '):'nincs'}</p>
+      ${missing.length?`<p>Összesen ${missing.length} mező üres. A beadás ettől még lehetséges, de ellenőrizd a válaszokat.</p>`:''}
+      <p>A szintaktikai ellenőrző gombok használata nem kötelező. Biztosan beadod?</p>`;
+    $('submission-summary').hidden=false;
+    $('submission-summary').scrollIntoView({behavior:'smooth',block:'start'});
+    logEvent('submission_summary_opened');save();refreshDeadline();
+  };
+  window.closeSubmissionSummary=()=>{$('submission-summary').hidden=true;};
+  const download = data => {
+    const file=`ITARCH_week07_${data.student_id}_${data.submitted_at.replace(/[:.]/g,'-')}.json`;
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'});
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=file;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  };
+  window.exportSubmissionJson=()=>{if(!validId()){$('submission-result').textContent='⚠ A JSON exporthoz 6 karakteres Neptun-kód szükséges.';return;}logEvent('submission_json_exported');save();download(payload());};
+  window.confirmSubmission=async()=>{
+    if(closed()){$('submission-result').textContent='⚠ A beadási határidő lejárt.';refreshDeadline();return;}
+    if(!validId()){$('submission-result').textContent='⚠ Adj meg érvényes, 6 karakteres Neptun-kódot.';return;}
+    const btn=$('confirm-submit-button');btn.disabled=true;
+    $('submission-result').textContent='Beadás folyamatban…';
+    try {
+      const response=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload())});
+      const result=await response.json().catch(()=>null);
+      if(!response.ok||!result||result.success!==true)throw new Error(`HTTP ${response.status}`);
+      logEvent('submission_succeeded');save();$('submission-summary').hidden=true;
+      $('submission-result').textContent=`✓ Beadás sikeres. Azonosító: ${result.submission_id||'–'}`;
+    }catch(e){logEvent('submission_failed');save();$('submission-result').textContent='⚠ A szerveres beadás nem sikerült. A helyi mentés megmaradt; próbáld újra, vagy készíts JSON exportot.';}
+    finally {btn.disabled=false;refreshDeadline();}
+  };
+  window.clearAnswers=()=>{
+    if(!confirm('Biztosan törlöd az összes helyben mentett választ és aktivitási adatot?'))return;
+    fields().forEach(f=>f.value='');
+    try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
+    activity={started_at:nowIso(),last_activity_at:nowIso(),active_seconds_estimate:0,edit_count:0,events:[]};
+    $('submission-summary').hidden=true;$('submission-result').textContent='';$('save-status').textContent='Helyi adatok törölve.';renderActivity();
+  };
+  document.addEventListener('DOMContentLoaded',()=>{
+    load();refreshDeadline();renderActivity();
+    fields().forEach(f=>{f.addEventListener('input',()=>{
+      if(f.dataset.answer==='STUDENT_ID')f.value=f.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);
+      activity.edit_count++;lastInteraction=Date.now();logEvent('answer_edited');save();renderActivity();
+    });f.addEventListener('change',()=>save());});
+    document.addEventListener('keydown',()=>lastInteraction=Date.now());
+    document.addEventListener('mousemove',()=>lastInteraction=Date.now(),{passive:true});
+    document.addEventListener('visibilitychange',()=>save());
+    window.addEventListener('beforeunload',()=>save());
+    setInterval(()=>{if(CONFIG.timeTracking&&!document.hidden&&Date.now()-lastInteraction<120000){activity.active_seconds_estimate++;if(activity.active_seconds_estimate%10===0)save();renderActivity();}},1000);
+    setInterval(refreshDeadline,30000);
+  });
+})();
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

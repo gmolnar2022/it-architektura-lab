@@ -38,6 +38,10 @@ Az egyes heti oldalak **interaktív munkafüzetként** működnek:
 
 ### [5 hét – Hálózati szolgáltatások](weeks/week05/)
 
+### [6 hét – Debian Linux](weeks/week06/)
+
+### [7 hét – Git verziókezelés](weeks/week07/)
+
 **VS Code -> Windows Server -> SMB, IIS, AD, GP ***
 
 A további hetek folyamatosan kerülnek hozzáadásra.

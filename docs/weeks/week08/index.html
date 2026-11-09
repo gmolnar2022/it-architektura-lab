@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>8. hét – Git/GitHub, Docker, Docker Compose és Azure Container Apps – IT Architektúra – Gyakorlati munkafüzet</title>
+<title>8. hét – Git/GitHub, Docker és Docker Compose – IT Architektúra – Gyakorlati munkafüzet</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -202,19 +202,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#nginx-és-portleképezés" id="toc-nginx-és-portleképezés" class="nav-link" data-scroll-target="#nginx-és-portleképezés">8. Nginx és portleképezés</a></li>
   <li><a href="#saját-dockerfile-és-image" id="toc-saját-dockerfile-és-image" class="nav-link" data-scroll-target="#saját-dockerfile-és-image">9. Saját Dockerfile és image</a></li>
   </ul></li>
-  <li><a href="#iii.-docker-compose" id="toc-iii.-docker-compose" class="nav-link" data-scroll-target="#iii.-docker-compose">III. Docker Compose</a>
+  <li><a href="#iii.-docker-compose-első-projekt" id="toc-iii.-docker-compose-első-projekt" class="nav-link" data-scroll-target="#iii.-docker-compose-első-projekt">III. Docker Compose – első projekt</a>
   <ul class="collapse">
-  <li><a href="#compose-projekt-létrehozása" id="toc-compose-projekt-létrehozása" class="nav-link" data-scroll-target="#compose-projekt-létrehozása">10. Compose-projekt létrehozása</a></li>
-  <li><a href="#több-szolgáltatás-indítása" id="toc-több-szolgáltatás-indítása" class="nav-link" data-scroll-target="#több-szolgáltatás-indítása">11. Több szolgáltatás indítása</a></li>
-  <li><a href="#compose-projekt-módosítása-és-leállítása" id="toc-compose-projekt-módosítása-és-leállítása" class="nav-link" data-scroll-target="#compose-projekt-módosítása-és-leállítása">12. Compose-projekt módosítása és leállítása</a></li>
+  <li><a href="#docker-compose-telepítése" id="toc-docker-compose-telepítése" class="nav-link" data-scroll-target="#docker-compose-telepítése">10. Docker Compose telepítése</a></li>
+  <li><a href="#első-compose-projekt-nginx" id="toc-első-compose-projekt-nginx" class="nav-link" data-scroll-target="#első-compose-projekt-nginx">11. Első Compose-projekt – Nginx</a></li>
   </ul></li>
-  <li><a href="#iv.-azure-container-apps-saját-azure-for-students-előfizetés" id="toc-iv.-azure-container-apps-saját-azure-for-students-előfizetés" class="nav-link" data-scroll-target="#iv.-azure-container-apps-saját-azure-for-students-előfizetés">IV. Azure Container Apps – saját Azure for Students előfizetés</a>
+  <li><a href="#iv.-második-compose-projekt-phpapache-és-mariadb" id="toc-iv.-második-compose-projekt-phpapache-és-mariadb" class="nav-link" data-scroll-target="#iv.-második-compose-projekt-phpapache-és-mariadb">IV. Második Compose-projekt – PHP/Apache és MariaDB</a>
   <ul class="collapse">
-  <li><a href="#erőforráscsoport-és-container-apps-környezet" id="toc-erőforráscsoport-és-container-apps-környezet" class="nav-link" data-scroll-target="#erőforráscsoport-és-container-apps-környezet">13. Erőforráscsoport és Container Apps-környezet</a></li>
-  <li><a href="#nginx-container-app-telepítése" id="toc-nginx-container-app-telepítése" class="nav-link" data-scroll-target="#nginx-container-app-telepítése">14. Nginx Container App telepítése</a></li>
-  <li><a href="#ellenőrzés-és-takarítás" id="toc-ellenőrzés-és-takarítás" class="nav-link" data-scroll-target="#ellenőrzés-és-takarítás">15. Ellenőrzés és takarítás</a></li>
+  <li><a href="#a-projektkönyvtár-és-a-fájlok-előkészítése" id="toc-a-projektkönyvtár-és-a-fájlok-előkészítése" class="nav-link" data-scroll-target="#a-projektkönyvtár-és-a-fájlok-előkészítése">12. A projektkönyvtár és a fájlok előkészítése</a></li>
+  <li><a href="#a-phpapache-és-mariadb-szolgáltatások-indítása" id="toc-a-phpapache-és-mariadb-szolgáltatások-indítása" class="nav-link" data-scroll-target="#a-phpapache-és-mariadb-szolgáltatások-indítása">13. A PHP/Apache és MariaDB szolgáltatások indítása</a></li>
+  <li><a href="#a-feladatnyilvántartó-kipróbálása" id="toc-a-feladatnyilvántartó-kipróbálása" class="nav-link" data-scroll-target="#a-feladatnyilvántartó-kipróbálása">14. A feladatnyilvántartó kipróbálása</a></li>
+  <li><a href="#az-adatmegmaradás-ellenőrzése-és-leállítás" id="toc-az-adatmegmaradás-ellenőrzése-és-leállítás" class="nav-link" data-scroll-target="#az-adatmegmaradás-ellenőrzése-és-leállítás">15. Az adatmegmaradás ellenőrzése és leállítás</a></li>
   </ul></li>
-  <li><a href="#összegző-kérdések" id="toc-összegző-kérdések" class="nav-link" data-scroll-target="#összegző-kérdések">Összegző kérdések</a></li>
   <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
   </ul>
 </nav>
@@ -224,8 +223,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">8. hét – Git/GitHub, Docker, Docker Compose és Azure Container Apps</h1>
-<p class="subtitle lead">15 feladat · Debian VM / helyi PowerShell vagy VS Code / GitHub / Azure Portal</p>
+<h1 class="title">8. hét – Git/GitHub, Docker és Docker Compose</h1>
+<p class="subtitle lead">15 feladat · Debian VM / helyi PowerShell vagy VS Code / GitHub</p>
 </div>
 
 
@@ -404,10 +403,7 @@ Formai ellenőrzés
 <p><strong>Segítség:</strong> <code>docker</code>, <code>run</code>, <code>hello-world</code>; a <code>--rm</code> kapcsolóval a konténer futás után automatikusan törölhető. Szükség lehet <code>sudo</code> használatára. További támpont: <code>docker run --help</code>.</p>
 <div class="lab-answer">
 <label for="q06result"><strong>Beadandó – A teljes indítóparancs és annak kimenete; magyarázat nem szükséges.</strong></label>
-<textarea id="q06result" data-answer="Q06_RESULT" rows="9">sudo docker ...
-
-Kimenet:
-</textarea>
+<textarea id="q06result" data-answer="Q06_RESULT" rows="9"></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
@@ -427,18 +423,7 @@ Formai ellenőrzés
 <p><strong>Segítség:</strong> <code>docker images</code>, <code>docker run</code>, <code>docker ps</code>, <code>docker rm</code>; kapcsolók: <code>--name</code>, <code>-a</code>. A teljes parancsokat önállóan állítsd össze.</p>
 <div class="lab-answer">
 <label for="q07result"><strong>Beadandó – A négy teljes parancs és a hozzájuk tartozó kimenetek; magyarázat nem szükséges.</strong></label>
-<textarea id="q07result" data-answer="Q07_RESULT" rows="17">sudo docker ...
-Kimenet:
-
-sudo docker ...
-Kimenet:
-
-sudo docker ...
-Kimenet:
-
-sudo docker ...
-Kimenet:
-</textarea>
+<textarea id="q07result" data-answer="Q07_RESULT" rows="17"></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
@@ -450,23 +435,25 @@ Formai ellenőrzés
 <p><strong>Platform:</strong> Debian VM – SSH terminál; HTTP-ellenőrzés a VM-en <code>curl</code> segítségével.</p>
 <p>Indíts Nginx webszervert háttérben, <strong><code>web-test</code></strong> néven. A Debian VM <strong>8080-as portját</strong> rendeld a konténer <strong>80-as portjához</strong>. Ellenőrizd a HTTP-választ, listázd a futó konténert, majd állítsd le és töröld. <strong>Az öt parancsot magad egészítsd ki.</strong></p>
 <p><strong>Segítség:</strong> <code>docker run</code>, <code>docker ps</code>, <code>docker stop</code>, <code>docker rm</code>, <code>curl -I</code>; kapcsolók: <code>-d</code>, <code>--name</code>, <code>-p HOST:CONTAINER</code>. A HTTP-ellenőrzés a VM-en történik, ezért nincs szükség Azure NSG-portnyitásra.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Segítség: HTTP-ellenőrzés a <code>curl</code> paranccsal
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A <code>curl</code> terminálból küld HTTP-kérést. A <code>-I</code> kapcsoló csak a válasz fejléceit jeleníti meg. Példa: <code>curl -I http://localhost:8080</code>. Sikeres Nginx-válasznál általában <code>HTTP/1.1 200 OK</code> látható. Ha nincs telepítve: <code>sudo apt install -y curl</code>.</p>
+</div>
+</div>
+</div>
 <div class="lab-answer">
 <label for="q08result"><strong>Beadandó – Az öt parancs és kimenetük; magyarázat nem szükséges.</strong></label>
-<textarea id="q08result" data-answer="Q08_RESULT" rows="21">sudo docker ...
-Kimenet:
-
-curl -I ...
-Kimenet:
-
-sudo docker ...
-Kimenet:
-
-sudo docker ...
-Kimenet:
-
-sudo docker ...
-Kimenet:
-</textarea>
+<textarea id="q08result" data-answer="Q08_RESULT" rows="21"></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
@@ -494,12 +481,7 @@ Formai ellenőrzés
 <p><strong>AI-segítség megengedett:</strong> A Dockerfile ellenőrzéséhez és hibák értelmezéséhez. A javaslatot saját futtatással ellenőrizd.</p>
 <div class="lab-answer">
 <label for="q09result"><strong>Beadandó – A saját build parancs, annak kimenete és a konténer futtatásának kimenete; magyarázat nem szükséges.</strong></label>
-<textarea id="q09result" data-answer="Q09_RESULT" rows="14">sudo docker build ...
-Kimenet:
-
-sudo docker run --rm report-image:v1
-Kimenet:
-</textarea>
+<textarea id="q09result" data-answer="Q09_RESULT" rows="14"></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
@@ -507,57 +489,63 @@ Formai ellenőrzés
 </div>
 </section>
 </section>
-<section id="iii.-docker-compose" class="level2">
-<h2 class="anchored" data-anchor-id="iii.-docker-compose">III. Docker Compose</h2>
-<section id="compose-projekt-létrehozása" class="level3">
-<h3 class="anchored" data-anchor-id="compose-projekt-létrehozása">10. Compose-projekt létrehozása</h3>
-<p><strong>Platform:</strong> Debian VM – SSH terminál; compose.yaml szerkesztése helyben vagy VS Code Remote-SSH-val.</p>
-<p>Készíts <code>compose-lab</code> mappát és benne az alábbi <code>compose.yaml</code> fájlt. Két külön Nginx-szolgáltatást indítunk eltérő host portokon.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web1</span><span class="kw">:</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:stable</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"8081:80"</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web2</span><span class="kw">:</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:stable</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"8082:80"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Segítség:</strong> A <code>services</code> az alkalmazás szolgáltatásait sorolja fel; a <code>ports</code> a host és a konténer portjait rendeli egymáshoz.</p>
-<p><strong>AI használható:</strong> YAML-szintaktikai hibák értelmezéséhez. A javítást a <code>docker compose config</code> paranccsal ellenőrizd.</p>
+<section id="iii.-docker-compose-első-projekt" class="level2">
+<h2 class="anchored" data-anchor-id="iii.-docker-compose-első-projekt">III. Docker Compose – első projekt</h2>
+<section id="docker-compose-telepítése" class="level3">
+<h3 class="anchored" data-anchor-id="docker-compose-telepítése">10. Docker Compose telepítése</h3>
+<p><strong>Platform:</strong> Debian 11/12/13 VM – SSH terminál. A Docker Engine már működik az 5. feladat óta.</p>
+<p>Telepítsd a <strong>Docker Compose v2 CLI-plugint</strong>. A következő, x86-64 architektúrájú Debian VM-en kipróbált telepítési lépéseket használd. A VM architektúráját az <code>uname -m</code> paranccsal ellenőrizheted; eltérő architektúrán más bináris szükséges.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> curl</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkdir <span class="at">-p</span> /usr/local/lib/docker/cli-plugins</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> curl <span class="at">-fSL</span> <span class="dt">\</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64 <span class="dt">\</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">-o</span> /usr/local/lib/docker/cli-plugins/docker-compose</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod +x /usr/local/lib/docker/cli-plugins/docker-compose</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ellenőrizd a telepített Compose verzióját:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker compose version</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>AI-segítség megengedett telepítési hiba esetén
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ha elakadsz, kérhetsz segítséget generatív AI-eszköztől (ChatGPT, Gemini, Copilot). Add meg a hibaüzenetet, de <strong>jelszót, tokent vagy privát kulcsot ne ossz meg</strong>. A javasolt parancsokat ellenőrizd futtatás előtt.</p>
+</div>
+</div>
+</div>
 <div class="lab-answer">
-<label for="q10result"><strong>Válasz – A <code>sudo docker compose config</code> parancs és az ellenőrzés eredménye (vagy a hiba és javítása).</strong></label>
-<textarea id="q10result" data-answer="Q10_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<label for="q10result"><strong>Beadandó – A Compose-verzió ellenőrző parancsa és kimenete; magyarázat nem szükséges.</strong></label>
+<textarea id="q10result" data-answer="Q10_RESULT" rows="5"></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
 <span class="lab-feedback" role="status" aria-live="polite"></span>
 </div>
 </section>
-<section id="több-szolgáltatás-indítása" class="level3">
-<h3 class="anchored" data-anchor-id="több-szolgáltatás-indítása">11. Több szolgáltatás indítása</h3>
-<p><strong>Platform:</strong> Debian VM – SSH terminál.</p>
-<p>Indítsd a Compose-projektet háttérben, és ellenőrizd mindkét webszervert.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker compose up <span class="at">-d</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker compose ps</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-I</span> http://localhost:8081</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-I</span> http://localhost:8082</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="első-compose-projekt-nginx" class="level3">
+<h3 class="anchored" data-anchor-id="első-compose-projekt-nginx">11. Első Compose-projekt – Nginx</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; fájlszerkesztés <code>nano</code> vagy <code>jed</code> segítségével.</p>
+<p>Hozd létre a <code>~/compose-project</code> könyvtárat, majd abban a <code>compose.yaml</code> fájlt:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/compose-project</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/compose-project</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> compose.yaml</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A fájl tartalma:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web</span><span class="kw">:</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:stable</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"8081:80"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Önállóan állítsd össze a következő négy parancsot: ellenőrizd a Compose-konfigurációt, indítsd el háttérben a projektet, listázd a projekt konténereit, majd <code>curl</code> segítségével ellenőrizd a HTTP-választ a VM 8081-es portján.</p>
+<p><strong>Segítség:</strong> <code>docker compose config</code>, <code>docker compose up</code>, <code>docker compose ps</code>, <code>curl -I</code>; a háttérben futtatáshoz <code>-d</code> kapcsoló kell. A projektet <strong>hagyd futva</strong> a feladat végén; a 12. feladat ettől független, külön könyvtárban készül.</p>
 <div class="lab-answer">
-<label for="q11result"><strong>Válasz – A <code>compose ps</code> kimenete és a két HTTP-státuszsor. Miért különböznek a host portok?</strong></label>
-<textarea id="q11result" data-answer="Q11_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
-<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
-Formai ellenőrzés
-</button>
-<span class="lab-feedback" role="status" aria-live="polite"></span>
-</div>
-</section>
-<section id="compose-projekt-módosítása-és-leállítása" class="level3">
-<h3 class="anchored" data-anchor-id="compose-projekt-módosítása-és-leállítása">12. Compose-projekt módosítása és leállítása</h3>
-<p><strong>Platform:</strong> Debian VM – SSH terminál; YAML-szerkesztés.</p>
-<p>Módosítsd a második szolgáltatás host portját <code>8082</code>-ről <code>8083</code>-ra. Alkalmazd a változást, ellenőrizd az új portot, majd állítsd le és távolítsd el a projekt konténereit.</p>
-<p><strong>Segítség:</strong> <code>sudo docker compose up -d</code>, <code>curl -I http://localhost:8083</code>, <code>sudo docker compose logs --tail=10</code>, <code>sudo docker compose down</code>.</p>
-<div class="lab-answer">
-<label for="q12result"><strong>Válasz – A módosított YAML-sor, az ellenőrző parancs kimenete és a <code>compose down</code> eredménye.</strong></label>
-<textarea id="q12result" data-answer="Q12_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<label for="q11result"><strong>Beadandó – A négy parancs és kimenetük; külön magyarázat nem szükséges.</strong></label>
+<textarea id="q11result" data-answer="Q11_RESULT" rows="18"></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
@@ -565,71 +553,198 @@ Formai ellenőrzés
 </div>
 </section>
 </section>
-<section id="iv.-azure-container-apps-saját-azure-for-students-előfizetés" class="level2">
-<h2 class="anchored" data-anchor-id="iv.-azure-container-apps-saját-azure-for-students-előfizetés">IV. Azure Container Apps – saját Azure for Students előfizetés</h2>
-<blockquote class="blockquote">
-<p><strong>Előfeltétel:</strong> aktív Azure for Students előfizetés, megfelelő jogosultság, és a választott régióban elérhető Azure Container Apps szolgáltatás. Az Azure Portal felülete változhat. A létrehozás előtt ellenőrizd az esetleges költségeket. A feladat nem igényel Azure Container Registryt.</p>
-</blockquote>
-<section id="erőforráscsoport-és-container-apps-környezet" class="level3">
-<h3 class="anchored" data-anchor-id="erőforráscsoport-és-container-apps-környezet">13. Erőforráscsoport és Container Apps-környezet</h3>
-<p><strong>Platform:</strong> Azure Portal – helyi böngésző, saját Azure for Students előfizetés.</p>
-<p>Lépj be az <a href="https://portal.azure.com">Azure Portalra</a>, válaszd a <strong>saját Azure for Students</strong> előfizetésedet. Hozz létre <code>rg-container-lab-&lt;azonosító&gt;</code> erőforráscsoportot, majd egy új Container App létrehozása során hozz létre egy Container Apps environmentet is, például <code>env-container-lab-&lt;azonosító&gt;</code> néven. Használj támogatott, az előfizetésedben engedélyezett régiót.</p>
-<p><strong>Segítség:</strong> Azure Portal → <em>Container Apps</em> → <em>Create</em>; Subscription, Resource group, Container Apps environment. A környezet létrehozása a Container App varázslójában is elvégezhető.</p>
+<section id="iv.-második-compose-projekt-phpapache-és-mariadb" class="level2">
+<h2 class="anchored" data-anchor-id="iv.-második-compose-projekt-phpapache-és-mariadb">IV. Második Compose-projekt – PHP/Apache és MariaDB</h2>
+<p>A 12–15. feladatban egy egyszerű <strong>feladatnyilvántartó webalkalmazást</strong> indítasz két konténerben: a PHP-t futtató Apache webszerver és a MariaDB adatbázis külön szolgáltatás. A forrásfájlokat készen kapod; a hangsúly a Linux-fájlkezelésen, a Compose-parancsokon, a szolgáltatások ellenőrzésén és a tartós adattároláson van. A projekt a korábbi Nginx Compose-projekttől független.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Erőforrások és oktatási jelszavak
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A projektet kis memóriájú VM-hez igazítottuk, de <strong>0,5–1 GB RAM esetén lassulás vagy memóriahiány előfordulhat</strong>. Ha a Docker nem válaszol, jelezd az oktatónak. A mintajelszavak kizárólag elkülönített oktatási környezetben használhatók; éles szolgáltatásban titokkezelést alkalmaznánk. A 8082-es portot csak a saját IP-címed számára nyisd meg, és a teszt után zárd le.</p>
+</div>
+</div>
+</div>
+<section id="a-projektkönyvtár-és-a-fájlok-előkészítése" class="level3">
+<h3 class="anchored" data-anchor-id="a-projektkönyvtár-és-a-fájlok-előkészítése">12. A projektkönyvtár és a fájlok előkészítése</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; <code>nano</code> vagy <code>jed</code>.</p>
+<p>Hozd létre a <code>~/php-mariadb-project</code> könyvtárat, lépj bele, majd az alábbi tartalmak alapján készítsd el a <strong><code>compose.yaml</code>, <code>Dockerfile</code>, <code>init.sql</code>, <code>index.php</code></strong> fájlokat. A fájlokat <code>nano</code> vagy <code>jed</code> szerkesztővel hozd létre. Végül listázd a könyvtár fájljait, és ellenőrizd egy kiválasztott fájl tartalmát.</p>
+<p><strong><code>compose.yaml</code></strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">db</span><span class="kw">:</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> mariadb:11.4</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">restart</span><span class="kw">:</span><span class="at"> </span><span class="st">"no"</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">command</span><span class="kw">:</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> --innodb-buffer-pool-size=32M</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> --max-connections=20</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> --performance-schema=OFF</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">MARIADB_ROOT_PASSWORD</span><span class="kw">:</span><span class="at"> root_demo_password</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">MARIADB_DATABASE</span><span class="kw">:</span><span class="at"> taskdb</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">MARIADB_USER</span><span class="kw">:</span><span class="at"> taskuser</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">MARIADB_PASSWORD</span><span class="kw">:</span><span class="at"> task_demo_password</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> db_data:/var/lib/mysql</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">healthcheck</span><span class="kw">:</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">test</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">"CMD"</span><span class="kw">,</span><span class="at"> </span><span class="st">"healthcheck.sh"</span><span class="kw">,</span><span class="at"> </span><span class="st">"--connect"</span><span class="kw">,</span><span class="at"> </span><span class="st">"--innodb_initialized"</span><span class="kw">]</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">interval</span><span class="kw">:</span><span class="at"> 10s</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">timeout</span><span class="kw">:</span><span class="at"> 5s</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">retries</span><span class="kw">:</span><span class="at"> </span><span class="dv">12</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">start_period</span><span class="kw">:</span><span class="at"> 30s</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web</span><span class="kw">:</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">build</span><span class="kw">:</span><span class="at"> .</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">restart</span><span class="kw">:</span><span class="at"> </span><span class="st">"no"</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">depends_on</span><span class="kw">:</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">db</span><span class="kw">:</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">condition</span><span class="kw">:</span><span class="at"> service_healthy</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"8082:80"</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">environment</span><span class="kw">:</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">DB_HOST</span><span class="kw">:</span><span class="at"> db</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">DB_NAME</span><span class="kw">:</span><span class="at"> taskdb</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">DB_USER</span><span class="kw">:</span><span class="at"> taskuser</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="fu">DB_PASSWORD</span><span class="kw">:</span><span class="at"> task_demo_password</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="fu">volumes</span><span class="kw">:</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">db_data</span><span class="kw">:</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong><code>Dockerfile</code></strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> php:8.3-apache</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">docker-php-ext-install</span> pdo_mysql</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> index.php /var/www/html/index.php</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong><code>init.sql</code></strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">NOT</span> <span class="kw">EXISTS</span> tasks (</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">id</span> <span class="dt">INT</span> AUTO_INCREMENT <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    title <span class="dt">VARCHAR</span>(<span class="dv">255</span>) <span class="kw">NOT</span> <span class="kw">NULL</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    created_at <span class="dt">TIMESTAMP</span> <span class="kw">DEFAULT</span> <span class="fu">CURRENT_TIMESTAMP</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong><code>index.php</code></strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode php code-with-copy"><code class="sourceCode php"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="va">$host</span> <span class="op">=</span> <span class="fu">getenv</span>(<span class="st">'DB_HOST'</span>)<span class="ot">;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="va">$dbname</span> <span class="op">=</span> <span class="fu">getenv</span>(<span class="st">'DB_NAME'</span>)<span class="ot">;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="va">$user</span> <span class="op">=</span> <span class="fu">getenv</span>(<span class="st">'DB_USER'</span>)<span class="ot">;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="va">$password</span> <span class="op">=</span> <span class="fu">getenv</span>(<span class="st">'DB_PASSWORD'</span>)<span class="ot">;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span> {</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">$pdo</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">PDO</span>(</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"mysql:host=</span><span class="va">$host</span><span class="st">;dbname=</span><span class="va">$dbname</span><span class="st">;charset=utf8mb4"</span><span class="ot">,</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">$user</span><span class="ot">,</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">$password</span><span class="ot">,</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        [<span class="bu">PDO</span>::<span class="cn">ATTR_ERRMODE</span> =&gt; <span class="bu">PDO</span>::<span class="cn">ERRMODE_EXCEPTION</span>]</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    )<span class="ot">;</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>} <span class="cf">catch</span> (<span class="bu">PDOException</span> <span class="va">$e</span>) {</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">http_response_code</span>(<span class="dv">503</span>)<span class="ot">;</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">exit</span>(<span class="st">"Adatbazis-kapcsolati hiba. Ellenorizd a MariaDB kontenert."</span>)<span class="ot">;</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$_SERVER</span>[<span class="st">'REQUEST_METHOD'</span>] <span class="op">===</span> <span class="st">'POST'</span>) {</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    <span class="va">$title</span> <span class="op">=</span> <span class="fu">trim</span>(<span class="va">$_POST</span>[<span class="st">'title'</span>] <span class="op">??</span> <span class="st">''</span>)<span class="ot">;</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="va">$title</span> <span class="op">!==</span> <span class="st">''</span>) {</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>        <span class="va">$stmt</span> <span class="op">=</span> <span class="va">$pdo</span>-&gt;prepare(<span class="st">"INSERT INTO tasks (title) VALUES (?)"</span>)<span class="ot">;</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">$stmt</span>-&gt;execute([<span class="va">$title</span>])<span class="ot">;</span></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">header</span>(<span class="st">'Location: /'</span>)<span class="ot">;</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">exit</span><span class="ot">;</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="va">$tasks</span> <span class="op">=</span> <span class="va">$pdo</span>-&gt;query(</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"SELECT id, title, created_at FROM tasks ORDER BY id DESC"</span></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>)-&gt;fetchAll(<span class="bu">PDO</span>::<span class="cn">FETCH_ASSOC</span>)<span class="ot">;</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="kw">?&gt;</span></span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;!</span><span class="cn">DOCTYPE</span> html<span class="op">&gt;</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>html lang<span class="op">=</span><span class="st">"hu"</span><span class="op">&gt;</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>head<span class="op">&gt;</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>meta charset<span class="op">=</span><span class="st">"UTF-8"</span><span class="op">&gt;</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>title<span class="op">&gt;</span>Docker Compose <span class="op">-</span> Feladatnyilvántartó<span class="op">&lt;/</span>title<span class="op">&gt;</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>style<span class="op">&gt;</span></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>body {font<span class="op">-</span>family<span class="ot">:</span>Arial<span class="ot">,</span>sans<span class="op">-</span>serif<span class="ot">;</span><span class="fu">max</span><span class="op">-</span>width<span class="ot">:</span><span class="er">700</span>px<span class="ot">;</span>margin<span class="ot">:</span><span class="er">50</span>px auto<span class="ot">;</span>padding<span class="ot">:</span><span class="er">20</span>px<span class="ot">;</span>background<span class="ot">:</span><span class="co">#f5f6fa}</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>main {background<span class="ot">:</span>white<span class="ot">;</span>padding<span class="ot">:</span><span class="er">25</span>px<span class="ot">;</span>border<span class="op">-</span>radius<span class="ot">:</span><span class="er">10</span>px}</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>input {padding<span class="ot">:</span><span class="er">10</span>px<span class="ot">;</span>width<span class="ot">:</span><span class="dv">65</span><span class="op">%</span>}</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>button {padding<span class="ot">:</span><span class="er">10</span>px<span class="ot">;</span>cursor<span class="ot">:</span>pointer}</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>li {padding<span class="ot">:</span><span class="er">8</span>px}</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;/</span>style<span class="op">&gt;</span></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;/</span>head<span class="op">&gt;</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>body<span class="op">&gt;</span></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>h1<span class="op">&gt;</span>Docker Compose <span class="op">-</span> Feladatnyilvántartó<span class="op">&lt;/</span>h1<span class="op">&gt;</span></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>p<span class="op">&gt;</span><span class="cn">PHP</span> <span class="op">+</span> Apache <span class="op">+</span> MariaDB<span class="op">&lt;/</span>p<span class="op">&gt;</span></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>form method<span class="op">=</span><span class="st">"post"</span><span class="op">&gt;</span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>input name<span class="op">=</span><span class="st">"title"</span> placeholder<span class="op">=</span><span class="st">"Új feladat"</span> required maxlength<span class="op">=</span><span class="st">"255"</span><span class="op">&gt;</span></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>button type<span class="op">=</span><span class="st">"submit"</span><span class="op">&gt;</span>Hozzáadás<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;/</span>form<span class="op">&gt;</span></span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>h2<span class="op">&gt;</span>Feladatok<span class="op">&lt;/</span>h2<span class="op">&gt;</span></span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>ul<span class="op">&gt;</span></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span><span class="ot">?</span>php <span class="cf">foreach</span> (<span class="va">$tasks</span> <span class="kw">as</span> <span class="va">$task</span>)<span class="ot">:</span> <span class="kw">?&gt;</span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>li<span class="op">&gt;</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span><span class="ot">?</span><span class="op">=</span> <span class="fu">htmlspecialchars</span>(<span class="va">$task</span>[<span class="st">'title'</span>]<span class="ot">,</span> <span class="cn">ENT_QUOTES</span><span class="ot">,</span> <span class="st">'UTF-8'</span>) <span class="kw">?&gt;</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>small<span class="op">&gt;</span>(<span class="op">&lt;</span><span class="ot">?</span><span class="op">=</span> <span class="fu">htmlspecialchars</span>(<span class="va">$task</span>[<span class="st">'created_at'</span>]<span class="ot">,</span> <span class="cn">ENT_QUOTES</span><span class="ot">,</span> <span class="st">'UTF-8'</span>) <span class="kw">?&gt;</span>)<span class="op">&lt;/</span>small<span class="op">&gt;</span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;/</span>li<span class="op">&gt;</span></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span><span class="ot">?</span>php <span class="cf">endforeach</span><span class="ot">;</span> <span class="kw">?&gt;</span></span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;/</span>ul<span class="op">&gt;</span></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;/</span>body<span class="op">&gt;</span></span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;/</span>html<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Segítség:</strong> <code>mkdir -p</code>, <code>cd</code>, <code>nano</code> / <code>jed</code>, <code>ls -l</code>, <code>cat</code>. A beadandóba <strong>ne másold be a négy forrásfájlt</strong>, csak az általad használt könyvtár- és fájlkezelési parancsokat, valamint az <code>ls -l</code> kimenetét.</p>
 <div class="lab-answer">
-<label for="q13result"><strong>Válasz – Az erőforráscsoport neve, a választott régió és a környezet neve. Ha hiba történt, a hibaüzenet releváns része.</strong></label>
-<textarea id="q13result" data-answer="Q13_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<label for="q12result"><strong>Beadandó – Könyvtár- és fájlkezelési parancsok; a négy fájlt mutató <code>ls -l</code> kimenet.</strong></label>
+<textarea id="q12result" data-answer="Q12_RESULT" rows="14"></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
 <span class="lab-feedback" role="status" aria-live="polite"></span>
 </div>
 </section>
-<section id="nginx-container-app-telepítése" class="level3">
-<h3 class="anchored" data-anchor-id="nginx-container-app-telepítése">14. Nginx Container App telepítése</h3>
-<p><strong>Platform:</strong> Azure Portal – helyi böngésző, saját Azure for Students előfizetés.</p>
-<p>Hozz létre egy <code>web-lab-&lt;azonosító&gt;</code> nevű Container Appot a nyilvános <code>nginx:stable</code> image-ből. Engedélyezd az <strong>External ingress</strong> opciót, a <strong>target port</strong> legyen <code>80</code>. A minimális replikaszám lehet <code>0</code>, a maximális <code>1</code>.</p>
-<p><strong>Segítség:</strong> Container image source: public registry / Docker Hub; image: <code>nginx:stable</code>; Ingress: External; Target port: <code>80</code>. Az ingress HTTPS-végpontot biztosít, a konténer belső portja ettől még 80.</p>
+<section id="a-phpapache-és-mariadb-szolgáltatások-indítása" class="level3">
+<h3 class="anchored" data-anchor-id="a-phpapache-és-mariadb-szolgáltatások-indítása">13. A PHP/Apache és MariaDB szolgáltatások indítása</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál, a <code>~/php-mariadb-project</code> könyvtárban.</p>
+<p>Állítsd össze és futtasd a következő parancsokat: (1) Compose-konfiguráció ellenőrzése, (2) a PHP-image megépítése és a szolgáltatások indítása háttérben, (3) a projekt konténereinek listázása. Első alkalommal a letöltés és a PHP-kiegészítő fordítása több percet is igénybe vehet.</p>
+<p><strong>Segítség:</strong> <code>docker compose config</code>, <code>docker compose up -d --build</code>, <code>docker compose ps</code>. A <code>db</code> szolgáltatásnak végül <strong>healthy</strong>, a <code>web</code> szolgáltatásnak <strong>Up</strong> állapotot kell mutatnia. Ha nem indulnak, nézd meg a <code>docker compose logs</code> kimenetét.</p>
 <div class="lab-answer">
-<label for="q14result"><strong>Válasz – Az alkalmazás neve, image-neve és publikus HTTPS-címe. Nyisd meg a címet, és írd le, milyen oldalt látsz.</strong></label>
-<textarea id="q14result" data-answer="Q14_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<label for="q13result"><strong>Beadandó – A három parancs és a hozzájuk tartozó kimenetek.</strong></label>
+<textarea id="q13result" data-answer="Q13_RESULT" rows="16"></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
 <span class="lab-feedback" role="status" aria-live="polite"></span>
 </div>
 </section>
-<section id="ellenőrzés-és-takarítás" class="level3">
-<h3 class="anchored" data-anchor-id="ellenőrzés-és-takarítás">15. Ellenőrzés és takarítás</h3>
-<p><strong>Platform:</strong> Azure Portal – helyi böngésző; opcionálisan helyi PowerShell <code>curl.exe</code> az URL ellenőrzéséhez.</p>
-<p>Tekintsd meg az alkalmazás állapotát, revízióit és – ha rendelkezésre állnak – naplóit az Azure Portalon. Ellenőrizd a HTTPS-címet. Ezután töröld a <strong>kizárólag ehhez a feladathoz létrehozott</strong> erőforráscsoportot, és várd meg a törlés befejeződését.</p>
-<p><strong>Segítség:</strong> Container App → <em>Overview</em>, <em>Revisions</em>, <em>Log stream</em>; Resource groups → a saját laborkörnyezeted erőforráscsoportja → <em>Delete resource group</em>. Más feladatokhoz tartozó erőforráscsoportot ne törölj.</p>
+<section id="a-feladatnyilvántartó-kipróbálása" class="level3">
+<h3 class="anchored" data-anchor-id="a-feladatnyilvántartó-kipróbálása">14. A feladatnyilvántartó kipróbálása</h3>
+<p><strong>Platform:</strong> Debian VM – terminál és böngésző.</p>
+<p>Ellenőrizd a HTTP-választ a VM-en a <code>curl -I http://localhost:8082</code> paranccsal. Ezután nyisd meg a webalkalmazást a böngészőben. Azure VM esetén az elérési cím <code>http://&lt;VM-publikus-IP&gt;:8082</code>; a <strong>8082/TCP</strong> bejövő portot az Azure NSG-ben szükség esetén csak a saját IP-címedről engedélyezd. Hozz létre <strong>legalább három, általad választott című</strong> feladatot, majd frissítsd az oldalt, és ellenőrizd, hogy megjelennek-e.</p>
+<p><strong>Beadandó:</strong> a HTTP-ellenőrzés parancsa és státuszsora, a böngészőben használt teljes URL, valamint a három ténylegesen rögzített feladat címe. Képernyőkép nem szükséges.</p>
 <div class="lab-answer">
-<label for="q15result"><strong>Válasz – A sikeres HTTP-elérés rövid igazolása, az alkalmazás állapota és a törlés eredménye. Ha a törlés nem sikerült, add meg a hibaüzenetet.</strong></label>
-<textarea id="q15result" data-answer="Q15_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<label for="q14result"><strong>Beadandó – HTTP-ellenőrzés, URL és három saját feladatcím.</strong></label>
+<textarea id="q14result" data-answer="Q14_RESULT" rows="10"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="az-adatmegmaradás-ellenőrzése-és-leállítás" class="level3">
+<h3 class="anchored" data-anchor-id="az-adatmegmaradás-ellenőrzése-és-leállítás">15. Az adatmegmaradás ellenőrzése és leállítás</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál és böngésző; a <code>~/php-mariadb-project</code> könyvtárban.</p>
+<p>Állítsd le és távolítsd el a projekt konténereit <strong>a volume megtartásával</strong>, ellenőrizd a volume-ok listáját, majd indítsd újra a projektet. Nézd meg a konténerek állapotát, és a böngészőben ellenőrizd, hogy a 14. feladatban felvett három bejegyzés megmaradt-e. Végül állítsd le ismét a konténereket a volume megtartásával.</p>
+<p><strong>Segítség:</strong> <code>docker compose down</code>, <code>docker volume ls</code>, <code>docker compose up -d</code>, <code>docker compose ps</code>. <strong>Ne használd a <code>down -v</code> kapcsolót</strong>, mert az törölné az adatbázis volume-ját.</p>
+<div class="lab-answer">
+<label for="q15result"><strong>Beadandó – A parancsok és releváns kimeneteik; megmaradt-e mindhárom feladat?</strong></label>
+<textarea id="q15result" data-answer="Q15_RESULT" rows="18"></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
 <span class="lab-feedback" role="status" aria-live="polite"></span>
 </div>
 <hr>
-<hr>
-<blockquote class="blockquote">
-<p><strong>AI-használat:</strong> A 3., 5., 9. és 10. feladatnál AI-asszisztens használható segítségként. A kapott javaslatot saját parancsokkal és kimenetekkel ellenőrizd. Jelszót, tokent és privát kulcsot ne adj meg AI-eszköznek. Az AI-használat nem jelent külön feladatot.</p>
-</blockquote>
-</section>
-</section>
-<section id="összegző-kérdések" class="level2">
-<h2 class="anchored" data-anchor-id="összegző-kérdések">Összegző kérdések</h2>
-<ol type="1">
-<li>Mi a különbség a Docker image és a konténer között?</li>
-<li>Miben különbözik a <code>docker run</code> és a <code>docker compose up</code> használata?</li>
-<li>Milyen üzemeltetési feladatokat vesz át az Azure Container Apps a saját Debian VM-en futó Dockerhez képest?</li>
-</ol>
-<div class="lab-answer">
-<label for="summary"><strong>Összegző válaszok (1–3):</strong></label>
-<textarea id="summary" data-answer="SUMMARY" rows="5" placeholder="Rövid válaszok az összegző kérdésekre..."></textarea>
-</div>
-<p><strong>Beadás:</strong> töltsd ki a feladatok válaszmezőit, majd használd az oldal alján található Beadás gombot. Tartalék megoldásként JSON export is készíthető.</p>
+<p><strong>Beadás:</strong> Ellenőrizd a 15 feladat válaszmezőit, majd használd az oldal alján található <strong>Beadás</strong> gombot. Tartalék megoldásként <strong>JSON export</strong> is készíthető.</p>
 <style>
 .lab-answer {display:flex;flex-direction:column;gap:.45rem;margin:1rem 0 1.5rem}
 .lab-answer input,.lab-answer textarea {width:100%;max-width:100%;padding:.65rem;border:1px solid #9ca3af;border-radius:5px;font:inherit}
@@ -637,6 +752,7 @@ Formai ellenőrzés
 .lab-answer button {align-self:flex-start}
 .lab-feedback.ok {color:#176b36}.lab-feedback.warn {color:#a45c00}
 </style>
+</section>
 </section>
 <section id="mentés-és-beadás" class="level2">
 <h2 class="anchored" data-anchor-id="mentés-és-beadás">Mentés és beadás</h2>
@@ -737,6 +853,19 @@ Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: 
   'use strict';
   const CONFIG = Object.assign({timeTracking:false,eventTracking:false,showTrackingPanel:false},window.ITARCH_SETUP||{});
   const STORAGE_KEY = 'itarch_week08_answers_2026';
+  const STARTERS = {
+    "Q06_RESULT": "sudo docker ...\n\nKimenet:",
+    "Q07_RESULT": "sudo docker ...\nKimenet:\n\nsudo docker ...\nKimenet:\n\nsudo docker ...\nKimenet:\n\nsudo docker ...\nKimenet:",
+    "Q08_RESULT": "sudo docker ...\nKimenet:\n\ncurl -I ...\nKimenet:\n\nsudo docker ...\nKimenet:\n\nsudo docker ...\nKimenet:\n\nsudo docker ...\nKimenet:",
+    "Q09_RESULT": "sudo docker build ...\nKimenet:\n\nsudo docker run --rm report-image:v1\nKimenet:",
+    "Q10_RESULT": "sudo docker compose version\nKimenet:",
+    "Q11_RESULT": "sudo docker compose ...\nKimenet:\n\nsudo docker compose ...\nKimenet:\n\nsudo docker compose ...\nKimenet:\n\ncurl -I ...\nKimenet:",
+    "Q12_RESULT": "mkdir ...\n\ncd ...\n\nnano ...\n\nnano ...\n\nnano ...\n\nnano ...\n\nls -l ...\nKimenet:",
+    "Q13_RESULT": "sudo docker compose ...\nKimenet:\n\nsudo docker compose ...\nKimenet:\n\nsudo docker compose ...\nKimenet:",
+    "Q14_RESULT": "curl -I ...\nHTTP-státuszsor:\n\nWebalkalmazás URL-je:\n\nHárom feladat címe:\n1. \n2. \n3. ",
+    "Q15_RESULT": "sudo docker compose ...\nKimenet:\n\nsudo docker volume ...\nKimenet:\n\nsudo docker compose ...\nKimenet:\n\nsudo docker compose ...\nKimenet:\n\nsudo docker compose ...\nKimenet:\n\nMegmaradt mindhárom feladat? "
+};
+
   // OKTATÓI BEÁLLÍTÁS: a végleges határidőt itt add meg ISO 8601 formában,
   // pl. '2026-10-29T11:40:00+01:00'. A null azt jelenti, hogy nincs korlátozás.
   const SUBMISSION_DEADLINE_ISO = '2026-11-19T11:40:00+01:00';
@@ -763,7 +892,7 @@ Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: 
   const load = () => {
     try {const stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null'); if(!stored)return;
       if(stored.student_id) $('neptun').value=stored.student_id;
-      fields().forEach(f=>{if(f.dataset.answer!=='STUDENT_ID' && Object.hasOwn(stored.answers||{},f.dataset.answer))f.value=stored.answers[f.dataset.answer]});
+      fields().forEach(f=>{if(f.dataset.answer!=='STUDENT_ID' && Object.hasOwn(stored.answers||{},f.dataset.answer) && String(stored.answers[f.dataset.answer]??'').trim())f.value=stored.answers[f.dataset.answer]});
       if(stored.activity)activity=Object.assign(activity,stored.activity);
     }catch(e){}
   };
@@ -789,7 +918,7 @@ Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: 
   window.openSubmissionSummary = () => {
     refreshDeadline();if(closed())return;
     const fs=fields().filter(f=>f.dataset.answer!=='STUDENT_ID');
-    const missing=fs.filter(f=>!f.value.trim());
+    const missing=fs.filter(f=>!f.value.trim() || (Object.hasOwn(STARTERS,f.dataset.answer) && f.value.trim()===STARTERS[f.dataset.answer].trim()));
     const groups=[...new Set(missing.map(f=>(f.dataset.answer.match(/^Q(\d\d)/)||[])[1]).filter(Boolean))];
     const complete=fs.length-missing.length;
     $('submission-summary-body').innerHTML=`<p><strong>Neptun:</strong> ${esc(studentId()||'nincs megadva')} ${validId()?'✓':'⚠ 6 betű/szám szükséges'}</p>
@@ -824,12 +953,13 @@ Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: 
   };
   window.clearAnswers=()=>{
     if(!confirm('Biztosan törlöd az összes helyben mentett választ és aktivitási adatot?'))return;
-    fields().forEach(f=>f.value=f.dataset.answer==='STUDENT_ID'?'':(f.defaultValue||''));
+    fields().forEach(f=>f.value=f.dataset.answer==='STUDENT_ID'?'':(STARTERS[f.dataset.answer]||f.defaultValue||''));
     try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
     activity={started_at:nowIso(),last_activity_at:nowIso(),active_seconds_estimate:0,edit_count:0,events:[]};
     $('submission-summary').hidden=true;$('submission-result').textContent='';$('save-status').textContent='Helyi adatok törölve.';renderActivity();
   };
   document.addEventListener('DOMContentLoaded',()=>{
+    fields().forEach(f=>{if(Object.hasOwn(STARTERS,f.dataset.answer))f.value=STARTERS[f.dataset.answer];});
     load();refreshDeadline();renderActivity();
     fields().forEach(f=>{f.addEventListener('input',()=>{
       if(f.dataset.answer==='STUDENT_ID')f.value=f.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);

@@ -1,6 +1,6 @@
 ---
-title: "8. hét – Git/GitHub, Docker, Docker Compose és Azure Container Apps"
-subtitle: "15 feladat · Debian VM / helyi PowerShell vagy VS Code / GitHub / Azure Portal"
+title: "8. hét – Git/GitHub, Docker és Docker Compose"
+subtitle: "15 feladat · Debian VM / helyi PowerShell vagy VS Code / GitHub"
 format:
   html:
     toc: true
@@ -135,10 +135,7 @@ Indíts egy konténert a hivatalos `hello-world` image-ből. **A teljes parancso
 
 **Segítség:** `docker`, `run`, `hello-world`; a `--rm` kapcsolóval a konténer futás után automatikusan törölhető. Szükség lehet `sudo` használatára. További támpont: `docker run --help`.
 
-<div class="lab-answer"><label for="q06result"><strong>Beadandó – A teljes indítóparancs és annak kimenete; magyarázat nem szükséges.</strong></label><textarea id="q06result" data-answer="Q06_RESULT" rows="9">sudo docker ...
-
-Kimenet:
-</textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<div class="lab-answer"><label for="q06result"><strong>Beadandó – A teljes indítóparancs és annak kimenete; magyarázat nem szükséges.</strong></label><textarea id="q06result" data-answer="Q06_RESULT" rows="9"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ### 7. Image-ek és konténerek kezelése
 
@@ -153,18 +150,7 @@ Végezd el a következő négy műveletet:
 
 **Segítség:** `docker images`, `docker run`, `docker ps`, `docker rm`; kapcsolók: `--name`, `-a`. A teljes parancsokat önállóan állítsd össze.
 
-<div class="lab-answer"><label for="q07result"><strong>Beadandó – A négy teljes parancs és a hozzájuk tartozó kimenetek; magyarázat nem szükséges.</strong></label><textarea id="q07result" data-answer="Q07_RESULT" rows="17">sudo docker ...
-Kimenet:
-
-sudo docker ...
-Kimenet:
-
-sudo docker ...
-Kimenet:
-
-sudo docker ...
-Kimenet:
-</textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<div class="lab-answer"><label for="q07result"><strong>Beadandó – A négy teljes parancs és a hozzájuk tartozó kimenetek; magyarázat nem szükséges.</strong></label><textarea id="q07result" data-answer="Q07_RESULT" rows="17"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ### 8. Nginx és portleképezés
 
@@ -174,21 +160,13 @@ Indíts Nginx webszervert háttérben, **`web-test`** néven. A Debian VM **8080
 
 **Segítség:** `docker run`, `docker ps`, `docker stop`, `docker rm`, `curl -I`; kapcsolók: `-d`, `--name`, `-p HOST:CONTAINER`. A HTTP-ellenőrzés a VM-en történik, ezért nincs szükség Azure NSG-portnyitásra.
 
-<div class="lab-answer"><label for="q08result"><strong>Beadandó – Az öt parancs és kimenetük; magyarázat nem szükséges.</strong></label><textarea id="q08result" data-answer="Q08_RESULT" rows="21">sudo docker ...
-Kimenet:
+::: {.callout-tip collapse="true"}
+## Segítség: HTTP-ellenőrzés a `curl` paranccsal
 
-curl -I ...
-Kimenet:
+A `curl` terminálból küld HTTP-kérést. A `-I` kapcsoló csak a válasz fejléceit jeleníti meg. Példa: `curl -I http://localhost:8080`. Sikeres Nginx-válasznál általában `HTTP/1.1 200 OK` látható. Ha nincs telepítve: `sudo apt install -y curl`.
+:::
 
-sudo docker ...
-Kimenet:
-
-sudo docker ...
-Kimenet:
-
-sudo docker ...
-Kimenet:
-</textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<div class="lab-answer"><label for="q08result"><strong>Beadandó – Az öt parancs és kimenetük; magyarázat nem szükséges.</strong></label><textarea id="q08result" data-answer="Q08_RESULT" rows="21"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ### 9. Saját Dockerfile és image
 
@@ -226,114 +204,252 @@ sudo docker run --rm report-image:v1
 
 **AI-segítség megengedett:** A Dockerfile ellenőrzéséhez és hibák értelmezéséhez. A javaslatot saját futtatással ellenőrizd.
 
-<div class="lab-answer"><label for="q09result"><strong>Beadandó – A saját build parancs, annak kimenete és a konténer futtatásának kimenete; magyarázat nem szükséges.</strong></label><textarea id="q09result" data-answer="Q09_RESULT" rows="14">sudo docker build ...
-Kimenet:
+<div class="lab-answer"><label for="q09result"><strong>Beadandó – A saját build parancs, annak kimenete és a konténer futtatásának kimenete; magyarázat nem szükséges.</strong></label><textarea id="q09result" data-answer="Q09_RESULT" rows="14"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
-sudo docker run --rm report-image:v1
-Kimenet:
-</textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+## III. Docker Compose – első projekt
 
-## III. Docker Compose
+### 10. Docker Compose telepítése
 
-### 10. Compose-projekt létrehozása
+**Platform:** Debian 11/12/13 VM – SSH terminál. A Docker Engine már működik az 5. feladat óta.
 
-**Platform:** Debian VM – SSH terminál; compose.yaml szerkesztése helyben vagy VS Code Remote-SSH-val.
+Telepítsd a **Docker Compose v2 CLI-plugint**. A következő, x86-64 architektúrájú Debian VM-en kipróbált telepítési lépéseket használd. A VM architektúráját az `uname -m` paranccsal ellenőrizheted; eltérő architektúrán más bináris szükséges.
 
-Készíts `compose-lab` mappát és benne az alábbi `compose.yaml` fájlt. Két külön Nginx-szolgáltatást indítunk eltérő host portokon.
+```bash
+sudo apt install -y curl
+sudo mkdir -p /usr/local/lib/docker/cli-plugins
+sudo curl -fSL \
+  https://github.com/docker/compose/releases/download/v2.40.3/docker-compose-linux-x86_64 \
+  -o /usr/local/lib/docker/cli-plugins/docker-compose
+sudo chmod +x /usr/local/lib/docker/cli-plugins/docker-compose
+```
+
+Ellenőrizd a telepített Compose verzióját:
+
+```bash
+sudo docker compose version
+```
+
+::: {.callout-tip collapse="true"}
+## AI-segítség megengedett telepítési hiba esetén
+
+Ha elakadsz, kérhetsz segítséget generatív AI-eszköztől (ChatGPT, Gemini, Copilot). Add meg a hibaüzenetet, de **jelszót, tokent vagy privát kulcsot ne ossz meg**. A javasolt parancsokat ellenőrizd futtatás előtt.
+:::
+
+<div class="lab-answer"><label for="q10result"><strong>Beadandó – A Compose-verzió ellenőrző parancsa és kimenete; magyarázat nem szükséges.</strong></label><textarea id="q10result" data-answer="Q10_RESULT" rows="5"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+### 11. Első Compose-projekt – Nginx
+
+**Platform:** Debian VM – SSH terminál; fájlszerkesztés `nano` vagy `jed` segítségével.
+
+Hozd létre a `~/compose-project` könyvtárat, majd abban a `compose.yaml` fájlt:
+
+```bash
+mkdir -p ~/compose-project
+cd ~/compose-project
+nano compose.yaml
+```
+
+A fájl tartalma:
 
 ```yaml
 services:
-  web1:
+  web:
     image: nginx:stable
     ports:
       - "8081:80"
-  web2:
-    image: nginx:stable
+```
+
+Önállóan állítsd össze a következő négy parancsot: ellenőrizd a Compose-konfigurációt, indítsd el háttérben a projektet, listázd a projekt konténereit, majd `curl` segítségével ellenőrizd a HTTP-választ a VM 8081-es portján.
+
+**Segítség:** `docker compose config`, `docker compose up`, `docker compose ps`, `curl -I`; a háttérben futtatáshoz `-d` kapcsoló kell. A projektet **hagyd futva** a feladat végén; a 12. feladat ettől független, külön könyvtárban készül.
+
+<div class="lab-answer"><label for="q11result"><strong>Beadandó – A négy parancs és kimenetük; külön magyarázat nem szükséges.</strong></label><textarea id="q11result" data-answer="Q11_RESULT" rows="18"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+## IV. Második Compose-projekt – PHP/Apache és MariaDB
+
+A 12–15. feladatban egy egyszerű **feladatnyilvántartó webalkalmazást** indítasz két konténerben: a PHP-t futtató Apache webszerver és a MariaDB adatbázis külön szolgáltatás. A forrásfájlokat készen kapod; a hangsúly a Linux-fájlkezelésen, a Compose-parancsokon, a szolgáltatások ellenőrzésén és a tartós adattároláson van. A projekt a korábbi Nginx Compose-projekttől független.
+
+::: {.callout-warning collapse="true"}
+## Erőforrások és oktatási jelszavak
+
+A projektet kis memóriájú VM-hez igazítottuk, de **0,5–1 GB RAM esetén lassulás vagy memóriahiány előfordulhat**. Ha a Docker nem válaszol, jelezd az oktatónak. A mintajelszavak kizárólag elkülönített oktatási környezetben használhatók; éles szolgáltatásban titokkezelést alkalmaznánk. A 8082-es portot csak a saját IP-címed számára nyisd meg, és a teszt után zárd le.
+:::
+
+### 12. A projektkönyvtár és a fájlok előkészítése
+
+**Platform:** Debian VM – SSH terminál; `nano` vagy `jed`.
+
+Hozd létre a `~/php-mariadb-project` könyvtárat, lépj bele, majd az alábbi tartalmak alapján készítsd el a **`compose.yaml`, `Dockerfile`, `init.sql`, `index.php`** fájlokat. A fájlokat `nano` vagy `jed` szerkesztővel hozd létre. Végül listázd a könyvtár fájljait, és ellenőrizd egy kiválasztott fájl tartalmát.
+
+**`compose.yaml`**
+
+```yaml
+services:
+  db:
+    image: mariadb:11.4
+    restart: "no"
+    command:
+      - --innodb-buffer-pool-size=32M
+      - --max-connections=20
+      - --performance-schema=OFF
+    environment:
+      MARIADB_ROOT_PASSWORD: root_demo_password
+      MARIADB_DATABASE: taskdb
+      MARIADB_USER: taskuser
+      MARIADB_PASSWORD: task_demo_password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
+  web:
+    build: .
+    restart: "no"
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "8082:80"
+    environment:
+      DB_HOST: db
+      DB_NAME: taskdb
+      DB_USER: taskuser
+      DB_PASSWORD: task_demo_password
+
+volumes:
+  db_data:
 ```
 
-**Segítség:** A `services` az alkalmazás szolgáltatásait sorolja fel; a `ports` a host és a konténer portjait rendeli egymáshoz.
+**`Dockerfile`**
 
-**AI használható:** YAML-szintaktikai hibák értelmezéséhez. A javítást a `docker compose config` paranccsal ellenőrizd.
-
-<div class="lab-answer"><label for="q10result"><strong>Válasz – A `sudo docker compose config` parancs és az ellenőrzés eredménye (vagy a hiba és javítása).</strong></label><textarea id="q10result" data-answer="Q10_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
-
-### 11. Több szolgáltatás indítása
-
-**Platform:** Debian VM – SSH terminál.
-
-Indítsd a Compose-projektet háttérben, és ellenőrizd mindkét webszervert.
-
-```bash
-sudo docker compose up -d
-sudo docker compose ps
-curl -I http://localhost:8081
-curl -I http://localhost:8082
+```dockerfile
+FROM php:8.3-apache
+RUN docker-php-ext-install pdo_mysql
+COPY index.php /var/www/html/index.php
 ```
 
-<div class="lab-answer"><label for="q11result"><strong>Válasz – A `compose ps` kimenete és a két HTTP-státuszsor. Miért különböznek a host portok?</strong></label><textarea id="q11result" data-answer="Q11_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+**`init.sql`**
 
-### 12. Compose-projekt módosítása és leállítása
+```sql
+CREATE TABLE IF NOT EXISTS tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
 
-**Platform:** Debian VM – SSH terminál; YAML-szerkesztés.
+**`index.php`**
 
-Módosítsd a második szolgáltatás host portját `8082`-ről `8083`-ra. Alkalmazd a változást, ellenőrizd az új portot, majd állítsd le és távolítsd el a projekt konténereit.
+```php
+<?php
+$host = getenv('DB_HOST');
+$dbname = getenv('DB_NAME');
+$user = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
 
-**Segítség:** `sudo docker compose up -d`, `curl -I http://localhost:8083`, `sudo docker compose logs --tail=10`, `sudo docker compose down`.
+try {
+    $pdo = new PDO(
+        "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
+        $user,
+        $password,
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+    );
+} catch (PDOException $e) {
+    http_response_code(503);
+    exit("Adatbazis-kapcsolati hiba. Ellenorizd a MariaDB kontenert.");
+}
 
-<div class="lab-answer"><label for="q12result"><strong>Válasz – A módosított YAML-sor, az ellenőrző parancs kimenete és a `compose down` eredménye.</strong></label><textarea id="q12result" data-answer="Q12_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $title = trim($_POST['title'] ?? '');
+    if ($title !== '') {
+        $stmt = $pdo->prepare("INSERT INTO tasks (title) VALUES (?)");
+        $stmt->execute([$title]);
+    }
+    header('Location: /');
+    exit;
+}
 
-## IV. Azure Container Apps – saját Azure for Students előfizetés
+$tasks = $pdo->query(
+    "SELECT id, title, created_at FROM tasks ORDER BY id DESC"
+)->fetchAll(PDO::FETCH_ASSOC);
+?>
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<title>Docker Compose - Feladatnyilvántartó</title>
+<style>
+body {font-family:Arial,sans-serif;max-width:700px;margin:50px auto;padding:20px;background:#f5f6fa}
+main {background:white;padding:25px;border-radius:10px}
+input {padding:10px;width:65%}
+button {padding:10px;cursor:pointer}
+li {padding:8px}
+</style>
+</head>
+<body>
+<main>
+<h1>Docker Compose - Feladatnyilvántartó</h1>
+<p>PHP + Apache + MariaDB</p>
+<form method="post">
+    <input name="title" placeholder="Új feladat" required maxlength="255">
+    <button type="submit">Hozzáadás</button>
+</form>
+<h2>Feladatok</h2>
+<ul>
+<?php foreach ($tasks as $task): ?>
+<li>
+    <?= htmlspecialchars($task['title'], ENT_QUOTES, 'UTF-8') ?>
+    <small>(<?= htmlspecialchars($task['created_at'], ENT_QUOTES, 'UTF-8') ?>)</small>
+</li>
+<?php endforeach; ?>
+</ul>
+</main>
+</body>
+</html>
+```
 
-> **Előfeltétel:** aktív Azure for Students előfizetés, megfelelő jogosultság, és a választott régióban elérhető Azure Container Apps szolgáltatás. Az Azure Portal felülete változhat. A létrehozás előtt ellenőrizd az esetleges költségeket. A feladat nem igényel Azure Container Registryt.
+**Segítség:** `mkdir -p`, `cd`, `nano` / `jed`, `ls -l`, `cat`. A beadandóba **ne másold be a négy forrásfájlt**, csak az általad használt könyvtár- és fájlkezelési parancsokat, valamint az `ls -l` kimenetét.
 
-### 13. Erőforráscsoport és Container Apps-környezet
+<div class="lab-answer"><label for="q12result"><strong>Beadandó – Könyvtár- és fájlkezelési parancsok; a négy fájlt mutató `ls -l` kimenet.</strong></label><textarea id="q12result" data-answer="Q12_RESULT" rows="14"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
-**Platform:** Azure Portal – helyi böngésző, saját Azure for Students előfizetés.
+### 13. A PHP/Apache és MariaDB szolgáltatások indítása
 
-Lépj be az [Azure Portalra](https://portal.azure.com), válaszd a **saját Azure for Students** előfizetésedet. Hozz létre `rg-container-lab-<azonosító>` erőforráscsoportot, majd egy új Container App létrehozása során hozz létre egy Container Apps environmentet is, például `env-container-lab-<azonosító>` néven. Használj támogatott, az előfizetésedben engedélyezett régiót.
+**Platform:** Debian VM – SSH terminál, a `~/php-mariadb-project` könyvtárban.
 
-**Segítség:** Azure Portal → *Container Apps* → *Create*; Subscription, Resource group, Container Apps environment. A környezet létrehozása a Container App varázslójában is elvégezhető.
+Állítsd össze és futtasd a következő parancsokat: (1) Compose-konfiguráció ellenőrzése, (2) a PHP-image megépítése és a szolgáltatások indítása háttérben, (3) a projekt konténereinek listázása. Első alkalommal a letöltés és a PHP-kiegészítő fordítása több percet is igénybe vehet.
 
-<div class="lab-answer"><label for="q13result"><strong>Válasz – Az erőforráscsoport neve, a választott régió és a környezet neve. Ha hiba történt, a hibaüzenet releváns része.</strong></label><textarea id="q13result" data-answer="Q13_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+**Segítség:** `docker compose config`, `docker compose up -d --build`, `docker compose ps`. A `db` szolgáltatásnak végül **healthy**, a `web` szolgáltatásnak **Up** állapotot kell mutatnia. Ha nem indulnak, nézd meg a `docker compose logs` kimenetét.
 
-### 14. Nginx Container App telepítése
+<div class="lab-answer"><label for="q13result"><strong>Beadandó – A három parancs és a hozzájuk tartozó kimenetek.</strong></label><textarea id="q13result" data-answer="Q13_RESULT" rows="16"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
-**Platform:** Azure Portal – helyi böngésző, saját Azure for Students előfizetés.
+### 14. A feladatnyilvántartó kipróbálása
 
-Hozz létre egy `web-lab-<azonosító>` nevű Container Appot a nyilvános `nginx:stable` image-ből. Engedélyezd az **External ingress** opciót, a **target port** legyen `80`. A minimális replikaszám lehet `0`, a maximális `1`.
+**Platform:** Debian VM – terminál és böngésző.
 
-**Segítség:** Container image source: public registry / Docker Hub; image: `nginx:stable`; Ingress: External; Target port: `80`. Az ingress HTTPS-végpontot biztosít, a konténer belső portja ettől még 80.
+Ellenőrizd a HTTP-választ a VM-en a `curl -I http://localhost:8082` paranccsal. Ezután nyisd meg a webalkalmazást a böngészőben. Azure VM esetén az elérési cím `http://<VM-publikus-IP>:8082`; a **8082/TCP** bejövő portot az Azure NSG-ben szükség esetén csak a saját IP-címedről engedélyezd. Hozz létre **legalább három, általad választott című** feladatot, majd frissítsd az oldalt, és ellenőrizd, hogy megjelennek-e.
 
-<div class="lab-answer"><label for="q14result"><strong>Válasz – Az alkalmazás neve, image-neve és publikus HTTPS-címe. Nyisd meg a címet, és írd le, milyen oldalt látsz.</strong></label><textarea id="q14result" data-answer="Q14_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+**Beadandó:** a HTTP-ellenőrzés parancsa és státuszsora, a böngészőben használt teljes URL, valamint a három ténylegesen rögzített feladat címe. Képernyőkép nem szükséges.
 
-### 15. Ellenőrzés és takarítás
+<div class="lab-answer"><label for="q14result"><strong>Beadandó – HTTP-ellenőrzés, URL és három saját feladatcím.</strong></label><textarea id="q14result" data-answer="Q14_RESULT" rows="10"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
-**Platform:** Azure Portal – helyi böngésző; opcionálisan helyi PowerShell `curl.exe` az URL ellenőrzéséhez.
+### 15. Az adatmegmaradás ellenőrzése és leállítás
 
-Tekintsd meg az alkalmazás állapotát, revízióit és – ha rendelkezésre állnak – naplóit az Azure Portalon. Ellenőrizd a HTTPS-címet. Ezután töröld a **kizárólag ehhez a feladathoz létrehozott** erőforráscsoportot, és várd meg a törlés befejeződését.
+**Platform:** Debian VM – SSH terminál és böngésző; a `~/php-mariadb-project` könyvtárban.
 
-**Segítség:** Container App → *Overview*, *Revisions*, *Log stream*; Resource groups → a saját laborkörnyezeted erőforráscsoportja → *Delete resource group*. Más feladatokhoz tartozó erőforráscsoportot ne törölj.
+Állítsd le és távolítsd el a projekt konténereit **a volume megtartásával**, ellenőrizd a volume-ok listáját, majd indítsd újra a projektet. Nézd meg a konténerek állapotát, és a böngészőben ellenőrizd, hogy a 14. feladatban felvett három bejegyzés megmaradt-e. Végül állítsd le ismét a konténereket a volume megtartásával.
 
-<div class="lab-answer"><label for="q15result"><strong>Válasz – A sikeres HTTP-elérés rövid igazolása, az alkalmazás állapota és a törlés eredménye. Ha a törlés nem sikerült, add meg a hibaüzenetet.</strong></label><textarea id="q15result" data-answer="Q15_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+**Segítség:** `docker compose down`, `docker volume ls`, `docker compose up -d`, `docker compose ps`. **Ne használd a `down -v` kapcsolót**, mert az törölné az adatbázis volume-ját.
+
+<div class="lab-answer"><label for="q15result"><strong>Beadandó – A parancsok és releváns kimeneteik; megmaradt-e mindhárom feladat?</strong></label><textarea id="q15result" data-answer="Q15_RESULT" rows="18"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ---
 
-
----
-
-> **AI-használat:** A 3., 5., 9. és 10. feladatnál AI-asszisztens használható segítségként. A kapott javaslatot saját parancsokkal és kimenetekkel ellenőrizd. Jelszót, tokent és privát kulcsot ne adj meg AI-eszköznek. Az AI-használat nem jelent külön feladatot.
-
-## Összegző kérdések
-
-1. Mi a különbség a Docker image és a konténer között?
-2. Miben különbözik a `docker run` és a `docker compose up` használata?
-3. Milyen üzemeltetési feladatokat vesz át az Azure Container Apps a saját Debian VM-en futó Dockerhez képest?
-
-<div class="lab-answer"><label for="summary"><strong>Összegző válaszok (1–3):</strong></label><textarea id="summary" data-answer="SUMMARY" rows="5" placeholder="Rövid válaszok az összegző kérdésekre..."></textarea></div>
-
-**Beadás:** töltsd ki a feladatok válaszmezőit, majd használd az oldal alján található Beadás gombot. Tartalék megoldásként JSON export is készíthető.
+**Beadás:** Ellenőrizd a 15 feladat válaszmezőit, majd használd az oldal alján található **Beadás** gombot. Tartalék megoldásként **JSON export** is készíthető.
 
 
 ```{=html}
@@ -412,6 +528,19 @@ Az időmérés és az eseménykövetés a projekt `config/setup.js` fájljából
   'use strict';
   const CONFIG = Object.assign({timeTracking:false,eventTracking:false,showTrackingPanel:false},window.ITARCH_SETUP||{});
   const STORAGE_KEY = 'itarch_week08_answers_2026';
+  const STARTERS = {
+    "Q06_RESULT": "sudo docker ...\n\nKimenet:",
+    "Q07_RESULT": "sudo docker ...\nKimenet:\n\nsudo docker ...\nKimenet:\n\nsudo docker ...\nKimenet:\n\nsudo docker ...\nKimenet:",
+    "Q08_RESULT": "sudo docker ...\nKimenet:\n\ncurl -I ...\nKimenet:\n\nsudo docker ...\nKimenet:\n\nsudo docker ...\nKimenet:\n\nsudo docker ...\nKimenet:",
+    "Q09_RESULT": "sudo docker build ...\nKimenet:\n\nsudo docker run --rm report-image:v1\nKimenet:",
+    "Q10_RESULT": "sudo docker compose version\nKimenet:",
+    "Q11_RESULT": "sudo docker compose ...\nKimenet:\n\nsudo docker compose ...\nKimenet:\n\nsudo docker compose ...\nKimenet:\n\ncurl -I ...\nKimenet:",
+    "Q12_RESULT": "mkdir ...\n\ncd ...\n\nnano ...\n\nnano ...\n\nnano ...\n\nnano ...\n\nls -l ...\nKimenet:",
+    "Q13_RESULT": "sudo docker compose ...\nKimenet:\n\nsudo docker compose ...\nKimenet:\n\nsudo docker compose ...\nKimenet:",
+    "Q14_RESULT": "curl -I ...\nHTTP-státuszsor:\n\nWebalkalmazás URL-je:\n\nHárom feladat címe:\n1. \n2. \n3. ",
+    "Q15_RESULT": "sudo docker compose ...\nKimenet:\n\nsudo docker volume ...\nKimenet:\n\nsudo docker compose ...\nKimenet:\n\nsudo docker compose ...\nKimenet:\n\nsudo docker compose ...\nKimenet:\n\nMegmaradt mindhárom feladat? "
+};
+
   // OKTATÓI BEÁLLÍTÁS: a végleges határidőt itt add meg ISO 8601 formában,
   // pl. '2026-10-29T11:40:00+01:00'. A null azt jelenti, hogy nincs korlátozás.
   const SUBMISSION_DEADLINE_ISO = '2026-11-19T11:40:00+01:00';
@@ -438,7 +567,7 @@ Az időmérés és az eseménykövetés a projekt `config/setup.js` fájljából
   const load = () => {
     try {const stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null'); if(!stored)return;
       if(stored.student_id) $('neptun').value=stored.student_id;
-      fields().forEach(f=>{if(f.dataset.answer!=='STUDENT_ID' && Object.hasOwn(stored.answers||{},f.dataset.answer))f.value=stored.answers[f.dataset.answer]});
+      fields().forEach(f=>{if(f.dataset.answer!=='STUDENT_ID' && Object.hasOwn(stored.answers||{},f.dataset.answer) && String(stored.answers[f.dataset.answer]??'').trim())f.value=stored.answers[f.dataset.answer]});
       if(stored.activity)activity=Object.assign(activity,stored.activity);
     }catch(e){}
   };
@@ -464,7 +593,7 @@ Az időmérés és az eseménykövetés a projekt `config/setup.js` fájljából
   window.openSubmissionSummary = () => {
     refreshDeadline();if(closed())return;
     const fs=fields().filter(f=>f.dataset.answer!=='STUDENT_ID');
-    const missing=fs.filter(f=>!f.value.trim());
+    const missing=fs.filter(f=>!f.value.trim() || (Object.hasOwn(STARTERS,f.dataset.answer) && f.value.trim()===STARTERS[f.dataset.answer].trim()));
     const groups=[...new Set(missing.map(f=>(f.dataset.answer.match(/^Q(\d\d)/)||[])[1]).filter(Boolean))];
     const complete=fs.length-missing.length;
     $('submission-summary-body').innerHTML=`<p><strong>Neptun:</strong> ${esc(studentId()||'nincs megadva')} ${validId()?'✓':'⚠ 6 betű/szám szükséges'}</p>
@@ -499,12 +628,13 @@ Az időmérés és az eseménykövetés a projekt `config/setup.js` fájljából
   };
   window.clearAnswers=()=>{
     if(!confirm('Biztosan törlöd az összes helyben mentett választ és aktivitási adatot?'))return;
-    fields().forEach(f=>f.value=f.dataset.answer==='STUDENT_ID'?'':(f.defaultValue||''));
+    fields().forEach(f=>f.value=f.dataset.answer==='STUDENT_ID'?'':(STARTERS[f.dataset.answer]||f.defaultValue||''));
     try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
     activity={started_at:nowIso(),last_activity_at:nowIso(),active_seconds_estimate:0,edit_count:0,events:[]};
     $('submission-summary').hidden=true;$('submission-result').textContent='';$('save-status').textContent='Helyi adatok törölve.';renderActivity();
   };
   document.addEventListener('DOMContentLoaded',()=>{
+    fields().forEach(f=>{if(Object.hasOwn(STARTERS,f.dataset.answer))f.value=STARTERS[f.dataset.answer];});
     load();refreshDeadline();renderActivity();
     fields().forEach(f=>{f.addEventListener('input',()=>{
       if(f.dataset.answer==='STUDENT_ID')f.value=f.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);

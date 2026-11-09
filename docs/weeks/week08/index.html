@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>8. hét – Git/GitHub, Docker, Docker Compose és Azure Container Apps – IT Architektúra – Gyakorlati munkafüzet</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-2c169b83e1fc2996b25bcc8774810429.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">IT Architektúra – Gyakorlati munkafüzet</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../utemterv.html"> 
+<span class="menu-text">Féléves ütemterv és értékelés</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Kezdőlap</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week01/index.html"> 
+<span class="menu-text">1. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week02/index.html"> 
+<span class="menu-text">2. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week03/index.html"> 
+<span class="menu-text">3. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week04/index.html"> 
+<span class="menu-text">4. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week05/index.html"> 
+<span class="menu-text">5. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week06/index.html"> 
+<span class="menu-text">6. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../hf01/index.html"> 
+<span class="menu-text">HF01</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week07/index.html"> 
+<span class="menu-text">7. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../weeks/week08/index.html" aria-current="page"> 
+<span class="menu-text">8. hét</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#i.-git-és-github-ismétlés" id="toc-i.-git-és-github-ismétlés" class="nav-link active" data-scroll-target="#i.-git-és-github-ismétlés">I. Git és GitHub – ismétlés</a>
+  <ul class="collapse">
+  <li><a href="#git-konfiguráció-és-repository" id="toc-git-konfiguráció-és-repository" class="nav-link" data-scroll-target="#git-konfiguráció-és-repository">1. Git konfiguráció és repository</a></li>
+  <li><a href="#első-commit-és-ágak" id="toc-első-commit-és-ágak" class="nav-link" data-scroll-target="#első-commit-és-ágak">2. Első commit és ágak</a></li>
+  <li><a href="#merge-konfliktus" id="toc-merge-konfliktus" class="nav-link" data-scroll-target="#merge-konfliktus">3. Merge-konfliktus</a></li>
+  <li><a href="#github-remote-és-push" id="toc-github-remote-és-push" class="nav-link" data-scroll-target="#github-remote-és-push">4. GitHub remote és push</a></li>
+  </ul></li>
+  <li><a href="#ii.-docker-öt-alapfeladat" id="toc-ii.-docker-öt-alapfeladat" class="nav-link" data-scroll-target="#ii.-docker-öt-alapfeladat">II. Docker – öt alapfeladat</a>
+  <ul class="collapse">
+  <li><a href="#docker-engine-és-compose-telepítése-debian-12-re" id="toc-docker-engine-és-compose-telepítése-debian-12-re" class="nav-link" data-scroll-target="#docker-engine-és-compose-telepítése-debian-12-re">5. Docker Engine és Compose telepítése Debian 12-re</a></li>
+  <li><a href="#első-konténer-hello-world" id="toc-első-konténer-hello-world" class="nav-link" data-scroll-target="#első-konténer-hello-world">6. Első konténer: Hello World</a></li>
+  <li><a href="#image-ek-és-konténerek-kezelése" id="toc-image-ek-és-konténerek-kezelése" class="nav-link" data-scroll-target="#image-ek-és-konténerek-kezelése">7. Image-ek és konténerek kezelése</a></li>
+  <li><a href="#nginx-és-portleképezés" id="toc-nginx-és-portleképezés" class="nav-link" data-scroll-target="#nginx-és-portleképezés">8. Nginx és portleképezés</a></li>
+  <li><a href="#saját-dockerfile-és-image" id="toc-saját-dockerfile-és-image" class="nav-link" data-scroll-target="#saját-dockerfile-és-image">9. Saját Dockerfile és image</a></li>
+  </ul></li>
+  <li><a href="#iii.-docker-compose" id="toc-iii.-docker-compose" class="nav-link" data-scroll-target="#iii.-docker-compose">III. Docker Compose</a>
+  <ul class="collapse">
+  <li><a href="#compose-projekt-létrehozása" id="toc-compose-projekt-létrehozása" class="nav-link" data-scroll-target="#compose-projekt-létrehozása">10. Compose-projekt létrehozása</a></li>
+  <li><a href="#több-szolgáltatás-indítása" id="toc-több-szolgáltatás-indítása" class="nav-link" data-scroll-target="#több-szolgáltatás-indítása">11. Több szolgáltatás indítása</a></li>
+  <li><a href="#compose-projekt-módosítása-és-leállítása" id="toc-compose-projekt-módosítása-és-leállítása" class="nav-link" data-scroll-target="#compose-projekt-módosítása-és-leállítása">12. Compose-projekt módosítása és leállítása</a></li>
+  </ul></li>
+  <li><a href="#iv.-azure-container-apps-saját-azure-for-students-előfizetés" id="toc-iv.-azure-container-apps-saját-azure-for-students-előfizetés" class="nav-link" data-scroll-target="#iv.-azure-container-apps-saját-azure-for-students-előfizetés">IV. Azure Container Apps – saját Azure for Students előfizetés</a>
+  <ul class="collapse">
+  <li><a href="#erőforráscsoport-és-container-apps-környezet" id="toc-erőforráscsoport-és-container-apps-környezet" class="nav-link" data-scroll-target="#erőforráscsoport-és-container-apps-környezet">13. Erőforráscsoport és Container Apps-környezet</a></li>
+  <li><a href="#nginx-container-app-telepítése" id="toc-nginx-container-app-telepítése" class="nav-link" data-scroll-target="#nginx-container-app-telepítése">14. Nginx Container App telepítése</a></li>
+  <li><a href="#ellenőrzés-és-takarítás" id="toc-ellenőrzés-és-takarítás" class="nav-link" data-scroll-target="#ellenőrzés-és-takarítás">15. Ellenőrzés és takarítás</a></li>
+  </ul></li>
+  <li><a href="#összegző-kérdések" id="toc-összegző-kérdések" class="nav-link" data-scroll-target="#összegző-kérdések">Összegző kérdések</a></li>
+  <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">8. hét – Git/GitHub, Docker, Docker Compose és Azure Container Apps</h1>
+<p class="subtitle lead">15 feladat · Debian 12 VM / helyi PowerShell vagy VS Code / GitHub / Azure Portal</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Munkakörnyezet és beadás
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Órai idő: 90 perc.</strong> A be nem fejezett feladatok otthon folytathatók. A feladatokhoz <strong>parancsokat, releváns kimeneteket és rövid magyarázatokat</strong> adj meg, képernyőkép nem szükséges. A válaszok helyben automatikusan mentődnek; a lap alján <strong>Beadás</strong> és <strong>JSON export</strong> is rendelkezésre áll. <strong>Beadási határidő: 2026. november 19., csütörtök, 11:40 (magyar idő).</strong> Ne adj meg jelszót, tokent vagy privát kulcsot.</p>
+</div>
+</div>
+<p><strong>Neptun-kód (kötelező, 6 karakter):</strong> <input id="neptun" data-answer="STUDENT_ID" maxlength="6" pattern="[A-Za-z0-9]{6}" required="" placeholder="ABC123"></p>
+<section id="i.-git-és-github-ismétlés" class="level2">
+<h2 class="anchored" data-anchor-id="i.-git-és-github-ismétlés">I. Git és GitHub – ismétlés</h2>
+<section id="git-konfiguráció-és-repository" class="level3">
+<h3 class="anchored" data-anchor-id="git-konfiguráció-és-repository">1. Git konfiguráció és repository</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál (helyi PowerShell vagy VS Code terminálból kapcsolódva).</p>
+<p>Ellenőrizd a Git telepítését és a commitokhoz beállított nevet, e-mail-címet. Hozz létre egy <code>container-lab</code> mappát, és inicializálj benne <code>main</code> alapágú Git-repositoryt.</p>
+<p><strong>Segítség:</strong> <code>git --version</code>, <code>git config --get user.name</code>, <code>git config --get user.email</code>, <code>git init -b main</code>, <code>git status</code>. Ha a név/e-mail hiányzik, a <code>git config --global user.name "..."</code> és <code>git config --global user.email "..."</code> parancsokkal állíthatod be.</p>
+<div class="lab-answer">
+<label for="q01result"><strong>Válasz – A repository inicializálásához használt parancs és a <code>git status</code> lényegi kimenete.</strong></label>
+<textarea id="q01result" data-answer="Q01_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="első-commit-és-ágak" class="level3">
+<h3 class="anchored" data-anchor-id="első-commit-és-ágak">2. Első commit és ágak</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; szerkesztéshez opcionálisan VS Code Remote-SSH.</p>
+<p>Készíts <code>proba.txt</code> fájlt <code>Hello World</code> tartalommal. Add a staging area-hoz, készíts <code>first commit</code> üzenetű commitot, majd hozz létre <code>Dev</code> és <code>Test</code> ágat.</p>
+<p><strong>Segítség:</strong> <code>printf</code>, <code>git add</code>, <code>git commit -m</code>, <code>git branch</code>, <code>git log --oneline --all --decorate</code>.</p>
+<div class="lab-answer">
+<label for="q02result"><strong>Válasz – A staging/commit parancsai és a <code>git branch</code> kimenete.</strong></label>
+<textarea id="q02result" data-answer="Q02_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="merge-konfliktus" class="level3">
+<h3 class="anchored" data-anchor-id="merge-konfliktus">3. Merge-konfliktus</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; szövegszerkesztő vagy VS Code Remote-SSH.</p>
+<p>A <code>Dev</code> ágon írd át a <code>proba.txt</code> első sorát <code>Hello from Dev</code> szövegre, és commitold. A <code>Test</code> ágon ugyanezt a sort írd át <code>Hello from Test</code> szövegre, és commitold. Válts vissza a <code>main</code> ágra, olvaszd be a <code>Dev</code>, majd a <code>Test</code> ágat. A konfliktust úgy oldd fel, hogy a végső fájlban a <strong>Dev-változat</strong> maradjon.</p>
+<p><strong>Segítség:</strong> <code>git switch</code>, <code>git merge</code>, <code>git status</code>, <code>cat proba.txt</code>, <code>git add</code>, <code>git commit</code>. Konfliktusnál szerkeszd ki a <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> jelöléseket.</p>
+<p><strong>AI használható:</strong> A konfliktus okának értelmezéséhez és a feloldási lépések ellenőrzéséhez. A javaslatot a saját repositorydban ellenőrizd; a beadandóban egy mondatban jelezd, miben segített az AI.</p>
+<div class="lab-answer">
+<label for="q03result"><strong>Válasz – A két merge parancsa, a konfliktust jelző hibaüzenet releváns részlete és a végleges <code>proba.txt</code> tartalma.</strong></label>
+<textarea id="q03result" data-answer="Q03_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="github-remote-és-push" class="level3">
+<h3 class="anchored" data-anchor-id="github-remote-és-push">4. GitHub remote és push</h3>
+<p><strong>Platform:</strong> GitHub – helyi böngésző; Git-parancsok: Debian VM SSH terminál.</p>
+<p>Hozz létre a GitHubon egy <strong>üres</strong>, README nélküli repositoryt. Kösd hozzá a lokális repositoryhoz <code>origin</code> néven, majd töltsd fel a <code>main</code> ágat.</p>
+<p><strong>Segítség:</strong> <code>git remote add origin &lt;repository-URL&gt;</code>, <code>git remote -v</code>, <code>git push -u origin main</code>. HTTPS használatakor GitHub-jelszó helyett megfelelő hitelesítési módszer (például Git Credential Manager vagy token), SSH esetén beállított SSH-kulcs szükséges.</p>
+<div class="lab-answer">
+<label for="q04result"><strong>Válasz – A <code>git remote -v</code> kimenete és a sikeres <code>git push</code> releváns kimenete; a repository URL-je.</strong></label>
+<textarea id="q04result" data-answer="Q04_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+</section>
+<section id="ii.-docker-öt-alapfeladat" class="level2">
+<h2 class="anchored" data-anchor-id="ii.-docker-öt-alapfeladat">II. Docker – öt alapfeladat</h2>
+<section id="docker-engine-és-compose-telepítése-debian-12-re" class="level3">
+<h3 class="anchored" data-anchor-id="docker-engine-és-compose-telepítése-debian-12-re">5. Docker Engine és Compose telepítése Debian 12-re</h3>
+<p><strong>Platform:</strong> Debian 12 VM – SSH terminál, sudo jogosultsággal.</p>
+<p>Telepítsd a Docker Engine-t és a Compose plugint a Docker hivatalos APT-csomagtárából. Az alábbi parancsok <strong>Debian 12 (bookworm)</strong> rendszerhez készültek.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> ca-certificates curl</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> install <span class="at">-m</span> 0755 <span class="at">-d</span> /etc/apt/keyrings</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> curl <span class="at">-fsSL</span> https://download.docker.com/linux/debian/gpg <span class="at">-o</span> /etc/apt/keyrings/docker.asc</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod a+r /etc/apt/keyrings/docker.asc</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tee /etc/apt/sources.list.d/docker.sources <span class="op">&gt;</span> /dev/null <span class="op">&lt;&lt;'EOF_DOCKER'</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">Types: deb</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">URIs: https://download.docker.com/linux/debian</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">Suites: bookworm</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">Components: stable</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">Signed-By: /etc/apt/keyrings/docker.asc</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">EOF_DOCKER</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable <span class="at">--now</span> docker</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker <span class="at">--version</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker compose version</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Megjegyzés:</strong> Ha a gépen korábban <code>docker.io</code> vagy más, ütköző Docker-csomag szerepel, a telepítés előtt a hivatalos útmutató szerint távolítsd el az ütköző csomagokat. Forrás: https://docs.docker.com/engine/install/debian/</p>
+<div class="lab-answer">
+<label for="q05result"><strong>Válasz – A Docker és a Compose verzióját kiíró két parancs és kimenetük.</strong></label>
+<textarea id="q05result" data-answer="Q05_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="első-konténer-hello-world" class="level3">
+<h3 class="anchored" data-anchor-id="első-konténer-hello-world">6. Első konténer: Hello World</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál.</p>
+<p>Futtasd a <code>hello-world</code> image-et. Figyeld meg, hogy a konténer a kiírás után automatikusan leáll.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker run <span class="at">--rm</span> hello-world</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Segítség:</strong> <code>docker run</code> konténert indít; a <code>--rm</code> eltávolítja a leállt konténert.</p>
+<div class="lab-answer">
+<label for="q06result"><strong>Válasz – A futtatott parancs és a sikeres futást igazoló 2–3 sor. Miért nem látszik ezután a konténer a <code>docker ps -a</code> listában?</strong></label>
+<textarea id="q06result" data-answer="Q06_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="image-ek-és-konténerek-kezelése" class="level3">
+<h3 class="anchored" data-anchor-id="image-ek-és-konténerek-kezelése">7. Image-ek és konténerek kezelése</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál.</p>
+<p>Listázd a helyi image-eket. Ezután indíts egy <code>alpine:3.20</code> konténert, amely kiírja a <code>Container OK</code> szöveget. Most <strong>ne</strong> használd a <code>--rm</code> kapcsolót. Listázd a futó és a leállt konténereket, végül töröld a leállt Alpine-konténert.</p>
+<p><strong>Segítség:</strong> <code>sudo docker images</code>, <code>sudo docker run --name alpine-test alpine:3.20 echo 'Container OK'</code>, <code>sudo docker ps</code>, <code>sudo docker ps -a</code>, <code>sudo docker rm alpine-test</code>.</p>
+<div class="lab-answer">
+<label for="q07result"><strong>Válasz – A konténerindítás parancsa és kimenete, valamint a <code>docker ps</code> és <code>docker ps -a</code> közötti különbség rövid magyarázata.</strong></label>
+<textarea id="q07result" data-answer="Q07_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="nginx-és-portleképezés" class="level3">
+<h3 class="anchored" data-anchor-id="nginx-és-portleképezés">8. Nginx és portleképezés</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; HTTP-ellenőrzés curl-lel a VM-en.</p>
+<p>Indíts Nginx webszervert háttérben, <code>web-test</code> néven. A Debian VM <strong>8080-as portját</strong> rendeld a konténer <strong>80-as portjához</strong>. Ellenőrizd a weboldalt a VM-en, majd állítsd le és töröld a konténert.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker run <span class="at">-d</span> <span class="at">--name</span> web-test <span class="at">-p</span> 8080:80 nginx:stable</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-I</span> http://localhost:8080</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker ps</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker stop web-test</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker rm web-test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Segítség:</strong> <code>-d</code> = háttérben futás; <code>--name</code> = konténernév; <code>-p HOST:CONTAINER</code> = portleképezés. Külső böngészős eléréshez az Azure VM hálózati szabályainak is engedniük kell a 8080-as portot; ezt a feladat nem követeli meg.</p>
+<div class="lab-answer">
+<label for="q08result"><strong>Válasz – Az indító parancs, a <code>curl -I</code> HTTP-státuszsora és a <code>docker ps</code> releváns sora.</strong></label>
+<textarea id="q08result" data-answer="Q08_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="saját-dockerfile-és-image" class="level3">
+<h3 class="anchored" data-anchor-id="saját-dockerfile-és-image">9. Saját Dockerfile és image</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; Dockerfile és shell script szerkesztése helyben vagy VS Code Remote-SSH-val.</p>
+<p>Hozz létre egy <code>report.sh</code> fájlt és Dockerfile-t. Építs belőlük <code>project-report:1.0</code> nevű image-et, majd futtasd.</p>
+<p><code>report.sh</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/sh</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'PROJECT STATUS REPORT\n'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'Hostname: %s\n'</span> <span class="st">"</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'User: %s\n'</span> <span class="st">"</span><span class="va">$(</span><span class="fu">whoami</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'Date: %s\n'</span> <span class="st">"</span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'Uptime: %s\n'</span> <span class="st">"</span><span class="va">$(</span><span class="fu">uptime</span><span class="va">)</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>Dockerfile</code> (ugyanabban a mappában):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> alpine:3.20</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apk</span> add <span class="at">--no-cache</span> coreutils</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> report.sh /app/report.sh</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"sh"</span>, <span class="st">"/app/report.sh"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Futtatás:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker build <span class="at">-t</span> project-report:1.0 .</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker run <span class="at">--rm</span> project-report:1.0</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker images</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Segítség:</strong> <code>-t</code> = image neve és címkéje; a <code>.</code> a build context aktuális mappája. A szkript POSIX <code>sh</code>-t használ, ezért nem kell külön Bash-t telepíteni.</p>
+<p><strong>AI használható:</strong> A Dockerfile utasításainak megértéséhez vagy egy kisebb fejlesztés javaslatához. A javaslatot csak kipróbálás és ellenőrzés után alkalmazd.</p>
+<div class="lab-answer">
+<label for="q09result"><strong>Válasz – A build és a futtatás parancsai, valamint a program kimenete. Miben tér el a konténerben kiírt gépnév a Debian VM gépnevétől?</strong></label>
+<textarea id="q09result" data-answer="Q09_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+</section>
+<section id="iii.-docker-compose" class="level2">
+<h2 class="anchored" data-anchor-id="iii.-docker-compose">III. Docker Compose</h2>
+<section id="compose-projekt-létrehozása" class="level3">
+<h3 class="anchored" data-anchor-id="compose-projekt-létrehozása">10. Compose-projekt létrehozása</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; compose.yaml szerkesztése helyben vagy VS Code Remote-SSH-val.</p>
+<p>Készíts <code>compose-lab</code> mappát és benne az alábbi <code>compose.yaml</code> fájlt. Két külön Nginx-szolgáltatást indítunk eltérő host portokon.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web1</span><span class="kw">:</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:stable</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"8081:80"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web2</span><span class="kw">:</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:stable</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"8082:80"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Segítség:</strong> A <code>services</code> az alkalmazás szolgáltatásait sorolja fel; a <code>ports</code> a host és a konténer portjait rendeli egymáshoz.</p>
+<p><strong>AI használható:</strong> YAML-szintaktikai hibák értelmezéséhez. A javítást a <code>docker compose config</code> paranccsal ellenőrizd.</p>
+<div class="lab-answer">
+<label for="q10result"><strong>Válasz – A <code>sudo docker compose config</code> parancs és az ellenőrzés eredménye (vagy a hiba és javítása).</strong></label>
+<textarea id="q10result" data-answer="Q10_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="több-szolgáltatás-indítása" class="level3">
+<h3 class="anchored" data-anchor-id="több-szolgáltatás-indítása">11. Több szolgáltatás indítása</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál.</p>
+<p>Indítsd a Compose-projektet háttérben, és ellenőrizd mindkét webszervert.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker compose up <span class="at">-d</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker compose ps</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-I</span> http://localhost:8081</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-I</span> http://localhost:8082</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="lab-answer">
+<label for="q11result"><strong>Válasz – A <code>compose ps</code> kimenete és a két HTTP-státuszsor. Miért különböznek a host portok?</strong></label>
+<textarea id="q11result" data-answer="Q11_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="compose-projekt-módosítása-és-leállítása" class="level3">
+<h3 class="anchored" data-anchor-id="compose-projekt-módosítása-és-leállítása">12. Compose-projekt módosítása és leállítása</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; YAML-szerkesztés.</p>
+<p>Módosítsd a második szolgáltatás host portját <code>8082</code>-ről <code>8083</code>-ra. Alkalmazd a változást, ellenőrizd az új portot, majd állítsd le és távolítsd el a projekt konténereit.</p>
+<p><strong>Segítség:</strong> <code>sudo docker compose up -d</code>, <code>curl -I http://localhost:8083</code>, <code>sudo docker compose logs --tail=10</code>, <code>sudo docker compose down</code>.</p>
+<div class="lab-answer">
+<label for="q12result"><strong>Válasz – A módosított YAML-sor, az ellenőrző parancs kimenete és a <code>compose down</code> eredménye.</strong></label>
+<textarea id="q12result" data-answer="Q12_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+</section>
+<section id="iv.-azure-container-apps-saját-azure-for-students-előfizetés" class="level2">
+<h2 class="anchored" data-anchor-id="iv.-azure-container-apps-saját-azure-for-students-előfizetés">IV. Azure Container Apps – saját Azure for Students előfizetés</h2>
+<blockquote class="blockquote">
+<p><strong>Előfeltétel:</strong> aktív Azure for Students előfizetés, megfelelő jogosultság, és a választott régióban elérhető Azure Container Apps szolgáltatás. Az Azure Portal felülete változhat. A létrehozás előtt ellenőrizd az esetleges költségeket. A feladat nem igényel Azure Container Registryt.</p>
+</blockquote>
+<section id="erőforráscsoport-és-container-apps-környezet" class="level3">
+<h3 class="anchored" data-anchor-id="erőforráscsoport-és-container-apps-környezet">13. Erőforráscsoport és Container Apps-környezet</h3>
+<p><strong>Platform:</strong> Azure Portal – helyi böngésző, saját Azure for Students előfizetés.</p>
+<p>Lépj be az <a href="https://portal.azure.com">Azure Portalra</a>, válaszd a <strong>saját Azure for Students</strong> előfizetésedet. Hozz létre <code>rg-container-lab-&lt;azonosító&gt;</code> erőforráscsoportot, majd egy új Container App létrehozása során hozz létre egy Container Apps environmentet is, például <code>env-container-lab-&lt;azonosító&gt;</code> néven. Használj támogatott, az előfizetésedben engedélyezett régiót.</p>
+<p><strong>Segítség:</strong> Azure Portal → <em>Container Apps</em> → <em>Create</em>; Subscription, Resource group, Container Apps environment. A környezet létrehozása a Container App varázslójában is elvégezhető.</p>
+<div class="lab-answer">
+<label for="q13result"><strong>Válasz – Az erőforráscsoport neve, a választott régió és a környezet neve. Ha hiba történt, a hibaüzenet releváns része.</strong></label>
+<textarea id="q13result" data-answer="Q13_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="nginx-container-app-telepítése" class="level3">
+<h3 class="anchored" data-anchor-id="nginx-container-app-telepítése">14. Nginx Container App telepítése</h3>
+<p><strong>Platform:</strong> Azure Portal – helyi böngésző, saját Azure for Students előfizetés.</p>
+<p>Hozz létre egy <code>web-lab-&lt;azonosító&gt;</code> nevű Container Appot a nyilvános <code>nginx:stable</code> image-ből. Engedélyezd az <strong>External ingress</strong> opciót, a <strong>target port</strong> legyen <code>80</code>. A minimális replikaszám lehet <code>0</code>, a maximális <code>1</code>.</p>
+<p><strong>Segítség:</strong> Container image source: public registry / Docker Hub; image: <code>nginx:stable</code>; Ingress: External; Target port: <code>80</code>. Az ingress HTTPS-végpontot biztosít, a konténer belső portja ettől még 80.</p>
+<div class="lab-answer">
+<label for="q14result"><strong>Válasz – Az alkalmazás neve, image-neve és publikus HTTPS-címe. Nyisd meg a címet, és írd le, milyen oldalt látsz.</strong></label>
+<textarea id="q14result" data-answer="Q14_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="ellenőrzés-és-takarítás" class="level3">
+<h3 class="anchored" data-anchor-id="ellenőrzés-és-takarítás">15. Ellenőrzés és takarítás</h3>
+<p><strong>Platform:</strong> Azure Portal – helyi böngésző; opcionálisan helyi PowerShell <code>curl.exe</code> az URL ellenőrzéséhez.</p>
+<p>Tekintsd meg az alkalmazás állapotát, revízióit és – ha rendelkezésre állnak – naplóit az Azure Portalon. Ellenőrizd a HTTPS-címet. Ezután töröld a <strong>kizárólag ehhez a feladathoz létrehozott</strong> erőforráscsoportot, és várd meg a törlés befejeződését.</p>
+<p><strong>Segítség:</strong> Container App → <em>Overview</em>, <em>Revisions</em>, <em>Log stream</em>; Resource groups → a saját laborkörnyezeted erőforráscsoportja → <em>Delete resource group</em>. Más feladatokhoz tartozó erőforráscsoportot ne törölj.</p>
+<div class="lab-answer">
+<label for="q15result"><strong>Válasz – A sikeres HTTP-elérés rövid igazolása, az alkalmazás állapota és a törlés eredménye. Ha a törlés nem sikerült, add meg a hibaüzenetet.</strong></label>
+<textarea id="q15result" data-answer="Q15_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<hr>
+<hr>
+<blockquote class="blockquote">
+<p><strong>AI-használat:</strong> A 3., 9. és 10. feladatnál AI-asszisztens használható segítségként. A kapott javaslatot saját parancsokkal és kimenetekkel ellenőrizd. Jelszót, tokent és privát kulcsot ne adj meg AI-eszköznek. Az AI-használat nem jelent külön feladatot.</p>
+</blockquote>
+</section>
+</section>
+<section id="összegző-kérdések" class="level2">
+<h2 class="anchored" data-anchor-id="összegző-kérdések">Összegző kérdések</h2>
+<ol type="1">
+<li>Mi a különbség a Docker image és a konténer között?</li>
+<li>Miben különbözik a <code>docker run</code> és a <code>docker compose up</code> használata?</li>
+<li>Milyen üzemeltetési feladatokat vesz át az Azure Container Apps a saját Debian VM-en futó Dockerhez képest?</li>
+</ol>
+<div class="lab-answer">
+<label for="summary"><strong>Összegző válaszok (1–3):</strong></label>
+<textarea id="summary" data-answer="SUMMARY" rows="5" placeholder="Rövid válaszok az összegző kérdésekre..."></textarea>
+</div>
+<p><strong>Beadás:</strong> töltsd ki a feladatok válaszmezőit, majd használd az oldal alján található Beadás gombot. Tartalék megoldásként JSON export is készíthető.</p>
+<style>
+.lab-answer {display:flex;flex-direction:column;gap:.45rem;margin:1rem 0 1.5rem}
+.lab-answer input,.lab-answer textarea {width:100%;max-width:100%;padding:.65rem;border:1px solid #9ca3af;border-radius:5px;font:inherit}
+.lab-answer textarea {min-height:6rem;resize:vertical}
+.lab-answer button {align-self:flex-start}
+.lab-feedback.ok {color:#176b36}.lab-feedback.warn {color:#a45c00}
+</style>
+</section>
+<section id="mentés-és-beadás" class="level2">
+<h2 class="anchored" data-anchor-id="mentés-és-beadás">Mentés és beadás</h2>
+<p>A válaszok automatikusan mentődnek ebben a böngészőben. A szerveres beadás a 7. heti mintából átvett végpontra küld adatot; az oktató a közzététel előtt ellenőrizze, hogy a 8. heti beadásokat is fogadja. A beadás előtt ellenőrizd a Neptun-kódot és a kitöltött mezőket. A formai ellenőrzés nem helyettesíti a parancsok tényleges futtatását.</p>
+<div class="actions">
+<button id="submit-button" type="button" onclick="openSubmissionSummary()">
+📤 Beadás
+</button>
+<button type="button" onclick="exportSubmissionJson()">
+💾 JSON export
+</button>
+<button type="button" onclick="clearAnswers()">
+Helyi adatok törlése
+</button>
+<p><span id="save-status" role="status"></span></p>
+</div>
+<p id="submission-deadline-note">
+<strong>Beadási határidő:</strong> 2026. november 19. 11:40 (magyar idő).
+</p>
+<div id="submission-summary" class="submission-summary" hidden="">
+<h3 class="anchored">
+Beadás előtti összesítés
+</h3>
+<div id="submission-summary-body">
+
+</div>
+<div class="actions">
+<button type="button" onclick="closeSubmissionSummary()">
+Vissza a javításhoz
+</button>
+<button id="confirm-submit-button" type="button" onclick="confirmSubmission()">
+Beadás megerősítése
+</button>
+</div>
+</div>
+<div id="submission-result" role="status" aria-live="polite">
+
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Aktivitási adatok">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Aktivitási adatok
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Az időmérés és az eseménykövetés a projekt <code>config/setup.js</code> fájljából konfigurálható. Az SSH-terminálban végzett munka nem feltétlenül számít böngészőbeli aktív időnek.</p>
+</div>
+</div>
+<div id="tracking-panel" class="submission-summary">
+<strong>Aktivitás ezen a gépen</strong>
+<p>
+Időmérés: <span id="tracking-time-status">–</span> · Eseménykövetés: <span id="tracking-event-status">–</span>
+</p>
+<p>
+Becsült aktív idő: <span id="activity-active-time">0:00</span> · Szerkesztések: <span id="activity-edit-count">0</span>
+</p>
+<p>
+Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: <span id="activity-last">–</span>
+</p>
+</div>
+<style>
+.actions {display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;margin:1rem 0}
+.actions button {padding:.55rem .9rem;border:1px solid #77808a;border-radius:6px;background:#fff;cursor:pointer}
+.actions button:disabled {opacity:.5;cursor:not-allowed}
+.submission-summary {border:1px solid #c8d0d8;border-radius:9px;padding:1rem;margin:1rem 0;background:#fafbfc}
+.submission-summary[hidden] {display:none}
+#submission-result {margin:1rem 0}
+</style>
+<script src="../../config/setup.js"></script>
+<script>
+(function(){
+  const patterns={
+    task:/[\s\S]{12,}/,
+    ssh:/\b(ssh|whoami|hostname|pwd)\b/i, csv:/[;]|\b(cut|awk|grep|tail)\b/i,
+    bash:/\b(while|for|read|mkdir|cp|bash|chmod|jed)\b/i,
+    diff:/\bdiff\b|---|\+\+\+/i,
+    git:/\bgit\s+(init|status|add|commit|log|diff|branch|switch|merge|remote|push|fetch|pull|config)\b/i,
+    github:/github\.com|gh auth|https/i,
+    vscode:/Source Control|Remote.SSH|VS Code|stage|commit|sync/i
+  };
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('.lab-check'); if(!b)return;
+    const wrap=b.closest('.lab-answer'), field=wrap?.querySelector('input,textarea');
+    const feedback=wrap?.querySelector('.lab-feedback'); if(!field||!feedback)return;
+    const v=field.value.trim(),type=b.dataset.check,p=patterns[type]||/\S{12}/;
+    const ok=type==='sha'?/^[0-9a-fA-F]{7,12}$/.test(v):type==='repo-url'?/^https:\/\/github\.com\/[A-Za-z0-9-]+\/[A-Za-z0-9._-]+\/?$/.test(v):v.length>=8&&p.test(v);
+    feedback.textContent=ok?'A válasz formátuma megfelelőnek tűnik. A tényleges végrehajtást ez nem igazolja.':(type==='sha'?'Adj meg 7–12 hexadecimális karaktert.':type==='repo-url'?'Adj meg teljes GitHub-repository URL-t.':'Egészítsd ki konkrét parancsokkal, kimenettel vagy a kért magyarázattal.');
+    feedback.className='lab-feedback '+(ok?'ok':'warn');
+  });
+})();
+</script>
+<p>```</p>
+<script>
+(() => {
+  'use strict';
+  const CONFIG = Object.assign({timeTracking:false,eventTracking:false,showTrackingPanel:false},window.ITARCH_SETUP||{});
+  const STORAGE_KEY = 'itarch_week08_answers_2026';
+  // OKTATÓI BEÁLLÍTÁS: a végleges határidőt itt add meg ISO 8601 formában,
+  // pl. '2026-10-29T11:40:00+01:00'. A null azt jelenti, hogy nincs korlátozás.
+  const SUBMISSION_DEADLINE_ISO = '2026-11-19T11:40:00+01:00';
+  const ENDPOINT = 'https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/submit';
+  const $ = id => document.getElementById(id);
+  const fields = () => [...document.querySelectorAll('[data-answer]')];
+  const studentId = () => ($('neptun')?.value||'').trim().toUpperCase();
+  const validId = () => /^[A-Z0-9]{6}$/.test(studentId());
+  const nowIso = () => new Date().toISOString();
+  const deadline = SUBMISSION_DEADLINE_ISO ? new Date(SUBMISSION_DEADLINE_ISO) : null;
+  const closed = () => deadline && !isNaN(deadline.getTime()) && Date.now() > deadline.getTime();
+  const started = nowIso();
+  let activity = {started_at:started,last_activity_at:started,active_seconds_estimate:0,edit_count:0,events:[]};
+  let lastInteraction = Date.now();
+  const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const logEvent = (type) => {if(CONFIG.eventTracking) activity.events.push({type,at:nowIso()});};
+  const answers = () => Object.fromEntries(fields().filter(f=>f.dataset.answer!=='STUDENT_ID').map(f=>[f.dataset.answer,f.value]));
+  const save = (message=false) => {
+    activity.last_activity_at=nowIso();
+    try {localStorage.setItem(STORAGE_KEY,JSON.stringify({student_id:studentId(),answers:answers(),activity}));
+      if(message) $('save-status').textContent='✓ Helyi mentés kész';
+    } catch(e) {if(message) $('save-status').textContent='⚠ Helyi mentés nem érhető el';}
+  };
+  const load = () => {
+    try {const stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null'); if(!stored)return;
+      if(stored.student_id) $('neptun').value=stored.student_id;
+      fields().forEach(f=>{if(f.dataset.answer!=='STUDENT_ID' && Object.hasOwn(stored.answers||{},f.dataset.answer))f.value=stored.answers[f.dataset.answer]});
+      if(stored.activity)activity=Object.assign(activity,stored.activity);
+    }catch(e){}
+  };
+  const renderActivity = () => {
+    $('tracking-panel').hidden=!CONFIG.showTrackingPanel;
+    $('tracking-time-status').textContent=CONFIG.timeTracking?'bekapcsolva':'kikapcsolva';
+    $('tracking-event-status').textContent=CONFIG.eventTracking?'bekapcsolva':'kikapcsolva';
+    const sec=activity.active_seconds_estimate||0;
+    $('activity-active-time').textContent=`${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;
+    $('activity-edit-count').textContent=activity.edit_count||0;
+    $('activity-started').textContent=activity.started_at||'–';
+    $('activity-last').textContent=activity.last_activity_at||'–';
+  };
+  const refreshDeadline = () => {
+    const isClosed=closed();
+    $('submit-button').hidden=!!isClosed;
+    if($('confirm-submit-button'))$('confirm-submit-button').disabled=!!isClosed||!validId();
+    $('submission-deadline-note').textContent=deadline && !isNaN(deadline.getTime())
+      ? `Beadási határidő: ${deadline.toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})} (magyar idő)${isClosed?' – lejárt':''}`
+      : 'Beadási határidő: még nincs beállítva a munkafüzetben.';
+  };
+  const payload = () => ({schema_version:1,course:'ITARCH',week:8,student_id:studentId(),submitted_at:nowIso(),answers:answers(),checks:{},activity_summary:activity});
+  window.openSubmissionSummary = () => {
+    refreshDeadline();if(closed())return;
+    const fs=fields().filter(f=>f.dataset.answer!=='STUDENT_ID');
+    const missing=fs.filter(f=>!f.value.trim());
+    const groups=[...new Set(missing.map(f=>(f.dataset.answer.match(/^Q(\d\d)/)||[])[1]).filter(Boolean))];
+    const complete=fs.length-missing.length;
+    $('submission-summary-body').innerHTML=`<p><strong>Neptun:</strong> ${esc(studentId()||'nincs megadva')} ${validId()?'✓':'⚠ 6 betű/szám szükséges'}</p>
+      <p><strong>Kitöltött mezők:</strong> ${complete}/${fs.length} (${Math.round(100*complete/Math.max(1,fs.length))}%)</p>
+      <p><strong>Hiányos feladatok:</strong> ${groups.length?groups.map(x=>Number(x)).join(', '):'nincs'}</p>
+      ${missing.length?`<p>Összesen ${missing.length} mező üres. A beadás ettől még lehetséges, de ellenőrizd a válaszokat.</p>`:''}
+      <p>A szintaktikai ellenőrző gombok használata nem kötelező. Biztosan beadod?</p>`;
+    $('submission-summary').hidden=false;
+    $('submission-summary').scrollIntoView({behavior:'smooth',block:'start'});
+    logEvent('submission_summary_opened');save();refreshDeadline();
+  };
+  window.closeSubmissionSummary=()=>{$('submission-summary').hidden=true;};
+  const download = data => {
+    const file=`ITARCH_week08_${data.student_id}_${data.submitted_at.replace(/[:.]/g,'-')}.json`;
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'});
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=file;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  };
+  window.exportSubmissionJson=()=>{if(!validId()){$('submission-result').textContent='⚠ A JSON exporthoz 6 karakteres Neptun-kód szükséges.';return;}logEvent('submission_json_exported');save();download(payload());};
+  window.confirmSubmission=async()=>{
+    if(closed()){$('submission-result').textContent='⚠ A beadási határidő lejárt.';refreshDeadline();return;}
+    if(!validId()){$('submission-result').textContent='⚠ Adj meg érvényes, 6 karakteres Neptun-kódot.';return;}
+    const btn=$('confirm-submit-button');btn.disabled=true;
+    $('submission-result').textContent='Beadás folyamatban…';
+    try {
+      const response=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload())});
+      const result=await response.json().catch(()=>null);
+      if(!response.ok||!result||result.success!==true)throw new Error(`HTTP ${response.status}`);
+      logEvent('submission_succeeded');save();$('submission-summary').hidden=true;
+      $('submission-result').textContent=`✓ Beadás sikeres. Azonosító: ${result.submission_id||'–'}`;
+    }catch(e){logEvent('submission_failed');save();$('submission-result').textContent='⚠ A szerveres beadás nem sikerült. A helyi mentés megmaradt; próbáld újra, vagy készíts JSON exportot.';}
+    finally {btn.disabled=false;refreshDeadline();}
+  };
+  window.clearAnswers=()=>{
+    if(!confirm('Biztosan törlöd az összes helyben mentett választ és aktivitási adatot?'))return;
+    fields().forEach(f=>f.value='');
+    try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
+    activity={started_at:nowIso(),last_activity_at:nowIso(),active_seconds_estimate:0,edit_count:0,events:[]};
+    $('submission-summary').hidden=true;$('submission-result').textContent='';$('save-status').textContent='Helyi adatok törölve.';renderActivity();
+  };
+  document.addEventListener('DOMContentLoaded',()=>{
+    load();refreshDeadline();renderActivity();
+    fields().forEach(f=>{f.addEventListener('input',()=>{
+      if(f.dataset.answer==='STUDENT_ID')f.value=f.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);
+      activity.edit_count++;lastInteraction=Date.now();logEvent('answer_edited');save();renderActivity();
+    });f.addEventListener('change',()=>save());});
+    document.addEventListener('keydown',()=>lastInteraction=Date.now());
+    document.addEventListener('mousemove',()=>lastInteraction=Date.now(),{passive:true});
+    document.addEventListener('visibilitychange',()=>save());
+    window.addEventListener('beforeunload',()=>save());
+    setInterval(()=>{if(CONFIG.timeTracking&&!document.hidden&&Date.now()-lastInteraction<120000){activity.active_seconds_estimate++;if(activity.active_seconds_estimate%10===0)save();renderActivity();}},1000);
+    setInterval(refreshDeadline,30000);
+  });
+})();
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

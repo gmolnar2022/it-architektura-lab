@@ -37,7 +37,8 @@ website:
         text: HF01
       - href: weeks/week07/index.qmd
         text: 7. hét
-
+      - href: weeks/week08/index.qmd
+        text: 8. hét
 
 format:
   html:

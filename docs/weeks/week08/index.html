@@ -189,14 +189,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#i.-git-és-github-ismétlés" id="toc-i.-git-és-github-ismétlés" class="nav-link active" data-scroll-target="#i.-git-és-github-ismétlés">I. Git és GitHub – ismétlés</a>
   <ul class="collapse">
-  <li><a href="#git-konfiguráció-és-repository" id="toc-git-konfiguráció-és-repository" class="nav-link" data-scroll-target="#git-konfiguráció-és-repository">1. Git konfiguráció és repository</a></li>
+  <li><a href="#git-repository-létrehozása" id="toc-git-repository-létrehozása" class="nav-link" data-scroll-target="#git-repository-létrehozása">1. Git-repository létrehozása</a></li>
   <li><a href="#első-commit-és-ágak" id="toc-első-commit-és-ágak" class="nav-link" data-scroll-target="#első-commit-és-ágak">2. Első commit és ágak</a></li>
   <li><a href="#merge-konfliktus" id="toc-merge-konfliktus" class="nav-link" data-scroll-target="#merge-konfliktus">3. Merge-konfliktus</a></li>
   <li><a href="#github-remote-és-push" id="toc-github-remote-és-push" class="nav-link" data-scroll-target="#github-remote-és-push">4. GitHub remote és push</a></li>
   </ul></li>
   <li><a href="#ii.-docker-öt-alapfeladat" id="toc-ii.-docker-öt-alapfeladat" class="nav-link" data-scroll-target="#ii.-docker-öt-alapfeladat">II. Docker – öt alapfeladat</a>
   <ul class="collapse">
-  <li><a href="#docker-engine-és-compose-telepítése-debian-12-re" id="toc-docker-engine-és-compose-telepítése-debian-12-re" class="nav-link" data-scroll-target="#docker-engine-és-compose-telepítése-debian-12-re">5. Docker Engine és Compose telepítése Debian 12-re</a></li>
+  <li><a href="#docker-engine-telepítése" id="toc-docker-engine-telepítése" class="nav-link" data-scroll-target="#docker-engine-telepítése">5. Docker Engine telepítése</a></li>
   <li><a href="#első-konténer-hello-world" id="toc-első-konténer-hello-world" class="nav-link" data-scroll-target="#első-konténer-hello-world">6. Első konténer: Hello World</a></li>
   <li><a href="#image-ek-és-konténerek-kezelése" id="toc-image-ek-és-konténerek-kezelése" class="nav-link" data-scroll-target="#image-ek-és-konténerek-kezelése">7. Image-ek és konténerek kezelése</a></li>
   <li><a href="#nginx-és-portleképezés" id="toc-nginx-és-portleképezés" class="nav-link" data-scroll-target="#nginx-és-portleképezés">8. Nginx és portleképezés</a></li>
@@ -225,7 +225,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">8. hét – Git/GitHub, Docker, Docker Compose és Azure Container Apps</h1>
-<p class="subtitle lead">15 feladat · Debian 12 VM / helyi PowerShell vagy VS Code / GitHub / Azure Portal</p>
+<p class="subtitle lead">15 feladat · Debian VM / helyi PowerShell vagy VS Code / GitHub / Azure Portal</p>
 </div>
 
 
@@ -252,17 +252,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Órai idő: 90 perc.</strong> A be nem fejezett feladatok otthon folytathatók. A feladatokhoz <strong>parancsokat, releváns kimeneteket és rövid magyarázatokat</strong> adj meg, képernyőkép nem szükséges. A válaszok helyben automatikusan mentődnek; a lap alján <strong>Beadás</strong> és <strong>JSON export</strong> is rendelkezésre áll. <strong>Beadási határidő: 2026. november 19., csütörtök, 11:40 (magyar idő).</strong> Ne adj meg jelszót, tokent vagy privát kulcsot.</p>
+<p><strong>Órai idő: 90 perc.</strong> A be nem fejezett feladatok otthon folytathatók. A feladatokhoz <strong>a feladatban kért parancsokat, releváns kimeneteket vagy fájltartalmakat</strong> add meg. Csak ott írj magyarázatot, ahol ezt külön kérjük. Képernyőkép nem szükséges. A válaszok helyben automatikusan mentődnek; a lap alján <strong>Beadás</strong> és <strong>JSON export</strong> is rendelkezésre áll. <strong>Beadási határidő: 2026. november 19., csütörtök, 11:40 (magyar idő).</strong> Ne adj meg jelszót, tokent vagy privát kulcsot.</p>
 </div>
 </div>
 <p><strong>Neptun-kód (kötelező, 6 karakter):</strong> <input id="neptun" data-answer="STUDENT_ID" maxlength="6" pattern="[A-Za-z0-9]{6}" required="" placeholder="ABC123"></p>
 <section id="i.-git-és-github-ismétlés" class="level2">
 <h2 class="anchored" data-anchor-id="i.-git-és-github-ismétlés">I. Git és GitHub – ismétlés</h2>
-<section id="git-konfiguráció-és-repository" class="level3">
-<h3 class="anchored" data-anchor-id="git-konfiguráció-és-repository">1. Git konfiguráció és repository</h3>
+<section id="git-repository-létrehozása" class="level3">
+<h3 class="anchored" data-anchor-id="git-repository-létrehozása">1. Git-repository létrehozása</h3>
 <p><strong>Platform:</strong> Debian VM – SSH terminál (helyi PowerShell vagy VS Code terminálból kapcsolódva).</p>
-<p>Ellenőrizd a Git telepítését és a commitokhoz beállított nevet, e-mail-címet. Hozz létre egy <code>container-lab</code> mappát, és inicializálj benne <code>main</code> alapágú Git-repositoryt.</p>
-<p><strong>Segítség:</strong> <code>git --version</code>, <code>git config --get user.name</code>, <code>git config --get user.email</code>, <code>git init -b main</code>, <code>git status</code>. Ha a név/e-mail hiányzik, a <code>git config --global user.name "..."</code> és <code>git config --global user.email "..."</code> parancsokkal állíthatod be.</p>
+<p>Hozz létre egy <code>container-lab</code> mappát, és inicializálj benne <code>main</code> alapágú Git-repositoryt.</p>
+<p><strong>Segítség:</strong> <code>mkdir</code>, <code>cd</code>, <code>git init -b main</code>, <code>git status</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Ha hiányoztál a korábbi Git-gyakorlatról
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Először ellenőrizd, hogy telepítve van-e a Git:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">--version</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ha a parancs hibát jelez (például <code>command not found</code>), telepítsd a Gitet Debianon:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> git</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A commitokhoz állítsd be a saját nevedet és e-mail-címedet:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">"Hallgato Neve"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">"hallgato@example.com"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A példában szereplő nevet és e-mail-címet cseréld a saját adataidra. Ellenőrzés: <code>git config --global --list</code>.</p>
+</div>
+</div>
+</div>
 <div class="lab-answer">
 <label for="q01result"><strong>Válasz – A repository inicializálásához használt parancs és a <code>git status</code> lényegi kimenete.</strong></label>
 <textarea id="q01result" data-answer="Q01_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
@@ -274,11 +298,11 @@ Formai ellenőrzés
 </section>
 <section id="első-commit-és-ágak" class="level3">
 <h3 class="anchored" data-anchor-id="első-commit-és-ágak">2. Első commit és ágak</h3>
-<p><strong>Platform:</strong> Debian VM – SSH terminál; szerkesztéshez opcionálisan VS Code Remote-SSH.</p>
-<p>Készíts <code>proba.txt</code> fájlt <code>Hello World</code> tartalommal. Add a staging area-hoz, készíts <code>first commit</code> üzenetű commitot, majd hozz létre <code>Dev</code> és <code>Test</code> ágat.</p>
-<p><strong>Segítség:</strong> <code>printf</code>, <code>git add</code>, <code>git commit -m</code>, <code>git branch</code>, <code>git log --oneline --all --decorate</code>.</p>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; fájlszerkesztéshez <code>nano</code> vagy <code>jed</code>.</p>
+<p>Készíts <code>proba.txt</code> fájlt <code>Hello World</code> tartalommal. Add a staging area-hoz, majd készíts <code>first commit</code> üzenetű commitot. A <code>Dev</code> és <code>Test</code> ágakat a következő feladatban hozd létre.</p>
+<p><strong>Segítség:</strong> <code>nano proba.txt</code> vagy <code>jed proba.txt</code>, <code>git add</code>, <code>git commit -m</code>, <code>git log --oneline</code>.</p>
 <div class="lab-answer">
-<label for="q02result"><strong>Válasz – A staging/commit parancsai és a <code>git branch</code> kimenete.</strong></label>
+<label for="q02result"><strong>Válasz – A fájl tartalma, a commit parancsa és a <code>git log --oneline</code> kimenete.</strong></label>
 <textarea id="q02result" data-answer="Q02_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
@@ -288,12 +312,12 @@ Formai ellenőrzés
 </section>
 <section id="merge-konfliktus" class="level3">
 <h3 class="anchored" data-anchor-id="merge-konfliktus">3. Merge-konfliktus</h3>
-<p><strong>Platform:</strong> Debian VM – SSH terminál; szövegszerkesztő vagy VS Code Remote-SSH.</p>
-<p>A <code>Dev</code> ágon írd át a <code>proba.txt</code> első sorát <code>Hello from Dev</code> szövegre, és commitold. A <code>Test</code> ágon ugyanezt a sort írd át <code>Hello from Test</code> szövegre, és commitold. Válts vissza a <code>main</code> ágra, olvaszd be a <code>Dev</code>, majd a <code>Test</code> ágat. A konfliktust úgy oldd fel, hogy a végső fájlban a <strong>Dev-változat</strong> maradjon.</p>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; szerkesztéshez <code>nano</code> vagy <code>jed</code>.</p>
+<p>Hozd létre a <code>Dev</code> és <code>Test</code> ágakat a <code>main</code> ágból. A <code>Dev</code> ágon írd át a <code>proba.txt</code> első sorát <code>Hello from Dev</code> szövegre, és commitold. A <code>Test</code> ágon ugyanezt a sort írd át <code>Hello from Test</code> szövegre, és commitold. Válts vissza a <code>main</code> ágra, olvaszd be a <code>Dev</code>, majd a <code>Test</code> ágat. A konfliktust úgy oldd fel, hogy a végső fájlban a <strong>Dev-változat</strong> maradjon.</p>
 <p><strong>Segítség:</strong> <code>git switch</code>, <code>git merge</code>, <code>git status</code>, <code>cat proba.txt</code>, <code>git add</code>, <code>git commit</code>. Konfliktusnál szerkeszd ki a <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> jelöléseket.</p>
-<p><strong>AI használható:</strong> A konfliktus okának értelmezéséhez és a feloldási lépések ellenőrzéséhez. A javaslatot a saját repositorydban ellenőrizd; a beadandóban egy mondatban jelezd, miben segített az AI.</p>
+<p><strong>AI-segítség megengedett:</strong> A merge-konfliktus értelmezéséhez és feloldásához. A megoldást saját repositorydban ellenőrizd.</p>
 <div class="lab-answer">
-<label for="q03result"><strong>Válasz – A két merge parancsa, a konfliktust jelző hibaüzenet releváns részlete és a végleges <code>proba.txt</code> tartalma.</strong></label>
+<label for="q03result"><strong>Válasz – A végleges <code>proba.txt</code> tartalma és a <code>git log --oneline --graph --all</code> kimenete.</strong></label>
 <textarea id="q03result" data-answer="Q03_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
@@ -304,10 +328,26 @@ Formai ellenőrzés
 <section id="github-remote-és-push" class="level3">
 <h3 class="anchored" data-anchor-id="github-remote-és-push">4. GitHub remote és push</h3>
 <p><strong>Platform:</strong> GitHub – helyi böngésző; Git-parancsok: Debian VM SSH terminál.</p>
-<p>Hozz létre a GitHubon egy <strong>üres</strong>, README nélküli repositoryt. Kösd hozzá a lokális repositoryhoz <code>origin</code> néven, majd töltsd fel a <code>main</code> ágat.</p>
-<p><strong>Segítség:</strong> <code>git remote add origin &lt;repository-URL&gt;</code>, <code>git remote -v</code>, <code>git push -u origin main</code>. HTTPS használatakor GitHub-jelszó helyett megfelelő hitelesítési módszer (például Git Credential Manager vagy token), SSH esetén beállított SSH-kulcs szükséges.</p>
+<p>Használd a <strong>múlt heti GitHub-repositorydat</strong>. A mostani <code>container-lab</code> külön helyi Git-repository, ezért itt is be kell állítani az <code>origin</code> remote-ot. A mostani munkát a GitHubon <strong>új, <code>container-lab</code> nevű ágra</strong> töltsd fel, a korábbi <code>main</code> ág felülírása nélkül.</p>
+<p><strong>Segítség:</strong> <code>git remote add origin &lt;repository-URL&gt;</code>, <code>git remote -v</code>, <code>git push -u origin main:container-lab</code>. A <code>main:container-lab</code> a helyi <code>main</code> ágat a távoli <code>container-lab</code> ágra tölti fel.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Ha nem voltál a múlt heti GitHub-gyakorlaton
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Hozz létre egy <strong>új, üres</strong> GitHub-repositoryt (README, <code>.gitignore</code> és licenc nélkül). Állítsd be az <code>origin</code> remote-ot, majd töltsd fel a helyi <code>main</code> ágat a <code>git push -u origin main</code> paranccsal. HTTPS esetén megfelelő GitHub-hitelesítés, SSH esetén beállított SSH-kulcs szükséges.</p>
+</div>
+</div>
+</div>
 <div class="lab-answer">
-<label for="q04result"><strong>Válasz – A <code>git remote -v</code> kimenete és a sikeres <code>git push</code> releváns kimenete; a repository URL-je.</strong></label>
+<label for="q04result"><strong>Válasz – A GitHub-repository URL-je, a <code>git remote -v</code> és a sikeres <code>git push</code> releváns kimenete.</strong></label>
 <textarea id="q04result" data-answer="Q04_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
@@ -318,33 +358,39 @@ Formai ellenőrzés
 </section>
 <section id="ii.-docker-öt-alapfeladat" class="level2">
 <h2 class="anchored" data-anchor-id="ii.-docker-öt-alapfeladat">II. Docker – öt alapfeladat</h2>
-<section id="docker-engine-és-compose-telepítése-debian-12-re" class="level3">
-<h3 class="anchored" data-anchor-id="docker-engine-és-compose-telepítése-debian-12-re">5. Docker Engine és Compose telepítése Debian 12-re</h3>
-<p><strong>Platform:</strong> Debian 12 VM – SSH terminál, sudo jogosultsággal.</p>
-<p>Telepítsd a Docker Engine-t és a Compose plugint a Docker hivatalos APT-csomagtárából. Az alábbi parancsok <strong>Debian 12 (bookworm)</strong> rendszerhez készültek.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> ca-certificates curl</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> install <span class="at">-m</span> 0755 <span class="at">-d</span> /etc/apt/keyrings</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> curl <span class="at">-fsSL</span> https://download.docker.com/linux/debian/gpg <span class="at">-o</span> /etc/apt/keyrings/docker.asc</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chmod a+r /etc/apt/keyrings/docker.asc</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> tee /etc/apt/sources.list.d/docker.sources <span class="op">&gt;</span> /dev/null <span class="op">&lt;&lt;'EOF_DOCKER'</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">Types: deb</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">URIs: https://download.docker.com/linux/debian</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">Suites: bookworm</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">Components: stable</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">Signed-By: /etc/apt/keyrings/docker.asc</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="op">EOF_DOCKER</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable <span class="at">--now</span> docker</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker <span class="at">--version</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker compose version</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Megjegyzés:</strong> Ha a gépen korábban <code>docker.io</code> vagy más, ütköző Docker-csomag szerepel, a telepítés előtt a hivatalos útmutató szerint távolítsd el az ütköző csomagokat. Forrás: https://docs.docker.com/engine/install/debian/</p>
+<section id="docker-engine-telepítése" class="level3">
+<h3 class="anchored" data-anchor-id="docker-engine-telepítése">5. Docker Engine telepítése</h3>
+<p><strong>Platform:</strong> Debian 11, 12 vagy 13 VM – SSH terminál, <code>sudo</code> jogosultsággal.</p>
+<p>Ellenőrizd a Debian verzióját, majd telepítsd a Docker Engine-t <strong>a Debian saját csomagtárából</strong>. A Docker Compose telepítésével csak a 10. feladatban foglalkozunk.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /etc/os-release</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt update</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install <span class="at">-y</span> docker.io</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl enable <span class="at">--now</span> docker</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ellenőrzés:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> systemctl is-active docker</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker version</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>AI-segítség megengedett telepítési hiba esetén
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ha elakadsz, kérhetsz segítséget AI-asszisztenstől a <strong>hibaüzenet értelmezéséhez és a javítási lehetőségekhez</strong>. A javasolt parancsokat végrehajtás előtt ellenőrizd. Jelszót, tokent vagy privát kulcsot ne ossz meg.</p>
+</div>
+</div>
 <div class="lab-answer">
-<label for="q05result"><strong>Válasz – A Docker és a Compose verzióját kiíró két parancs és kimenetük.</strong></label>
-<textarea id="q05result" data-answer="Q05_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<label for="q05result"><strong>Beadandó – A Debian verziója, a szolgáltatás állapota és a <code>sudo docker version</code> kimenete.</strong></label>
+<textarea id="q05result" data-answer="Q05_RESULT" rows="9" placeholder="Debian verzió:
+
+sudo systemctl is-active docker
+Kimenet:
+
+sudo docker version
+Kimenet:"></textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
@@ -354,12 +400,14 @@ Formai ellenőrzés
 <section id="első-konténer-hello-world" class="level3">
 <h3 class="anchored" data-anchor-id="első-konténer-hello-world">6. Első konténer: Hello World</h3>
 <p><strong>Platform:</strong> Debian VM – SSH terminál.</p>
-<p>Futtasd a <code>hello-world</code> image-et. Figyeld meg, hogy a konténer a kiírás után automatikusan leáll.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker run <span class="at">--rm</span> hello-world</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Segítség:</strong> <code>docker run</code> konténert indít; a <code>--rm</code> eltávolítja a leállt konténert.</p>
+<p>Indíts egy konténert a hivatalos <code>hello-world</code> image-ből. <strong>A teljes parancsot magad állítsd össze.</strong></p>
+<p><strong>Segítség:</strong> <code>docker</code>, <code>run</code>, <code>hello-world</code>; a <code>--rm</code> kapcsolóval a konténer futás után automatikusan törölhető. Szükség lehet <code>sudo</code> használatára. További támpont: <code>docker run --help</code>.</p>
 <div class="lab-answer">
-<label for="q06result"><strong>Válasz – A futtatott parancs és a sikeres futást igazoló 2–3 sor. Miért nem látszik ezután a konténer a <code>docker ps -a</code> listában?</strong></label>
-<textarea id="q06result" data-answer="Q06_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<label for="q06result"><strong>Beadandó – A teljes indítóparancs és annak kimenete; magyarázat nem szükséges.</strong></label>
+<textarea id="q06result" data-answer="Q06_RESULT" rows="9">sudo docker ...
+
+Kimenet:
+</textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
@@ -369,11 +417,28 @@ Formai ellenőrzés
 <section id="image-ek-és-konténerek-kezelése" class="level3">
 <h3 class="anchored" data-anchor-id="image-ek-és-konténerek-kezelése">7. Image-ek és konténerek kezelése</h3>
 <p><strong>Platform:</strong> Debian VM – SSH terminál.</p>
-<p>Listázd a helyi image-eket. Ezután indíts egy <code>alpine:3.20</code> konténert, amely kiírja a <code>Container OK</code> szöveget. Most <strong>ne</strong> használd a <code>--rm</code> kapcsolót. Listázd a futó és a leállt konténereket, végül töröld a leállt Alpine-konténert.</p>
-<p><strong>Segítség:</strong> <code>sudo docker images</code>, <code>sudo docker run --name alpine-test alpine:3.20 echo 'Container OK'</code>, <code>sudo docker ps</code>, <code>sudo docker ps -a</code>, <code>sudo docker rm alpine-test</code>.</p>
+<p>Végezd el a következő négy műveletet:</p>
+<ol type="1">
+<li>Listázd a helyben elérhető Docker-image-eket.</li>
+<li>Indíts egy <strong><code>alpine-test</code> nevű</strong> konténert az <code>alpine:3.20</code> image-ből, amely kiírja: <code>Container OK</code>. Itt ne használj <code>--rm</code> kapcsolót.</li>
+<li>Listázd <strong>az összes</strong> konténert, a leállítottakat is.</li>
+<li>Töröld az <code>alpine-test</code> konténert.</li>
+</ol>
+<p><strong>Segítség:</strong> <code>docker images</code>, <code>docker run</code>, <code>docker ps</code>, <code>docker rm</code>; kapcsolók: <code>--name</code>, <code>-a</code>. A teljes parancsokat önállóan állítsd össze.</p>
 <div class="lab-answer">
-<label for="q07result"><strong>Válasz – A konténerindítás parancsa és kimenete, valamint a <code>docker ps</code> és <code>docker ps -a</code> közötti különbség rövid magyarázata.</strong></label>
-<textarea id="q07result" data-answer="Q07_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<label for="q07result"><strong>Beadandó – A négy teljes parancs és a hozzájuk tartozó kimenetek; magyarázat nem szükséges.</strong></label>
+<textarea id="q07result" data-answer="Q07_RESULT" rows="17">sudo docker ...
+Kimenet:
+
+sudo docker ...
+Kimenet:
+
+sudo docker ...
+Kimenet:
+
+sudo docker ...
+Kimenet:
+</textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
@@ -382,17 +447,26 @@ Formai ellenőrzés
 </section>
 <section id="nginx-és-portleképezés" class="level3">
 <h3 class="anchored" data-anchor-id="nginx-és-portleképezés">8. Nginx és portleképezés</h3>
-<p><strong>Platform:</strong> Debian VM – SSH terminál; HTTP-ellenőrzés curl-lel a VM-en.</p>
-<p>Indíts Nginx webszervert háttérben, <code>web-test</code> néven. A Debian VM <strong>8080-as portját</strong> rendeld a konténer <strong>80-as portjához</strong>. Ellenőrizd a weboldalt a VM-en, majd állítsd le és töröld a konténert.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker run <span class="at">-d</span> <span class="at">--name</span> web-test <span class="at">-p</span> 8080:80 nginx:stable</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-I</span> http://localhost:8080</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker ps</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker stop web-test</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker rm web-test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Segítség:</strong> <code>-d</code> = háttérben futás; <code>--name</code> = konténernév; <code>-p HOST:CONTAINER</code> = portleképezés. Külső böngészős eléréshez az Azure VM hálózati szabályainak is engedniük kell a 8080-as portot; ezt a feladat nem követeli meg.</p>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; HTTP-ellenőrzés a VM-en <code>curl</code> segítségével.</p>
+<p>Indíts Nginx webszervert háttérben, <strong><code>web-test</code></strong> néven. A Debian VM <strong>8080-as portját</strong> rendeld a konténer <strong>80-as portjához</strong>. Ellenőrizd a HTTP-választ, listázd a futó konténert, majd állítsd le és töröld. <strong>Az öt parancsot magad egészítsd ki.</strong></p>
+<p><strong>Segítség:</strong> <code>docker run</code>, <code>docker ps</code>, <code>docker stop</code>, <code>docker rm</code>, <code>curl -I</code>; kapcsolók: <code>-d</code>, <code>--name</code>, <code>-p HOST:CONTAINER</code>. A HTTP-ellenőrzés a VM-en történik, ezért nincs szükség Azure NSG-portnyitásra.</p>
 <div class="lab-answer">
-<label for="q08result"><strong>Válasz – Az indító parancs, a <code>curl -I</code> HTTP-státuszsora és a <code>docker ps</code> releváns sora.</strong></label>
-<textarea id="q08result" data-answer="Q08_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<label for="q08result"><strong>Beadandó – Az öt parancs és kimenetük; magyarázat nem szükséges.</strong></label>
+<textarea id="q08result" data-answer="Q08_RESULT" rows="21">sudo docker ...
+Kimenet:
+
+curl -I ...
+Kimenet:
+
+sudo docker ...
+Kimenet:
+
+sudo docker ...
+Kimenet:
+
+sudo docker ...
+Kimenet:
+</textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
@@ -401,30 +475,31 @@ Formai ellenőrzés
 </section>
 <section id="saját-dockerfile-és-image" class="level3">
 <h3 class="anchored" data-anchor-id="saját-dockerfile-és-image">9. Saját Dockerfile és image</h3>
-<p><strong>Platform:</strong> Debian VM – SSH terminál; Dockerfile és shell script szerkesztése helyben vagy VS Code Remote-SSH-val.</p>
-<p>Hozz létre egy <code>report.sh</code> fájlt és Dockerfile-t. Építs belőlük <code>project-report:1.0</code> nevű image-et, majd futtasd.</p>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; fájlok szerkesztése <code>nano</code> vagy <code>jed</code> segítségével.</p>
+<p>Hozz létre ugyanabban a mappában egy <code>report.sh</code> és egy <code>Dockerfile</code> nevű fájlt. Az alábbi kódokat használhatod.</p>
 <p><code>report.sh</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/sh</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'PROJECT STATUS REPORT\n'</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'Hostname: %s\n'</span> <span class="st">"</span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span><span class="st">"</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'User: %s\n'</span> <span class="st">"</span><span class="va">$(</span><span class="fu">whoami</span><span class="va">)</span><span class="st">"</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'Date: %s\n'</span> <span class="st">"</span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">"</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">'Uptime: %s\n'</span> <span class="st">"</span><span class="va">$(</span><span class="fu">uptime</span><span class="va">)</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>Dockerfile</code> (ugyanabban a mappában):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> alpine:3.20</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">RUN</span> <span class="ex">apk</span> add <span class="at">--no-cache</span> coreutils</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> report.sh /app/report.sh</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"sh"</span>, <span class="st">"/app/report.sh"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Futtatás:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker build <span class="at">-t</span> project-report:1.0 .</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker run <span class="at">--rm</span> project-report:1.0</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker images</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Segítség:</strong> <code>-t</code> = image neve és címkéje; a <code>.</code> a build context aktuális mappája. A szkript POSIX <code>sh</code>-t használ, ezért nem kell külön Bash-t telepíteni.</p>
-<p><strong>AI használható:</strong> A Dockerfile utasításainak megértéséhez vagy egy kisebb fejlesztés javaslatához. A javaslatot csak kipróbálás és ellenőrzés után alkalmazd.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/sh</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"CONTAINER REPORT"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Hostname: </span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Date: </span><span class="va">$(</span><span class="fu">date</span><span class="va">)</span><span class="st">"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>Dockerfile</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> alpine:3.20</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">WORKDIR</span> /app</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> report.sh .</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="kw">CMD</span> [<span class="st">"sh"</span>, <span class="st">"report.sh"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Önálló feladat:</strong> állítsd össze a <code>docker build</code> parancsot, amely az aktuális könyvtárból <strong><code>report-image:v1</code></strong> nevű image-et készít.</p>
+<p><strong>Segítség:</strong> <code>docker build</code>, <code>-t</code> (név és címke), <code>.</code> (aktuális könyvtár mint buildkontextus); <code>docker build --help</code>.</p>
+<p>Az elkészült image futtatásához használd:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker run <span class="at">--rm</span> report-image:v1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>AI-segítség megengedett:</strong> A Dockerfile ellenőrzéséhez és hibák értelmezéséhez. A javaslatot saját futtatással ellenőrizd.</p>
 <div class="lab-answer">
-<label for="q09result"><strong>Válasz – A build és a futtatás parancsai, valamint a program kimenete. Miben tér el a konténerben kiírt gépnév a Debian VM gépnevétől?</strong></label>
-<textarea id="q09result" data-answer="Q09_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
+<label for="q09result"><strong>Beadandó – A saját build parancs, annak kimenete és a konténer futtatásának kimenete; magyarázat nem szükséges.</strong></label>
+<textarea id="q09result" data-answer="Q09_RESULT" rows="14">sudo docker build ...
+Kimenet:
+
+sudo docker run --rm report-image:v1
+Kimenet:
+</textarea>
 <button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
 Formai ellenőrzés
 </button>
@@ -438,15 +513,15 @@ Formai ellenőrzés
 <h3 class="anchored" data-anchor-id="compose-projekt-létrehozása">10. Compose-projekt létrehozása</h3>
 <p><strong>Platform:</strong> Debian VM – SSH terminál; compose.yaml szerkesztése helyben vagy VS Code Remote-SSH-val.</p>
 <p>Készíts <code>compose-lab</code> mappát és benne az alábbi <code>compose.yaml</code> fájlt. Két külön Nginx-szolgáltatást indítunk eltérő host portokon.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web1</span><span class="kw">:</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:stable</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"8081:80"</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web2</span><span class="kw">:</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:stable</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"8082:80"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web1</span><span class="kw">:</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:stable</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"8081:80"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">web2</span><span class="kw">:</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> nginx:stable</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">"8082:80"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Segítség:</strong> A <code>services</code> az alkalmazás szolgáltatásait sorolja fel; a <code>ports</code> a host és a konténer portjait rendeli egymáshoz.</p>
 <p><strong>AI használható:</strong> YAML-szintaktikai hibák értelmezéséhez. A javítást a <code>docker compose config</code> paranccsal ellenőrizd.</p>
 <div class="lab-answer">
@@ -462,10 +537,10 @@ Formai ellenőrzés
 <h3 class="anchored" data-anchor-id="több-szolgáltatás-indítása">11. Több szolgáltatás indítása</h3>
 <p><strong>Platform:</strong> Debian VM – SSH terminál.</p>
 <p>Indítsd a Compose-projektet háttérben, és ellenőrizd mindkét webszervert.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker compose up <span class="at">-d</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker compose ps</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-I</span> http://localhost:8081</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-I</span> http://localhost:8082</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker compose up <span class="at">-d</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> docker compose ps</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-I</span> http://localhost:8081</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-I</span> http://localhost:8082</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="lab-answer">
 <label for="q11result"><strong>Válasz – A <code>compose ps</code> kimenete és a két HTTP-státuszsor. Miért különböznek a host portok?</strong></label>
 <textarea id="q11result" data-answer="Q11_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea>
@@ -539,7 +614,7 @@ Formai ellenőrzés
 <hr>
 <hr>
 <blockquote class="blockquote">
-<p><strong>AI-használat:</strong> A 3., 9. és 10. feladatnál AI-asszisztens használható segítségként. A kapott javaslatot saját parancsokkal és kimenetekkel ellenőrizd. Jelszót, tokent és privát kulcsot ne adj meg AI-eszköznek. Az AI-használat nem jelent külön feladatot.</p>
+<p><strong>AI-használat:</strong> A 3., 5., 9. és 10. feladatnál AI-asszisztens használható segítségként. A kapott javaslatot saját parancsokkal és kimenetekkel ellenőrizd. Jelszót, tokent és privát kulcsot ne adj meg AI-eszköznek. Az AI-használat nem jelent külön feladatot.</p>
 </blockquote>
 </section>
 </section>
@@ -651,7 +726,7 @@ Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: 
     const feedback=wrap?.querySelector('.lab-feedback'); if(!field||!feedback)return;
     const v=field.value.trim(),type=b.dataset.check,p=patterns[type]||/\S{12}/;
     const ok=type==='sha'?/^[0-9a-fA-F]{7,12}$/.test(v):type==='repo-url'?/^https:\/\/github\.com\/[A-Za-z0-9-]+\/[A-Za-z0-9._-]+\/?$/.test(v):v.length>=8&&p.test(v);
-    feedback.textContent=ok?'A válasz formátuma megfelelőnek tűnik. A tényleges végrehajtást ez nem igazolja.':(type==='sha'?'Adj meg 7–12 hexadecimális karaktert.':type==='repo-url'?'Adj meg teljes GitHub-repository URL-t.':'Egészítsd ki konkrét parancsokkal, kimenettel vagy a kért magyarázattal.');
+    feedback.textContent=ok?'A válasz formátuma megfelelőnek tűnik. A tényleges végrehajtást ez nem igazolja.':(type==='sha'?'Adj meg 7–12 hexadecimális karaktert.':type==='repo-url'?'Adj meg teljes GitHub-repository URL-t.':'Egészítsd ki a feladatban kért parancsokkal és kimenetekkel.');
     feedback.className='lab-feedback '+(ok?'ok':'warn');
   });
 })();
@@ -749,7 +824,7 @@ Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: 
   };
   window.clearAnswers=()=>{
     if(!confirm('Biztosan törlöd az összes helyben mentett választ és aktivitási adatot?'))return;
-    fields().forEach(f=>f.value='');
+    fields().forEach(f=>f.value=f.dataset.answer==='STUDENT_ID'?'':(f.defaultValue||''));
     try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
     activity={started_at:nowIso(),last_activity_at:nowIso(),active_seconds_estimate:0,edit_count:0,events:[]};
     $('submission-summary').hidden=true;$('submission-result').textContent='';$('save-status').textContent='Helyi adatok törölve.';renderActivity();

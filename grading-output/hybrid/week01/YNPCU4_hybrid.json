@@ -1,0 +1,123 @@
+{
+  "student_id": "YNPCU4",
+  "submitted_at": "2026-09-15T15:13:30.217Z",
+  "source_blob": "week01/YNPCU4/2026-09-15T15-13-31-653Z_6c2d16e6-90b9-4f36-9ec1-88cf43e34fdd.json",
+  "model": "gpt-5-mini",
+  "version": "0.6",
+  "provisional": true,
+  "total": 12,
+  "classification": "Elfogadott",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "reason": "A parancsban a Q05-ben megadott nyilvános IP szerepel, a TcpTestSucceeded értéke True — megfelel a feladatnak.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "Helyes Set-AzContext parancs, az előfizetés neve idézőjelek között szerepel.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "A Get-AzSubscription lekérdezés és a Select-Object Name, State használata szerepel és a kimenet is tartalmazza a Name/State oszlopokat.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "Get-AzResourceGroup parancs szerepel, és a saját erőforráscsoport neve (alban_pekseg) meg van adva.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "Get-AzVM parancs szerepel, a megadott VM-név (IDF-GAMING-PC) egyezik a Q02 válasszal.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "Get-AzVM -Status használata és a kimenetben a PowerState (VM running) szerepel — megfelel a feladatnak.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q12",
+      "score": 1,
+      "reason": "Mindkét hiányzó sor megfelelő: a VM státusz lekérdezése -Status kapcsolóval és az OS-lemez méretének kiírása $disk.DiskSizeGB használatával.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "Hiányzik az AI-nak adott prompt és a saját, érdemi összefoglalás (2–4 mondat).",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "Nem töltötte ki a PowerShell-parancsot, valamint hiányoznak a dailyRecurrence és notificationSettings kimenetek — a feladat nincs teljesítve.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "reason": "Nem adott leállító és állapotellenőrző parancsot, illetve nem szerepel a VM végső állapota.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    }
+  ],
+  "overall_note": "Jó az alap PowerShell/VM ellenőrzés és a scriptkiegészítés; hiányoznak azonban a Q13–Q15 feladatok, különösen az AI-prompt/összefoglalás és az automatikus leállítás ellenőrzése illetve a VM leállítása."
+}

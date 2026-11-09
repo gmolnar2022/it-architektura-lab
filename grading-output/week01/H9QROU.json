@@ -1,0 +1,128 @@
+{
+  "course": "ITARCH",
+  "week": 1,
+  "student_id": "H9QROU",
+  "submission_file": "week01/H9QROU/2026-09-17T11-12-12-577Z_6113b720-72ad-4de7-87e7-25e5be5f4a4b.json",
+  "submitted_at": "2026-09-17T11:12:11.757Z",
+  "submissions": 2,
+  "scoring_mode": "rule_based_provisional_not_AI",
+  "tasks": [
+    {
+      "task": "Q01",
+      "solved": true,
+      "score": 0,
+      "reason": "Subscription ID formátum ellenőrzése; az előfizetés tényleges tulajdonosa nem igazolt",
+      "review_required": true
+    },
+    {
+      "task": "Q02",
+      "solved": true,
+      "score": 0.5,
+      "reason": "Mezők: 4/4; régió: nem igazolt; régió és méret előfizetésbeli engedélyezése nem ellenőrzött",
+      "review_required": true
+    },
+    {
+      "task": "Q03",
+      "solved": true,
+      "score": 1,
+      "reason": "Önbevallás; tényleges Azure-konfiguráció nem igazolt",
+      "review_required": true
+    },
+    {
+      "task": "Q04",
+      "solved": true,
+      "score": 1,
+      "reason": "Önbevallás; tényleges Azure-konfiguráció nem igazolt",
+      "review_required": true
+    },
+    {
+      "task": "Q05",
+      "solved": true,
+      "score": 1,
+      "reason": "Publikus IPv4: true; privát IPv4: true; VNet megadva: true",
+      "review_required": false
+    },
+    {
+      "task": "Q06",
+      "solved": true,
+      "score": 1,
+      "reason": "Test-NetConnection: true; 3389: true; publikus IP-egyezés: true; TCP válasz önmagában nem bizonyítja a helyes parancsot",
+      "review_required": false
+    },
+    {
+      "task": "Q07",
+      "solved": true,
+      "score": 0.5,
+      "reason": "Előfizetés-kiválasztó parancs ellenőrzése",
+      "review_required": false
+    },
+    {
+      "task": "Q08",
+      "solved": true,
+      "score": 1,
+      "reason": "Get-AzSubscription, Name/State megjelenítés és kimenet; State hiánya miatt az eredmény ellenőrzendő lehet",
+      "review_required": false
+    },
+    {
+      "task": "Q09",
+      "solved": true,
+      "score": 1,
+      "reason": "RG egyezés a Q02 mezővel: true",
+      "review_required": false
+    },
+    {
+      "task": "Q10",
+      "solved": true,
+      "score": 1,
+      "reason": "VM névegyezés a Q02 mezővel: true",
+      "review_required": false
+    },
+    {
+      "task": "Q11",
+      "solved": true,
+      "score": 1,
+      "reason": "VM állapotlekérdezés; alternatív állapotok elfogadása",
+      "review_required": false
+    },
+    {
+      "task": "Q12",
+      "solved": false,
+      "score": 0,
+      "reason": "1. sor: nem igazolt; 2. sor: nem igazolt",
+      "review_required": false
+    },
+    {
+      "task": "Q13",
+      "solved": true,
+      "score": 1,
+      "reason": "Tartalmi kulcselemek: 3/3; tanári ellenőrzés szükséges",
+      "review_required": true
+    },
+    {
+      "task": "Q14",
+      "solved": false,
+      "score": 0,
+      "reason": "Schedule lekérdezés: false; RG egyezés: false; recurrence/notification mezők: false/false",
+      "review_required": true
+    },
+    {
+      "task": "Q15",
+      "solved": false,
+      "score": 0,
+      "reason": "Stop-AzVM: false; VM névegyezés: false; állapotellenőrzés: false; leállított állapot: false",
+      "review_required": true
+    }
+  ],
+  "summary": {
+    "solved": 12,
+    "correct": 9,
+    "partially_correct": 2,
+    "incorrect": 1,
+    "unanswered": 3,
+    "points": 10,
+    "max_points": 15,
+    "classification": "Nem elfogadott",
+    "review_required": true
+  },
+  "teacher_override": null
+}

@@ -1,0 +1,465 @@
+{
+  "week": 4,
+  "version": "week04-draft-1",
+  "status": "draft_requires_teacher_review",
+  "max_points": 15,
+  "accept_percent": 80,
+  "tasks": [
+    {
+      "number": 1,
+      "title": "1. feladat – Az Azure VM elindítása",
+      "description": "## 1. feladat – Az Azure VM elindítása **Hely:** Saját számítógép **Eszköz:** VS Code → PowerShell Terminal **AI:** nem szükséges Jelentkezz be az Azure-ba, majd a korábban tanult Azure PowerShell-parancsokkal indítsd el a saját virtuális gépedet, és ellenőrizd az állapotát. Add meg a ténylegesen használt, megfelelően paraméterezett parancsokat. ::: {.callout-warning title=\"Ha a virtuális gép nem indul el\"} Ha a virtuális gép **legalább két próbálkozás után sem indul el**, az Azure Portalon méretezd át egy másik, az adott régióban rendelkezésre álló VM-méretre, majd próbáld meg újra elindítani. ::: Connect-AzAccount parancs Start-AzVM parancs Get-AzVM állapotellenőrző parancs ",
+      "fields": [
+        "Q01_CONNECT",
+        "Q01_START",
+        "Q01_STATUS"
+      ],
+      "criteria": [
+        {
+          "id": "Q01_CONNECT",
+          "description": "Q01 CONNECT",
+          "weight": 1
+        },
+        {
+          "id": "Q01_START",
+          "description": "Q01 START",
+          "weight": 1
+        },
+        {
+          "id": "Q01_STATUS",
+          "description": "Q01 STATUS",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 2,
+      "title": "2. feladat – A VM Azure-erőforrásadatainak lekérdezése",
+      "description": "## 2. feladat – A VM Azure-erőforrásadatainak lekérdezése **Hely:** Saját számítógép **Eszköz:** VS Code → PowerShell Terminal **AI:** nem szükséges Kérdezd le Azure PowerShellből a VM nevét, erőforráscsoportját, régióját és futási állapotát. ::: {.callout-tip title=\"Támpont\"} Indulj ki a `Get-AzVM` parancsból, és használd a `-Status` kapcsolót. A VM-et kiválaszthatod közvetlenül például a `-Name` paraméterrel, vagy használhatsz szűrést (`Where-Object`). A megjelenített adatokat `Select-Object` segítségével szűkítheted. **Hasznos property-k:** `Name`, `ResourceGroupName`, `Location`, `PowerState` ::: A használt Azure PowerShell-parancs(ok) Resource Group Azure Location Power State ",
+      "fields": [
+        "Q02_COMMAND",
+        "Q02_RG",
+        "Q02_LOCATION",
+        "Q02_STATE"
+      ],
+      "criteria": [
+        {
+          "id": "Q02_COMMAND",
+          "description": "Q02 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q02_RG",
+          "description": "Q02 RG",
+          "weight": 1
+        },
+        {
+          "id": "Q02_LOCATION",
+          "description": "Q02 LOCATION",
+          "weight": 1
+        },
+        {
+          "id": "Q02_STATE",
+          "description": "Q02 STATE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 3,
+      "title": "3. feladat – Azure hálózati adatok lekérdezése",
+      "description": "## 3. feladat – Azure hálózati adatok lekérdezése **Hely:** Saját számítógép **Eszköz:** VS Code → PowerShell Terminal **AI:** nem szükséges Azure PowerShell segítségével keresd meg a VM-hez tartozó **nyilvános IP-címet** és **hálózati interfészt (NIC)**. ::: {.callout-tip title=\"Támpont\"} A publikus IP-címhez használd a `Get-AzPublicIpAddress`, a hálózati interfészhez a `Get-AzNetworkInterface` parancsot. A keresést szűkítheted a `-ResourceGroupName` paraméterrel. Hasznos property-k: `IpAddress`, `Name`. A megjelenítést `Select-Object` segítségével is szűkítheted. ::: A használt parancs(ok) Public IP NIC neve ",
+      "fields": [
+        "Q03_COMMAND",
+        "Q03_PUBLICIP",
+        "Q03_NIC"
+      ],
+      "criteria": [
+        {
+          "id": "Q03_COMMAND",
+          "description": "Q03 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q03_PUBLICIP",
+          "description": "Q03 PUBLICIP",
+          "weight": 1
+        },
+        {
+          "id": "Q03_NIC",
+          "description": "Q03 NIC",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 4,
+      "title": "4. feladat – Kapcsolódás a virtuális géphez",
+      "description": "## 4. feladat – Kapcsolódás a virtuális géphez **Hely:** Saját számítógép **Eszköz:** VS Code → PowerShell Terminal, majd Remote Desktop Connection **AI:** nem szükséges Mielőtt RDP-vel kapcsolódsz, teszteld a VM nyilvános IP-címének **TCP/3389** portját. Ha a teszt sikeres, kapcsolódj RDP-vel a VM-hez. ::: {.callout-tip title=\"Támpont\"} Használd a `Test-NetConnection` parancsot. Add meg célként a VM **publikus IP-címét**, a `-Port` paraméterrel pedig az RDP **3389-es TCP-portját**. Figyeld a `TcpTestSucceeded` értékét. **Hasznos elemek:** `Test-NetConnection` · `-Port` · `3389` · `TcpTestSucceeded` ::: A használt Test-NetConnection parancs TcpTestSucceeded True False # II. Guest OS nézőpont – Azure VM ",
+      "fields": [
+        "Q04_COMMAND",
+        "Q04_TCP"
+      ],
+      "criteria": [
+        {
+          "id": "Q04_COMMAND",
+          "description": "Q04 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q04_TCP",
+          "description": "Q04 TCP",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 5,
+      "title": "5. feladat – IIS webkiszolgáló engedélyezése",
+      "description": "## 5. feladat – IIS webkiszolgáló engedélyezése **Hely:** Azure VM **Eszköz:** RDP → Windows PowerShell rendszergazdaként **AI:** nem szükséges ::: {.callout-note title=\"PowerShell indítása rendszergazdaként a virtuális gépen\"} Nyisd meg a **Start menüt**, keress rá a **Windows PowerShell** alkalmazásra, majd jobb egérgomb → **Run as administrator / Futtatás rendszergazdaként**. Ha megjelenik a UAC ablak, válaszd a **Yes / Igen** lehetőséget. A címsorban az **Administrator: Windows PowerShell** felirat jelzi a rendszergazdai módot. ::: Ellenőrizd az `IIS-WebServerRole` állapotát a `Get-WindowsOptionalFeature` paranccsal, majd a `W3SVC` szolgáltatást a `Get-Service -Name ...` paranccsal. ::: {.callout-tip title=\"Ha az IIS nincs engedélyezve\"} Ha az `IIS-WebServerRole` nincs engedélyezve, futtasd: ```powershell Enable-WindowsOptionalFeature -Online -FeatureName IIS-WebServerRole -All -NoRestart ``` Ezután ellenőrizd újra az IIS állapotát. Ezt az opcionális engedélyező parancsot **nem kell beadnod**. ::: Végül futtasd a megadott HTTP-tesztet: ```powershell (Invoke-WebRequest http://localhost -UseBasicParsing).StatusCode ``` Get-WindowsOptionalFeature parancs Get-Service parancs a W3SVC ellenőrzéséhez http://localhost StatusCode ",
+      "fields": [
+        "Q05_FEATURE_COMMAND",
+        "Q05_SERVICE_COMMAND",
+        "Q05_HTTP"
+      ],
+      "criteria": [
+        {
+          "id": "Q05_FEATURE_COMMAND",
+          "description": "Q05 FEATURE COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q05_SERVICE_COMMAND",
+          "description": "Q05 SERVICE COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q05_HTTP",
+          "description": "Q05 HTTP",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 6,
+      "title": "6. feladat – IP-konfiguráció vizsgálata",
+      "description": "## 6. feladat – IP-konfiguráció vizsgálata **Hely:** Azure VM **Eszköz:** RDP → Windows PowerShell **AI:** nem szükséges A `Get-NetIPConfiguration` segítségével vizsgáld meg, mit lát a Windows a VM hálózati konfigurációjából. Jegyezd fel a privát IPv4-címet, az alapértelmezett átjárót és a DNS-szervert. ::: {.callout-tip title=\"Támpont\"} A megjelenített adatokat `Select-Object` segítségével szűkítheted. **Hasznos property-k:** `InterfaceAlias`, `IPv4Address`, `IPv4DefaultGateway`, `DNSServer` ::: A használt parancs IPv4 address Default gateway DNS server ",
+      "fields": [
+        "Q06_COMMAND",
+        "Q06_IPV4",
+        "Q06_GATEWAY",
+        "Q06_DNS"
+      ],
+      "criteria": [
+        {
+          "id": "Q06_COMMAND",
+          "description": "Q06 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q06_IPV4",
+          "description": "Q06 IPV4",
+          "weight": 1
+        },
+        {
+          "id": "Q06_GATEWAY",
+          "description": "Q06 GATEWAY",
+          "weight": 1
+        },
+        {
+          "id": "Q06_DNS",
+          "description": "Q06 DNS",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 7,
+      "title": "7. feladat – DNS-diagnosztika",
+      "description": "## 7. feladat – DNS-diagnosztika **Hely:** Azure VM **Eszköz:** RDP → Windows PowerShell **AI:** nem szükséges A `Resolve-DnsName` segítségével oldd fel a `www.microsoft.com` nevet. Vizsgáld meg, milyen IP-címet kapsz vissza. ::: {.callout-tip title=\"Támpont\"} **Hasznos elemek:** `Resolve-DnsName` · `www.microsoft.com` · `IPAddress` ::: A használt parancs Egy visszakapott IP-cím A névfeloldás eredménye Success Failed ",
+      "fields": [
+        "Q07_COMMAND",
+        "Q07_IP",
+        "Q07_RESULT"
+      ],
+      "criteria": [
+        {
+          "id": "Q07_COMMAND",
+          "description": "Q07 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q07_IP",
+          "description": "Q07 IP",
+          "weight": 1
+        },
+        {
+          "id": "Q07_RESULT",
+          "description": "Q07 RESULT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 8,
+      "title": "8. feladat – TCP-port diagnosztika",
+      "description": "## 8. feladat – TCP-port diagnosztika **Hely:** Azure VM **Eszköz:** RDP → Windows PowerShell **AI:** nem szükséges A `Test-NetConnection` segítségével ellenőrizd, hogy a VM képes-e TCP-kapcsolatot létrehozni a `www.microsoft.com` **443-as portjára**. ::: {.callout-tip title=\"Támpont\"} **Hasznos elemek:** `Test-NetConnection` · `www.microsoft.com` · `-Port` · `443` · `RemoteAddress` · `TcpTestSucceeded` ::: A használt parancs RemoteAddress TcpTestSucceeded True False ",
+      "fields": [
+        "Q08_COMMAND",
+        "Q08_REMOTE",
+        "Q08_TCP"
+      ],
+      "criteria": [
+        {
+          "id": "Q08_COMMAND",
+          "description": "Q08 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q08_REMOTE",
+          "description": "Q08 REMOTE",
+          "weight": 1
+        },
+        {
+          "id": "Q08_TCP",
+          "description": "Q08 TCP",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 9,
+      "title": "9. feladat – Network Diagnostic Dashboard készítése AI segítségével",
+      "description": "## 9. feladat – Network Diagnostic Dashboard készítése AI segítségével **Hely:** Azure VM **Eszköz:** RDP → Windows PowerShell ISE **AI:** használható és ajánlott ::: {.callout-note title=\"Hol találod a PowerShell ISE-t?\"} A VM-en nyisd meg a **Start menüt**, keress rá a **Windows PowerShell ISE** alkalmazásra, majd indítsd el **rendszergazdaként**. A felső szerkesztőablakban írhatod és mentheted a `.ps1` scriptet, az alsó konzolban pedig futtathatod és tesztelheted a parancsokat. ::: Most már három külön parancsot kipróbáltál: `Get-NetIPConfiguration`, `Resolve-DnsName` és `Test-NetConnection`. Kérd meg az AI-t, hogy ezekből készítsen egy **paraméterezhető PowerShell scriptet**, amely HTML-oldalt generál az IIS alapértelmezett webhelyére. A script neve legyen **`network-dashboard.ps1`**, és legalább a következőket jelenítse meg: - privát IPv4-cím, alapértelmezett átjáró és DNS-szerver; - a megadott célgép DNS-feloldásának eredménye; - a megadott TCP-port kapcsolatának eredménye. A célgép és a port legyen paraméter, például `Target` és `Port`. A teszthez választhatsz tetszőleges, értelmes célgépet. Futtatás előtt olvasd át az AI által készített scriptet, majd mentsd el (**Ctrl+S**), futtasd, és ellenőrizd a létrehozott oldalt. Böngészőben is ellenőrizd, hogy a dashboard adatai megfelelnek-e a 6–8. feladat eredményeinek. ::: {.callout-warning title=\"Ha az AI által készített kód hibát ad\"} Az AI első megoldása nem feltétlenül működik azonnal. Ha hibát kapsz, másold ki a **teljes hibaüzenetet**, add vissza az AI-nak, és kérd meg, hogy **javítsa a kódot a hiba alapján**. Ezután futtasd újra és ellenőrizd az eredményt. Ne csak azt írd, hogy „nem működik”: a hibaüzenet alapján az AI pontosabban tud javítani. **Mintaprompt:** „Az általad készített PowerShell-kód az alábbi hibát adja. Javítsd úgy, hogy Windows PowerShellben is működjön: [hibaüzenet]” ::: Az AI-nak adott prompt A script fájlneve A teszthez használt Target A teszthez használt Port http://localhost StatusCode # III. Külső elérés és Azure hálózati védelem ",
+      "fields": [
+        "Q09_PROMPT",
+        "Q09_FILENAME",
+        "Q09_TARGET",
+        "Q09_PORT",
+        "Q09_HTTP"
+      ],
+      "criteria": [
+        {
+          "id": "Q09_PROMPT",
+          "description": "Q09 PROMPT",
+          "weight": 1
+        },
+        {
+          "id": "Q09_FILENAME",
+          "description": "Q09 FILENAME",
+          "weight": 1
+        },
+        {
+          "id": "Q09_TARGET",
+          "description": "Q09 TARGET",
+          "weight": 1
+        },
+        {
+          "id": "Q09_PORT",
+          "description": "Q09 PORT",
+          "weight": 1
+        },
+        {
+          "id": "Q09_HTTP",
+          "description": "Q09 HTTP",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 10,
+      "title": "10. feladat – A Network Dashboard külső tesztje",
+      "description": "## 10. feladat – A Network Dashboard külső tesztje **Hely:** Azure VM, majd saját számítógép **Eszköz:** PowerShell mindkét gépen **AI:** nem szükséges Először a VM-en ellenőrizd a 80-as portot `localhost` címmel. Ezután a **saját számítógépedről** teszteld a VM nyilvános IP-címének 80-as portját. ::: {.callout-tip title=\"Támpont\"} Használd a `Test-NetConnection` parancsot, a `-Port` paraméterrel a **80-as TCP-portot**, és figyeld a `TcpTestSucceeded` értékét. **Hasznos elemek:** `Test-NetConnection` · `localhost` · publikus IP-cím · `-Port 80` · `TcpTestSucceeded` Az első tesztet **a VM-en**, a másodikat **a saját számítógépeden** futtasd. ::: localhost:80 – TcpTestSucceeded True False PUBLIC-IP:80 – TcpTestSucceeded az NSG ellenőrzése előtt True False ",
+      "fields": [
+        "Q10_LOCAL",
+        "Q10_EXTERNAL"
+      ],
+      "criteria": [
+        {
+          "id": "Q10_LOCAL",
+          "description": "Q10 LOCAL",
+          "weight": 1
+        },
+        {
+          "id": "Q10_EXTERNAL",
+          "description": "Q10 EXTERNAL",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 11,
+      "title": "11. feladat – NSG-szabály a Network Dashboardhoz",
+      "description": "## 11. feladat – NSG-szabály a Network Dashboardhoz **Hely:** Saját számítógép **Eszköz:** Azure Portal + VS Code → PowerShell Terminal + böngésző **AI:** használható Ha a 80-as port kívülről nem érhető el, az Azure Portalon hozz létre olyan **Inbound NSG szabályt**, amely a **saját nyilvános IP-címedről** engedélyezi a TCP/80 forgalmat. Ne nyisd meg szükségtelenül az egész internet felé. ::: {.callout-tip title=\"Útmutató – HTTP-forgalom engedélyezése\"} Az Azure Portalon nyisd meg a VM-et → **Hálózati beállítások (Networking / Network settings)** → **Portszabály létrehozása (Create port rule)** → **Bejövő portszabály (Inbound port rule)**. - **Source:** saját publikus IP-címed (`/32`) - **Source port ranges:** `*` - **Destination:** `Any` - **Service:** `HTTP` - **Destination port:** `80` - **Protocol:** `TCP` - **Action:** `Allow` - **Priority:** például `310` - **Name:** például `Allow-HTTP-MyIP` ::: Ezután ismételd meg a külső `Test-NetConnection` tesztet, majd böngészőből nyisd meg a Network Diagnostic Dashboardot. NSG rule name Destination port Source beállítás röviden TcpTestSucceeded az NSG-szabály után True False # IV. Azure Resource Dashboard ",
+      "fields": [
+        "Q11_NAME",
+        "Q11_PORT",
+        "Q11_SOURCE",
+        "Q11_TCP"
+      ],
+      "criteria": [
+        {
+          "id": "Q11_NAME",
+          "description": "Q11 NAME",
+          "weight": 1
+        },
+        {
+          "id": "Q11_PORT",
+          "description": "Q11 PORT",
+          "weight": 1
+        },
+        {
+          "id": "Q11_SOURCE",
+          "description": "Q11 SOURCE",
+          "weight": 1
+        },
+        {
+          "id": "Q11_TCP",
+          "description": "Q11 TCP",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 12,
+      "title": "12. feladat – Azure Resource Dashboard készítése",
+      "description": "## 12. feladat – Azure Resource Dashboard készítése **Hely:** Saját számítógép, majd Azure VM **Eszköz:** VS Code → PowerShell Terminal, AI, RDP **AI:** használható és ajánlott Térj vissza a 2–3. feladatban **külön-külön kipróbált Azure PowerShell-parancsokhoz**. Kérd meg az AI-t, hogy ezekből készítsen olyan PowerShell scriptet, amely létrehoz egy **`azure-dashboard.html`** fájlt. A dashboard jelenítse meg legalább: - VM name; - Resource Group; - Azure Location; - VM size; - Power State; - Public IP. A létrehozott HTML-fájlt másold át RDP-n keresztül a VM-re. Az AI-nak adott prompt A scriptben használt fő Get-Az parancsok A létrehozott HTML fájl neve ",
+      "fields": [
+        "Q12_PROMPT",
+        "Q12_COMMANDS",
+        "Q12_FILE"
+      ],
+      "criteria": [
+        {
+          "id": "Q12_PROMPT",
+          "description": "Q12 PROMPT",
+          "weight": 1
+        },
+        {
+          "id": "Q12_COMMANDS",
+          "description": "Q12 COMMANDS",
+          "weight": 1
+        },
+        {
+          "id": "Q12_FILE",
+          "description": "Q12 FILE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 13,
+      "title": "13. feladat – Második IIS-webhely létrehozása a 8080-as porton",
+      "description": "## 13. feladat – Második IIS-webhely létrehozása a 8080-as porton **Hely:** Azure VM **Eszköz:** RDP → Windows PowerShell rendszergazdaként **AI:** használható Hozd létre a `C:\\inetpub\\azure-dashboard` könyvtárat, és helyezd el benne az előző feladatban elkészített HTML-oldalt `index.html` néven. A `WebAdministration` modul és a `New-Website` segítségével hozz létre egy második IIS-webhelyet **AzureDashboard** néven a **8080-as porton**. Ellenőrizd a webhelyet a VM-en `localhost:8080` címmel. ::: {.callout-tip title=\"Támpont a teszteléshez\"} Használd a `Test-NetConnection` parancsot. Célként add meg a `localhost` értéket, a `-Port` paraméterrel pedig a **8080-as portot**. Figyeld a `TcpTestSucceeded` értékét. **Hasznos elemek:** `Test-NetConnection` · `localhost` · `-Port` · `8080` · `TcpTestSucceeded` ::: IIS site neve Physical path Port localhost:8080 – TcpTestSucceeded True False ",
+      "fields": [
+        "Q13_SITE",
+        "Q13_PATH",
+        "Q13_PORT",
+        "Q13_LOCAL"
+      ],
+      "criteria": [
+        {
+          "id": "Q13_SITE",
+          "description": "Q13 SITE",
+          "weight": 1
+        },
+        {
+          "id": "Q13_PATH",
+          "description": "Q13 PATH",
+          "weight": 1
+        },
+        {
+          "id": "Q13_PORT",
+          "description": "Q13 PORT",
+          "weight": 1
+        },
+        {
+          "id": "Q13_LOCAL",
+          "description": "Q13 LOCAL",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 14,
+      "title": "14. feladat – A 8080-as port hibakeresése",
+      "description": "## 14. feladat – A 8080-as port hibakeresése **Hely:** Saját számítógép és Azure VM **Eszköz:** VS Code → PowerShell Terminal, Azure Portal, RDP → Administrator PowerShell **AI:** használható és ajánlott A saját számítógépedről teszteld a VM nyilvános IP-címének **8080-as portját**. Használd a **13. feladatban már alkalmazott `Test-NetConnection` parancsot**, de `localhost` helyett a VM **publikus IP-címét** add meg, a port pedig legyen `8080`. 1. **NSG-szabály:** a **11. feladatban megismert módon** hozz létre új bejövő szabályt. Most a `80` helyett a `8080` célportot engedélyezd, továbbra is csak a saját publikus IP-címedről (`/32`). 2. **Teszteld újra:** használd ismét a `Test-NetConnection` parancsot a VM publikus IP-címével és a `-Port 8080` paraméterrel. 3. Ha továbbra sem érhető el, kérj az AI-tól hibakeresési javaslatot. Vizsgáld meg a **Windows Defender Firewall** szerepét. 4. Szükség esetén hozz létre Windows Firewall inbound szabályt a TCP/8080 portra. 5. **Végső ellenőrzés:** futtasd újra a `Test-NetConnection` parancsot a **saját számítógépeden**, a VM publikus IP-címére és a `8080`-as portra. A `TcpTestSucceeded` értékének ekkor már `True` értéket kell mutatnia. Ezután nyisd meg böngészőben az Azure Resource Dashboardot. ::: {.callout-note title=\"Mit tanulunk ebből?\"} Az IIS működése, az Azure NSG engedélyezése és a Windows Firewall engedélyezése **három külön ellenőrzési pont**. Attól, hogy `localhost:8080` működik, a szolgáltatás még nem feltétlenül érhető el az internetről. ::: Külső 8080 teszt a beállítások előtt True False 8080-as NSG rule neve A Windows Firewallhoz használt PowerShell-parancs Külső 8080 teszt a beállítások után True False Röviden: miért kellett két külön helyen is engedélyezni a portot? # V. Lezárás ",
+      "fields": [
+        "Q14_BEFORE",
+        "Q14_NSG",
+        "Q14_FIREWALL",
+        "Q14_AFTER",
+        "Q14_EXPLANATION"
+      ],
+      "criteria": [
+        {
+          "id": "Q14_BEFORE",
+          "description": "Q14 BEFORE",
+          "weight": 1
+        },
+        {
+          "id": "Q14_NSG",
+          "description": "Q14 NSG",
+          "weight": 1
+        },
+        {
+          "id": "Q14_FIREWALL",
+          "description": "Q14 FIREWALL",
+          "weight": 1
+        },
+        {
+          "id": "Q14_AFTER",
+          "description": "Q14 AFTER",
+          "weight": 1
+        },
+        {
+          "id": "Q14_EXPLANATION",
+          "description": "Q14 EXPLANATION",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 15,
+      "title": "15. feladat – A virtuális gép leállítása",
+      "description": "## 15. feladat – A virtuális gép leállítása **Hely:** Saját számítógép **Eszköz:** VS Code → PowerShell Terminal **AI:** nem szükséges Azure PowerShell használatával állítsd le a gyakorlat során használt saját virtuális gépedet. A VM-et úgy állítsd le, hogy az Azure-ban is felszabadításra kerüljön (**deallocated** állapot). Ezután ellenőrizd a végső állapotot. VM neve A leállításhoz használt parancs PowerState ::: {.callout-tip title=\"Ajánlott kiegészítő Skillable labor\"} A heti gyakorlat kiegészítéseként ajánlott elvégezni a következő **Skillable labort**: **AZ-900 – Implement a Network Security Group** A labor jó lehetőséget ad az ezen a héten megismert **Network Security Group (NSG)** és hálózati biztonsági szabályok további gyakorlására. ::: ## Mentés és beadás 📤 Beadás 💾 JSON export Helyi adatok törlése Beadási határidő: 2026. október 15. 11:40 Beadás előtti összesítés Vissza a javításhoz Beadás megerősítése ::: {.callout-note title=\"Aktivitási adatok\"} A munkafüzet kísérleti jelleggel becsült aktív időt és feladatonkénti szerkesztési eseményeket is rögzíthet. Ez nem pontos munkaidőmérés: a másik böngészőlapon, VS Code-ban vagy RDP-ben végzett munka nem feltétlenül számít aktív időnek. ::: Aktivitás ezen a gépen Időmérés: – Eseménykövetés: – Becsült aktív idő: 0:00 Szerkesztési események: 0 Első megnyitás: – Utolsó aktivitás: – const SETUP = Object.assign({ timeTracking: false, eventTracking: false, showTrackingPanel: false, allowImport: false, checksEnabled: false, syntaxChecks: true, aiChecks: true, showChecksInSubmissionSummary: true, requireChecksBeforeSubmission: false }, window.ITARCH_SETUP || {}); const STORAGE_KEY = \"itarch_week04_answers_beta1\"; const IDLE_LIMIT_MS = 120000; const TICK_MS = 1000; const TASKS = { Q01: { title: \"Azure VM indítása\", type: \"syntax\" }, Q02: { title: \"Azure VM adatainak lekérdezése\", type: \"syntax\" }, Q03: { title: \"Azure hálózati adatok lekérdezése\", type: \"syntax\" }, Q04: { title: \"Kapcsolódás a virtuális géphez\", type: \"syntax\" }, Q05: { title: \"IIS webkiszolgáló engedélyezése\", type: \"syntax\" }, Q06: { title: \"IP-konfiguráció vizsgálata\", type: \"syntax\" }, Q07: { title: \"DNS-diagnosztika\", type: \"syntax\" }, Q08: { title: \"TCP-port diagnosztika\", type: \"syntax\" }, Q09: { title: \"Network Diagnostic Dashboard\", type: \"syntax\" }, Q10: { title: \"A Network Dashboard külső tesztje\", type: \"syntax\" }, Q11: { title: \"NSG-szabály a 80-as portra\", type: \"syntax\" }, Q12: { title: \"Azure Resource Dashboard\", type: \"syntax\" }, Q13: { title: \"Második IIS-webhely a 8080-as porton\", type: \"syntax\" }, Q14: { title: \"8080-as port hibakeresése és engedélyezése\", type: \"syntax\" }, Q15: { title: \"A virtuális gép leállítása\", type: \"syntax\" } }; function fields() { return Array.from(document.querySelectorAll(\"[data-answer]\")); ",
+      "fields": [
+        "Q15_VM",
+        "Q15_COMMAND",
+        "Q15_STATE"
+      ],
+      "criteria": [
+        {
+          "id": "Q15_VM",
+          "description": "Q15 VM",
+          "weight": 1
+        },
+        {
+          "id": "Q15_COMMAND",
+          "description": "Q15 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q15_STATE",
+          "description": "Q15 STATE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    }
+  ]
+}

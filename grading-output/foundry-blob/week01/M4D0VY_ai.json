@@ -1,0 +1,102 @@
+{
+  "student_id": "M4D0VY",
+  "submitted_at": "2026-09-21T16:14:09.174Z",
+  "source_blob": "week01/M4D0VY/2026-09-21T16-14-13-048Z_7673661c-1f67-4984-91f5-5a79546dd81b.json",
+  "model": "gpt-5-mini",
+  "provisional": true,
+  "total": 12,
+  "classification": "Elfogadott",
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "A beküldött Subscription ID (fb7298ff-d1d2-4efd-ac01-1c0650892af0) szerepel; az elvárt érték megadva.",
+      "manual_review": false
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Az Alapadatok mezők kitöltve: Resource Group = Win11RG, VM name = IT-Arch, Region = Poland Central, Username = azure — megfelel a feladat követelményének.",
+      "manual_review": false
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "A lemezbeállításról a hallgató megerősítette ('Igen'), tehát a Standard HDD kiválasztását elvégezte a feladat utasítása szerint.",
+      "manual_review": false
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "A hálózati ellenőrzésről a hallgató megerősítette ('Igen'), az elvárt alapértelmezett hálózati beállítások használata igazoltnak tekinthető a beadás alapján.",
+      "manual_review": false
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "A VM Áttekintés adatai megadva: Public IP = 20.215.213.115, Private IP = 172.16.0.4, Virtual network = ' vnet-polandcentral-1' — a kért mezők kitöltöttek (a VNet név előtti szókörész kisebb formai eltérés, de szemantikailag értelmezhető).",
+      "manual_review": false
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "reason": "A PowerShell parancs helyesen megadva (Test-NetConnection 20.215.213.115 -Port 3389) és a TcpTestSucceeded értéke 'True' — a feladatban kért ellenőrzés teljesült.",
+      "manual_review": false
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "A Set-AzContext \"Azure for Students\" parancs megadva, ez megfelel az előfizetés kontextusának beállítására vonatkozó utasításnak.",
+      "manual_review": false
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "Az előfizetések listázásához a Get-AzSubscription és a Get-AzSubscription | Select-Object Name, State parancsok megadva, valamint a várt Name/State kimenet szerepel — a feladat teljesítve.",
+      "manual_review": false
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "A Resource Groupok listázásához Get-AzResourceGroup parancs megadva, és a saját Resource Group névként Win11RG szerepel — megfelel az elvárásnak.",
+      "manual_review": false
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "A Virtuális gépek lekérdezéséhez a Get-AzVM parancs megadva, és a saját VM neve IT-Arch szerepel — a feladat követelménye teljesült.",
+      "manual_review": false
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A VM állapot lekérdezéséhez Get-AzVM -Status parancs szerepel, és az állapotként 'VM running' megadva — az állapot lekérdezése és megadása megtörtént.",
+      "manual_review": false
+    },
+    {
+      "task": "Q12",
+      "score": 0,
+      "reason": "A vm-info.ps1 kódváz két hiányzó sorát nem töltötte ki (mindkét mező üres). A feladat kifejezetten a két hiányzó PowerShell-sor kitöltését kérte, ami nem történt meg.",
+      "manual_review": false
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "Az AI-prompt és a saját összefoglalás mezők üresek; a feladat a script futtatását és magyarázatának beküldését kérte, ezt nem teljesítette a beadás.",
+      "manual_review": false
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "A PowerShell-parancs, valamint a dailyRecurrence és notificationSettings mezők nem kerültek kitöltésre — a feladat ellenőrzése PowerShellből ezért nem igazolható a beadás alapján.",
+      "manual_review": false
+    },
+    {
+      "task": "Q15",
+      "score": 1,
+      "reason": "A VM leállításához és állapotellenőrzéshez helyes parancsok szerepelnek: Stop-AzVM -Name \"IT-Arch\" -ResourceGroupName \"Win11RG\" és Get-AzVM -Status, a végső állapotként 'VM deallocated' megadva — megfelel a feladatnak.",
+      "manual_review": false
+    }
+  ],
+  "overall_note": "A beadásban a legtöbb feladat helyesen kitöltött (12/15 feladat teljesnek ítélhető). Három feladat (Q12, Q13, Q14) hiányos maradt, ezért ezekre 0 pontot adtam. Nincsenek 0.5 pontos részpontok, mivel a hiányosságok vagy üresen maradtak, vagy a szükséges információ teljesen megadott. Manual review nem szükséges."
+}

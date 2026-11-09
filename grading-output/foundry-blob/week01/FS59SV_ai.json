@@ -1,0 +1,102 @@
+{
+  "student_id": "FS59SV",
+  "submitted_at": "2026-09-15T15:05:38.306Z",
+  "source_blob": "week01/FS59SV/2026-09-15T15-05-38-367Z_9e870a17-3717-4ddb-a54d-ea6cd7640a55.json",
+  "model": "gpt-5-mini",
+  "provisional": true,
+  "total": 12,
+  "classification": "Elfogadott",
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Megadott egy Subscription ID-t (GUID), ami megfelel a feladathoz kért információnak.",
+      "manual_review": false
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Megvannak a kért alapadatok: erőforráscsoport (win11), VM név (elsoGep), régió (Denmark East) és felhasználónév (TothDani).",
+      "manual_review": false
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "A feladat elvégzését megerősítette (Igen) — a leírt követelmény (Standard HDD kiválasztása) teljesítése jelzése megtörtént.",
+      "manual_review": false
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "A hálózati beállítások ellenőrzését megerősítette (Igen), ami megfelel a feladat követelményének.",
+      "manual_review": false
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Megadta a public IP-t, private IP-t és a virtuális hálózat nevét; a feladat azt kérte, hogy ezeket írja le — teljesítve.",
+      "manual_review": false
+    },
+    {
+      "task": "Q06",
+      "score": 0.5,
+      "reason": "A parancs formailag helyes (Test-NetConnection ... -Port 3389) és a TcpTestSucceeded értéket is megadta, de az IP-cím, amit a parancsban használt (9.205.19.152) nem egyezik a korábban megadott public IP-vel (9.205.16.152). Részleges pont a helyes parancsszintaxisért, de eltérés a megadott címmel.",
+      "manual_review": true
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "A Set-AzContext -Subscription \"Azure for Students\" parancs megfelel az instrukciónak (az előfizetés aktiválása/kontextus beállítása).",
+      "manual_review": false
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "A get-AzSubscription és a get-AzSubscription | Select-Object State,Name parancsok helyesek, és a parancsok kimenetét is megadta.",
+      "manual_review": false
+    },
+    {
+      "task": "Q09",
+      "score": 0.5,
+      "reason": "A használt parancs (Get-AzResourceGroup) megfelelő. A saját VM Resource Group-jának megadott neve (elsoGep_csoport) viszont eltér a korábban megadott erőforráscsoporttól (win11), ezért ellentmondás van — részleges pontot adtam a parancsért és az erőfeszítésért.",
+      "manual_review": true
+    },
+    {
+      "task": "Q10",
+      "score": 0.5,
+      "reason": "A Get-AzVM parancs megadása helyes, de a saját VM névként megadott érték (ELSOGEP_CSOPORT_7025734) nem egyezik a korábbi VM-névvel (elsoGep). Részleges pont a megadott parancsért; a név-ellentmondás miatt nem adható teljes pont.",
+      "manual_review": true
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A Get-AzVM -Status parancs helyes a VM állapotának lekérdezésére, és az állapotot ('running') megadta.",
+      "manual_review": false
+    },
+    {
+      "task": "Q12",
+      "score": 1,
+      "reason": "A két hiányzó sor helyesen lett kitöltve: $vmStatus = Get-AzVM -ResourceGroupName $resourceGroup -Name $vmName -Status és a Write-Host sor a lemezméret kiíratására (Az OS-lemez mérete: $($disk.DiskSizeGB) GB).",
+      "manual_review": false
+    },
+    {
+      "task": "Q13",
+      "score": 1,
+      "reason": "Az AI-hoz adott prompt rövid és a saját összefoglalás 2–4 mondatban van, pontosan leírja a script működését és a Select-Object szerepét.",
+      "manual_review": false
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "Nem töltötte ki a hiányzó PowerShell-utasítás nevét (elvárt: Get-AzResource), nem cserélte le a placeholder erőforráscsoport-nevet, és a dailyRecurrence illetve notificationSettings mezők értékét nem adta meg. A feladatban kért ellenőrző parancs és a mezők kimenete hiányzik.",
+      "manual_review": true
+    },
+    {
+      "task": "Q15",
+      "score": 0.5,
+      "reason": "Ismerte a megfelelő parancsok nevét (Stop-AzVM és Get-AzVM -Status), de a leállításhoz megadott parancs hiányos (paraméterek -Name és -ResourceGroupName nem szerepelnek), és a VM végső állapotként megadott 'inactive' nem szokványos Azure állapotmegnevezés (pl. 'stopped' vagy 'stopped (deallocated)'). Részleges pont a koncepcióért.",
+      "manual_review": true
+    }
+  ],
+  "overall_note": "Az értékelésnél figyelembe vettem a parancsok helyességét, a megadott értékek konzisztenciáját és a feladatban explicit kért eredmények meglétét. Részleges pontot adtam, ha a hallgató sematikusan helyes megoldást adott, de hiányosság vagy ellentmondás volt (pl. IP-cím- vagy néveltérések). Kérlek vizsgáld át a 6-os, 9-es, 10-es, 14-es és 15-ös feladatoknál jelölt ellentmondásokat és hiányosságokat; ezek miatt a feladatoknál manual_review=true szerepel."
+}

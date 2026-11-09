@@ -1,0 +1,102 @@
+{
+  "student_id": "YNPCU4",
+  "submitted_at": "2026-09-15T15:13:30.217Z",
+  "source_blob": "week01/YNPCU4/2026-09-15T15-13-31-653Z_6c2d16e6-90b9-4f36-9ec1-88cf43e34fdd.json",
+  "model": "gpt-5-mini",
+  "provisional": true,
+  "total": 12,
+  "classification": "Elfogadott",
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "A hallgató érvényes GUID formátumú Subscription ID-t adott meg.",
+      "manual_review": false
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Az erőforráscsoport, VM-név, régió és felhasználónév megadva; a feladat egyedi értékeket várt, ezek érvényesnek tűnnek.",
+      "manual_review": false
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "A hallgató jelölte, hogy a Standard HDD kiválasztása megtörtént (\"Igen\").",
+      "manual_review": false
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "A hálózati beállítások elvégzését a hallgató megerősítette (\"Igen\").",
+      "manual_review": false
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "A hallgató megadta a nyilvános és magánhálózati IP-címet, valamint a virtuális hálózat azonosítóját/azonosítóját; a feladat értékeket várt, ezek rendelkezésre állnak.",
+      "manual_review": false
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "reason": "A Test-NetConnection parancs helyesen szerepel a megadott publikus IP-vel és a 3389-es porttal; a TcpTestSucceeded értéke is megadva (True).",
+      "manual_review": false
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "A Set-AzContext parancs helyesen szerepel az \"Azure for Students\" előfizetés beállításához.",
+      "manual_review": false
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "A Get-AzSubscription parancs és a szűrési példa (Select-Object Name, State) megvan, valamint a várt kimenetet is megadta a hallgató.",
+      "manual_review": false
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "A Get-AzResourceGroup parancs megadva, valamint a saját Resource Group neve (alban_pekseg) is szerepel.",
+      "manual_review": false
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "A virtuális gépek listázására a Get-AzVM parancs szerepel, és a saját VM neve megadva (IDF-GAMING-PC).",
+      "manual_review": false
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A Get-AzVM -Status parancs szerepel, és a kimenetből a VM állapota (VM running) visszaolvasható — a feladat követelménye teljesül.",
+      "manual_review": false
+    },
+    {
+      "task": "Q12",
+      "score": 1,
+      "reason": "Mindkét hiányzó sort helyesen kiegészítette: a VM státusz lekérése -Status kapcsolóval, és az OS-lemez méretének kiírása a $disk.DiskSizeGB használatával. (A feladatlapon a $disk változó már rendelkezésre áll.)",
+      "manual_review": false
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "A feladat megoldásához AI-hoz küldött prompt és a saját összefoglalás hiányzik (üres mezők).",
+      "manual_review": false
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "A kiegészítendő PowerShell-parancs (a parancs neve és a ResourceGroup paraméter) nincs megadva, valamint a dailyRecurrence és notificationSettings mezők értékei hiányoznak; így az ellenőrzés nem teljesített.",
+      "manual_review": false
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "reason": "A VM leállításához és az állapot ellenőrzéséhez szükséges PowerShell-parancsok nincsenek megadva (üres mezők).",
+      "manual_review": false
+    }
+  ],
+  "overall_note": "Összpontszám: 12/15. Hiányzó vagy nem leadott megoldások: Q13 (AI-elemzés és összefoglaló), Q14 (automatikus leállítás ellenőrző parancs és mezők), Q15 (leállítás és státusz parancsok)."
+}

@@ -1,0 +1,123 @@
+{
+  "student_id": "M4D0VY",
+  "submitted_at": "2026-09-21T16:14:09.174Z",
+  "source_blob": "week01/M4D0VY/2026-09-21T16-14-13-048Z_7673661c-1f67-4984-91f5-5a79546dd81b.json",
+  "model": "gpt-5-mini",
+  "version": "0.7",
+  "provisional": true,
+  "total": 11.5,
+  "classification": "Ellenőrizendő",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "reason": "A parancs pontosan a Q05-ben megadott nyilvános IP-t és a 3389-es portot használja; TcpTestSucceeded True.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q07",
+      "score": 0.5,
+      "reason": "A parancs tartalmazza a nevet, de a paraméternév hiányzik; nem biztos, hogy a subscription lesz beállítva (posicionális paraméter bizonytalan).",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "Helyes parancs és filter (Get-AzSubscription | Select-Object Name, State); az eredmény rendben van.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "Helyes parancs és az RG név megegyezik a Q02-ban megadottal.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "Helyes parancs (Get-AzVM) és a megadott VM-név megegyezik a Q02-ban szereplővel.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "Get-AzVM -Status parancs megadva, és az Azure státusz ('VM running') szerepel — helyes.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q12",
+      "score": 0,
+      "reason": "Mindkét hiányzó sor üres, nincs megoldás.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "Hiányzik az AI-nak adott prompt és a saját összefoglalás.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "Hiányzó válaszok (parancs és mezők üresek).",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q15",
+      "score": 1,
+      "reason": "Teljes megoldás: helyes Stop-AzVM paranccsal megadva a VM neve és RG, és érvényes Azure-státusz ('VM deallocated') szerepel.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    }
+  ],
+  "overall_note": "Feladatonkénti, kötegelt szemantikai AI-javítás; minden eredmény előzetes."
+}

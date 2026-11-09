@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@azure/identity": "^4.14.1",
+    "@azure/storage-blob": "^12.34.0",
+    "openai": "^7.53.0"
+  }
+}

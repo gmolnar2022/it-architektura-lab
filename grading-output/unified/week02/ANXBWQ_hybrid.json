@@ -1,0 +1,210 @@
+{
+  "student_id": "ANXBWQ",
+  "week": 2,
+  "submitted_at": "2026-09-26T11:34:01.124Z",
+  "source_blob": "week02/ANXBWQ/2026-09-26T11-34-04-787Z_064b1ffb-f792-4a63-b961-6e7878d149b1.json",
+  "rubric_version": "week02-draft-1",
+  "rubric_status": "draft_requires_teacher_review",
+  "model": "gpt-5-mini",
+  "provisional": true,
+  "total": null,
+  "total_display": null,
+  "max_points": 15,
+  "threshold": 12,
+  "classification": "Hiányos értékelés",
+  "manual_review_tasks": [
+    "Q04",
+    "Q05",
+    "Q06",
+    "Q07",
+    "Q08",
+    "Q09",
+    "Q10",
+    "Q11",
+    "Q12",
+    "Q13",
+    "Q14",
+    "Q15"
+  ],
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q01_DONE",
+          "percent": 100,
+          "reason": "Önbevallás: igen (nem igazolt végrehajtás)"
+        }
+      ],
+      "reason": "Q01_DONE: Önbevallás: igen (nem igazolt végrehajtás)",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q02_DONE",
+          "percent": 100,
+          "reason": "Önbevallás: igen (nem igazolt végrehajtás)"
+        }
+      ],
+      "reason": "Q02_DONE: Önbevallás: igen (nem igazolt végrehajtás)",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q03_VMNAME",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q03_REGION",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q03_IMAGE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q03_SIZE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q03_VMNAME: Üres válasz | Q03_REGION: Üres válasz | Q03_IMAGE: Üres válasz | Q03_SIZE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_shared"
+    },
+    {
+      "task": "Q05",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_shared"
+    },
+    {
+      "task": "Q06",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q07",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q08",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q09",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_shared"
+    },
+    {
+      "task": "Q10",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_shared"
+    },
+    {
+      "task": "Q11",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q12",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_shared"
+    },
+    {
+      "task": "Q13",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q14",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q15",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q15_SCRIPT",
+          "percent": 100,
+          "reason": "A script helyesen kiírja a gépnevét, Windows nevét és verzióját, 0. lemez nevét és méretét, valamint a 5 legtöbbet memóriahasználó folyamat nevét, azonosítóját és WS értékét; pipeline és változók jól használva."
+        },
+        {
+          "id": "Q15_DONE",
+          "percent": 100,
+          "reason": "A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen)."
+        }
+      ],
+      "reason": "Q15_SCRIPT: A script helyesen kiírja a gépnevét, Windows nevét és verzióját, 0. lemez nevét és méretét, valamint a 5 legtöbbet memóriahasználó folyamat nevét, azonosítóját és WS értékét; pipeline és változók jól használva. | Q15_DONE: A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen).",
+      "manual_review": true,
+      "method": "ai_batch"
+    }
+  ]
+}

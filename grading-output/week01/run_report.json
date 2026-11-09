@@ -1,0 +1,11 @@
+{
+  "scanned_files": 111,
+  "students": 94,
+  "warnings": [
+    {
+      "file": "week01/ABC123/2026-09-13T19-48-48-832Z_8c33bf22-dfd2-44b1-909c-bf57da0655ba.json",
+      "issue": "course/week/student_id mismatch"
+    }
+  ],
+  "provisional": true
+}

@@ -1,0 +1,102 @@
+{
+  "student_id": "CGJJPN",
+  "submitted_at": "2026-09-17T13:25:04.353Z",
+  "source_blob": "week01/CGJJPN/2026-09-17T13-25-08-804Z_a885015a-3adf-49f8-bf2c-61cb52c9f542.json",
+  "model": "gpt-5-mini",
+  "provisional": true,
+  "total": 11.5,
+  "classification": "Ellenőrizendő",
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "A hallgató megadott egy érvényesnek tűnő Subscription ID-t (GUID).",
+      "manual_review": false
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "A szükséges alapadatokat kitöltötte: erőforráscsoport, VM név, régió és felhasználónév megadva.",
+      "manual_review": false
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "A hallgató jelezte, hogy elvégezte a Lemezek feladatot ('Igen'). (A beadott űrlap erre kérdezett rá.)",
+      "manual_review": false
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "A hálózati beállításokat igazolónak jelölte ('Igen').",
+      "manual_review": false
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Public IP, private IP és virtuális hálózat mezők kitöltve és ésszerű értékekkel megadva.",
+      "manual_review": false
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "reason": "A Test-NetConnection parancs helyesen szerepel, valamint a TcpTestSucceeded eredmény 'True' megadva.",
+      "manual_review": false
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "A Set-AzContext parancs helyesen megadva az előfizetés névvel (idézőjelekben).",
+      "manual_review": false
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "A Get-AzSubscription parancs és a Select-Object Name, State szűrés megadva; a kimenet is szerepel.",
+      "manual_review": false
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "A Get-AzResourceGroup parancs megadva, valamint a saját Resource Group neve szerepel ('win11g').",
+      "manual_review": false
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "A Get-AzVM parancs megadva és a saját VM neve feltüntetve ('Windows11').",
+      "manual_review": false
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A Get-AzVM -Status parancs megadva, és a VM állapota ('deallocated') szerepel a válaszban.",
+      "manual_review": false
+    },
+    {
+      "task": "Q12",
+      "score": 0.5,
+      "reason": "A második hiányzó sor (az OS-lemez méretének Write-Host kiíratása) helyesen megadva. Az első sornál azonban hiányzik a hozzárendelés ($vmStatus = ...); a parancs önmagában nem töltötte be a $vmStatus változót. Részleges, releváns tudás ezért 0,5 pont.",
+      "manual_review": false
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "Nem adott választ: a prompt és a saját összefoglalás hiányzik.",
+      "manual_review": false
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "Nem töltötte ki a kért PowerShell-parancsot és a dailyRecurrence illetve notificationSettings mezők értékét; nincs ellenőrzésre vonatkozó bemenet.",
+      "manual_review": false
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "reason": "Hiányoznak a leállításhoz és az állapot ellenőrzéséhez használt PowerShell-parancsok és a végső állapot megadása.",
+      "manual_review": false
+    }
+  ],
+  "overall_note": "Összpontszám: 11.5/15. Q12 részben jó (hiányzik a $vmStatus változóra való hozzárendelés). Q13–Q15 hiányosak, ezért 0 pontot kaptak."
+}

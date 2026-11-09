@@ -1,0 +1,126 @@
+{
+  "student_id": "FS59SV",
+  "submitted_at": "2026-09-15T15:05:38.306Z",
+  "source_blob": "week01/FS59SV/2026-09-15T15-05-38-367Z_9e870a17-3717-4ddb-a54d-ea6cd7640a55.json",
+  "model": "gpt-5-mini",
+  "version": "0.6.1",
+  "provisional": true,
+  "total": 11,
+  "classification": "Ellenőrizendő",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01",
+    "Q09",
+    "Q10",
+    "Q15"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 0.5,
+      "reason": "A parancs helyes formátumú (Test-NetConnection ... -Port 3389) és a TcpTestSucceeded értéke True, de a parancsban szereplő IP (9.205.19.152) nem egyezik a Q05-ben megadott publikus IP-vel (9.205.16.152), ezért csak részpont adható.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "Helyes parancs megadva: Set-AzContext -Subscription \"Azure for Students\" (az előfizetés neve idézőjelek között).",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "Helyes megoldás: a Get-AzSubscription lekéri az előfizetéseket, és a '| Select-Object State,Name' kimenetet a kért tulajdonságokra szűkíti. Az oszlopok sorrendje (State,Name vs Name,State) elfogadható.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q09",
+      "score": 0.5,
+      "reason": "A parancs helyes: Get-AzResourceGroup listázza a resource groupokat. Azonban a megadott Resource Group név ('elsoGep_csoport') eltér a Q02-ban szereplő 'win11' névtől; az eltérés oka nem igazolt, ezért kézi ellenőrzés szükséges.",
+      "manual_review": true,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q10",
+      "score": 0.5,
+      "reason": "A parancs helyes: a Get-AzVM valóban listázza az előfizetés virtuális gépeit (részpont jár). Ugyanakkor eltérés tapasztalható a Q02-ben megadott VM-név ('elsoGep') és a Q10-ben megadott név ('ELSOGEP_CSOPORT_7025734') között; az eltérés oka nincs igazolva, ezért manuális ellenőrzés szükséges.",
+      "manual_review": true,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A 'Get-AzVM -Status' érvényes PowerShell-parancs a virtuális gépek állapotának lekérdezésére, így a jelentett 'running' állapot elfogadható. (Megjegyzés: a lekérdezés pontosítható a -ResourceGroupName és -Name paraméterek megadásával.)",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q12",
+      "score": 0.5,
+      "reason": "A második kitöltött sor helyes (Write-Host kiírja az OS-lemez méretét a $disk.DiskSizeGB tulajdonságból). Az első sorból viszont hiányzik az eredmény hozzárendelése a $vmStatus változóhoz — helyesen: $vmStatus = Get-AzVM -ResourceGroupName $resourceGroup -Name $vmName -Status.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q13",
+      "score": 0.5,
+      "reason": "A saját összefoglalás helyes és pontosan leírja a script működését és a Select-Object szerepét. A beadott AI-prompt viszont túl általános — nem kéri kifejezetten, hogy a magyarázat PowerShellt csak alapszinten ismerő hallgató számára készüljön, ahogy a feladat előírta.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "A kötelező PowerShell-utasítás nincs kitöltve (maradt az aláhúzás). A várt parancs például: Get-AzResource -ResourceGroupName \"SAJÁT ERŐFORRÁSCSOPORT\" -ResourceType \"Microsoft.DevTestLab/schedules\" -ExpandProperties | Select-Object -ExpandProperty Properties. A dailyRecurrence és notificationSettings értékei hiányoznak.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q15",
+      "score": 0.5,
+      "reason": "A használt parancsnevek helyesek (Stop-AzVM, Get-AzVM -Status), ezért részpont jár, de a parancsok hiányosak: nem adta meg a -ResourceGroupName és -Name paramétereket vagy azok egyértelmű megadását, így a parancsok nem garantáltan működnek. A megadott végső állapot ('inactive') nem érvényes Azure VM-állapot (pl. 'stopped' vagy 'deallocated' várható). Továbbá eltérés van a Q02 és a Q09/Q10-ben szereplő erőforráscsoport/VM-nevek között, ezért manuális ellenőrzés szükséges.",
+      "manual_review": true,
+      "method": "ai_semantic"
+    }
+  ],
+  "overall_note": "Feladatonkénti szemantikai javítás; minden eredmény előzetes."
+}

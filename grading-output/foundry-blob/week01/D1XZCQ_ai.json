@@ -1,0 +1,102 @@
+{
+  "student_id": "D1XZCQ",
+  "submitted_at": "2026-09-19T14:16:23.533Z",
+  "source_blob": "week01/D1XZCQ/2026-09-19T14-16-27-707Z_dd6c4b0a-9df9-4acd-b524-3a426e8b325f.json",
+  "model": "gpt-5-mini",
+  "provisional": true,
+  "total": 11,
+  "classification": "Ellenőrizendő",
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "A hallgató megadott egy érvényes GUID-formátumú Subscription ID-t: 1ef98b72-d2ff-4b37-b159-2bcf1b7ec74f.",
+      "manual_review": false
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "A szükséges alapadatok szerepelnek: erőforráscsoport 'win11rg', VM név 'bencepc', régió 'Denmark East', felhasználónév 'azureuser'.",
+      "manual_review": false
+    },
+    {
+      "task": "Q03",
+      "score": 0.5,
+      "reason": "A hallgató jelezte, hogy elvégezte a Lemezek beállítást ('Igen'), azonban nem szolgáltatott explicit információt az OS-lemez típusáról (Standard HDD). Részleges pont adható a beavatkozás jelzéséért.",
+      "manual_review": false
+    },
+    {
+      "task": "Q04",
+      "score": 0.5,
+      "reason": "A hálózatkezelésnél a hallgató csak azt jelölte, hogy elvégezte ('Igen'), de nem adott részleteket (virtual network, subnet, Public IP engedélyezve, RDP port). Részleges pontot adtam a teljesítés jelzéséért.",
+      "manual_review": false
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "A megadott IP-címek és VNet név szerepelnek: Public IP '9.205.26.222', Private IP '172.16.0.4', VNet 'vnet-denmarkeast-1'. Ezek a kérdésnek megfelelő mezők kitöltését mutatják.",
+      "manual_review": false
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "reason": "A PowerShell parancs helyes: 'Test-NetConnection 9.205.26.222 -Port 3389' és a TcpTestSucceeded eredményt 'True'-ként adta meg, ami megfelel a feladatnak.",
+      "manual_review": false
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "A megadott parancs helyes az aktív előfizetés beállításához: Set-AzContext -Subscription \"Azure for Students\".",
+      "manual_review": false
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "A hallgató megadta az előfizetések listázására szolgáló parancsot (Get-AzSubscription), a szűrést (Get-AzSubscription | Select-Object Name, State) és a kimenetet is, ami 'Azure for Students   Enabled'.",
+      "manual_review": false
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "A Resource Groupok listázására használt parancs megvan: Get-AzResourceGroup, és a saját VM Resource Group neve 'win11rg' szerepel.",
+      "manual_review": false
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "A virtuális gépek lekérdezéséhez használt parancs megvan (Get-AzVM) és a saját VM neve 'bencepc' megadva.",
+      "manual_review": false
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A VM állapot lekérdezésére alkalmas parancs szerepel: (Get-AzVM -ResourceGroupName \"win11rg\" -Name \"bencepc\" -Status).Statuses[1].DisplayStatus és az állapotként 'VM running' került megadásra.",
+      "manual_review": false
+    },
+    {
+      "task": "Q12",
+      "score": 1,
+      "reason": "A két hiányzó sor helyesen lett kitöltve: 1) $vmStatus = Get-AzVM -ResourceGroupName $resourceGroup -Name $vmName -Status  és 2) Write-Host \"Az OS-lemez mérete: $($disk.DiskSizeGB) GB\". (A feladatlapon a $disk változó már létrejött, így a kiírás megfelelő.)",
+      "manual_review": false
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "A feladat AI-promptjára és az összefoglalásra nem adott választ (üres mezők), így pont nem adható.",
+      "manual_review": false
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "A szükséges PowerShell-parancs (pl. Get-AzResource -ResourceGroupName ...) nincs megadva, valamint a kimenetből kért dailyRecurrence és notificationSettings mezők értékei hiányoznak. Nem teljesített.",
+      "manual_review": false
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "reason": "A VM leállításához és az állapot ellenőrzéséhez szükséges parancsok nincsenek megadva (üres mezők), ezért nem jár pont.",
+      "manual_review": false
+    }
+  ],
+  "overall_note": "Összesített pontszám: 11.0/15.0. A hallgató a legtöbb technikai parancsot helyesen adta meg (Q01, Q02, Q05–Q12 sikeres), de több helyen csak a 'teljesítettem' jelölés szerepel (Q03, Q04), illetve hiányoznak a Q13, Q14 és Q15 válaszok. manual_review nem szükséges; a pontozás a beadott válaszok alapján történt. Részleges (0.5) pontokat adtam a részlegesen igazolt feladatoknál (Q03, Q04)."
+}

@@ -1,0 +1,301 @@
+{
+  "course": "ITARCH",
+  "week": 1,
+  "version": "2026-11-08-draft-1",
+  "status": "draft_for_teacher_review",
+  "grading": {
+    "max_points": 15,
+    "task_points": [
+      0,
+      0.5,
+      1
+    ],
+    "solved_definition": "Legalább egy nem üres válaszmező az adott feladatban.",
+    "correct_definition": "1 pont",
+    "partially_correct_definition": "0.5 pont",
+    "incorrect_definition": "0 pont; a megoldott és helytelen kategóriák átfedhetnek, külön jelezzük a nem megoldottakat.",
+    "classification": [
+      {
+        "min": 12,
+        "max": 15,
+        "label": "Elfogadott"
+      },
+      {
+        "min": 11,
+        "max": 11.5,
+        "label": "Ellenőrizendő"
+      },
+      {
+        "min": 0,
+        "max": 10.5,
+        "label": "Nem elfogadott"
+      }
+    ]
+  },
+  "safety": {
+    "read_submissions_only": true,
+    "do_not_modify_originals": true,
+    "prior_checks_not_grades": true,
+    "teacher_override": true,
+    "ai_suggestions_require_review": true
+  },
+  "tasks": [
+    {
+      "task": "Q01",
+      "title": "Azure-előfizetés azonosítója",
+      "fields": [
+        "Q01_SUBSCRIPTION_ID"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Érvényes UUID-formátumú Subscription ID (8-4-4-4-12 hexadecimális).",
+      "partial_credit": "Kisebb, egyértelmű formázási eltérés, de az azonosító teljes és felismerhető.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "A tényleges Azure-előfizetéshez tartozást önmagában a beadás nem igazolja; ne következtessünk belőle jogosultságra."
+    },
+    {
+      "task": "Q02",
+      "title": "VM alapadatok",
+      "fields": [
+        "Q02_RESOURCEGROUP",
+        "Q02_VMNAME",
+        "Q02_REGION",
+        "Q02_USERNAME"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Mind a négy mező értékelhető; RG és VM név szabályos; régió ismert Azure-régió, VM méretet csak akkor ellenőrizzünk, ha a beadásban ténylegesen szerepel.",
+      "partial_credit": "A négy mezőből legalább kettő helyes, vagy régió/méret elnevezésében csak kisebb elírás van.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "A feladatlap Q02-ben NINCS VM-méret válaszmező. Az adott előfizetésben ténylegesen engedélyezett régió/méret csak Azure-lekérdezéssel igazolható. Normalizálás: kis/nagybetű, szóköz, kötőjel, aláhúzás figyelmen kívül hagyása; nem korlátlan fuzzy egyezés."
+    },
+    {
+      "task": "Q03",
+      "title": "OS-lemez",
+      "fields": [
+        "Q03_DONE"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Igen válasz.",
+      "partial_credit": "Egyértelműen pozitív, de nem pontos igenlő válasz.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "Önbevallás; nem bizonyítja, hogy valóban Standard HDD került kiválasztásra."
+    },
+    {
+      "task": "Q04",
+      "title": "Hálózat",
+      "fields": [
+        "Q04_DONE"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Igen válasz.",
+      "partial_credit": "Egyértelműen pozitív, de nem pontos igenlő válasz.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "Önbevallás; tényleges NSG és RDP-port nem igazolható."
+    },
+    {
+      "task": "Q05",
+      "title": "VM IP-címek és virtuális hálózat",
+      "fields": [
+        "Q05_PUBLICIP",
+        "Q05_PRIVATEIP",
+        "Q05_VNET"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Érvényes globálisan routolható IPv4 publikus IP; érvényes privát IPv4; nem üres VNet név.",
+      "partial_credit": "Legalább két mező megfelelő, vagy egy IP helyes és VNet név megfelelő.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "Publikus IP-nél zárjuk ki a privát, loopback, link-local, dokumentációs és egyéb nem globális címeket; privát IP RFC1918 tartományban."
+    },
+    {
+      "task": "Q06",
+      "title": "RDP-port ellenőrzése",
+      "fields": [
+        "Q06_COMMAND",
+        "Q06_TCP"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Test-NetConnection parancs 3389-es porttal és Q05-ben megadott publikus IP-vel (ha Q05-ben nincs IP, bármely érvényes publikus IP); TcpTestSucceeded értéke értelmezhető logikai érték.",
+      "partial_credit": "A parancs helyes, de hiányzik vagy téves a TCP eredmény; vagy a TCP eredmény helyes, de a parancsban kisebb hiba van.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "A False eredmény önmagában nem jelenti, hogy a parancs hibás; a parancs végrehajtását nem ellenőrizzük."
+    },
+    {
+      "task": "Q07",
+      "title": "Azure Cloud Shell kontextus",
+      "fields": [
+        "Q07_COMMAND"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Set-AzContext -Subscription vagy -SubscriptionId használata az Azure for Students előfizetés kiválasztására.",
+      "partial_credit": "A helyes parancs felismerhető, de paraméterezési vagy idézőjelezési hiba van.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "Ha SubscriptionId szerepel, lehetőség szerint Q01-gyel egyeztessük."
+    },
+    {
+      "task": "Q08",
+      "title": "Előfizetések listázása",
+      "fields": [
+        "Q08_COMMAND",
+        "Q08_FILTER",
+        "Q08_OUTPUT"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Érvényes előfizetés-listázás (pl. Get-AzSubscription), Name és State kiválasztás (Select-Object), és értelmezhető kimenet; alternatív állapotok, pl. Enabled/Running elfogadhatók.",
+      "partial_credit": "A három rész közül legalább kettő megfelelő, vagy a State hiánya mellett a listázás és Name megjelenítése megfelelő.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "A State tulajdonság és a tényleges megjelenített állapot környezetfüggő; ne ragaszkodjunk egyetlen szöveghez."
+    },
+    {
+      "task": "Q09",
+      "title": "Resource Group lekérdezése",
+      "fields": [
+        "Q09_COMMAND",
+        "Q09_RESOURCEGROUP"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Get-AzResourceGroup (vagy helyes ekvivalens) és RG név megegyezik Q02_RESOURCEGROUP értékével, ha ott megadták.",
+      "partial_credit": "Csak a parancs vagy csak a megfelelő RG név helyes.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "Ha Q02_RESOURCEGROUP üres, fogadjunk el bármely szabályos, nem üres RG nevet."
+    },
+    {
+      "task": "Q10",
+      "title": "VM-ek lekérdezése",
+      "fields": [
+        "Q10_COMMAND",
+        "Q10_VMNAME"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Get-AzVM (vagy helyes ekvivalens) és VM név megegyezik Q02_VMNAME értékével, ha ott megadták.",
+      "partial_credit": "Csak a parancs vagy csak a megfelelő VM név helyes.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "Ha Q02_VMNAME üres, fogadjunk el bármely szabályos, nem üres VM nevet."
+    },
+    {
+      "task": "Q11",
+      "title": "VM állapot lekérdezése",
+      "fields": [
+        "Q11_COMMAND",
+        "Q11_STATE"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Érvényes VM állapotlekérdezés (pl. Get-AzVM -Status) és értelmezhető állapot (Running, VM running, Stopped, Deallocated stb.).",
+      "partial_credit": "Az állapotlekérdezés helyes, de az állapot hiányzik/általános; vagy az állapot értelmezhető, de a parancs részben hibás.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "Rugalmasan fogadjuk el az Azure PowerShell/Portal különböző állapotformáit."
+    },
+    {
+      "task": "Q12",
+      "title": "PowerShell script két sora",
+      "fields": [
+        "Q12_LINE1",
+        "Q12_LINE2"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Első sor Get-AzVM -ResourceGroupName $resourceGroup -Name $vmName -Status (vagy ekvivalens, Statuses-t adó lekérdezés); második sor kiírja a $disk.DiskSizeGB értéket, pl. Write-Host használatával.",
+      "partial_credit": "A két sor közül pontosan egy helyes, vagy mindkettő lényegileg helyes kisebb szintaktikai hibával.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "A második sorban a $disk.DiskSizeGB értékének kiírása a lényeg; a felirat és mértékegység rugalmasan kezelhető."
+    },
+    {
+      "task": "Q13",
+      "title": "AI-prompt és saját magyarázat",
+      "fields": [
+        "Q13_PROMPT",
+        "Q13_SUMMARY"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Van releváns AI-prompt és 2–4 mondatos saját összefoglalás, amely helyesen írja le a Get-AzVM -Status, Select-Object (Name, ResourceGroupName, számított PowerState) és Format-Table szerepét.",
+      "partial_credit": "A prompt releváns, de a magyarázat hiányos; vagy a magyarázat lényegileg helyes, de nem teljes.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "Szemantikus/AI-alapú tanári ellenőrzés ajánlott; a stilisztikai különbségek nem hibák."
+    },
+    {
+      "task": "Q14",
+      "title": "Auto-shutdown ütemezés",
+      "fields": [
+        "Q14_COMMAND",
+        "Q14_DAILYRECURRENCE",
+        "Q14_NOTIFICATIONSETTINGS"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Get-AzResource -ResourceType Microsoft.DevTestLab/schedules -ExpandProperties és a Q02 szerinti RG; dailyRecurrence napi 22:00; notificationSettings letiltva.",
+      "partial_credit": "A három fő rész közül kettő megfelelő, vagy a parancs helyes és az idő/értesítés részben igazolható.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "Q02 RG hiányában más szabályos RG elfogadható; 22:00 időzóna-értelmezését a tényleges kimenet alapján kezeljük."
+    },
+    {
+      "task": "Q15",
+      "title": "VM leállítása és ellenőrzése",
+      "fields": [
+        "Q15_STOPCOMMAND",
+        "Q15_STATUSCOMMAND",
+        "Q15_STATE"
+      ],
+      "score_values": [
+        0,
+        0.5,
+        1
+      ],
+      "full_credit": "Stop-AzVM helyes VM névvel (Q02 szerint, ha van), állapotellenőrző parancs és leállított/deallocated végállapot.",
+      "partial_credit": "A három részből kettő helyes; vagy helyes leállítási parancs mellett a státusz nem egyértelmű.",
+      "zero_credit": "Nincs értékelhető válasz, vagy a lényegi követelmény hibás.",
+      "notes": "A Stop-AzVM -Name és -ResourceGroupName paraméterek, valamint a státuszlekérdezésben szereplő VM név legyen konzisztens; Q02 név hiányában szabályos név elfogadható."
+    }
+  ]
+}

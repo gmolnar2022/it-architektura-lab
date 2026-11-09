@@ -1,0 +1,375 @@
+{
+  "week": 5,
+  "version": "week05-draft-1",
+  "status": "draft_requires_teacher_review",
+  "max_points": 15,
+  "accept_percent": 80,
+  "tasks": [
+    {
+      "number": 1,
+      "title": "1. feladat – A Windows 11 erőforráscsoport törlése",
+      "description": "## 1. feladat – A Windows 11 erőforráscsoport törlése **Hely:** Saját számítógép **Eszköz:** VS Code → PowerShell Terminal **AI:** nem szükséges Az előző hetek Windows 11 virtuális gépére már nincs szükség. Először jelentkezz be az Azure-ba: ```powershell Connect-AzAccount ``` Listázd az erőforráscsoportokat: ```powershell Get-AzResourceGroup | Select-Object ResourceGroupName ``` Azonosítsd a **saját Windows 11 VM-ed** erőforráscsoportját, és ellenőrizd a benne található erőforrásokat. Ehhez segítség: ```powershell Get-AzResource -ResourceGroupName \"SAJAT_EROFORRASCSOPORT\" ``` A törléshez a **`Remove-AzResourceGroup`** parancsot használd. A **`-Name`** paraméterrel add meg a csoport nevét. A futtatás előtt ellenőrizd újra a csoport nevét. **A törlés több percig is eltarthat; várd meg a művelet befejezését!** Törlés után a `Get-AzResourceGroup | Select-Object ResourceGroupName` paranccsal győződj meg arról, hogy a csoport már nem szerepel a listában. Az eltávolított erőforráscsoport neve A ténylegesen használt törlőparancs A törlés ellenőrzésének eredménye Az erőforráscsoport már nem szerepel a listában A törlés nem sikerült – hibaelhárítás szükséges **Elfogadási feltétel:** a helyes törlőparancs megadása és a csoport eltávolításának ellenőrzése. ",
+      "fields": [
+        "Q01_RG",
+        "Q01_COMMAND",
+        "Q01_RESULT"
+      ],
+      "criteria": [
+        {
+          "id": "Q01_RG",
+          "description": "Q01 RG",
+          "weight": 1
+        },
+        {
+          "id": "Q01_COMMAND",
+          "description": "Q01 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q01_RESULT",
+          "description": "Q01 RESULT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 2,
+      "title": "2. feladat – Telepítési adatlap kitöltése",
+      "description": "## 2. feladat – Telepítési adatlap kitöltése **Hely:** Saját számítógép **Eszköz:** VS Code / Azure PowerShell **AI:** nem szükséges Az első heti Windows 11 telepítéséhez hasonlóan készítsd elő az új VM adatait. A **rögzített követelményeket** már kitöltöttük; a többi mezőt te add meg. A kitöltött adatlapot a 3. feladatban használd fel az AI-promptodhoz. | Telepítési adat | Érték | |---|---| | Operációs rendszer | **Windows Server 2025 Datacenter** | | VM-generáció | **Gen2** | | Felület | **Desktop Experience (GUI)** | | Ajánlott VM-méret | **Standard_DS2_v2**, ha elérhető | | Operációsrendszer-lemez | **Standard HDD (`Standard_LRS`)** | | Availability Zone | **Nincs megadva** – ne rendelj a VM-hez rendelkezésre állási zónát (`-Zone` nélkül) | | RDP | **TCP 3389**, lehetőleg csak a saját nyilvános IP-címről | Azure-előfizetés (név vagy azonosító) Új erőforráscsoport neve Azure-régió Windows Server VM neve VM-méret (ellenőrzött, tényleges választás) Virtuális hálózat neve Alhálózat neve Rendszergazdai felhasználónév (jelszó nélkül!) ::: {.callout-note title=\"A telepítéshez használt lemezkép\"} A lemezkép azonosítóját most **nem kell külön lekérdezned**. A szkriptben ezt használd: `MicrosoftWindowsServer:WindowsServer:2025-datacenter-g2:latest` Ez a Windows Server 2025 Datacenter Gen2 grafikus felületű változata. A javasolt `Standard_DS2_v2` méret helyett, ha szükséges, válassz az előfizetésedben elérhető másik méretet. ::: Telepítési adatok másolása AI-hoz A gomb a kitöltött adatokat a rögzített követelményekkel együtt másolja a vágólapra. Illeszd be őket az AI-asszisztensbe, majd egészítsd ki a saját utasításaiddal. **Jelszót ne adj meg!** **Elfogadási feltétel:** minden kitöltendő adat megvan, és a választott régió, image és VM-méret használható az előfizetésben. ",
+      "fields": [
+        "Q02_SUBSCRIPTION",
+        "Q02_RG",
+        "Q02_LOCATION",
+        "Q02_VM",
+        "Q02_SIZE",
+        "Q02_VNET",
+        "Q02_SUBNET",
+        "Q02_ADMIN"
+      ],
+      "criteria": [
+        {
+          "id": "Q02_SUBSCRIPTION",
+          "description": "Q02 SUBSCRIPTION",
+          "weight": 1
+        },
+        {
+          "id": "Q02_RG",
+          "description": "Q02 RG",
+          "weight": 1
+        },
+        {
+          "id": "Q02_LOCATION",
+          "description": "Q02 LOCATION",
+          "weight": 1
+        },
+        {
+          "id": "Q02_VM",
+          "description": "Q02 VM",
+          "weight": 1
+        },
+        {
+          "id": "Q02_SIZE",
+          "description": "Q02 SIZE",
+          "weight": 1
+        },
+        {
+          "id": "Q02_VNET",
+          "description": "Q02 VNET",
+          "weight": 1
+        },
+        {
+          "id": "Q02_SUBNET",
+          "description": "Q02 SUBNET",
+          "weight": 1
+        },
+        {
+          "id": "Q02_ADMIN",
+          "description": "Q02 ADMIN",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 3,
+      "title": "3. feladat – AI-prompt a telepítőszkripthez",
+      "description": "## 3. feladat – AI-prompt a telepítőszkripthez **Hely:** Saját számítógép **Eszköz:** VS Code + választott AI-asszisztens **AI:** szükséges A **2. feladat kitöltött adatai alapján** (a „Telepítési adatok másolása AI-hoz” gombbal) írj promptot, amelyben az AI-t egy **`New-AzVM`-re épülő Azure PowerShell-szkript** elkészítésére kéred. A promptodban szerepeljenek az előkészített paraméterek, és kérd, hogy a szkript: - hozza létre a szükséges Azure-erőforrásokat (erőforráscsoport, VNet, subnet, NIC, NSG, nyilvános IP); - Windows Server 2025 Datacenter **Gen2 Desktop Experience** lemezképet használjon; - az OS-lemez **Standard HDD (`Standard_LRS`)** legyen; - **ne rendelje a VM-et Availability Zone-hoz**, a `New-AzVM` hívásban ne legyen `-Zone` paraméter; - **biztonságosan, futás közben** kérje be a rendszergazdai jelszót; - a **TCP 3389** RDP-portot lehetőleg csak a saját publikus IP-címedről engedje; - végül írja ki a VM nevét és nyilvános IP-címét. ::: {.callout-tip title=\"Tipp\"} Ne csak annyit írj, hogy „telepíts egy szervert”. Add meg a konkrét beállításokat és a `New-AzVM` követelményt. A promptban **nem szerepelhet jelszó**. ::: Az AI-nak megadott teljes prompt **Elfogadási feltétel:** a prompt egyértelmű, tartalmazza a telepítés adatait és a biztonsági követelményeket. ",
+      "fields": [
+        "Q03_PROMPT"
+      ],
+      "criteria": [
+        {
+          "id": "Q03_PROMPT",
+          "description": "Q03 PROMPT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 4,
+      "title": "4. feladat – A generált PowerShell-szkript ellenőrzése",
+      "description": "## 4. feladat – A generált PowerShell-szkript ellenőrzése **Hely:** Saját számítógép **Eszköz:** VS Code → `create-server.ps1` **AI:** szükséges (generálás és szükség szerinti javítás) Másold át az AI által generált szkriptet a VS Code-ban létrehozott **`create-server.ps1`** fájlba. Olvasd át, és ha szükséges, kérj javítást az AI-tól. **Ellenőrző szempontok:** `New-AzVM` szerepel a kódban; a lemezkép, a VM-méret és a régió helyes; az OS-lemez `Standard_LRS`; a jelszó nincs beégetve; az NSG csak a szükséges RDP-hozzáférést engedélyezi; **a VM nincs Availability Zone-hoz rendelve, és a `New-AzVM` nem kap `-Zone` paramétert**. Az AI nem tévedhetetlen: az általa javasolt parancsokat neked kell ellenőrizned. A végleges `create-server.ps1` teljes tartalma (titkok és jelszavak nélkül) Mit módosítottál az AI első válaszán? (ha nem volt szükséges, írd: nem kellett módosítani) **Elfogadási feltétel:** a teljes, futtatható és átnézett PowerShell-szkript szerepel a válaszban. ",
+      "fields": [
+        "Q04_SCRIPT",
+        "Q04_REVIEW"
+      ],
+      "criteria": [
+        {
+          "id": "Q04_SCRIPT",
+          "description": "Q04 SCRIPT",
+          "weight": 1
+        },
+        {
+          "id": "Q04_REVIEW",
+          "description": "Q04 REVIEW",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 5,
+      "title": "5. feladat – Windows Server telepítése és RDP-kapcsolat",
+      "description": "## 5. feladat – Windows Server telepítése és RDP-kapcsolat **Hely:** Saját számítógép (az RDP-csatlakozás célja a Windows Server VM) **Eszköz:** VS Code PowerShell Terminal → Azure Portal → letöltött RDP-fájl **AI:** szükség esetén hibakereséshez Futtasd a létrehozott szkriptet: ```powershell .\\create-server.ps1 ``` ::: {.callout-note title=\"Telepítési idő és ellenőrzés\"} **A Windows Server telepítése körülbelül 3–10 percig is eltarthat.** Várd meg, amíg a PowerShell-szkript befejeződik. A virtuális gép az Azure Portalon már a szkript befejezése előtt is megjelenhet, sőt akár RDP-vel is elérhető lehet. A telepítés sikerességét **az Azure Portal grafikus felületén is ellenőrizheted**: nyisd meg a **Virtual machines** menüpontot, válaszd ki a létrehozott gépet, és nézd meg az állapotát. A cél: **Provisioning state: Succeeded** és **Status: Running**. ::: Ellenőrizd a VM-et és a nyilvános IP-címét az Azure Portalon vagy Azure PowerShellben. A **TCP 3389** port elérhetőségét a `Test-NetConnection` paranccsal ellenőrizheted. **Csatlakozás a letöltött RDP-fájllal:** 1. Az **Azure Portalon** nyisd meg a létrehozott virtuális gépet. 2. Válaszd a **Connect / Csatlakozás → Connect via RDP (RDP)** lehetőséget. 3. Ellenőrizd a megjelenített IP-címet és a **3389-es portot**, majd kattints a **Download RDP File / RDP-fájl letöltése** gombra. 4. Nyisd meg a letöltött **`.rdp`** fájlt, és jelentkezz be a telepítéskor megadott rendszergazdai fiókkal. 5. Ellenőrizd, hogy megjelenik a Windows Server asztala és a **Server Manager**. ::: {.callout-important title=\"RDP-biztonság\"} Ne engedélyezd tartósan az RDP-t az egész internet felől (`0.0.0.0/0`). Ha nem tudsz csatlakozni, ellenőrizd az NSG-szabályt, a saját publikus IP-címedet, a VM állapotát és a Windows tűzfalat. ::: A VM nyilvános IP-címe A szkript által kiírt StatusCode **Elfogadási feltétel:** a Windows Server 2025 VM működik, az RDP-kapcsolat sikeres, és a nyilvános IP-cím, valamint a szkript által kiírt `StatusCode` szerepel a válaszban. # II. blokk – Windows Server-szerepkörök és szolgáltatások A következő feladatokat már **a Windows Server virtuális gépen**, a letöltött RDP-fájllal megnyitott távoli asztalon végezd. A Server Manager varázslóival két szerepkört telepítesz, majd PowerShellből állítod be a webkiszolgáló tűzfalszabályát. ",
+      "fields": [
+        "Q05_PUBLICIP",
+        "Q05_STATUSCODE"
+      ],
+      "criteria": [
+        {
+          "id": "Q05_PUBLICIP",
+          "description": "Q05 PUBLICIP",
+          "weight": 1
+        },
+        {
+          "id": "Q05_STATUSCODE",
+          "description": "Q05 STATUSCODE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 6,
+      "title": "6. feladat – File Server szerepkör telepítése",
+      "description": "## 6. feladat – File Server szerepkör telepítése **Hely:** Windows Server VM (RDP) **Eszköz:** Server Manager → Add Roles and Features Wizard **AI:** nem szükséges 1. Nyisd meg a **Server Manager** alkalmazást. 2. Válaszd a **Manage → Add Roles and Features** lehetőséget. 3. A **Role-based or feature-based installation** telepítési típust válaszd, majd jelöld ki a saját szerveredet. 4. A **File and Storage Services → File and iSCSI Services** alatt ellenőrizd a **File Server** szerepkörszolgáltatást; ha még nincs telepítve, jelöld be és telepítsd. 5. A varázsló végén ellenőrizd a telepítés eredményét. Ha a File Server már telepítve volt, ezt rögzítsd. A File Server szerepkör állapota Válassz... Most telepítettem Már telepítve volt **Elfogadási feltétel:** a File Server szerepkör telepítve van, az eredményt rögzítetted. ",
+      "fields": [
+        "Q06_ROLE"
+      ],
+      "criteria": [
+        {
+          "id": "Q06_ROLE",
+          "description": "Q06 ROLE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 7,
+      "title": "7. feladat – SMB-megosztás létrehozása varázslóval",
+      "description": "## 7. feladat – SMB-megosztás létrehozása varázslóval **Hely:** Windows Server VM (RDP) **Eszköz:** Server Manager → File and Storage Services → Shares → New Share Wizard; ellenőrzés: PowerShell **AI:** nem szükséges 1. Hozd létre a `C:\\Megosztas` mappát. 2. A Server Managerben nyisd meg a **File and Storage Services → Shares** nézetet, és indítsd a **New Share** varázslót. 3. Válaszd az **SMB Share – Quick** profilt, majd a létrehozott mappát. 4. A megosztás neve legyen **`Tananyag`**. A megosztás UNC-útvonala például `\\\\SZERVERNEV\\Tananyag`. 5. A jogosultságoknál a rendszergazdának legyen hozzáférése; **ne adj teljes hozzáférést az Everyone csoportnak**. A gyakorlatban elegendő a rendszergazdai hozzáférés. 6. Fejezd be a varázslót, és a szerveren a Fájlkezelő címsorából nyisd meg a megosztást a saját szervernevével. 7. **A szerveren**, az RDP-munkamenetben nyiss egy **PowerShell**-ablakot, és futtasd a következő parancsot: ```powershell Get-SmbShare ``` 8. Másold be a parancs **teljes, szöveges kimenetét** a válaszmezőbe. A listában szerepelnie kell a `Tananyag` megosztásnak. A Get-SmbShare parancs kimenete **Elfogadási feltétel:** a `Get-SmbShare` kimenetében szerepel a `Tananyag` megosztás. **Az SMB 445-ös portját ne nyisd meg az internet felé.** ",
+      "fields": [
+        "Q07_OUTPUT"
+      ],
+      "criteria": [
+        {
+          "id": "Q07_OUTPUT",
+          "description": "Q07 OUTPUT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 8,
+      "title": "8. feladat – IIS webkiszolgáló szerepkör telepítése",
+      "description": "## 8. feladat – IIS webkiszolgáló szerepkör telepítése **Hely:** Windows Server VM (RDP) **Eszköz:** Server Manager → Add Roles and Features Wizard; ellenőrzés böngészővel **AI:** nem szükséges 1. A **Server Manager → Manage → Add Roles and Features** varázslóval telepítsd a **Web Server (IIS)** szerepkört. 2. A felkínált szükséges összetevőket fogadd el; az alapértelmezett szerepkörszolgáltatások elegendők. 3. A telepítés után a szerveren nyisd meg a böngészőben a `http://localhost` címet. 4. Figyeld meg, mi jelenik meg a böngészőben, majd válaszd ki a megfelelő választ. Mi jelenik meg a szerveren a http://localhost cím megnyitásakor? Válassz... Az IIS alapértelmezett üdvözlőoldala (Internet Information Services) A C:\\\\inetpub\\\\wwwroot mappa fájljainak listája A böngésző nem tud kapcsolódni a webhelyhez A Windows Server Manager kezdőoldala **Elfogadási feltétel:** az IIS működik, és a `http://localhost` oldala betöltődik. ",
+      "fields": [
+        "Q08_LOCAL"
+      ],
+      "criteria": [
+        {
+          "id": "Q08_LOCAL",
+          "description": "Q08 LOCAL",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 9,
+      "title": "9. feladat – Teljes IIS-webhely létrehozása AI segítségével",
+      "description": "## 9. feladat – Teljes IIS-webhely létrehozása AI segítségével **Hely:** Windows Server VM (RDP) **Eszköz:** AI + rendszergazdai PowerShell; ellenőrzés IIS Managerrel és böngészővel **AI:** a teljes folyamat megtervezéséhez és a PowerShell-szkript előállításához 1. Kérj az AI-tól **egyetlen PowerShell-szkriptet**, amely elkészít egy önálló, magyar nyelvű HTML-bemutatkozó oldalt (cím, rövid leírás, legalább három szerverfunkció és egyszerű CSS), majd elhelyezi a **`C:\\inetpub\\wwwroot\\index.html`** fájlban. Külső képeket és JavaScript-könyvtárakat ne használjon. 2. A szkript ellenőrizze a **Default Web Site** webhelyet, és gondoskodjon arról, hogy az oldal **HTTP 80-as porton** működjön. A hiányzó bindingot hozza létre, de meglévő bindingot ne duplikáljon. Ellenőrizze az `index.html` alapértelmezett dokumentumként való használatát is; szükség esetén állítsa a kezdőoldalak sorrendjében az IIS üdvözlőoldala elé. 3. **Olvasd át** az AI által generált kódot: csak a saját tesztwebhelyet módosíthatja, és nem törölhet más IIS-webhelyeket. Ezután futtasd a szerveren rendszergazdai PowerShellben. 4. Az **IIS Manager → Sites → Default Web Site → Bindings** menüben ellenőrizd a HTTP/80 kötést, majd a szerver böngészőjében nyisd meg a `http://localhost` címet. A **saját weboldaladnak** kell megjelennie. Az AI-nak adott teljes prompt A létrehozott index.html tartalma ...\"> Az AI-generált és végrehajtott PowerShell-szkript A saját weboldal jelenik meg a http://localhost címen? Válassz... Igen Nem **Elfogadási feltétel:** a szkript elhelyezi a HTML-oldalt, kezeli a HTTP/80 bindingot és az alapértelmezett dokumentumot; a saját oldal megjelenik a `http://localhost` címen. ",
+      "fields": [
+        "Q09_PROMPT",
+        "Q09_HTML",
+        "Q09_SCRIPT",
+        "Q09_LOCAL"
+      ],
+      "criteria": [
+        {
+          "id": "Q09_PROMPT",
+          "description": "Q09 PROMPT",
+          "weight": 1
+        },
+        {
+          "id": "Q09_HTML",
+          "description": "Q09 HTML",
+          "weight": 1
+        },
+        {
+          "id": "Q09_SCRIPT",
+          "description": "Q09 SCRIPT",
+          "weight": 1
+        },
+        {
+          "id": "Q09_LOCAL",
+          "description": "Q09 LOCAL",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 10,
+      "title": "10. feladat – HTTP 80-as port engedélyezése Windows és Azure tűzfalon",
+      "description": "## 10. feladat – HTTP 80-as port engedélyezése Windows és Azure tűzfalon **Hely és eszköz:** (1) Windows Server VM → **RDP / rendszergazdai PowerShell**; (2) saját számítógép → **VS Code / Azure PowerShell** **AI:** két külön PowerShell-parancs előállításához 1. Kérj az AI-tól **egy Windows PowerShell-parancsot**, amely a szerver **Windows Defender Firewall** tűzfalában engedélyezi a bejövő **TCP 80** forgalmat (`New-NetFirewallRule`). A szerveren rendszergazdai PowerShellben futtasd. Ha már van megfelelő engedélyező szabály, ne hozz létre felesleges duplikátumot. 2. Kérj az AI-tól **egy Azure PowerShell-parancsot vagy egyetlen parancsláncot**, amely a VM-hez tartozó **Network Security Group (NSG)** bejövő szabályai közé felveszi a **TCP 80** engedélyezését (`Get-AzNetworkSecurityGroup`, `Add-AzNetworkSecurityRuleConfig`, `Set-AzNetworkSecurityGroup`). A parancs a megfelelő erőforráscsoportot és NSG-t módosítsa, **csak a saját géped aktuális nyilvános IP-címéről** engedje a forgalmat (`/32`), és ne ütközzön meglévő szabálynévvel vagy prioritással. Futtasd a **saját gépeden, VS Code PowerShell-terminálban**, a megfelelő Azure-előfizetésben. 3. A saját géped böngészőjében nyisd meg a `http://VM_PUBLIKUS_IP` címet, és ellenőrizd, hogy a 9. feladatban készített weboldal jelenik-e meg. 4. A teszt után az ideiglenes NSG-engedélyezést szüntesd meg, ha már nincs rá szükség. **Az SMB 445-ös és RDP 3389-es portokat ne nyisd meg széles körben az internet felé.** Az AI-nak adott utasítás (mindkét tűzfalszintre) 1. Windows Defender – végrehajtott PowerShell-parancs (RDP) 2. Azure NSG – végrehajtott Azure PowerShell-parancs vagy parancslánc (VS Code) A weboldal megjelenik a saját számítógép böngészőjében a VM nyilvános IP-címén? Válassz... Igen Nem **Elfogadási feltétel:** a két külön tűzfalszinthez tartozó AI-generált parancs szerepel a válaszban, és a weboldal a saját gépről is megnyitható. A Windows tűzfala és az Azure NSG egymástól független védelmi réteg. ",
+      "fields": [
+        "Q10_PROMPT",
+        "Q10_COMMAND",
+        "Q10_AZURE",
+        "Q10_RESULT"
+      ],
+      "criteria": [
+        {
+          "id": "Q10_PROMPT",
+          "description": "Q10 PROMPT",
+          "weight": 1
+        },
+        {
+          "id": "Q10_COMMAND",
+          "description": "Q10 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q10_AZURE",
+          "description": "Q10 AZURE",
+          "weight": 1
+        },
+        {
+          "id": "Q10_RESULT",
+          "description": "Q10 RESULT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 11,
+      "title": "11. feladat – Mappa és szöveges fájl létrehozása PowerShellből",
+      "description": "## 11. feladat – Mappa és szöveges fájl létrehozása PowerShellből **Hely:** Windows Server VM (RDP) **Eszköz:** PowerShell (a szerveren) Hozz létre egy **`C:\\Users\\Public\\ITARCH`** nevű mappát, majd benne egy **`bemutatkozas.txt`** nevű szöveges fájlt. A fájl legalább két sort tartalmazzon, például a szerver nevét és a gyakorlat témáját. A fájlt ne grafikus fájlkezelővel készítsd el. **Kiinduló parancs:** `New-Item` **Hasznos paraméterek:** `-Path` (elérési út), `-Name` (név), `-ItemType Directory` vagy `-ItemType File` (típus), `-Value` (kezdeti fájltartalom), `-Force` (szükség esetén már létező elem kezelése). Többsoros szöveg megadásához a PowerShell tömbszintaxisát is használhatod, vagy a fájlba íráshoz a `Set-Content` parancsot. **Feladat:** állítsd össze és futtasd a megfelelő PowerShell-parancsokat. Ellenőrizd, hogy a mappa és a fájl létezik. A mappa és a szöveges fájl létrehozásához futtatott parancsok **Elfogadási feltétel:** a `C:\\Users\\Public\\ITARCH\\bemutatkozas.txt` fájl létrejött, és legalább két sornyi szöveget tartalmaz. ",
+      "fields": [
+        "Q11_COMMANDS"
+      ],
+      "criteria": [
+        {
+          "id": "Q11_COMMANDS",
+          "description": "Q11 COMMANDS",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 12,
+      "title": "12. feladat – Fájl másolása a megosztott mappába",
+      "description": "## 12. feladat – Fájl másolása a megosztott mappába **Hely:** Windows Server VM (RDP) **Eszköz:** PowerShell (a szerveren) Másold át a 11. feladatban készített **`bemutatkozas.txt`** fájlt a 7. feladatban létrehozott **`Tananyag`** megosztás mögötti mappába. A célmappa fizikai elérési útját a `Get-SmbShare -Name Tananyag` paranccsal ellenőrizheted; a szerveren helyi útvonallal dolgozz. Az eredeti fájl maradjon meg. **Kiinduló parancs:** `Copy-Item` **Hasznos paraméterek:** `-Path` (forrás), `-Destination` (cél), `-Force` (felülírás engedélyezése), `-PassThru` (másolt elem megjelenítése), `-WhatIf` (próba végrehajtás nélkül). A `-Recurse` almappák másolásához használható, de ennél az egy fájlnál nem szükséges. A másoláshoz végrehajtott PowerShell-parancs A Tananyag megosztás fizikai mappájának útvonala **Elfogadási feltétel:** a fájl az eredeti helyén és a megosztott mappában is megtalálható. ",
+      "fields": [
+        "Q12_COMMAND",
+        "Q12_DEST"
+      ],
+      "criteria": [
+        {
+          "id": "Q12_COMMAND",
+          "description": "Q12 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q12_DEST",
+          "description": "Q12 DEST",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 13,
+      "title": "13. feladat – A másolt fájl tartalmának megjelenítése",
+      "description": "## 13. feladat – A másolt fájl tartalmának megjelenítése **Hely:** Windows Server VM (RDP) **Eszköz:** PowerShell (a szerveren) Olvasd ki a **megosztott mappába átmásolt** `bemutatkozas.txt` fájl tartalmát, és másold be a kimenetet a válaszmezőbe. **Kiinduló parancs:** `Get-Content` **Hasznos paraméterek:** `-Path` (fájlútvonal), `-Raw` (teljes tartalom egy szövegként), `-TotalCount` (első néhány sor), `-Tail` (utolsó néhány sor), `-Encoding` (karakterkódolás). A teljes, rövid fájlhoz elegendő a `-Path`. A futtatott Get-Content parancs A parancs kimenete (a fájl tartalma) **Elfogadási feltétel:** a megosztásba másolt fájl tartalma helyesen megjelenik. ",
+      "fields": [
+        "Q13_COMMAND",
+        "Q13_OUTPUT"
+      ],
+      "criteria": [
+        {
+          "id": "Q13_COMMAND",
+          "description": "Q13 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q13_OUTPUT",
+          "description": "Q13 OUTPUT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 14,
+      "title": "14. feladat – A Public mappa tartalmának listázása",
+      "description": "## 14. feladat – A Public mappa tartalmának listázása **Hely:** Windows Server VM (RDP) **Eszköz:** PowerShell (a szerveren) Listázd ki a **`C:\\Users\\Public`** mappa közvetlen tartalmát PowerShellből. A kimenetben keresd meg a 11. feladatban létrehozott `ITARCH` mappát. **Kiinduló parancs:** `Get-ChildItem` **Hasznos paraméterek:** `-Path` (mappaútvonal), `-Directory` (csak mappák), `-File` (csak fájlok), `-Recurse` (almappák tartalma is), `-Force` (rejtett elemek is), `-Name` (csak nevek). **Ehhez a feladathoz ne használj `-Recurse` kapcsolót**, hogy a Public mappa közvetlen tartalmát kapd. A futtatott Get-ChildItem parancs A parancs kimenete **Elfogadási feltétel:** a `C:\\Users\\Public` tartalma megjelenik, benne az `ITARCH` mappával. ",
+      "fields": [
+        "Q14_COMMAND",
+        "Q14_OUTPUT"
+      ],
+      "criteria": [
+        {
+          "id": "Q14_COMMAND",
+          "description": "Q14 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q14_OUTPUT",
+          "description": "Q14 OUTPUT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 15,
+      "title": "15. feladat – Calculated property: Azure VM energiaállapota",
+      "description": "## 15. feladat – Calculated property: Azure VM energiaállapota **Hely:** saját számítógép **Eszköz:** VS Code → PowerShell (Azure PowerShell / Az modul) Kérdezd le az Azure virtuális gépeidet, majd készíts **calculated property** segítségével egy `Allapot` nevű oszlopot. Az oszlop a VM energiaállapotát mutassa a `PowerState` tulajdonságból úgy, hogy a `VM ` előtag ne szerepeljen benne (például `running`, `stopped`, `deallocated`). A listában a gép neve is jelenjen meg. **Kiinduló parancsok:** `Get-AzVM -Status` és `Select-Object` **Hasznos paraméterek és elemek:** `Get-AzVM -ResourceGroupName` (szűrés erőforráscsoportra), `-Status` (futási állapot lekérése), `Select-Object -Property` (oszlopok), `@{Name='Allapot'; Expression={...}}` (calculated property), `$_.PowerState` (az aktuális VM állapota), `-replace '^VM ', ''` (a `VM ` előtag eltávolítása). A `Name` és `Expression` hashtable-kulcsok nem önálló cmdletparaméterek. **Segítség a szintaxishoz:** `Select-Object Name, @{Name='Allapot'; Expression={ ... }}`. A kapcsos zárójelek közé neked kell beírnod az állapotot átalakító kifejezést. A calculated property-t használó teljes PowerShell-parancs A parancs kimenete (VM neve és Allapot) **Elfogadási feltétel:** a VM neve és a calculated property-vel előállított `Allapot` oszlop megjelenik, és az állapotból hiányzik a `VM ` előtag (például `running`). ## Mentés és beadás 📤 Beadás 💾 JSON export Helyi adatok törlése Beadási határidő: 2026. október 22. 11:40 (magyar idő) Beadás előtti összesítés Vissza a javításhoz Beadás megerősítése ::: {.callout-note title=\"Aktivitási adatok\"} A munkafüzet opcionálisan aktivitási adatokat is rögzíthet. A másik alkalmazásban vagy RDP-ben töltött idő nem feltétlenül számít aktív időnek. ::: Aktivitás ezen a gépen Időmérés: – Eseménykövetés: – Becsült aktív idő: 0:00 Szerkesztési események: 0 Első megnyitás: – Utolsó aktivitás: – const SETUP = Object.assign({ timeTracking: false, eventTracking: false, showTrackingPanel: false, allowImport: false, checksEnabled: false, syntaxChecks: true, aiChecks: true, showChecksInSubmissionSummary: true, requireChecksBeforeSubmission: false }, window.ITARCH_SETUP || {}); // A feladatok kliensoldali, formai/szintaktikai ellenőrzése bekapcsolva. SETUP.checksEnabled = true; const STORAGE_KEY = \"itarch_week05_answers_2026\"; const IDLE_LIMIT_MS = 120000; const TICK_MS = 1000; const TASKS = { Q01: { title: \"Windows 11 erőforráscsoport törlése\", type: \"syntax\" }, Q02: { title: \"Windows Server telepítési adatlap\", type: \"syntax\" }, Q03: { title: \"AI-prompt\", type: \"syntax\" }, Q04: { title: \"PowerShell telepítőszkript\", type: \"syntax\" }, Q05: { title: \"Telepítés és RDP\", type: \"syntax\" }, Q06: { title: \"File Server szerepkör\", type: \"syntax\" }, Q07: { title: \"SMB-megosztás\", type: \"syntax\" }, Q08:",
+      "fields": [
+        "Q15_COMMAND",
+        "Q15_OUTPUT"
+      ],
+      "criteria": [
+        {
+          "id": "Q15_COMMAND",
+          "description": "Q15 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q15_OUTPUT",
+          "description": "Q15 OUTPUT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    }
+  ]
+}

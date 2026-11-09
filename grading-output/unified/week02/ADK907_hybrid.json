@@ -1,0 +1,190 @@
+{
+  "student_id": "ADK907",
+  "week": 2,
+  "submitted_at": "2026-09-27T21:39:53.674Z",
+  "source_blob": "week02/ADK907/2026-09-27T21-39-57-103Z_36d80250-48f6-42b5-9d32-ed8577c7c4c7.json",
+  "rubric_version": "week02-draft-1",
+  "rubric_status": "draft_requires_teacher_review",
+  "model": "gpt-5-mini",
+  "provisional": true,
+  "total": null,
+  "total_display": null,
+  "max_points": 15,
+  "threshold": 12,
+  "classification": "Hiányos értékelés",
+  "manual_review_tasks": [
+    "Q03",
+    "Q04",
+    "Q05",
+    "Q06",
+    "Q07",
+    "Q08",
+    "Q09",
+    "Q10",
+    "Q11",
+    "Q12",
+    "Q13",
+    "Q14",
+    "Q15"
+  ],
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q01_DONE",
+          "percent": 100,
+          "reason": "Önbevallás: igen (nem igazolt végrehajtás)"
+        }
+      ],
+      "reason": "Q01_DONE: Önbevallás: igen (nem igazolt végrehajtás)",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q02_DONE",
+          "percent": 100,
+          "reason": "Önbevallás: igen (nem igazolt végrehajtás)"
+        }
+      ],
+      "reason": "Q02_DONE: Önbevallás: igen (nem igazolt végrehajtás)",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_shared"
+    },
+    {
+      "task": "Q04",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_shared"
+    },
+    {
+      "task": "Q05",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q06",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q07",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q08",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q09",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_shared"
+    },
+    {
+      "task": "Q10",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_shared"
+    },
+    {
+      "task": "Q11",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q12",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q13",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_failed"
+    },
+    {
+      "task": "Q14",
+      "score": null,
+      "percent": null,
+      "parts": [],
+      "reason": "AI-értékelés sikertelen: 400 Response input messages must contain the word 'json' in some form to use 'text.format' of type 'json_object'.",
+      "manual_review": true,
+      "method": "ai_shared"
+    },
+    {
+      "task": "Q15",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q15_SCRIPT",
+          "percent": 100,
+          "reason": "A script minden kért információt kiír (gépnév, Windows név és verzió, 0. lemez neve/mérete, top5 memóriafolyamat), pipeline és változók használata megfelelő."
+        },
+        {
+          "id": "Q15_DONE",
+          "percent": 100,
+          "reason": "A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen)."
+        }
+      ],
+      "reason": "Q15_SCRIPT: A script minden kért információt kiír (gépnév, Windows név és verzió, 0. lemez neve/mérete, top5 memóriafolyamat), pipeline és változók használata megfelelő. | Q15_DONE: A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen).",
+      "manual_review": true,
+      "method": "ai_batch"
+    }
+  ]
+}

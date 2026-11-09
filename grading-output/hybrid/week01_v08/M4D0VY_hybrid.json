@@ -1,0 +1,340 @@
+{
+  "student_id": "M4D0VY",
+  "submitted_at": "2026-09-21T16:14:09.174Z",
+  "source_blob": "week01/M4D0VY/2026-09-21T16-14-13-048Z_7673661c-1f67-4984-91f5-5a79546dd81b.json",
+  "model": "gpt-5-mini",
+  "version": "0.8",
+  "rubric_version": "week01-v08-rubric-1",
+  "provisional": true,
+  "total": 11.5,
+  "total_display": 11.5,
+  "classification": "Ellenőrizendő",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q01_SUBSCRIPTION_ID",
+          "percent": 100,
+          "reason": "GUID-formátum; a tulajdonjog nincs igazolva"
+        }
+      ],
+      "reason": "Subscription ID formátumának ellenőrzése.",
+      "manual_review": true,
+      "method": "rule_parts"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q02_RESOURCEGROUP",
+          "percent": 100,
+          "reason": "Kitöltve"
+        },
+        {
+          "id": "Q02_VMNAME",
+          "percent": 100,
+          "reason": "Kitöltve"
+        },
+        {
+          "id": "Q02_REGION",
+          "percent": 100,
+          "reason": "Kitöltve"
+        },
+        {
+          "id": "Q02_USERNAME",
+          "percent": 100,
+          "reason": "Kitöltve"
+        }
+      ],
+      "reason": "Négy alapadat külön értékelve; Azure-erőforrás létezése nem igazolt.",
+      "manual_review": false,
+      "method": "rule_parts"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q03_DONE",
+          "percent": 100,
+          "reason": "Önbevallás: Igen"
+        }
+      ],
+      "reason": "A tényleges Azure-konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule_parts"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q04_DONE",
+          "percent": 100,
+          "reason": "Önbevallás: Igen"
+        }
+      ],
+      "reason": "A tényleges Azure-konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule_parts"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q05_PUBLICIP",
+          "percent": 100,
+          "reason": "IPv4 formátum"
+        },
+        {
+          "id": "Q05_PRIVATEIP",
+          "percent": 100,
+          "reason": "IPv4 formátum"
+        },
+        {
+          "id": "Q05_VNET",
+          "percent": 100,
+          "reason": "Virtuális hálózat neve"
+        }
+      ],
+      "reason": "Három mező külön értékelve; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule_parts"
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q06_COMMAND",
+          "percent": 100,
+          "reason": "A parancs helyes IP-t és a 3389-es portot tartalmazza, megegyezik a megadott nyilvános IP-vel."
+        },
+        {
+          "id": "Q06_TCP",
+          "percent": 100,
+          "reason": "Érvényes igaz/hamis érték szerepel (True)."
+        }
+      ],
+      "reason": "Q06_COMMAND: A parancs helyes IP-t és a 3389-es portot tartalmazza, megegyezik a megadott nyilvános IP-vel. | Q06_TCP: Érvényes igaz/hamis érték szerepel (True).",
+      "manual_review": false,
+      "method": "ai_parts_batch",
+      "cache_key": "00cebd84b5f5937173e345e5b90eea10df085f71113b8e6a6bea5c5287bbedf5"
+    },
+    {
+      "task": "Q07",
+      "score": 0.5,
+      "percent": 50,
+      "parts": [
+        {
+          "id": "Q07_COMMAND",
+          "percent": 50,
+          "reason": "Részben helyes: a Set-AzContext parancs szerepel és a név idézőjelek között, de hiányzik a paraméternév; előfordulhat, hogy nem a várt paraméterre kötődik."
+        }
+      ],
+      "reason": "Q07_COMMAND: Részben helyes: a Set-AzContext parancs szerepel és a név idézőjelek között, de hiányzik a paraméternév; előfordulhat, hogy nem a várt paraméterre kötődik.",
+      "manual_review": false,
+      "method": "ai_parts_shared",
+      "cache_key": "273bfe699d6fbfaad7524a1396de7d8f51a715cfd215bca29c88ef8ce0fd4591"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q08_COMMAND",
+          "percent": 100,
+          "reason": "Helyes parancs: Get-AzSubscription."
+        },
+        {
+          "id": "Q08_FILTER",
+          "percent": 100,
+          "reason": "A pipeline helyesen használja a Select-Object Name, State kifejezést."
+        },
+        {
+          "id": "Q08_OUTPUT",
+          "percent": 100,
+          "reason": "Táblázatos kimenet, tartalmazza a Name és State oszlopokat és a bejegyzéseket."
+        }
+      ],
+      "reason": "Q08_COMMAND: Helyes parancs: Get-AzSubscription. | Q08_FILTER: A pipeline helyesen használja a Select-Object Name, State kifejezést. | Q08_OUTPUT: Táblázatos kimenet, tartalmazza a Name és State oszlopokat és a bejegyzéseket.",
+      "manual_review": false,
+      "method": "ai_parts_shared",
+      "cache_key": "ff359c73498b7797fca49f220192790848472bb92079f1208acceefaeca9bdcb"
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q09_COMMAND",
+          "percent": 100,
+          "reason": "Helyes PowerShell-parancs (Get-AzResourceGroup)."
+        },
+        {
+          "id": "Q09_RESOURCEGROUP",
+          "percent": 100,
+          "reason": "A megadott Resource Group név megegyezik a Q02-ben szereplővel (kis/nagybetűtől független egyezés)."
+        }
+      ],
+      "reason": "Q09_COMMAND: Helyes PowerShell-parancs (Get-AzResourceGroup). | Q09_RESOURCEGROUP: A megadott Resource Group név megegyezik a Q02-ben szereplővel (kis/nagybetűtől független egyezés).",
+      "manual_review": false,
+      "method": "ai_parts_batch",
+      "cache_key": "65c2fae99b63ce7d0b2cf68f07f0706680eb113ed51afef6fb28bfd63ba3d304"
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q10_COMMAND",
+          "percent": 100,
+          "reason": "Megfelelő parancs (Get-AzVM)."
+        },
+        {
+          "id": "Q10_VMNAME",
+          "percent": 100,
+          "reason": "A megadott VM-név megegyezik a Q02-ban szereplő névvel."
+        }
+      ],
+      "reason": "Q10_COMMAND: Megfelelő parancs (Get-AzVM). | Q10_VMNAME: A megadott VM-név megegyezik a Q02-ban szereplő névvel.",
+      "manual_review": false,
+      "method": "ai_parts_batch",
+      "cache_key": "b015759f7e7d0f96ad01f9284a875dbe4dc0a3b7f20754cb9e24e510451d2e78"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q11_COMMAND",
+          "percent": 100,
+          "reason": "Helyes parancs a VM állapotának lekérdezésére."
+        },
+        {
+          "id": "Q11_STATE",
+          "percent": 100,
+          "reason": "Helyes és elvárt státuszmegnevezés: 'VM running'."
+        }
+      ],
+      "reason": "Q11_COMMAND: Helyes parancs a VM állapotának lekérdezésére. | Q11_STATE: Helyes és elvárt státuszmegnevezés: 'VM running'.",
+      "manual_review": false,
+      "method": "ai_parts_batch",
+      "cache_key": "8f5665804aca3a72fa6bc1eb5a7b5697cae6638e13902a65d7f667fdde3d5aa6"
+    },
+    {
+      "task": "Q12",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q12_LINE1",
+          "percent": 0,
+          "reason": "Hiányzik a szükséges kifejezés a $vmStatus változó jobb oldalán."
+        },
+        {
+          "id": "Q12_LINE2",
+          "percent": 0,
+          "reason": "Hiányzik az OS-lemez méretét kiíró sor."
+        }
+      ],
+      "reason": "Q12_LINE1: Hiányzik a szükséges kifejezés a $vmStatus változó jobb oldalán. | Q12_LINE2: Hiányzik az OS-lemez méretét kiíró sor.",
+      "manual_review": false,
+      "method": "ai_parts_batch",
+      "cache_key": "1b0f9a0abc03c7a93f1fecd0a522ab45491e7cc691f2c35b1910980768989051"
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q13_PROMPT",
+          "percent": 0,
+          "reason": "Üres mező, nincs megadott prompt."
+        },
+        {
+          "id": "Q13_SUMMARY",
+          "percent": 0,
+          "reason": "Üres mező, nincs összefoglalás."
+        }
+      ],
+      "reason": "Q13_PROMPT: Üres mező, nincs megadott prompt. | Q13_SUMMARY: Üres mező, nincs összefoglalás.",
+      "manual_review": false,
+      "method": "ai_parts_shared",
+      "cache_key": "72e7294948faa5e2afbcdb69c44f9933f0b93692cb186508b9d3b2a065b53975"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q14_COMMAND",
+          "percent": 0,
+          "reason": "A PowerShell-parancs hiányzik; nem adott meg érvényes Get-AzResource lekérdezést."
+        },
+        {
+          "id": "Q14_DAILYRECURRENCE",
+          "percent": 0,
+          "reason": "A dailyRecurrence mező értéke nincs megadva; a 22:00 leállítás nem igazolt."
+        },
+        {
+          "id": "Q14_NOTIFICATIONSETTINGS",
+          "percent": 0,
+          "reason": "A notificationSettings mező értéke nincs megadva; az e-mail értesítés állapota nem igazolt."
+        }
+      ],
+      "reason": "Q14_COMMAND: A PowerShell-parancs hiányzik; nem adott meg érvényes Get-AzResource lekérdezést. | Q14_DAILYRECURRENCE: A dailyRecurrence mező értéke nincs megadva; a 22:00 leállítás nem igazolt. | Q14_NOTIFICATIONSETTINGS: A notificationSettings mező értéke nincs megadva; az e-mail értesítés állapota nem igazolt.",
+      "manual_review": false,
+      "method": "ai_parts_shared",
+      "cache_key": "72f266a640baa01d0d32fdc01a5b848257de300fdc41e10cac2bcdb9c3ad42fa"
+    },
+    {
+      "task": "Q15",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q15_STOPCOMMAND",
+          "percent": 100,
+          "reason": "helyes és teljes parancs (Name és ResourceGroupName megadva)"
+        },
+        {
+          "id": "Q15_STATUSCOMMAND",
+          "percent": 100,
+          "reason": "Get-AzVM -Status helyes parancs a státusz ellenőrzésére"
+        },
+        {
+          "id": "Q15_STATE",
+          "percent": 100,
+          "reason": "'VM deallocated' érvényes Azure státusznév egy leállított/deallocated VM-re"
+        }
+      ],
+      "reason": "Q15_STOPCOMMAND: helyes és teljes parancs (Name és ResourceGroupName megadva) | Q15_STATUSCOMMAND: Get-AzVM -Status helyes parancs a státusz ellenőrzésére | Q15_STATE: 'VM deallocated' érvényes Azure státusznév egy leállított/deallocated VM-re",
+      "manual_review": false,
+      "method": "ai_parts_batch",
+      "cache_key": "2ecdda30d958a34d0bde3c914e2b54aa3a3349df9c0699460446beddf10d61c1"
+    }
+  ],
+  "overall_note": "Feladatonkénti, cache-elt, részszempontokra bontott AI-javítás; minden eredmény előzetes."
+}

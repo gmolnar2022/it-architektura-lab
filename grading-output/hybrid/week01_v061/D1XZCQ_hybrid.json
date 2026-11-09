@@ -1,0 +1,123 @@
+{
+  "student_id": "D1XZCQ",
+  "submitted_at": "2026-09-19T14:16:23.533Z",
+  "source_blob": "week01/D1XZCQ/2026-09-19T14-16-27-707Z_dd6c4b0a-9df9-4acd-b524-3a426e8b325f.json",
+  "model": "gpt-5-mini",
+  "version": "0.6.1",
+  "provisional": true,
+  "total": 12,
+  "classification": "Elfogadott",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "reason": "A megadott parancs helyes PowerShell-szintaxisú (Test-NetConnection 9.205.26.222 -Port 3389) és tartalmazza a VM nyilvános IP-jét és a 3389-es portot; a TcpTestSucceeded értéke True, tehát az RDP-port elérhetőnek jelzett.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "A megadott parancs helyes: Set-AzContext -Subscription \"Azure for Students\" az aktív előfizetést a név alapján állítja be (a név idézőjelek között).",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "Helyes parancs: Get-AzSubscription, majd Get-AzSubscription | Select-Object Name, State — a kimenet tartalmazza a Name és State oszlopokat.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "A megadott Get-AzResourceGroup parancs helyes a Resource Groupok listázására, és a megadott erőforráscsoport (win11rg) megegyezik a Q02-ban megadottal.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "Helyes parancs: a Get-AzVM paraméter nélkül az előfizetés virtuális gépeit listázza. A megadott VM-név (bencepc) megegyezik a Q02-ban megadott névvel.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A parancs érvényes: Get-AzVM -Status visszaadja a Statuses tömböt, a .Statuses[1].DisplayStatus kinyeri a PowerState értéket; a megadott állapot 'VM running' helyes és konzisztens.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q12",
+      "score": 1,
+      "reason": "Mindkét sor helyes: az első a Get-AzVM ... -Status-szal lekéri a VM státuszobjektumot, a második pedig a korábban definiált $disk objektum DiskSizeGB tulajdonságát írja ki.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "Üres válasz: hiányzik az AI-nak adott prompt és a kért 2–4 mondatos saját összefoglalás, így a feladat nincs teljesítve.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "A válasz üres: nem adta meg a kiegészített PowerShell-parancsot (pl. Get-AzResource ...) és nem szolgáltatta a dailyRecurrence illetve notificationSettings mezők értékét.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "reason": "Üres válasz: nem adott meg sem leállításhoz használható PowerShell-parancsot, sem a státusz lekérdezéséhez valót, illetve a végső állapot hiányzik.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    }
+  ],
+  "overall_note": "Feladatonkénti szemantikai javítás; minden eredmény előzetes."
+}

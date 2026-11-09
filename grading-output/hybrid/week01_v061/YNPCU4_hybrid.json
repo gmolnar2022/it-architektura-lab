@@ -1,0 +1,123 @@
+{
+  "student_id": "YNPCU4",
+  "submitted_at": "2026-09-15T15:13:30.217Z",
+  "source_blob": "week01/YNPCU4/2026-09-15T15-13-31-653Z_6c2d16e6-90b9-4f36-9ec1-88cf43e34fdd.json",
+  "model": "gpt-5-mini",
+  "version": "0.6.1",
+  "provisional": true,
+  "total": 12,
+  "classification": "Elfogadott",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "reason": "A megadott parancs helyes (Test-NetConnection 68.210.225.121 -Port 3389), és a TcpTestSucceeded értéke True; az RDP-port elérhetősége helyesen jelezve.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "Helyes parancs: a Set-AzContext a megadott előfizetés nevével (idézőjelek között) állítja be az aktív kontextust.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "Helyes megoldás: a Get-AzSubscription parancsot adta meg, és a Get-AzSubscription | Select-Object Name, State szűrést használta; a megadott kimenet tartalmazza a Name és State oszlopokat.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "A megadott parancs (Get-AzResourceGroup) helyes az erőforráscsoportok listázásához; a megadott Resource Group név (alban_pekseg) megegyezik a Q02-ban megadottal.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "Megfelelő parancsot adott meg (Get-AzVM listázza az előfizetés virtuális gépeit), és a megadott VM-név (IDF-GAMING-PC) megegyezik a Q02-ban szereplő névvel.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "Megfelelő parancsot adta meg (Get-AzVM -Status), a kimenet PowerState mezője 'VM running'-ként szerepel, tehát a VM fut.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q12",
+      "score": 1,
+      "reason": "Mindkét hiányzó sor helyes: a VM státusz lekérdezése -Status kapcsolóval (Get-AzVM ... -Status), és az OS-lemez méretének kiírása a meglévő $disk.DiskSizeGB használatával.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "Hiányzik az AI-nak adott prompt és a saját összefoglalás; a Q13 mezők üresek, ezért nem teljesült a feladat.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "A kötelező kiegészítés (például Get-AzResource -ResourceGroupName \"SAJÁT ERŐFORRÁSCSOPORT\" -ResourceType \"Microsoft.DevTestLab/schedules\" -ExpandProperties | Select-Object -ExpandProperty Properties) nem szerepel; a mezők üresek, így a feladat nincs teljesítve.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "reason": "Üres válasz — a diák nem adott meg leállításhoz és az állapot ellenőrzéséhez szükséges PowerShell-parancsokat, illetve nem közölte a VM végső állapotát.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    }
+  ],
+  "overall_note": "Feladatonkénti szemantikai javítás; minden eredmény előzetes."
+}

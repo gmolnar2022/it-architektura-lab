@@ -1,0 +1,345 @@
+{
+  "week": 2,
+  "version": "week02-draft-1",
+  "status": "draft_requires_teacher_review",
+  "max_points": 15,
+  "accept_percent": 80,
+  "tasks": [
+    {
+      "number": 1,
+      "title": "1. feladat – Regisztráció a Skillable rendszerbe",
+      "description": "## 1. feladat – Regisztráció a Skillable rendszerbe Nyisd meg a **Skillable / Microsoft Learn for Educators** laboroldalt: . 1. Válaszd a **Register with Training Key** lehetőséget. 2. Add meg az oktatótól kapott **Training Key** értéket, majd válaszd a **Register** gombot. 3. Töltsd ki a regisztrációhoz szükséges adatokat, és hozd létre a fiókodat. 4. A regisztráció után jelentkezz be a Skillable rendszerbe. ::: {.callout-warning title=\"Fontos\"} A Training Key-t, a jelszavadat és más belépési adatot ne írd be ebbe a munkafüzetbe. Jegyezd meg a Skillable felhasználónevedet és jelszavadat, mert később is szükséged lehet rájuk. ::: A Skillable-fiókot létrehoztam, és sikeresen be tudok jelentkezni Igen ",
+      "fields": [
+        "Q01_DONE"
+      ],
+      "criteria": [
+        {
+          "id": "Q01_DONE",
+          "description": "Q01 DONE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 2,
+      "title": "2. feladat – A labor megkeresése",
+      "description": "## 2. feladat – A labor megkeresése Bejelentkezés után nyisd meg a **Current Training** részt, majd válaszd ki az oktató által megadott kurzust. Ha a rendszer kéri, végezd el a **Get Ready / Software Check** lépést és fogadd el a Microsoft End User License Agreementet. Keresd meg az elérhető laborok között a **Deploy an Azure Virtual Machine [Guided]** labort. Megtaláltam a Deploy an Azure Virtual Machine [Guided] labort Igen ",
+      "fields": [
+        "Q02_DONE"
+      ],
+      "criteria": [
+        {
+          "id": "Q02_DONE",
+          "description": "Q02 DONE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 3,
+      "title": "3. feladat – Deploy an Azure Virtual Machine [Guided]",
+      "description": "## 3. feladat – Deploy an Azure Virtual Machine [Guided] Indítsd el a **Deploy an Azure Virtual Machine [Guided]** labort, és végezd el a labor utasításait. A végrehajtás közben figyeld meg különösen az Azure VM legfontosabb beállításait: **Region, Image, Size, Disks, Networking**. Mi a laborban létrehozott virtuális gép neve? Melyik régióban hoztad létre a virtuális gépet? Milyen operációs rendszert / image-et használtál? Milyen VM-méretet használtál? # II. Azure menedzsment Visual Studio Code-ból ",
+      "fields": [
+        "Q03_VMNAME",
+        "Q03_REGION",
+        "Q03_IMAGE",
+        "Q03_SIZE"
+      ],
+      "criteria": [
+        {
+          "id": "Q03_VMNAME",
+          "description": "Q03 VMNAME",
+          "weight": 1
+        },
+        {
+          "id": "Q03_REGION",
+          "description": "Q03 REGION",
+          "weight": 1
+        },
+        {
+          "id": "Q03_IMAGE",
+          "description": "Q03 IMAGE",
+          "weight": 1
+        },
+        {
+          "id": "Q03_SIZE",
+          "description": "Q03 SIZE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 4,
+      "title": "4. feladat – Visual Studio Code előkészítése",
+      "description": "## 4. feladat – Visual Studio Code előkészítése Indítsd el a **Visual Studio Code** alkalmazást a tantermi gépen. 1. Nyisd meg az **Extensions** nézetet (`Ctrl+Shift+X`). 2. Keresd meg az **Azure Resources** bővítményt. 3. Ha nincs telepítve, telepítsd. 4. Nyisd meg az **Azure** nézetet a VS Code bal oldali sávjában. 5. Jelentkezz be az Azure-ba az egyetemi Microsoft-fiókoddal. 6. Ellenőrizd, hogy az Azure-előfizetésed megjelenik-e a **Resources** nézetben. Sikerült bejelentkezni, és megjelenik az Azure-előfizetésed a Resources nézetben? Igen Nem ::: {.callout-note title=\"Ha az Azure Resources nincs telepítve\"} Telepítsd az **Azure Resources** bővítményt a VS Code Extensions nézetéből, majd jelentkezz be újra. ::: ",
+      "fields": [
+        "Q04_RESULT"
+      ],
+      "criteria": [
+        {
+          "id": "Q04_RESULT",
+          "description": "Q04 RESULT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 5,
+      "title": "5. feladat – Azure bejelentkezés és előfizetés",
+      "description": "## 5. feladat – Azure bejelentkezés és előfizetés Nyiss egy **PowerShell terminált** a VS Code-ban, majd a korábban tanult Azure PowerShell parancsok segítségével: 1. jelentkezz be az Azure-ba; 2. listázd az elérhető előfizetéseidet; 3. ha több előfizetésed van, válaszd ki azt, amelyet a gyakorlaton használsz. A használt előfizetés neve A megfelelő előfizetés kiválasztásához használt parancs ::: {.callout-note title=\"Ha a Powershell parancsot nem fogadja el\"} Add ki egymás után a következő parancsokat: Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force -AllowClobber Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser Connect-AzAccount ::: ",
+      "fields": [
+        "Q05_NAME",
+        "Q05_COMMAND"
+      ],
+      "criteria": [
+        {
+          "id": "Q05_NAME",
+          "description": "Q05 NAME",
+          "weight": 1
+        },
+        {
+          "id": "Q05_COMMAND",
+          "description": "Q05 COMMAND",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 6,
+      "title": "6. feladat – Egy erőforráscsoport lekérdezése",
+      "description": "## 6. feladat – Egy erőforráscsoport lekérdezése A korábban tanult Azure PowerShell parancs segítségével **kérdezd le azt az erőforráscsoportot, amelyben a saját virtuális géped található**. A lekérdezésben paraméterként add meg az erőforráscsoport nevét. A kimenet alapján add meg az erőforráscsoport helyét (`Location`) is. A használt PowerShell-parancs Az erőforráscsoport Location értéke ",
+      "fields": [
+        "Q06_COMMAND",
+        "Q06_LOCATION"
+      ],
+      "criteria": [
+        {
+          "id": "Q06_COMMAND",
+          "description": "Q06 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q06_LOCATION",
+          "description": "Q06 LOCATION",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 7,
+      "title": "7. feladat – Egy virtuális gép állapotának lekérdezése",
+      "description": "## 7. feladat – Egy virtuális gép állapotának lekérdezése A korábban tanult Azure PowerShell parancs segítségével **csak a saját virtuális gépedet kérdezd le**. A parancsban paraméterként add meg az **erőforráscsoport nevét** és a **virtuális gép nevét**, és kérdezd le a VM aktuális állapotát is. A használt PowerShell-parancs A virtuális géped aktuális állapota ",
+      "fields": [
+        "Q07_COMMAND",
+        "Q07_STATE"
+      ],
+      "criteria": [
+        {
+          "id": "Q07_COMMAND",
+          "description": "Q07 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q07_STATE",
+          "description": "Q07 STATE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 8,
+      "title": "8. feladat – A virtuális gép leállítása és elindítása",
+      "description": "## 8. feladat – A virtuális gép leállítása és elindítása A korábban megismert Azure PowerShell parancsok segítségével: 1. állítsd le a saját virtuális gépedet az **erőforráscsoport és a VM nevének megadásával**; 2. várd meg a leállítás befejezését; 3. indítsd el újra ugyanazt a virtuális gépet; 4. ellenőrizd, hogy a VM ismét futó állapotba került-e. A VM elindításához használt PowerShell-parancs A VM állapota az indítás befejezése után # III. Windows PowerShell az Azure VM-en ",
+      "fields": [
+        "Q08_COMMAND",
+        "Q08_STATE"
+      ],
+      "criteria": [
+        {
+          "id": "Q08_COMMAND",
+          "description": "Q08 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q08_STATE",
+          "description": "Q08 STATE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 9,
+      "title": "9. feladat – Kapcsolódás RDP-vel és PowerShell indítása",
+      "description": "## 9. feladat – Kapcsolódás RDP-vel és PowerShell indítása Az Azure Portalon vagy a korábbi gyakorlaton megismert módon töltsd le a VM RDP-fájlját, majd kapcsolódj a virtuális géphez. Jelentkezz be a VM létrehozásakor megadott **helyi rendszergazdai fiókkal**. A virtuális gépen indíts el egy **Windows PowerShell** ablakot, majd futtasd: ```powershell $env:COMPUTERNAME ``` A virtuális gép PowerShellből lekérdezett számítógépneve ::: {.callout-note title=\"Két különböző menedzsmentszint\"} A VS Code-ban használt `Get-AzVM` az **Azure-ban lévő VM-erőforrást** kérdezi le. Az RDP-kapcsolat után használt `Get-Process`, `Get-Disk` és hasonló parancsok már **a virtuális gépen futó Windows operációs rendszert** vizsgálják. ::: ",
+      "fields": [
+        "Q09_NAME"
+      ],
+      "criteria": [
+        {
+          "id": "Q09_NAME",
+          "description": "Q09 NAME",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 10,
+      "title": "10. feladat – Folyamatok és szolgáltatások",
+      "description": "## 10. feladat – Folyamatok és szolgáltatások A virtuális gép PowerShell ablakában végezd el az alábbi lekérdezéseket. Ebben a feladatban még **ne használj pipeline-t (`|`)**. 1. A `Get-Process` paranccsal kérdezd le az **explorer** nevű folyamatot a megfelelő paraméter használatával. 2. A `Get-Service` paranccsal kérdezd le a **Windows Update (`wuauserv`)** szolgáltatást a megfelelő paraméter használatával. Másold be az alábbi mezőbe a két használt PowerShell-parancsot. A két PowerShell-parancs ",
+      "fields": [
+        "Q10_COMMANDS"
+      ],
+      "criteria": [
+        {
+          "id": "Q10_COMMANDS",
+          "description": "Q10 COMMANDS",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 11,
+      "title": "11. feladat – CPU, memória és háttértár",
+      "description": "## 11. feladat – CPU, memória és háttértár Az előadáson a fizikai és virtuális erőforrások kapcsolatát vizsgáltuk. Most nézd meg, milyen erőforrásokat lát a Windows a saját Azure VM-edben. Ebben a feladatban még **ne használj pipeline-t (`|`)**. 1. Kérdezd le a processzor adatait a `Get-CimInstance` segítségével a **Win32_Processor** osztályból. 2. Kérdezd le a memória adatait a `Get-CimInstance` segítségével a **Win32_ComputerSystem** osztályból. 3. A `Get-Disk` paranccsal kérdezd le külön a **0. számú lemezt**. 4. A `Get-Volume` paranccsal kérdezd le külön a **C:** meghajtót. A négy használt PowerShell-parancs CPU-magok száma (NumberOfCores) Logikai processzorok száma (NumberOfLogicalProcessors) A 0. lemez neve / FriendlyName értéke ",
+      "fields": [
+        "Q11_COMMANDS",
+        "Q11_CORES",
+        "Q11_LOGICAL",
+        "Q11_DISK"
+      ],
+      "criteria": [
+        {
+          "id": "Q11_COMMANDS",
+          "description": "Q11 COMMANDS",
+          "weight": 1
+        },
+        {
+          "id": "Q11_CORES",
+          "description": "Q11 CORES",
+          "weight": 1
+        },
+        {
+          "id": "Q11_LOGICAL",
+          "description": "Q11 LOGICAL",
+          "weight": 1
+        },
+        {
+          "id": "Q11_DISK",
+          "description": "Q11 DISK",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 12,
+      "title": "12. feladat – Hálózat és rendszerinformáció",
+      "description": "## 12. feladat – Hálózat és rendszerinformáció Most kérdezd le a virtuális gép hálózati és rendszerinformációit. Ebben a feladatban még **ne használj pipeline-t (`|`)**. 1. A `Get-NetIPAddress` paranccsal csak az **IPv4** címeket kérdezd le a megfelelő paraméter használatával. 2. A `Get-ComputerInfo` paranccsal csak a `WindowsProductName`, `WindowsVersion` és `OsArchitecture` tulajdonságokat kérdezd le. A két használt PowerShell-parancs A VM egyik IPv4-címe WindowsProductName OsArchitecture ",
+      "fields": [
+        "Q12_COMMANDS",
+        "Q12_IP",
+        "Q12_OS",
+        "Q12_ARCH"
+      ],
+      "criteria": [
+        {
+          "id": "Q12_COMMANDS",
+          "description": "Q12 COMMANDS",
+          "weight": 1
+        },
+        {
+          "id": "Q12_IP",
+          "description": "Q12 IP",
+          "weight": 1
+        },
+        {
+          "id": "Q12_OS",
+          "description": "Q12 OS",
+          "weight": 1
+        },
+        {
+          "id": "Q12_ARCH",
+          "description": "Q12 ARCH",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 13,
+      "title": "13. feladat – Parancsok összefűzése pipeline-nal",
+      "description": "## 13. feladat – Parancsok összefűzése pipeline-nal A PowerShellben a `|` jel segítségével egy parancs kimenetét átadhatjuk a következő parancsnak. Keresd meg az **5 legtöbb working set memóriát használó folyamatot**: ```powershell Get-Process | Sort-Object -Property WS | Select-Object -Last 5 ``` Ezután módosítsd a parancsot úgy, hogy a folyamatok **csökkenő sorrendben** jelenjenek meg, és csak a `Name`, `Id` és `WS` tulajdonságokat lásd. A módosított pipeline A legnagyobb memóriahasználatú folyamat neve ",
+      "fields": [
+        "Q13_COMMAND",
+        "Q13_PROCESS"
+      ],
+      "criteria": [
+        {
+          "id": "Q13_COMMAND",
+          "description": "Q13 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q13_PROCESS",
+          "description": "Q13 PROCESS",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 14,
+      "title": "14. feladat – Változók használata",
+      "description": "## 14. feladat – Változók használata Tárold el a 0. számú lemez objektumát egy `$disk` nevű változóban, majd jelenítsd meg a lemez nevét, méretét és állapotát. ```powershell $disk = Get-Disk -Number 0 Write-Host \"Lemez neve:\" $disk.FriendlyName Write-Host \"Lemez mérete:\" ($disk.Size / 1GB) \"GB\" Write-Host \"Állapot:\" $disk.OperationalStatus ``` A lemez PowerShell által kijelzett mérete GB-ban OperationalStatus ",
+      "fields": [
+        "Q14_SIZE",
+        "Q14_STATUS"
+      ],
+      "criteria": [
+        {
+          "id": "Q14_SIZE",
+          "description": "Q14 SIZE",
+          "weight": 1
+        },
+        {
+          "id": "Q14_STATUS",
+          "description": "Q14 STATUS",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 15,
+      "title": "15. feladat – PowerShell ISE és az első script",
+      "description": "## 15. feladat – PowerShell ISE és az első script A virtuális gépen indítsd el a **Windows PowerShell ISE** alkalmazást. Válaszd a **File → New** lehetőséget, és készíts egy `system-report.ps1` nevű scriptet. A script legalább az alábbi információkat jelenítse meg: - a számítógép neve; - a Windows verziója; - a 0. lemez neve és mérete; - az 5 legtöbb memóriát használó folyamat neve, azonosítója és memóriahasználata. Használd fel a korábbi feladatokban megismert parancsokat, pipeline-t és változókat. Mentsd el a scriptet `.ps1` kiterjesztéssel, majd futtasd a PowerShell ISE-ben az **F5** billentyűvel. ::: {.callout-note title=\"Ha a script futtatását a rendszer korlátozza\"} A PowerShell végrehajtási házirendje (Execution Policy) korlátozhatja a `.ps1` fájlok futtatását. Ha ilyen üzenetet kapsz, jelezd az oktatónak; a biztonsági beállításokat ne módosítsd önállóan. ::: Másold be ide a végleges system-report.ps1 scripted tartalmát A scriptet sikeresen lefuttattam a PowerShell ISE-ben Igen ::: {.callout-warning title=\"A gyakorlat végén\"} A feladatok befejezése után állítsd le az Azure virtuális gépedet, és ellenőrizd, hogy **Stopped (deallocated)** állapotba került. Ezzel elkerülheted a felesleges Azure-erőforrás-felhasználást. ::: ## Mentés és beadás 📤 Beadás 💾 JSON export Helyi adatok törlése Beadási határidő: 2026. október 1. 11:40 Beadás előtti összesítés Vissza a javításhoz Beadás megerősítése ::: {.callout-note title=\"Aktivitási adatok\"} A munkafüzet kísérleti jelleggel becsült aktív időt és feladatonkénti szerkesztési eseményeket is rögzíthet. Ez nem pontos munkaidőmérés: a másik böngészőlapon, VS Code-ban, RDP-ben vagy Skillable-ben végzett munka nem feltétlenül számít aktív időnek. ::: Aktivitás ezen a gépen Időmérés: – Eseménykövetés: – Becsült aktív idő: 0:00 Szerkesztési események: 0 Első megnyitás: – Utolsó aktivitás: – const SETUP = Object.assign({ timeTracking: false, eventTracking: false, showTrackingPanel: false, allowImport: false, checksEnabled: false, syntaxChecks: true, aiChecks: true, showChecksInSubmissionSummary: true, requireChecksBeforeSubmission: false }, window.ITARCH_SETUP || {}); const STORAGE_KEY = \"itarch_week02_answers_beta1\"; const IDLE_LIMIT_MS = 120000; const TICK_MS = 1000; const TASKS = { Q01: { title: \"Skillable regisztráció\", type: \"syntax\" }, Q02: { title: \"A Skillable labor megkeresése\", type: \"syntax\" }, Q03: { title: \"Azure VM Guided Lab\", type: \"syntax\" }, Q04: { title: \"VS Code és PowerShell előkészítése\", type: \"syntax\" }, Q05: { title: \"Azure bejelentkezés és előfizetés\", type: \"syntax\" }, Q06: { title: \"Erőforráscsoportok lekérdezése\", type: \"syntax\" }, Q07: { title: \"Virtuális gépek lekérdezése\", type: \"syntax\" }, Q08: { title: \"Virtuális gép vezérlése\", type: \"syntax\" }, Q09: { title: \"RDP és PowerShell a",
+      "fields": [
+        "Q15_SCRIPT",
+        "Q15_DONE"
+      ],
+      "criteria": [
+        {
+          "id": "Q15_SCRIPT",
+          "description": "Q15 SCRIPT",
+          "weight": 1
+        },
+        {
+          "id": "Q15_DONE",
+          "description": "Q15 DONE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    }
+  ]
+}

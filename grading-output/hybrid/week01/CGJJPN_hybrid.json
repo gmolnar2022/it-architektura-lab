@@ -1,0 +1,123 @@
+{
+  "student_id": "CGJJPN",
+  "submitted_at": "2026-09-17T13:25:04.353Z",
+  "source_blob": "week01/CGJJPN/2026-09-17T13-25-08-804Z_a885015a-3adf-49f8-bf2c-61cb52c9f542.json",
+  "model": "gpt-5-mini",
+  "version": "0.6",
+  "provisional": true,
+  "total": 11.5,
+  "classification": "Ellenőrizendő",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "reason": "A parancs a Q05-ban megadott nyilvános IP-t és a 3389-es portot használja; a TcpTestSucceeded eredmény (True) megadva.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "Helyes Set-AzContext parancs az 'Azure for Students' előfizetés beállításához.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "Get-AzSubscription használata és a Select-Object Name, State szűrés alkalmazva; a kimenet megfelel.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "Get-AzResourceGroup parancs megadva, és a saját Resource Group neve ('win11g') is megadva (egyezik a Q02-vel).",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "Get-AzVM parancs használata és a saját VM név ('Windows11') megadva (egyezik a Q02-vel).",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "Get-AzVM -Status parancs használata és a VM állapota ('deallocated') megadva.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q12",
+      "score": 0.5,
+      "reason": "Az OS-lemez méretét kiíró sor helyes. Hiányzik azonban a $vmStatus változóhoz való hozzárendelés (pl. \"$vmStatus = Get-AzVM -ResourceGroupName ... -Status\"), emiatt a script hibás lenne.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "Hiányzik az AI-nak adott prompt és a saját, 2–4 mondatos összefoglalás.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "Hiányzik a kiegészített Get-AzResource(…) parancs és a kimenet (dailyRecurrence, notificationSettings) megadása; a placeholder üres.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "reason": "Hiányzik a VM leállításhoz és az állapot ellenőrzéséhez használt PowerShell-parancs, valamint a végső állapot.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    }
+  ],
+  "overall_note": "Összpontszám: 6.5/10. Jó megoldások: Q06–Q11, Q08; részben hiányos Q12; hiányos Q13–Q15."
+}

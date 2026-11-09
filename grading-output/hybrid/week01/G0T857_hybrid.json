@@ -1,0 +1,123 @@
+{
+  "student_id": "G0T857",
+  "submitted_at": "2026-09-15T15:05:13.692Z",
+  "source_blob": "week01/G0T857/2026-09-15T15-05-18-540Z_8aed028d-d049-4f6b-bd37-6302a06e3229.json",
+  "model": "gpt-5-mini",
+  "version": "0.6",
+  "provisional": true,
+  "total": 11.5,
+  "classification": "Ellenőrizendő",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 0.5,
+      "reason": "A Test-NetConnection parancs jó, és TcpTestSucceeded értéket is adott, de a használt IP (158.158.76.146) nem egyezik a Q05-ben megadott nyilvános IP-vel (158.158.42.191).",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "A Set-AzContext parancs helyesen megadva az \"Azure for Students\" előfizetésre; megoldás elfogadható.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "Get-AzSubscription és a | Select-Object Name, State használata helyes, a kimenet tartalmazza a várt mezőket.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "Get-AzResourceGroup parancs megadva és a saját Resource Group neve 'mywin11' szerepel, egyezik a Q02-val.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "Get-AzVM használata a VM-ek listázására megfelelő; a saját VM névként 'gep001' megadva.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "Get-AzVM -ResourceGroupName ... -Name ... -Status parancs szerepel és állapotként 'VM running' van megadva — megfelelő.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q12",
+      "score": 1,
+      "reason": "A hiányzó sorok tartalma logikailag megfelelő: a VM státusz lekérdezése (Get-AzVM -Status) és a Write-Host a $disk.DiskSizeGB kiírására; a vázban lévő $vmStatus változó feltételezve beállítódik a megadott utasítással.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "Hiányzik az AI-hoz adott prompt és a 2–4 mondatos saját összefoglalás; a feladat nincs teljesen kitöltve.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "Nem töltötte ki a hiányzó Get-AzResource parancsot; nincs megadva a dailyRecurrence és notificationSettings kimenet sem.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "reason": "Hiányzik a VM leállításához és az állapot ellenőrzéséhez használt PowerShell-parancs, valamint a végső állapot megadása.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    }
+  ],
+  "overall_note": "A beadás részben teljes: 6.5/10 pont. Javítandó főként Q06 (helyes IP), hiányzó vagy üres Q13–Q15 és Q14 mezők."
+}

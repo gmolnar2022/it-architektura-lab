@@ -1,0 +1,441 @@
+{
+  "rubricHash": "ebc55205c66d84a69eba108530f3569c47832bbb6658a88b9ad3a20cfefb82fe",
+  "model": "gpt-5-mini",
+  "entries": {
+    "ab30d42ed3f4abb98fc3d443ba6f28f7ceeac27bd588d025062758d36401f5c9": {
+      "task": "Q01",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q01_DONE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q01_DONE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "d6c147da59b83c7c4f20922110aa81f42721e5aa8b0219d73e027b3f32d6d9e2": {
+      "task": "Q01",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q01_DONE",
+          "percent": 100,
+          "reason": "Önbevallás: igen (nem igazolt végrehajtás)"
+        }
+      ],
+      "reason": "Q01_DONE: Önbevallás: igen (nem igazolt végrehajtás)",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "a99962501222ba35cf2bdc8fca5e2e83e97a643627b03d2d83f5f11ff70b58e4": {
+      "task": "Q02",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q02_DONE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q02_DONE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "9f1d2d701880af1241491a9a1595ada3dee2c62781868eb3a222faee0c98c74e": {
+      "task": "Q02",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q02_DONE",
+          "percent": 100,
+          "reason": "Önbevallás: igen (nem igazolt végrehajtás)"
+        }
+      ],
+      "reason": "Q02_DONE: Önbevallás: igen (nem igazolt végrehajtás)",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "5d67f2e39066d5795145db3c155d425110ee205b10230b08f5047bc5e8cb7c0b": {
+      "task": "Q03",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q03_VMNAME",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q03_REGION",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q03_IMAGE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q03_SIZE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q03_VMNAME: Üres válasz | Q03_REGION: Üres válasz | Q03_IMAGE: Üres válasz | Q03_SIZE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "8fdf0ec2b2606ad823d8940284dafdf3db354329763fc21cfdb46a67ca5426b0": {
+      "task": "Q04",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q04_RESULT",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q04_RESULT: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "a764fde758a1adde2df323b58f2318f066948236895396439c1385478a890aac": {
+      "task": "Q05",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q05_NAME",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q05_COMMAND",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q05_NAME: Üres válasz | Q05_COMMAND: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "bc501d417a7bd25a3aac73d4a4f76f30f6e0533e883e08c5620dfd6294952cec": {
+      "task": "Q06",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q06_COMMAND",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q06_LOCATION",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q06_COMMAND: Üres válasz | Q06_LOCATION: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "2036e88257bba2914d331401bd1008ec265fc20d4d39ceb2eb521d22d7228a4c": {
+      "task": "Q07",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q07_COMMAND",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q07_STATE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q07_COMMAND: Üres válasz | Q07_STATE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "5f641244dfcc02973b0fc6dbcfc5b77f73553d52df4bc7b5c4a17dd62ce52e73": {
+      "task": "Q08",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q08_COMMAND",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q08_STATE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q08_COMMAND: Üres válasz | Q08_STATE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "bfc0dd99c8ecc82869ec937b13bac50a4b8b4367374d6ed5fb9f5b2844c37b30": {
+      "task": "Q09",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q09_NAME",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q09_NAME: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "5266775839779bd305ebf43c25a82dc78a5b12a27bbfd489329eb215930e4e69": {
+      "task": "Q10",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q10_COMMANDS",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q10_COMMANDS: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "4edd5976a3f10c78394e132a77257e3ee99341d60111d4ee23477c2926be5216": {
+      "task": "Q11",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q11_COMMANDS",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q11_CORES",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q11_LOGICAL",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q11_DISK",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q11_COMMANDS: Üres válasz | Q11_CORES: Üres válasz | Q11_LOGICAL: Üres válasz | Q11_DISK: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "9b4e433a5be849ea4f5e8eb3bb93773c854ee0d1054d47a8da8a02f06aecd64c": {
+      "task": "Q12",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q12_COMMANDS",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q12_IP",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q12_OS",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q12_ARCH",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q12_COMMANDS: Üres válasz | Q12_IP: Üres válasz | Q12_OS: Üres válasz | Q12_ARCH: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "b48a1093a86cdf71c206cf6d88bc985f5bb45910326474468a31f011ec6697c3": {
+      "task": "Q13",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q13_COMMAND",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q13_PROCESS",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q13_COMMAND: Üres válasz | Q13_PROCESS: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "797c1f8c192cd28733083c0281ea6f93dc3b48c13b464a9e64000f4cacbef65f": {
+      "task": "Q14",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q14_SIZE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q14_STATUS",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q14_SIZE: Üres válasz | Q14_STATUS: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "d04f978b36fc9026d4fdfd9890510bcea43e95a6cdef667f496cd172fbfe2f83": {
+      "task": "Q15",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q15_SCRIPT",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q15_DONE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q15_SCRIPT: Üres válasz | Q15_DONE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    "d1f366be4c08033aa910e190d7715934a5582d362457d6ba3a4d90cd93401835": {
+      "task": "Q15",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q15_SCRIPT",
+          "percent": 100,
+          "reason": "A script minden kért információt kiír (gépnév, Windows név és verzió, 0. lemez neve/mérete, top5 memóriafolyamat), pipeline és változók használata megfelelő."
+        },
+        {
+          "id": "Q15_DONE",
+          "percent": 100,
+          "reason": "A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen)."
+        }
+      ],
+      "reason": "Q15_SCRIPT: A script minden kért információt kiír (gépnév, Windows név és verzió, 0. lemez neve/mérete, top5 memóriafolyamat), pipeline és változók használata megfelelő. | Q15_DONE: A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen).",
+      "manual_review": true,
+      "method": "ai_batch"
+    },
+    "ad4d4efafd76a9ac5a95afbe99a295ea01882c4eab9b2c20614d601c3f408901": {
+      "task": "Q15",
+      "score": 0.75,
+      "percent": 75,
+      "parts": [
+        {
+          "id": "Q15_SCRIPT",
+          "percent": 50,
+          "reason": "Hiányzik a Windows verzió mező lekérése (csak WindowsProductName szerepel), a többi kimenet (lemezinformáció, top5 memóriafolyamat) rendben van."
+        },
+        {
+          "id": "Q15_DONE",
+          "percent": 100,
+          "reason": "A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen)."
+        }
+      ],
+      "reason": "Q15_SCRIPT: Hiányzik a Windows verzió mező lekérése (csak WindowsProductName szerepel), a többi kimenet (lemezinformáció, top5 memóriafolyamat) rendben van. | Q15_DONE: A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen).",
+      "manual_review": true,
+      "method": "ai_batch"
+    },
+    "1c27488f2dfbeabd329a306b75db4a26a3d208167b977fb10cf93a2bb560f7a8": {
+      "task": "Q15",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q15_SCRIPT",
+          "percent": 100,
+          "reason": "A script helyesen kiírja a gépnevét, Windows nevét és verzióját, 0. lemez nevét és méretét, valamint a 5 legtöbbet memóriahasználó folyamat nevét, azonosítóját és WS értékét; pipeline és változók jól használva."
+        },
+        {
+          "id": "Q15_DONE",
+          "percent": 100,
+          "reason": "A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen)."
+        }
+      ],
+      "reason": "Q15_SCRIPT: A script helyesen kiírja a gépnevét, Windows nevét és verzióját, 0. lemez nevét és méretét, valamint a 5 legtöbbet memóriahasználó folyamat nevét, azonosítóját és WS értékét; pipeline és változók jól használva. | Q15_DONE: A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen).",
+      "manual_review": true,
+      "method": "ai_batch"
+    },
+    "f8dc0c5d54c5af36f1ae55eb7263dd30c7fb40dbb819a5805b991dc32efa369b": {
+      "task": "Q15",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q15_SCRIPT",
+          "percent": 100,
+          "reason": "Teljes és helyes kimenet: gépnév, Windows verzió, 0. lemez neve/mérete, top5 memóriafolyamat; pipeline és változók használata megfelelő."
+        },
+        {
+          "id": "Q15_DONE",
+          "percent": 100,
+          "reason": "A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen)."
+        }
+      ],
+      "reason": "Q15_SCRIPT: Teljes és helyes kimenet: gépnév, Windows verzió, 0. lemez neve/mérete, top5 memóriafolyamat; pipeline és változók használata megfelelő. | Q15_DONE: A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen).",
+      "manual_review": true,
+      "method": "ai_batch"
+    },
+    "41b73964ba1cebc9dbcb555a85986bf6c9585bb1716dc0ac3df71038377dd76e": {
+      "task": "Q15",
+      "score": 1,
+      "percent": 100,
+      "parts": [
+        {
+          "id": "Q15_SCRIPT",
+          "percent": 100,
+          "reason": "Minden követelmény teljesül: gépnév (Get-CimInstance), Windows információk, 0. lemez neve és mérete, valamint top5 memóriafolyamat; a kimenet és a parancsok megfelelőek."
+        },
+        {
+          "id": "Q15_DONE",
+          "percent": 100,
+          "reason": "A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen)."
+        }
+      ],
+      "reason": "Q15_SCRIPT: Minden követelmény teljesül: gépnév (Get-CimInstance), Windows információk, 0. lemez neve és mérete, valamint top5 memóriafolyamat; a kimenet és a parancsok megfelelőek. | Q15_DONE: A beadott válaszban a hallgató jelezte, hogy a scriptet lefuttatta (Igen).",
+      "manual_review": true,
+      "method": "ai_batch"
+    }
+  }
+}

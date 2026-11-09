@@ -1,0 +1,123 @@
+{
+  "student_id": "M4D0VY",
+  "submitted_at": "2026-09-21T16:14:09.174Z",
+  "source_blob": "week01/M4D0VY/2026-09-21T16-14-13-048Z_7673661c-1f67-4984-91f5-5a79546dd81b.json",
+  "model": "gpt-5-mini",
+  "version": "0.6.1",
+  "provisional": true,
+  "total": 12,
+  "classification": "Elfogadott",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "reason": "Helyes parancsot adtál meg a publikus IP-vel (Test-NetConnection 20.215.213.115 -Port 3389), és a TcpTestSucceeded értéke 'True', tehát a 3389-es port elérhetőnek jelzett.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "A parancs megfelel a feladatnak: Set-AzContext \"Azure for Students\" beállítja az aktív előfizetést a megadott névre.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "Helyes megoldás: a Get-AzSubscription lekéri az előfizetéseket, és a Get-AzSubscription | Select-Object Name, State csak a Name és State mezőket jeleníti meg. A megadott kimenet is konzisztens ezzel.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "A Get-AzResourceGroup helyes parancs a Resource Groupok listázására; a megadott erőforráscsoport neve 'Win11RG' megegyezik a Q02-ban szereplő névvel.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "Megfelelő parancsot adta meg (Get-AzVM) a virtuális gépek listázásához; a megadott VM-név (IT-Arch) egyezik a Q02-ban megadott névvel.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A megadott parancs helyes (Get-AzVM -Status) és a megadott állapotszöveg („VM running”) az Azure által visszaadott DisplayStatus formátumával egyezik, így a lekérdezés és az értelmezés megfelelő.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q12",
+      "score": 0,
+      "reason": "A két hiányzó sor üres: hiányzik a $vmStatus lekérdezése (pl. Get-AzVM -ResourceGroupName $resourceGroup -Name $vmName -Status) és az OS-lemez méretének kiíratása (pl. Write-Host \"Az OS-lemez mérete: $($disk.DiskSizeGb) GB\"). Nincs részmegoldás, ezért 0 pont.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "Hiányzik mindkét kötelező elem: az AI-nak adott prompt és a saját összefoglalás üresen maradt.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "A mezők üresek: nem töltötte ki a kiegészítendő PowerShell-parancsot (pl. Get-AzResource), és nem adta meg a dailyRecurrence illetve notificationSettings kimeneteket.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q15",
+      "score": 1,
+      "reason": "A megadott leállító parancs (Stop-AzVM -Name \"IT-Arch\" -ResourceGroupName \"Win11RG\") és az állapotlekérdező parancs (Get-AzVM -Status) helyesek, a jelentett 'VM deallocated' állapot konzisztens a VM leállításával (deallocated).",
+      "manual_review": false,
+      "method": "ai_semantic"
+    }
+  ],
+  "overall_note": "Feladatonkénti szemantikai javítás; minden eredmény előzetes."
+}

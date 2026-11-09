@@ -1,0 +1,125 @@
+{
+  "student_id": "FS59SV",
+  "submitted_at": "2026-09-15T15:05:38.306Z",
+  "source_blob": "week01/FS59SV/2026-09-15T15-05-38-367Z_9e870a17-3717-4ddb-a54d-ea6cd7640a55.json",
+  "model": "gpt-5-mini",
+  "version": "0.7",
+  "provisional": true,
+  "total": 11,
+  "classification": "Ellenőrizendő",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01",
+    "Q09",
+    "Q10"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 0.5,
+      "reason": "Parancs futtatható és TcpTestSucceeded érték megadva, de az IP a parancsban (9.205.19.152) nem egyezik meg a Q05-ben megadott IP-vel (9.205.16.152).",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "Elfogadott paraméternév (-Subscription) használata, a parancs a kérésnek megfelel.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "Helyes parancs (get-AzSubscription) és csak a State/Name tulajdonságok kiválasztása; a sorrend eltér, de a kért mezők megvannak.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q09",
+      "score": 0.5,
+      "reason": "Helyes parancs, de a Q09-ben megadott RG eltér a Q02-ban szereplőtől — kézi ellenőrzés szükséges.",
+      "manual_review": true,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q10",
+      "score": 0.5,
+      "reason": "Helyes lekérdezés (Get-AzVM), de a megadott VM-név eltér a Q02-ban szereplőtől; kézi ellenőrzés szükséges.",
+      "manual_review": true,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "Érvényes parancs (Get-AzVM -Status) és állapot megadva ('running') — elfogadható eredményként értékelve.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q12",
+      "score": 0,
+      "reason": "Hiányzik az értékadás a $vmStatus változónak (Get-AzVM parancs nincs hozzárendelve), így a későbbi hivatkozás hibás lesz.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q13",
+      "score": 0.5,
+      "reason": "Megadta a saját összefoglalást (2 mondat, megfelelő), de a prompt nem tartalmazza a feladatlapon előírt kezdő célközönség megjelölését.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q14",
+      "score": 0.5,
+      "reason": "Parancsot nem töltötte ki (hagyott helyőrző aláhúzásokat); érdemi részmegoldás, de dailyRecurrence és notificationSettings hiányoznak.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    },
+    {
+      "task": "Q15",
+      "score": 0.5,
+      "reason": "Részleges megoldás: megadott generikus parancsok (Stop-AzVM, Get-AzVM -Status) de hiányoznak a célparaméterek; az állapotként megadott 'inactive' nem az Azure által használt státuszmegnevezés.",
+      "manual_review": false,
+      "method": "ai_semantic_batch"
+    }
+  ],
+  "overall_note": "Feladatonkénti, kötegelt szemantikai AI-javítás; minden eredmény előzetes."
+}

@@ -1,0 +1,171 @@
+{
+  "course": "ITARCH",
+  "week": 1,
+  "version": "draft-0.1",
+  "max_points": 15,
+  "accepted_from": 12,
+  "score_values": [
+    0,
+    0.5,
+    1
+  ],
+  "policy": {
+    "0": "Hiányzik vagy lényegileg hibás",
+    "0.5": "Részben megfelelő, de hiányos vagy nem kellően alátámasztott",
+    "1": "A munkafüzet alapján megfelelő; a bizonyíthatósági korlátokat külön jelölni kell"
+  },
+  "tasks": [
+    {
+      "id": "Q01",
+      "title": "Belépés az Azure-ba",
+      "answer_fields": [
+        "Q01_SUBSCRIPTION_ID"
+      ],
+      "criterion": "Érvényes formátumú Subscription ID; önmagában nem bizonyítja a tényleges bejelentkezést.",
+      "manual_review": false
+    },
+    {
+      "id": "Q02",
+      "title": "Virtuális gép: Alapadatok",
+      "answer_fields": [
+        "Q02_RESOURCEGROUP",
+        "Q02_VMNAME",
+        "Q02_REGION",
+        "Q02_USERNAME"
+      ],
+      "criterion": "Minden megadott alapadat értelmes; a tényleges VM-konfiguráció nem igazolható pusztán a mezőkből.",
+      "manual_review": true
+    },
+    {
+      "id": "Q03",
+      "title": "Virtuális gép: Lemezek",
+      "answer_fields": [
+        "Q03_DONE"
+      ],
+      "criterion": "Standard HDD kiválasztásának nyilatkozata; ellenőrző bizonyíték hiányában csak önbevallás.",
+      "manual_review": true
+    },
+    {
+      "id": "Q04",
+      "title": "Virtuális gép: Hálózatkezelés",
+      "answer_fields": [
+        "Q04_DONE"
+      ],
+      "criterion": "VNet, subnet, publikus IP és RDP 3389 beállítások ellenőrzésének nyilatkozata.",
+      "manual_review": true
+    },
+    {
+      "id": "Q05",
+      "title": "VM létrehozása és ellenőrzése",
+      "answer_fields": [
+        "Q05_PUBLICIP",
+        "Q05_PRIVATEIP",
+        "Q05_VNET"
+      ],
+      "criterion": "Publikus és privát IP formátuma, VNet megadása, az IP-k eltérő tartománya; nem élő Azure-ellenőrzés.",
+      "manual_review": true
+    },
+    {
+      "id": "Q06",
+      "title": "RDP-port ellenőrzése",
+      "answer_fields": [
+        "Q06_COMMAND",
+        "Q06_TCP"
+      ],
+      "criterion": "Test-NetConnection a Q05 publikus IP-re, 3389-es porttal; TcpTestSucceeded értelmezhető értéke.",
+      "manual_review": false
+    },
+    {
+      "id": "Q07",
+      "title": "Azure Cloud Shell",
+      "answer_fields": [
+        "Q07_COMMAND"
+      ],
+      "criterion": "Set-AzContext a megfelelő Azure for Students előfizetésre.",
+      "manual_review": false
+    },
+    {
+      "id": "Q08",
+      "title": "Előfizetések listázása",
+      "answer_fields": [
+        "Q08_COMMAND",
+        "Q08_FILTER",
+        "Q08_OUTPUT"
+      ],
+      "criterion": "Get-AzSubscription, Name/State kiválasztása, értelmezhető kimenet.",
+      "manual_review": false
+    },
+    {
+      "id": "Q09",
+      "title": "Resource Groupok lekérdezése",
+      "answer_fields": [
+        "Q09_COMMAND",
+        "Q09_RESOURCEGROUP"
+      ],
+      "criterion": "Get-AzResourceGroup és a Q02-ben megadott RG következetes használata.",
+      "manual_review": false
+    },
+    {
+      "id": "Q10",
+      "title": "Virtuális gépek lekérdezése",
+      "answer_fields": [
+        "Q10_COMMAND",
+        "Q10_VMNAME"
+      ],
+      "criterion": "Get-AzVM és a Q02-ben megadott VM név következetes használata.",
+      "manual_review": false
+    },
+    {
+      "id": "Q11",
+      "title": "VM állapota",
+      "answer_fields": [
+        "Q11_COMMAND",
+        "Q11_STATE"
+      ],
+      "criterion": "Get-AzVM -Status, megfelelő RG és VM; érvényes PowerState értelmezése.",
+      "manual_review": false
+    },
+    {
+      "id": "Q12",
+      "title": "PowerShell-script kiegészítése",
+      "answer_fields": [
+        "Q12_LINE1",
+        "Q12_LINE2"
+      ],
+      "criterion": "A $vmStatus változó helyes Get-AzVM -Status lekérdezése és a $disk.DiskSizeGB kiírása.",
+      "manual_review": true
+    },
+    {
+      "id": "Q13",
+      "title": "PowerShell-kód értelmezése AI-val",
+      "answer_fields": [
+        "Q13_PROMPT",
+        "Q13_SUMMARY"
+      ],
+      "criterion": "Kezdőknek szóló prompt és saját összefoglalás: Get-AzVM -Status, Select-Object, kalkulált PowerState oszlop, Format-Table.",
+      "manual_review": true
+    },
+    {
+      "id": "Q14",
+      "title": "Automatikus leállítás",
+      "answer_fields": [
+        "Q14_COMMAND",
+        "Q14_DAILYRECURRENCE",
+        "Q14_NOTIFICATIONSETTINGS"
+      ],
+      "criterion": "Get-AzResource Microsoft.DevTestLab/schedules; napi 22:00 és kikapcsolt értesítés.",
+      "manual_review": true
+    },
+    {
+      "id": "Q15",
+      "title": "VM leállítása és ellenőrzése",
+      "answer_fields": [
+        "Q15_STOPCOMMAND",
+        "Q15_STATUSCOMMAND",
+        "Q15_STATE"
+      ],
+      "criterion": "Stop-AzVM, állapot visszaolvasása, deallocated végállapot.",
+      "manual_review": false
+    }
+  ]
+}

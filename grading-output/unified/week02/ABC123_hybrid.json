@@ -1,0 +1,323 @@
+{
+  "student_id": "ABC123",
+  "week": 2,
+  "submitted_at": "2026-09-28T09:43:06.019Z",
+  "source_blob": "week02/ABC123/2026-09-28T09-43-06-137Z_03ef2c3b-aefe-47bb-8ad5-3118c7725084.json",
+  "rubric_version": "week02-draft-1",
+  "rubric_status": "draft_requires_teacher_review",
+  "model": "gpt-5-mini",
+  "provisional": true,
+  "total": 0,
+  "total_display": 0,
+  "max_points": 15,
+  "threshold": 12,
+  "classification": "Nem elfogadott",
+  "manual_review_tasks": [],
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q01_DONE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q01_DONE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q02_DONE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q02_DONE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q03_VMNAME",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q03_REGION",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q03_IMAGE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q03_SIZE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q03_VMNAME: Üres válasz | Q03_REGION: Üres válasz | Q03_IMAGE: Üres válasz | Q03_SIZE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q04_RESULT",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q04_RESULT: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q05_NAME",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q05_COMMAND",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q05_NAME: Üres válasz | Q05_COMMAND: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q06_COMMAND",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q06_LOCATION",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q06_COMMAND: Üres válasz | Q06_LOCATION: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q07",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q07_COMMAND",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q07_STATE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q07_COMMAND: Üres válasz | Q07_STATE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q08",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q08_COMMAND",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q08_STATE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q08_COMMAND: Üres válasz | Q08_STATE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q09",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q09_NAME",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q09_NAME: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q10",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q10_COMMANDS",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q10_COMMANDS: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q11",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q11_COMMANDS",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q11_CORES",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q11_LOGICAL",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q11_DISK",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q11_COMMANDS: Üres válasz | Q11_CORES: Üres válasz | Q11_LOGICAL: Üres válasz | Q11_DISK: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q12",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q12_COMMANDS",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q12_IP",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q12_OS",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q12_ARCH",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q12_COMMANDS: Üres válasz | Q12_IP: Üres válasz | Q12_OS: Üres válasz | Q12_ARCH: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q13_COMMAND",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q13_PROCESS",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q13_COMMAND: Üres válasz | Q13_PROCESS: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q14_SIZE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q14_STATUS",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q14_SIZE: Üres válasz | Q14_STATUS: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "percent": 0,
+      "parts": [
+        {
+          "id": "Q15_SCRIPT",
+          "percent": 0,
+          "reason": "Üres válasz"
+        },
+        {
+          "id": "Q15_DONE",
+          "percent": 0,
+          "reason": "Üres válasz"
+        }
+      ],
+      "reason": "Q15_SCRIPT: Üres válasz | Q15_DONE: Üres válasz",
+      "manual_review": false,
+      "method": "rule"
+    }
+  ]
+}

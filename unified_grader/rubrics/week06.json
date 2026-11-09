@@ -1,0 +1,375 @@
+{
+  "week": 6,
+  "version": "week06-draft-1",
+  "status": "draft_requires_teacher_review",
+  "max_points": 15,
+  "accept_percent": 80,
+  "tasks": [
+    {
+      "number": 1,
+      "title": "1. feladat – A korábbi Windows Server erőforráscsoport törlése",
+      "description": "## 1. feladat – A korábbi Windows Server erőforráscsoport törlése **Környezet:** saját gép, VS Code PowerShell terminál · **AI:** nem használható. 1. Ellenőrizd, hogy a megfelelő Azure-előfizetés aktív. 2. Listázd a korábbi Windows Serverhez tartozó erőforráscsoport tartalmát. 3. **Csak a saját, előző heti Windows Server gyakorlathoz tartozó** erőforráscsoportot töröld. A törlés minden benne lévő erőforrást érint, és nem visszavonható. 4. Ellenőrizd, hogy az erőforráscsoport már nem létezik. Törölt erőforráscsoport neve: Szintaktikai ellenőrzés Az ellenőrzéshez használt PowerShell-parancs és eredmény: Szintaktikai ellenőrzés **Elfogadási feltétel:** a megfelelő csoport törlése és a törlés utáni ellenőrzés dokumentálása. ",
+      "fields": [
+        "Q01_RG",
+        "Q01_CHECK"
+      ],
+      "criteria": [
+        {
+          "id": "Q01_RG",
+          "description": "Q01 RG",
+          "weight": 1
+        },
+        {
+          "id": "Q01_CHECK",
+          "description": "Q01 CHECK",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 2,
+      "title": "2. feladat – Debian VM telepítési adatlap és régióellenőrzés",
+      "description": "## 2. feladat – Debian VM telepítési adatlap és régióellenőrzés **Környezet:** Azure Portal **vagy** Azure Cloud Shell (Bash) a régióellenőrzéshez; a többi előkészítés saját gépen · **AI:** használható. ### Régió kiválasztása – javasolt ellenőrzés Az **Azure for Students** előfizetés nem feltétlenül engedélyez minden régiót. A telepítés előtt **javasolt** ellenőrizni a régió elérhetőségét az alábbi módszerek valamelyikével. Az ellenőrzés nem kötelező; sikertelen telepítésnél érdemes visszatérni rá: **A) Azure Portal:** kezdd el egy VM létrehozását, ellenőrizd a régióválasztót és a kiválasztott Debian-lemezkép/VM-méret elérhetőségét. Még ne indítsd el a telepítést. **B) Azure Cloud Shell (Bash):** [Töltsd le az azure-region-check.sh szkriptet](../../azure-region-check.sh), töltsd fel a Cloud Shellbe, majd futtasd: ```bash chmod +x azure-region-check.sh ./azure-region-check.sh ``` A szkript az Azure for Students előfizetést próbálja kiválasztani, szükség esetén létrehozza a `region-check-rg` erőforráscsoportot, és **VNet ARM-validációt** futtat a fizikai régiókon. **Nem telepít VM-et vagy teszt-VNetet.** Az `ALLOWED` csak a tesztelt VNet validációjának sikerét jelzi, **nem garantálja** a Debian-lemezkép, a VM-méret vagy a kvóta elérhetőségét. A `BLOCKED` és `OTHER ERROR` eredményeket ne kezeld azonosként. A tesztcsoportot a szkript nem törli automatikusan; csak akkor töröld, ha meggyőződtél róla, hogy nem tartalmaz szükséges erőforrást. **Régióellenőrzés módja (nem kötelező):** Nem végeztem külön ellenőrzést Azure Portal Cloud Shell Bash-szkript Választott régió (Azure-kód, pl. northeurope ): Szintaktikai ellenőrzés ### Telepítési adatlap | Paraméter | Követelmény / kitöltendő érték | |---|---| | Előfizetés | Azure for Students | | Erőforráscsoport | `rg-linux` (vagy egyedi, saját név) | | VM neve | `debian01` (vagy egyedi, saját név) | | Operációs rendszer | Debian 12 vagy Debian 13, elérhető Azure image | | Régió | Választott régió (ellenőrzés javasolt) | | VM-méret | Költség- és kvótaellenőrzés után kiválasztva | | OS-lemez | Standard HDD (`Standard_LRS`), ha elérhető | | Adminisztrátor | `azureuser` | | Hitelesítés | **Jelszó (Password)**; erős, egyedi jelszó, biztonságos megadás | | Bejövő kapcsolat | SSH / TCP 22, lehetőleg csak saját publikus IP (`/32`) | | Availability Zone | Nem szükséges | ::: {.callout-tip} ## Telepítési adatok másolása AI-asszisztenshez A **„Táblázat másolása AI-hoz”** gomb a fenti paramétereket és egy rövid, egyértelmű kérést másol a vágólapra. Az AI-tól **jelszavas SSH-hitelesítéssel** kérd a Debian VM létrehozását, **ne SSH-kulcsos módszerrel**. A tényleges jelszót soha ne add meg az AI-nak; a szkript futás közben kérje be biztonságosan. Táblázat másolása AI-hoz ::: ```{=html} document.addEventListener('DOMContentLoaded'",
+      "fields": [
+        "Q02_METHOD",
+        "Q02_REGION"
+      ],
+      "criteria": [
+        {
+          "id": "Q02_METHOD",
+          "description": "Q02 METHOD",
+          "weight": 1
+        },
+        {
+          "id": "Q02_REGION",
+          "description": "Q02 REGION",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 3,
+      "title": "3. feladat – Debian VM telepítése két választható módon",
+      "description": "## 3. feladat – Debian VM telepítése két választható módon **Környezet:** saját gép VS Code PowerShell **vagy** Azure Portal · **AI:** használható. Válassz **egyetlen** megoldási útvonalat: - **A – PowerShell-szkript:** készíts vagy készíttess AI-val `create-linux.ps1` szkriptet, amely a 2. feladat paramétereivel létrehozza a szükséges Azure-erőforrásokat és a Debian VM-et. **Jelszavas SSH-hitelesítést** használj, ne SSH-kulcsot. A titkos adatokat ne égesd be a kódba; a szkript kérje be biztonságosan. Ne engedélyezzen nyitott SSH-t az egész internet felől, ha ez elkerülhető. Hibakezelésnél csak a saját maga által létrehozott erőforrásokat törölhesse, meglévő erőforráscsoportot automatikusan ne. - **B – Azure Portal:** a 2. feladat adatlapjával hozd létre a VM-et a grafikus felületen. Az NSG és a lemez beállításait külön ellenőrizd. **Választott módszer:** Válassz... PowerShell-szkript Azure Portal Sikeres telepítés visszaigazolása – a VM publikus IP-címe: Szintaktikai ellenőrzés ::: {.callout-warning} ## Tartalék megoldás, ha a telepítés egyik módszerrel sem sikerül Az Azure Portalon keresd meg az **Ingyenes szolgáltatások (Free services)** oldalt, és ellenőrizd, elérhető-e ott egy **Debian 11** virtuális gép. Ez lehet alternatíva, de az elérhetőség előfizetés- és régiófüggő, nem garantált. A létrehozáskor **Password / Jelszó** hitelesítést válassz (ne SSH public key-t), és az SSH TCP 22-es portját lehetőleg csak a saját publikus IP-címedről engedélyezd. A véglegesítés előtt ellenőrizd a várható költségeket. ::: ",
+      "fields": [
+        "Q03_METHOD",
+        "Q03_PUBLIC_IP"
+      ],
+      "criteria": [
+        {
+          "id": "Q03_METHOD",
+          "description": "Q03 METHOD",
+          "weight": 1
+        },
+        {
+          "id": "Q03_PUBLIC_IP",
+          "description": "Q03 PUBLIC IP",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 4,
+      "title": "4. feladat – A Debian VM ellenőrzése PowerShellből",
+      "description": "## 4. feladat – A Debian VM ellenőrzése PowerShellből **Környezet:** saját gép, VS Code PowerShell terminál · **AI:** használható. A saját gép **VS Code PowerShell-termináljában** futtasd a [letölthető ellenőrző szkriptet](../../check-linux-vm.ps1): ```powershell .\\check-linux-vm.ps1 ``` A szkript **sorszámozott listából kiválaszthatóvá teszi az erőforráscsoportot és azon belül a virtuális gépet**. Nem kell átírni a változókat. A már aktív Azure PowerShell-bejelentkezést használja. Ha még nem jelentkeztél be, előbb futtasd a `Connect-AzAccount` parancsot. A szkript három eredménycsoportot jelenít meg. Másold be őket külön a megfelelő mezőbe: 1. eredmény – VM neve, régiója, mérete és állapota Szintaktikai ellenőrzés 2. eredmény – a VM publikus IP-címe Szintaktikai ellenőrzés 3. eredmény – NSG bejövő szabályai Szintaktikai ellenőrzés ::: {.callout-note} A szkript a kiválasztott VM hálózati adapteréhez és alhálózatához kapcsolódó NSG-k **egyéni bejövő szabályait** listázza. Ez nem azonos a teljes effektív szabálykészlettel, és nem bizonyítja az SSH tényleges elérhetőségét. Ezt az 5. feladatban ellenőrzöd. ::: ",
+      "fields": [
+        "Q04_VM",
+        "Q04_IP",
+        "Q04_NSG"
+      ],
+      "criteria": [
+        {
+          "id": "Q04_VM",
+          "description": "Q04 VM",
+          "weight": 1
+        },
+        {
+          "id": "Q04_IP",
+          "description": "Q04 IP",
+          "weight": 1
+        },
+        {
+          "id": "Q04_NSG",
+          "description": "Q04 NSG",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 5,
+      "title": "5. feladat – SSH-kapcsolat VS Code terminálból",
+      "description": "## 5. feladat – SSH-kapcsolat VS Code terminálból **Környezet:** saját gép, VS Code terminál, majd a Debian VM Bash-shellje · **AI:** nem használható. A saját gépen, a VS Code termináljában csatlakozz a Debian VM-hez (a címet cseréld a saját VM-ed publikus IP-címére): ```powershell ssh azureuser@VM_PUBLIC_IP ``` Sikeres bejelentkezés után a **távoli Debian VM-en** add ki: ```bash whoami hostname pwd cat /etc/os-release ``` Az SSH-bejelentkezés után kiadott parancsok kimenete (titkos adat nélkül): Szintaktikai ellenőrzés **Elfogadási feltétel:** működő SSH-kapcsolat, a Debian VM-en kiadott négy parancs kimenete. ",
+      "fields": [
+        "Q05_OUTPUT"
+      ],
+      "criteria": [
+        {
+          "id": "Q05_OUTPUT",
+          "description": "Q05 OUTPUT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 6,
+      "title": "6. feladat – Saját munkamappa létrehozása",
+      "description": "## 6. feladat – Saját munkamappa létrehozása **Környezet:** Debian VM, SSH-n keresztül · **AI:** nem használható. Válassz egy **egyedi azonosítót** (3–8 kisbetű vagy szám), amely nem jelszó és nem személyes adat. Például `k7m42`. A további feladatokban következetesen ezt használd. A munkamappa neve legyen `linux- `, és a **saját felhasználói könyvtáradban** hozd létre. Ne használj `sudo`-t. **Parancssegítség:** `pwd` (aktuális könyvtár), `mkdir` (mappa létrehozása), `cd` (könyvtárváltás), `ls` (listázás). Hasznos kapcsolók: `mkdir -p` (szükség esetén szülőmappák is), `ls -ld` (a mappa saját adatai), `ls -la` (rejtett elemekkel). A `~` a saját home könyvtár rövidítése. Egyedi azonosítód: Szintaktikai ellenőrzés A mappa létrehozására és ellenőrzésére használt parancsok (soronként): Szintaktikai ellenőrzés **Elfogadási feltétel:** a `~/linux- ` mappa létezik, és a megadott parancsokkal ellenőrizhető. ",
+      "fields": [
+        "Q06_ID",
+        "Q06_COMMANDS"
+      ],
+      "criteria": [
+        {
+          "id": "Q06_ID",
+          "description": "Q06 ID",
+          "weight": 1
+        },
+        {
+          "id": "Q06_COMMANDS",
+          "description": "Q06 COMMANDS",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 7,
+      "title": "7. feladat – Szöveges fájl létrehozása és másolása",
+      "description": "## 7. feladat – Szöveges fájl létrehozása és másolása **Környezet:** Debian VM · **AI:** nem használható. A 6. feladatban létrehozott mappában készíts `jegyzet- .txt` nevű fájlt. Írj bele **legalább két sort**: az egyik tartalmazza a saját azonosítódat, a másik a VM `hostname` parancsával lekért gépnevét. Másold le a fájlt `masolat- .txt` néven, majd listázd a mappa tartalmát. A szövegbe ne írj jelszót vagy hozzáférési tokent. **Parancssegítség:** `echo` (szöveg kiírása), `hostname` (gépnév), `>` (fájl létrehozása/felülírása), `>>` (hozzáfűzés), `cp FORRÁS CÉL` (másolás), `ls -l` (fájllista). A `$(hostname)` a parancs eredményét illeszti a szövegbe. **Figyelem:** a `>` felülírja a meglévő fájl tartalmát. A fájl létrehozásához, másolásához és ellenőrzéséhez használt parancsok: ...&#10;echo ... >> ...&#10;cp ... ...&#10;ls -l ...\"> Szintaktikai ellenőrzés **Elfogadási feltétel:** két különböző nevű `.txt` fájl található a saját mappádban, kezdetben azonos tartalommal. ",
+      "fields": [
+        "Q07_COMMANDS"
+      ],
+      "criteria": [
+        {
+          "id": "Q07_COMMANDS",
+          "description": "Q07 COMMANDS",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 8,
+      "title": "8. feladat – Fájljogosultságok és hozzáférés megtagadása",
+      "description": "## 8. feladat – Fájljogosultságok és hozzáférés megtagadása **Környezet:** Debian VM · **AI:** nem használható. Dolgozz **csak** a `masolat- .txt` fájlon! Először állítsd a jogosultságát `600`-ra (csak a tulajdonos olvashatja és írhatja). Nézd meg a jogosultságot és a tartalmat. Ezután állítsd `000`-ra, és próbáld ismét megjeleníteni a tartalmat. Végül **kötelezően állítsd vissza `600`-ra**, majd ismét jelenítsd meg a fájlt. Jegyezd fel, mikor sikerült a megnyitás és mikor kaptál `Permission denied` hibát. **Parancssegítség:** `chmod 600 FÁJL`, `chmod 000 FÁJL`, `ls -l FÁJL`, `cat FÁJL`. A `600` jelentése `rw-------`, a `000` jelentése `----------`. Ne használj `sudo`-t, és ne módosítsd a mappa vagy rendszerfájlok jogosultságát. A feladatot normál felhasználóként végezd, ne rootként. A jogosultságmódosítások, megtekintési próbák és visszaállítás parancsai, sorrendben: Szintaktikai ellenőrzés **Tapasztalat (röviden):** ::: {.callout-warning} A `chmod 000` után **ugyanazzal a felhasználóval** próbáld olvasni a fájlt. A root felhasználó jogosultságai eltérnek, ezért rootként a próba nem ugyanazt mutatja. A feladat végén ellenőrizd a visszaállított `600` jogosultságot. ::: ",
+      "fields": [
+        "Q08_COMMANDS",
+        "Q08_OBSERVATION"
+      ],
+      "criteria": [
+        {
+          "id": "Q08_COMMANDS",
+          "description": "Q08 COMMANDS",
+          "weight": 1
+        },
+        {
+          "id": "Q08_OBSERVATION",
+          "description": "Q08 OBSERVATION",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 9,
+      "title": "9. feladat – Hálózati interfészek és útvonalak",
+      "description": "## 9. feladat – Hálózati interfészek és útvonalak **Környezet:** Debian VM · **AI:** nem használható. Derítsd ki, milyen hálózati interfészeket lát a Debian, melyik rendelkezik IPv4-címmel, és mi az alapértelmezett átjáró. **A VM belső IP-címe eltérhet az Azure Portalon látott publikus IP-címtől**; ez normális, mert az Azure hálózati címfordítást is használhat. **Parancssegítség:** `ip -br addr` (rövid interfészlista és címek), `ip -4 addr show` (IPv4-címek), `ip route` vagy `ip -4 route` (útvonalak), `hostname -I` (a géphez rendelt IP-címek). A `-br` rövid formátumot, a `-4` IPv4-szűrést jelent. A hálózati interfészek és az alapértelmezett útvonal lekérdezéséhez használt parancsok: Szintaktikai ellenőrzés **Az alapértelmezett átjáró IP-címe:** ",
+      "fields": [
+        "Q09_COMMANDS",
+        "Q09_GATEWAY"
+      ],
+      "criteria": [
+        {
+          "id": "Q09_COMMANDS",
+          "description": "Q09 COMMANDS",
+          "weight": 1
+        },
+        {
+          "id": "Q09_GATEWAY",
+          "description": "Q09 GATEWAY",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 10,
+      "title": "10. feladat – Hálózati elérés és névfeloldás ellenőrzése",
+      "description": "## 10. feladat – Hálózati elérés és névfeloldás ellenőrzése **Környezet:** Debian VM · **AI:** nem használható. Próbáld ki, elérhető-e egy külső IP-cím (`1.1.1.1`), majd egy tartománynév (`example.com`). Végezz legfeljebb **3–3 ping-kísérletet**, és nézd meg a névfeloldás eredményét. Hasonlítsd össze, mit vizsgál az IP-címes ping, a névvel végzett ping és a külön DNS-lekérdezés. Ha a ping nem kap választ, az **nem bizonyítja önmagában**, hogy nincs hálózati kapcsolat: ICMP-forgalom tiltva is lehet. **Parancssegítség:** `ping -c 3 CÉL` (három ICMP-kérés), `nslookup example.com` (névfeloldás a rendszer beállításaival), opcionálisan `ip route get 1.1.1.1` (a kiválasztott útvonal). A `-c 3` automatikusan leállítja a pinget három próbálkozás után. ::: {.callout-tip title=\"Ha az nslookup parancs nem érhető el\"} Ha az `nslookup` futtatásakor a `command not found` hibaüzenet jelenik meg, telepítsd a `dnsutils` csomagot a Debian virtuális gépen: ```bash sudo apt-get update sudo apt-get install dnsutils ``` A telepítés után próbáld újra: ```bash nslookup example.com ``` A `sudo` a rendszergazdai jogosultsággal történő végrehajtáshoz szükséges. A telepítés megerősítést kérhet. ::: A két ping és a DNS-ellenőrzés parancsai: Szintaktikai ellenőrzés **Rövid tapasztalat (sikeres/sikertelen ping, DNS):** **Elfogadási feltétel:** mindhárom vizsgálathoz megadtad a ténylegesen használt parancsot, és röviden értelmezted az eredményt. ## 11–15. feladat – AI-val támogatott Bash-projekt: Linux VM Health Monitor **Környezet:** SSH-kapcsolattal elért Debian VM, VS Code terminál · **AI:** használható. Az öt feladatban **ugyanazt a szkriptet** (`monitor- .sh`) fejleszted tovább. A 6. feladatban választott azonosítódat használd; a fájlt a saját `~/linux- /` mappádban tárold. A szkript **csak állapotot figyeljen meg**, ne módosítson rendszerszolgáltatást, ne töröljön fájlokat, és ne tartalmazzon jelszót vagy tokent. ::: {.callout-tip title=\"AI-használat és ellenőrzés\"} Az AI segíthet a szkript megírásában és javításában, de **minden új változatot neked kell átnézned és a Debian VM-en kipróbálnod**. Minden feladatnál add meg a ténylegesen használt parancsokat, az AI-nak adott rövid utasítást és a kért ellenőrzési eredményt. A „Szintaktikai ellenőrzés” gomb csak a munkafüzetbe írt szöveget vizsgálja; **nem futtatja és nem minősíti a szkriptet**. ::: ::: {.callout-tip title=\"Bash-szkript készítése a nano szerkesztővel\"} A szkriptet a Debian VM-en, az SSH-kapcsolatban megnyitott terminálban készítsd el. Lépj a 6. feladatban létrehozott saját mappádba, majd indítsd el a `nano` szövegszerkesztőt (az `AZONOSITO` helyére a saját azonosítódat írd): ```bash cd ~/linux-AZONOSITO nano monitor-AZONOSITO.sh ``` A szerkesztőben írd be vagy módosítsd a Bash-kódot. **Mentés:** `Ctrl+O`, majd `Ent",
+      "fields": [
+        "Q10_COMMANDS",
+        "Q10_OBSERVATION"
+      ],
+      "criteria": [
+        {
+          "id": "Q10_COMMANDS",
+          "description": "Q10 COMMANDS",
+          "weight": 1
+        },
+        {
+          "id": "Q10_OBSERVATION",
+          "description": "Q10 OBSERVATION",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 11,
+      "title": "11. feladat – Rendszeradatok lekérdezése változókba",
+      "description": "## 11. feladat – Rendszeradatok lekérdezése változókba Készíts egy `monitor- .sh` nevű Bash-szkriptet. Lekérdezéssel tölts fel **legalább négy változót**: gépnév, aktuális felhasználó, üzemidő és a `/` fájlrendszer foglaltsága százalékban. Az értékeket jelenítsd meg áttekinthető formában. A lemezfoglaltságot később **egész számként** kell összehasonlítani, tehát a `%` jelet el kell távolítanod. Opcionálisan a szabad memóriát is jelenítsd meg. **Parancssegítség:** `hostname`, `whoami`, `uptime -p`, `df -P /`, `free -m`, `awk`, `tr -d '%'`, `echo`, `printf`; Bash: `VALTOZO=$(parancs)` (parancshelyettesítés), `\"$VALTOZO\"` (változó biztonságos kiírása). A `df -P /` kimenetéből a megfelelő oszlopot kell kiválasztani; a fejlécsort hagyd ki. A szkript létrehozásának, a szintaxisellenőrzésnek és az első futtatásnak a parancsai: Szintaktikai ellenőrzés **A szkript változóit létrehozó kódrészlet:** **AI-nak adott utasítás (röviden):** **Elfogadási feltétel:** a szkript hiba nélkül fut, és a négy kért adatot megjeleníti. ",
+      "fields": [
+        "Q11_COMMANDS",
+        "Q11_CODE",
+        "Q11_PROMPT"
+      ],
+      "criteria": [
+        {
+          "id": "Q11_COMMANDS",
+          "description": "Q11 COMMANDS",
+          "weight": 1
+        },
+        {
+          "id": "Q11_CODE",
+          "description": "Q11 CODE",
+          "weight": 1
+        },
+        {
+          "id": "Q11_PROMPT",
+          "description": "Q11 PROMPT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 12,
+      "title": "12. feladat – Állapotminősítés elágazással",
+      "description": "## 12. feladat – Állapotminősítés elágazással Bővítsd **ugyanazt a szkriptet** lemezfoglaltság-ellenőrzéssel. A foglaltság alapján írjon ki **OK**, **WARNING** vagy **CRITICAL** állapotot: 75% alatt OK; 75–89% között WARNING; 90%-tól CRITICAL. Az ellenőrzéshez használd a 11. feladatban előállított numerikus változót. **Parancssegítség:** `if`, `elif`, `else`, `fi`; numerikus összehasonlítás: `-ge` (nagyobb vagy egyenlő), `-lt` (kisebb). Bash-ben használható a `[[ ... ]]` vagy a `[ ... ]` szerkezet. **Előbb a magasabb (90%) küszöböt vizsgáld**, különben hibás lehet a besorolás. A működést ne a VM lemezének mesterséges feltöltésével teszteld! Ideiglenesen adj a kódnak **tesztértékeket** (például 40, 80 és 95), és ellenőrizd mindhárom ágat, majd állítsd vissza a valódi `df`-alapú lekérdezést. Az elágazást tartalmazó Bash-kódrészlet: Szintaktikai ellenőrzés **Tesztelési parancsok és a három kapott állapot:** **AI-nak adott utasítás (röviden):** ",
+      "fields": [
+        "Q12_CODE",
+        "Q12_TEST",
+        "Q12_PROMPT"
+      ],
+      "criteria": [
+        {
+          "id": "Q12_CODE",
+          "description": "Q12 CODE",
+          "weight": 1
+        },
+        {
+          "id": "Q12_TEST",
+          "description": "Q12 TEST",
+          "weight": 1
+        },
+        {
+          "id": "Q12_PROMPT",
+          "description": "Q12 PROMPT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 13,
+      "title": "13. feladat – Ismételt ellenőrzés ciklussal",
+      "description": "## 13. feladat – Ismételt ellenőrzés ciklussal Bővítsd a szkriptet úgy, hogy **háromszor** lekérdezze és minősítse a lemezhasználatot, az ellenőrzések között **5 másodperc** szünettel. Minden körben friss lekérdezés történjen (ne csak ugyanazt a korábban elmentett értéket írd ki). A gépnevet és a felhasználót elég egyszer lekérdezni. **Parancssegítség:** `for`, `do`, `done`, `sleep 5`, `date '+%Y-%m-%d %H:%M:%S'`; Bash-számláló: `for ((i=1; i A ciklust és az ismételt lekérdezést tartalmazó kódrészlet: Szintaktikai ellenőrzés **Futtatási parancs és a három ellenőrzés rövid eredménye:** **AI-nak adott utasítás (röviden):** ",
+      "fields": [
+        "Q13_CODE",
+        "Q13_TEST",
+        "Q13_PROMPT"
+      ],
+      "criteria": [
+        {
+          "id": "Q13_CODE",
+          "description": "Q13 CODE",
+          "weight": 1
+        },
+        {
+          "id": "Q13_TEST",
+          "description": "Q13 TEST",
+          "weight": 1
+        },
+        {
+          "id": "Q13_PROMPT",
+          "description": "Q13 PROMPT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 14,
+      "title": "14. feladat – Paraméterek és naplózás",
+      "description": "## 14. feladat – Paraméterek és naplózás Tedd paraméterezhetővé a szkriptet: az **első paraméter** az ellenőrzések száma (alapérték: `3`), a **második paraméter** a WARNING-küszöb százalékban (alapérték: `75`). A CRITICAL-küszöb maradjon `90`. Ellenőrizd, hogy az ismétlésszám 1–5 közötti egész szám, a WARNING-küszöb pedig 1–89 közötti egész szám legyen. Hibás paraméternél írj ki rövid használati útmutatót és lépj ki. A szkript minden ellenőrzés eredményét fűzze hozzá a saját mappában lévő `monitor- .log` fájlhoz, dátummal és állapottal. **Parancssegítség:** `$1`, `$2` (pozicionális paraméterek), `${1:-3}` (alapérték), `[[ ... ]]`, `=~` (szabályos kifejezés), `-gt`, `-lt`, `exit 1`, `date`, `>>` (hozzáfűzés), `tail -n 5 FÁJL` (utolsó öt sor). Opcionális: `case` a paraméterek kezelésére. **A naplóhoz abszolút útvonalat használj** (például `$HOME/linux- /...`), hogy később cronból is működjön. Próbáld ki legalább egyszer az alapértékeket, egyszer az `1 5` paraméterpárt (így várhatóan tesztelhető a WARNING ág), és egyszer egy hibás paramétert. Az `1 5` nem garantál figyelmeztetést, ha a tényleges foglaltság 5% alatt van. A három tesztfuttatás és a naplóellenőrzés parancsai: Szintaktikai ellenőrzés **A paraméterkezelés és a naplózás kódrészlete:** **AI-nak adott utasítás (röviden):** ",
+      "fields": [
+        "Q14_COMMANDS",
+        "Q14_CODE",
+        "Q14_PROMPT"
+      ],
+      "criteria": [
+        {
+          "id": "Q14_COMMANDS",
+          "description": "Q14 COMMANDS",
+          "weight": 1
+        },
+        {
+          "id": "Q14_CODE",
+          "description": "Q14 CODE",
+          "weight": 1
+        },
+        {
+          "id": "Q14_PROMPT",
+          "description": "Q14 PROMPT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 15,
+      "title": "15. feladat – Futtatási jog, automatizálás és az Azure VM leállítása",
+      "description": "## 15. feladat – Futtatási jog, automatizálás és az Azure VM leállítása **A) Üzembe helyezés.** Ellenőrizd a kész szkript Bash-szintaxisát, adj neki futtatási jogot, majd futtasd közvetlenül, paraméterekkel. Ellenőrizd a naplófájlt is. **Parancssegítség:** `bash -n FÁJL`, `chmod u+x FÁJL`, `ls -l FÁJL`, `./FÁJL 1 75`, `tail -n 5 NAPLÓ`. **B) Időzítés rövid tesztje.** A `crontab -e` segítségével állíts be **percenkénti** futtatást, a szkript és a napló **abszolút elérési útjával**. Az időzített futtatás csak **egy ellenőrzést** végezzen, ne háromszor várakozzon. Várj legfeljebb 2–3 percet, és ellenőrizd, hogy megjelent-e új sor a naplóban. Ha a `crontab` parancs nem érhető el, a telepítéshez kérj segítséget az oktatótól; a feladat kedvéért ne módosíts önállóan rendszerkonfigurációt. **Parancssegítség:** `crontab -e` (szerkesztés), `crontab -l` (megjelenítés). A percenkénti cron-kifejezés: `* * * * *`. Cronban a `~` helyett használj abszolút útvonalat, például `/home/FELHASZNALO/linux-AZONOSITO/monitor-AZONOSITO.sh 1 75`. A naplózást maga a szkript végezze. **C) Takarítás.** A sikeres teszt után a `crontab -e` paranccsal **töröld csak az általad létrehozott sort** (más cron-feladatot ne módosíts), majd a `crontab -l` paranccsal ellenőrizd, hogy a saját időzítésed már nem szerepel. A szintaxisellenőrzés, jogosultságállítás, futtatás és cron-ellenőrzés parancsai: Szintaktikai ellenőrzés **A beállított (majd eltávolított) cron-sor:** **Az időzített futtatás bizonyítéka (naplórészlet):** **AI-nak adott utasítás (röviden):** ::: {.callout-warning title=\"Kötelező utolsó lépés – az Azure VM leállítása\"} A gyakorlat végén **az Azure Portalon** nyisd meg a saját Debian virtuális gépedet, kattints a **Stop / Leállítás** gombra, és várd meg a **Stopped (deallocated)** állapotot. **Ne elégedj meg** a Linuxon kiadott `shutdown` vagy `poweroff` paranccsal: ezek nem feltétlenül szabadítják fel az Azure számítási erőforrásait. A VM számítási díja a deallokálással megszűnik, de a lemez és más erőforrások továbbra is költségesek lehetnek. **Ne töröld a VM-et**, mert a következő gyakorlaton még szükség lehet rá. ::: **A VM végső állapota az Azure Portalon:** **Elfogadási feltétel:** a kész szkript futtatható, a naplóban megjelenik az időzített ellenőrzés, a saját cron-bejegyzést eltávolítottad, és a VM állapota **Stopped (deallocated)**. --- **Megjegyzés:** ez az 1–15. feladat tartalmi és megjelenítési próbaváltozata. A korábbi munkafüzet összesített ellenőrző, JSON-mentési és beadási funkciói még nincsenek átvezetve. ```{=html} .lab-answer { display:flex; flex-direction:column; align-items:stretch; gap:.45rem; margin:1.1rem 0 1.5rem; clear:both; width:100%; } .lab-answer label { display:block; width:100%; } .lab-answer input, .lab-answer textarea { display:block; box-si",
+      "fields": [
+        "Q15_COMMANDS",
+        "Q15_CRON",
+        "Q15_LOG",
+        "Q15_PROMPT",
+        "Q15_VM_STATE"
+      ],
+      "criteria": [
+        {
+          "id": "Q15_COMMANDS",
+          "description": "Q15 COMMANDS",
+          "weight": 1
+        },
+        {
+          "id": "Q15_CRON",
+          "description": "Q15 CRON",
+          "weight": 1
+        },
+        {
+          "id": "Q15_LOG",
+          "description": "Q15 LOG",
+          "weight": 1
+        },
+        {
+          "id": "Q15_PROMPT",
+          "description": "Q15 PROMPT",
+          "weight": 1
+        },
+        {
+          "id": "Q15_VM_STATE",
+          "description": "Q15 VM STATE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    }
+  ]
+}

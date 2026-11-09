@@ -1,0 +1,95 @@
+student_id,solved,correct,partially_correct,incorrect,unanswered,points,classification,review_required,submissions
+ABC111,10,6,4,0,5,8,Nem elfogadott,true,1
+ABC456,2,2,0,0,13,2,Nem elfogadott,true,1
+ABC789,3,2,1,0,12,2.5,Nem elfogadott,true,1
+AFESQW,15,13,2,0,0,14,Elfogadott,true,1
+AHIB49,15,14,1,0,0,14.5,Elfogadott,true,2
+ANXBWQ,15,14,1,0,0,14.5,Elfogadott,true,2
+APMADC,15,15,0,0,0,15,Elfogadott,true,1
+AUGBR7,13,12,1,0,2,12.5,Elfogadott,true,1
+AV4WBT,15,14,1,0,0,14.5,Elfogadott,true,1
+AXAD1B,15,14,1,0,0,14.5,Elfogadott,true,1
+B0C0OX,15,13,2,0,0,14,Elfogadott,true,1
+B0GR3H,15,15,0,0,0,15,Elfogadott,true,1
+BMOWG0,14,14,0,0,1,14,Elfogadott,true,1
+BYXIA9,15,13,2,0,0,14,Elfogadott,true,2
+C2UIUU,15,13,2,0,0,14,Elfogadott,true,1
+C5UJSL,15,13,2,0,0,14,Elfogadott,true,1
+CAD2GN,15,13,2,0,0,14,Elfogadott,true,1
+CGJJPN,12,11,1,0,3,11.5,Ellenőrizendő,true,1
+CHFZGD,15,11,4,0,0,13,Elfogadott,true,2
+CTCGJY,15,12,2,1,0,13,Elfogadott,true,1
+CZNUFN,15,14,1,0,0,14.5,Elfogadott,true,1
+D1BET6,15,14,1,0,0,14.5,Elfogadott,true,1
+D1XZCQ,12,11,1,0,3,11.5,Ellenőrizendő,true,1
+D3M4BC,15,15,0,0,0,15,Elfogadott,true,1
+DCBKHB,15,14,1,0,0,14.5,Elfogadott,true,1
+DMZ1G1,15,15,0,0,0,15,Elfogadott,true,1
+DSVTY6,15,14,1,0,0,14.5,Elfogadott,true,2
+E02AAX,14,13,1,0,1,13.5,Elfogadott,true,1
+E4XDHO,13,11,2,0,2,12,Elfogadott,true,1
+EOCBAV,15,12,1,2,0,12.5,Elfogadott,true,1
+EXJZZD,15,12,3,0,0,13.5,Elfogadott,true,2
+EXNGOK,12,12,0,0,3,12,Elfogadott,true,1
+F1CLE1,15,13,2,0,0,14,Elfogadott,true,1
+F84Y19,13,11,2,0,2,12,Elfogadott,true,1
+FII4HQ,14,12,2,0,1,13,Elfogadott,true,1
+FJJJJT,15,14,1,0,0,14.5,Elfogadott,true,2
+FS59SV,15,9,4,2,0,11,Ellenőrizendő,true,2
+FSQXFX,13,11,2,0,2,12,Elfogadott,true,1
+FXHJ1E,15,15,0,0,0,15,Elfogadott,true,1
+G0T857,12,10,2,0,3,11,Ellenőrizendő,true,1
+G2PNLR,15,12,3,0,0,13.5,Elfogadott,true,1
+G5UGGC,15,14,1,0,0,14.5,Elfogadott,true,1
+GFRYGO,15,13,2,0,0,14,Elfogadott,true,1
+GPYOKM,15,15,0,0,0,15,Elfogadott,true,1
+GTVMK5,15,13,2,0,0,14,Elfogadott,true,1
+GXF8KB,15,15,0,0,0,15,Elfogadott,true,1
+H9QROU,12,9,2,1,3,10,Nem elfogadott,true,2
+HGW16P,12,12,0,0,3,12,Elfogadott,true,1
+HUBM02,15,13,2,0,0,14,Elfogadott,true,2
+I5DV78,15,13,2,0,0,14,Elfogadott,true,1
+IJG8S4,15,15,0,0,0,15,Elfogadott,true,1
+IS9ORB,15,14,0,1,0,14,Elfogadott,true,1
+IUS0PL,15,15,0,0,0,15,Elfogadott,true,1
+J84IEZ,7,7,0,0,8,7,Nem elfogadott,true,1
+JKBHQV,15,14,1,0,0,14.5,Elfogadott,true,1
+JM4ERP,15,15,0,0,0,15,Elfogadott,true,1
+JNQQL0,14,12,2,0,1,13,Elfogadott,true,1
+JP4U38,15,13,2,0,0,14,Elfogadott,true,1
+K4T8NZ,15,15,0,0,0,15,Elfogadott,true,1
+KSEV72,13,13,0,0,2,13,Elfogadott,true,2
+L51FA5,13,12,1,0,2,12.5,Elfogadott,true,1
+LGL333,5,3,2,0,10,4,Nem elfogadott,true,1
+LP64XK,15,15,0,0,0,15,Elfogadott,true,1
+M0CGJM,15,14,1,0,0,14.5,Elfogadott,true,1
+M4D0VY,12,11,1,0,3,11.5,Ellenőrizendő,true,1
+M7WXJ6,12,10,1,1,3,10.5,Nem elfogadott,true,1
+MFUFV4,13,12,1,0,2,12.5,Elfogadott,true,2
+MMM0NJ,15,15,0,0,0,15,Elfogadott,true,1
+MUEXNL,15,11,4,0,0,13,Elfogadott,true,2
+MVK7AY,15,10,5,0,0,12.5,Elfogadott,true,2
+NQ5PT2,15,14,1,0,0,14.5,Elfogadott,true,1
+OBLY0B,15,14,1,0,0,14.5,Elfogadott,true,1
+OUUQCI,15,14,1,0,0,14.5,Elfogadott,true,1
+OYR6UB,15,13,2,0,0,14,Elfogadott,true,1
+R1E4BW,15,15,0,0,0,15,Elfogadott,true,1
+RGZ33P,15,13,2,0,0,14,Elfogadott,true,1
+S5PP98,15,15,0,0,0,15,Elfogadott,true,1
+SBTWR3,15,15,0,0,0,15,Elfogadott,true,2
+SSODAX,15,13,2,0,0,14,Elfogadott,true,1
+SXLXGF,15,14,1,0,0,14.5,Elfogadott,true,1
+T036JH,13,12,1,0,2,12.5,Elfogadott,true,1
+TG1HES,15,15,0,0,0,15,Elfogadott,true,1
+UJAENB,4,4,0,0,11,4,Nem elfogadott,true,1
+UR13RQ,14,11,3,0,1,12.5,Elfogadott,true,1
+VSAZH6,14,11,3,0,1,12.5,Elfogadott,true,2
+VXGITJ,15,13,2,0,0,14,Elfogadott,true,1
+XDSD4B,15,15,0,0,0,15,Elfogadott,true,1
+XUWARV,15,12,3,0,0,13.5,Elfogadott,true,1
+XVGMGD,13,11,2,0,2,12,Elfogadott,true,1
+Y5S27Q,15,12,3,0,0,13.5,Elfogadott,true,1
+YNPCU4,12,11,1,0,3,11.5,Ellenőrizendő,true,1
+Z4K7QE,15,14,1,0,0,14.5,Elfogadott,true,1
+ZCBITN,15,14,1,0,0,14.5,Elfogadott,true,1
+ZXYUK9,15,13,2,0,0,14,Elfogadott,true,1

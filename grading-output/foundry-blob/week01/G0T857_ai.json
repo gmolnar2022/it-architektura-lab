@@ -1,0 +1,102 @@
+{
+  "student_id": "G0T857",
+  "submitted_at": "2026-09-15T15:05:13.692Z",
+  "source_blob": "week01/G0T857/2026-09-15T15-05-18-540Z_8aed028d-d049-4f6b-bd37-6302a06e3229.json",
+  "model": "gpt-5-mini",
+  "provisional": true,
+  "total": 11.5,
+  "classification": "Ellenőrizendő",
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Megadott egy Subscription ID-t (a6a00752-29b2-4618-9bea-c9b051a721bf), a feladatban kért érték szerepel.",
+      "manual_review": false
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Az Alapadatok mezők mind megvannak (Resource group: mywin11, VM name: gep001, Region: (Europe) Spain Central, Username: azureuser); formailag megfelelő válasz.",
+      "manual_review": false
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "A 'Igen' válasz jelzi, hogy a lemezeknél a szükséges beállítást elvégezte (Standard HDD), ahogy a feladat kérte.",
+      "manual_review": false
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "A 'Igen' válasz jelzi, hogy a hálózati beállításokat ellenőrizte/elfogadta az előírt feltételek szerint.",
+      "manual_review": false
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "A feladathoz kért áttekintési értékek megvannak (Public IP, Private IP, Virtual network) — 158.158.42.191, 172.16.0.4, vnet-spaincentral-1.",
+      "manual_review": false
+    },
+    {
+      "task": "Q06",
+      "score": 0.5,
+      "reason": "A Test-NetConnection parancsot megadta és TcpTestSucceeded értéket is jelölt (True), de a parancsban szereplő IP (158.158.76.146) nem egyezik a Q05-ben megadott publikus IP-vel (158.158.42.191). A feladat kifejezetten megkövetelte, hogy a parancsban a tényleges nyilvános IP szerepeljen. Részleges (0.5) pont adható a releváns parancs és eredmény megadásáért.",
+      "manual_review": false
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "A Set-AzContext parancs helyesen szerepel: set-azcontext -Subscription \"Azure for Students\"; megfelel a feladat utasításának.",
+      "manual_review": false
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "A Get-AzSubscription és a Get-AzSubscription | Select-Object Name, State parancsok megvannak, valamint a parancs kimenetét is megadta; a feladat követelménye teljesült.",
+      "manual_review": false
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "A Get-AzResourceGroup parancs szerepel, és megadta a saját resource group nevét (mywin11) — megfelel a feladatnak.",
+      "manual_review": false
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "A Get-AzVM parancs szerepel a beadásban, és a saját VM nevét is megadta (gep001). A VM-listázásra vonatkozó követelmény teljesült.",
+      "manual_review": false
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A VM állapotának lekérdezésére a helyes parancsot adta meg: Get-AzVM -ResourceGroupName \"MYWIN11\" -Name \"gep001\" -Status, valamint az állapotot is (VM running).",
+      "manual_review": false
+    },
+    {
+      "task": "Q12",
+      "score": 1,
+      "reason": "A két hiányzó sor helyesen ki lett töltve: Get-AzVM -ResourceGroupName $resourceGroup -Name $vmName -Status a VM státusz lekérésére, illetve a Write-Host sor a lemez méretének kiíratására ($disk.DiskSizeGB). A $disk változó a feladatlapon rendelkezésre áll, így a megoldás szemantikailag helyes.",
+      "manual_review": false
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "A feladat megkívánta az AI-hoz adott promptot és a saját, 2–4 mondatos összefoglalót; ezek hiányoznak (üres mezők), ezért nem adható pont.",
+      "manual_review": false
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "Nem adta meg a kiegészített PowerShell-parancsot, illetve a dailyRecurrence és notificationSettings mezők kimenetét sem; a feladat ellenőrzéséhez ezeket látnunk kellett volna.",
+      "manual_review": false
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "reason": "A VM leállításához és állapotellenőrzéshez kért parancsok és a végső állapot hiányoznak, ezért nem adható pont.",
+      "manual_review": false
+    }
+  ],
+  "overall_note": "Összpontszám: 11.5/15. Hiányosságok: Q06 parancsban szereplő IP nem egyezik a korábban megadott publikus IP-vel (részleges pontozás), valamint Q13, Q14 és Q15 nem kerültek kitöltésre. A többi feladatot elfogadtam; ahol releváns, szemantikailag helyes megoldást is elfogadtam. manual_review=false."
+}

@@ -1,0 +1,123 @@
+{
+  "student_id": "D1XZCQ",
+  "submitted_at": "2026-09-19T14:16:23.533Z",
+  "source_blob": "week01/D1XZCQ/2026-09-19T14-16-27-707Z_dd6c4b0a-9df9-4acd-b524-3a426e8b325f.json",
+  "model": "gpt-5-mini",
+  "version": "0.6",
+  "provisional": true,
+  "total": 12,
+  "classification": "Elfogadott",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "reason": "Megadott parancs helyes (Test-NetConnection IP:3389), és a TcpTestSucceeded értéke True szerepel — megfelel a feladatnak.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "A megadott Set-AzContext parancs megfelel az instrukciónak (\"Azure for Students\" előfizetés beállítása).",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "Get-AzSubscription és a | Select-Object Name, State használata látható, valamint a várt Name/State kimenet megvan.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "Get-AzResourceGroup parancs szerepel, és megadta a saját resource group nevét (win11rg) — kielégíti a feladatot.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "A Get-AzVM parancs szerepel, és a saját VM név (bencepc) meg van adva — megfelel a követelménynek.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A státusz lekérdezésére helyes parancsot használta (-Status), és az eredményként 'VM running' szerepel.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q12",
+      "score": 1,
+      "reason": "Mindkét hiányzó sor helyesen ki van töltve: vm státusz lekérése -Status kapcsolóval, és az OS-lemez méretének kiírása a $disk változóval.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "Hiányzik az AI-nak adott prompt és a 2–4 mondatos saját összefoglalás — a feladat nem teljes.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "A PowerShell-parancs nincs kitöltve (hiányzik a Get-AzResource/... hívás és az erőforráscsoport), a dailyRecurrence és notificationSettings kimenet nincs megadva.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "reason": "Nem adott meg leállító és állapot-ellenőrző parancsokat, valamint a VM végső állapota hiányzik.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    }
+  ],
+  "overall_note": "A gyakorlati feladatok többsége helyesen megoldott (Q06–Q12), de a Q13–Q15 feladatok üresek, így ezeken nincs pontszám."
+}

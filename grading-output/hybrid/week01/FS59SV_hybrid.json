@@ -1,0 +1,123 @@
+{
+  "student_id": "FS59SV",
+  "submitted_at": "2026-09-15T15:05:38.306Z",
+  "source_blob": "week01/FS59SV/2026-09-15T15-05-38-367Z_9e870a17-3717-4ddb-a54d-ea6cd7640a55.json",
+  "model": "gpt-5-mini",
+  "version": "0.6",
+  "provisional": true,
+  "total": 11,
+  "classification": "Ellenőrizendő",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 0.5,
+      "reason": "A parancs helyes (Test-NetConnection és a 3389-es port megadva), de a tesztelt IP (9.205.19.152) nem egyezik a Q05-ben megadott nyilvános IP-vel (9.205.16.152).",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q07",
+      "score": 0,
+      "reason": "Ez a feladat nem része a Q06–Q15 tartományának a pontozási szabályok szerint.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q08",
+      "score": 0,
+      "reason": "Ez a feladat nem része a Q06–Q15 tartományának a pontozási szabályok szerint.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "Megfelelő parancsot használt (Get-AzResourceGroup) és megadott egy erőforráscsoportnevet a saját VM-hez; a beadás alapján nincs bizonyíték, hogy ez helytelen lenne.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "A virtuális gépek listázásához helyes parancsot adott meg (Get-AzVM) és megadta a saját VM nevét.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A VM állapotának lekérdezésére helyes parancsot használta (Get-AzVM -Status) és megadott egy állapotértéket ('running').",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q12",
+      "score": 1,
+      "reason": "Mindkét hiányzó sor helyesen kitöltve: a VM státusz lekérése Get-AzVM -Status-szal, és az OS-lemez méretének kiíratása a $disk.DiskSizeGB változóval.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q13",
+      "score": 1,
+      "reason": "Megadta az AI-promptot és egy tömör, érthető 2 mondatos összefoglalót a script működéséről és a Select-Object szerepéről.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "Nem töltötte ki a hiányzó Get-AzResource parancssort (helyőrző maradt), és nem szolgáltatott dailyRecurrence vagy notificationSettings kimenetet.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q15",
+      "score": 0.5,
+      "reason": "A leállításhoz csak a cmdlet nevét adta meg (Stop-AzVM) paraméterek nélkül — ez részmegoldás; az állapot-ellenőrzéshez használt parancs (Get-AzVM -Status) rendben van, a végső állapot azonban nem standard ('inactive').",
+      "manual_review": false,
+      "method": "ai_semantic"
+    }
+  ],
+  "overall_note": "A megoldás általában jó: a PowerShell-parancsok többsége helyes, a kódkiegészítés (Q12) és a magyarázat (Q13) teljesen rendben van. Hiányosságok: Q06 IP-eltérés, Q14 kitöltetlen parancssor, Q15 csak részlegesen adott leállító parancs."
+}

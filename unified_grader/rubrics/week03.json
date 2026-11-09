@@ -1,0 +1,513 @@
+{
+  "week": 3,
+  "version": "week03-draft-1",
+  "status": "draft_requires_teacher_review",
+  "max_points": 15,
+  "accept_percent": 80,
+  "tasks": [
+    {
+      "number": 1,
+      "title": "1. feladat – A virtuális gép elindítása és az indítás ellenőrzése",
+      "description": "## 1. feladat – A virtuális gép elindítása és az indítás ellenőrzése Nyisd meg a **Visual Studio Code** alkalmazást, majd egy **PowerShell terminált**. Jelentkezz be az Azure-ba, és válaszd ki a gyakorlaton használt előfizetést. A korábban tanult `Start-AzVM` paranccsal indítsd el a saját virtuális gépedet. A parancsban a **saját erőforráscsoportod és VM-ed nevét** használd. Vizsgáld meg a parancs kimenetét. Az indítás sikerességét a `Status` mező jelzi, a `StartTime` és `EndTime` pedig az indítási művelet időadatait mutatja. A saját virtuális géped neve StartTime EndTime Milyen Status értéket kaptál? Succeeded Failed Egyéb ",
+      "fields": [
+        "Q01_VMNAME",
+        "Q01_START",
+        "Q01_END",
+        "Q01_STATUS"
+      ],
+      "criteria": [
+        {
+          "id": "Q01_VMNAME",
+          "description": "Q01 VMNAME",
+          "weight": 1
+        },
+        {
+          "id": "Q01_START",
+          "description": "Q01 START",
+          "weight": 1
+        },
+        {
+          "id": "Q01_END",
+          "description": "Q01 END",
+          "weight": 1
+        },
+        {
+          "id": "Q01_STATUS",
+          "description": "Q01 STATUS",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 2,
+      "title": "2. feladat – Folyamatok és az EXE fájlok helye",
+      "description": "## 2. feladat – Folyamatok és az EXE fájlok helye Kapcsolódj **RDP-vel** a saját Azure VM-edhez, majd indíts Windows PowerShellt. A `Get-Process` segítségével listázd a futó folyamatokat. A sok találat miatt: 1. csak azok a folyamatok maradjanak, amelyeknél a `Path` értéke **nem üres**; 2. csak az **első 10 találatot** jelenítsd meg; 3. a kimenetben a `Name`, `Id` és `Path` mezők szerepeljenek. ::: {.callout-tip title=\"Segítség a szűréshez\"} A nem üres `Path` értékek szűréséhez ezt a pipeline-elemet használhatod: ```powershell Where-Object { $_.Path } ``` Az első 10 találat kiválasztásához a korábban megismert `Select-Object` parancs `-First` paraméterét használd. ::: Válassz a megjelenített 10 folyamatból **egy folyamatot**, és add meg az adatait. ::: {.callout-note title=\"Miért érdekes a fájl helye?\"} Egy ismeretlen vagy gyanús folyamat vizsgálatakor az EXE fájl helye hasznos információ lehet. A fájl elérési útja azonban **önmagában nem bizonyítja**, hogy egy program biztonságos vagy kártékony. ::: A listázáshoz használt PowerShell-parancs / pipeline Az általad kiválasztott folyamat neve A folyamat PID-je Az EXE fájl teljes elérési útja Melyik könyvtártípusban található? C:\\Windows alatt C:\\Program Files alatt Felhasználói könyvtárban Egyéb helyen ",
+      "fields": [
+        "Q02_COMMAND",
+        "Q02_NAME",
+        "Q02_PID",
+        "Q02_PATH",
+        "Q02_LOCATION"
+      ],
+      "criteria": [
+        {
+          "id": "Q02_COMMAND",
+          "description": "Q02 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q02_NAME",
+          "description": "Q02 NAME",
+          "weight": 1
+        },
+        {
+          "id": "Q02_PID",
+          "description": "Q02 PID",
+          "weight": 1
+        },
+        {
+          "id": "Q02_PATH",
+          "description": "Q02 PATH",
+          "weight": 1
+        },
+        {
+          "id": "Q02_LOCATION",
+          "description": "Q02 LOCATION",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 3,
+      "title": "3. feladat – CPU-terhelés mérése `Get-Counter` segítségével",
+      "description": "## 3. feladat – CPU-terhelés mérése `Get-Counter` segítségével A `Get-Counter` PowerShell-paranccsal a Windows teljesítményszámlálóit kérdezheted le. Most a processzor kihasználtságát fogod megmérni. A processzorhoz tartozó számlálócsoport neve magyar Windows esetén **`Processzor`**, angol Windows esetén **`Processor`**. Listázd ki a csoporthoz tartozó számlálókat. Magyar Windows esetén például: ```powershell (Get-Counter -ListSet 'Processzor').Paths ``` Keresd meg a CPU kihasználtságát (%) mutató számlálót. A listában a számláló útvonalában `(*)` szerepelhet. A teljes rendszer összesített CPU-terhelésének méréséhez a `*` helyett használd a **`_Total`** példányt. Készíts **5 mérést 2 másodperces időközzel**. ::: {.callout-tip title=\"Segítség\"} Több egymást követő méréshez a következő paramétereket használd: ```text -SampleInterval 2 -MaxSamples 5 ``` ::: A CPU-terhelés mérésére használt számláló teljes elérési útja A használt Get-Counter parancs Az 5 mérés közül a legmagasabb CPU-terhelés (%) Melyik tartományba esett a legmagasabb mért érték? 0–25% 25–50% 50–75% 75–100% ",
+      "fields": [
+        "Q03_COUNTER",
+        "Q03_COMMAND",
+        "Q03_MAX",
+        "Q03_LEVEL"
+      ],
+      "criteria": [
+        {
+          "id": "Q03_COUNTER",
+          "description": "Q03 COUNTER",
+          "weight": 1
+        },
+        {
+          "id": "Q03_COMMAND",
+          "description": "Q03 COMMAND",
+          "weight": 1
+        },
+        {
+          "id": "Q03_MAX",
+          "description": "Q03 MAX",
+          "weight": 1
+        },
+        {
+          "id": "Q03_LEVEL",
+          "description": "Q03 LEVEL",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 4,
+      "title": "4. feladat – Paraméterezhető CPU-monitorozó script AI segítségével",
+      "description": "## 4. feladat – Paraméterezhető CPU-monitorozó script AI segítségével Készíts egy új PowerShell scriptet a **VS Code-ban**: 1. válaszd a **File → New Text File** lehetőséget; 2. mentsd el a fájlt **`cpu-monitor.ps1`** néven; 3. ellenőrizd, hogy a VS Code terminálja PowerShellt használ. Ezután kérj segítséget egy általad választott **generatív AI-eszköztől** a script elkészítéséhez. A script követelményei: - a futtatáskor **`Threshold` paraméterként** kapja meg a CPU-terhelés küszöbértékét; - a 3. feladatban megismert `Get-Counter` segítségével mérje meg az aktuális CPU-kihasználtságot; - ha a CPU-terhelés nagyobb a megadott küszöbértéknél, jelenítsen meg **piros `HIGH CPU`** üzenetet; - egyébként jelenítsen meg **zöld `CPU OK`** üzenetet; - az üzenet tartalmazza a mért CPU-terhelést és a megadott küszöbértéket is. A scriptet például így futtathatod: ```powershell .\\cpu-monitor.ps1 -Threshold 50 ``` ::: {.callout-important title=\"Teszteld mindkét ágat!\"} A script tartalmát a teszteléshez **ne módosítsd**. Futtasd különböző `Threshold` paraméterekkel úgy, hogy egyszer `CPU OK`, egyszer pedig `HIGH CPU` eredményt kapj. Ehhez nem szükséges mesterségesen terhelni a CPU-t: a futtatáskor megadott küszöbértéket változtasd. ::: ::: {.callout-note title=\"AI használata\"} Az AI által generált kódot futtatás előtt olvasd át. Csak olyan parancsot futtass, amelynek érted a célját. Ha szükséges, módosítsd az AI első megoldását. ::: Az AI-nak adott promptod A CPU OK eredményhez használt Threshold (%) A CPU OK futtatáskor mért CPU-terhelés (%) A HIGH CPU eredményhez használt Threshold (%) A HIGH CPU futtatáskor mért CPU-terhelés (%) ",
+      "fields": [
+        "Q04_PROMPT",
+        "Q04_OK_THRESHOLD",
+        "Q04_OK_CPU",
+        "Q04_HIGH_THRESHOLD",
+        "Q04_HIGH_CPU"
+      ],
+      "criteria": [
+        {
+          "id": "Q04_PROMPT",
+          "description": "Q04 PROMPT",
+          "weight": 1
+        },
+        {
+          "id": "Q04_OK_THRESHOLD",
+          "description": "Q04 OK THRESHOLD",
+          "weight": 1
+        },
+        {
+          "id": "Q04_OK_CPU",
+          "description": "Q04 OK CPU",
+          "weight": 1
+        },
+        {
+          "id": "Q04_HIGH_THRESHOLD",
+          "description": "Q04 HIGH THRESHOLD",
+          "weight": 1
+        },
+        {
+          "id": "Q04_HIGH_CPU",
+          "description": "Q04 HIGH CPU",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 5,
+      "title": "5. feladat – Azure-erőforrások vizsgálata Resource Graph segítségével",
+      "description": "## 5. feladat – Azure-erőforrások vizsgálata Resource Graph segítségével Térj vissza a **VS Code PowerShell termináljához**. Az Azure Resource Graph segítségével az előfizetésed erőforrásait lekérdezhető adatokként vizsgálhatod. Ellenőrizd, hogy a `Search-AzGraph` cmdlet elérhető-e: ```powershell Get-Command Search-AzGraph ``` ::: {.callout-tip title=\"Ha a Search-AzGraph parancs nem érhető el\"} Telepítsd az **Az.ResourceGraph** modult a saját felhasználói profilodhoz: ```powershell Install-Module -Name Az.ResourceGraph -Scope CurrentUser ``` Ezután töltsd be a modult: ```powershell Import-Module Az.ResourceGraph ``` Végül ellenőrizd újra, hogy a parancs elérhető-e: ```powershell Get-Command Search-AzGraph ``` ::: Ezután kérj segítséget egy **generatív AI-eszköztől** olyan `Search-AzGraph` lekérdezés elkészítéséhez, amely: - kilistázza az Azure-erőforrásaidat; - megjeleníti a `name`, `type`, `resourceGroup` és `location` adatokat; - az eredményt erőforrástípus szerint rendezi. Futtasd és ellenőrizd a lekérdezést. Ezután módosítsd vagy egészítsd ki AI segítségével úgy, hogy **erőforrástípusonként számolja össze** az erőforrásokat, és a legtöbb előfordulástól a legkevesebb felé rendezze az eredményt. ::: {.callout-note title=\"Miért érdekes?\"} Bár csak egy virtuális gépet hoztál létre, az Azure-ban ehhez több kapcsolódó erőforrás is tartozhat, például lemez, hálózati interfész, virtuális hálózat vagy nyilvános IP-cím. A Resource Graph segítségével ezeket egyetlen lekérdezésben áttekintheted. ::: Az AI segítségével elkészített, erőforrásokat listázó Resource Graph query Hány Azure-erőforrást találtál összesen? Hány különböző erőforrástípust találtál? Melyik erőforrástípusból találtad a legtöbbet? Hány ilyen erőforrás található? ",
+      "fields": [
+        "Q05_QUERY",
+        "Q05_TOTAL",
+        "Q05_TYPES",
+        "Q05_TOPTYPE",
+        "Q05_TOPCOUNT"
+      ],
+      "criteria": [
+        {
+          "id": "Q05_QUERY",
+          "description": "Q05 QUERY",
+          "weight": 1
+        },
+        {
+          "id": "Q05_TOTAL",
+          "description": "Q05 TOTAL",
+          "weight": 1
+        },
+        {
+          "id": "Q05_TYPES",
+          "description": "Q05 TYPES",
+          "weight": 1
+        },
+        {
+          "id": "Q05_TOPTYPE",
+          "description": "Q05 TOPTYPE",
+          "weight": 1
+        },
+        {
+          "id": "Q05_TOPCOUNT",
+          "description": "Q05 TOPCOUNT",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 6,
+      "title": "6. feladat – Az RDP-kapcsolat ellenőrzése",
+      "description": "## 6. feladat – Az RDP-kapcsolat ellenőrzése Mielőtt távoli asztallal csatlakozol a virtuális géphez, ellenőrizd a **VS Code PowerShell termináljából**, hogy a VM RDP-szolgáltatása hálózaton keresztül elérhető-e. Keresd meg a virtuális géped **nyilvános IP-címét** a korábban megismert Azure PowerShell-parancsok segítségével, majd ellenőrizd a **3389-es TCP-portot**: ```powershell Test-NetConnection -Port 3389 ``` A ` ` helyére a saját virtuális géped nyilvános IP-címét írd. A kimenetben keresd meg a `RemoteAddress` és `TcpTestSucceeded` értékeket. RemoteAddress TcpTestSucceeded – válassz – True False ::: {.callout-warning title=\"Ha a TcpTestSucceeded értéke False\"} Ellenőrizd, hogy a virtuális gép fut-e, helyes nyilvános IP-címet adtál-e meg, illetve hogy az Azure hálózati beállításai engedélyezik-e az RDP-kapcsolatot a **TCP/3389** porton. ::: Ha a `TcpTestSucceeded` értéke `True`, indítsd el a **Távoli asztali kapcsolat (Remote Desktop Connection)** alkalmazást, és csatlakozz a virtuális gépedhez. ::: {.callout-important title=\"A következő feladatok helye\"} A **7–10. feladatot már az RDP-vel elért virtuális gépen**, a Windows PowerShellben hajtsd végre. ::: ",
+      "fields": [
+        "Q06_ADDRESS",
+        "Q06_TCP"
+      ],
+      "criteria": [
+        {
+          "id": "Q06_ADDRESS",
+          "description": "Q06 ADDRESS",
+          "weight": 1
+        },
+        {
+          "id": "Q06_TCP",
+          "description": "Q06 TCP",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 7,
+      "title": "7. feladat – A Guest OS adatainak vizsgálata",
+      "description": "## 7. feladat – A Guest OS adatainak vizsgálata Nyisd meg a **Windows PowerShellt** a távoli gépen, majd kérdezd le a rendszer alapvető adatait: ```powershell Get-ComputerInfo ``` A parancs sok adatot jelenít meg. Pipeline és `Select-Object` segítségével szűkítsd a kimenetet az alábbi tulajdonságokra: - `CsName` - `WindowsProductName` - `WindowsVersion` - `OsArchitecture` CsName WindowsProductName WindowsVersion OsArchitecture ",
+      "fields": [
+        "Q07_NAME",
+        "Q07_PRODUCT",
+        "Q07_VERSION",
+        "Q07_ARCH"
+      ],
+      "criteria": [
+        {
+          "id": "Q07_NAME",
+          "description": "Q07 NAME",
+          "weight": 1
+        },
+        {
+          "id": "Q07_PRODUCT",
+          "description": "Q07 PRODUCT",
+          "weight": 1
+        },
+        {
+          "id": "Q07_VERSION",
+          "description": "Q07 VERSION",
+          "weight": 1
+        },
+        {
+          "id": "Q07_ARCH",
+          "description": "Q07 ARCH",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 8,
+      "title": "8. feladat – Mit lát a Guest OS a processzorból?",
+      "description": "## 8. feladat – Mit lát a Guest OS a processzorból? Vizsgáld meg, milyen processzort és hány feldolgozási egységet lát a Windows! Kérdezd le a `Win32_Processor` CIM-osztály adatait, és az eredményt mentsd egy **`$cpu` változóba**. Ezután a változó felhasználásával jelenítsd meg az alábbi tulajdonságokat: - `Name` - `NumberOfCores` - `NumberOfLogicalProcessors` Az eredményt **táblázatos formában** jelenítsd meg. ::: {.callout-tip title=\"Segítség\"} A feladat megoldásához a korábban megismert `Get-CimInstance`, `Select-Object` és `Format-Table` parancsokat használd. A CIM-osztály neve: `Win32_Processor`. ::: CPU neve NumberOfCores NumberOfLogicalProcessors Melyik Azure VM-erőforrással áll legközvetlenebb kapcsolatban a Guest OS által látott logikai processzorok száma? – válassz – RAM vCPU Virtual Disk vNIC ",
+      "fields": [
+        "Q08_CPU",
+        "Q08_CORES",
+        "Q08_LOGICAL",
+        "Q08_AZURE"
+      ],
+      "criteria": [
+        {
+          "id": "Q08_CPU",
+          "description": "Q08 CPU",
+          "weight": 1
+        },
+        {
+          "id": "Q08_CORES",
+          "description": "Q08 CORES",
+          "weight": 1
+        },
+        {
+          "id": "Q08_LOGICAL",
+          "description": "Q08 LOGICAL",
+          "weight": 1
+        },
+        {
+          "id": "Q08_AZURE",
+          "description": "Q08 AZURE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 9,
+      "title": "9. feladat – Folyamatok, erőforrás-használat és szálak",
+      "description": "## 9. feladat – Folyamatok, erőforrás-használat és szálak Listázd a futó folyamatokat, majd: 1. rendezd őket a felhasznált memória alapján **csökkenő sorrendbe**; 2. jelenítsd meg **csak az első 10 folyamatot**; 3. a listában jelenjen meg a folyamat neve, PID-je és memóriahasználata; 4. az eredményt táblázatos formában jelenítsd meg. ::: {.callout-tip title=\"Segítség\"} Használd a korábban megismert `Get-Process`, `Sort-Object`, `Select-Object -First` és `Format-Table` lehetőségeket. A memóriahasználathoz a `WorkingSet` tulajdonságot használhatod. ::: Válassz ki **egy folyamatot a saját Top 10 listádból**, és mentsd el egy **`$p` változóba**. Ezután a változó segítségével vizsgáld meg a folyamathoz tartozó szálakat, és határozd meg a szálak számát. ::: {.callout-tip title=\"Segítség\"} Egy folyamat név szerinti lekéréséhez használhatod a `Get-Process` `-Name` paraméterét. A processzhez tartozó szálakat a `Threads` tulajdonságon keresztül érheted el; a darabszám meghatározásához a `Count` tulajdonság használható. ::: A Top 10 listából választott process neve PID A process szálainak száma ",
+      "fields": [
+        "Q09_PROCESS",
+        "Q09_PID",
+        "Q09_THREADS"
+      ],
+      "criteria": [
+        {
+          "id": "Q09_PROCESS",
+          "description": "Q09 PROCESS",
+          "weight": 1
+        },
+        {
+          "id": "Q09_PID",
+          "description": "Q09 PID",
+          "weight": 1
+        },
+        {
+          "id": "Q09_THREADS",
+          "description": "Q09 THREADS",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 10,
+      "title": "10. feladat – Szolgáltatás állapotának ellenőrzése elágazással",
+      "description": "## 10. feladat – Szolgáltatás állapotának ellenőrzése elágazással Listázd a Windows szolgáltatásait: ```powershell Get-Service ``` Válassz ki **egy tetszőleges szolgáltatást**, kérdezd le név alapján, majd az eredményt mentsd egy **`$service` változóba**. ::: {.callout-tip title=\"Segítség\"} A szolgáltatás név szerinti lekéréséhez használd a `Get-Service` parancs `-Name` paraméterét. ::: Ezután készíts egy egyszerű feltételes elágazást, amely megvizsgálja a `$service.Status` értékét: - ha a szolgáltatás állapota `Running`, jelenjen meg: **A szolgáltatás fut.** - egyébként jelenjen meg: **A szolgáltatás nem fut.** Az `if/else` szerkezet általános alakja: ```powershell if (feltétel) { # utasítások } else { # utasítások } ``` A konkrét feltételt neked kell megfogalmaznod. A választott szolgáltatás Name értéke DisplayName Status – válassz – Running Stopped Other Az elkészített if/else kódrészlet ",
+      "fields": [
+        "Q10_NAME",
+        "Q10_DISPLAY",
+        "Q10_STATUS",
+        "Q10_CODE"
+      ],
+      "criteria": [
+        {
+          "id": "Q10_NAME",
+          "description": "Q10 NAME",
+          "weight": 1
+        },
+        {
+          "id": "Q10_DISPLAY",
+          "description": "Q10 DISPLAY",
+          "weight": 1
+        },
+        {
+          "id": "Q10_STATUS",
+          "description": "Q10 STATUS",
+          "weight": 1
+        },
+        {
+          "id": "Q10_CODE",
+          "description": "Q10 CODE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 11,
+      "title": "11. feladat – Skillable labor elindítása",
+      "description": "## 11. feladat – Skillable labor elindítása A következő feladatokhoz ismét a **Skillable** laborkörnyezetét használjuk. Nyisd meg a korábban használt Skillable felületet: [**Skillable – Microsoft Learn for Educators laborkörnyezet**](https://msle.learnondemand.net/) Ha már a korábbi gyakorlaton regisztráltál, jelentkezz be a meglévő fiókoddal. Ha most regisztrálsz először, válaszd a **Register with Training Key** lehetőséget. A szükséges **Training Key a Moodle kurzusfelületén található**. Bejelentkezés után a **Current Training** részen keresd meg az alábbi labort: **Monitor Azure with Service Health and Activity Log alerts** Mielőtt elindítod a labort, ellenőrizd a labor adatlapját, és rögzítsd az alábbi adatokat. Duration RAM Ezután indítsd el a labort, és várd meg, amíg a laborkörnyezet teljesen betöltődik. ::: {.callout-important title=\"Fontos\"} A 12–14. feladatban a **Skillable által biztosított Azure-környezetben** dolgozz, ne a saját Azure-előfizetésedben. A részletes lépéseket a Skillable labor tartalmazza. ::: ",
+      "fields": [
+        "Q11_DURATION",
+        "Q11_RAM"
+      ],
+      "criteria": [
+        {
+          "id": "Q11_DURATION",
+          "description": "Q11 DURATION",
+          "weight": 1
+        },
+        {
+          "id": "Q11_RAM",
+          "description": "Q11 RAM",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 12,
+      "title": "12. feladat – Action group létrehozása",
+      "description": "## 12. feladat – Action group létrehozása Végezd el a Skillable labor **Create an action group** részét. A létrehozás és a laborban szereplő teszt végrehajtása után add meg az alábbi adatokat. A **Tracking ID** értékét a teszt során kapott Service Health e-mailben keresd meg. Action group name Display name Tracking ID ",
+      "fields": [
+        "Q12_NAME",
+        "Q12_DISPLAY",
+        "Q12_TRACKING"
+      ],
+      "criteria": [
+        {
+          "id": "Q12_NAME",
+          "description": "Q12 NAME",
+          "weight": 1
+        },
+        {
+          "id": "Q12_DISPLAY",
+          "description": "Q12 DISPLAY",
+          "weight": 1
+        },
+        {
+          "id": "Q12_TRACKING",
+          "description": "Q12 TRACKING",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 13,
+      "title": "13. feladat – Service Health alert létrehozása",
+      "description": "## 13. feladat – Service Health alert létrehozása Végezd el a Skillable labor **Create a Service Health alert** részét. A riasztási szabály létrehozása után ellenőrizd annak tulajdonságait, majd add meg az alábbi adatokat. Alert rule name Region Severity Event types – jelöld be a szabályban beállított eseménytípusokat: Service issue Planned maintenance Health advisories Security advisories ",
+      "fields": [
+        "Q13_NAME",
+        "Q13_REGION",
+        "Q13_SEVERITY",
+        "Q13_SERVICE_ISSUE",
+        "Q13_PLANNED",
+        "Q13_HEALTH",
+        "Q13_SECURITY"
+      ],
+      "criteria": [
+        {
+          "id": "Q13_NAME",
+          "description": "Q13 NAME",
+          "weight": 1
+        },
+        {
+          "id": "Q13_REGION",
+          "description": "Q13 REGION",
+          "weight": 1
+        },
+        {
+          "id": "Q13_SEVERITY",
+          "description": "Q13 SEVERITY",
+          "weight": 1
+        },
+        {
+          "id": "Q13_SERVICE_ISSUE",
+          "description": "Q13 SERVICE ISSUE",
+          "weight": 1
+        },
+        {
+          "id": "Q13_PLANNED",
+          "description": "Q13 PLANNED",
+          "weight": 1
+        },
+        {
+          "id": "Q13_HEALTH",
+          "description": "Q13 HEALTH",
+          "weight": 1
+        },
+        {
+          "id": "Q13_SECURITY",
+          "description": "Q13 SECURITY",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 14,
+      "title": "14. feladat – Activity Log alert létrehozása",
+      "description": "## 14. feladat – Activity Log alert létrehozása Végezd el a Skillable labor **Create an Activity Log alert** részét. A riasztási szabály létrehozása után ellenőrizd annak tulajdonságait, majd add meg az alábbi adatokat. Alert rule name Signal name Severity Action group Alert rule status – válassz – Enabled Disabled ",
+      "fields": [
+        "Q14_NAME",
+        "Q14_SIGNAL",
+        "Q14_SEVERITY",
+        "Q14_ACTION",
+        "Q14_STATUS"
+      ],
+      "criteria": [
+        {
+          "id": "Q14_NAME",
+          "description": "Q14 NAME",
+          "weight": 1
+        },
+        {
+          "id": "Q14_SIGNAL",
+          "description": "Q14 SIGNAL",
+          "weight": 1
+        },
+        {
+          "id": "Q14_SEVERITY",
+          "description": "Q14 SEVERITY",
+          "weight": 1
+        },
+        {
+          "id": "Q14_ACTION",
+          "description": "Q14 ACTION",
+          "weight": 1
+        },
+        {
+          "id": "Q14_STATUS",
+          "description": "Q14 STATUS",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    },
+    {
+      "number": 15,
+      "title": "15. feladat – A virtuális gép leállítása",
+      "description": "## 15. feladat – A virtuális gép leállítása A Skillable labor befejezése után térj vissza a **Visual Studio Code** PowerShell termináljához és a **saját Azure-előfizetésedhez**. Azure PowerShell használatával állítsd le a gyakorlat során használt saját virtuális gépedet. A szükséges Azure PowerShell parancsot már korábban használtad, ezért a kész parancsot itt nem adjuk meg. A leállítás után ellenőrizd a virtuális gép állapotát. ::: {.callout-important title=\"Fontos\"} A virtuális gépet úgy állítsd le, hogy az Azure-ban is felszabadításra kerüljön (**deallocated** állapot). ::: VM neve PowerState ## Mentés és beadás 📤 Beadás 💾 JSON export Helyi adatok törlése Beadási határidő: 2026. október 8. 11:40 Beadás előtti összesítés Vissza a javításhoz Beadás megerősítése ::: {.callout-note title=\"Aktivitási adatok\"} A munkafüzet kísérleti jelleggel becsült aktív időt és feladatonkénti szerkesztési eseményeket is rögzíthet. Ez nem pontos munkaidőmérés: a másik böngészőlapon, VS Code-ban, RDP-ben vagy Skillable-ben végzett munka nem feltétlenül számít aktív időnek. ::: Aktivitás ezen a gépen Időmérés: – Eseménykövetés: – Becsült aktív idő: 0:00 Szerkesztési események: 0 Első megnyitás: – Utolsó aktivitás: – const SETUP = Object.assign({ timeTracking: false, eventTracking: false, showTrackingPanel: false, allowImport: false, checksEnabled: false, syntaxChecks: true, aiChecks: true, showChecksInSubmissionSummary: true, requireChecksBeforeSubmission: false }, window.ITARCH_SETUP || {}); const STORAGE_KEY = \"itarch_week03_answers_beta1\"; const IDLE_LIMIT_MS = 120000; const TICK_MS = 1000; const TASKS = { Q01: { title: \"VM indítása és állapotellenőrzés\", type: \"syntax\" }, Q02: { title: \"Folyamatok és EXE elérési hely\", type: \"syntax\" }, Q03: { title: \"CPU-terhelés Get-Counter segítségével\", type: \"syntax\" }, Q04: { title: \"AI-val készített CPU-monitor\", type: \"syntax\" }, Q05: { title: \"Azure Resource Graph AI segítségével\", type: \"syntax\" }, Q06: { title: \"RDP-kapcsolat ellenőrzése\", type: \"syntax\" }, Q07: { title: \"Guest OS adatainak vizsgálata\", type: \"syntax\" }, Q08: { title: \"Guest OS és processzor\", type: \"syntax\" }, Q09: { title: \"Folyamatok, erőforrás-használat és szálak\", type: \"syntax\" }, Q10: { title: \"Szolgáltatás állapotának ellenőrzése\", type: \"syntax\" }, Q11: { title: \"Skillable labor elindítása\", type: \"syntax\" }, Q12: { title: \"Action group létrehozása\", type: \"syntax\" }, Q13: { title: \"Service Health alert létrehozása\", type: \"syntax\" }, Q14: { title: \"Activity Log alert létrehozása\", type: \"syntax\" }, Q15: { title: \"A virtuális gép leállítása\", type: \"syntax\" } }; function fields() { return Array.from(document.querySelectorAll(\"[data-answer]\")); } function taskFields(q) { return fields().filter(el => String(el.dataset.answer || \"\").startsWith(q + \"",
+      "fields": [
+        "Q15_VM",
+        "Q15_STATE"
+      ],
+      "criteria": [
+        {
+          "id": "Q15_VM",
+          "description": "Q15 VM",
+          "weight": 1
+        },
+        {
+          "id": "Q15_STATE",
+          "description": "Q15 STATE",
+          "weight": 1
+        }
+      ],
+      "method": "ai"
+    }
+  ]
+}

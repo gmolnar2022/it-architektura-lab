@@ -1,0 +1,123 @@
+{
+  "student_id": "CGJJPN",
+  "submitted_at": "2026-09-17T13:25:04.353Z",
+  "source_blob": "week01/CGJJPN/2026-09-17T13-25-08-804Z_a885015a-3adf-49f8-bf2c-61cb52c9f542.json",
+  "model": "gpt-5-mini",
+  "version": "0.6.1",
+  "provisional": true,
+  "total": 11.5,
+  "classification": "Ellenőrizendő",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 1,
+      "reason": "A parancs helyes (Test-NetConnection 68.221.171.64 -Port 3389 érvényes szintaxis), és a TcpTestSucceeded eredmény True, tehát a 3389-es port elérhető.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "A megadott parancs helyes: Set-AzContext -SubscriptionName \"Azure for Students\" beállítja az aktív előfizetést a kért névvel.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "A megoldás a Get-AzSubscription és a Select-Object Name, State használatát mutatja (értelmezhető pipeline-ként), és a bemutatott kimenet csak a Name és State oszlopokat tartalmazza, tehát megfelel a feladatnak.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "Helyes parancsot adott meg (Get-AzResourceGroup), és a megadott erőforráscsoport neve (win11g) egyezik a Q02-ban szereplő névvel.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q10",
+      "score": 1,
+      "reason": "A Get-AzVM parancs helyes az előfizetés virtuális gépeinek listázásához; a megadott VM-név ('Windows11') egyezik a Q02-ban szereplő névvel.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A megadott parancs (Get-AzVM -Status) megfelelő és működő PowerShell-parancs a VM állapotának lekérdezésére; a megadott állapot ('deallocated') érvényes Azure PowerState-érték (a VM leállt és deallocated).",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q12",
+      "score": 0.5,
+      "reason": "Az 1. sor hibás: hiányzik az értékadás ($vmStatus = Get-AzVM -ResourceGroupName $resourceGroup -Name $vmName -Status). A 2. sor helyes: Write-Host \"Az OS-lemez mérete: $($disk.DiskSizeGB) GB\" kiírja a lemez méretét.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "Hiányzik az AI-nak adott prompt és a saját 2–4 mondatos összefoglalás; a feladat nem teljesült.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "Üres mező; a kért PowerShell-parancs (például Get-AzResource -ResourceGroupName \"SAJÁT ERŐFORRÁSCSOPORT\" -ResourceType \"Microsoft.DevTestLab/schedules\" -ExpandProperties | Select-Object -ExpandProperty Properties) nincs megadva, ezért 0 pont.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "reason": "Hiányoznak a leállításhoz és az állapotellenőrzéshez szükséges PowerShell-parancsok (Q15_STOPCOMMAND és Q15_STATUSCOMMAND üres), ezért a VM végső állapota sem megadott.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    }
+  ],
+  "overall_note": "Feladatonkénti szemantikai javítás; minden eredmény előzetes."
+}

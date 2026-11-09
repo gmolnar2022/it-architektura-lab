@@ -1,0 +1,466 @@
+---
+title: "8. hét – Git/GitHub, Docker, Docker Compose és Azure Container Apps"
+subtitle: "15 feladat · Debian 12 VM / helyi PowerShell vagy VS Code / GitHub / Azure Portal"
+format:
+  html:
+    toc: true
+    theme: cosmo
+    code-copy: true
+execute:
+  enabled: false
+---
+
+::: {.callout-important}
+## Munkakörnyezet és beadás
+**Órai idő: 90 perc.** A be nem fejezett feladatok otthon folytathatók. A feladatokhoz **parancsokat, releváns kimeneteket és rövid magyarázatokat** adj meg, képernyőkép nem szükséges. A válaszok helyben automatikusan mentődnek; a lap alján **Beadás** és **JSON export** is rendelkezésre áll. **Beadási határidő: 2026. november 19., csütörtök, 11:40 (magyar idő).** Ne adj meg jelszót, tokent vagy privát kulcsot.
+:::
+
+**Neptun-kód (kötelező, 6 karakter):** <input id="neptun" data-answer="STUDENT_ID" maxlength="6" pattern="[A-Za-z0-9]{6}" required placeholder="ABC123" />
+
+## I. Git és GitHub – ismétlés
+
+### 1. Git konfiguráció és repository
+
+**Platform:** Debian VM – SSH terminál (helyi PowerShell vagy VS Code terminálból kapcsolódva).
+
+Ellenőrizd a Git telepítését és a commitokhoz beállított nevet, e-mail-címet. Hozz létre egy `container-lab` mappát, és inicializálj benne `main` alapágú Git-repositoryt.
+
+**Segítség:** `git --version`, `git config --get user.name`, `git config --get user.email`, `git init -b main`, `git status`. Ha a név/e-mail hiányzik, a `git config --global user.name "..."` és `git config --global user.email "..."` parancsokkal állíthatod be.
+
+<div class="lab-answer"><label for="q01result"><strong>Válasz – A repository inicializálásához használt parancs és a `git status` lényegi kimenete.</strong></label><textarea id="q01result" data-answer="Q01_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+### 2. Első commit és ágak
+
+**Platform:** Debian VM – SSH terminál; szerkesztéshez opcionálisan VS Code Remote-SSH.
+
+Készíts `proba.txt` fájlt `Hello World` tartalommal. Add a staging area-hoz, készíts `first commit` üzenetű commitot, majd hozz létre `Dev` és `Test` ágat.
+
+**Segítség:** `printf`, `git add`, `git commit -m`, `git branch`, `git log --oneline --all --decorate`.
+
+<div class="lab-answer"><label for="q02result"><strong>Válasz – A staging/commit parancsai és a `git branch` kimenete.</strong></label><textarea id="q02result" data-answer="Q02_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+### 3. Merge-konfliktus
+
+**Platform:** Debian VM – SSH terminál; szövegszerkesztő vagy VS Code Remote-SSH.
+
+A `Dev` ágon írd át a `proba.txt` első sorát `Hello from Dev` szövegre, és commitold. A `Test` ágon ugyanezt a sort írd át `Hello from Test` szövegre, és commitold. Válts vissza a `main` ágra, olvaszd be a `Dev`, majd a `Test` ágat. A konfliktust úgy oldd fel, hogy a végső fájlban a **Dev-változat** maradjon.
+
+**Segítség:** `git switch`, `git merge`, `git status`, `cat proba.txt`, `git add`, `git commit`. Konfliktusnál szerkeszd ki a `<<<<<<<`, `=======`, `>>>>>>>` jelöléseket.
+
+**AI használható:** A konfliktus okának értelmezéséhez és a feloldási lépések ellenőrzéséhez. A javaslatot a saját repositorydban ellenőrizd; a beadandóban egy mondatban jelezd, miben segített az AI.
+
+<div class="lab-answer"><label for="q03result"><strong>Válasz – A két merge parancsa, a konfliktust jelző hibaüzenet releváns részlete és a végleges `proba.txt` tartalma.</strong></label><textarea id="q03result" data-answer="Q03_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+### 4. GitHub remote és push
+
+**Platform:** GitHub – helyi böngésző; Git-parancsok: Debian VM SSH terminál.
+
+Hozz létre a GitHubon egy **üres**, README nélküli repositoryt. Kösd hozzá a lokális repositoryhoz `origin` néven, majd töltsd fel a `main` ágat.
+
+**Segítség:** `git remote add origin <repository-URL>`, `git remote -v`, `git push -u origin main`. HTTPS használatakor GitHub-jelszó helyett megfelelő hitelesítési módszer (például Git Credential Manager vagy token), SSH esetén beállított SSH-kulcs szükséges.
+
+<div class="lab-answer"><label for="q04result"><strong>Válasz – A `git remote -v` kimenete és a sikeres `git push` releváns kimenete; a repository URL-je.</strong></label><textarea id="q04result" data-answer="Q04_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+## II. Docker – öt alapfeladat
+
+### 5. Docker Engine és Compose telepítése Debian 12-re
+
+**Platform:** Debian 12 VM – SSH terminál, sudo jogosultsággal.
+
+Telepítsd a Docker Engine-t és a Compose plugint a Docker hivatalos APT-csomagtárából. Az alábbi parancsok **Debian 12 (bookworm)** rendszerhez készültek.
+
+```bash
+sudo apt update
+sudo apt install -y ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+sudo tee /etc/apt/sources.list.d/docker.sources > /dev/null <<'EOF_DOCKER'
+Types: deb
+URIs: https://download.docker.com/linux/debian
+Suites: bookworm
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF_DOCKER
+
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo systemctl enable --now docker
+sudo docker --version
+sudo docker compose version
+```
+
+**Megjegyzés:** Ha a gépen korábban `docker.io` vagy más, ütköző Docker-csomag szerepel, a telepítés előtt a hivatalos útmutató szerint távolítsd el az ütköző csomagokat. Forrás: https://docs.docker.com/engine/install/debian/
+
+<div class="lab-answer"><label for="q05result"><strong>Válasz – A Docker és a Compose verzióját kiíró két parancs és kimenetük.</strong></label><textarea id="q05result" data-answer="Q05_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+### 6. Első konténer: Hello World
+
+**Platform:** Debian VM – SSH terminál.
+
+Futtasd a `hello-world` image-et. Figyeld meg, hogy a konténer a kiírás után automatikusan leáll.
+
+```bash
+sudo docker run --rm hello-world
+```
+
+**Segítség:** `docker run` konténert indít; a `--rm` eltávolítja a leállt konténert.
+
+<div class="lab-answer"><label for="q06result"><strong>Válasz – A futtatott parancs és a sikeres futást igazoló 2–3 sor. Miért nem látszik ezután a konténer a `docker ps -a` listában?</strong></label><textarea id="q06result" data-answer="Q06_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+### 7. Image-ek és konténerek kezelése
+
+**Platform:** Debian VM – SSH terminál.
+
+Listázd a helyi image-eket. Ezután indíts egy `alpine:3.20` konténert, amely kiírja a `Container OK` szöveget. Most **ne** használd a `--rm` kapcsolót. Listázd a futó és a leállt konténereket, végül töröld a leállt Alpine-konténert.
+
+**Segítség:** `sudo docker images`, `sudo docker run --name alpine-test alpine:3.20 echo 'Container OK'`, `sudo docker ps`, `sudo docker ps -a`, `sudo docker rm alpine-test`.
+
+<div class="lab-answer"><label for="q07result"><strong>Válasz – A konténerindítás parancsa és kimenete, valamint a `docker ps` és `docker ps -a` közötti különbség rövid magyarázata.</strong></label><textarea id="q07result" data-answer="Q07_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+### 8. Nginx és portleképezés
+
+**Platform:** Debian VM – SSH terminál; HTTP-ellenőrzés curl-lel a VM-en.
+
+Indíts Nginx webszervert háttérben, `web-test` néven. A Debian VM **8080-as portját** rendeld a konténer **80-as portjához**. Ellenőrizd a weboldalt a VM-en, majd állítsd le és töröld a konténert.
+
+```bash
+sudo docker run -d --name web-test -p 8080:80 nginx:stable
+curl -I http://localhost:8080
+sudo docker ps
+sudo docker stop web-test
+sudo docker rm web-test
+```
+
+**Segítség:** `-d` = háttérben futás; `--name` = konténernév; `-p HOST:CONTAINER` = portleképezés. Külső böngészős eléréshez az Azure VM hálózati szabályainak is engedniük kell a 8080-as portot; ezt a feladat nem követeli meg.
+
+<div class="lab-answer"><label for="q08result"><strong>Válasz – Az indító parancs, a `curl -I` HTTP-státuszsora és a `docker ps` releváns sora.</strong></label><textarea id="q08result" data-answer="Q08_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+### 9. Saját Dockerfile és image
+
+**Platform:** Debian VM – SSH terminál; Dockerfile és shell script szerkesztése helyben vagy VS Code Remote-SSH-val.
+
+Hozz létre egy `report.sh` fájlt és Dockerfile-t. Építs belőlük `project-report:1.0` nevű image-et, majd futtasd.
+
+`report.sh`:
+
+```sh
+#!/bin/sh
+printf 'PROJECT STATUS REPORT\n'
+printf 'Hostname: %s\n' "$(hostname)"
+printf 'User: %s\n' "$(whoami)"
+printf 'Date: %s\n' "$(date)"
+printf 'Uptime: %s\n' "$(uptime)"
+```
+
+`Dockerfile` (ugyanabban a mappában):
+
+```dockerfile
+FROM alpine:3.20
+RUN apk add --no-cache coreutils
+WORKDIR /app
+COPY report.sh /app/report.sh
+CMD ["sh", "/app/report.sh"]
+```
+
+Futtatás:
+
+```bash
+sudo docker build -t project-report:1.0 .
+sudo docker run --rm project-report:1.0
+sudo docker images
+```
+
+**Segítség:** `-t` = image neve és címkéje; a `.` a build context aktuális mappája. A szkript POSIX `sh`-t használ, ezért nem kell külön Bash-t telepíteni.
+
+**AI használható:** A Dockerfile utasításainak megértéséhez vagy egy kisebb fejlesztés javaslatához. A javaslatot csak kipróbálás és ellenőrzés után alkalmazd.
+
+<div class="lab-answer"><label for="q09result"><strong>Válasz – A build és a futtatás parancsai, valamint a program kimenete. Miben tér el a konténerben kiírt gépnév a Debian VM gépnevétől?</strong></label><textarea id="q09result" data-answer="Q09_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+## III. Docker Compose
+
+### 10. Compose-projekt létrehozása
+
+**Platform:** Debian VM – SSH terminál; compose.yaml szerkesztése helyben vagy VS Code Remote-SSH-val.
+
+Készíts `compose-lab` mappát és benne az alábbi `compose.yaml` fájlt. Két külön Nginx-szolgáltatást indítunk eltérő host portokon.
+
+```yaml
+services:
+  web1:
+    image: nginx:stable
+    ports:
+      - "8081:80"
+  web2:
+    image: nginx:stable
+    ports:
+      - "8082:80"
+```
+
+**Segítség:** A `services` az alkalmazás szolgáltatásait sorolja fel; a `ports` a host és a konténer portjait rendeli egymáshoz.
+
+**AI használható:** YAML-szintaktikai hibák értelmezéséhez. A javítást a `docker compose config` paranccsal ellenőrizd.
+
+<div class="lab-answer"><label for="q10result"><strong>Válasz – A `sudo docker compose config` parancs és az ellenőrzés eredménye (vagy a hiba és javítása).</strong></label><textarea id="q10result" data-answer="Q10_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+### 11. Több szolgáltatás indítása
+
+**Platform:** Debian VM – SSH terminál.
+
+Indítsd a Compose-projektet háttérben, és ellenőrizd mindkét webszervert.
+
+```bash
+sudo docker compose up -d
+sudo docker compose ps
+curl -I http://localhost:8081
+curl -I http://localhost:8082
+```
+
+<div class="lab-answer"><label for="q11result"><strong>Válasz – A `compose ps` kimenete és a két HTTP-státuszsor. Miért különböznek a host portok?</strong></label><textarea id="q11result" data-answer="Q11_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+### 12. Compose-projekt módosítása és leállítása
+
+**Platform:** Debian VM – SSH terminál; YAML-szerkesztés.
+
+Módosítsd a második szolgáltatás host portját `8082`-ről `8083`-ra. Alkalmazd a változást, ellenőrizd az új portot, majd állítsd le és távolítsd el a projekt konténereit.
+
+**Segítség:** `sudo docker compose up -d`, `curl -I http://localhost:8083`, `sudo docker compose logs --tail=10`, `sudo docker compose down`.
+
+<div class="lab-answer"><label for="q12result"><strong>Válasz – A módosított YAML-sor, az ellenőrző parancs kimenete és a `compose down` eredménye.</strong></label><textarea id="q12result" data-answer="Q12_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+## IV. Azure Container Apps – saját Azure for Students előfizetés
+
+> **Előfeltétel:** aktív Azure for Students előfizetés, megfelelő jogosultság, és a választott régióban elérhető Azure Container Apps szolgáltatás. Az Azure Portal felülete változhat. A létrehozás előtt ellenőrizd az esetleges költségeket. A feladat nem igényel Azure Container Registryt.
+
+### 13. Erőforráscsoport és Container Apps-környezet
+
+**Platform:** Azure Portal – helyi böngésző, saját Azure for Students előfizetés.
+
+Lépj be az [Azure Portalra](https://portal.azure.com), válaszd a **saját Azure for Students** előfizetésedet. Hozz létre `rg-container-lab-<azonosító>` erőforráscsoportot, majd egy új Container App létrehozása során hozz létre egy Container Apps environmentet is, például `env-container-lab-<azonosító>` néven. Használj támogatott, az előfizetésedben engedélyezett régiót.
+
+**Segítség:** Azure Portal → *Container Apps* → *Create*; Subscription, Resource group, Container Apps environment. A környezet létrehozása a Container App varázslójában is elvégezhető.
+
+<div class="lab-answer"><label for="q13result"><strong>Válasz – Az erőforráscsoport neve, a választott régió és a környezet neve. Ha hiba történt, a hibaüzenet releváns része.</strong></label><textarea id="q13result" data-answer="Q13_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+### 14. Nginx Container App telepítése
+
+**Platform:** Azure Portal – helyi böngésző, saját Azure for Students előfizetés.
+
+Hozz létre egy `web-lab-<azonosító>` nevű Container Appot a nyilvános `nginx:stable` image-ből. Engedélyezd az **External ingress** opciót, a **target port** legyen `80`. A minimális replikaszám lehet `0`, a maximális `1`.
+
+**Segítség:** Container image source: public registry / Docker Hub; image: `nginx:stable`; Ingress: External; Target port: `80`. Az ingress HTTPS-végpontot biztosít, a konténer belső portja ettől még 80.
+
+<div class="lab-answer"><label for="q14result"><strong>Válasz – Az alkalmazás neve, image-neve és publikus HTTPS-címe. Nyisd meg a címet, és írd le, milyen oldalt látsz.</strong></label><textarea id="q14result" data-answer="Q14_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+### 15. Ellenőrzés és takarítás
+
+**Platform:** Azure Portal – helyi böngésző; opcionálisan helyi PowerShell `curl.exe` az URL ellenőrzéséhez.
+
+Tekintsd meg az alkalmazás állapotát, revízióit és – ha rendelkezésre állnak – naplóit az Azure Portalon. Ellenőrizd a HTTPS-címet. Ezután töröld a **kizárólag ehhez a feladathoz létrehozott** erőforráscsoportot, és várd meg a törlés befejeződését.
+
+**Segítség:** Container App → *Overview*, *Revisions*, *Log stream*; Resource groups → a saját laborkörnyezeted erőforráscsoportja → *Delete resource group*. Más feladatokhoz tartozó erőforráscsoportot ne törölj.
+
+<div class="lab-answer"><label for="q15result"><strong>Válasz – A sikeres HTTP-elérés rövid igazolása, az alkalmazás állapota és a törlés eredménye. Ha a törlés nem sikerült, add meg a hibaüzenetet.</strong></label><textarea id="q15result" data-answer="Q15_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+
+---
+
+
+---
+
+> **AI-használat:** A 3., 9. és 10. feladatnál AI-asszisztens használható segítségként. A kapott javaslatot saját parancsokkal és kimenetekkel ellenőrizd. Jelszót, tokent és privát kulcsot ne adj meg AI-eszköznek. Az AI-használat nem jelent külön feladatot.
+
+## Összegző kérdések
+
+1. Mi a különbség a Docker image és a konténer között?
+2. Miben különbözik a `docker run` és a `docker compose up` használata?
+3. Milyen üzemeltetési feladatokat vesz át az Azure Container Apps a saját Debian VM-en futó Dockerhez képest?
+
+<div class="lab-answer"><label for="summary"><strong>Összegző válaszok (1–3):</strong></label><textarea id="summary" data-answer="SUMMARY" rows="5" placeholder="Rövid válaszok az összegző kérdésekre..."></textarea></div>
+
+**Beadás:** töltsd ki a feladatok válaszmezőit, majd használd az oldal alján található Beadás gombot. Tartalék megoldásként JSON export is készíthető.
+
+
+```{=html}
+<style>
+.lab-answer {display:flex;flex-direction:column;gap:.45rem;margin:1rem 0 1.5rem}
+.lab-answer input,.lab-answer textarea {width:100%;max-width:100%;padding:.65rem;border:1px solid #9ca3af;border-radius:5px;font:inherit}
+.lab-answer textarea {min-height:6rem;resize:vertical}
+.lab-answer button {align-self:flex-start}
+.lab-feedback.ok {color:#176b36}.lab-feedback.warn {color:#a45c00}
+</style>
+```
+
+## Mentés és beadás
+
+A válaszok automatikusan mentődnek ebben a böngészőben. A szerveres beadás a 7. heti mintából átvett végpontra küld adatot; az oktató a közzététel előtt ellenőrizze, hogy a 8. heti beadásokat is fogadja. A beadás előtt ellenőrizd a Neptun-kódot és a kitöltött mezőket. A formai ellenőrzés nem helyettesíti a parancsok tényleges futtatását.
+
+<div class="actions">
+<button id="submit-button" type="button" onclick="openSubmissionSummary()">📤 Beadás</button>
+<button type="button" onclick="exportSubmissionJson()">💾 JSON export</button>
+<button type="button" onclick="clearAnswers()">Helyi adatok törlése</button>
+<span id="save-status" role="status"></span>
+</div>
+<p id="submission-deadline-note"><strong>Beadási határidő:</strong> 2026. november 19. 11:40 (magyar idő).</p>
+<div id="submission-summary" class="submission-summary" hidden>
+<h3>Beadás előtti összesítés</h3>
+<div id="submission-summary-body"></div>
+<div class="actions"><button type="button" onclick="closeSubmissionSummary()">Vissza a javításhoz</button><button id="confirm-submit-button" type="button" onclick="confirmSubmission()">Beadás megerősítése</button></div>
+</div>
+<div id="submission-result" role="status" aria-live="polite"></div>
+
+::: {.callout-note title="Aktivitási adatok"}
+Az időmérés és az eseménykövetés a projekt `config/setup.js` fájljából konfigurálható. Az SSH-terminálban végzett munka nem feltétlenül számít böngészőbeli aktív időnek.
+:::
+<div id="tracking-panel" class="submission-summary">
+<strong>Aktivitás ezen a gépen</strong>
+<p>Időmérés: <span id="tracking-time-status">–</span> · Eseménykövetés: <span id="tracking-event-status">–</span></p>
+<p>Becsült aktív idő: <span id="activity-active-time">0:00</span> · Szerkesztések: <span id="activity-edit-count">0</span></p>
+<p>Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: <span id="activity-last">–</span></p>
+</div>
+
+<style>
+.actions {display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;margin:1rem 0}
+.actions button {padding:.55rem .9rem;border:1px solid #77808a;border-radius:6px;background:#fff;cursor:pointer}
+.actions button:disabled {opacity:.5;cursor:not-allowed}
+.submission-summary {border:1px solid #c8d0d8;border-radius:9px;padding:1rem;margin:1rem 0;background:#fafbfc}
+.submission-summary[hidden] {display:none}
+#submission-result {margin:1rem 0}
+</style>
+<script src="../../config/setup.js"></script>
+<script>
+(function(){
+  const patterns={
+    task:/[\s\S]{12,}/,
+    ssh:/\b(ssh|whoami|hostname|pwd)\b/i, csv:/[;]|\b(cut|awk|grep|tail)\b/i,
+    bash:/\b(while|for|read|mkdir|cp|bash|chmod|jed)\b/i,
+    diff:/\bdiff\b|---|\+\+\+/i,
+    git:/\bgit\s+(init|status|add|commit|log|diff|branch|switch|merge|remote|push|fetch|pull|config)\b/i,
+    github:/github\.com|gh auth|https/i,
+    vscode:/Source Control|Remote.SSH|VS Code|stage|commit|sync/i
+  };
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('.lab-check'); if(!b)return;
+    const wrap=b.closest('.lab-answer'), field=wrap?.querySelector('input,textarea');
+    const feedback=wrap?.querySelector('.lab-feedback'); if(!field||!feedback)return;
+    const v=field.value.trim(),type=b.dataset.check,p=patterns[type]||/\S{12}/;
+    const ok=type==='sha'?/^[0-9a-fA-F]{7,12}$/.test(v):type==='repo-url'?/^https:\/\/github\.com\/[A-Za-z0-9-]+\/[A-Za-z0-9._-]+\/?$/.test(v):v.length>=8&&p.test(v);
+    feedback.textContent=ok?'A válasz formátuma megfelelőnek tűnik. A tényleges végrehajtást ez nem igazolja.':(type==='sha'?'Adj meg 7–12 hexadecimális karaktert.':type==='repo-url'?'Adj meg teljes GitHub-repository URL-t.':'Egészítsd ki konkrét parancsokkal, kimenettel vagy a kért magyarázattal.');
+    feedback.className='lab-feedback '+(ok?'ok':'warn');
+  });
+})();
+</script>
+```
+
+<script>
+(() => {
+  'use strict';
+  const CONFIG = Object.assign({timeTracking:false,eventTracking:false,showTrackingPanel:false},window.ITARCH_SETUP||{});
+  const STORAGE_KEY = 'itarch_week08_answers_2026';
+  // OKTATÓI BEÁLLÍTÁS: a végleges határidőt itt add meg ISO 8601 formában,
+  // pl. '2026-10-29T11:40:00+01:00'. A null azt jelenti, hogy nincs korlátozás.
+  const SUBMISSION_DEADLINE_ISO = '2026-11-19T11:40:00+01:00';
+  const ENDPOINT = 'https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/submit';
+  const $ = id => document.getElementById(id);
+  const fields = () => [...document.querySelectorAll('[data-answer]')];
+  const studentId = () => ($('neptun')?.value||'').trim().toUpperCase();
+  const validId = () => /^[A-Z0-9]{6}$/.test(studentId());
+  const nowIso = () => new Date().toISOString();
+  const deadline = SUBMISSION_DEADLINE_ISO ? new Date(SUBMISSION_DEADLINE_ISO) : null;
+  const closed = () => deadline && !isNaN(deadline.getTime()) && Date.now() > deadline.getTime();
+  const started = nowIso();
+  let activity = {started_at:started,last_activity_at:started,active_seconds_estimate:0,edit_count:0,events:[]};
+  let lastInteraction = Date.now();
+  const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const logEvent = (type) => {if(CONFIG.eventTracking) activity.events.push({type,at:nowIso()});};
+  const answers = () => Object.fromEntries(fields().filter(f=>f.dataset.answer!=='STUDENT_ID').map(f=>[f.dataset.answer,f.value]));
+  const save = (message=false) => {
+    activity.last_activity_at=nowIso();
+    try {localStorage.setItem(STORAGE_KEY,JSON.stringify({student_id:studentId(),answers:answers(),activity}));
+      if(message) $('save-status').textContent='✓ Helyi mentés kész';
+    } catch(e) {if(message) $('save-status').textContent='⚠ Helyi mentés nem érhető el';}
+  };
+  const load = () => {
+    try {const stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null'); if(!stored)return;
+      if(stored.student_id) $('neptun').value=stored.student_id;
+      fields().forEach(f=>{if(f.dataset.answer!=='STUDENT_ID' && Object.hasOwn(stored.answers||{},f.dataset.answer))f.value=stored.answers[f.dataset.answer]});
+      if(stored.activity)activity=Object.assign(activity,stored.activity);
+    }catch(e){}
+  };
+  const renderActivity = () => {
+    $('tracking-panel').hidden=!CONFIG.showTrackingPanel;
+    $('tracking-time-status').textContent=CONFIG.timeTracking?'bekapcsolva':'kikapcsolva';
+    $('tracking-event-status').textContent=CONFIG.eventTracking?'bekapcsolva':'kikapcsolva';
+    const sec=activity.active_seconds_estimate||0;
+    $('activity-active-time').textContent=`${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;
+    $('activity-edit-count').textContent=activity.edit_count||0;
+    $('activity-started').textContent=activity.started_at||'–';
+    $('activity-last').textContent=activity.last_activity_at||'–';
+  };
+  const refreshDeadline = () => {
+    const isClosed=closed();
+    $('submit-button').hidden=!!isClosed;
+    if($('confirm-submit-button'))$('confirm-submit-button').disabled=!!isClosed||!validId();
+    $('submission-deadline-note').textContent=deadline && !isNaN(deadline.getTime())
+      ? `Beadási határidő: ${deadline.toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})} (magyar idő)${isClosed?' – lejárt':''}`
+      : 'Beadási határidő: még nincs beállítva a munkafüzetben.';
+  };
+  const payload = () => ({schema_version:1,course:'ITARCH',week:8,student_id:studentId(),submitted_at:nowIso(),answers:answers(),checks:{},activity_summary:activity});
+  window.openSubmissionSummary = () => {
+    refreshDeadline();if(closed())return;
+    const fs=fields().filter(f=>f.dataset.answer!=='STUDENT_ID');
+    const missing=fs.filter(f=>!f.value.trim());
+    const groups=[...new Set(missing.map(f=>(f.dataset.answer.match(/^Q(\d\d)/)||[])[1]).filter(Boolean))];
+    const complete=fs.length-missing.length;
+    $('submission-summary-body').innerHTML=`<p><strong>Neptun:</strong> ${esc(studentId()||'nincs megadva')} ${validId()?'✓':'⚠ 6 betű/szám szükséges'}</p>
+      <p><strong>Kitöltött mezők:</strong> ${complete}/${fs.length} (${Math.round(100*complete/Math.max(1,fs.length))}%)</p>
+      <p><strong>Hiányos feladatok:</strong> ${groups.length?groups.map(x=>Number(x)).join(', '):'nincs'}</p>
+      ${missing.length?`<p>Összesen ${missing.length} mező üres. A beadás ettől még lehetséges, de ellenőrizd a válaszokat.</p>`:''}
+      <p>A szintaktikai ellenőrző gombok használata nem kötelező. Biztosan beadod?</p>`;
+    $('submission-summary').hidden=false;
+    $('submission-summary').scrollIntoView({behavior:'smooth',block:'start'});
+    logEvent('submission_summary_opened');save();refreshDeadline();
+  };
+  window.closeSubmissionSummary=()=>{$('submission-summary').hidden=true;};
+  const download = data => {
+    const file=`ITARCH_week08_${data.student_id}_${data.submitted_at.replace(/[:.]/g,'-')}.json`;
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'});
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=file;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  };
+  window.exportSubmissionJson=()=>{if(!validId()){$('submission-result').textContent='⚠ A JSON exporthoz 6 karakteres Neptun-kód szükséges.';return;}logEvent('submission_json_exported');save();download(payload());};
+  window.confirmSubmission=async()=>{
+    if(closed()){$('submission-result').textContent='⚠ A beadási határidő lejárt.';refreshDeadline();return;}
+    if(!validId()){$('submission-result').textContent='⚠ Adj meg érvényes, 6 karakteres Neptun-kódot.';return;}
+    const btn=$('confirm-submit-button');btn.disabled=true;
+    $('submission-result').textContent='Beadás folyamatban…';
+    try {
+      const response=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload())});
+      const result=await response.json().catch(()=>null);
+      if(!response.ok||!result||result.success!==true)throw new Error(`HTTP ${response.status}`);
+      logEvent('submission_succeeded');save();$('submission-summary').hidden=true;
+      $('submission-result').textContent=`✓ Beadás sikeres. Azonosító: ${result.submission_id||'–'}`;
+    }catch(e){logEvent('submission_failed');save();$('submission-result').textContent='⚠ A szerveres beadás nem sikerült. A helyi mentés megmaradt; próbáld újra, vagy készíts JSON exportot.';}
+    finally {btn.disabled=false;refreshDeadline();}
+  };
+  window.clearAnswers=()=>{
+    if(!confirm('Biztosan törlöd az összes helyben mentett választ és aktivitási adatot?'))return;
+    fields().forEach(f=>f.value='');
+    try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
+    activity={started_at:nowIso(),last_activity_at:nowIso(),active_seconds_estimate:0,edit_count:0,events:[]};
+    $('submission-summary').hidden=true;$('submission-result').textContent='';$('save-status').textContent='Helyi adatok törölve.';renderActivity();
+  };
+  document.addEventListener('DOMContentLoaded',()=>{
+    load();refreshDeadline();renderActivity();
+    fields().forEach(f=>{f.addEventListener('input',()=>{
+      if(f.dataset.answer==='STUDENT_ID')f.value=f.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);
+      activity.edit_count++;lastInteraction=Date.now();logEvent('answer_edited');save();renderActivity();
+    });f.addEventListener('change',()=>save());});
+    document.addEventListener('keydown',()=>lastInteraction=Date.now());
+    document.addEventListener('mousemove',()=>lastInteraction=Date.now(),{passive:true});
+    document.addEventListener('visibilitychange',()=>save());
+    window.addEventListener('beforeunload',()=>save());
+    setInterval(()=>{if(CONFIG.timeTracking&&!document.hidden&&Date.now()-lastInteraction<120000){activity.active_seconds_estimate++;if(activity.active_seconds_estimate%10===0)save();renderActivity();}},1000);
+    setInterval(refreshDeadline,30000);
+  });
+})();
+</script>

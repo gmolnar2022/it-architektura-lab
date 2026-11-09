@@ -1,0 +1,124 @@
+{
+  "student_id": "G0T857",
+  "submitted_at": "2026-09-15T15:05:13.692Z",
+  "source_blob": "week01/G0T857/2026-09-15T15-05-18-540Z_8aed028d-d049-4f6b-bd37-6302a06e3229.json",
+  "model": "gpt-5-mini",
+  "version": "0.6.1",
+  "provisional": true,
+  "total": 11,
+  "classification": "Ellenőrizendő",
+  "manual_review_required": true,
+  "manual_review_tasks": [
+    "Q01",
+    "Q10"
+  ],
+  "boundary_review": true,
+  "tasks": [
+    {
+      "task": "Q01",
+      "score": 1,
+      "reason": "Subscription ID GUID-formátumának ellenőrzése; az előfizetés tulajdonjoga nem igazolt.",
+      "manual_review": true,
+      "method": "rule"
+    },
+    {
+      "task": "Q02",
+      "score": 1,
+      "reason": "Kitöltött alapadatok: 4/4; a tényleges Azure-erőforrások nem ellenőrzöttek.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q03",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q04",
+      "score": 1,
+      "reason": "Önbevallás: Igen. A feladatlap megerősítést kér, ezért az igen 1 pont; a tényleges konfiguráció nincs ellenőrizve.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q05",
+      "score": 1,
+      "reason": "Nyilvános és privát IPv4 formátum: rendben; VNet: megadva.",
+      "manual_review": false,
+      "method": "rule"
+    },
+    {
+      "task": "Q06",
+      "score": 0.5,
+      "reason": "A parancs helyes PowerShell-szintaxissal készült és a -Port 3389 szerepel, ezért részleges pont jár. Azonban a használt IP-cím (158.158.76.146) nem egyezik a Q05-ben megadott nyilvános IP-vel (158.158.42.191), ezért nem adható teljes pont.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q07",
+      "score": 1,
+      "reason": "Helyes parancs: a Set-AzContext megfelelően használva van az előfizetés nevével idézőjelek között (a PowerShell parancs kis-/nagybetű-független).",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q08",
+      "score": 1,
+      "reason": "A megadott megoldás helyes: Get-AzSubscription | Select-Object Name, State a kívánt tulajdonságokat listázza, és a bemutatott kimenet szintaktikailag és szemantikailag megfelel.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q09",
+      "score": 1,
+      "reason": "A Get-AzResourceGroup parancs helyes a Resource Groupok listázására; a megadott erőforráscsoport neve 'mywin11' megegyezik a Q02-ban megadottal.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q10",
+      "score": 0.5,
+      "reason": "A lekérdezéshez megadott 'Get-AzVM' parancs helyes és működőképes. Azonban a megadott VM-név ' gep001' eltér a Q02-ban szereplő 'gep001'-től (vezető szóköz), ezért manuális ellenőrzés szükséges.",
+      "manual_review": true,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q11",
+      "score": 1,
+      "reason": "A parancs szintaxisa helyes (Get-AzVM -ResourceGroupName \"MYWIN11\" -Name \"gep001\" -Status) és a „VM running” a PowerState DisplayStatus érvényes kimenet.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q12",
+      "score": 1,
+      "reason": "Mindkét sor helyes: az első lekéri a VM státuszát (Get-AzVM ... -Status), a második pedig kiírja az OS-lemez méretét a $disk.DiskSizeGB mezőből Write-Host segítségével.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q13",
+      "score": 0,
+      "reason": "Hiányzik az AI-nak adott prompt és a saját összefoglalás (üres mezők), így a feladat nem teljesült.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q14",
+      "score": 0,
+      "reason": "A kért PowerShell-parancs és a dailyRecurrence/notificationSettings kimenetek hiányoznak (üres mezők), ezért nem teljesült a feladat.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    },
+    {
+      "task": "Q15",
+      "score": 0,
+      "reason": "A Q15 mezők üresek: nincs megadva leállításhoz és állapotellenőrzéshez használható PowerShell-parancs, illetve a VM végső állapota; emiatt nem értékelhető.",
+      "manual_review": false,
+      "method": "ai_semantic"
+    }
+  ],
+  "overall_note": "Feladatonkénti szemantikai javítás; minden eredmény előzetes."
+}

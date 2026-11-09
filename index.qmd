@@ -42,6 +42,8 @@ Az egyes heti oldalak **interaktív munkafüzetként** működnek:
 
 ### [7 hét – Git verziókezelés](weeks/week07/)
 
+### [8 hét – Linux DevOps](weeks/week08/)
+
 **VS Code -> Windows Server -> SMB, IIS, AD, GP ***
 
 A további hetek folyamatosan kerülnek hozzáadásra.

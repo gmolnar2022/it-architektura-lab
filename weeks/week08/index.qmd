@@ -1,6 +1,6 @@
 ---
 title: "8. hét – Git/GitHub, Docker, Docker Compose és Azure Container Apps"
-subtitle: "15 feladat · Debian 12 VM / helyi PowerShell vagy VS Code / GitHub / Azure Portal"
+subtitle: "15 feladat · Debian VM / helyi PowerShell vagy VS Code / GitHub / Azure Portal"
 format:
   html:
     toc: true
@@ -12,171 +12,226 @@ execute:
 
 ::: {.callout-important}
 ## Munkakörnyezet és beadás
-**Órai idő: 90 perc.** A be nem fejezett feladatok otthon folytathatók. A feladatokhoz **parancsokat, releváns kimeneteket és rövid magyarázatokat** adj meg, képernyőkép nem szükséges. A válaszok helyben automatikusan mentődnek; a lap alján **Beadás** és **JSON export** is rendelkezésre áll. **Beadási határidő: 2026. november 19., csütörtök, 11:40 (magyar idő).** Ne adj meg jelszót, tokent vagy privát kulcsot.
+**Órai idő: 90 perc.** A be nem fejezett feladatok otthon folytathatók. A feladatokhoz **a feladatban kért parancsokat, releváns kimeneteket vagy fájltartalmakat** add meg. Csak ott írj magyarázatot, ahol ezt külön kérjük. Képernyőkép nem szükséges. A válaszok helyben automatikusan mentődnek; a lap alján **Beadás** és **JSON export** is rendelkezésre áll. **Beadási határidő: 2026. november 19., csütörtök, 11:40 (magyar idő).** Ne adj meg jelszót, tokent vagy privát kulcsot.
 :::
 
 **Neptun-kód (kötelező, 6 karakter):** <input id="neptun" data-answer="STUDENT_ID" maxlength="6" pattern="[A-Za-z0-9]{6}" required placeholder="ABC123" />
 
 ## I. Git és GitHub – ismétlés
 
-### 1. Git konfiguráció és repository
+### 1. Git-repository létrehozása
 
 **Platform:** Debian VM – SSH terminál (helyi PowerShell vagy VS Code terminálból kapcsolódva).
 
-Ellenőrizd a Git telepítését és a commitokhoz beállított nevet, e-mail-címet. Hozz létre egy `container-lab` mappát, és inicializálj benne `main` alapágú Git-repositoryt.
+Hozz létre egy `container-lab` mappát, és inicializálj benne `main` alapágú Git-repositoryt.
 
-**Segítség:** `git --version`, `git config --get user.name`, `git config --get user.email`, `git init -b main`, `git status`. Ha a név/e-mail hiányzik, a `git config --global user.name "..."` és `git config --global user.email "..."` parancsokkal állíthatod be.
+**Segítség:** `mkdir`, `cd`, `git init -b main`, `git status`.
+
+::: {.callout-note collapse="true"}
+## Ha hiányoztál a korábbi Git-gyakorlatról
+
+Először ellenőrizd, hogy telepítve van-e a Git:
+
+```bash
+git --version
+```
+
+Ha a parancs hibát jelez (például `command not found`), telepítsd a Gitet Debianon:
+
+```bash
+sudo apt update
+sudo apt install -y git
+```
+
+A commitokhoz állítsd be a saját nevedet és e-mail-címedet:
+
+```bash
+git config --global user.name "Hallgato Neve"
+git config --global user.email "hallgato@example.com"
+```
+
+A példában szereplő nevet és e-mail-címet cseréld a saját adataidra. Ellenőrzés: `git config --global --list`.
+:::
 
 <div class="lab-answer"><label for="q01result"><strong>Válasz – A repository inicializálásához használt parancs és a `git status` lényegi kimenete.</strong></label><textarea id="q01result" data-answer="Q01_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ### 2. Első commit és ágak
 
-**Platform:** Debian VM – SSH terminál; szerkesztéshez opcionálisan VS Code Remote-SSH.
+**Platform:** Debian VM – SSH terminál; fájlszerkesztéshez `nano` vagy `jed`.
 
-Készíts `proba.txt` fájlt `Hello World` tartalommal. Add a staging area-hoz, készíts `first commit` üzenetű commitot, majd hozz létre `Dev` és `Test` ágat.
+Készíts `proba.txt` fájlt `Hello World` tartalommal. Add a staging area-hoz, majd készíts `first commit` üzenetű commitot. A `Dev` és `Test` ágakat a következő feladatban hozd létre.
 
-**Segítség:** `printf`, `git add`, `git commit -m`, `git branch`, `git log --oneline --all --decorate`.
+**Segítség:** `nano proba.txt` vagy `jed proba.txt`, `git add`, `git commit -m`, `git log --oneline`.
 
-<div class="lab-answer"><label for="q02result"><strong>Válasz – A staging/commit parancsai és a `git branch` kimenete.</strong></label><textarea id="q02result" data-answer="Q02_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<div class="lab-answer"><label for="q02result"><strong>Válasz – A fájl tartalma, a commit parancsa és a `git log --oneline` kimenete.</strong></label><textarea id="q02result" data-answer="Q02_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ### 3. Merge-konfliktus
 
-**Platform:** Debian VM – SSH terminál; szövegszerkesztő vagy VS Code Remote-SSH.
+**Platform:** Debian VM – SSH terminál; szerkesztéshez `nano` vagy `jed`.
 
-A `Dev` ágon írd át a `proba.txt` első sorát `Hello from Dev` szövegre, és commitold. A `Test` ágon ugyanezt a sort írd át `Hello from Test` szövegre, és commitold. Válts vissza a `main` ágra, olvaszd be a `Dev`, majd a `Test` ágat. A konfliktust úgy oldd fel, hogy a végső fájlban a **Dev-változat** maradjon.
+Hozd létre a `Dev` és `Test` ágakat a `main` ágból. A `Dev` ágon írd át a `proba.txt` első sorát `Hello from Dev` szövegre, és commitold. A `Test` ágon ugyanezt a sort írd át `Hello from Test` szövegre, és commitold. Válts vissza a `main` ágra, olvaszd be a `Dev`, majd a `Test` ágat. A konfliktust úgy oldd fel, hogy a végső fájlban a **Dev-változat** maradjon.
 
 **Segítség:** `git switch`, `git merge`, `git status`, `cat proba.txt`, `git add`, `git commit`. Konfliktusnál szerkeszd ki a `<<<<<<<`, `=======`, `>>>>>>>` jelöléseket.
 
-**AI használható:** A konfliktus okának értelmezéséhez és a feloldási lépések ellenőrzéséhez. A javaslatot a saját repositorydban ellenőrizd; a beadandóban egy mondatban jelezd, miben segített az AI.
+**AI-segítség megengedett:** A merge-konfliktus értelmezéséhez és feloldásához. A megoldást saját repositorydban ellenőrizd.
 
-<div class="lab-answer"><label for="q03result"><strong>Válasz – A két merge parancsa, a konfliktust jelző hibaüzenet releváns részlete és a végleges `proba.txt` tartalma.</strong></label><textarea id="q03result" data-answer="Q03_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+<div class="lab-answer"><label for="q03result"><strong>Válasz – A végleges `proba.txt` tartalma és a `git log --oneline --graph --all` kimenete.</strong></label><textarea id="q03result" data-answer="Q03_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ### 4. GitHub remote és push
 
 **Platform:** GitHub – helyi böngésző; Git-parancsok: Debian VM SSH terminál.
 
-Hozz létre a GitHubon egy **üres**, README nélküli repositoryt. Kösd hozzá a lokális repositoryhoz `origin` néven, majd töltsd fel a `main` ágat.
+Használd a **múlt heti GitHub-repositorydat**. A mostani `container-lab` külön helyi Git-repository, ezért itt is be kell állítani az `origin` remote-ot. A mostani munkát a GitHubon **új, `container-lab` nevű ágra** töltsd fel, a korábbi `main` ág felülírása nélkül.
 
-**Segítség:** `git remote add origin <repository-URL>`, `git remote -v`, `git push -u origin main`. HTTPS használatakor GitHub-jelszó helyett megfelelő hitelesítési módszer (például Git Credential Manager vagy token), SSH esetén beállított SSH-kulcs szükséges.
+**Segítség:** `git remote add origin <repository-URL>`, `git remote -v`, `git push -u origin main:container-lab`. A `main:container-lab` a helyi `main` ágat a távoli `container-lab` ágra tölti fel.
 
-<div class="lab-answer"><label for="q04result"><strong>Válasz – A `git remote -v` kimenete és a sikeres `git push` releváns kimenete; a repository URL-je.</strong></label><textarea id="q04result" data-answer="Q04_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+::: {.callout-note collapse="true"}
+## Ha nem voltál a múlt heti GitHub-gyakorlaton
+Hozz létre egy **új, üres** GitHub-repositoryt (README, `.gitignore` és licenc nélkül). Állítsd be az `origin` remote-ot, majd töltsd fel a helyi `main` ágat a `git push -u origin main` paranccsal. HTTPS esetén megfelelő GitHub-hitelesítés, SSH esetén beállított SSH-kulcs szükséges.
+:::
+
+<div class="lab-answer"><label for="q04result"><strong>Válasz – A GitHub-repository URL-je, a `git remote -v` és a sikeres `git push` releváns kimenete.</strong></label><textarea id="q04result" data-answer="Q04_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ## II. Docker – öt alapfeladat
 
-### 5. Docker Engine és Compose telepítése Debian 12-re
+### 5. Docker Engine telepítése
 
-**Platform:** Debian 12 VM – SSH terminál, sudo jogosultsággal.
+**Platform:** Debian 11, 12 vagy 13 VM – SSH terminál, `sudo` jogosultsággal.
 
-Telepítsd a Docker Engine-t és a Compose plugint a Docker hivatalos APT-csomagtárából. Az alábbi parancsok **Debian 12 (bookworm)** rendszerhez készültek.
+Ellenőrizd a Debian verzióját, majd telepítsd a Docker Engine-t **a Debian saját csomagtárából**. A Docker Compose telepítésével csak a 10. feladatban foglalkozunk.
 
 ```bash
+cat /etc/os-release
 sudo apt update
-sudo apt install -y ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
-
-sudo tee /etc/apt/sources.list.d/docker.sources > /dev/null <<'EOF_DOCKER'
-Types: deb
-URIs: https://download.docker.com/linux/debian
-Suites: bookworm
-Components: stable
-Signed-By: /etc/apt/keyrings/docker.asc
-EOF_DOCKER
-
-sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt install -y docker.io
 sudo systemctl enable --now docker
-sudo docker --version
-sudo docker compose version
 ```
 
-**Megjegyzés:** Ha a gépen korábban `docker.io` vagy más, ütköző Docker-csomag szerepel, a telepítés előtt a hivatalos útmutató szerint távolítsd el az ütköző csomagokat. Forrás: https://docs.docker.com/engine/install/debian/
+Ellenőrzés:
 
-<div class="lab-answer"><label for="q05result"><strong>Válasz – A Docker és a Compose verzióját kiíró két parancs és kimenetük.</strong></label><textarea id="q05result" data-answer="Q05_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+```bash
+sudo systemctl is-active docker
+sudo docker version
+```
+
+::: {.callout-tip}
+## AI-segítség megengedett telepítési hiba esetén
+Ha elakadsz, kérhetsz segítséget AI-asszisztenstől a **hibaüzenet értelmezéséhez és a javítási lehetőségekhez**. A javasolt parancsokat végrehajtás előtt ellenőrizd. Jelszót, tokent vagy privát kulcsot ne ossz meg.
+:::
+
+<div class="lab-answer"><label for="q05result"><strong>Beadandó – A Debian verziója, a szolgáltatás állapota és a `sudo docker version` kimenete.</strong></label><textarea id="q05result" data-answer="Q05_RESULT" rows="9" placeholder="Debian verzió:
+
+sudo systemctl is-active docker
+Kimenet:
+
+sudo docker version
+Kimenet:"></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ### 6. Első konténer: Hello World
 
 **Platform:** Debian VM – SSH terminál.
 
-Futtasd a `hello-world` image-et. Figyeld meg, hogy a konténer a kiírás után automatikusan leáll.
+Indíts egy konténert a hivatalos `hello-world` image-ből. **A teljes parancsot magad állítsd össze.**
 
-```bash
-sudo docker run --rm hello-world
-```
+**Segítség:** `docker`, `run`, `hello-world`; a `--rm` kapcsolóval a konténer futás után automatikusan törölhető. Szükség lehet `sudo` használatára. További támpont: `docker run --help`.
 
-**Segítség:** `docker run` konténert indít; a `--rm` eltávolítja a leállt konténert.
+<div class="lab-answer"><label for="q06result"><strong>Beadandó – A teljes indítóparancs és annak kimenete; magyarázat nem szükséges.</strong></label><textarea id="q06result" data-answer="Q06_RESULT" rows="9">sudo docker ...
 
-<div class="lab-answer"><label for="q06result"><strong>Válasz – A futtatott parancs és a sikeres futást igazoló 2–3 sor. Miért nem látszik ezután a konténer a `docker ps -a` listában?</strong></label><textarea id="q06result" data-answer="Q06_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+Kimenet:
+</textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ### 7. Image-ek és konténerek kezelése
 
 **Platform:** Debian VM – SSH terminál.
 
-Listázd a helyi image-eket. Ezután indíts egy `alpine:3.20` konténert, amely kiírja a `Container OK` szöveget. Most **ne** használd a `--rm` kapcsolót. Listázd a futó és a leállt konténereket, végül töröld a leállt Alpine-konténert.
+Végezd el a következő négy műveletet:
 
-**Segítség:** `sudo docker images`, `sudo docker run --name alpine-test alpine:3.20 echo 'Container OK'`, `sudo docker ps`, `sudo docker ps -a`, `sudo docker rm alpine-test`.
+1. Listázd a helyben elérhető Docker-image-eket.
+2. Indíts egy **`alpine-test` nevű** konténert az `alpine:3.20` image-ből, amely kiírja: `Container OK`. Itt ne használj `--rm` kapcsolót.
+3. Listázd **az összes** konténert, a leállítottakat is.
+4. Töröld az `alpine-test` konténert.
 
-<div class="lab-answer"><label for="q07result"><strong>Válasz – A konténerindítás parancsa és kimenete, valamint a `docker ps` és `docker ps -a` közötti különbség rövid magyarázata.</strong></label><textarea id="q07result" data-answer="Q07_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+**Segítség:** `docker images`, `docker run`, `docker ps`, `docker rm`; kapcsolók: `--name`, `-a`. A teljes parancsokat önállóan állítsd össze.
+
+<div class="lab-answer"><label for="q07result"><strong>Beadandó – A négy teljes parancs és a hozzájuk tartozó kimenetek; magyarázat nem szükséges.</strong></label><textarea id="q07result" data-answer="Q07_RESULT" rows="17">sudo docker ...
+Kimenet:
+
+sudo docker ...
+Kimenet:
+
+sudo docker ...
+Kimenet:
+
+sudo docker ...
+Kimenet:
+</textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ### 8. Nginx és portleképezés
 
-**Platform:** Debian VM – SSH terminál; HTTP-ellenőrzés curl-lel a VM-en.
+**Platform:** Debian VM – SSH terminál; HTTP-ellenőrzés a VM-en `curl` segítségével.
 
-Indíts Nginx webszervert háttérben, `web-test` néven. A Debian VM **8080-as portját** rendeld a konténer **80-as portjához**. Ellenőrizd a weboldalt a VM-en, majd állítsd le és töröld a konténert.
+Indíts Nginx webszervert háttérben, **`web-test`** néven. A Debian VM **8080-as portját** rendeld a konténer **80-as portjához**. Ellenőrizd a HTTP-választ, listázd a futó konténert, majd állítsd le és töröld. **Az öt parancsot magad egészítsd ki.**
 
-```bash
-sudo docker run -d --name web-test -p 8080:80 nginx:stable
-curl -I http://localhost:8080
-sudo docker ps
-sudo docker stop web-test
-sudo docker rm web-test
-```
+**Segítség:** `docker run`, `docker ps`, `docker stop`, `docker rm`, `curl -I`; kapcsolók: `-d`, `--name`, `-p HOST:CONTAINER`. A HTTP-ellenőrzés a VM-en történik, ezért nincs szükség Azure NSG-portnyitásra.
 
-**Segítség:** `-d` = háttérben futás; `--name` = konténernév; `-p HOST:CONTAINER` = portleképezés. Külső böngészős eléréshez az Azure VM hálózati szabályainak is engedniük kell a 8080-as portot; ezt a feladat nem követeli meg.
+<div class="lab-answer"><label for="q08result"><strong>Beadandó – Az öt parancs és kimenetük; magyarázat nem szükséges.</strong></label><textarea id="q08result" data-answer="Q08_RESULT" rows="21">sudo docker ...
+Kimenet:
 
-<div class="lab-answer"><label for="q08result"><strong>Válasz – Az indító parancs, a `curl -I` HTTP-státuszsora és a `docker ps` releváns sora.</strong></label><textarea id="q08result" data-answer="Q08_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+curl -I ...
+Kimenet:
+
+sudo docker ...
+Kimenet:
+
+sudo docker ...
+Kimenet:
+
+sudo docker ...
+Kimenet:
+</textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ### 9. Saját Dockerfile és image
 
-**Platform:** Debian VM – SSH terminál; Dockerfile és shell script szerkesztése helyben vagy VS Code Remote-SSH-val.
+**Platform:** Debian VM – SSH terminál; fájlok szerkesztése `nano` vagy `jed` segítségével.
 
-Hozz létre egy `report.sh` fájlt és Dockerfile-t. Építs belőlük `project-report:1.0` nevű image-et, majd futtasd.
+Hozz létre ugyanabban a mappában egy `report.sh` és egy `Dockerfile` nevű fájlt. Az alábbi kódokat használhatod.
 
 `report.sh`:
 
 ```sh
 #!/bin/sh
-printf 'PROJECT STATUS REPORT\n'
-printf 'Hostname: %s\n' "$(hostname)"
-printf 'User: %s\n' "$(whoami)"
-printf 'Date: %s\n' "$(date)"
-printf 'Uptime: %s\n' "$(uptime)"
+echo "CONTAINER REPORT"
+echo "Hostname: $(hostname)"
+echo "Date: $(date)"
 ```
 
-`Dockerfile` (ugyanabban a mappában):
+`Dockerfile`:
 
 ```dockerfile
 FROM alpine:3.20
-RUN apk add --no-cache coreutils
 WORKDIR /app
-COPY report.sh /app/report.sh
-CMD ["sh", "/app/report.sh"]
+COPY report.sh .
+CMD ["sh", "report.sh"]
 ```
 
-Futtatás:
+**Önálló feladat:** állítsd össze a `docker build` parancsot, amely az aktuális könyvtárból **`report-image:v1`** nevű image-et készít.
+
+**Segítség:** `docker build`, `-t` (név és címke), `.` (aktuális könyvtár mint buildkontextus); `docker build --help`.
+
+Az elkészült image futtatásához használd:
 
 ```bash
-sudo docker build -t project-report:1.0 .
-sudo docker run --rm project-report:1.0
-sudo docker images
+sudo docker run --rm report-image:v1
 ```
 
-**Segítség:** `-t` = image neve és címkéje; a `.` a build context aktuális mappája. A szkript POSIX `sh`-t használ, ezért nem kell külön Bash-t telepíteni.
+**AI-segítség megengedett:** A Dockerfile ellenőrzéséhez és hibák értelmezéséhez. A javaslatot saját futtatással ellenőrizd.
 
-**AI használható:** A Dockerfile utasításainak megértéséhez vagy egy kisebb fejlesztés javaslatához. A javaslatot csak kipróbálás és ellenőrzés után alkalmazd.
+<div class="lab-answer"><label for="q09result"><strong>Beadandó – A saját build parancs, annak kimenete és a konténer futtatásának kimenete; magyarázat nem szükséges.</strong></label><textarea id="q09result" data-answer="Q09_RESULT" rows="14">sudo docker build ...
+Kimenet:
 
-<div class="lab-answer"><label for="q09result"><strong>Válasz – A build és a futtatás parancsai, valamint a program kimenete. Miben tér el a konténerben kiírt gépnév a Debian VM gépnevétől?</strong></label><textarea id="q09result" data-answer="Q09_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, magyarázat..."></textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
+sudo docker run --rm report-image:v1
+Kimenet:
+</textarea><button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">Formai ellenőrzés</button><span class="lab-feedback" role="status" aria-live="polite"></span></div>
 
 ## III. Docker Compose
 
@@ -268,7 +323,7 @@ Tekintsd meg az alkalmazás állapotát, revízióit és – ha rendelkezésre �
 
 ---
 
-> **AI-használat:** A 3., 9. és 10. feladatnál AI-asszisztens használható segítségként. A kapott javaslatot saját parancsokkal és kimenetekkel ellenőrizd. Jelszót, tokent és privát kulcsot ne adj meg AI-eszköznek. Az AI-használat nem jelent külön feladatot.
+> **AI-használat:** A 3., 5., 9. és 10. feladatnál AI-asszisztens használható segítségként. A kapott javaslatot saját parancsokkal és kimenetekkel ellenőrizd. Jelszót, tokent és privát kulcsot ne adj meg AI-eszköznek. Az AI-használat nem jelent külön feladatot.
 
 ## Összegző kérdések
 
@@ -345,7 +400,7 @@ Az időmérés és az eseménykövetés a projekt `config/setup.js` fájljából
     const feedback=wrap?.querySelector('.lab-feedback'); if(!field||!feedback)return;
     const v=field.value.trim(),type=b.dataset.check,p=patterns[type]||/\S{12}/;
     const ok=type==='sha'?/^[0-9a-fA-F]{7,12}$/.test(v):type==='repo-url'?/^https:\/\/github\.com\/[A-Za-z0-9-]+\/[A-Za-z0-9._-]+\/?$/.test(v):v.length>=8&&p.test(v);
-    feedback.textContent=ok?'A válasz formátuma megfelelőnek tűnik. A tényleges végrehajtást ez nem igazolja.':(type==='sha'?'Adj meg 7–12 hexadecimális karaktert.':type==='repo-url'?'Adj meg teljes GitHub-repository URL-t.':'Egészítsd ki konkrét parancsokkal, kimenettel vagy a kért magyarázattal.');
+    feedback.textContent=ok?'A válasz formátuma megfelelőnek tűnik. A tényleges végrehajtást ez nem igazolja.':(type==='sha'?'Adj meg 7–12 hexadecimális karaktert.':type==='repo-url'?'Adj meg teljes GitHub-repository URL-t.':'Egészítsd ki a feladatban kért parancsokkal és kimenetekkel.');
     feedback.className='lab-feedback '+(ok?'ok':'warn');
   });
 })();
@@ -444,7 +499,7 @@ Az időmérés és az eseménykövetés a projekt `config/setup.js` fájljából
   };
   window.clearAnswers=()=>{
     if(!confirm('Biztosan törlöd az összes helyben mentett választ és aktivitási adatot?'))return;
-    fields().forEach(f=>f.value='');
+    fields().forEach(f=>f.value=f.dataset.answer==='STUDENT_ID'?'':(f.defaultValue||''));
     try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
     activity={started_at:nowIso(),last_activity_at:nowIso(),active_seconds_estimate:0,edit_count:0,events:[]};
     $('submission-summary').hidden=true;$('submission-result').textContent='';$('save-status').textContent='Helyi adatok törölve.';renderActivity();

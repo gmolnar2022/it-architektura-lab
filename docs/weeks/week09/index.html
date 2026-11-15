@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9. hét – DevOps, CI/CD, GitHub Actions és Azure Container Apps – IT Architektúra – Gyakorlati munkafüzet</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-2c169b83e1fc2996b25bcc8774810429.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">IT Architektúra – Gyakorlati munkafüzet</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../utemterv.html"> 
+<span class="menu-text">Féléves ütemterv és értékelés</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Kezdőlap</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week01/index.html"> 
+<span class="menu-text">1. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week02/index.html"> 
+<span class="menu-text">2. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week03/index.html"> 
+<span class="menu-text">3. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week04/index.html"> 
+<span class="menu-text">4. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week05/index.html"> 
+<span class="menu-text">5. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week06/index.html"> 
+<span class="menu-text">6. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../hf01/index.html"> 
+<span class="menu-text">HF01</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week07/index.html"> 
+<span class="menu-text">7. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week08/index.html"> 
+<span class="menu-text">8. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../../weeks/week09/index.html" aria-current="page"> 
+<span class="menu-text">9. hét</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a-gyakorlat-célja-egy-működő-cicd-pipeline" id="toc-a-gyakorlat-célja-egy-működő-cicd-pipeline" class="nav-link active" data-scroll-target="#a-gyakorlat-célja-egy-működő-cicd-pipeline">A gyakorlat célja – egy működő CI/CD pipeline</a></li>
+  <li><a href="#i.-projekt-és-helyi-docker-konténer" id="toc-i.-projekt-és-helyi-docker-konténer" class="nav-link" data-scroll-target="#i.-projekt-és-helyi-docker-konténer">I. Projekt és helyi Docker-konténer</a>
+  <ul class="collapse">
+  <li><a href="#előkészítés-és-azonosítók" id="toc-előkészítés-és-azonosítók" class="nav-link" data-scroll-target="#előkészítés-és-azonosítók">1. Előkészítés és azonosítók</a></li>
+  <li><a href="#nginx-weboldal-és-dockerfile" id="toc-nginx-weboldal-és-dockerfile" class="nav-link" data-scroll-target="#nginx-weboldal-és-dockerfile">2. Nginx weboldal és Dockerfile</a></li>
+  <li><a href="#git-inicializálása-és-első-push" id="toc-git-inicializálása-és-első-push" class="nav-link" data-scroll-target="#git-inicializálása-és-első-push">3. Git inicializálása és első push</a></li>
+  <li><a href="#docker-image-építése" id="toc-docker-image-építése" class="nav-link" data-scroll-target="#docker-image-építése">4. Docker-image építése</a></li>
+  <li><a href="#helyi-konténerteszt" id="toc-helyi-konténerteszt" class="nav-link" data-scroll-target="#helyi-konténerteszt">5. Helyi konténerteszt</a></li>
+  </ul></li>
+  <li><a href="#ii.-docker-hub-és-azure-container-apps" id="toc-ii.-docker-hub-és-azure-container-apps" class="nav-link" data-scroll-target="#ii.-docker-hub-és-azure-container-apps">II. Docker Hub és Azure Container Apps</a>
+  <ul class="collapse">
+  <li><a href="#docker-hub-image-publikálása" id="toc-docker-hub-image-publikálása" class="nav-link" data-scroll-target="#docker-hub-image-publikálása">6. Docker Hub image publikálása</a></li>
+  <li><a href="#azure-erőforráscsoport" id="toc-azure-erőforráscsoport" class="nav-link" data-scroll-target="#azure-erőforráscsoport">7. Azure erőforráscsoport</a></li>
+  <li><a href="#workload-profiles-környezet-létrehozása" id="toc-workload-profiles-környezet-létrehozása" class="nav-link" data-scroll-target="#workload-profiles-környezet-létrehozása">8. Workload Profiles környezet létrehozása</a></li>
+  <li><a href="#nginx-container-app-létrehozása" id="toc-nginx-container-app-létrehozása" class="nav-link" data-scroll-target="#nginx-container-app-létrehozása">9. Nginx Container App létrehozása</a></li>
+  <li><a href="#https-url-és-futó-revision-ellenőrzése" id="toc-https-url-és-futó-revision-ellenőrzése" class="nav-link" data-scroll-target="#https-url-és-futó-revision-ellenőrzése">10. HTTPS URL és futó revision ellenőrzése</a></li>
+  </ul></li>
+  <li><a href="#iii.-github-actions-automatizált-cicd" id="toc-iii.-github-actions-automatizált-cicd" class="nav-link" data-scroll-target="#iii.-github-actions-automatizált-cicd">III. GitHub Actions – automatizált CI/CD</a>
+  <ul class="collapse">
+  <li><a href="#github-actions-build-és-teszt" id="toc-github-actions-build-és-teszt" class="nav-link" data-scroll-target="#github-actions-build-és-teszt">11. GitHub Actions: build és teszt</a></li>
+  <li><a href="#automatikus-docker-hub-publikálás" id="toc-automatikus-docker-hub-publikálás" class="nav-link" data-scroll-target="#automatikus-docker-hub-publikálás">12. Automatikus Docker Hub-publikálás</a></li>
+  <li><a href="#github-és-azure-összekapcsolása" id="toc-github-és-azure-összekapcsolása" class="nav-link" data-scroll-target="#github-és-azure-összekapcsolása">13. GitHub és Azure összekapcsolása</a></li>
+  <li><a href="#automatikus-azure-deployment-és-version-2" id="toc-automatikus-azure-deployment-és-version-2" class="nav-link" data-scroll-target="#automatikus-azure-deployment-és-version-2">14. Automatikus Azure-deployment és Version 2</a></li>
+  </ul></li>
+  <li><a href="#iv.-ellenőrzés-és-takarítás" id="toc-iv.-ellenőrzés-és-takarítás" class="nav-link" data-scroll-target="#iv.-ellenőrzés-és-takarítás">IV. Ellenőrzés és takarítás</a>
+  <ul class="collapse">
+  <li><a href="#revision-bizonyítékok-és-azure-erőforrások-törlése" id="toc-revision-bizonyítékok-és-azure-erőforrások-törlése" class="nav-link" data-scroll-target="#revision-bizonyítékok-és-azure-erőforrások-törlése">15. Revision, bizonyítékok és Azure-erőforrások törlése</a></li>
+  </ul></li>
+  <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">9. hét – DevOps, CI/CD, GitHub Actions és Azure Container Apps</h1>
+<p class="subtitle lead">15 feladat · Debian VM / GitHub / Docker Hub / Azure Portal</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Munkakörnyezet és beadás
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Órai idő: 90 perc.</strong> A be nem fejezett feladatok otthon folytathatók. A munkafüzetben 15 egymásra épülő feladat található. A válaszmezők automatikusan mentődnek ebben a böngészőben; a lap alján <strong>Beadás</strong> és <strong>JSON export</strong> érhető el. Képernyőkép nem szükséges. <strong>Jelszót, hozzáférési tokent, privát kulcsot és GitHub Secret-értéket soha ne másolj a válaszmezőkbe!</strong> <strong>Beadási határidő: 2026. november 26. (csütörtök), 11:40 (magyar idő).</strong></p>
+</div>
+</div>
+<p><strong>Neptun-kód (kötelező, 6 karakter):</strong> <input id="neptun" data-answer="STUDENT_ID" maxlength="6" pattern="[A-Za-z0-9]{6}" required="" placeholder="ABC123"></p>
+<section id="a-gyakorlat-célja-egy-működő-cicd-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="a-gyakorlat-célja-egy-működő-cicd-pipeline">A gyakorlat célja – egy működő CI/CD pipeline</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="cicd-attekintes.png" class="img-fluid figure-img" style="width:100.0%" alt="CI/CD folyamatábra: forráskód, automatikus build és teszt, konténerkép publikálása, Azure Container Apps telepítés"></p>
+<figcaption>A létrehozandó CI/CD pipeline áttekintése: Debian VM → GitHub → GitHub Actions → Docker Hub → Azure Container Apps.</figcaption>
+</figure>
+</div>
+<p><strong>A feladat végére:</strong> a Debian VM-en módosított <code>index.html</code> fájl <code>git push</code> után automatikusan új Docker-image-ként publikálódik, majd frissül az Azure Container Apps webalkalmazás. Az ábrán szereplő felhasználó- és erőforrásnevek <strong>példák</strong>: mindenki a saját GitHub- és Docker Hub-fiókját használja.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>CI és CD röviden
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong>CI (Continuous Integration):</strong> a kódváltozás automatikus ellenőrzése, buildelése és tesztelése. <strong>CD (Continuous Deployment):</strong> a sikeres ellenőrzés után a működő alkalmazás automatikus frissítése. A gyakorlatban a GitHub Actions végzi a munkát; a Debian VM csak a fejlesztés helyszíne.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="i.-projekt-és-helyi-docker-konténer" class="level2">
+<h2 class="anchored" data-anchor-id="i.-projekt-és-helyi-docker-konténer">I. Projekt és helyi Docker-konténer</h2>
+<section id="előkészítés-és-azonosítók" class="level3">
+<h3 class="anchored" data-anchor-id="előkészítés-és-azonosítók">1. Előkészítés és azonosítók</h3>
+<p><strong>Platform:</strong> Debian VM – SSH terminál; GitHub és Docker Hub böngésző.</p>
+<p>Ellenőrizd a Git és Docker elérhetőségét. Hozz létre <strong>új, üres</strong> <code>aca-nginx-lab</code> nevű GitHub-repositoryt (README és licenc nélkül). Jegyezd fel a saját Docker Hub-felhasználónevedet.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">--version</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> <span class="at">--version</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> info <span class="at">--format</span> <span class="st">'{{.ServerVersion}}'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Ha a Docker socket hozzáférése tiltott
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ha <code>permission denied ... /var/run/docker.sock</code> jelenik meg, ellenőrzésként használd a <code>sudo docker info</code> parancsot. Tartós megoldásként a rendszergazda a felhasználót a <code>docker</code> csoportba veheti; a csoporttagság root-szintű jogosultsággal jár. Ne változtass jogosultságot ellenőrzés nélkül.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q01result"><strong>Válasz – A GitHub-repository URL-je, Git/Docker verzió és Docker Hub-felhasználónév.</strong></label>
+<textarea id="q01result" data-answer="Q01_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="nginx-weboldal-és-dockerfile" class="level3">
+<h3 class="anchored" data-anchor-id="nginx-weboldal-és-dockerfile">2. Nginx weboldal és Dockerfile</h3>
+<p><strong>Platform:</strong> Debian VM – Bash, nano vagy jed.</p>
+<p>Hozd létre a projektet, majd az alábbi két fájlt. A <code>Version: 1</code> feliratot később módosítjuk.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ~/aca-nginx-lab</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/aca-nginx-lab</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong><code>index.html</code></strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode html code-with-copy"><code class="sourceCode html"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;!doctype</span> html<span class="dt">&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span><span class="ot"> lang</span><span class="op">=</span><span class="st">"en"</span><span class="dt">&gt;&lt;</span><span class="kw">head</span><span class="dt">&gt;&lt;</span><span class="kw">meta</span><span class="ot"> charset</span><span class="op">=</span><span class="st">"utf-8"</span><span class="dt">&gt;&lt;</span><span class="kw">title</span><span class="dt">&gt;</span>ACA Lab<span class="dt">&lt;/</span><span class="kw">title</span><span class="dt">&gt;&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Azure Container Apps Lab<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Version: 1<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>Deployed from a Docker container.<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;&lt;/</span><span class="kw">body</span><span class="dt">&gt;&lt;/</span><span class="kw">html</span><span class="dt">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong><code>Dockerfile</code></strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode dockerfile code-with-copy"><code class="sourceCode dockerfile"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> nginx:alpine</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">COPY</span> index.html /usr/share/nginx/html/index.html</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">EXPOSE</span> 80</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Ellenőrzés: <code>ls -l</code> és <code>cat Dockerfile</code>.</p>
+<div class="lab-answer">
+<label for="q02result"><strong>Válasz – A két fájl tartalma vagy a létrehozásukhoz használt parancsok.</strong></label>
+<textarea id="q02result" data-answer="Q02_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="git-inicializálása-és-első-push" class="level3">
+<h3 class="anchored" data-anchor-id="git-inicializálása-és-első-push">3. Git inicializálása és első push</h3>
+<p><strong>Platform:</strong> Debian VM – Git; GitHub webes felület.</p>
+<p>Inicializáld a repositoryt, készíts első commitot, majd állítsd be a <strong>saját</strong> GitHub-repositorydat remote-ként.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/aca-nginx-lab</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> init <span class="at">-b</span> main</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add index.html Dockerfile</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Initial Nginx app"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> remote add origin https://github.com/GITHUB_USER/aca-nginx-lab.git</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">-u</span> origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A <code>GITHUB_USER</code> helyére saját GitHub-felhasználónevedet írd. Ellenőrizd a fájlokat a GitHub <strong>Code</strong> fülén.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Ha a push nem sikerül
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>Repository not found</code>: ellenőrizd, hogy a GitHubon létrejött-e a repository, és a <code>git remote -v</code> helyes URL-t mutat-e. <code>fetch first</code>: ha a távoli ágon új commit jelent meg, előbb <code>git pull --rebase origin main</code>, majd <code>git push origin main</code>. <strong>Ne használj <code>--force</code> kapcsolót.</strong></p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q03result"><strong>Válasz – A <code>git remote -v</code>, <code>git log --oneline</code> és a push lényegi eredménye.</strong></label>
+<textarea id="q03result" data-answer="Q03_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="docker-image-építése" class="level3">
+<h3 class="anchored" data-anchor-id="docker-image-építése">4. Docker-image építése</h3>
+<p><strong>Platform:</strong> Debian VM – Docker CLI.</p>
+<p>Építsd fel a képet a saját Dockerfile-ból:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/aca-nginx-lab</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> aca-nginx:v1 .</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> image ls aca-nginx</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Ellenőrzés:</strong> szerepeljen az <code>aca-nginx</code> image <code>v1</code> taggel.</p>
+<div class="lab-answer">
+<label for="q04result"><strong>Válasz – A build parancsa és az image-lista releváns sora.</strong></label>
+<textarea id="q04result" data-answer="Q04_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="helyi-konténerteszt" class="level3">
+<h3 class="anchored" data-anchor-id="helyi-konténerteszt">5. Helyi konténerteszt</h3>
+<p><strong>Platform:</strong> Debian VM – Docker CLI, curl.</p>
+<p>Indítsd el a konténert, majd ellenőrizd a HTTP-választ és az oldalt:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-d</span> <span class="at">--name</span> aca-nginx-test <span class="at">-p</span> 8080:80 aca-nginx:v1</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-I</span> http://localhost:8080</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> http://localhost:8080 <span class="kw">|</span> <span class="fu">grep</span> <span class="st">'Version:'</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> ps <span class="at">--filter</span> name=aca-nginx-test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Az ellenőrzés után állítsd le és töröld a tesztkonténert:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> rm <span class="at">-f</span> aca-nginx-test</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Ha a 8080-as port foglalt
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Válassz másik szabad <strong>hostportot</strong>, például <code>-p 8081:80</code>, és a <code>curl</code> parancsban is ezt használd. A konténeren belüli Nginx-port továbbra is <code>80</code>.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q05result"><strong>Válasz – A <code>curl</code> HTTP-státusza, a Version-sor és a konténer állapota.</strong></label>
+<textarea id="q05result" data-answer="Q05_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+</section>
+<section id="ii.-docker-hub-és-azure-container-apps" class="level2">
+<h2 class="anchored" data-anchor-id="ii.-docker-hub-és-azure-container-apps">II. Docker Hub és Azure Container Apps</h2>
+<section id="docker-hub-image-publikálása" class="level3">
+<h3 class="anchored" data-anchor-id="docker-hub-image-publikálása">6. Docker Hub image publikálása</h3>
+<p><strong>Platform:</strong> Docker Hub webes felület; Debian VM – Docker CLI.</p>
+<p>A Docker Hubon hozz létre egy <strong>public</strong> <code>aca-nginx-lab</code> repositoryt. A saját felhasználóneveddel taggeld és publikáld az image-et:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> login <span class="at">--username</span> DOCKERHUB_USER</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> tag aca-nginx:v1 DOCKERHUB_USER/aca-nginx-lab:v1</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> push DOCKERHUB_USER/aca-nginx-lab:v1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A jelszóbekérésnél Docker Hub <strong>Personal Access Token</strong> használható. A tokent <strong>ne írd a parancsba vagy a munkafüzetbe</strong>. A böngészőben ellenőrizd a <code>v1</code> taget.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Docker Hub token és jogosultság
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A tokent a Docker Hub biztonsági beállításainál lehet létrehozni; a teljes érték csak létrehozáskor másolható ki. A GitHub Actionshez később külön token is használható. A tokent kizárólag jelszómezőbe vagy GitHub Secretbe írd.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q06result"><strong>Válasz – A publikus image neve (<code>DOCKERHUB_USER/aca-nginx-lab:v1</code>) és a push eredménye.</strong></label>
+<textarea id="q06result" data-answer="Q06_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="azure-erőforráscsoport" class="level3">
+<h3 class="anchored" data-anchor-id="azure-erőforráscsoport">7. Azure erőforráscsoport</h3>
+<p><strong>Platform:</strong> Azure Portal – grafikus felület.</p>
+<p>Az Azure Portalon válaszd az <strong>Azure for Students</strong> előfizetést, és hozz létre egy külön erőforráscsoportot, például <code>rg-aca-lab-ABC123</code> néven (a saját Neptun-kódoddal). Régió: <strong>North Europe</strong>. A későbbi összes erőforrást ebben a csoportban hozd létre.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Költségek
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Az Azure for Students keret nem korlátlan. Ne hozz létre dedikált workload profilt, és a feladatok végén töröld a <strong>csak ehhez a laborhoz használt</strong> erőforráscsoportot.</p>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q07result"><strong>Válasz – Az előfizetés neve, az erőforráscsoport neve és a régió.</strong></label>
+<textarea id="q07result" data-answer="Q07_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="workload-profiles-környezet-létrehozása" class="level3">
+<h3 class="anchored" data-anchor-id="workload-profiles-környezet-létrehozása">8. Workload Profiles környezet létrehozása</h3>
+<p><strong>Platform:</strong> Azure Portal – grafikus felület.</p>
+<p>A <strong>Container Apps → Create</strong> felületen hozz létre új Container Apps-környezetet (például <code>aca-lab-standard-ABC123</code>). A környezet beállításainál:</p>
+<ul>
+<li><strong>Workload Profiles / Tevékenységprofilok</strong> típusú környezetet használj, ne Expresst.</li>
+<li>A beépített <strong>Consumption</strong> profil maradjon; <strong>dedikált profilt ne adj hozzá</strong>.</li>
+<li>Zónaredundancia: kikapcsolva; külön VNet nem szükséges.</li>
+<li>Monitorozás: <code>None</code>, ha elérhető.</li>
+</ul>
+<p><strong>Ellenőrzés:</strong> a Container Apps listában a környezet típusa <strong>Tevékenységprofilok / Workload Profiles</strong> legyen.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Alternatíva: környezet létrehozása kész Azure CLI-paranccsal
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ha a Portal ismét Express környezetet hoz létre, a következő <strong>opcionális</strong> parancsblokkot használhatod, ha az Azure CLI telepítve van és be vagy jelentkezve. A neveket cseréld a saját értékeidre:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">az</span> containerapp env create <span class="dt">\</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--name</span> aca-lab-standard-ABC123 <span class="dt">\</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--resource-group</span> rg-aca-lab-ABC123 <span class="dt">\</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">--location</span> northeurope <span class="dt">\</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">--environment-mode</span> WorkloadProfiles <span class="dt">\</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--enable-workload-profiles</span> true <span class="dt">\</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--logs-destination</span> none</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>A környezet típusát a Portalon ellenőrizd. Ez <strong>nem</strong> kötelező Azure CLI-feladat.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q08result"><strong>Válasz – A környezet neve és a Portalban látható típusa.</strong></label>
+<textarea id="q08result" data-answer="Q08_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="nginx-container-app-létrehozása" class="level3">
+<h3 class="anchored" data-anchor-id="nginx-container-app-létrehozása">9. Nginx Container App létrehozása</h3>
+<p><strong>Platform:</strong> Azure Portal – Container Apps létrehozási varázsló.</p>
+<p>Hozz létre új Container Appot a <strong>8. feladat Workload Profiles környezetében</strong>. Javasolt név: <code>aca-nginx-standard-ABC123</code>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Beállítás</th>
+<th>Érték</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Image</td>
+<td><code>docker.io/DOCKERHUB_USER/aca-nginx-lab:v1</code></td>
+</tr>
+<tr class="even">
+<td>Workload profile</td>
+<td><code>Consumption</code></td>
+</tr>
+<tr class="odd">
+<td>CPU / memória</td>
+<td><code>0.25 vCPU</code> / <code>0.5 GiB</code></td>
+</tr>
+<tr class="even">
+<td>Minimum / maximum replica</td>
+<td><code>0</code> / <code>1</code></td>
+</tr>
+<tr class="odd">
+<td>Bejövő forgalom (Ingress)</td>
+<td>Engedélyezett, <strong>külső</strong>, HTTP</td>
+</tr>
+<tr class="even">
+<td>Célport (Target port)</td>
+<td><code>80</code></td>
+</tr>
+</tbody>
+</table>
+<p>A Docker Hub-repository publikus, ezért az image lehúzásához nem kell registry-jelszó. <strong>Ne keverd össze a konténer 80-as célportját a host gép 8080-as tesztportjával.</strong></p>
+<div class="lab-answer">
+<label for="q09result"><strong>Válasz – Az alkalmazás neve, az image pontos neve és az ingress-beállítások.</strong></label>
+<textarea id="q09result" data-answer="Q09_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="https-url-és-futó-revision-ellenőrzése" class="level3">
+<h3 class="anchored" data-anchor-id="https-url-és-futó-revision-ellenőrzése">10. HTTPS URL és futó revision ellenőrzése</h3>
+<p><strong>Platform:</strong> Azure Portal és böngésző.</p>
+<p>Az alkalmazás <strong>Áttekintés</strong> oldalán nyisd meg az automatikusan kapott HTTPS URL-t. A weboldalon a <code>Version: 1</code> feliratot kell látnod. Nyisd meg az <strong>Alkalmazás → Változatok és replikák</strong> nézetet, és azonosítsd az aktív revisiont.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Ha az oldal nem érhető el
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ellenőrizd, hogy a bejövő forgalom külső, a célport <code>80</code>, a container image neve és tagje helyes, valamint a revision fut-e. A skálázás miatt a <code>min replicas = 0</code> beállításnál az első kérés lassabb lehet.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q10result"><strong>Válasz – A HTTPS URL, a megjelenő verzió és az aktív revision neve.</strong></label>
+<textarea id="q10result" data-answer="Q10_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+</section>
+<section id="iii.-github-actions-automatizált-cicd" class="level2">
+<h2 class="anchored" data-anchor-id="iii.-github-actions-automatizált-cicd">III. GitHub Actions – automatizált CI/CD</h2>
+<section id="github-actions-build-és-teszt" class="level3">
+<h3 class="anchored" data-anchor-id="github-actions-build-és-teszt">11. GitHub Actions: build és teszt</h3>
+<p><strong>Platform:</strong> GitHub – repository és Actions; Debian VM – Git.</p>
+<p>A repositoryban hozd létre a <code>.github/workflows/ci.yml</code> fájlt. Az alábbi workflow minden <code>main</code> ágra történő push után felépíti az image-et, elindítja, majd ellenőrzi a weboldalt.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> Build and test Nginx</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">push</span><span class="kw">:</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">branches</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">main</span><span class="kw">]</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">jobs</span><span class="kw">:</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">test</span><span class="kw">:</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">runs-on</span><span class="kw">:</span><span class="at"> ubuntu-latest</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">steps</span><span class="kw">:</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> actions/checkout@v4</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Build image</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">run</span><span class="kw">:</span><span class="at"> docker build -t aca-nginx:ci .</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Run and test</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>          docker run -d --name web -p 8080:80 aca-nginx:ci</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>          for i in 1 2 3 4 5; do</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>            curl --fail http://localhost:8080 &amp;&amp; exit 0</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>            sleep 2</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>          done</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>          exit 1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Commitold a fájlt, majd az <strong>Actions</strong> fülön ellenőrizd a futást. Ez még csak CI; a Docker Hub-publikálás és az Azure-deployment a következő feladatokban következik.</p>
+<div class="lab-answer">
+<label for="q11result"><strong>Válasz – A workflow neve, a commit azonosítója és a sikeres futás állapota.</strong></label>
+<textarea id="q11result" data-answer="Q11_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="automatikus-docker-hub-publikálás" class="level3">
+<h3 class="anchored" data-anchor-id="automatikus-docker-hub-publikálás">12. Automatikus Docker Hub-publikálás</h3>
+<p><strong>Platform:</strong> GitHub – Settings → Secrets and variables → Actions.</p>
+<p>Hozz létre két repository secretet: <code>DOCKERHUB_USERNAME</code> és <code>DOCKERHUB_TOKEN</code>. A tokennek legyen megfelelő írási jogosultsága a saját repositoryhoz. A <code>ci.yml</code> workflow <strong>test</strong> jobjának végére illeszd a következő lépéseket (azonos behúzási szinten, mint a korábbi <code>- name</code> lépések):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Docker Hub login</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> docker/login-action@v3</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">username</span><span class="kw">:</span><span class="at"> ${{ secrets.DOCKERHUB_USERNAME }}</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">password</span><span class="kw">:</span><span class="at"> ${{ secrets.DOCKERHUB_TOKEN }}</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Build and push versioned image</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="fu">        run</span><span class="kw">: </span><span class="ch">|</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/aca-nginx-lab:${{ github.sha }} .</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>          docker push ${{ secrets.DOCKERHUB_USERNAME }}/aca-nginx-lab:${{ github.sha }}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Commit után ellenőrizd, hogy a Docker Hubon megjelent-e az új, <strong>commit SHA-val címkézett</strong> image.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Miért használunk commit SHA-t tagként?
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A SHA-val címkézett image egy konkrét forráskód-állapothoz kapcsolódik. Ez átláthatóbb, mint egy folyamatosan felülírt <code>latest</code> tag.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q12result"><strong>Válasz – A GitHub Actions futás eredménye és a Docker Hub image-tag (token nélkül).</strong></label>
+<textarea id="q12result" data-answer="Q12_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="github-és-azure-összekapcsolása" class="level3">
+<h3 class="anchored" data-anchor-id="github-és-azure-összekapcsolása">13. GitHub és Azure összekapcsolása</h3>
+<p><strong>Platform:</strong> Azure Portal – Container App → Üzembe helyezés.</p>
+<p>Nyisd meg a <strong>9. feladatban létrehozott</strong> Container Appot, majd az <strong>Üzembe helyezés → Folyamatos üzembe helyezés</strong> oldalt. Válaszd ki a saját GitHub-repositorydat és a <code>main</code> ágat. Registry: <strong>Docker Hub vagy más registry</strong>; add meg a saját image-nevet és a Docker Hub-hozzáférést. Azure-hozzáférésnél válaszd a <strong>felhasználó által hozzárendelt identitást</strong>, ha a Portal felajánlja. Indítsd el az integrációt.</p>
+<p>A Portal létrehozhat egy <strong>új GitHub Actions workflow-t</strong> és hozzá kapcsolódó titkokat. Az új YAML-t a következő feladatban ellenőrizzük.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Ha a jogosultságok nem elegendők
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Az Azure-integráció létrehozása managed identity, federált hitelesítés és szerepkör-hozzárendelés műveleteket igényelhet. Ha az egyetemi előfizetésben ezek tiltottak, <strong>ne kérj vagy ossz meg rendszergazdai hitelesítő adatot</strong>. Rögzítsd a hiba rövid leírását, és kérj oktatói segítséget.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q13result"><strong>Válasz – A kapcsolt GitHub-repository/branch és a létrejött workflow fájlneve; a művelet eredménye.</strong></label>
+<textarea id="q13result" data-answer="Q13_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="automatikus-azure-deployment-és-version-2" class="level3">
+<h3 class="anchored" data-anchor-id="automatikus-azure-deployment-és-version-2">14. Automatikus Azure-deployment és Version 2</h3>
+<p><strong>Platform:</strong> GitHub Actions, Debian VM – Git; Azure Portal.</p>
+<p>Az Azure által létrehozott workflow YAML-fájljában ellenőrizd a Dockerfile-alapú buildet és a helyes Container App-nevet. A működő deploy lépés lényege:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Build and deploy container</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> azure/container-apps-deploy-action@v2</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">appSourcePath</span><span class="kw">:</span><span class="at"> ${{ github.workspace }}</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">dockerfilePath</span><span class="kw">:</span><span class="at"> Dockerfile</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">registryUrl</span><span class="kw">:</span><span class="at"> docker.io</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">registryUsername</span><span class="kw">:</span><span class="at"> ${{ secrets.ACANGINXSTANDARD_REGISTRY_USERNAME }}</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">registryPassword</span><span class="kw">:</span><span class="at"> ${{ secrets.ACANGINXSTANDARD_REGISTRY_PASSWORD }}</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">containerAppName</span><span class="kw">:</span><span class="at"> aca-nginx-standard-ABC123</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">resourceGroup</span><span class="kw">:</span><span class="at"> rg-aca-lab-ABC123</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="at">          </span><span class="fu">imageToBuild</span><span class="kw">:</span><span class="at"> DOCKERHUB_USER/aca-nginx-standard:${{ github.sha }}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>A fenti secretnevek és az Azure-erőforrásnevek csak minták.</strong> Tartsd meg az Azure Portal által létrehozott <code>Azure Login</code> lépést és a <strong>saját repositorydban ténylegesen létrejött</strong> secretneveket. A GitHub workflow-ban szükséges: <code>permissions: id-token: write</code> és <code>contents: read</code>. Az új deployment workflow a saját Docker Hub-repositorydban külön <code>aca-nginx-standard</code> image-et is létrehozhat.</p>
+<p>Módosítsd az <code>index.html</code> fájlban a verziót <code>2</code>-re, commitold és pushold:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-i</span> <span class="st">'s/Version: 1/Version: 2/'</span> index.html</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add index.html</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"Release version 2"</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull <span class="at">--rebase</span> origin main</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push origin main</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Az <strong>Actions</strong> fülön ellenőrizd, hogy a deploy workflow sikeresen lefutott-e, majd nyisd meg az Azure HTTPS URL-t: <code>Version: 2</code> jelenjen meg.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Ha a generált workflow hibával leáll
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><strong><code>pack failed with exit code 1</code> vagy <code>Unexpected input(s)</code></strong> esetén ellenőrizd, hogy az <code>appSourcePath</code> a <strong>projektkönyvtárra</strong>, a <code>dockerfilePath</code> pedig a <strong>Dockerfile-ra</strong> mutat:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">appSourcePath</span><span class="kw">:</span><span class="at"> ${{ github.workspace }}</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dockerfilePath</span><span class="kw">:</span><span class="at"> Dockerfile</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Távolítsd el az action által nem támogatott helyőrző paramétereket (például <code>_dockerfilePathKey_</code>, <code>_targetLabelKey_</code>, <code>_buildArgumentsKey_</code>). A beépített GitHub Actions workflow és a saját <code>ci.yml</code> egymástól külön is futhat; a későbbi optimalizálás nem része a kötelező feladatnak.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Ha a GitHub push <code>fetch first</code> hibát ad
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A Portal új commitot készíthetett a távoli <code>main</code> ágon. A helyi commit után futtasd: <code>git pull --rebase origin main</code>, majd <code>git push origin main</code>. Konfliktus esetén kérj segítséget; <strong>ne használj force push-t</strong>.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q14result"><strong>Válasz – A sikeres deployment workflow neve/futása, a HTTPS URL és a <code>Version: 2</code> eredmény.</strong></label>
+<textarea id="q14result" data-answer="Q14_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+</section>
+<section id="iv.-ellenőrzés-és-takarítás" class="level2">
+<h2 class="anchored" data-anchor-id="iv.-ellenőrzés-és-takarítás">IV. Ellenőrzés és takarítás</h2>
+<section id="revision-bizonyítékok-és-azure-erőforrások-törlése" class="level3">
+<h3 class="anchored" data-anchor-id="revision-bizonyítékok-és-azure-erőforrások-törlése">15. Revision, bizonyítékok és Azure-erőforrások törlése</h3>
+<p><strong>Platform:</strong> Azure Portal; GitHub Actions.</p>
+<p>Az <strong>Alkalmazás → Változatok és replikák</strong> nézetben jegyezd fel az új revision nevét és a hozzá tartozó image taget. <strong>Először rögzítsd a bizonyítékokat a válaszmezőben, és készíts JSON exportot / beadást.</strong></p>
+<p>Ezután az Azure Portalon nyisd meg az <strong>Erőforráscsoportok</strong> szolgáltatást, válaszd ki a <strong>csak ehhez a gyakorlathoz létrehozott</strong> <code>rg-aca-lab-ABC123</code> csoportot, ellenőrizd a benne lévő erőforrásokat, majd válaszd az <strong>Erőforráscsoport törlése</strong> műveletet. A törlés az adott csoport összes Azure-erőforrását érinti; a GitHub- és Docker Hub-tartalmakat nem törli. A GitHubon a deployment workflow-t a labor után kapcsold ki, ha a repositoryt megtartod.</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Visszafordíthatatlan művelet
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Csak akkor töröld az erőforráscsoportot, ha az <strong>nem tartalmaz más projekthez tartozó erőforrást</strong>. A korábbi fogyasztás költségeit a törlés nem vonja vissza.</p>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q15result"><strong>Válasz – Az aktív revision neve, image-tagje, HTTPS-verzió, valamint az erőforráscsoport törlésének eredménye.</strong></label>
+<textarea id="q15result" data-answer="Q15_RESULT" rows="6" placeholder="Parancsok, releváns kimenetek, URL-ek vagy rövid válasz..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<hr>
+<p><strong>Beadás:</strong> a válaszmezők kitöltése után ellenőrizd az eredményeket, és használd a <strong>Beadás</strong> gombot. Tartalék megoldásként <strong>JSON export</strong> készíthető. A labor végén a külön létrehozott Azure-erőforráscsoportot töröld.</p>
+<style>
+.lab-answer {display:flex;flex-direction:column;gap:.45rem;margin:1rem 0 1.5rem}
+.lab-answer input,.lab-answer textarea {width:100%;max-width:100%;padding:.65rem;border:1px solid #9ca3af;border-radius:5px;font:inherit}
+.lab-answer textarea {min-height:6rem;resize:vertical}
+.lab-answer button {align-self:flex-start}
+.lab-feedback.ok {color:#176b36}.lab-feedback.warn {color:#a45c00}
+</style>
+</section>
+</section>
+<section id="mentés-és-beadás" class="level2">
+<h2 class="anchored" data-anchor-id="mentés-és-beadás">Mentés és beadás</h2>
+<p>A válaszok automatikusan mentődnek ebben a böngészőben. A szerveres beadást az oktató a közzététel előtt ellenőrzi a 9. heti feladatokhoz. A beadás előtt ellenőrizd a Neptun-kódot és a kitöltött mezőket. A formai ellenőrzés nem helyettesíti a parancsok tényleges futtatását.</p>
+<div class="actions">
+<button id="submit-button" type="button" onclick="openSubmissionSummary()">
+📤 Beadás
+</button>
+<button type="button" onclick="exportSubmissionJson()">
+💾 JSON export
+</button>
+<button type="button" onclick="clearAnswers()">
+Helyi adatok törlése
+</button>
+<p><span id="save-status" role="status"></span></p>
+</div>
+<p id="submission-deadline-note">
+<strong>Beadási határidő:</strong> 2026. november 26., 11:40 (magyar idő).
+</p>
+<div id="submission-summary" class="submission-summary" hidden="">
+<h3 class="anchored">
+Beadás előtti összesítés
+</h3>
+<div id="submission-summary-body">
+
+</div>
+<div class="actions">
+<button type="button" onclick="closeSubmissionSummary()">
+Vissza a javításhoz
+</button>
+<button id="confirm-submit-button" type="button" onclick="confirmSubmission()">
+Beadás megerősítése
+</button>
+</div>
+</div>
+<div id="submission-result" role="status" aria-live="polite">
+
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Aktivitási adatok">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Aktivitási adatok
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Az időmérés és az eseménykövetés a projekt <code>config/setup.js</code> fájljából konfigurálható. Az SSH-terminálban végzett munka nem feltétlenül számít böngészőbeli aktív időnek.</p>
+</div>
+</div>
+<div id="tracking-panel" class="submission-summary">
+<strong>Aktivitás ezen a gépen</strong>
+<p>
+Időmérés: <span id="tracking-time-status">–</span> · Eseménykövetés: <span id="tracking-event-status">–</span>
+</p>
+<p>
+Becsült aktív idő: <span id="activity-active-time">0:00</span> · Szerkesztések: <span id="activity-edit-count">0</span>
+</p>
+<p>
+Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: <span id="activity-last">–</span>
+</p>
+</div>
+<style>
+.actions {display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;margin:1rem 0}
+.actions button {padding:.55rem .9rem;border:1px solid #77808a;border-radius:6px;background:#fff;cursor:pointer}
+.actions button:disabled {opacity:.5;cursor:not-allowed}
+.submission-summary {border:1px solid #c8d0d8;border-radius:9px;padding:1rem;margin:1rem 0;background:#fafbfc}
+.submission-summary[hidden] {display:none}
+#submission-result {margin:1rem 0}
+</style>
+<script src="../../config/setup.js"></script>
+<script>
+(function(){
+  const patterns={
+    task:/[\s\S]{12,}/,
+    ssh:/\b(ssh|whoami|hostname|pwd)\b/i, csv:/[;]|\b(cut|awk|grep|tail)\b/i,
+    bash:/\b(while|for|read|mkdir|cp|bash|chmod|jed)\b/i,
+    diff:/\bdiff\b|---|\+\+\+/i,
+    git:/\bgit\s+(init|status|add|commit|log|diff|branch|switch|merge|remote|push|fetch|pull|config)\b/i,
+    github:/github\.com|gh auth|https/i,
+    vscode:/Source Control|Remote.SSH|VS Code|stage|commit|sync/i
+  };
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('.lab-check'); if(!b)return;
+    const wrap=b.closest('.lab-answer'), field=wrap?.querySelector('input,textarea');
+    const feedback=wrap?.querySelector('.lab-feedback'); if(!field||!feedback)return;
+    const v=field.value.trim(),type=b.dataset.check,p=patterns[type]||/\S{12}/;
+    const ok=type==='sha'?/^[0-9a-fA-F]{7,12}$/.test(v):type==='repo-url'?/^https:\/\/github\.com\/[A-Za-z0-9-]+\/[A-Za-z0-9._-]+\/?$/.test(v):v.length>=8&&p.test(v);
+    feedback.textContent=ok?'A válasz formátuma megfelelőnek tűnik. A tényleges végrehajtást ez nem igazolja.':(type==='sha'?'Adj meg 7–12 hexadecimális karaktert.':type==='repo-url'?'Adj meg teljes GitHub-repository URL-t.':'Egészítsd ki a feladatban kért parancsokkal és kimenetekkel.');
+    feedback.className='lab-feedback '+(ok?'ok':'warn');
+  });
+})();
+</script>
+<p>```</p>
+<script>
+(() => {
+  'use strict';
+  const CONFIG = Object.assign({timeTracking:false,eventTracking:false,showTrackingPanel:false},window.ITARCH_SETUP||{});
+  const STORAGE_KEY = 'itarch_week09_answers_2026';
+  const STARTERS = {};
+
+  // Beadási határidő: 2026. november 26. 11:40, Europe/Budapest (CET, UTC+01:00).
+  const SUBMISSION_DEADLINE_ISO = '2026-11-26T11:40:00+01:00';
+  const ENDPOINT = 'https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/submit';
+  const $ = id => document.getElementById(id);
+  const fields = () => [...document.querySelectorAll('[data-answer]')];
+  const studentId = () => ($('neptun')?.value||'').trim().toUpperCase();
+  const validId = () => /^[A-Z0-9]{6}$/.test(studentId());
+  const nowIso = () => new Date().toISOString();
+  const deadline = SUBMISSION_DEADLINE_ISO ? new Date(SUBMISSION_DEADLINE_ISO) : null;
+  const closed = () => deadline && !isNaN(deadline.getTime()) && Date.now() > deadline.getTime();
+  const started = nowIso();
+  let activity = {started_at:started,last_activity_at:started,active_seconds_estimate:0,edit_count:0,events:[]};
+  let lastInteraction = Date.now();
+  const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const logEvent = (type) => {if(CONFIG.eventTracking) activity.events.push({type,at:nowIso()});};
+  const answers = () => Object.fromEntries(fields().filter(f=>f.dataset.answer!=='STUDENT_ID').map(f=>[f.dataset.answer,f.value]));
+  const save = (message=false) => {
+    activity.last_activity_at=nowIso();
+    try {localStorage.setItem(STORAGE_KEY,JSON.stringify({student_id:studentId(),answers:answers(),activity}));
+      if(message) $('save-status').textContent='✓ Helyi mentés kész';
+    } catch(e) {if(message) $('save-status').textContent='⚠ Helyi mentés nem érhető el';}
+  };
+  const load = () => {
+    try {const stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null'); if(!stored)return;
+      if(stored.student_id) $('neptun').value=stored.student_id;
+      fields().forEach(f=>{if(f.dataset.answer!=='STUDENT_ID' && Object.hasOwn(stored.answers||{},f.dataset.answer) && String(stored.answers[f.dataset.answer]??'').trim())f.value=stored.answers[f.dataset.answer]});
+      if(stored.activity)activity=Object.assign(activity,stored.activity);
+    }catch(e){}
+  };
+  const renderActivity = () => {
+    $('tracking-panel').hidden=!CONFIG.showTrackingPanel;
+    $('tracking-time-status').textContent=CONFIG.timeTracking?'bekapcsolva':'kikapcsolva';
+    $('tracking-event-status').textContent=CONFIG.eventTracking?'bekapcsolva':'kikapcsolva';
+    const sec=activity.active_seconds_estimate||0;
+    $('activity-active-time').textContent=`${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;
+    $('activity-edit-count').textContent=activity.edit_count||0;
+    $('activity-started').textContent=activity.started_at||'–';
+    $('activity-last').textContent=activity.last_activity_at||'–';
+  };
+  const refreshDeadline = () => {
+    const isClosed=closed();
+    $('submit-button').hidden=!!isClosed;
+    if($('confirm-submit-button'))$('confirm-submit-button').disabled=!!isClosed||!validId();
+    $('submission-deadline-note').textContent=deadline && !isNaN(deadline.getTime())
+      ? `Beadási határidő: ${deadline.toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})} (magyar idő)${isClosed?' – lejárt':''}`
+      : 'Beadási határidő: még nincs beállítva a munkafüzetben.';
+  };
+  const payload = () => ({schema_version:1,course:'ITARCH',week:9,student_id:studentId(),submitted_at:nowIso(),answers:answers(),checks:{},activity_summary:activity});
+  window.openSubmissionSummary = () => {
+    refreshDeadline();if(closed())return;
+    const fs=fields().filter(f=>f.dataset.answer!=='STUDENT_ID');
+    const missing=fs.filter(f=>!f.value.trim() || (Object.hasOwn(STARTERS,f.dataset.answer) && f.value.trim()===STARTERS[f.dataset.answer].trim()));
+    const groups=[...new Set(missing.map(f=>(f.dataset.answer.match(/^Q(\d\d)/)||[])[1]).filter(Boolean))];
+    const complete=fs.length-missing.length;
+    $('submission-summary-body').innerHTML=`<p><strong>Neptun:</strong> ${esc(studentId()||'nincs megadva')} ${validId()?'✓':'⚠ 6 betű/szám szükséges'}</p>
+      <p><strong>Kitöltött mezők:</strong> ${complete}/${fs.length} (${Math.round(100*complete/Math.max(1,fs.length))}%)</p>
+      <p><strong>Hiányos feladatok:</strong> ${groups.length?groups.map(x=>Number(x)).join(', '):'nincs'}</p>
+      ${missing.length?`<p>Összesen ${missing.length} mező üres. A beadás ettől még lehetséges, de ellenőrizd a válaszokat.</p>`:''}
+      <p>A szintaktikai ellenőrző gombok használata nem kötelező. Biztosan beadod?</p>`;
+    $('submission-summary').hidden=false;
+    $('submission-summary').scrollIntoView({behavior:'smooth',block:'start'});
+    logEvent('submission_summary_opened');save();refreshDeadline();
+  };
+  window.closeSubmissionSummary=()=>{$('submission-summary').hidden=true;};
+  const download = data => {
+    const file=`ITARCH_week09_${data.student_id}_${data.submitted_at.replace(/[:.]/g,'-')}.json`;
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'});
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=file;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  };
+  window.exportSubmissionJson=()=>{if(!validId()){$('submission-result').textContent='⚠ A JSON exporthoz 6 karakteres Neptun-kód szükséges.';return;}logEvent('submission_json_exported');save();download(payload());};
+  window.confirmSubmission=async()=>{
+    if(closed()){$('submission-result').textContent='⚠ A beadási határidő lejárt.';refreshDeadline();return;}
+    if(!validId()){$('submission-result').textContent='⚠ Adj meg érvényes, 6 karakteres Neptun-kódot.';return;}
+    const btn=$('confirm-submit-button');btn.disabled=true;
+    $('submission-result').textContent='Beadás folyamatban…';
+    try {
+      const response=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload())});
+      const result=await response.json().catch(()=>null);
+      if(!response.ok||!result||result.success!==true)throw new Error(`HTTP ${response.status}`);
+      logEvent('submission_succeeded');save();$('submission-summary').hidden=true;
+      $('submission-result').textContent=`✓ Beadás sikeres. Azonosító: ${result.submission_id||'–'}`;
+    }catch(e){logEvent('submission_failed');save();$('submission-result').textContent='⚠ A szerveres beadás nem sikerült. A helyi mentés megmaradt; próbáld újra, vagy készíts JSON exportot.';}
+    finally {btn.disabled=false;refreshDeadline();}
+  };
+  window.clearAnswers=()=>{
+    if(!confirm('Biztosan törlöd az összes helyben mentett választ és aktivitási adatot?'))return;
+    fields().forEach(f=>f.value=f.dataset.answer==='STUDENT_ID'?'':(STARTERS[f.dataset.answer]||f.defaultValue||''));
+    try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
+    activity={started_at:nowIso(),last_activity_at:nowIso(),active_seconds_estimate:0,edit_count:0,events:[]};
+    $('submission-summary').hidden=true;$('submission-result').textContent='';$('save-status').textContent='Helyi adatok törölve.';renderActivity();
+  };
+  document.addEventListener('DOMContentLoaded',()=>{
+    fields().forEach(f=>{if(Object.hasOwn(STARTERS,f.dataset.answer))f.value=STARTERS[f.dataset.answer];});
+    load();refreshDeadline();renderActivity();
+    fields().forEach(f=>{f.addEventListener('input',()=>{
+      if(f.dataset.answer==='STUDENT_ID')f.value=f.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);
+      activity.edit_count++;lastInteraction=Date.now();logEvent('answer_edited');save();renderActivity();
+    });f.addEventListener('change',()=>save());});
+    document.addEventListener('keydown',()=>lastInteraction=Date.now());
+    document.addEventListener('mousemove',()=>lastInteraction=Date.now(),{passive:true});
+    document.addEventListener('visibilitychange',()=>save());
+    window.addEventListener('beforeunload',()=>save());
+    setInterval(()=>{if(CONFIG.timeTracking&&!document.hidden&&Date.now()-lastInteraction<120000){activity.active_seconds_estimate++;if(activity.active_seconds_estimate%10===0)save();renderActivity();}},1000);
+    setInterval(refreshDeadline,30000);
+  });
+})();
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

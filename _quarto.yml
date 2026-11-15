@@ -39,7 +39,8 @@ website:
         text: 7. hét
       - href: weeks/week08/index.qmd
         text: 8. hét
-
+      - href: weeks/week09/index.qmd
+        text: 9. hét
 format:
   html:
     theme: cosmo

@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10. hét – AWS alapok és Azure–AWS megfeleltetések – IT Architektúra – Gyakorlati munkafüzet</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-2c169b83e1fc2996b25bcc8774810429.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">IT Architektúra – Gyakorlati munkafüzet</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../utemterv.html"> 
+<span class="menu-text">Féléves ütemterv és értékelés</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Kezdőlap</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week01/index.html"> 
+<span class="menu-text">1. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week02/index.html"> 
+<span class="menu-text">2. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week03/index.html"> 
+<span class="menu-text">3. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week04/index.html"> 
+<span class="menu-text">4. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week05/index.html"> 
+<span class="menu-text">5. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week06/index.html"> 
+<span class="menu-text">6. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../hf01/index.html"> 
+<span class="menu-text">HF01</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week07/index.html"> 
+<span class="menu-text">7. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week08/index.html"> 
+<span class="menu-text">8. hét</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../weeks/week09/index.html"> 
+<span class="menu-text">9. hét</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a-gyakorlat-célja" id="toc-a-gyakorlat-célja" class="nav-link active" data-scroll-target="#a-gyakorlat-célja">A gyakorlat célja</a></li>
+  <li><a href="#i.-aws-academy-előzetes-regisztráció" id="toc-i.-aws-academy-előzetes-regisztráció" class="nav-link" data-scroll-target="#i.-aws-academy-előzetes-regisztráció">I. AWS Academy – előzetes regisztráció</a>
+  <ul class="collapse">
+  <li><a href="#meghívó-elfogadása" id="toc-meghívó-elfogadása" class="nav-link" data-scroll-target="#meghívó-elfogadása">1. Meghívó elfogadása</a></li>
+  <li><a href="#kurzus-megnyitása" id="toc-kurzus-megnyitása" class="nav-link" data-scroll-target="#kurzus-megnyitása">2. Kurzus megnyitása</a></li>
+  </ul></li>
+  <li><a href="#ii.-lab-3-introduction-to-amazon-ec2-30-perc" id="toc-ii.-lab-3-introduction-to-amazon-ec2-30-perc" class="nav-link" data-scroll-target="#ii.-lab-3-introduction-to-amazon-ec2-30-perc">II. Lab 3 – Introduction to Amazon EC2 (30 perc)</a>
+  <ul class="collapse">
+  <li><a href="#ec2-létrehozása" id="toc-ec2-létrehozása" class="nav-link" data-scroll-target="#ec2-létrehozása">3. EC2 létrehozása</a></li>
+  <li><a href="#monitorozás" id="toc-monitorozás" class="nav-link" data-scroll-target="#monitorozás">4. Monitorozás</a></li>
+  <li><a href="#http-hozzáférés" id="toc-http-hozzáférés" class="nav-link" data-scroll-target="#http-hozzáférés">5. HTTP-hozzáférés</a></li>
+  <li><a href="#átméretezés-és-védelem" id="toc-átméretezés-és-védelem" class="nav-link" data-scroll-target="#átméretezés-és-védelem">6. Átméretezés és védelem</a></li>
+  <li><a href="#lab-3-beadása" id="toc-lab-3-beadása" class="nav-link" data-scroll-target="#lab-3-beadása">7. Lab 3 beadása</a></li>
+  </ul></li>
+  <li><a href="#iii.-lab-2-build-your-vpc-and-launch-a-web-server-45-perc" id="toc-iii.-lab-2-build-your-vpc-and-launch-a-web-server-45-perc" class="nav-link" data-scroll-target="#iii.-lab-2-build-your-vpc-and-launch-a-web-server-45-perc">III. Lab 2 – Build your VPC and Launch a Web Server (45 perc)</a>
+  <ul class="collapse">
+  <li><a href="#vpc-és-átjárók" id="toc-vpc-és-átjárók" class="nav-link" data-scroll-target="#vpc-és-átjárók">8. VPC és átjárók</a></li>
+  <li><a href="#további-subnetek" id="toc-további-subnetek" class="nav-link" data-scroll-target="#további-subnetek">9. További subnetek</a></li>
+  <li><a href="#útválasztás" id="toc-útválasztás" class="nav-link" data-scroll-target="#útválasztás">10. Útválasztás</a></li>
+  <li><a href="#web-security-group" id="toc-web-security-group" class="nav-link" data-scroll-target="#web-security-group">11. Web Security Group</a></li>
+  <li><a href="#web-server-1" id="toc-web-server-1" class="nav-link" data-scroll-target="#web-server-1">12. Web Server 1</a></li>
+  <li><a href="#lab-2-beadása" id="toc-lab-2-beadása" class="nav-link" data-scroll-target="#lab-2-beadása">13. Lab 2 beadása</a></li>
+  </ul></li>
+  <li><a href="#iv.-aws-cli-irányított-lekérdezések-15-perc" id="toc-iv.-aws-cli-irányított-lekérdezések-15-perc" class="nav-link" data-scroll-target="#iv.-aws-cli-irányított-lekérdezések-15-perc">IV. AWS CLI – irányított lekérdezések (15 perc)</a>
+  <ul class="collapse">
+  <li><a href="#sandbox-indítása-és-aws-cloudshell-megnyitása" id="toc-sandbox-indítása-és-aws-cloudshell-megnyitása" class="nav-link" data-scroll-target="#sandbox-indítása-és-aws-cloudshell-megnyitása">14. Sandbox indítása és AWS CloudShell megnyitása</a></li>
+  <li><a href="#aws-erőforrások-lekérdezése" id="toc-aws-erőforrások-lekérdezése" class="nav-link" data-scroll-target="#aws-erőforrások-lekérdezése">15. AWS-erőforrások lekérdezése</a></li>
+  </ul></li>
+  <li><a href="#mentés-és-beadás" id="toc-mentés-és-beadás" class="nav-link" data-scroll-target="#mentés-és-beadás">Mentés és beadás</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">10. hét – AWS alapok és Azure–AWS megfeleltetések</h1>
+<p class="subtitle lead">15 feladat · AWS Academy / EC2 / VPC / S3 / IAM / AWS CLI</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Munkakörnyezet és beadás
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Órai idő: 90 perc</strong> (regisztráció előzetesen). Kövesd az AWS Academy hivatalos laborutasításait, az erőforrásneveket pontosan tartsd be. A munkafüzetbe saját eredményeidet másold, képernyőkép nem szükséges. A válaszok helyben automatikusan mentődnek. <strong>Jelszót, access key-t, secret key-t, session tokent vagy privát kulcsot ne adj be!</strong> Beadási határidő: <strong>2026. december 3., 11:40 (magyar idő).</strong></p>
+</div>
+</div>
+<p><strong>Neptun-kód (kötelező, 6 karakter):</strong> <input id="neptun" data-answer="STUDENT_ID" maxlength="6" pattern="[A-Za-z0-9]{6}" required="" placeholder="ABC123"></p>
+<section id="a-gyakorlat-célja" class="level2">
+<h2 class="anchored" data-anchor-id="a-gyakorlat-célja">A gyakorlat célja</h2>
+<p>Az AWS infrastruktúra megismerése két irányított labor és parancssori lekérdezések segítségével. Az Azure-ban megismert fogalmak AWS-megfelelői tájékozódási segítségként:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Azure</th>
+<th>AWS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Virtual Machine</td>
+<td>EC2 instance</td>
+</tr>
+<tr class="even">
+<td>Virtual Network</td>
+<td>VPC</td>
+</tr>
+<tr class="odd">
+<td>Subnet</td>
+<td>Subnet</td>
+</tr>
+<tr class="even">
+<td>Network Security Group</td>
+<td>Security Group (közelítő megfelelő)</td>
+</tr>
+<tr class="odd">
+<td>Managed Disk</td>
+<td>EBS volume</td>
+</tr>
+<tr class="even">
+<td>Blob Storage</td>
+<td>S3</td>
+</tr>
+<tr class="odd">
+<td>Azure Monitor</td>
+<td>CloudWatch</td>
+</tr>
+<tr class="even">
+<td>Azure RBAC / Entra ID</td>
+<td>IAM (részleges funkcionális megfelelés)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="i.-aws-academy-előzetes-regisztráció" class="level2">
+<h2 class="anchored" data-anchor-id="i.-aws-academy-előzetes-regisztráció">I. AWS Academy – előzetes regisztráció</h2>
+<section id="meghívó-elfogadása" class="level3">
+<h3 class="anchored" data-anchor-id="meghívó-elfogadása">1. Meghívó elfogadása</h3>
+<p><strong>Platform:</strong> AWS Academy / email.</p>
+<p>Nyisd meg az egyetemi email-címre érkezett meghívót, fogadd el és fejezd be a regisztrációt.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Segítség és hibakeresés
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ellenőrizd a levélszemét mappát; hiányzó meghívó esetén jelezd az oktatónak.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q01result"><strong>Dokumentálandó adatok – A felületen látható saját megjelenített név és a regisztráció eredménye.</strong></label>
+<textarea id="q01result" data-answer="Q01_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="kurzus-megnyitása" class="level3">
+<h3 class="anchored" data-anchor-id="kurzus-megnyitása">2. Kurzus megnyitása</h3>
+<p><strong>Platform:</strong> AWS Academy.</p>
+<p>Jelentkezz be, nyisd meg a Cloud Foundations kurzust, keresd meg a Lab 3 és Lab 2 feladatokat.</p>
+<div class="lab-answer">
+<label for="q02result"><strong>Dokumentálandó adatok – A kurzus pontos neve és a két labor megjelenő címe.</strong></label>
+<textarea id="q02result" data-answer="Q02_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+</section>
+<section id="ii.-lab-3-introduction-to-amazon-ec2-30-perc" class="level2">
+<h2 class="anchored" data-anchor-id="ii.-lab-3-introduction-to-amazon-ec2-30-perc">II. Lab 3 – Introduction to Amazon EC2 (30 perc)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab3.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Lab 3 – saját szerkesztésű áttekintő ábra</figcaption>
+</figure>
+</div>
+<p>Indítsd el a Lab 3 környezetet (Start Lab), várd meg a zöld jelzést, majd nyisd meg az AWS konzolt. Régió: N. Virginia (us-east-1). A hivatalos labor becslése 35 perc.</p>
+<section id="ec2-létrehozása" class="level3">
+<h3 class="anchored" data-anchor-id="ec2-létrehozása">3. EC2 létrehozása</h3>
+<p><strong>Platform:</strong> EC2 Console.</p>
+<p>Végezd el a Task 1 lépéseit: Web Server, Amazon Linux 2023, t2.micro, vockey, Lab VPC, PublicSubnet1, új Web Server security group bejövő szabály nélkül, 8 GiB EBS, termination protection és a labor User Data szkriptje. Várd meg a futó állapotot.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Segítség és hibakeresés
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Explicit deny esetén ellenőrizd a régiót, a Lab VPC-t és a PublicSubnet1 kiválasztását, valamint az előírt instance type-ot. Ne próbáld megkerülni a jogosultsági korlátozást; másold a hibát és jelezd az oktatónak.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q03result"><strong>Dokumentálandó adatok – Instance ID, AMI, instance type, VPC/subnet, publikus IPv4, termination protection és státusz.</strong></label>
+<textarea id="q03result" data-answer="Q03_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="monitorozás" class="level3">
+<h3 class="anchored" data-anchor-id="monitorozás">4. Monitorozás</h3>
+<p><strong>Platform:</strong> EC2 / CloudWatch.</p>
+<p>Task 2: nyisd meg a Status checks és Monitoring lapokat, majd a Get system log és Get instance screenshot funkciókat.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Segítség és hibakeresés
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ha a log vagy metrika még nem érhető el, várj röviden, majd frissíts; dokumentáld a tényleges állapotot.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q04result"><strong>Dokumentálandó adatok – Status checks eredménye, egy látható metrika neve és értéke (ha van), a system log releváns részlete.</strong></label>
+<textarea id="q04result" data-answer="Q04_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="http-hozzáférés" class="level3">
+<h3 class="anchored" data-anchor-id="http-hozzáférés">5. HTTP-hozzáférés</h3>
+<p><strong>Platform:</strong> EC2 / böngésző.</p>
+<p>Task 3: próbáld elérni a publikus IPv4 címet HTTP-n, majd add hozzá az előírt HTTP / Anywhere-IPv4 szabályt a security grouphoz, és ismételd meg a tesztet.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Segítség és hibakeresés
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Használj http:// előtagot. A nyitott HTTP-szabály csak az ideiglenes laborhoz szükséges.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q05result"><strong>Dokumentálandó adatok – Első teszt eredménye, security group ID, új inbound szabály és a weboldalon ténylegesen megjelenő szöveg.</strong></label>
+<textarea id="q05result" data-answer="Q05_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="átméretezés-és-védelem" class="level3">
+<h3 class="anchored" data-anchor-id="átméretezés-és-védelem">6. Átméretezés és védelem</h3>
+<p><strong>Platform:</strong> EC2 / Service Quotas.</p>
+<p>Task 4–6: állítsd le a gépet, módosítsd t2.small típusra, engedélyezd a stop protectiont, növeld az EBS méretét 10 GiB-ra, indítsd el. Nézd meg az EC2 kvótákat. Próbáld leállítani, majd kapcsold ki a stop protectiont és állítsd le.</p>
+<div class="lab-answer">
+<label for="q06result"><strong>Dokumentálandó adatok – Új instance type, volume ID és méret, egy megjelenő kvóta neve és értéke, a védett leállítás hibaüzenete, végső állapot.</strong></label>
+<textarea id="q06result" data-answer="Q06_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="lab-3-beadása" class="level3">
+<h3 class="anchored" data-anchor-id="lab-3-beadása">7. Lab 3 beadása</h3>
+<p><strong>Platform:</strong> Vocareum.</p>
+<p>Submit → Yes → Grades → Submission Report. Másold ki az eredményeket, majd End Lab.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Segítség és hibakeresés
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Egyes ellenőrzésekhez öt perc várakozás szükséges. Ha indokolt, ismételd meg a Submit műveletet; az utolsó beadás számít.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q07result"><strong>Dokumentálandó adatok – Elért/maximális pontszám és a Submission Report feladatonkénti eredménye.</strong></label>
+<textarea id="q07result" data-answer="Q07_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+</section>
+<section id="iii.-lab-2-build-your-vpc-and-launch-a-web-server-45-perc" class="level2">
+<h2 class="anchored" data-anchor-id="iii.-lab-2-build-your-vpc-and-launch-a-web-server-45-perc">III. Lab 2 – Build your VPC and Launch a Web Server (45 perc)</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="lab2.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Lab 2 – saját szerkesztésű hálózati topológia</figcaption>
+</figure>
+</div>
+<p>Indítsd el a külön Lab 2 környezetet. A két labor erőforrásai nem feltétlenül azonos munkamenetben érhetők el.</p>
+<section id="vpc-és-átjárók" class="level3">
+<h3 class="anchored" data-anchor-id="vpc-és-átjárók">8. VPC és átjárók</h3>
+<p><strong>Platform:</strong> VPC Console.</p>
+<p>Task 1: hozd létre a lab-vpc hálózatot a hivatalos VPC and more beállításokkal (10.0.0.0/16, egy AZ, egy publikus és egy privát subnet, NAT gateway egy AZ-ban).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Segítség és hibakeresés
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Várd meg a létrehozási folyamat végét, különösen a NAT gateway rendelkezésre állását.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q08result"><strong>Dokumentálandó adatok – VPC ID, név, CIDR, Internet Gateway ID, NAT Gateway ID és állapot.</strong></label>
+<textarea id="q08result" data-answer="Q08_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="további-subnetek" class="level3">
+<h3 class="anchored" data-anchor-id="további-subnetek">9. További subnetek</h3>
+<p><strong>Platform:</strong> VPC Console.</p>
+<p>Task 2: hozd létre a második AZ publikus és privát subnetjét az előírt nevekkel és CIDR-ekkel.</p>
+<div class="lab-answer">
+<label for="q09result"><strong>Dokumentálandó adatok – Mind a négy subnet neve, ID-ja, CIDR-je és Availability Zone-ja.</strong></label>
+<textarea id="q09result" data-answer="Q09_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="útválasztás" class="level3">
+<h3 class="anchored" data-anchor-id="útválasztás">10. Útválasztás</h3>
+<p><strong>Platform:</strong> VPC Console.</p>
+<p>Task 2: rendeld a második privát subnetet a privát route table-höz, a második publikus subnetet a publikus route table-höz a labor szerint.</p>
+<div class="lab-answer">
+<label for="q10result"><strong>Dokumentálandó adatok – Mindkét route table ID-ja, útvonalai (destination/target) és a társított subnetek.</strong></label>
+<textarea id="q10result" data-answer="Q10_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="web-security-group" class="level3">
+<h3 class="anchored" data-anchor-id="web-security-group">11. Web Security Group</h3>
+<p><strong>Platform:</strong> VPC Console.</p>
+<p>Task 3: hozd létre a Web Security Groupot a lab-vpc hálózatban, a laborban előírt HTTP inbound szabállyal.</p>
+<div class="lab-answer">
+<label for="q11result"><strong>Dokumentálandó adatok – Security group ID, VPC ID, inbound szabály típusa, portja és forrása.</strong></label>
+<textarea id="q11result" data-answer="Q11_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="web-server-1" class="level3">
+<h3 class="anchored" data-anchor-id="web-server-1">12. Web Server 1</h3>
+<p><strong>Platform:</strong> EC2 / böngésző.</p>
+<p>Task 4: indítsd el a Web Server 1 instance-t Amazon Linux 2023, t2.micro, vockey, lab-subnet-public2, publikus IP engedélyezése, meglévő Web Security Group és a hivatalos User Data szkript használatával. Teszteld a publikus DNS címet HTTP-n.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Segítség és hibakeresés
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ha nem tölt be az oldal, ellenőrizd a publikus subnetet, route table-t, HTTP-szabályt és várd meg a User Data futását.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q12result"><strong>Dokumentálandó adatok – Instance ID, publikus DNS, státuszellenőrzés és a weboldalon megjelenő instance-metaadatok.</strong></label>
+<textarea id="q12result" data-answer="Q12_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="lab-2-beadása" class="level3">
+<h3 class="anchored" data-anchor-id="lab-2-beadása">13. Lab 2 beadása</h3>
+<p><strong>Platform:</strong> Vocareum.</p>
+<p>Submit → Yes → Grades → Submission Report. Rögzítsd az eredményt. A riport rögzítése után zárd le a labort (End Lab). A következő feladatok külön Sandbox környezetben futnak.</p>
+<div class="lab-answer">
+<label for="q13result"><strong>Dokumentálandó adatok – Elért/maximális pontszám és a Submission Report feladatonkénti eredménye.</strong></label>
+<textarea id="q13result" data-answer="Q13_RESULT" rows="6" placeholder="Másold be vagy írd be ide a kért adatokat!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+</section>
+<section id="iv.-aws-cli-irányított-lekérdezések-15-perc" class="level2">
+<h2 class="anchored" data-anchor-id="iv.-aws-cli-irányított-lekérdezések-15-perc">IV. AWS CLI – irányított lekérdezések (15 perc)</h2>
+<section id="sandbox-indítása-és-aws-cloudshell-megnyitása" class="level3">
+<h3 class="anchored" data-anchor-id="sandbox-indítása-és-aws-cloudshell-megnyitása">14. Sandbox indítása és AWS CloudShell megnyitása</h3>
+<p><strong>Platform:</strong> AWS Academy / Sandbox / AWS Management Console.</p>
+<ol type="1">
+<li>Az AWS Academy kurzusban nyisd meg a <strong>Modules → Sandbox environment</strong> elemet.</li>
+<li>Kattints a <strong>Start Lab</strong> gombra. Az indítás akár 4–5 percig is eltarthat.</li>
+<li>Várd meg, amíg az AWS állapotjelző zöldre vált, majd kattints az <strong>AWS</strong> ikonra az AWS Management Console megnyitásához.</li>
+<li>A konzol felső menüsorában kattints a <strong>CloudShell</strong> ikonra (<code>&gt;_</code>). Várd meg a parancssor megjelenését.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Segítség és hibakeresés
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ne a Vocareum beépített Terminal ablakát használd, hanem az AWS Management Console CloudShell környezetét. A CloudShell automatikusan átveszi az aktuális munkamenet hitelesítését, ezért nincs szükség az <code>aws configure</code> parancsra vagy hozzáférési kulcsokra. Ha nem indul el, ellenőrizd a labor állapotát és jelezd az oktatónak.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q14result"><strong>Dokumentálandó adatok – A CloudShell megnyitásának eredménye és a megjelenő régió.</strong></label>
+<textarea id="q14result" data-answer="Q14_RESULT" rows="6" placeholder="CloudShell állapota és régiója..."></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+</section>
+<section id="aws-erőforrások-lekérdezése" class="level3">
+<h3 class="anchored" data-anchor-id="aws-erőforrások-lekérdezése">15. AWS-erőforrások lekérdezése</h3>
+<p><strong>Platform:</strong> AWS CloudShell / Bash.</p>
+<p>Futtasd egymás után a következő három lekérdező parancsot. Másold be a parancsokat és a tényleges kimenetüket az alábbi mezőbe.</p>
+<p><strong>EC2 instance-ok:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> ec2 describe-instances <span class="at">--region</span> us-east-1 <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--query</span> <span class="st">'Reservations[].Instances[].{ID:InstanceId,Type:InstanceType,State:State.Name,PrivateIP:PrivateIpAddress}'</span> <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Virtuális hálózatok (VPC):</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> ec2 describe-vpcs <span class="at">--region</span> us-east-1 <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--query</span> <span class="st">'Vpcs[].{ID:VpcId,CIDR:CidrBlock}'</span> <span class="at">--output</span> table</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>S3 bucketek:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> s3 ls</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Segítség és hibakeresés
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>A parancsok másolhatók a munkafüzetből. Ha a kimenet üres, ezt is dokumentáld; ne hozz létre új erőforrást. Ha jogosultsági hiba jelenik meg, másold be a hibaüzenetet és jelezd az oktatónak. Ha lapozó nyílik meg, a <code>q</code> billentyűvel léphetsz ki.</p>
+</div>
+</div>
+</div>
+<div class="lab-answer">
+<label for="q15result"><strong>Kiadott parancsok és azok kimenete – Mindhárom parancs és tényleges kimenete.</strong></label>
+<textarea id="q15result" data-answer="Q15_RESULT" rows="6" placeholder="Másold be a három parancsot és kimenetüket!"></textarea>
+<button type="button" class="btn btn-outline-primary btn-sm lab-check" data-check="task">
+Formai ellenőrzés
+</button>
+<span class="lab-feedback" role="status" aria-live="polite"></span>
+</div>
+<p>A kimenetek rögzítése után zárd le a Sandbox labort (<strong>End Lab</strong>).</p>
+<p><strong>Beadás:</strong> ellenőrizd a 15 mezőt, majd használd a Beadás gombot. Tartalék: JSON export.</p>
+<style>
+.lab-answer {display:flex;flex-direction:column;gap:.45rem;margin:1rem 0 1.5rem}
+.lab-answer input,.lab-answer textarea {width:100%;max-width:100%;padding:.65rem;border:1px solid #9ca3af;border-radius:5px;font:inherit}
+.lab-answer textarea {min-height:6rem;resize:vertical}
+.lab-answer button {align-self:flex-start}
+.lab-feedback.ok {color:#176b36}.lab-feedback.warn {color:#a45c00}
+</style>
+</section>
+</section>
+<section id="mentés-és-beadás" class="level2">
+<h2 class="anchored" data-anchor-id="mentés-és-beadás">Mentés és beadás</h2>
+<p>A válaszok automatikusan mentődnek ebben a böngészőben. A szerveres beadást az oktató a közzététel előtt ellenőrzi a 10. heti feladatokhoz. A beadás előtt ellenőrizd a Neptun-kódot és a kitöltött mezőket. A formai ellenőrzés nem helyettesíti a parancsok tényleges futtatását.</p>
+<div class="actions">
+<button id="submit-button" type="button" onclick="openSubmissionSummary()">
+📤 Beadás
+</button>
+<button type="button" onclick="exportSubmissionJson()">
+💾 JSON export
+</button>
+<button type="button" onclick="clearAnswers()">
+Helyi adatok törlése
+</button>
+<p><span id="save-status" role="status"></span></p>
+</div>
+<p id="submission-deadline-note">
+<strong>Beadási határidő:</strong> 2026. december 3., 11:40 (magyar idő).
+</p>
+<div id="submission-summary" class="submission-summary" hidden="">
+<h3 class="anchored">
+Beadás előtti összesítés
+</h3>
+<div id="submission-summary-body">
+
+</div>
+<div class="actions">
+<button type="button" onclick="closeSubmissionSummary()">
+Vissza a javításhoz
+</button>
+<button id="confirm-submit-button" type="button" onclick="confirmSubmission()">
+Beadás megerősítése
+</button>
+</div>
+</div>
+<div id="submission-result" role="status" aria-live="polite">
+
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Aktivitási adatok">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Aktivitási adatok
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Az időmérés és az eseménykövetés a projekt <code>config/setup.js</code> fájljából konfigurálható. Az SSH-terminálban végzett munka nem feltétlenül számít böngészőbeli aktív időnek.</p>
+</div>
+</div>
+<div id="tracking-panel" class="submission-summary">
+<strong>Aktivitás ezen a gépen</strong>
+<p>
+Időmérés: <span id="tracking-time-status">–</span> · Eseménykövetés: <span id="tracking-event-status">–</span>
+</p>
+<p>
+Becsült aktív idő: <span id="activity-active-time">0:00</span> · Szerkesztések: <span id="activity-edit-count">0</span>
+</p>
+<p>
+Első megnyitás: <span id="activity-started">–</span> · Utolsó aktivitás: <span id="activity-last">–</span>
+</p>
+</div>
+<style>
+.actions {display:flex;flex-wrap:wrap;gap:.65rem;align-items:center;margin:1rem 0}
+.actions button {padding:.55rem .9rem;border:1px solid #77808a;border-radius:6px;background:#fff;cursor:pointer}
+.actions button:disabled {opacity:.5;cursor:not-allowed}
+.submission-summary {border:1px solid #c8d0d8;border-radius:9px;padding:1rem;margin:1rem 0;background:#fafbfc}
+.submission-summary[hidden] {display:none}
+#submission-result {margin:1rem 0}
+</style>
+<script src="../../config/setup.js"></script>
+<script>
+(function(){
+  const patterns={
+    task:/[\s\S]{12,}/,
+    ssh:/\b(ssh|whoami|hostname|pwd)\b/i, csv:/[;]|\b(cut|awk|grep|tail)\b/i,
+    bash:/\b(while|for|read|mkdir|cp|bash|chmod|jed)\b/i,
+    diff:/\bdiff\b|---|\+\+\+/i,
+    git:/\bgit\s+(init|status|add|commit|log|diff|branch|switch|merge|remote|push|fetch|pull|config)\b/i,
+    github:/github\.com|gh auth|https/i,
+    vscode:/Source Control|Remote.SSH|VS Code|stage|commit|sync/i
+  };
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('.lab-check'); if(!b)return;
+    const wrap=b.closest('.lab-answer'), field=wrap?.querySelector('input,textarea');
+    const feedback=wrap?.querySelector('.lab-feedback'); if(!field||!feedback)return;
+    const v=field.value.trim(),type=b.dataset.check,p=patterns[type]||/\S{12}/;
+    const ok=type==='sha'?/^[0-9a-fA-F]{7,12}$/.test(v):type==='repo-url'?/^https:\/\/github\.com\/[A-Za-z0-9-]+\/[A-Za-z0-9._-]+\/?$/.test(v):v.length>=8&&p.test(v);
+    feedback.textContent=ok?'A válasz formátuma megfelelőnek tűnik. A tényleges végrehajtást ez nem igazolja.':(type==='sha'?'Adj meg 7–12 hexadecimális karaktert.':type==='repo-url'?'Adj meg teljes GitHub-repository URL-t.':'Egészítsd ki a feladatban kért parancsokkal és kimenetekkel.');
+    feedback.className='lab-feedback '+(ok?'ok':'warn');
+  });
+})();
+</script>
+<p>```</p>
+<script>
+(() => {
+  'use strict';
+  const CONFIG = Object.assign({timeTracking:false,eventTracking:false,showTrackingPanel:false},window.ITARCH_SETUP||{});
+  const STORAGE_KEY = 'itarch_week10_answers_2026';
+  const STARTERS = {};
+
+  // Beadási határidő: 2026. december 3. 11:40, Europe/Budapest (CET, UTC+01:00).
+  const SUBMISSION_DEADLINE_ISO = '2026-12-03T11:40:00+01:00';
+  const ENDPOINT = 'https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/submit';
+  const $ = id => document.getElementById(id);
+  const fields = () => [...document.querySelectorAll('[data-answer]')];
+  const studentId = () => ($('neptun')?.value||'').trim().toUpperCase();
+  const validId = () => /^[A-Z0-9]{6}$/.test(studentId());
+  const nowIso = () => new Date().toISOString();
+  const deadline = SUBMISSION_DEADLINE_ISO ? new Date(SUBMISSION_DEADLINE_ISO) : null;
+  const closed = () => deadline && !isNaN(deadline.getTime()) && Date.now() > deadline.getTime();
+  const started = nowIso();
+  let activity = {started_at:started,last_activity_at:started,active_seconds_estimate:0,edit_count:0,events:[]};
+  let lastInteraction = Date.now();
+  const esc = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const logEvent = (type) => {if(CONFIG.eventTracking) activity.events.push({type,at:nowIso()});};
+  const answers = () => Object.fromEntries(fields().filter(f=>f.dataset.answer!=='STUDENT_ID').map(f=>[f.dataset.answer,f.value]));
+  const save = (message=false) => {
+    activity.last_activity_at=nowIso();
+    try {localStorage.setItem(STORAGE_KEY,JSON.stringify({student_id:studentId(),answers:answers(),activity}));
+      if(message) $('save-status').textContent='✓ Helyi mentés kész';
+    } catch(e) {if(message) $('save-status').textContent='⚠ Helyi mentés nem érhető el';}
+  };
+  const load = () => {
+    try {const stored=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null'); if(!stored)return;
+      if(stored.student_id) $('neptun').value=stored.student_id;
+      fields().forEach(f=>{if(f.dataset.answer!=='STUDENT_ID' && Object.hasOwn(stored.answers||{},f.dataset.answer) && String(stored.answers[f.dataset.answer]??'').trim())f.value=stored.answers[f.dataset.answer]});
+      if(stored.activity)activity=Object.assign(activity,stored.activity);
+    }catch(e){}
+  };
+  const renderActivity = () => {
+    $('tracking-panel').hidden=!CONFIG.showTrackingPanel;
+    $('tracking-time-status').textContent=CONFIG.timeTracking?'bekapcsolva':'kikapcsolva';
+    $('tracking-event-status').textContent=CONFIG.eventTracking?'bekapcsolva':'kikapcsolva';
+    const sec=activity.active_seconds_estimate||0;
+    $('activity-active-time').textContent=`${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;
+    $('activity-edit-count').textContent=activity.edit_count||0;
+    $('activity-started').textContent=activity.started_at||'–';
+    $('activity-last').textContent=activity.last_activity_at||'–';
+  };
+  const refreshDeadline = () => {
+    const isClosed=closed();
+    $('submit-button').hidden=!!isClosed;
+    if($('confirm-submit-button'))$('confirm-submit-button').disabled=!!isClosed||!validId();
+    $('submission-deadline-note').textContent=deadline && !isNaN(deadline.getTime())
+      ? `Beadási határidő: ${deadline.toLocaleString('hu-HU',{timeZone:'Europe/Budapest'})} (magyar idő)${isClosed?' – lejárt':''}`
+      : 'Beadási határidő: még nincs beállítva a munkafüzetben.';
+  };
+  const payload = () => ({schema_version:1,course:'ITARCH',week:10,student_id:studentId(),submitted_at:nowIso(),answers:answers(),checks:{},activity_summary:activity});
+  window.openSubmissionSummary = () => {
+    refreshDeadline();if(closed())return;
+    const fs=fields().filter(f=>f.dataset.answer!=='STUDENT_ID');
+    const missing=fs.filter(f=>!f.value.trim() || (Object.hasOwn(STARTERS,f.dataset.answer) && f.value.trim()===STARTERS[f.dataset.answer].trim()));
+    const groups=[...new Set(missing.map(f=>(f.dataset.answer.match(/^Q(\d\d)/)||[])[1]).filter(Boolean))];
+    const complete=fs.length-missing.length;
+    $('submission-summary-body').innerHTML=`<p><strong>Neptun:</strong> ${esc(studentId()||'nincs megadva')} ${validId()?'✓':'⚠ 6 betű/szám szükséges'}</p>
+      <p><strong>Kitöltött mezők:</strong> ${complete}/${fs.length} (${Math.round(100*complete/Math.max(1,fs.length))}%)</p>
+      <p><strong>Hiányos feladatok:</strong> ${groups.length?groups.map(x=>Number(x)).join(', '):'nincs'}</p>
+      ${missing.length?`<p>Összesen ${missing.length} mező üres. A beadás ettől még lehetséges, de ellenőrizd a válaszokat.</p>`:''}
+      <p>A szintaktikai ellenőrző gombok használata nem kötelező. Biztosan beadod?</p>`;
+    $('submission-summary').hidden=false;
+    $('submission-summary').scrollIntoView({behavior:'smooth',block:'start'});
+    logEvent('submission_summary_opened');save();refreshDeadline();
+  };
+  window.closeSubmissionSummary=()=>{$('submission-summary').hidden=true;};
+  const download = data => {
+    const file=`ITARCH_week10_${data.student_id}_${data.submitted_at.replace(/[:.]/g,'-')}.json`;
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json;charset=utf-8'});
+    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=file;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  };
+  window.exportSubmissionJson=()=>{if(!validId()){$('submission-result').textContent='⚠ A JSON exporthoz 6 karakteres Neptun-kód szükséges.';return;}logEvent('submission_json_exported');save();download(payload());};
+  window.confirmSubmission=async()=>{
+    if(closed()){$('submission-result').textContent='⚠ A beadási határidő lejárt.';refreshDeadline();return;}
+    if(!validId()){$('submission-result').textContent='⚠ Adj meg érvényes, 6 karakteres Neptun-kódot.';return;}
+    const btn=$('confirm-submit-button');btn.disabled=true;
+    $('submission-result').textContent='Beadás folyamatban…';
+    try {
+      const response=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload())});
+      const result=await response.json().catch(()=>null);
+      if(!response.ok||!result||result.success!==true)throw new Error(`HTTP ${response.status}`);
+      logEvent('submission_succeeded');save();$('submission-summary').hidden=true;
+      $('submission-result').textContent=`✓ Beadás sikeres. Azonosító: ${result.submission_id||'–'}`;
+    }catch(e){logEvent('submission_failed');save();$('submission-result').textContent='⚠ A szerveres beadás nem sikerült. A helyi mentés megmaradt; próbáld újra, vagy készíts JSON exportot.';}
+    finally {btn.disabled=false;refreshDeadline();}
+  };
+  window.clearAnswers=()=>{
+    if(!confirm('Biztosan törlöd az összes helyben mentett választ és aktivitási adatot?'))return;
+    fields().forEach(f=>f.value=f.dataset.answer==='STUDENT_ID'?'':(STARTERS[f.dataset.answer]||f.defaultValue||''));
+    try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
+    activity={started_at:nowIso(),last_activity_at:nowIso(),active_seconds_estimate:0,edit_count:0,events:[]};
+    $('submission-summary').hidden=true;$('submission-result').textContent='';$('save-status').textContent='Helyi adatok törölve.';renderActivity();
+  };
+  document.addEventListener('DOMContentLoaded',()=>{
+    fields().forEach(f=>{if(Object.hasOwn(STARTERS,f.dataset.answer))f.value=STARTERS[f.dataset.answer];});
+    load();refreshDeadline();renderActivity();
+    fields().forEach(f=>{f.addEventListener('input',()=>{
+      if(f.dataset.answer==='STUDENT_ID')f.value=f.value.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6);
+      activity.edit_count++;lastInteraction=Date.now();logEvent('answer_edited');save();renderActivity();
+    });f.addEventListener('change',()=>save());});
+    document.addEventListener('keydown',()=>lastInteraction=Date.now());
+    document.addEventListener('mousemove',()=>lastInteraction=Date.now(),{passive:true});
+    document.addEventListener('visibilitychange',()=>save());
+    window.addEventListener('beforeunload',()=>save());
+    setInterval(()=>{if(CONFIG.timeTracking&&!document.hidden&&Date.now()-lastInteraction<120000){activity.active_seconds_estimate++;if(activity.active_seconds_estimate%10===0)save();renderActivity();}},1000);
+    setInterval(refreshDeadline,30000);
+  });
+})();
+</script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

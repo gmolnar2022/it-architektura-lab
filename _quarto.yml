@@ -18,7 +18,7 @@ website:
   navbar:
     left:
       - href: utemterv.qmd
-        text: Féléves ütemterv és értékelés
+        text: Féléves ütemterv
       - href: index.qmd
         text: Kezdőlap
       - href: weeks/week01/index.qmd

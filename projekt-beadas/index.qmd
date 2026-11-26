@@ -21,7 +21,7 @@ Csapatonként egy beadás szükséges. A strukturált adatlap a műszaki dokumen
 <form id="pf" novalidate><div id="sections"></div><div class="tools"><button type="button" class="btn btn-outline-secondary" id="export">Piszkozat exportálása JSON-ba</button><button type="button" class="btn btn-outline-secondary" id="import">JSON visszatöltése</button><input type="file" id="importFile" accept=".json" hidden><button type="button" class="btn btn-outline-secondary" id="print">Nyomtatás / PDF</button><button type="button" class="btn btn-outline-secondary" id="clear">Helyi piszkozat törlése</button></div><button type="submit" class="btn btn-primary">Projekt beadása</button><p id="status" role="status" aria-live="polite"></p></form>
 <script>
 (()=>{
-const API='https://REPLACE-FUNCTION-APP.azurewebsites.net/api/submitItarchProject', KEY='itarch-project-2026-v9', $=id=>document.getElementById(id), form=$('pf'), status=$('status');
+const API='https://itarch-backend-fpdsf6brfpanf5d8.northeurope-01.azurewebsites.net/api/submitItarchProject', KEY='itarch-project-2026-v9', $=id=>document.getElementById(id), form=$('pf'), status=$('status');
 const F=(key,label,type='text',hint='',required=true,options=[])=>({key,label,type,hint,required,options});
 const T=(key,label,hint='',required=true)=>F(key,label,'textarea',hint,required);
 const sections=[

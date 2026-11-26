@@ -9,7 +9,7 @@ format:
 
 [Projektkiírás és értékelés (PDF)](projektkiiras.pdf)
 
-Csapatonként egy beadás szükséges. A strukturált adatlap a műszaki dokumentáció; a videó 4–5 perces, az oktató számára hozzáférhető linken. Ne adj meg jelszavakat, kulcsokat vagy tokeneket. A helyi mentés nem beadás.
+Csapatonként egy beadás szükséges, a beadás a határidőig módosítható. 
 
 ```{=html}
 <style>

@@ -6,12 +6,14 @@ project:
     - utemterv.qmd
     - weeks/**/*.qmd
     - hf01\index.qmd
+    - projekt-beadas/index.qmd
   resources:
     - config/**
     - files/**
     - assets/**
     - azure-region-check.sh
     - check-linux-vm.ps1
+    - projekt-beadas/projektkiiras.pdf
 
 website:
   title: "IT Architektúra – Gyakorlati munkafüzet"
@@ -43,6 +45,12 @@ website:
         text: 9. hét
       - href: weeks/week10/index.qmd
         text: 10. hét
+            - text: Csoportprojekt
+        menu:
+          - text: Projektkiírás
+            href: projekt-beadas/projektkiiras.pdf
+          - text: Projekt beadása
+            href: projekt-beadas/index.qmd  
 
 format:
   html:

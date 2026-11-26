@@ -1,0 +1,6 @@
+# Telepítés
+Az index.qmd és projektkiiras.pdf együtt kerüljön a Quarto webhelyre. `quarto preview index.qmd`.
+A felület önmagában nem ment Azure-ba. A /api/project-submit végpontot hitelesített Azure Function vagy App Service API mögött kell megvalósítani. A Quarto statikus webhely nem szerveroldali alkalmazás.
+API: POST multipart/form-data, metadata JSON szöveg, document és readme fájl. Siker: HTTP 201, JSON {"receipt":"egyedi-azonosító"}. Csak sikeres tartós mentés után adjon vissza azonosítót.
+Javaslat: Entra ID intézményi bejelentkezés, privát Blob Storage container, managed identity + Storage Blob Data Contributor. Szerveroldalon ellenőrizendő a felhasználó, csapat, határidő (2026-12-10T10:40:00Z), fájlméret (20/1 MiB), fájltípus és tartalom, egyedi Neptun-kódok, HTTPS link. Egyedi beadási azonosító alatt tárolandó a két fájl és metadata.json; ismételt beadások verziózva. A hozzáférést oktatókra korlátozni, a megőrzési időt intézményi szabály szerint beállítani. Ne legyen publikus konténer vagy böngészőbe ágyazott kulcs. Külön hoszt esetén API URL, CORS és hitelesítés konfigurálandó. A videó hozzáférését az oktató ellenőrzi. A JSON-export nem tartalmaz fájlokat, nem minősül beadásnak.
+A csoportválasztás egy közös gyakorlati csoportot feltételez. A méretkorlátok javasolt értékek. A tényleges beadási sablon nem része a csomagnak.

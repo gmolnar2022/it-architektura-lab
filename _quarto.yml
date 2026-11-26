@@ -20,7 +20,7 @@ website:
   navbar:
     left:
       - href: utemterv.qmd
-        text: Féléves ütemterv
+        text: Ütemterv
       - href: index.qmd
         text: Kezdőlap
       - href: weeks/week01/index.qmd
@@ -45,12 +45,12 @@ website:
         text: 9. hét
       - href: weeks/week10/index.qmd
         text: 10. hét
-            - text: Csoportprojekt
+      - text: Projekt
         menu:
           - text: Projektkiírás
             href: projekt-beadas/projektkiiras.pdf
           - text: Projekt beadása
-            href: projekt-beadas/index.qmd  
+            href: projekt-beadas/index.qmd
 
 format:
   html:

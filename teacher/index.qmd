@@ -1,0 +1,11 @@
+---
+title: "IT Architecture – Teacher Dashboard"
+page-layout: full
+toc: false
+css: teacher.css
+---
+
+```{=html}
+<div id="itarch-teacher"></div>
+<script type="module" src="./teacher.js"></script>
+```

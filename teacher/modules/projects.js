@@ -1,6 +1,6 @@
 import {api} from '../api.js';
 const names=['Azure-infrastruktúra és VM-ek','Három szolgáltatás','Hálózat, biztonság, tesztelés','Konténerizáció','Architektúra','Dokumentáció és README','Videóbemutató'], max=[10,20,20,10,15,15,10];
-const labels={architecture:'Architektúra',vms:'Virtuális gépek',configuration:'Konfiguráció',config:'Konfiguráció',containers:'Konténerek',services:'Szolgáltatások',testing:'Tesztelés',security:'Biztonság',readme:'README',delivery:'Videóbemutató',extra:'Kiegészítő dokumentáció',technical:'Műszaki dokumentáció'};
+const labels={decisions:'2.8. A választott megoldás előnyei, korlátai és költségei',architecture:'Architektúra',vms:'Virtuális gépek',configuration:'Konfiguráció',config:'Konfiguráció',containers:'Konténerek',services:'Szolgáltatások',testing:'Tesztelés',security:'Biztonság',readme:'README',delivery:'Videóbemutató',extra:'Kiegészítő dokumentáció',technical:'Műszaki dokumentáció'};
 const pending='Értékelésre vár',draft='AI / piszkozat',finalized='Véglegesítve',stale='Új beadás';
 export function projects(host,group){
  let alive=true,seq=0,busy=false,dirty=false,items=[],selected='',visible=[];
